@@ -7,7 +7,7 @@ import {spawnSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 
 for(const migrationExit of [0,37]){
- test(`container startup ${migrationExit?'stops on failed migrations':'starts the server after migrations'}`,async()=>{
+ test(`container startup ${migrationExit?'stops on failed migrations':'starts the server after migrations'}`,{skip:process.platform==='win32'?'the startup script runs inside the Linux container, not on the Windows host':false},async()=>{
   const directory=await mkdtemp(join(tmpdir(),'polisrossa-start-'));
   try{
    const calls=join(directory,'calls');

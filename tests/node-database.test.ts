@@ -41,6 +41,10 @@ test('PostgreSQL enforces admission, immutable rules, fixed electorate, unique b
   const board=await(await call('bobby')).json();assert.equal(board.activeCount,4);assert.equal(board.applications.find((a:{member:{id:string}})=>a.member.id===waiting).canVote,true);
   for(const user of ['bobby','alice','founder-two'])assert.equal((await call(user,{action:'admit',id:waiting,value:-1})).status,200);
   assert.equal((await(await call('waiting')).json()).member.status,'rejected');
+  const withdrawn=crypto.randomUUID();
+  assert.equal((await call('alice',{action:'create',kind:'discussion',requestId:withdrawn,title:'Una discussione da ritirare',body:'Questo testo non deve restare accessibile dopo il ritiro.',language:'it',category:'general'})).status,201);
+  assert.equal((await call('alice',{action:'withdrawTopic',id:withdrawn})).status,200);
+  for(const user of [null,'alice'])for(const kind of ['topic','export'])assert.equal((await call(user,undefined,`?kind=${kind}&id=${withdrawn}`)).status,404);
   const id=crypto.randomUUID(),result=await call('alice',{action:'create',requestId:id,title:'Una proposta condivisa',body:'Una proposta con problemi e soluzioni discussi insieme dalla comunità.',options:['Soluzione uno','Soluzione due'],language:'it',category:'other',method:'single',quorum:25,durationHours:1,discussionHours:0});assert.equal(result.status,201);
   await assert.rejects(pg.query('UPDATE forum_topics SET title=$1 WHERE id=$2',['Corrupted',id]),/immutable/);
   await assert.rejects(pg.query('DELETE FROM forum_electorate WHERE topic_id=$1',[id]),/Immutable/);

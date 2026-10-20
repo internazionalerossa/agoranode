@@ -28,6 +28,16 @@ L’applicazione ha un’interfaccia React compilata con Vite e un server Node.j
 | `server/migrations/` | Schema e vincoli persistenti |
 | `public/data/history/` | Serie annuali e provenienza degli indicatori |
 
+## Checkpoint pubblico della release
+
+Il comando di self-hosting può produrre un checkpoint deterministico della release eseguibile contenuta nella stessa immagine Docker taggata usata dall'app. Il manifesto elenca dimensione e SHA-256 dei soli `build-node/**`, `package.json` e `package-lock.json`, calcola una radice della lista canonica e viene firmato con Ed25519. Prima dell'hash, nei due file JSON le terminazioni CRLF vengono normalizzate a LF; un ritorno a capo CR isolato viene rifiutato. La chiave privata resta nel percorso privato dell'installazione; soltanto lo strumento di firma la monta, senza accesso alla rete o al database. Verifica e importazione non vedono la chiave. La chiave pubblica deve arrivare al nodo ricevente attraverso un canale autenticato separato.
+
+La versione 1 dichiara `policy.scope=release-only`, mantiene `publicState` vuoto ed esclude esplicitamente i contenuti generati dagli utenti. Un nodo verifica firma e corrispondenza con la propria release già compilata; l'importazione registra in PostgreSQL soltanto provenienza e testa del checkpoint. Il bundle contiene manifesto e firma, non i file della release né dati applicativi, e non installa o aggiorna il codice. Il checkpoint non include `runtime.env` e non attesta che `MIRROR_MODE` o gli altri controlli di scrittura siano effettivamente applicati al servizio in esecuzione: la modalità di sola consultazione va collaudata separatamente.
+
+Il primo checkpoint ha altezza zero e nessun predecessore. Ogni aggiornamento deve indicare l'altezza successiva e lo `snapshotId` esatto della testa precedente; rollback, salti e biforcazioni vengono rifiutati rispetto alla testa della singola installazione. Tutta la catena versione 1 deve usare la stessa chiave Ed25519: la rotazione della chiave non è supportata. L'esportazione non mantiene ancora una testa condivisa né impedisce al firmatario di produrre checkpoint concorrenti; nodi diversi possono quindi accettare rami diversi. Questo limite non equivale a consenso o quorum.
+
+La firma attesta la provenienza rispetto alla chiave scelta, non rende affidabile codice che non sia già stato esaminato: il componente di firma appartiene alla stessa release candidata. Questa attestazione tecnica non assegna diritti editoriali o di voto e non realizza distribuzione del traffico, replica del database o del forum, scoperta fra nodi, failover, quorum o cifratura end-to-end. Ogni nodo di sola consultazione mantiene un database locale separato e recupera autonomamente le fonti pubbliche.
+
 ## Account e dati privati
 
 Better Auth gestisce accesso OAuth e sessioni. Con `MAIL_TRANSPORT=none`, predefinito, registrazione con password, recupero e invio email sono disabilitati anche sul server. Gli eventuali indirizzi verificati provengono dal provider social. Le API verificano la sessione nel database: header o identificatori inviati dal browser non attribuiscono un’identità. Le operazioni private controllano l’origine della richiesta e non entrano nelle cache condivise. I cookie sono HttpOnly e sicuri; le credenziali restano sul server.
@@ -68,7 +78,7 @@ Le serie statistiche includono osservazioni annuali e metadati. Un anno mancante
 
 Ogni argomento riunisce proposta, soluzioni, messaggi e, quando prevista, votazione. I messaggi sono persistenti e attribuiti al nome pubblico. La pagina controlla gli aggiornamenti a intervalli mentre è visibile; non offre presenza online o messaggistica privata.
 
-Le transazioni sigillano le regole e aggiungono ogni nuovo membro all’elettorato delle consultazioni non scadute. Le ammissioni successive alla scadenza non modificano il risultato. Vincoli unici impediscono schede duplicate dello stesso membro. Trigger proteggono regole, elettorato e registro da modifiche ordinarie. Le decisioni che modificano adesioni ed elettorati sono serializzate attraverso un lock transazionale PostgreSQL condiviso dalle repliche.
+Le transazioni sigillano le regole e aggiungono ogni nuovo membro all’elettorato delle consultazioni non scadute. Le ammissioni successive alla scadenza non modificano il risultato. Vincoli unici impediscono schede duplicate dello stesso membro. Trigger proteggono regole, elettorato e registro da modifiche ordinarie. Le decisioni che modificano adesioni ed elettorati sono serializzate attraverso un lock transazionale PostgreSQL fra le istanze applicative collegate allo stesso database.
 
 Il registro e gli export rendono possibile ricalcolare il risultato e confrontare le ricevute. Non impediscono a un amministratore del database di rimuovere le protezioni; non certificano l’unicità di ogni persona. La documentazione deve mantenere espliciti questi limiti.
 

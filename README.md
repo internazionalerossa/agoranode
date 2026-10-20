@@ -55,7 +55,7 @@ Per correggere un file puoi usare la matita di GitHub e proporre una pull reques
 
 ## Ospitare il progetto
 
-La [guida al server domestico e alle copie pubbliche](docs/SELF-HOSTING.md) include avvio Docker, database persistente locale e backup age cifrati per custodi separati. Le copie pubbliche non ricevono account o dati privati. Replica P2P e subentro automatico del database non sono ancora implementati.
+La [guida al server domestico e ai nodi di sola consultazione](docs/SELF-HOSTING.md) include avvio Docker, database persistente locale, backup age cifrati e un checkpoint `release-only` firmato della release eseguibile. Il checkpoint attesta il runtime già costruito sul nodo: non trasporta il codice, il database, account o contenuti del forum e non dimostra che l'istanza in esecuzione sia configurata come mirror. Replica automatica fra computer, subentro del database, quorum e cifratura end-to-end non sono implementati.
 
 ## Eseguire e verificare il codice
 

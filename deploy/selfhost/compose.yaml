@@ -1,4 +1,4 @@
-name: polisrossa
+name: ${COMPOSE_PROJECT_NAME:-polisrossa}
 services:
   database:
     image: postgres:17-bookworm
@@ -18,6 +18,7 @@ services:
       timeout: 3s
       retries: 20
   app:
+    image: "polisrossa-runtime:${COMPOSE_PROJECT_NAME:-polisrossa}"
     build:
       context: ../..
     restart: unless-stopped
@@ -64,6 +65,63 @@ services:
     depends_on:
       database:
         condition: service_healthy
+  snapshot:
+    user: "${LOCAL_UID:-1000}:${LOCAL_GID:-1000}"
+    profiles: [tools]
+    image: "polisrossa-runtime:${COMPOSE_PROJECT_NAME:-polisrossa}"
+    pull_policy: never
+    network_mode: none
+    entrypoint: [node, build-node/snapshot.mjs]
+    environment:
+      SNAPSHOT_PUBLIC_KEY: /replica/public.pem
+      SNAPSHOT_DIR: /snapshots
+      SNAPSHOT_REPLICA_DIR: /replica
+      SNAPSHOT_RELEASE_ROOT: /app
+      SNAPSHOT_NETWORK_ID: polisrossa-public
+    volumes:
+      - ../../.selfhost/snapshots:/snapshots:ro
+      - ../../.selfhost/replica:/replica:ro
+  snapshot-db:
+    user: "${LOCAL_UID:-1000}:${LOCAL_GID:-1000}"
+    profiles: [tools]
+    image: "polisrossa-runtime:${COMPOSE_PROJECT_NAME:-polisrossa}"
+    pull_policy: never
+    network_mode: none
+    entrypoint: [node, build-node/snapshot.mjs]
+    environment:
+      DATABASE_URL: ${DATABASE_URL:?Run selfhost init first}
+      SNAPSHOT_PUBLIC_KEY: /replica/public.pem
+      SNAPSHOT_DIR: /snapshots
+      SNAPSHOT_REPLICA_DIR: /replica
+      SNAPSHOT_RELEASE_ROOT: /app
+      SNAPSHOT_NETWORK_ID: polisrossa-public
+    volumes:
+      - socket:/var/run/postgresql:ro
+      - ../../.selfhost/snapshots:/snapshots:ro
+      - ../../.selfhost/replica:/replica:ro
+    depends_on:
+      database:
+        condition: service_healthy
+  snapshot-sign:
+    user: "${LOCAL_UID:-1000}:${LOCAL_GID:-1000}"
+    profiles: [tools]
+    image: "polisrossa-runtime:${COMPOSE_PROJECT_NAME:-polisrossa}"
+    pull_policy: never
+    network_mode: none
+    entrypoint: [node, build-node/snapshot.mjs]
+    environment:
+      SNAPSHOT_PRIVATE_KEY: /snapshot-private/private.pem
+      SNAPSHOT_PUBLIC_KEY: /replica/public.pem
+      SNAPSHOT_DIR: /snapshots
+      SNAPSHOT_REPLICA_DIR: /replica
+      SNAPSHOT_RELEASE_ROOT: /app
+      SNAPSHOT_NETWORK_ID: polisrossa-public
+      SNAPSHOT_HEIGHT: "${SNAPSHOT_HEIGHT:-0}"
+      SNAPSHOT_PREVIOUS: "${SNAPSHOT_PREVIOUS:-}"
+    volumes:
+      - ../../.selfhost/private/snapshot:/snapshot-private:${SNAPSHOT_PRIVATE_ACCESS:-ro}
+      - ../../.selfhost/snapshots:/snapshots:${SNAPSHOT_DIR_ACCESS:-ro}
+      - ../../.selfhost/replica:/replica:${SNAPSHOT_REPLICA_ACCESS:-ro}
 volumes:
   database:
   socket:

@@ -124,7 +124,7 @@ export async function handleForum(request:Request,db:ForumDatabase|undefined,use
   }
   if(data.action==='create'){
    const discussion=data.kind==='discussion';
-   if((data.private!==undefined&&typeof data.private!=='boolean')||(data.private===true&&(!discussion||data.category!=='general')))return reply({error:'Solo le discussioni libere possono essere riservate ai membri IR2. Proposte e votazioni sono pubbliche.'},400);
+   if((data.private!==undefined&&typeof data.private!=='boolean')||(data.private===true&&(!discussion||data.category!=='general')))return reply({error:'Solo le discussioni libere possono essere riservate ai membri PR2. Proposte e votazioni sono pubbliche.'},400);
    const privateTopic=data.private===true?1:0;
    if(data.kind!==undefined&&!['discussion','proposal'].includes(String(data.kind)))return reply({error:'Tipo di argomento non valido.'},400);
    if(!proposalId(data.requestId)||!text(data.title,3,140)||!text(data.body,3,30000)||!text(data.references??'',0,1500)||!language(data.language)||typeof data.category!=='string'||!Object.hasOwn(COMMUNITY_CATEGORIES,data.category)||(!discussion&&data.category==='general'))return reply({error:'Controlla titolo, testo e ambito.'},400);

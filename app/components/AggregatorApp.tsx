@@ -930,7 +930,7 @@ export function AggregatorApp() {
                     <span>
                       <strong>
                         <LocalizedText>
-                          Lingua delle fonti
+                          Lingua originale delle fonti
                         </LocalizedText>
                       </strong>
                       <small>
@@ -976,7 +976,7 @@ export function AggregatorApp() {
                         {TOPIC_TAXONOMY.map(item => <option key={item.id} value={item.id}><LocalizedText>{item.label}</LocalizedText></option>)}
                       </Select>
                     </> : null}
-                    <p className="filter-explanation"><LocalizedText>Area e paese indicano dove ha sede la testata. La ricerca usa il testo originale delle fonti. Il tema è riconosciuto nel titolo, nell’estratto e nelle categorie, con possibili errori.</LocalizedText></p>
+                    <p className="filter-explanation"><LocalizedText>La lingua di lettura, nell’intestazione, regola le traduzioni. La lingua delle fonti seleziona le lingue originali degli articoli; il paese indica la sede della testata e non la lingua o il luogo della notizia. La ricerca usa il testo originale delle fonti. Il tema è riconosciuto nel titolo, nell’estratto e nelle categorie, con possibili errori.</LocalizedText></p>
                     <button className="text-link" onClick={() => { reset(); chooseSourceLanguage(ALL); }}>
                       <X size={14} />
                       <LocalizedText>{" Azzera filtri"}</LocalizedText>

@@ -20,7 +20,7 @@ export default function LanguageSettings(){
     <button type="button" aria-pressed={!preferences.original&&preferences.content===preferences.interface} onClick={()=>preferences.setReadingMode('translated')}><strong><T>Interfaccia e contenuti nella mia lingua</T></strong><span><T>Menu e traduzioni nella lingua scelta sopra, quando disponibili.</T></span></button>
    </div>
    <ContentLanguageSelector/>
-   <p><T>Puoi anche scegliere una lingua diversa per la lettura. Queste preferenze non escludono fonti: per selezionare le lingue originali delle testate usa i filtri della rassegna. I libri conservano la lingua dell’edizione scelta.</T></p>
+   <p><T>Puoi anche scegliere una lingua diversa per la lettura. La lingua di lettura regola le traduzioni. La lingua delle fonti filtra gli articoli per lingua originale. Il paese della testata indica dove ha sede la redazione: non seleziona una lingua e non indica il luogo della notizia. Questi ultimi due filtri sono nella rassegna. I libri conservano la lingua dell’edizione scelta.</T></p>
   </div>
  </details>;
 }

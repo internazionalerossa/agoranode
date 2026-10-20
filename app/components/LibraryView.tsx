@@ -2,8 +2,7 @@
 import { lazy, Suspense, useEffect, useState } from "react";
 import { ArrowUpRight, BookOpen, Bookmark, BookmarkCheck, Search, X } from "lucide-react";
 import { THEORY_LIBRARY, BOOK_LANGUAGES } from "@/app/data/library";
-import HISTORY from "@/app/data/history-world-index.json";
-import { historyId } from "@/app/lib/history-navigation";
+import { LIBRARY_SECTIONS, librarySectionFromUrl, librarySectionUrl, type LibrarySection } from "@/app/lib/library-navigation";
 import { READING_PATHS, GLOSSARY } from "@/app/data/editorial";
 import { LocalizedText, LocalizedInput, useReadingLocale } from "./Localization";
 const ALL = "all";
@@ -26,13 +25,19 @@ export function LibraryView({
   const [country,setCountry]=useState('all'),[theme,setTheme]=useState('all'),[bookPage,setBookPage]=useState(0);
   const countries=[...new Set(THEORY_LIBRARY.flatMap(book=>book.country?[book.country]:[]))].sort();
   const themes=[...new Set(THEORY_LIBRARY.filter(book=>book.editions?.length).map(book=>book.lane))].sort();
-  const [showAchievements, setShowAchievements] = useState(false);
+  const [section, setSection] = useState<LibrarySection>("libri");
   const [archivesOpen,setArchivesOpen]=useState(false);
   useEffect(() => {
-    const sync=()=>{const params=new URL(window.location.href).searchParams;if(historyId(params.get("storia"))||params.get("percorso")==="conquiste")setShowAchievements(true);};
+    const sync=()=>setSection(librarySectionFromUrl(window.location.href));
     sync();window.addEventListener('popstate',sync);window.addEventListener('hashchange',sync);
     return()=>{window.removeEventListener('popstate',sync);window.removeEventListener('hashchange',sync);};
   }, []);
+  const chooseSection=(next:LibrarySection)=>{
+    const target=librarySectionUrl(window.location.href,next);
+    if(target!==window.location.pathname+window.location.search+window.location.hash)window.history.pushState(window.history.state,"",target);
+    setSection(next);
+    requestAnimationFrame(()=>document.getElementById('library-section-panel')?.focus({preventScroll:true}));
+  };
   const readingLink = (book: typeof THEORY_LIBRARY[number]) => {
     const preferred = bookLanguage === "all" ? readingLanguage : bookLanguage;
     const edition = book.editions?.find(item => item.language === preferred) ?? book.editions?.find(item => item.language === "en") ?? book.editions?.[0];
@@ -55,18 +60,13 @@ export function LibraryView({
   return (
     <div className="library-view">
       <header className="section-heading"><h1 id="page-title"><LocalizedText>Biblioteca</LocalizedText></h1><BookOpen size={24} strokeWidth={1.3}/></header>
+      <nav className="library-destinations" aria-label="Percorsi della biblioteca">{LIBRARY_SECTIONS.map(item=><a key={item.id} href={librarySectionUrl('/?view=teoria',item.id)} aria-current={section===item.id?'page':undefined} onClick={event=>{if(event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;event.preventDefault();chooseSection(item.id);}}><strong><LocalizedText>{item.label}</LocalizedText></strong><span><LocalizedText>{item.description}</LocalizedText></span><ArrowUpRight size={16}/></a>)}</nav>
+      <div id="library-section-panel" tabIndex={-1}>
+      {section==='libri'?<>
       <div className="usage-guide" aria-label="Guida alla biblioteca">
         <p><strong><LocalizedText>Come orientarsi</LocalizedText></strong> <LocalizedText>Questa biblioteca mette in relazione libri gratuiti, idee politiche e storia sociale. Se parti da zero, scegli un percorso: troverai un ordine di lettura suggerito, dai testi introduttivi alle opere più impegnative. Se cerchi già qualcosa di preciso, usa il catalogo per autore, argomento e lingua. Le edizioni disponibili possono essere aperte per la lettura online; con un account attivo puoi ritrovare il segnalibro e riprendere dal punto in cui ti eri fermato.</LocalizedText></p>
-        <p><span>{HISTORY.indicators.length} <LocalizedText>indicatori</LocalizedText> · {HISTORY.countries.length} <LocalizedText>paesi ed economie</LocalizedText>.</span> <LocalizedText>Conquiste accompagna la lettura con un racconto storico: come sono nati alcuni diritti, quali organizzazioni li hanno sostenuti e come sono cambiati scuola, lavoro, salute e capacità produttiva. Le tappe si possono espandere senza abbandonare il percorso. Nell’archivio trovi anche dati internazionali da confrontare: scegli una domanda, osserva gli stessi anni per più paesi e apri le fonti per capire da dove vengono i numeri.</LocalizedText> <a href="/?view=teoria&percorso=conquiste&indicatore=SP.DYN.LE00.IN#world-history-title"><LocalizedText>Apri i dati e i confronti</LocalizedText> →</a></p>
+        <p><LocalizedText>La timeline ricostruisce le lotte, le organizzazioni e le trasformazioni delle condizioni di vita. Dati e grafici permette invece di costruire confronti, scegliendo indicatore, paesi, periodo e scala: comprende serie annuali, definizioni, fonti e download.</LocalizedText></p>
       </div>
-      <section className="achievements-showcase">
-        <button className="achievements-entry" aria-expanded={showAchievements} aria-controls="social-showcase-content" onClick={() => setShowAchievements(open => !open)}>
-          <svg className="achievements-entry-mark" viewBox="0 0 100 100" aria-hidden="true"><path fill="currentColor" d="M50 3 61.2 37.5 97.6 37.5 68.2 58.9 79.4 93.5 50 72.1 20.6 93.5 31.8 58.9 2.4 37.5 38.8 37.5Z"/></svg>
-          <span><span className="eyebrow"><LocalizedText>LA MEMORIA CHE COSTRUISCE IL FUTURO</LocalizedText></span><strong><LocalizedText>Le conquiste del socialismo</LocalizedText></strong><small><LocalizedText>Storia, protagonisti e confronti internazionali: dalle lotte ai risultati</LocalizedText></small></span>
-          <span className="achievements-entry-action"><LocalizedText>{showAchievements ? 'Chiudi le conquiste' : 'Conquiste'}</LocalizedText><ArrowUpRight size={19}/></span>
-        </button>
-        <div id="social-showcase-content" hidden={!showAchievements}>{showAchievements && <Suspense fallback={<p className="notice" role="status"><LocalizedText>Apertura della raccolta…</LocalizedText></p>}><SocialAchievements/></Suspense>}</div>
-      </section>
       <p className="reading-paths-intro"><LocalizedText>Non occorre conoscere già il marxismo o la storia dei movimenti operai. I tre percorsi aiutano a costruire gradualmente gli strumenti di lettura: capire come si producono e si distribuiscono le risorse, conoscere le forme della solidarietà e confrontare diversi progetti di trasformazione sociale. Si comincia da opere relativamente brevi e si procede verso testi più complessi, con autori di paesi e tradizioni differenti. Non è un programma obbligatorio: puoi fermarti su una domanda, scegliere un’altra lingua o tornare in qualsiasi momento al catalogo completo.</LocalizedText></p>
       <div className="reading-paths">
         {READING_PATHS.map((p, i) => (
@@ -244,6 +244,8 @@ export function LibraryView({
           ))}
         </div>
       </section>
+      </>:<Suspense fallback={<p role="status"><LocalizedText>Apertura della sezione…</LocalizedText></p>}><SocialAchievements key={section} section={section}/></Suspense>}
+      </div>
     </div>
   );
 }

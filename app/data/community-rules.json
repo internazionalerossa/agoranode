@@ -1,28 +1,28 @@
 [
   {
     "id": 1,
-    "title": "IR1: il tuo archivio",
+    "title": "PR1: il tuo archivio",
     "text": "Registrati con email e password e conferma l’indirizzo. Non serve l’approvazione dei membri né un profilo social. Articoli salvati e segnalibri sono privati e sincronizzati online. Il primo livello serve alla continuità della lettura: ritrovare un articolo o riprendere un libro non richiede una presentazione pubblica. La sincronizzazione è disponibile quando il servizio indipendente è attivo."
   },
   {
     "id": 2,
-    "title": "IR2: partecipare alla comunità",
-    "text": "Presenta una domanda con il nome della persona o dell’ente e un riferimento pubblico verificabile. Per l’ammissione servono almeno tre sì di membri IR2 distinti entro 72 ore. Senza tre sì, la domanda scade. Ogni voto di ammissione è definitivo. Il riferimento deve permettere ai membri di capire chi presenta la domanda e di riscontrarne il controllo; il solo nome dichiarato non è sufficiente. Non pubblicare documenti d’identità o dati riservati."
+    "title": "PR2: partecipare alla comunità",
+    "text": "Presenta una domanda con il nome della persona o dell’ente e un riferimento pubblico verificabile. Per l’ammissione servono almeno tre sì di membri PR2 distinti entro 72 ore. Senza tre sì, la domanda scade. Ogni voto di ammissione è definitivo. Il riferimento deve permettere ai membri di capire chi presenta la domanda e di riscontrarne il controllo; il solo nome dichiarato non è sufficiente. Non pubblicare documenti d’identità o dati riservati."
   },
   {
     "id": 3,
     "title": "Discutere",
-    "text": "I membri IR2 possono conversare su qualsiasi argomento nel forum, rispettando le persone. Non serve aprire una votazione per discutere. Un thread riunisce il messaggio iniziale e le risposte nello stesso luogo. Un titolo riconoscibile e una spiegazione del contesto aiutano anche chi arriva più tardi a comprendere e continuare il confronto."
+    "text": "I membri PR2 possono conversare su qualsiasi argomento nel forum, rispettando le persone. Non serve aprire una votazione per discutere. Un thread riunisce il messaggio iniziale e le risposte nello stesso luogo. Un titolo riconoscibile e una spiegazione del contesto aiutano anche chi arriva più tardi a comprendere e continuare il confronto."
   },
   {
     "id": 4,
     "title": "Segnalare e proporre",
-    "text": "Ogni membro IR2 può aprire tutte le issue che desidera. Bastano un titolo e una descrizione comprensibili; le domande del modulo aiutano a spiegare il problema e sono facoltative. Una proposta sottoposta al voto può avere una o più soluzioni, senza un limite editoriale al loro numero. Un’issue è una segnalazione dedicata a un problema o a un miglioramento. Puoi partire dall’esperienza concreta, indicare il risultato desiderato e aggiungere alternative: non occorre conoscere il codice né compilare tutte le domande di aiuto."
+    "text": "Ogni membro PR2 può aprire tutte le issue che desidera. Bastano un titolo e una descrizione comprensibili; le domande del modulo aiutano a spiegare il problema e sono facoltative. Una proposta sottoposta al voto può avere una o più soluzioni, senza un limite editoriale al loro numero. Un’issue è una segnalazione dedicata a un problema o a un miglioramento. Puoi partire dall’esperienza concreta, indicare il risultato desiderato e aggiungere alternative: non occorre conoscere il codice né compilare tutte le domande di aiuto."
   },
   {
     "id": 5,
     "title": "La chat delle stanze",
-    "text": "La chat è riservata ai membri IR2. Ogni messaggio può contenere al massimo 200 parole; puoi inviarne uno al minuto, considerando tutte le stanze. Puoi condividere link e immagini. Messaggi e immagini restano solo nella memoria del server e tutte le stanze si azzerano ogni 48 ore, o prima se il servizio si riavvia. Non esiste un archivio della chat; chi legge può comunque conservarne una copia. Il forum rimane permanente. Usa la chat per scambi brevi e il forum quando vuoi conservare una discussione articolata. Il passaggio a un thread richiede una pubblicazione volontaria: il sito non trasferisce automaticamente le conversazioni temporanee."
+    "text": "La chat è riservata ai membri PR2. Ogni messaggio può contenere al massimo 200 parole; puoi inviarne uno al minuto, considerando tutte le stanze. Puoi condividere link e immagini. Messaggi e immagini restano solo nella memoria del server e tutte le stanze si azzerano ogni 48 ore, o prima se il servizio si riavvia. Non esiste un archivio della chat; chi legge può comunque conservarne una copia. Il forum rimane permanente. Usa la chat per scambi brevi e il forum quando vuoi conservare una discussione articolata. Il passaggio a un thread richiede una pubblicazione volontaria: il sito non trasferisce automaticamente le conversazioni temporanee."
   },
   {
     "id": 6,
@@ -32,7 +32,7 @@
   {
     "id": 7,
     "title": "Stesso diritto di voto",
-    "text": "Ogni membro IR2 può votare, anche nelle consultazioni ancora aperte al momento della sua ammissione. L’elenco degli aventi diritto e il quorum vengono aggiornati fino alla scadenza. IR1 e IR2 hanno quindi funzioni diverse: conservare letture non attribuisce da solo il voto, mentre ogni membro ammesso al secondo livello dispone dello stesso diritto di partecipare alle consultazioni aperte."
+    "text": "Ogni membro PR2 può votare, anche nelle consultazioni ancora aperte al momento della sua ammissione. L’elenco degli aventi diritto e il quorum vengono aggiornati fino alla scadenza. PR1 e PR2 hanno quindi funzioni diverse: conservare letture non attribuisce da solo il voto, mentre ogni membro ammesso al secondo livello dispone dello stesso diritto di partecipare alle consultazioni aperte."
   },
   {
     "id": 8,
@@ -47,7 +47,7 @@
   {
     "id": 10,
     "title": "Pubblico o privato",
-    "text": "Issue, proposte, votazioni e risultati sono pubblici. Le discussioni sono pubbliche per impostazione iniziale; soltanto quelle contrassegnate come private sono accessibili ai soli membri IR2. La visibilità viene fissata alla pubblicazione. Prima di pubblicare, considera chi potrà leggere e condividere il contenuto. L’impostazione privata limita l’accesso nel sito, ma non può impedire a un partecipante autorizzato di conservarne una copia."
+    "text": "Issue, proposte, votazioni e risultati sono pubblici. Le discussioni sono pubbliche per impostazione iniziale; soltanto quelle contrassegnate come private sono accessibili ai soli membri PR2. La visibilità viene fissata alla pubblicazione. Prima di pubblicare, considera chi potrà leggere e condividere il contenuto. L’impostazione privata limita l’accesso nel sito, ma non può impedire a un partecipante autorizzato di conservarne una copia."
   },
   {
     "id": 11,

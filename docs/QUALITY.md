@@ -91,10 +91,10 @@ Aggiornamento: 20 ottobre 2026. Questo registro distingue codice verificato, com
 | Requisito | Stato e riscontro |
 | --- | --- |
 | Account indipendenti senza profilo social obbligatorio | **codice e anteprima**. SSO rimosso; accesso indipendente non ancora collegato. |
-| IR1 email/password senza approvazione comunitaria | **solo runtime indipendente**. Registrazione con email e password verificata senza profilo social; salvataggi IR1 testati prima dell’ammissione IR2. Non attiva online sul precedente indirizzo. |
-| IR1 salvataggi privati persistenti dopo cancellazione cache | **solo runtime indipendente**. Database remoto previsto; isolamento e riapertura DB testati localmente. |
-| IR2 verifica persona/ente e nome riconoscibile nel voto | **solo runtime indipendente**. Profilo con riferimento pubblico e ammissione; non certifica identità civile. |
-| Tre sì da IR2 distinti entro 72 ore | **solo runtime indipendente**. Regole e test presenti; nessuna comunità reale attivata. |
+| PR1 email/password senza approvazione comunitaria | **solo runtime indipendente**. Registrazione con email e password verificata senza profilo social; salvataggi PR1 testati prima dell’ammissione PR2. Non attiva online sul precedente indirizzo. |
+| PR1 salvataggi privati persistenti dopo cancellazione cache | **solo runtime indipendente**. Database remoto previsto; isolamento e riapertura DB testati localmente. |
+| PR2 verifica persona/ente e nome riconoscibile nel voto | **solo runtime indipendente**. Profilo con riferimento pubblico e ammissione; non certifica identità civile. |
+| Tre sì da PR2 distinti entro 72 ore | **solo runtime indipendente**. Regole e test presenti; nessuna comunità reale attivata. |
 | Avvio dei tre membri iniziali con procedura sicura | **bloccato**. Inviti personali monouso previsti; non configurati né distribuiti. |
 | Regole semplici con numerazione sequenziale | **pubblicato**. Numerazione sequenziale e distinzione fra regole pubbliche e configurazione tecnica. |
 | Conferma email, recupero, sessioni e sicurezza del servizio reale | **non completato**. Flussi simulati verificati; consegna email e configurazione remota mancanti. |
@@ -103,13 +103,13 @@ Aggiornamento: 20 ottobre 2026. Questo registro distingue codice verificato, com
 
 | Requisito | Stato e riscontro |
 | --- | --- |
-| Forum IR2 per conversazioni generali e testi lunghi | **solo runtime indipendente**. Thread e commenti persistenti testati, non attivi online. |
-| Lettura pubblica di issue, discussioni e risultati salvo privato IR2 | **solo runtime indipendente**. Autorizzazioni server testate; verifica operativa remota mancante. |
+| Forum PR2 per conversazioni generali e testi lunghi | **solo runtime indipendente**. Thread e commenti persistenti testati, non attivi online. |
+| Lettura pubblica di issue, discussioni e risultati salvo privato PR2 | **solo runtime indipendente**. Autorizzazioni server testate; verifica operativa remota mancante. |
 | Issue senza limite editoriale con modulo guidato facoltativo | **solo runtime indipendente**. Modulo e limiti tecnici implementati; non attivo online. |
 | Una o più soluzioni senza limite editoriale prefissato | **solo runtime indipendente**. Implementazione verificata con limiti tecnici di richiesta. |
-| Ogni IR2 ha diritto di voto, anche nuovo ammesso | **solo runtime indipendente**. Quorum e aventi diritto aggiornati fino alla scadenza; prova integrata di voto di un nuovo IR2 e rifiuto delle scritture comunitarie per IR1. |
+| Ogni PR2 ha diritto di voto, anche nuovo ammesso | **solo runtime indipendente**. Quorum e aventi diritto aggiornati fino alla scadenza; prova integrata di voto di un nuovo PR2 e rifiuto delle scritture comunitarie per PR1. |
 | Metodi, termini, schede nominative ed esportazione verificabile | **solo runtime indipendente**. Metodi e scrutinio testati; nessuna garanzia assoluta contro amministratore. |
-| Chat IR2 con stanze, 200 parole e un messaggio/minuto | **solo runtime indipendente**. Cinque stanze, limite condiviso nel processo, test di concorrenza. |
+| Chat PR2 con stanze, 200 parole e un messaggio/minuto | **solo runtime indipendente**. Cinque stanze, limite condiviso nel processo, test di concorrenza. |
 | Chat temporanea 48h con link/immagini e invito al forum permanente | **solo runtime indipendente**. RAM senza archivio applicativo; riavvio può cancellare prima, terzi possono copiare. |
 
 ### Garanzie e consegna

@@ -42,10 +42,10 @@ export const liveChat=new LiveChat();
 const privateHeaders={'cache-control':'private, no-store',vary:'cookie','x-content-type-options':'nosniff','referrer-policy':'no-referrer'};
 export async function handleLiveChat(request:Request,db:ForumDatabase,userId:string|null,store=liveChat,open=true){
  const reply=(body:unknown,status=200,extra:Record<string,string>={})=>Response.json(body,{status,headers:{...privateHeaders,...extra}});
- if(!userId)return reply({error:'La chat è riservata ai membri IR2.'},401);
+ if(!userId)return reply({error:'La chat è riservata ai membri PR2.'},401);
  try{
   const owner=createHash('sha256').update('internazionale-rossa:forum:'+userId).digest('hex');const member=(await db.prepare("SELECT id,alias FROM forum_members WHERE owner_key=? AND status='active'").bind(owner).all()).results[0] as Member|undefined;
-  if(!member)return reply({error:'Per entrare nella chat serve l’ammissione IR2.'},403);
+  if(!member)return reply({error:'Per entrare nella chat serve l’ammissione PR2.'},403);
   const url=new URL(request.url),image=url.pathname==='/api/community/chat-image';
   if(image){if(request.method!=='GET')return reply({error:'Method not allowed'},405);if([...url.searchParams.keys()].some(key=>key!=='id'||url.searchParams.getAll(key).length!==1)||!proposalId(url.searchParams.get('id')))return reply({error:'Immagine non valida.'},400);const data=store.image(url.searchParams.get('id')!);return data?new Response(data.bytes as BodyInit,{headers:{...privateHeaders,'content-type':data.type,'content-security-policy':"default-src 'none'; sandbox"}}):reply({error:'Immagine scaduta o non disponibile.'},404);}
   if(request.method==='GET'){

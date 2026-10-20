@@ -33,7 +33,9 @@
     "tsx": "4.23.15",
     "esbuild": "0.28.2",
     "@types/pg": "8.16.0",
-    "@types/nodemailer": "7.0.11"
+    "@types/nodemailer": "7.0.11",
+    "tailwindcss": "4.2.1",
+    "@tailwindcss/postcss": "4.2.1"
   },
   "type": "module",
   "license": "AGPL-3.0-or-later"

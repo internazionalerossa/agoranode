@@ -10,6 +10,7 @@ export type ChatDraft={title:string;body:string;language?:string};
 const initialRoom=()=>typeof window!=='undefined'&&ROOMS.some(room=>room.id===new URL(location.href).searchParams.get('stanza'))?new URL(location.href).searchParams.get('stanza')!:'generale';
 export default function LiveChat({active,disabled,preview,onThread}:{active:boolean;disabled:boolean;preview:boolean;onThread:(draft:ChatDraft)=>void}){
  const locale=useLocale(),[room,setRoom]=useState(initialRoom),[board,setBoard]=useState<ChatBoard|null>(null),[messages,setMessages]=useState<ChatMessage[]>([]),[body,setBody]=useState(''),[image,setImage]=useState<string|undefined>(),[error,setError]=useState(''),[busy,setBusy]=useState(false),[before,setBefore]=useState<number|null|undefined>(),[paging,setPaging]=useState(false),[now,setNow]=useState(Date.now),[connected,setConnected]=useState(false);
+ useEffect(()=>{const sync=()=>setRoom(initialRoom());window.addEventListener('popstate',sync);return()=>window.removeEventListener('popstate',sync);},[]);
  const currentRoomId=useRef(room),messageBox=useRef<HTMLDivElement>(null),stickToBottom=useRef(true);currentRoomId.current=room;
  const offset=useRef(0),generation=useRef(''),file=useRef<HTMLInputElement>(null),attachmentVersion=useRef(0),request=useRef<{signature:string;id:string}|null>(null),currentRoom=ROOMS.find(item=>item.id===room)!;
  const [messageLanguage,setMessageLanguage]=useState(locale);

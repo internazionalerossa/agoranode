@@ -772,7 +772,7 @@ export function AggregatorApp() {
               <span>
                 <BrandName language={readingLanguage}/>
               </span>
-            </button><p className="brand-tagline"><LocalizedText>Leggere le fonti, sostenere chi informa.</LocalizedText></p></div>
+            </button></div>
             <div className="header-account-actions utility-controls"><LanguageSettings/><a href="/?view=salvati" onClick={event=>{event.preventDefault();navigate("salvati");}}><Bookmark size={16}/><LocalizedText>I tuoi salvati</LocalizedText>{savedIds.size+savedBooks.size>0&&<span>{savedIds.size+savedBooks.size}</span>}</a><a className="header-account-link" href={"/account?"+new URLSearchParams({return_to:view==="notizie"?"/":"/?view="+view})}><UserRound size={17}/><LocalizedText>{cloud.account?"Il tuo account":"Accedi / Registrati"}</LocalizedText></a><a href="/?view=fonti" className="source-directory-button" aria-current={view==="fonti"?"page":undefined} onClick={event=>{if(event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;event.preventDefault();navigate("fonti");}}><Newspaper size={16}/><LocalizedText>Fonti</LocalizedText><strong>{SOURCE_CATALOG.length}</strong></a></div>
           </div>
           <nav className="main-nav" aria-label="Navigazione principale">

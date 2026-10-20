@@ -125,7 +125,7 @@ async function fileRecord(root:string,path:string):Promise<ReleaseFile>{
  const absolute=join(root,...path.split('/')),info=await lstat(absolute);
  if(!info.isFile()||info.size>MAX_RELEASE_FILE_BYTES)fail('release file is missing, not regular, or too large: '+path);
  let data=await readFile(absolute);if(data.length!==info.size)fail('release file changed while reading: '+path);
- if(path==='package.json'||path==='package-lock.json'){
+ if(path==='package.json'||path==='package-lock.json'||/^build-node\/migrations\/[A-Za-z0-9._+@-]+\.sql$/.test(path)){
   let text:string;try{text=new TextDecoder('utf-8',{fatal:true}).decode(data);}catch{fail('release JSON is not UTF-8: '+path);}
   text=text.replaceAll('\r\n','\n');if(text.includes('\r'))fail('release JSON contains a bare carriage return: '+path);data=Buffer.from(text);
  }

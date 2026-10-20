@@ -9,10 +9,11 @@ import {canonicalJson,createPublicSnapshot,generateSnapshotKeys,importPublicSnap
 
 async function releaseFixture(){
  const root=await mkdtemp(join(tmpdir(),'polisrossa-snapshot-'));
- await mkdir(join(root,'build-node','public'),{recursive:true});
+ await Promise.all([mkdir(join(root,'build-node','public'),{recursive:true}),mkdir(join(root,'build-node','migrations'),{recursive:true})]);
  await Promise.all([
   writeFile(join(root,'package.json'),'{}\n'),writeFile(join(root,'package-lock.json'),'{"lockfileVersion":3}\n'),
   writeFile(join(root,'build-node','server.mjs'),'export const ready=true;\n'),writeFile(join(root,'build-node','public','index.html'),'<!doctype html><title>PolisRossa</title>\n'),
+  writeFile(join(root,'build-node','migrations','001-test.sql'),'SELECT 1;\r\n'),
  ]);
  return root;
 }
@@ -31,12 +32,13 @@ test('public snapshot is canonical, signed, release-only and unaffected by files
   assert.equal((await verifiedBundle(root,output,keys)).created.snapshotId,first.created.snapshotId);
   assert.deepEqual(first.verified.manifest.publicState,[]);
   assert.deepEqual(first.verified.manifest.policy,{scope:'release-only',userGeneratedContent:'excluded'});
-  assert.deepEqual(first.verified.manifest.release.files.map(file=>file.path),['build-node/public/index.html','build-node/server.mjs','package-lock.json','package.json']);
+  assert.deepEqual(first.verified.manifest.release.files.map(file=>file.path),['build-node/migrations/001-test.sql','build-node/public/index.html','build-node/server.mjs','package-lock.json','package.json']);
   assert.equal(first.created.manifestBytes.toString(),canonicalJson(first.created.manifest));
   assert.doesNotMatch(first.created.manifestBytes.toString(),/canary-private-value|\.selfhost|AUTH_SECRET/);
   assert.doesNotMatch(first.created.signatureBytes.toString(),/PRIVATE KEY/);
   assert.equal(first.verified.signerKeyId,keys.keyId);
   await writeFile(join(root,'package.json'),'{}\n');
+  await writeFile(join(root,'build-node','migrations','001-test.sql'),'SELECT 1;\n');
   assert.equal((await verifyPublicSnapshot({bundleDirectory:first.created.directory,releaseRoot:root,publicKey:keys.publicKeyPem})).snapshotId,first.created.snapshotId);
  }finally{await rm(root,{recursive:true,force:true});}
 });

@@ -1,0 +1,40 @@
+{
+  "name": "polis-rossa",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "dev": "vite --host 127.0.0.1 --config web/vite.config.ts",
+    "build": "node scripts/build-node.mjs",
+    "start": "node --env-file-if-exists=.env build-node/server.mjs",
+    "db:migrate": "node --env-file-if-exists=.env --import tsx server/migrate.ts",
+    "test": "node --import tsx --test --test-concurrency=1 tests/*.test.mjs tests/node-*.test.ts",
+    "typecheck": "tsc --noEmit",
+    "dev:server": "node --env-file=.env --import tsx --watch server/index.ts"
+  },
+  "dependencies": {
+    "lucide-react": "^1.25.0",
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
+    "better-auth": "1.7.11",
+    "pg": "8.23.1",
+    "nodemailer": "10.1.7"
+  },
+  "devDependencies": {
+    "@types/node": "22.19.19",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "@vitejs/plugin-react": "6.0.2",
+    "typescript": "5.9.3",
+    "vite": "8.0.13",
+    "@electric-sql/pglite": "0.5.10",
+    "tsx": "4.23.15",
+    "esbuild": "0.28.2",
+    "@types/pg": "8.16.0",
+    "@types/nodemailer": "7.0.11"
+  },
+  "type": "module",
+  "license": "AGPL-3.0-or-later"
+}

@@ -1,0 +1,317 @@
+"use client";
+import { memo, useEffect, useMemo, useRef, useState } from "react";
+import { ArrowUpRight, RefreshCcw } from "lucide-react";
+import { rankPulse } from "@/app/lib/pulse";
+import {
+  validateArticles,
+  mergeArticles,
+  safeWebUrl,
+  type ReadingArticle,
+} from "@/app/lib/reading";
+import { SOURCE_CATALOG, TOPIC_TAXONOMY } from "@/app/data/catalog";
+import { LocalizedText as T, useLocale } from "./Localization";
+import { createPublisherResolver } from "@/app/lib/publisher";
+const publisherFor = createPublisherResolver(SOURCE_CATALOG);
+const AREAS = [
+  "europe",
+  "north",
+  "latin",
+  "africa",
+  "asia",
+  "east",
+  "mena",
+  "pacific",
+];
+export const WorldWatch = memo(function WorldWatch({ networkArticles, expanded=false }: { networkArticles: ReadingArticle[];expanded?:boolean }) {
+  const locale = useLocale();
+  const [articles, setArticles] = useState<ReadingArticle[]>([]);
+  const [country, setCountry] = useState("all");
+  const [topic, setTopic] = useState("all");
+  const [hours, setHours] = useState(6);
+  const [sort, setSort] = useState("signal");
+  const [visibleCount,setVisibleCount]=useState(60);
+  useEffect(()=>setVisibleCount(60),[country,topic,hours]);
+  const [busy, setBusy] = useState(false);
+  const [coverage, setCoverage] = useState({ done: 0, ok: 0 });
+  const [now, setNow] = useState(Date.now());
+  const [updatedAt, setUpdatedAt] = useState(0);
+  const abort = useRef<AbortController | null>(null);
+  const run = useRef(0);
+  const refresh = async () => {
+    abort.current?.abort();
+    const controller = new AbortController();
+    abort.current = controller;
+    const current = ++run.current;
+    setBusy(true);
+    setCoverage({ done: 0, ok: 0 });
+    setNow(Date.now());
+    let cursor = 0;
+    const worker = async () => {
+      while (cursor < AREAS.length && !controller.signal.aborted) {
+        const area = AREAS[cursor++];
+        let ok = false;
+        try {
+          const response = await fetch(`/api/pulse?area=${area}`, {
+            signal: AbortSignal.any([
+              controller.signal,
+              AbortSignal.timeout(12000),
+            ]),
+          });
+          const data = await response.json();
+          if (!response.ok) throw new Error("Collection unavailable");
+          const cards = validateArticles(data.articles);
+          if (!data.ok && !cards.length) throw new Error("Collection unavailable");
+          if (current === run.current)
+            setArticles((previous) =>
+              mergeArticles(previous, cards).filter(
+                (article) =>
+                  article.publishedAt &&
+                  Date.parse(article.publishedAt) >= Date.now() - 21_600_000,
+              ),
+            );
+          ok = Boolean(data.ok);
+        } catch {
+          /* One failed area never blocks the other results. */
+        }
+        if (current === run.current)
+          setCoverage((previous) => ({
+            done: previous.done + 1,
+            ok: previous.ok + Number(ok),
+          }));
+      }
+    };
+    await Promise.all([worker(), worker(), worker()]);
+    if (current === run.current) {
+      setBusy(false);
+      setUpdatedAt(Date.now());
+      setNow(Date.now());
+    }
+  };
+  useEffect(() => {
+    try {
+      const cached = JSON.parse(localStorage.getItem("rassegna-rossa.pulse-cache") ?? "null");
+      if (cached?.savedAt > Date.now() - 600_000 && cached.savedAt <= Date.now()) {
+        const restored = validateArticles(cached.articles);
+        if (restored.length) { setArticles(restored); setUpdatedAt(cached.savedAt); }
+      }
+    } catch { /* Public cache is optional. */ }
+    void refresh();
+    const tick = setInterval(() => setNow(Date.now()), 60_000);
+    const refreshTimer = setInterval(() => {
+      if (document.visibilityState === "visible") void refresh();
+    }, 300_000);
+    return () => {
+      abort.current?.abort();
+      run.current++;
+      clearInterval(tick);
+      clearInterval(refreshTimer);
+    };
+    // Collection is independent of the language and the main news filters.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  useEffect(() => {
+    if (!updatedAt || !articles.length) return;
+    const timer = setTimeout(() => {
+      try { localStorage.setItem("rassegna-rossa.pulse-cache", JSON.stringify({ savedAt: updatedAt, articles: articles.slice(0, 480) })); }
+      catch { /* Never evict private saved items for a public cache. */ }
+    }, 300);
+    return () => clearTimeout(timer);
+  }, [articles, updatedAt]);
+  const allStories = useMemo(
+    () => rankPulse([...networkArticles, ...articles], now),
+    [networkArticles, articles, now],
+  );
+  const countries = [...new Set(allStories.flatMap(story => story.coverage.map(article => publisherFor(article).country ?? "Paese non verificato")))].sort();
+  const stories = allStories.flatMap(story => {
+    const eligible = story.coverage.filter(article =>
+      (country === "all" || (publisherFor(article).country ?? "Paese non verificato") === country) &&
+      (topic === "all" || article.topics.includes(topic)) &&
+      Date.parse(article.publishedAt!) >= now - hours * 3_600_000);
+    return eligible.length ? [{ ...story, article: eligible[0] }] : [];
+  });
+  if (sort === "fresh")
+    stories.sort(
+      (a, b) =>
+        Date.parse(b.article.publishedAt!) - Date.parse(a.article.publishedAt!),
+    );
+  const dateTime = (value:number)=>new Intl.DateTimeFormat(locale,{day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"}).format(value);
+  const time = (value: number) =>
+    new Intl.DateTimeFormat(locale, {
+      hour: "2-digit",
+      minute: "2-digit",
+    }).format(value);
+  return (
+    <aside
+      className={"world-watch"+(expanded?" world-watch-expanded":"")}
+      id="osservatorio-sei-ore"
+      data-initial-pending={busy && !allStories.length && coverage.done === 0 ? "true" : undefined}
+      aria-label="Osservatorio mondiale delle ultime sei ore"
+    >
+      <div className="watch-heading">
+        <p className="eyebrow">
+          <span className="live-dot" /> <T>OSSERVATORIO MONDIALE</T>
+        </p>
+        <strong>
+          06<span>h</span>
+        </strong>
+      </div>
+      <h3>
+        <T>Ultime sei ore</T>
+      </h3>
+      <p className="watch-deck">
+        <T>
+          I fatti più recenti dalle fonti internazionali, in una finestra di sei ore. Per seguire ciò che accade adesso.
+        </T>
+      </p>
+      <a className="watch-back-to-review" href="/?view=notizie#rassegna-articoli"><T>Torna alla rassegna</T> ↑</a>
+      <div className="watch-stats">
+
+        <div>
+          <strong>
+            {
+              new Set(
+                allStories.flatMap((story) =>
+                  story.coverage.map((article) => article.sourceName),
+                ),
+              ).size
+            }
+          </strong>
+          <T>testate rappresentate</T>
+        </div>
+      </div>
+      <details className="watch-filters">
+        <summary><T>Filtra l’osservatorio</T></summary>
+      <div className="watch-controls">
+        <label>
+          <T>Paese della testata</T>
+          <select
+            value={country}
+            onChange={(event) => setCountry(event.target.value)}
+          >
+            <option value="all">
+              <T>Tutti i paesi</T>
+            </option>
+            {countries.map((value) => (
+              <option key={value} value={value}>
+                <T>{value}</T>
+              </option>
+            ))}
+          </select>
+        </label>
+        <label>
+          <T>Argomento</T>
+          <select
+            value={topic}
+            onChange={(event) => setTopic(event.target.value)}
+          >
+            <option value="all">
+              <T>Tutti gli argomenti</T>
+            </option>
+            {TOPIC_TAXONOMY.map((item) => (
+              <option key={item.id} value={item.id}>
+                <T>{item.label}</T>
+              </option>
+            ))}
+          </select>
+        </label>
+        <label>
+          <T>Periodo</T>
+          <select
+            value={hours}
+            onChange={(event) => setHours(Number(event.target.value))}
+          >
+            {[1, 3, 6].map((value) => (
+              <option key={value} value={value}>
+                {value} h
+              </option>
+            ))}
+          </select>
+        </label>
+        <label>
+          <T>Ordina</T>
+          <select
+            value={sort}
+            onChange={(event) => setSort(event.target.value)}
+          >
+            <option value="signal">
+              <T>Rilevanza</T>
+            </option>
+            <option value="fresh">
+              <T>Più recenti</T>
+            </option>
+          </select>
+        </label>
+      </div>
+      </details>
+      <div className="watch-status" role="status">
+        <span>
+          {busy ? (
+            <>
+              <T>Raccolte aggiornate</T> {coverage.done}/{AREAS.length}
+            </>
+          ) : (
+            <>
+              <T>Raccolte disponibili</T> {coverage.ok}/{AREAS.length}
+            </>
+          )}
+        </span>
+        <button
+          disabled={busy}
+          onClick={() => void refresh()}
+          aria-label="Aggiorna osservatorio"
+        >
+          <RefreshCcw size={14} />
+        </button>
+      </div>
+      <ol className="watch-stories">
+        {stories.slice(0, expanded ? visibleCount : 12).map((story) => (
+          <li key={story.article.id}>
+            <div className="watch-story-meta">
+              <time dateTime={story.article.publishedAt!}>
+                {dateTime(Date.parse(story.article.publishedAt!))}
+              </time>
+            </div>
+            <a
+              className="watch-title"
+              href={safeWebUrl(story.article.link) ?? undefined}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <T priority={3} from={publisherFor(story.article).language}>
+                {story.article.title}
+              </T>
+              <ArrowUpRight size={14} />
+            </a>
+            <p className="watch-publisher">
+              <span>{story.article.sourceName}</span>
+              <span className="watch-country"><T>{publisherFor(story.article).country ?? "Paese non verificato"}</T></span>
+            </p>
+          </li>
+        ))}
+      </ol>
+      {expanded&&stories.length>visibleCount?<button className="button button-outline" onClick={()=>setVisibleCount(n=>n+60)}><T>Mostra altre notizie recenti</T></button>:null}
+      {!expanded&&stories.length>12?<a className="watch-open-all" href="/?view=osservatorio"><T>Apri tutte le notizie delle ultime sei ore</T> ↗</a>:null}
+      {!stories.length ? (
+        <p className="watch-empty">
+          <T>
+            {busy
+              ? "Le aree rispondono separatamente. Le prime notizie compariranno qui."
+              : "Nessuna notizia in questa finestra."}
+          </T>
+        </p>
+      ) : null}
+      <p className="watch-footnote">
+        <T>Finestra di pubblicazione</T> {dateTime(now - hours * 3_600_000)}–{dateTime(now)}.{" "}
+        {updatedAt ? (
+          <>
+            <T>Ultimo tentativo</T> {time(updatedAt)}.
+          </>
+        ) : null}{" "}
+        <T>
+          Aggiornamento ogni cinque minuti a pagina visibile. Apri e sostieni le
+          fonti originali.
+        </T>
+      </p>
+    </aside>
+  );
+});

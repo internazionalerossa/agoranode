@@ -1,0 +1,34 @@
+services:
+  - type: web
+    name: polis-rossa
+    runtime: docker
+    plan: free
+    region: frankfurt
+    autoDeployTrigger: "off"
+    healthCheckPath: /healthz
+    dockerCommand: sh -c 'node build-node/migrate.mjs && node build-node/server.mjs'
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: APP_URL
+        sync: false
+      - key: DATABASE_URL
+        sync: false
+      - key: AUTH_SECRET
+        generateValue: true
+      - key: MAIL_TRANSPORT
+        value: brevo
+      - key: BREVO_API_KEY
+        sync: false
+      - key: MAIL_FROM
+        sync: false
+      - key: PUBLIC_OPERATOR_NAME
+        sync: false
+      - key: PUBLIC_PRIVACY_CONTACT
+        sync: false
+      - key: COMMUNITY_BOOTSTRAP_HASH
+        sync: false
+      - key: REGISTRATIONS_OPEN
+        value: "false"
+      - key: FORUM_OPEN
+        value: "false"

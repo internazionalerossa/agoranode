@@ -1,0 +1,10 @@
+import {build as viteBuild} from 'vite';
+import react from '@vitejs/plugin-react';
+import {build} from 'esbuild';
+import {resolve} from 'node:path';
+import {mkdir,cp} from 'node:fs/promises';
+await viteBuild({configFile:false,root:resolve('web'),publicDir:resolve('public'),resolve:{alias:{'@':resolve('.')}},plugins:[react()],build:{manifest:true,outDir:resolve('build-node/public'),emptyOutDir:true}});
+await build({entryPoints:['server/index.ts'],outfile:'build-node/server.mjs',bundle:true,platform:'node',target:'node24',format:'esm',packages:'external',alias:{'@':resolve('.')},sourcemap:false});
+await build({entryPoints:['server/migrate.ts'],outfile:'build-node/migrate.mjs',bundle:true,platform:'node',target:'node24',format:'esm',packages:'external'});
+await mkdir('build-node/migrations',{recursive:true});
+await cp('server/migrations','build-node/migrations',{recursive:true});

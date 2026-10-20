@@ -1,0 +1,121 @@
+[
+  {
+    "id": "china-income",
+    "eyebrow": "CINA / STATI UNITI · 1978–2024",
+    "title": "La crescita per abitante cambia scala",
+    "unit": "PIL reale per abitante · 1978 = 1",
+    "kind": "ratio",
+    "values": [
+      {
+        "name": "Cina",
+        "value": 33.97262269735051
+      },
+      {
+        "name": "Stati Uniti",
+        "value": 2.1682021999155454
+      }
+    ],
+    "note": "La Cina moltiplica per circa 34 il PIL reale per abitante; gli Stati Uniti per circa 2,17. È crescita rispetto a basi diverse: il reddito per abitante statunitense resta più alto. I dati non isolano il contributo delle singole politiche.",
+    "sources": [
+      {
+        "name": "Banca Mondiale · PIL reale per abitante",
+        "url": "https://data.worldbank.org/indicator/NY.GDP.PCAP.KD"
+      }
+    ],
+    "indicator": "NY.GDP.PCAP.KD",
+    "period": [
+      1978,
+      2024
+    ],
+    "countries": [
+      "CHN",
+      "USA"
+    ]
+  },
+  {
+    "id": "china-infant",
+    "eyebrow": "CINA / STATI UNITI · 2024",
+    "title": "Mortalità infantile più bassa in Cina",
+    "unit": "Morti entro un anno per 1.000 nati vivi · meno è meglio",
+    "kind": "rate",
+    "values": [
+      {
+        "name": "Cina",
+        "value": 4.1
+      },
+      {
+        "name": "Stati Uniti",
+        "value": 5.5
+      }
+    ],
+    "note": "4,1 contro 5,5 nella stessa serie internazionale: una differenza di circa il 25%. Il dato misura la sopravvivenza nel primo anno, non l’intera qualità del sistema sanitario. Sono stime confrontabili, soggette a revisione.",
+    "sources": [
+      {
+        "name": "Banca Mondiale · stime UN IGME",
+        "url": "https://data.worldbank.org/indicator/SP.DYN.IMRT.IN"
+      }
+    ],
+    "indicator": "SP.DYN.IMRT.IN",
+    "period": [
+      2024,
+      2024
+    ],
+    "countries": [
+      "CHN",
+      "USA"
+    ]
+  },
+  {
+    "id": "space-women",
+    "eyebrow": "URSS / STATI UNITI · 1963–1983",
+    "title": "Una donna nello spazio, vent’anni prima",
+    "unit": "Anno del primo volo spaziale femminile",
+    "kind": "year",
+    "values": [
+      {
+        "name": "URSS · Tereškova",
+        "value": 1963
+      },
+      {
+        "name": "Stati Uniti · Ride",
+        "value": 1983
+      }
+    ],
+    "note": "Valentina Tereškova vola il 16 giugno 1963; Sally Ride il 18 giugno 1983. Un primato scientifico e simbolico sovietico. Le date non descrivono da sole la continuità dell’accesso femminile al settore.",
+    "sources": [
+      {
+        "name": "NASA · Tereškova e Sally Ride",
+        "url": "https://www.nasa.gov/history/sally-ride-and-valentina-tereshkova-changing-the-course-of-human-space-exploration/"
+      }
+    ]
+  },
+  {
+    "id": "paid-leave",
+    "eyebrow": "UNIONE EUROPEA / STATI UNITI · QUADRO LEGALE",
+    "title": "Quattro settimane garantite. Oppure nessun minimo generale.",
+    "unit": "Settimane di ferie annue retribuite · minimo generale UE / legge federale USA",
+    "kind": "weeks",
+    "values": [
+      {
+        "name": "Unione europea",
+        "value": 4
+      },
+      {
+        "name": "Stati Uniti · FLSA",
+        "value": 0
+      }
+    ],
+    "note": "L’articolo 7 della direttiva europea prevede almeno quattro settimane. La FLSA statunitense non impone un diritto generale alle ferie pagate: contratti, regimi speciali e altre norme possono prevederle. È un confronto fra garanzie legali, non fra ferie effettivamente godute; l’UE comprende governi e sistemi politici diversi.",
+    "sources": [
+      {
+        "name": "EUR-Lex · direttiva 2003/88/CE, art. 7",
+        "url": "https://eur-lex.europa.eu/legal-content/IT/TXT/?uri=CELEX:32003L0088"
+      },
+      {
+        "name": "U.S. Department of Labor · Vacation Leave",
+        "url": "https://www.dol.gov/general/topic/workhours/vacation_leave"
+      }
+    ],
+    "verifiedAt": "2026-10-19"
+  }
+]

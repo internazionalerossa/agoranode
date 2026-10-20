@@ -1,0 +1,43 @@
+{
+  "excludedSourceIds": [
+    "asia-times",
+    "responsible-statecraft",
+    "indian-punchline",
+    "dawn",
+    "the-hindu",
+    "eff"
+  ],
+  "excludedPublisherDomains": [
+    "vanityfair.com",
+    "vanityfair.it",
+    "asia-times.com",
+    "asiatimes.com",
+    "responsiblestatecraft.org",
+    "indianpunchline.com",
+    "dawn.com",
+    "thehindu.com",
+    "eff.org"
+  ],
+  "publicUniversities": [
+    {
+      "domain": "usp.br",
+      "sourceId": "jornal-usp",
+      "name": "Universidade de São Paulo",
+      "status": "Università pubblica dello Stato di São Paulo",
+      "evidence": "https://www5.usp.br/english/institutional/"
+    },
+    {
+      "domain": "cam.ac.uk",
+      "sourceId": "cambridge-academic-documentation",
+      "name": "University of Cambridge · Cambridge University Press",
+      "status": "Università autonoma senza fini di lucro, parte del sistema universitario pubblico britannico; riferimento di ricerca storica, non testata della rassegna",
+      "evidence": "https://www.cam.ac.uk/about-the-university/how-the-university-and-colleges-work/people/vice-chancellor/speeches/public-and-private"
+    }
+  ],
+  "criteria": [
+    "La rassegna raccoglie testate e organizzazioni della sinistra, dei movimenti sociali e sindacali e dell’informazione anticoloniale e femminista.",
+    "La presenza di parole chiave politiche non qualifica una testata: il radar ammette soltanto editori già presenti nel catalogo editoriale.",
+    "Le fonti universitarie devono appartenere ad atenei pubblici verificati. Un ateneo pubblico non viene per questo qualificato come socialista.",
+    "Dati statistici, testi di legge e documenti originali sono riferimenti documentali, distinti dalle testate della rassegna. Il loro uso non attribuisce agli enti una linea politica."
+  ]
+}

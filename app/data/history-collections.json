@@ -1,0 +1,421 @@
+{
+  "source": "https://www.marxists.org/history/index.htm",
+  "retrievedAt": "2026-10-19",
+  "collections": [
+    {
+      "title": "International Worker's Organisations",
+      "url": "https://www.marxists.org/history/international/index.htm",
+      "kind": "history"
+    },
+    {
+      "title": "The Soviet Union",
+      "url": "https://www.marxists.org/history/ussr/index.htm",
+      "kind": "history"
+    },
+    {
+      "title": "Conspiracy of Equals",
+      "url": "https://www.marxists.org/history/france/revolution/conspiracy-equals/index.htm",
+      "kind": "history"
+    },
+    {
+      "title": "Paris Commune",
+      "url": "https://www.marxists.org/history/france/paris-commune/index.htm",
+      "kind": "history"
+    },
+    {
+      "title": "The Cuban Republic",
+      "url": "https://www.marxists.org/history/cuba/index.htm",
+      "kind": "history"
+    },
+    {
+      "title": "U.S.A Radical, Leftist & Marxist Journals",
+      "url": "https://www.marxists.org/history/usa/index.htm",
+      "kind": "history"
+    },
+    {
+      "title": "Black Liberation and Civil Rights in the U.S.",
+      "url": "https://www.marxists.org/history/black-liberation/index.htm",
+      "kind": "history"
+    },
+    {
+      "title": "Afghanistan",
+      "url": "https://www.marxists.org/history/afghanistan/index.htm",
+      "kind": "history"
+    },
+    {
+      "title": "Algeria",
+      "url": "https://www.marxists.org/history/algeria/index.htm",
+      "kind": "history"
+    },
+    {
+      "title": "Argentina",
+      "url": "https://www.marxists.org/history/argentina/index.htm",
+      "kind": "history"
+    },
+    {
+      "title": "Australia",
+      "url": "https://www.marxists.org/history/australia/index.htm",
+      "kind": "history"
+    },
+    {
+      "title": "Austria",
+      "url": "https://www.marxists.org/history/austria/index.htm",
+      "kind": "history"
+    },
+    {
+      "title": "Britain",
+      "url": "https://www.marxists.org/history/england/index.htm",
+      "kind": "history"
+    },
+    {
+      "title": "Dominican Republic",
+      "url": "https://www.marxists.org/history/dominican-republic/index.htm",
+      "kind": "history"
+    },
+    {
+      "title": "Grenada",
+      "url": "https://www.marxists.org/history/grenada/index.htm",
+      "kind": "history"
+    },
+    {
+      "title": "Guatemala 1954",
+      "url": "https://www.marxists.org/history/guatemala/index.htm",
+      "kind": "history"
+    },
+    {
+      "title": "Hungary",
+      "url": "https://www.marxists.org/subject/hungary/index.htm",
+      "kind": "history"
+    },
+    {
+      "title": "Indonesia",
+      "url": "https://www.marxists.org/history/indonesia/index.htm",
+      "kind": "history"
+    },
+    {
+      "title": "Philippines",
+      "url": "https://www.marxists.org/history/philippines/index.htm",
+      "kind": "history"
+    },
+    {
+      "title": "Portugal",
+      "url": "https://www.marxists.org/history/portugal/index.htm",
+      "kind": "history"
+    },
+    {
+      "title": "Yugoslavia",
+      "url": "https://www.marxists.org/history/yugoslavia/index.htm",
+      "kind": "history"
+    },
+    {
+      "title": "Capitalism",
+      "url": "https://www.marxists.org/history/capitalism/index.htm",
+      "kind": "history"
+    },
+    {
+      "title": "“Anti-Revisionism”",
+      "url": "https://www.marxists.org/history/erol/index.htm",
+      "kind": "history"
+    },
+    {
+      "title": "Trotskyism",
+      "url": "https://www.marxists.org/history/etol/index.htm",
+      "kind": "history"
+    },
+    {
+      "title": "Alienation",
+      "url": "https://www.marxists.org/subject/alienation/index.htm",
+      "kind": "subject"
+    },
+    {
+      "title": "Art and Literature",
+      "url": "https://www.marxists.org/subject/art/index.htm",
+      "kind": "subject"
+    },
+    {
+      "title": "Education",
+      "url": "https://www.marxists.org/subject/education/index.htm",
+      "kind": "subject"
+    },
+    {
+      "title": "Environment",
+      "url": "https://www.marxists.org/subject/environment/index.htm",
+      "kind": "subject"
+    },
+    {
+      "title": "Fascism & how to fight it",
+      "url": "https://www.marxists.org/subject/fascism/index.htm",
+      "kind": "subject"
+    },
+    {
+      "title": "Imperialism",
+      "url": "https://www.marxists.org/subject/imperialism/index.htm",
+      "kind": "subject"
+    },
+    {
+      "title": "Lesbian, Bisexual, Gay, Transgender and Queer Movement",
+      "url": "https://www.marxists.org/subject/lgbtq/index.htm",
+      "kind": "subject"
+    },
+    {
+      "title": "Marx Myths & Legends",
+      "url": "https://www.marxists.org/subject/marxmyths/index.htm",
+      "kind": "subject"
+    },
+    {
+      "title": "Natural Science",
+      "url": "https://www.marxists.org/subject/science/index.htm",
+      "kind": "subject"
+    },
+    {
+      "title": "Philosophy",
+      "url": "https://www.marxists.org/subject/philosophy/index.htm",
+      "kind": "subject"
+    },
+    {
+      "title": "Political Economy",
+      "url": "https://www.marxists.org/subject/economy/index.htm",
+      "kind": "subject"
+    },
+    {
+      "title": "Precapitalist Societies",
+      "url": "https://www.marxists.org/subject/precapitalist/index.htm",
+      "kind": "subject"
+    },
+    {
+      "title": "Psychology",
+      "url": "https://www.marxists.org/subject/psychology/index.htm",
+      "kind": "subject"
+    },
+    {
+      "title": "Religion",
+      "url": "https://www.marxists.org/subject/religion/index.html",
+      "kind": "subject"
+    },
+    {
+      "title": "War and Military Science",
+      "url": "https://www.marxists.org/subject/war/index.htm",
+      "kind": "subject"
+    },
+    {
+      "title": "Working Class Organisation",
+      "url": "https://www.marxists.org/subject/workers/index.htm",
+      "kind": "subject"
+    },
+    {
+      "title": "Women and Marxism",
+      "url": "https://www.marxists.org/subject/women/index.htm",
+      "kind": "subject"
+    },
+    {
+      "title": "Introduction to Marxism",
+      "url": "https://www.marxists.org/subject/students/index.htm",
+      "kind": "subject"
+    },
+    {
+      "title": "Dialectics",
+      "url": "https://www.marxists.org/subject/dialectics/index.htm",
+      "kind": "subject"
+    },
+    {
+      "title": "Famous Quotes",
+      "url": "https://www.marxists.org/subject/quotes/index.htm",
+      "kind": "subject"
+    },
+    {
+      "title": "The Bolsheviks",
+      "url": "https://www.marxists.org/subject/bolsheviks/index.htm",
+      "kind": "subject"
+    },
+    {
+      "title": "Eurocommunism",
+      "url": "https://www.marxists.org/subject/eurocommunism/index.htm",
+      "kind": "subject"
+    },
+    {
+      "title": "Frankfurt School",
+      "url": "https://www.marxists.org/subject/frankfurt-school/index.htm",
+      "kind": "subject"
+    },
+    {
+      "title": "The International Socialists",
+      "url": "https://www.marxists.org/history/etol/writers/ist/index.htm",
+      "kind": "subject"
+    },
+    {
+      "title": "Left Communism",
+      "url": "https://www.marxists.org/subject/left-wing/index.htm",
+      "kind": "subject"
+    },
+    {
+      "title": "Marxist-Humanism",
+      "url": "https://www.marxists.org/subject/humanism/index.htm",
+      "kind": "subject"
+    },
+    {
+      "title": "The Praxis Group",
+      "url": "https://www.marxists.org/subject/praxis/index.htm",
+      "kind": "subject"
+    },
+    {
+      "title": "The S.P.G.B.",
+      "url": "https://www.marxists.org/subject/spgb/index.htm",
+      "kind": "subject"
+    },
+    {
+      "title": "The Comintern and After",
+      "url": "https://www.marxists.org/subject/stalinism/index.htm",
+      "kind": "subject"
+    },
+    {
+      "title": "Syndicalism and Anarchism",
+      "url": "https://www.marxists.org/subject/anarchism/index.htm",
+      "kind": "subject"
+    },
+    {
+      "title": "Utopian Socialism",
+      "url": "https://www.marxists.org/subject/utopian/index.htm",
+      "kind": "subject"
+    },
+    {
+      "title": "Early American Marxism",
+      "url": "https://www.marxists.org/history/usa/eam/index.html",
+      "kind": "subject"
+    },
+    {
+      "title": "Anti-Imperalism & Marxism in Africa",
+      "url": "https://www.marxists.org/subject/africa/index.htm",
+      "kind": "subject"
+    },
+    {
+      "title": "Anti-Imperalism in the Arab World",
+      "url": "https://www.marxists.org/subject/arab-world/index.htm",
+      "kind": "subject"
+    },
+    {
+      "title": "Albania",
+      "url": "https://www.marxists.org/subject/albania/index.htm",
+      "kind": "subject"
+    },
+    {
+      "title": "Bangladesh",
+      "url": "https://www.marxists.org/subject/bangladesh/index.htm",
+      "kind": "subject"
+    },
+    {
+      "title": "Bolivia",
+      "url": "https://www.marxists.org/subject/bolivia/index.htm",
+      "kind": "subject"
+    },
+    {
+      "title": "Britain",
+      "url": "https://www.marxists.org/subject/britain/index.htm",
+      "kind": "subject"
+    },
+    {
+      "title": "Chinese Communism",
+      "url": "https://www.marxists.org/subject/china/index.htm",
+      "kind": "subject"
+    },
+    {
+      "title": "Czechoslovakia 1968",
+      "url": "https://www.marxists.org/subject/czech/index.htm",
+      "kind": "subject"
+    },
+    {
+      "title": "The German Revolution 1918-1923",
+      "url": "https://www.marxists.org/subject/germany-1918-23/index.htm",
+      "kind": "subject"
+    },
+    {
+      "title": "The Greek Civil War 1946-1949",
+      "url": "https://www.marxists.org/subject/greek-civil-war/index.htm",
+      "kind": "subject"
+    },
+    {
+      "title": "Marxism & Anti-Imperialism in India",
+      "url": "https://www.marxists.org/subject/india/index.htm",
+      "kind": "subject"
+    },
+    {
+      "title": "The Guerilla Movement in Iran",
+      "url": "https://www.marxists.org/subject/iran/index.htm",
+      "kind": "subject"
+    },
+    {
+      "title": "Iraq War",
+      "url": "https://www.marxists.org/subject/iraq-war/index.htm",
+      "kind": "subject"
+    },
+    {
+      "title": "Ireland and the Irish Freedom Struggle",
+      "url": "https://www.marxists.org/subject/ireland/index.htm",
+      "kind": "subject"
+    },
+    {
+      "title": "Israel-Arab/Palestinian Conflict",
+      "url": "https://www.marxists.org/subject/israel-palestine/index.htm",
+      "kind": "subject"
+    },
+    {
+      "title": "Japanese Marxism",
+      "url": "https://www.marxists.org/subject/japan/index.htm",
+      "kind": "subject"
+    },
+    {
+      "title": "Jews and the Worker’s Movement",
+      "url": "https://www.marxists.org/subject/jewish/index.htm",
+      "kind": "subject"
+    },
+    {
+      "title": "Kurdistan",
+      "url": "https://www.marxists.org/subject/kurdistan/index.htm",
+      "kind": "subject"
+    },
+    {
+      "title": "Latin America",
+      "url": "https://www.marxists.org/subject/latinamerica/index.htm",
+      "kind": "subject"
+    },
+    {
+      "title": "May Day",
+      "url": "https://www.marxists.org/subject/mayday/index.htm",
+      "kind": "subject"
+    },
+    {
+      "title": "Somalia",
+      "url": "https://www.marxists.org/subject/somalia/index.htm",
+      "kind": "subject"
+    },
+    {
+      "title": "The Spanish Civil War",
+      "url": "https://www.marxists.org/subject/spain/index.htm",
+      "kind": "subject"
+    },
+    {
+      "title": "Tamil Eelam Liberation Struggle",
+      "url": "https://www.marxists.org/subject/tamil-eelam/index.htm",
+      "kind": "subject"
+    },
+    {
+      "title": "Revolution and Anti-Imperialism in Turkey",
+      "url": "https://www.marxists.org/subject/turkey/index.htm",
+      "kind": "subject"
+    },
+    {
+      "title": "Venezuela's Bolivarian Revolution",
+      "url": "https://www.marxists.org/subject/venezuela/index.htm",
+      "kind": "subject"
+    },
+    {
+      "title": "Vietnam Revolution",
+      "url": "https://www.marxists.org/subject/vietnam/index.htm",
+      "kind": "subject"
+    },
+    {
+      "title": "Yugoslavia",
+      "url": "https://www.marxists.org/subject/yugoslavia/index.htm",
+      "kind": "subject"
+    }
+  ]
+}

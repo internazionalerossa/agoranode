@@ -1,0 +1,17 @@
+{
+  "name": "Polis-Rossa",
+  "short_name": "Polis-Rossa",
+  "description": "Notizie, fonti e percorsi di lettura per uno sguardo internazionale.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f6f3ec",
+  "theme_color": "#f6f3ec",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

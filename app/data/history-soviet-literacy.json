@@ -1,0 +1,29 @@
+{
+  "title": "URSS: leggere e scrivere diventa una capacità di massa",
+  "ageRange": "9–49 anni",
+  "values": [
+    {
+      "year": 1926,
+      "total": 56.6,
+      "women": 42.7
+    },
+    {
+      "year": 1939,
+      "total": 87.4,
+      "women": 81.6
+    },
+    {
+      "year": 1959,
+      "total": 98.5,
+      "women": 97.8
+    },
+    {
+      "year": 1970,
+      "total": 99.7,
+      "women": 99.7
+    }
+  ],
+  "source": "https://documents1.worldbank.org/curated/en/363441468768731106/pdf/multi0page.pdf#page=98",
+  "locator": "Tabella II · p. 86 del documento, p. 98 del PDF",
+  "note": "Percentuale di persone alfabetizzate fra 9 e 49 anni. Serie storica sovietica riprodotta nello studio di Blumenthal e Benson del 1978; non è l’indicatore attuale sugli adulti dai 15 anni e non va sovrapposta ad esso."
+}

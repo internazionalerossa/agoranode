@@ -1,0 +1,956 @@
+[
+  {
+    "id": "mintpress",
+    "name": "MintPress News",
+    "homepage": "https://www.mintpressnews.com/",
+    "country": "Stati Uniti",
+    "region": "Nord America",
+    "language": "en",
+    "kind": "giornale",
+    "ideologies": [],
+    "tags": [
+      "analisi",
+      "società"
+    ],
+    "priority": 8,
+    "feedUrls": [
+      "https://www.mintpressnews.com/feed/"
+    ]
+  },
+  {
+    "id": "grayzone",
+    "name": "The Grayzone",
+    "homepage": "https://thegrayzone.com/",
+    "country": "Stati Uniti",
+    "region": "Nord America",
+    "language": "en",
+    "kind": "giornale",
+    "ideologies": [],
+    "tags": [
+      "analisi",
+      "società"
+    ],
+    "priority": 8,
+    "feedUrls": [
+      "https://thegrayzone.com/feed/"
+    ]
+  },
+  {
+    "id": "fair",
+    "name": "FAIR",
+    "homepage": "https://fair.org/",
+    "country": "Stati Uniti",
+    "region": "Nord America",
+    "language": "en",
+    "kind": "rivista",
+    "ideologies": [],
+    "tags": [
+      "analisi",
+      "società"
+    ],
+    "priority": 8,
+    "feedUrls": [
+      "https://fair.org/feed/"
+    ]
+  },
+  {
+    "id": "geopolitical-economy",
+    "name": "Geopolitical Economy Report",
+    "homepage": "https://geopoliticaleconomy.com/",
+    "country": "Stati Uniti",
+    "region": "Nord America",
+    "language": "en",
+    "kind": "giornale",
+    "ideologies": [],
+    "tags": [
+      "analisi",
+      "società"
+    ],
+    "priority": 8,
+    "feedUrls": [
+      "https://geopoliticaleconomy.com/feed/"
+    ]
+  },
+  {
+    "id": "truthdig",
+    "name": "Truthdig",
+    "homepage": "https://www.truthdig.com/",
+    "country": "Stati Uniti",
+    "region": "Nord America",
+    "language": "en",
+    "kind": "giornale",
+    "ideologies": [],
+    "tags": [
+      "analisi",
+      "società"
+    ],
+    "priority": 8,
+    "feedUrls": [
+      "https://www.truthdig.com/feed/"
+    ]
+  },
+  {
+    "id": "dissent",
+    "name": "Dissent",
+    "homepage": "https://www.dissentmagazine.org/",
+    "country": "Stati Uniti",
+    "region": "Nord America",
+    "language": "en",
+    "kind": "rivista",
+    "ideologies": [],
+    "tags": [
+      "analisi",
+      "società"
+    ],
+    "priority": 8,
+    "feedUrls": [
+      "https://dissentmagazine.org/feed/"
+    ]
+  },
+  {
+    "id": "dropsite",
+    "name": "Drop Site News",
+    "homepage": "https://www.dropsitenews.com/",
+    "country": "Stati Uniti",
+    "region": "Nord America",
+    "language": "en",
+    "kind": "giornale",
+    "ideologies": [],
+    "tags": [
+      "analisi",
+      "società"
+    ],
+    "priority": 8,
+    "feedUrls": [
+      "https://www.dropsitenews.com/feed"
+    ]
+  },
+  {
+    "id": "real-news",
+    "name": "The Real News Network",
+    "homepage": "https://therealnews.com/",
+    "country": "Stati Uniti",
+    "region": "Nord America",
+    "language": "en",
+    "kind": "giornale",
+    "ideologies": [],
+    "tags": [
+      "analisi",
+      "società"
+    ],
+    "priority": 8,
+    "feedUrls": [
+      "https://therealnews.com/feed"
+    ]
+  },
+  {
+    "id": "breach",
+    "name": "The Breach",
+    "homepage": "https://breachmedia.ca/",
+    "country": "Canada",
+    "region": "Nord America",
+    "language": "en",
+    "kind": "giornale",
+    "ideologies": [],
+    "tags": [
+      "analisi",
+      "società"
+    ],
+    "priority": 8,
+    "feedUrls": [
+      "https://breachmedia.ca/feed/"
+    ]
+  },
+  {
+    "id": "ricochet",
+    "name": "Ricochet",
+    "homepage": "https://ricochet.media/",
+    "country": "Canada",
+    "region": "Nord America",
+    "language": "en",
+    "kind": "giornale",
+    "ideologies": [],
+    "tags": [
+      "analisi",
+      "società"
+    ],
+    "priority": 8,
+    "feedUrls": [
+      "https://ricochet.media/feed/"
+    ]
+  },
+  {
+    "id": "brasil-wire",
+    "name": "Brasil Wire",
+    "homepage": "https://www.brasilwire.com/",
+    "country": "Brasile / Regno Unito",
+    "region": "America Latina",
+    "language": "en",
+    "kind": "giornale",
+    "ideologies": [],
+    "tags": [
+      "analisi",
+      "società"
+    ],
+    "priority": 8,
+    "feedUrls": [
+      "https://www.brasilwire.com/feed/"
+    ]
+  },
+  {
+    "id": "rabble",
+    "name": "rabble.ca",
+    "homepage": "https://rabble.ca/",
+    "country": "Canada",
+    "region": "Nord America",
+    "language": "en",
+    "kind": "giornale",
+    "ideologies": [],
+    "tags": [
+      "analisi",
+      "società"
+    ],
+    "priority": 8,
+    "feedUrls": [
+      "https://rabble.ca/feed/"
+    ]
+  },
+  {
+    "id": "merce",
+    "name": "Mérce",
+    "homepage": "https://merce.hu/",
+    "country": "Ungheria",
+    "region": "Europa",
+    "language": "hu",
+    "kind": "giornale",
+    "ideologies": [],
+    "tags": [
+      "analisi",
+      "società"
+    ],
+    "priority": 8,
+    "feedUrls": [
+      "https://merce.hu/feed/"
+    ]
+  },
+  {
+    "id": "krytyka",
+    "name": "Krytyka Polityczna",
+    "homepage": "https://krytykapolityczna.pl/",
+    "country": "Polonia",
+    "region": "Europa",
+    "language": "pl",
+    "kind": "giornale",
+    "ideologies": [],
+    "tags": [
+      "analisi",
+      "società"
+    ],
+    "priority": 8,
+    "feedUrls": [
+      "https://krytykapolityczna.pl/feed/"
+    ]
+  },
+  {
+    "id": "alarm",
+    "name": "Alarm",
+    "homepage": "https://denikalarm.cz/",
+    "country": "Repubblica Ceca",
+    "region": "Europa",
+    "language": "cs",
+    "kind": "giornale",
+    "ideologies": [],
+    "tags": [
+      "analisi",
+      "società"
+    ],
+    "priority": 8,
+    "feedUrls": [
+      "https://denikalarm.cz/feed/"
+    ]
+  },
+  {
+    "id": "directa",
+    "name": "La Directa",
+    "homepage": "https://directa.cat/",
+    "country": "Spagna",
+    "region": "Europa",
+    "language": "ca",
+    "kind": "giornale",
+    "ideologies": [],
+    "tags": [
+      "analisi",
+      "società"
+    ],
+    "priority": 8,
+    "feedUrls": [
+      "https://directa.cat/feed/"
+    ]
+  },
+  {
+    "id": "birgun",
+    "name": "BirGün",
+    "homepage": "https://www.birgun.net/",
+    "country": "Turchia",
+    "region": "Europa",
+    "language": "tr",
+    "kind": "giornale",
+    "ideologies": [],
+    "tags": [
+      "analisi",
+      "società"
+    ],
+    "priority": 8,
+    "feedUrls": [
+      "https://www.birgun.net/rss/home"
+    ]
+  },
+  {
+    "id": "efsyn",
+    "name": "Η Εφημερίδα των Συντακτών",
+    "homepage": "https://www.efsyn.gr/",
+    "country": "Grecia",
+    "region": "Europa",
+    "language": "el",
+    "kind": "giornale",
+    "ideologies": [],
+    "tags": [
+      "analisi",
+      "società"
+    ],
+    "priority": 8,
+    "feedUrls": [
+      "https://www.efsyn.gr/feed/"
+    ]
+  },
+  {
+    "id": "flamman",
+    "name": "Flamman",
+    "homepage": "https://www.flamman.se/",
+    "country": "Svezia",
+    "region": "Europa",
+    "language": "sv",
+    "kind": "giornale",
+    "ideologies": [],
+    "tags": [
+      "analisi",
+      "società"
+    ],
+    "priority": 8,
+    "feedUrls": [
+      "https://www.flamman.se/feed/"
+    ]
+  },
+  {
+    "id": "arbejderen",
+    "name": "Arbejderen",
+    "homepage": "https://arbejderen.dk/",
+    "country": "Danimarca",
+    "region": "Europa",
+    "language": "da",
+    "kind": "giornale",
+    "ideologies": [],
+    "tags": [
+      "analisi",
+      "società"
+    ],
+    "priority": 8,
+    "feedUrls": [
+      "https://arbejderen.dk/feed/"
+    ]
+  },
+  {
+    "id": "klassekampen",
+    "name": "Klassekampen",
+    "homepage": "https://klassekampen.no/",
+    "country": "Norvegia",
+    "region": "Europa",
+    "language": "no",
+    "kind": "giornale",
+    "ideologies": [],
+    "tags": [
+      "analisi",
+      "società"
+    ],
+    "priority": 8,
+    "feedUrls": [
+      "https://klassekampen.no/api/newsfeed/rss"
+    ]
+  },
+  {
+    "id": "opera-mundi",
+    "name": "Opera Mundi",
+    "homepage": "https://operamundi.uol.com.br/",
+    "country": "Brasile",
+    "region": "America Latina",
+    "language": "pt",
+    "kind": "giornale",
+    "ideologies": [],
+    "tags": [
+      "analisi",
+      "società"
+    ],
+    "priority": 8,
+    "feedUrls": [
+      "https://operamundi.uol.com.br/feed/"
+    ]
+  },
+  {
+    "id": "brasil247",
+    "name": "Brasil 247",
+    "homepage": "https://www.brasil247.com/",
+    "country": "Brasile",
+    "region": "America Latina",
+    "language": "pt",
+    "kind": "giornale",
+    "ideologies": [],
+    "tags": [
+      "analisi",
+      "società"
+    ],
+    "priority": 8,
+    "feedUrls": [
+      "https://www.brasil247.com/feed/"
+    ]
+  },
+  {
+    "id": "midia-ninja",
+    "name": "Mídia NINJA",
+    "homepage": "https://midianinja.org/",
+    "country": "Brasile",
+    "region": "America Latina",
+    "language": "pt",
+    "kind": "giornale",
+    "ideologies": [],
+    "tags": [
+      "analisi",
+      "società"
+    ],
+    "priority": 8,
+    "feedUrls": [
+      "https://midianinja.org/feed/"
+    ]
+  },
+  {
+    "id": "transform",
+    "name": "transform! europe",
+    "homepage": "https://www.transform-network.net/",
+    "country": "Austria",
+    "region": "Europa",
+    "language": "en",
+    "kind": "rivista",
+    "ideologies": [],
+    "tags": [
+      "analisi",
+      "società"
+    ],
+    "priority": 8,
+    "feedUrls": [
+      "https://transform-network.net/feed/"
+    ]
+  },
+  {
+    "id": "apublica",
+    "name": "Agência Pública",
+    "homepage": "https://apublica.org/",
+    "country": "Brasile",
+    "region": "America Latina",
+    "language": "pt",
+    "kind": "giornale",
+    "ideologies": [],
+    "tags": [
+      "analisi",
+      "società"
+    ],
+    "priority": 8,
+    "feedUrls": [
+      "https://apublica.org/feed/"
+    ]
+  },
+  {
+    "id": "de-olho",
+    "name": "De Olho nos Ruralistas",
+    "homepage": "https://deolhonosruralistas.com.br/",
+    "country": "Brasile",
+    "region": "America Latina",
+    "language": "pt",
+    "kind": "giornale",
+    "ideologies": [],
+    "tags": [
+      "analisi",
+      "società"
+    ],
+    "priority": 8,
+    "feedUrls": [
+      "https://deolhonosruralistas.com.br/feed/"
+    ]
+  },
+  {
+    "id": "colombia-informa",
+    "name": "Colombia Informa",
+    "homepage": "https://www.colombiainforma.info/",
+    "country": "Colombia",
+    "region": "America Latina",
+    "language": "es",
+    "kind": "giornale",
+    "ideologies": [],
+    "tags": [
+      "analisi",
+      "società"
+    ],
+    "priority": 8,
+    "feedUrls": [
+      "https://www.colombiainforma.info/feed/"
+    ]
+  },
+  {
+    "id": "prensa-rural",
+    "name": "Agencia Prensa Rural",
+    "homepage": "https://prensarural.org/",
+    "country": "Colombia",
+    "region": "America Latina",
+    "language": "es",
+    "kind": "giornale",
+    "ideologies": [],
+    "tags": [
+      "analisi",
+      "società"
+    ],
+    "priority": 8,
+    "feedUrls": [
+      "https://prensarural.org/spip/spip.php?page=backend"
+    ]
+  },
+  {
+    "id": "brecha",
+    "name": "Brecha",
+    "homepage": "https://brecha.com.uy/",
+    "country": "Uruguay",
+    "region": "America Latina",
+    "language": "es",
+    "kind": "giornale",
+    "ideologies": [],
+    "tags": [
+      "analisi",
+      "società"
+    ],
+    "priority": 8,
+    "feedUrls": [
+      "https://brecha.com.uy/feed/"
+    ]
+  },
+  {
+    "id": "revista-crisis",
+    "name": "Revista Crisis",
+    "homepage": "https://revistacrisis.com.ar/",
+    "country": "Argentina",
+    "region": "America Latina",
+    "language": "es",
+    "kind": "rivista",
+    "ideologies": [],
+    "tags": [
+      "analisi",
+      "società"
+    ],
+    "priority": 8,
+    "feedUrls": [
+      "https://revistacrisis.com.ar/sitemap.rss"
+    ]
+  },
+  {
+    "id": "revista-comun",
+    "name": "Revista Común",
+    "homepage": "https://revistacomun.com/",
+    "country": "Messico",
+    "region": "America Latina",
+    "language": "es",
+    "kind": "rivista",
+    "ideologies": [],
+    "tags": [
+      "analisi",
+      "società"
+    ],
+    "priority": 8,
+    "feedUrls": [
+      "https://revistacomun.com/feed/"
+    ]
+  },
+  {
+    "id": "venezuelanalysis",
+    "name": "Venezuelanalysis",
+    "homepage": "https://venezuelanalysis.com/",
+    "country": "Venezuela",
+    "region": "America Latina",
+    "language": "en",
+    "kind": "giornale",
+    "ideologies": [],
+    "tags": [
+      "analisi",
+      "società"
+    ],
+    "priority": 8,
+    "feedUrls": [
+      "https://venezuelanalysis.com/feed/"
+    ]
+  },
+  {
+    "id": "orinoco-tribune",
+    "name": "Orinoco Tribune",
+    "homepage": "https://orinocotribune.com/",
+    "country": "Venezuela",
+    "region": "America Latina",
+    "language": "en",
+    "kind": "giornale",
+    "ideologies": [],
+    "tags": [
+      "analisi",
+      "società"
+    ],
+    "priority": 8,
+    "feedUrls": [
+      "https://orinocotribune.com/feed/"
+    ]
+  },
+  {
+    "id": "elephant",
+    "name": "The Elephant",
+    "homepage": "https://www.theelephant.info/",
+    "country": "Kenya",
+    "region": "Africa",
+    "language": "en",
+    "kind": "giornale",
+    "ideologies": [],
+    "tags": [
+      "analisi",
+      "società"
+    ],
+    "priority": 8,
+    "feedUrls": [
+      "https://www.theelephant.info/feed/"
+    ]
+  },
+  {
+    "id": "chimurenga",
+    "name": "Chimurenga",
+    "homepage": "https://chimurengachronic.co.za/",
+    "country": "Sudafrica",
+    "region": "Africa",
+    "language": "en",
+    "kind": "rivista",
+    "ideologies": [],
+    "tags": [
+      "analisi",
+      "società"
+    ],
+    "priority": 8,
+    "feedUrls": [
+      "https://chimurengachronic.co.za/feed/"
+    ]
+  },
+  {
+    "id": "bulatlat",
+    "name": "Bulatlat",
+    "homepage": "https://www.bulatlat.com/",
+    "country": "Filippine",
+    "region": "Asia",
+    "language": "en",
+    "kind": "giornale",
+    "ideologies": [],
+    "tags": [
+      "analisi",
+      "società"
+    ],
+    "priority": 8,
+    "feedUrls": [
+      "https://www.bulatlat.com/feed/"
+    ]
+  },
+  {
+    "id": "kodao",
+    "name": "Kodao Productions",
+    "homepage": "https://kodao.org/",
+    "country": "Filippine",
+    "region": "Asia",
+    "language": "en",
+    "kind": "giornale",
+    "ideologies": [],
+    "tags": [
+      "analisi",
+      "società"
+    ],
+    "priority": 8,
+    "feedUrls": [
+      "https://kodao.org/feed/"
+    ]
+  },
+  {
+    "id": "altermidya",
+    "name": "Altermidya",
+    "homepage": "https://www.altermidya.net/",
+    "country": "Filippine",
+    "region": "Asia",
+    "language": "en",
+    "kind": "giornale",
+    "ideologies": [],
+    "tags": [
+      "analisi",
+      "società"
+    ],
+    "priority": 8,
+    "feedUrls": [
+      "https://www.altermidya.net/feed/"
+    ]
+  },
+  {
+    "id": "indoprogress",
+    "name": "IndoPROGRESS",
+    "homepage": "https://indoprogress.com/",
+    "country": "Indonesia",
+    "region": "Asia",
+    "language": "id",
+    "kind": "rivista",
+    "ideologies": [],
+    "tags": [
+      "analisi",
+      "società"
+    ],
+    "priority": 8,
+    "feedUrls": [
+      "https://indoprogress.com/feed/"
+    ]
+  },
+  {
+    "id": "feminism-india",
+    "name": "Feminism in India",
+    "homepage": "https://feminisminindia.com/",
+    "country": "India",
+    "region": "Asia",
+    "language": "en",
+    "kind": "giornale",
+    "ideologies": [],
+    "tags": [
+      "analisi",
+      "società"
+    ],
+    "priority": 8,
+    "feedUrls": [
+      "https://feminisminindia.com/feed/"
+    ]
+  },
+  {
+    "id": "himal",
+    "name": "Himal Southasian",
+    "homepage": "https://www.himalmag.com/",
+    "country": "Sri Lanka",
+    "region": "Asia",
+    "language": "en",
+    "kind": "rivista",
+    "ideologies": [],
+    "tags": [
+      "analisi",
+      "società"
+    ],
+    "priority": 8,
+    "feedUrls": [
+      "https://www.himalmag.com/rss/"
+    ]
+  },
+  {
+    "id": "project-multatuli",
+    "name": "Project Multatuli",
+    "homepage": "https://projectmultatuli.org/",
+    "country": "Indonesia",
+    "region": "Asia",
+    "language": "id",
+    "kind": "giornale",
+    "ideologies": [],
+    "tags": [
+      "analisi",
+      "società"
+    ],
+    "priority": 8,
+    "feedUrls": [
+      "https://projectmultatuli.org/feed/"
+    ]
+  },
+  {
+    "id": "new-bloom",
+    "name": "New Bloom",
+    "homepage": "https://newbloommag.net/",
+    "country": "Taiwan",
+    "region": "Asia",
+    "language": "en",
+    "kind": "giornale",
+    "ideologies": [],
+    "tags": [
+      "analisi",
+      "società"
+    ],
+    "priority": 8,
+    "feedUrls": [
+      "https://newbloommag.net/feed/"
+    ]
+  },
+  {
+    "id": "lausancollective",
+    "name": "Lausan",
+    "homepage": "https://lausancollective.com/",
+    "country": "Hong Kong",
+    "region": "Asia",
+    "language": "en",
+    "kind": "giornale",
+    "ideologies": [],
+    "tags": [
+      "analisi",
+      "società"
+    ],
+    "priority": 8,
+    "feedUrls": [
+      "https://lausancollective.com/feed/"
+    ]
+  },
+  {
+    "id": "dindeng",
+    "name": "Din Deng",
+    "homepage": "https://www.dindeng.com/",
+    "country": "Thailandia",
+    "region": "Asia",
+    "language": "th",
+    "kind": "giornale",
+    "ideologies": [],
+    "tags": [
+      "analisi",
+      "società"
+    ],
+    "priority": 8,
+    "feedUrls": [
+      "https://dindeng.com/feed/"
+    ]
+  },
+  {
+    "id": "maktoob",
+    "name": "Maktoob Media",
+    "homepage": "https://maktoobmedia.com/",
+    "country": "India",
+    "region": "Asia",
+    "language": "en",
+    "kind": "giornale",
+    "ideologies": [],
+    "tags": [
+      "analisi",
+      "società"
+    ],
+    "priority": 8,
+    "feedUrls": [
+      "https://maktoobmedia.com/rss"
+    ]
+  },
+  {
+    "id": "asia-times",
+    "name": "Asia Times",
+    "homepage": "https://asiatimes.com/",
+    "country": "Hong Kong",
+    "region": "Asia",
+    "language": "en",
+    "kind": "giornale",
+    "ideologies": [],
+    "tags": [
+      "internazionale",
+      "analisi"
+    ],
+    "priority": 8,
+    "feedUrls": [
+      "https://asiatimes.com/feed/"
+    ]
+  },
+  {
+    "id": "responsible-statecraft",
+    "name": "Responsible Statecraft",
+    "homepage": "https://responsiblestatecraft.org/",
+    "country": "Stati Uniti",
+    "region": "Nord America",
+    "language": "en",
+    "kind": "giornale",
+    "ideologies": [],
+    "tags": [
+      "internazionale",
+      "analisi"
+    ],
+    "priority": 8,
+    "feedUrls": [
+      "https://responsiblestatecraft.org/feeds/feed.rss"
+    ]
+  },
+  {
+    "id": "972mag",
+    "name": "+972 Magazine",
+    "homepage": "https://www.972mag.com/",
+    "country": "Israele",
+    "region": "Asia",
+    "language": "en",
+    "kind": "giornale",
+    "ideologies": [],
+    "tags": [
+      "internazionale",
+      "analisi"
+    ],
+    "priority": 8,
+    "feedUrls": [
+      "https://www.972mag.com/feed/"
+    ]
+  },
+  {
+    "id": "indian-punchline",
+    "name": "Indian Punchline",
+    "homepage": "https://www.indianpunchline.com/",
+    "country": "India",
+    "region": "Asia",
+    "language": "en",
+    "kind": "giornale",
+    "ideologies": [],
+    "tags": [
+      "internazionale",
+      "analisi"
+    ],
+    "priority": 8,
+    "feedUrls": [
+      "https://www.indianpunchline.com/feed/"
+    ]
+  },
+  {
+    "id": "dawn",
+    "name": "Dawn",
+    "homepage": "https://www.dawn.com/",
+    "country": "Pakistan",
+    "region": "Asia",
+    "language": "en",
+    "kind": "giornale",
+    "ideologies": [],
+    "tags": [
+      "internazionale",
+      "analisi"
+    ],
+    "priority": 8,
+    "feedUrls": [
+      "https://www.dawn.com/feeds/home"
+    ]
+  },
+  {
+    "id": "the-hindu",
+    "name": "The Hindu",
+    "homepage": "https://www.thehindu.com/",
+    "country": "India",
+    "region": "Asia",
+    "language": "en",
+    "kind": "giornale",
+    "ideologies": [],
+    "tags": [
+      "internazionale",
+      "analisi"
+    ],
+    "priority": 8,
+    "feedUrls": [
+      "https://www.thehindu.com/feeder/default.rss"
+    ]
+  }
+]

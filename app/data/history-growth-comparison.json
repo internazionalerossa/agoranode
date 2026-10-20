@@ -1,0 +1,53 @@
+{
+  "period": [
+    1978,
+    2024
+  ],
+  "source": "https://data.worldbank.org/indicator/NY.GDP.MKTP.KD",
+  "perCapitaSource": "https://data.worldbank.org/indicator/NY.GDP.PCAP.KD",
+  "retrievedAt": "2026-10-19",
+  "countries": [
+    {
+      "id": "CHN",
+      "name": "Cina",
+      "total": {
+        "start": 369239420801.258,
+        "end": 18484494644731.6,
+        "multiple": 50.060999999999524
+      },
+      "perCapita": {
+        "start": 386.167053595622,
+        "end": 13119.1076099516,
+        "multiple": 33.97262269735051
+      }
+    },
+    {
+      "id": "USA",
+      "name": "Stati Uniti",
+      "total": {
+        "start": 6863408304118.42,
+        "end": 22731468331925.1,
+        "multiple": 3.311979606150632
+      },
+      "perCapita": {
+        "start": 30834.9992322862,
+        "end": 66856.5131698371,
+        "multiple": 2.1682021999155454
+      }
+    },
+    {
+      "id": "GBR",
+      "name": "Regno Unito",
+      "total": {
+        "start": 1310033665484.62,
+        "end": 3318626965006.66,
+        "multiple": 2.533237925438353
+      },
+      "perCapita": {
+        "start": 23311.6577053372,
+        "end": 47900.9680144146,
+        "multiple": 2.054807453845193
+      }
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+[
+  {"id":"generale","name":"La piazza","description":"Conversazioni libere e incontri fra membri."},
+  {"id":"notizie","name":"Notizie e fonti","description":"Segnalazioni, articoli e collegamenti da confrontare."},
+  {"id":"letture","name":"Libri e idee","description":"Letture, domande e spunti per ragionare insieme."},
+  {"id":"laboratorio","name":"Il laboratorio","description":"Il sito, i problemi e le idee per migliorarlo."},
+  {"id":"immagini","name":"Immagini e meme","description":"Immagini, umorismo e cultura visiva."}
+]

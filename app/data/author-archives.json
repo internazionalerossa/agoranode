@@ -1,0 +1,2951 @@
+{
+  "source": "https://www.marxists.org/archive/index.htm",
+  "retrievedAt": "2026-10-19",
+  "authors": [
+    {
+      "name": "Karl Marx & Fredrick Engels",
+      "url": "https://www.marxists.org/archive/marx/index.htm",
+      "collection": "International Working-men's Association (First International)"
+    },
+    {
+      "name": "Victor Considerant",
+      "url": "https://www.marxists.org/archive/considerant/index.htm",
+      "collection": "International Working-men's Association (First International)"
+    },
+    {
+      "name": "Eugene Pottier",
+      "url": "https://www.marxists.org/archive/pottier/index.htm",
+      "collection": "International Working-men's Association (First International)"
+    },
+    {
+      "name": "Johann Georg Eccarius",
+      "url": "https://www.marxists.org/archive/eccarius/index.htm",
+      "collection": "International Working-men's Association (First International)"
+    },
+    {
+      "name": "Wilhelm Liebknecht",
+      "url": "https://www.marxists.org/archive/liebknecht-w/index.htm",
+      "collection": "International Working-men's Association (First International)"
+    },
+    {
+      "name": "Friedrich Adolphe Sorge",
+      "url": "https://www.marxists.org/archive/sorge/index.htm",
+      "collection": "International Working-men's Association (First International)"
+    },
+    {
+      "name": "Joseph Dietzgen",
+      "url": "https://www.marxists.org/archive/dietzgen/index.htm",
+      "collection": "International Working-men's Association (First International)"
+    },
+    {
+      "name": "Lucien Sanial",
+      "url": "https://www.marxists.org/archive/sanial/index.htm",
+      "collection": "International Working-men's Association (First International)"
+    },
+    {
+      "name": "Ferdinand Lassalle",
+      "url": "https://www.marxists.org/archive/lassalle/index.htm",
+      "collection": "International Working-men's Association (First International)"
+    },
+    {
+      "name": "Frederick Lessner",
+      "url": "https://www.marxists.org/archive/lessner/index.htm",
+      "collection": "International Working-men's Association (First International)"
+    },
+    {
+      "name": "August Bebel",
+      "url": "https://www.marxists.org/archive/bebel/index.htm",
+      "collection": "International Working-men's Association (First International)"
+    },
+    {
+      "name": "Paul Lafargue",
+      "url": "https://www.marxists.org/archive/lafargue/index.htm",
+      "collection": "International Working-men's Association (First International)"
+    },
+    {
+      "name": "Jules Guesde",
+      "url": "https://www.marxists.org/archive/guesde/index.htm",
+      "collection": "International Working-men's Association (First International)"
+    },
+    {
+      "name": "Karl Kautsky",
+      "url": "https://www.marxists.org/archive/kautsky/index.htm",
+      "collection": "The Socialist International (Second International)"
+    },
+    {
+      "name": "William Morris",
+      "url": "https://www.marxists.org/archive/morris/index.htm",
+      "collection": "British Social Democracy"
+    },
+    {
+      "name": "Henry Hyndman",
+      "url": "https://www.marxists.org/archive/hyndman/index.htm",
+      "collection": "British Social Democracy"
+    },
+    {
+      "name": "Edward Carpenter",
+      "url": "https://www.marxists.org/archive/carpenter/index.htm",
+      "collection": "British Social Democracy"
+    },
+    {
+      "name": "Annie Besant",
+      "url": "https://www.marxists.org/archive/besant/index.htm",
+      "collection": "British Social Democracy"
+    },
+    {
+      "name": "Frank Kitz",
+      "url": "https://www.marxists.org/archive/kitz/index.htm",
+      "collection": "British Social Democracy"
+    },
+    {
+      "name": "Edward Aveling",
+      "url": "https://www.marxists.org/archive/aveling/index.htm",
+      "collection": "British Social Democracy"
+    },
+    {
+      "name": "E. Belfort Bax",
+      "url": "https://www.marxists.org/archive/bax/index.htm",
+      "collection": "British Social Democracy"
+    },
+    {
+      "name": "Eleanor Marx",
+      "url": "https://www.marxists.org/archive/eleanor-marx/index.htm",
+      "collection": "British Social Democracy"
+    },
+    {
+      "name": "Harry Quelch",
+      "url": "https://www.marxists.org/archive/quelch/index.htm",
+      "collection": "British Social Democracy"
+    },
+    {
+      "name": "Dora Montefiore",
+      "url": "https://www.marxists.org/archive/montefiore/index.htm",
+      "collection": "British Social Democracy"
+    },
+    {
+      "name": "Tom Mann",
+      "url": "https://www.marxists.org/archive/mann-tom/index.htm",
+      "collection": "British Social Democracy"
+    },
+    {
+      "name": "Frank Anstey",
+      "url": "https://www.marxists.org/archive/anstey/index.htm",
+      "collection": "British Social Democracy"
+    },
+    {
+      "name": "Max Beer",
+      "url": "https://www.marxists.org/archive/beer/index.htm",
+      "collection": "British Social Democracy"
+    },
+    {
+      "name": "Theo. Rothstein",
+      "url": "https://www.marxists.org/archive/rothstein/index.htm",
+      "collection": "British Social Democracy"
+    },
+    {
+      "name": "Peter Petroff",
+      "url": "https://www.marxists.org/archive/petroff/index.htm",
+      "collection": "British Social Democracy"
+    },
+    {
+      "name": "Helmut Wagner",
+      "url": "https://www.marxists.org/archive/wagner/index.htm",
+      "collection": "British Social Democracy"
+    },
+    {
+      "name": "Daniel DeLeon",
+      "url": "https://www.marxists.org/archive/deleon/index.htm",
+      "collection": "Early American Marxism"
+    },
+    {
+      "name": "Eugene Debs",
+      "url": "https://www.marxists.org/archive/debs/index.htm",
+      "collection": "Early American Marxism"
+    },
+    {
+      "name": "Victor Berger",
+      "url": "https://www.marxists.org/archive/berger-victor/index.htm",
+      "collection": "Early American Marxism"
+    },
+    {
+      "name": "Ben Hanford",
+      "url": "https://www.marxists.org/archive/hanford/index.htm",
+      "collection": "Early American Marxism"
+    },
+    {
+      "name": "Morris Hillquit",
+      "url": "https://www.marxists.org/archive/hillquit/index.htm",
+      "collection": "Early American Marxism"
+    },
+    {
+      "name": "Louis B. Boudin",
+      "url": "https://www.marxists.org/archive/boudin/index.html",
+      "collection": "Early American Marxism"
+    },
+    {
+      "name": "Vida D. Scudder",
+      "url": "https://www.marxists.org/archive/scudder/index.htm",
+      "collection": "Early American Marxism"
+    },
+    {
+      "name": "Norman Thomas",
+      "url": "https://www.marxists.org/archive/thomas-norman/index.htm",
+      "collection": "Early American Marxism"
+    },
+    {
+      "name": "James Connolly",
+      "url": "https://www.marxists.org/archive/connolly/index.htm",
+      "collection": "Early American Marxism"
+    },
+    {
+      "name": "Constance Markievicz",
+      "url": "https://www.marxists.org/archive/markievicz/index.htm",
+      "collection": "Early American Marxism"
+    },
+    {
+      "name": "Antonio Labriola",
+      "url": "https://www.marxists.org/archive/labriola/index.htm",
+      "collection": "Early American Marxism"
+    },
+    {
+      "name": "August Palm",
+      "url": "https://www.marxists.org/archive/palm-august/index.htm",
+      "collection": "Early American Marxism"
+    },
+    {
+      "name": "Vera Zasulich",
+      "url": "https://www.marxists.org/archive/zasulich/index.htm",
+      "collection": "Mensheviks"
+    },
+    {
+      "name": "Georgi Plekhanov",
+      "url": "https://www.marxists.org/archive/plekhanov/index.htm",
+      "collection": "Mensheviks"
+    },
+    {
+      "name": "Julius Martov",
+      "url": "https://www.marxists.org/archive/martov/index.htm",
+      "collection": "Mensheviks"
+    },
+    {
+      "name": "Gregory Bienstock",
+      "url": "https://www.marxists.org/archive/bienstock/index.htm",
+      "collection": "Mensheviks"
+    },
+    {
+      "name": "Engelbert Pernerstorfer",
+      "url": "https://www.marxists.org/archive/pernerstorfer/index.htm",
+      "collection": "Mensheviks"
+    },
+    {
+      "name": "Gabriel Deville",
+      "url": "https://www.marxists.org/archive/deville/index.htm",
+      "collection": "Mensheviks"
+    },
+    {
+      "name": "Enrico Ferri",
+      "url": "https://www.marxists.org/archive/ferri/index.htm",
+      "collection": "Mensheviks"
+    },
+    {
+      "name": "Sen Katayama",
+      "url": "https://www.marxists.org/archive/katayama/index.htm",
+      "collection": "Mensheviks"
+    },
+    {
+      "name": "Franz Mehring",
+      "url": "https://www.marxists.org/archive/mehring/index.htm",
+      "collection": "The Spartacist League"
+    },
+    {
+      "name": "Clara Zetkin",
+      "url": "https://www.marxists.org/archive/zetkin/index.htm",
+      "collection": "The Spartacist League"
+    },
+    {
+      "name": "Rosa Luxemburg",
+      "url": "https://www.marxists.org/archive/luxemburg/index.htm",
+      "collection": "The Spartacist League"
+    },
+    {
+      "name": "Karl Liebknecht",
+      "url": "https://www.marxists.org/archive/liebknecht-k/index.htm",
+      "collection": "The Spartacist League"
+    },
+    {
+      "name": "Käte Duncker",
+      "url": "https://www.marxists.org/archive/duncker-kate/index.htm",
+      "collection": "The Spartacist League"
+    },
+    {
+      "name": "Hermann Duncker",
+      "url": "https://www.marxists.org/archive/duncker/index.htm",
+      "collection": "The Spartacist League"
+    },
+    {
+      "name": "Wilhelm Pieck",
+      "url": "https://www.marxists.org/archive/pieck/index.htm",
+      "collection": "The Spartacist League"
+    },
+    {
+      "name": "Hugo Eberlein",
+      "url": "https://www.marxists.org/archive/eberlein/index.htm",
+      "collection": "The Spartacist League"
+    },
+    {
+      "name": "August Thalheimer",
+      "url": "https://www.marxists.org/archive/thalheimer/index.htm",
+      "collection": "The Spartacist League"
+    },
+    {
+      "name": "Rudolph Hilferding",
+      "url": "https://www.marxists.org/archive/hilferding/index.htm",
+      "collection": "The Spartacist League"
+    },
+    {
+      "name": "Otto Bauer",
+      "url": "https://www.marxists.org/archive/bauer/index.htm",
+      "collection": "The Spartacist League"
+    },
+    {
+      "name": "Ber Borochov",
+      "url": "https://www.marxists.org/archive/borochov/index.htm",
+      "collection": "The Spartacist League"
+    },
+    {
+      "name": "Julius Braunthal",
+      "url": "https://www.marxists.org/archive/braunthal/index.htm",
+      "collection": "The Spartacist League"
+    },
+    {
+      "name": "Vladimir Lenin",
+      "url": "https://www.marxists.org/archive/lenin/index.htm",
+      "collection": "The Spartacist League"
+    },
+    {
+      "name": "Leon Trotsky",
+      "url": "https://www.marxists.org/archive/trotsky/index.htm",
+      "collection": "The Spartacist League"
+    },
+    {
+      "name": "Leon Kamenev",
+      "url": "https://www.marxists.org/archive/kamenev/index.htm",
+      "collection": "The Spartacist League"
+    },
+    {
+      "name": "Sylvia Pankhurst",
+      "url": "https://www.marxists.org/archive/pankhurst-sylvia/index.htm",
+      "collection": "The Spartacist League"
+    },
+    {
+      "name": "Eduard Bernstein",
+      "url": "https://www.marxists.org/reference/archive/bernstein/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Jean Jaurès",
+      "url": "https://www.marxists.org/archive/jaures/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Hjalmar Branting",
+      "url": "https://www.marxists.org/archive/branting/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Jean Longuet",
+      "url": "https://www.marxists.org/archive/longuet-jean/index.htm",
+      "collection": "Reformism"
+    },
+    {
+      "name": "Leon Blum",
+      "url": "https://www.marxists.org/archive/blum/index.htm",
+      "collection": "Reformism"
+    },
+    {
+      "name": "Georgy Gapon",
+      "url": "https://www.marxists.org/archive/gapon/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Alexander Kerensky",
+      "url": "https://www.marxists.org/reference/archive/kerensky/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Isaac Steinberg",
+      "url": "https://www.marxists.org/archive/steinberg/index.htm",
+      "collection": "Reformism"
+    },
+    {
+      "name": "Bruno Rizzi",
+      "url": "https://www.marxists.org/archive/rizzi/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Oscar Wilde",
+      "url": "https://www.marxists.org/reference/archive/wilde-oscar/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "George Bernard Shaw",
+      "url": "https://www.marxists.org/reference/archive/shaw/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Keir Hardie",
+      "url": "https://www.marxists.org/archive/hardie/index.htm",
+      "collection": "Fabian Society"
+    },
+    {
+      "name": "J. Bruce Glasier",
+      "url": "https://www.marxists.org/archive/glasier/index.htm",
+      "collection": "Fabian Society"
+    },
+    {
+      "name": "H.G. Wells",
+      "url": "https://www.marxists.org/reference/archive/hgwells/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Michael Davitt",
+      "url": "https://www.marxists.org/archive/davitt/index.htm",
+      "collection": "Fabian Society"
+    },
+    {
+      "name": "G. D. H. Cole",
+      "url": "https://www.marxists.org/archive/cole/index.htm",
+      "collection": "Fabian Society"
+    },
+    {
+      "name": "Maxim Gorky",
+      "url": "https://www.marxists.org/archive/gorky-maxim/index.htm",
+      "collection": "The Bolsheviks"
+    },
+    {
+      "name": "Nadezhada Krupskaya",
+      "url": "https://www.marxists.org/archive/krupskaya/index.htm",
+      "collection": "The Bolsheviks"
+    },
+    {
+      "name": "David Riazanov",
+      "url": "https://www.marxists.org/archive/riazanov/index.htm",
+      "collection": "The Bolsheviks"
+    },
+    {
+      "name": "Alexandra Kollontai",
+      "url": "https://www.marxists.org/archive/kollonta/index.htm",
+      "collection": "The Bolsheviks"
+    },
+    {
+      "name": "Georgi Chicherin",
+      "url": "https://www.marxists.org/archive/chicherin/index.htm",
+      "collection": "The Bolsheviks"
+    },
+    {
+      "name": "Christian Rakovsky",
+      "url": "https://www.marxists.org/archive/rakovsky/index.htm",
+      "collection": "The Bolsheviks"
+    },
+    {
+      "name": "Alexander Bogdanov",
+      "url": "https://www.marxists.org/archive/bogdanov/index.htm",
+      "collection": "The Bolsheviks"
+    },
+    {
+      "name": "Anatoly Lunacharsky",
+      "url": "https://www.marxists.org/archive/lunachar/index.htm",
+      "collection": "The Bolsheviks"
+    },
+    {
+      "name": "Felix Dzerzhinsky",
+      "url": "https://www.marxists.org/archive/dzerzhinsky/index.htm",
+      "collection": "The Bolsheviks"
+    },
+    {
+      "name": "Mikhail Tomsky",
+      "url": "https://www.marxists.org/archive/tomsky/index.htm",
+      "collection": "The Bolsheviks"
+    },
+    {
+      "name": "Grigory Sokolnikov",
+      "url": "https://www.marxists.org/archive/sokolnikov/index.htm",
+      "collection": "The Bolsheviks"
+    },
+    {
+      "name": "Osip Piatnitsky",
+      "url": "https://www.marxists.org/archive/piatnitsky/index.htm",
+      "collection": "The Bolsheviks"
+    },
+    {
+      "name": "Vladimir Milyutin",
+      "url": "https://www.marxists.org/archive/milyutin/index.htm",
+      "collection": "The Bolsheviks"
+    },
+    {
+      "name": "Vladimir Antonov-Ovseenko",
+      "url": "https://www.marxists.org/archive/antonov-ovseenko/index.htm",
+      "collection": "The Bolsheviks"
+    },
+    {
+      "name": "Sergo Ordzhnikidze",
+      "url": "https://www.marxists.org/archive/ordzhonikidze/index.htm",
+      "collection": "The Bolsheviks"
+    },
+    {
+      "name": "Natalia Sedova Trotsky",
+      "url": "https://www.marxists.org/archive/sedova-natalia/index.htm",
+      "collection": "The Bolsheviks"
+    },
+    {
+      "name": "Adolf Joffe",
+      "url": "https://www.marxists.org/archive/joffe/index.htm",
+      "collection": "The Bolsheviks"
+    },
+    {
+      "name": "Gregory Zinoviev",
+      "url": "https://www.marxists.org/archive/zinoviev/index.htm",
+      "collection": "The Bolsheviks"
+    },
+    {
+      "name": "Alexander Voronsky",
+      "url": "https://www.marxists.org/archive/voronsky/index.htm",
+      "collection": "The Bolsheviks"
+    },
+    {
+      "name": "Alexander Shliapnikov",
+      "url": "https://www.marxists.org/archive/shliapnikov/index.htm",
+      "collection": "The Bolsheviks"
+    },
+    {
+      "name": "Karl Radek",
+      "url": "https://www.marxists.org/archive/radek/index.htm",
+      "collection": "The Bolsheviks"
+    },
+    {
+      "name": "Nikolai Bukharin",
+      "url": "https://www.marxists.org/archive/bukharin/index.htm",
+      "collection": "The Bolsheviks"
+    },
+    {
+      "name": "Nikolai Osinsky",
+      "url": "https://www.marxists.org/archive/osinsky/index.htm",
+      "collection": "The Bolsheviks"
+    },
+    {
+      "name": "Gabriel Miasnikov",
+      "url": "https://www.marxists.org/archive/miasnikov/index.htm",
+      "collection": "The Bolsheviks"
+    },
+    {
+      "name": "Georgy Oppokov (Lomov)",
+      "url": "https://www.marxists.org/archive/oppokov/index.htm",
+      "collection": "The Bolsheviks"
+    },
+    {
+      "name": "Felix Raskolnikov",
+      "url": "https://www.marxists.org/archive/raskolnikov/index.htm",
+      "collection": "The Bolsheviks"
+    },
+    {
+      "name": "Evgenii Preobrazhensky",
+      "url": "https://www.marxists.org/archive/preobrazhensky/index.htm",
+      "collection": "The Bolsheviks"
+    },
+    {
+      "name": "Josef Stalin",
+      "url": "https://www.marxists.org/reference/archive/stalin/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Alexander Lozovsky",
+      "url": "https://www.marxists.org/archive/lozovsky/index.htm",
+      "collection": "The Bolsheviks"
+    },
+    {
+      "name": "Vyacheslav Molotov",
+      "url": "https://www.marxists.org/archive/molotov/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Charles Rappoport",
+      "url": "https://www.marxists.org/archive/rappoport/index.htm",
+      "collection": "The Comintern"
+    },
+    {
+      "name": "Henri Barbusse",
+      "url": "https://www.marxists.org/archive/barbusse/index.htm",
+      "collection": "The Comintern"
+    },
+    {
+      "name": "Eugen Samuilovich Varga",
+      "url": "https://www.marxists.org/archive/varga/index.htm",
+      "collection": "The Comintern"
+    },
+    {
+      "name": "Isaak Illich Rubin",
+      "url": "https://www.marxists.org/archive/rubin/index.htm",
+      "collection": "The Comintern"
+    },
+    {
+      "name": "Heinrich Laufenberg",
+      "url": "https://www.marxists.org/archive/laufenberg/index.htm",
+      "collection": "The Comintern"
+    },
+    {
+      "name": "Heinrich Brandler",
+      "url": "https://www.marxists.org/archive/brandler/index.htm",
+      "collection": "The Comintern"
+    },
+    {
+      "name": "Fritz Heckert",
+      "url": "https://www.marxists.org/archive/heckert/index.htm",
+      "collection": "The Comintern"
+    },
+    {
+      "name": "Paul Frölich",
+      "url": "https://www.marxists.org/archive/froelich/index.htm",
+      "collection": "The Comintern"
+    },
+    {
+      "name": "Paul Levi",
+      "url": "https://www.marxists.org/archive/levi-paul/index.htm",
+      "collection": "The Comintern"
+    },
+    {
+      "name": "Ernst Meyer",
+      "url": "https://www.marxists.org/archive/meyer/index.htm",
+      "collection": "The Comintern"
+    },
+    {
+      "name": "Jacob Walcher",
+      "url": "https://www.marxists.org/archive/walcher/index.htm",
+      "collection": "The Comintern"
+    },
+    {
+      "name": "Fritz Wolffheim",
+      "url": "https://www.marxists.org/archive/wolffheim/index.htm",
+      "collection": "The Comintern"
+    },
+    {
+      "name": "Willi Münzenberg",
+      "url": "https://www.marxists.org/archive/muenzenberg/index.htm",
+      "collection": "The Comintern"
+    },
+    {
+      "name": "Walter Ulbricht",
+      "url": "https://www.marxists.org/archive/ulbricht/index.htm",
+      "collection": "The Comintern"
+    },
+    {
+      "name": "Theodor Bergmann",
+      "url": "https://www.marxists.org/archive/bergmann/index.htm",
+      "collection": "The Comintern"
+    },
+    {
+      "name": "Victor Serge",
+      "url": "https://www.marxists.org/archive/serge/index.htm",
+      "collection": "The Comintern"
+    },
+    {
+      "name": "Antonio Gramsci",
+      "url": "https://www.marxists.org/archive/gramsci/index.htm",
+      "collection": "The Comintern"
+    },
+    {
+      "name": "Palmiro Togliatti",
+      "url": "https://www.marxists.org/archive/togliatti/index.htm",
+      "collection": "The Comintern"
+    },
+    {
+      "name": "Pietro Secchia",
+      "url": "https://www.marxists.org/archive/secchia/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "John MacLean",
+      "url": "https://www.marxists.org/archive/maclean/index.htm",
+      "collection": "The Comintern"
+    },
+    {
+      "name": "Henri Wallon",
+      "url": "https://www.marxists.org/archive/wallon/index.htm",
+      "collection": "The Comintern"
+    },
+    {
+      "name": "Pierre Monatte",
+      "url": "https://www.marxists.org/archive/monatte/index.htm",
+      "collection": "The Comintern"
+    },
+    {
+      "name": "Alfred Rosmer",
+      "url": "https://www.marxists.org/archive/rosmer/index.htm",
+      "collection": "The Comintern"
+    },
+    {
+      "name": "David Ivon Jones",
+      "url": "https://www.marxists.org/archive/jones/index.htm",
+      "collection": "The Comintern"
+    },
+    {
+      "name": "Bela Kun",
+      "url": "https://www.marxists.org/archive/kun-bela/index.htm",
+      "collection": "The Comintern"
+    },
+    {
+      "name": "Lajos Magyar",
+      "url": "https://www.marxists.org/archive/magyar/index.htm",
+      "collection": "The Comintern"
+    },
+    {
+      "name": "Guido Baracchi",
+      "url": "https://www.marxists.org/archive/baracchi/index.htm",
+      "collection": "The Comintern"
+    },
+    {
+      "name": "Josip Broz Tito",
+      "url": "https://www.marxists.org/archive/tito/index.htm",
+      "collection": "The Comintern"
+    },
+    {
+      "name": "Andreu Nin",
+      "url": "https://www.marxists.org/archive/nin/index.htm",
+      "collection": "The Comintern"
+    },
+    {
+      "name": "José Carlos Mariátegui",
+      "url": "https://www.marxists.org/archive/mariateg/index.htm",
+      "collection": "The Comintern"
+    },
+    {
+      "name": "M N Roy",
+      "url": "https://www.marxists.org/archive/roy/index.htm",
+      "collection": "The Comintern"
+    },
+    {
+      "name": "Evelyn Roy",
+      "url": "https://www.marxists.org/archive/roy-evelyn/index.htm",
+      "collection": "The Comintern"
+    },
+    {
+      "name": "E.M.S. Namboodiripad",
+      "url": "https://www.marxists.org/archive/namboodiripad/index.htm",
+      "collection": "The Comintern"
+    },
+    {
+      "name": "Henk Sneevliet",
+      "url": "https://www.marxists.org/archive/sneevliet/index.htm",
+      "collection": "The Comintern"
+    },
+    {
+      "name": "Tan Malaka",
+      "url": "https://www.marxists.org/archive/malaka/index.htm",
+      "collection": "The Comintern"
+    },
+    {
+      "name": "Ludwig Lore",
+      "url": "https://www.marxists.org/archive/lore/index.htm",
+      "collection": "Early U.S Communists [Under reorganization]"
+    },
+    {
+      "name": "Israel Amter",
+      "url": "https://www.marxists.org/archive/amter/index.htm",
+      "collection": "Early U.S Communists [Under reorganization]"
+    },
+    {
+      "name": "Max Bedacht",
+      "url": "https://www.marxists.org/archive/bedacht/index.htm",
+      "collection": "Early U.S Communists [Under reorganization]"
+    },
+    {
+      "name": "Nicholas I. Hourwich",
+      "url": "https://www.marxists.org/archive/hourwich/index.htm",
+      "collection": "Early U.S Communists [Under reorganization]"
+    },
+    {
+      "name": "Albert Rhys Williams",
+      "url": "https://www.marxists.org/archive/williams/index.htm",
+      "collection": "Early U.S Communists [Under reorganization]"
+    },
+    {
+      "name": "John Pepper [József Pogány]",
+      "url": "https://www.marxists.org/archive/pepper-pogany/index.htm",
+      "collection": "Early U.S Communists [Under reorganization]"
+    },
+    {
+      "name": "Wm. F. Dunne",
+      "url": "https://www.marxists.org/archive/dunne/index.htm",
+      "collection": "Early U.S Communists [Under reorganization]"
+    },
+    {
+      "name": "Cyril Briggs",
+      "url": "https://www.marxists.org/archive/briggs/index.htm",
+      "collection": "Early U.S Communists [Under reorganization]"
+    },
+    {
+      "name": "Otto Hall",
+      "url": "https://www.marxists.org/archive/hall-otto/index.htm",
+      "collection": "Early U.S Communists [Under reorganization]"
+    },
+    {
+      "name": "Louis Fraina (Corey)",
+      "url": "https://www.marxists.org/archive/corey/index.htm",
+      "collection": "Early U.S Communists [Under reorganization]"
+    },
+    {
+      "name": "Rose Wortis",
+      "url": "https://www.marxists.org/archive/wortis/index.htm",
+      "collection": "Early U.S Communists [Under reorganization]"
+    },
+    {
+      "name": "Bertram Wolfe",
+      "url": "https://www.marxists.org/archive/wolfe-b/index.htm",
+      "collection": "Early U.S Communists [Under reorganization]"
+    },
+    {
+      "name": "Jay Lovestone",
+      "url": "https://www.marxists.org/archive/lovestone/index.htm",
+      "collection": "Early U.S Communists [Under reorganization]"
+    },
+    {
+      "name": "Anna Damon",
+      "url": "https://www.marxists.org/archive/damon/index.htm",
+      "collection": "Early U.S Communists [Under reorganization]"
+    },
+    {
+      "name": "Joseph Zack",
+      "url": "https://www.marxists.org/archive/zack/index.htm",
+      "collection": "Early U.S Communists [Under reorganization]"
+    },
+    {
+      "name": "John H. Owens",
+      "url": "https://www.marxists.org/archive/owens/index.htm",
+      "collection": "Early U.S Communists [Under reorganization]"
+    },
+    {
+      "name": "Manuel Gómez",
+      "url": "https://www.marxists.org/archive/gomez/index.htm",
+      "collection": "Early U.S Communists [Under reorganization]"
+    },
+    {
+      "name": "Abram Jakira",
+      "url": "https://www.marxists.org/archive/jakira/index.htm",
+      "collection": "Early U.S Communists [Under reorganization]"
+    },
+    {
+      "name": "Herbert Zam",
+      "url": "https://www.marxists.org/archive/zam/index.htm",
+      "collection": "Early U.S Communists [Under reorganization]"
+    },
+    {
+      "name": "Gilbert Lewis",
+      "url": "https://www.marxists.org/archive/lewis-gilbert/index.htm",
+      "collection": "Early U.S Communists [Under reorganization]"
+    },
+    {
+      "name": "George Papcun",
+      "url": "https://www.marxists.org/archive/papcun/index.htm",
+      "collection": "Early U.S Communists [Under reorganization]"
+    },
+    {
+      "name": "Sam Darcy",
+      "url": "https://www.marxists.org/archive/darcy-sam/index.htm",
+      "collection": "Early U.S Communists [Under reorganization]"
+    },
+    {
+      "name": "Doxey Wilkerson",
+      "url": "https://www.marxists.org/archive/wilkerson/index.htm",
+      "collection": "Early U.S Communists [Under reorganization]"
+    },
+    {
+      "name": "Francis Franklin",
+      "url": "https://www.marxists.org/archive/franklin/index.htm",
+      "collection": "Early U.S Communists [Under reorganization]"
+    },
+    {
+      "name": "Gus Hall",
+      "url": "https://www.marxists.org/archive/hall/index.htm",
+      "collection": "Early U.S Communists [Under reorganization]"
+    },
+    {
+      "name": "John Gates",
+      "url": "https://www.marxists.org/archive/gates/index.htm",
+      "collection": "Early U.S Communists [Under reorganization]"
+    },
+    {
+      "name": "Angelo Braxton Herndon",
+      "url": "https://www.marxists.org/archive/herndon/index.htm",
+      "collection": "Early U.S Communists [Under reorganization]"
+    },
+    {
+      "name": "James S. \"Jim\" Allen",
+      "url": "https://www.marxists.org/archive/allen/index.htm",
+      "collection": "Early U.S Communists [Under reorganization]"
+    },
+    {
+      "name": "Tom Johnson",
+      "url": "https://www.marxists.org/archive/johnson-tom/index.htm",
+      "collection": "Early U.S Communists [Under reorganization]"
+    },
+    {
+      "name": "Benjamin Gitlow",
+      "url": "https://www.marxists.org/archive/gitlow/index.htm",
+      "collection": "Early U.S Communists [Under reorganization]"
+    },
+    {
+      "name": "Max Eastman",
+      "url": "https://www.marxists.org/archive/eastman/index.htm",
+      "collection": "Early U.S Communists [Under reorganization]"
+    },
+    {
+      "name": "Louise Bryant",
+      "url": "https://www.marxists.org/archive/bryant/index.htm",
+      "collection": "Early U.S Communists [Under reorganization]"
+    },
+    {
+      "name": "John Reed",
+      "url": "https://www.marxists.org/archive/reed/index.htm",
+      "collection": "Early U.S Communists [Under reorganization]"
+    },
+    {
+      "name": "James Cannon",
+      "url": "https://www.marxists.org/archive/cannon/index.htm",
+      "collection": "Early U.S Communists [Under reorganization]"
+    },
+    {
+      "name": "Karl Korsch",
+      "url": "https://www.marxists.org/archive/korsch/index.htm",
+      "collection": "Early U.S Communists [Under reorganization]"
+    },
+    {
+      "name": "Georg Lukács",
+      "url": "https://www.marxists.org/archive/lukacs/index.htm",
+      "collection": "Early U.S Communists [Under reorganization]"
+    },
+    {
+      "name": "Alois Neurath",
+      "url": "https://www.marxists.org/archive/neurath/index.htm",
+      "collection": "Early U.S Communists [Under reorganization]"
+    },
+    {
+      "name": "Otto Ville Kuusinen",
+      "url": "https://www.marxists.org/archive/kuusinen/index.htm",
+      "collection": "Early U.S Communists [Under reorganization]"
+    },
+    {
+      "name": "Georgi Dimitrov",
+      "url": "https://www.marxists.org/reference/archive/dimitrov/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Nikita Khrushchev",
+      "url": "https://www.marxists.org/archive/khrushchev/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Leonid Brezhnev",
+      "url": "https://www.marxists.org/archive/brezhnev/index.htm",
+      "collection": "Early U.S Communists [Under reorganization]"
+    },
+    {
+      "name": "Yuri Andropov",
+      "url": "https://www.marxists.org/archive/andropov/index.htm",
+      "collection": "Early U.S Communists [Under reorganization]"
+    },
+    {
+      "name": "Konstantin Chernenko",
+      "url": "https://www.marxists.org/archive/chernenko/index.htm",
+      "collection": "Early U.S Communists [Under reorganization]"
+    },
+    {
+      "name": "Mikhail Gorbachev",
+      "url": "https://www.marxists.org/archive/gorbachev/index.htm",
+      "collection": "Early U.S Communists [Under reorganization]"
+    },
+    {
+      "name": "Dmitry Manuilsky",
+      "url": "https://www.marxists.org/archive/manuilsky/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Lavrenti Beria",
+      "url": "https://www.marxists.org/archive/beria/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Georgy Malenkov",
+      "url": "https://www.marxists.org/archive/malenkov/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Nikolai Bulganin",
+      "url": "https://www.marxists.org/archive/bulganin/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Mikhail Suslov",
+      "url": "https://www.marxists.org/archive/suslov/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Dinmohammed Kunayev",
+      "url": "https://www.marxists.org/archive/kunayev/index.htm",
+      "collection": "Early U.S Communists [Under reorganization]"
+    },
+    {
+      "name": "Sheng Shicai",
+      "url": "https://www.marxists.org/archive/sheng/index.htm",
+      "collection": "Early U.S Communists [Under reorganization]"
+    },
+    {
+      "name": "Mátyás Rákosi",
+      "url": "https://www.marxists.org/archive/rakosi/index.htm",
+      "collection": "Early U.S Communists [Under reorganization]"
+    },
+    {
+      "name": "János Kádár",
+      "url": "https://www.marxists.org/archive/kadar/index.htm",
+      "collection": "Early U.S Communists [Under reorganization]"
+    },
+    {
+      "name": "Vŭlko Chervenkov",
+      "url": "https://www.marxists.org/archive/chervenkov/index.htm",
+      "collection": "Early U.S Communists [Under reorganization]"
+    },
+    {
+      "name": "Todor Zhivkov",
+      "url": "https://www.marxists.org/archive/zhivkov/index.htm",
+      "collection": "Early U.S Communists [Under reorganization]"
+    },
+    {
+      "name": "Erich Honecker",
+      "url": "https://www.marxists.org/archive/honecker/index.htm",
+      "collection": "Early U.S Communists [Under reorganization]"
+    },
+    {
+      "name": "Nicolae Ceasescu",
+      "url": "https://www.marxists.org/archive/ceausescu/index.htm",
+      "collection": "Early U.S Communists [Under reorganization]"
+    },
+    {
+      "name": "Yumjaagiin Tsedenbal",
+      "url": "https://www.marxists.org/archive/tsedenbal/index.htm",
+      "collection": "Early U.S Communists [Under reorganization]"
+    },
+    {
+      "name": "Kaysone Phomvihane",
+      "url": "https://www.marxists.org/archive/kaysone/index.htm",
+      "collection": "Early U.S Communists [Under reorganization]"
+    },
+    {
+      "name": "Maurice Thorez",
+      "url": "https://www.marxists.org/reference/archive/thorez/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Louis Aragon",
+      "url": "https://www.marxists.org/archive/aragon/index.htm",
+      "collection": "Early U.S Communists [Under reorganization]"
+    },
+    {
+      "name": "Georges Politzer",
+      "url": "https://www.marxists.org/archive/politzer/index.htm",
+      "collection": "Early U.S Communists [Under reorganization]"
+    },
+    {
+      "name": "Moissaye J. Olgin",
+      "url": "https://www.marxists.org/archive/olgin/index.htm",
+      "collection": "C.P.U.S.A."
+    },
+    {
+      "name": "William Z. Foster",
+      "url": "https://www.marxists.org/archive/foster/index.htm",
+      "collection": "C.P.U.S.A."
+    },
+    {
+      "name": "Earl Browder",
+      "url": "https://www.marxists.org/archive/browder/index.htm",
+      "collection": "C.P.U.S.A."
+    },
+    {
+      "name": "F. Brown [Mario Alpi] [Ferruccio Marini]:",
+      "url": "https://www.marxists.org/archive/brown-f/index.htm",
+      "collection": "C.P.U.S.A."
+    },
+    {
+      "name": "James W. Ford",
+      "url": "https://www.marxists.org/archive/ford/index.htm",
+      "collection": "C.P.U.S.A."
+    },
+    {
+      "name": "J. Peters [Sandor Goldberger]",
+      "url": "https://www.marxists.org/archive/peters/index.htm",
+      "collection": "C.P.U.S.A."
+    },
+    {
+      "name": "Gikl Green",
+      "url": "https://www.marxists.org/archive/green-gil/index.htm",
+      "collection": "C.P.U.S.A."
+    },
+    {
+      "name": "Victor Perlo",
+      "url": "https://www.marxists.org/archive/perlo/index.htm",
+      "collection": "C.P.U.S.A."
+    },
+    {
+      "name": "Claudia Jones",
+      "url": "https://www.marxists.org/archive/jones-claudia/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Irving Howe",
+      "url": "https://www.marxists.org/archive/howe/index.htm",
+      "collection": "C.P.U.S.A."
+    },
+    {
+      "name": "Alberto Moreau",
+      "url": "https://www.marxists.org/archive/moreau/index.htm",
+      "collection": "C.P.U.S.A."
+    },
+    {
+      "name": "R. Page Arnot",
+      "url": "https://www.marxists.org/archive/arnot-page/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Thomas Bell",
+      "url": "https://www.marxists.org/archive/bell/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "B. F. Bradley",
+      "url": "https://www.marxists.org/archive/bradley/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Tom Brown",
+      "url": "https://www.marxists.org/archive/brown-tom/index.htm",
+      "collection": "Anarchists and Syndicalists"
+    },
+    {
+      "name": "Emile Burns",
+      "url": "https://www.marxists.org/archive/burns-emile/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "J. R. Campbell",
+      "url": "https://www.marxists.org/archive/campbell-jr/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Maurice Conforth",
+      "url": "https://www.marxists.org/archive/cornforth/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Idris Cox",
+      "url": "https://www.marxists.org/archive/cox/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Helen Crawfurd",
+      "url": "https://www.marxists.org/archive/crawfurd/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Maurice Dobb",
+      "url": "https://www.marxists.org/archive/dobb/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Clemens Dutt",
+      "url": "https://www.marxists.org/archive/dutt-clemens/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Joseph Fineberg",
+      "url": "https://www.marxists.org/archive/fineberg/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Ralph Fox",
+      "url": "https://www.marxists.org/archive/fox/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Will Gallacher",
+      "url": "https://www.marxists.org/archive/gallacher/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "John Gollan",
+      "url": "https://www.marxists.org/archive/gollan/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Wal Hannington",
+      "url": "https://www.marxists.org/archive/hannington/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Arthur Horner",
+      "url": "https://www.marxists.org/archive/horner/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "J. F. Horrabin",
+      "url": "https://www.marxists.org/archive/horrabin/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Albert Inkpin",
+      "url": "https://www.marxists.org/archive/inkpin/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "T. A. Jackson",
+      "url": "https://www.marxists.org/archive/jackson-ta/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Monty Johnstone",
+      "url": "https://www.marxists.org/archive/johnstone/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "James Klugmann",
+      "url": "https://www.marxists.org/archive/klugmann/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Arthur MacManus",
+      "url": "https://www.marxists.org/archive/mcmanus/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "A. L. Morton",
+      "url": "https://www.marxists.org/archive/morton/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "J. T. Walton Newbold",
+      "url": "https://www.marxists.org/archive/newbold/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Eden & Cedar Paul",
+      "url": "https://www.marxists.org/archive/paul/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "William Paul",
+      "url": "https://www.marxists.org/archive/paul-william/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Marjorie Pollitt",
+      "url": "https://www.marxists.org/archive/pollitt-marjorie/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "R. W. Postgate",
+      "url": "https://www.marxists.org/archive/postgate/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Stewart Purkis",
+      "url": "https://www.marxists.org/archive/purkis/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Tom Quelch",
+      "url": "https://www.marxists.org/archive/quelch-tom/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Bert Ramelson",
+      "url": "https://www.marxists.org/archive/ramelson/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Andrew Rothstein",
+      "url": "https://www.marxists.org/archive/rothstein-andrew/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "William Rust",
+      "url": "https://www.marxists.org/archive/rust/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Shapurji Saklatvala",
+      "url": "https://www.marxists.org/archive/saklatvala/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "John Strachey",
+      "url": "https://www.marxists.org/archive/strachey/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Beth Turner",
+      "url": "https://www.marxists.org/archive/turner-beth/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Ellen Wilkinson",
+      "url": "https://www.marxists.org/archive/wilkinson/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Joseph Winternitz",
+      "url": "https://www.marxists.org/archive/winternitz/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Tom Wintringham",
+      "url": "https://www.marxists.org/archive/wintringham/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Jack Woddis",
+      "url": "https://www.marxists.org/archive/woddis/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Hewlett Johnson",
+      "url": "https://www.marxists.org/archive/johnson-hewlett/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "J. T. Murphy",
+      "url": "https://www.marxists.org/archive/murphy-jt/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Harry Pollitt",
+      "url": "https://www.marxists.org/archive/pollitt/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "R. Palme Dutt",
+      "url": "https://www.marxists.org/archive/dutt/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "J. D. Bernal",
+      "url": "https://www.marxists.org/archive/bernal/index.htm",
+      "collection": "C.P.U.S.A."
+    },
+    {
+      "name": "Christopher Caudwell",
+      "url": "https://www.marxists.org/archive/caudwell/index.htm",
+      "collection": "C.P.U.S.A."
+    },
+    {
+      "name": "Christopher Hill",
+      "url": "https://www.marxists.org/archive/hill-christopher/index.htm",
+      "collection": "C.P.U.S.A."
+    },
+    {
+      "name": "Dolores Ibárruri",
+      "url": "https://www.marxists.org/archive/ibarruri/index.htm",
+      "collection": "C.P.U.S.A."
+    },
+    {
+      "name": "Luiz Carlos Prestes",
+      "url": "https://www.marxists.org/archive/prestes/index.htm",
+      "collection": "C.P.U.S.A."
+    },
+    {
+      "name": "Nikos Zachariadis",
+      "url": "https://www.marxists.org/archive/zachariadis/index.htm",
+      "collection": "C.P.U.S.A."
+    },
+    {
+      "name": "Álvaro Cunhal",
+      "url": "https://www.marxists.org/archive/cunhal/index.htm",
+      "collection": "C.P.U.S.A."
+    },
+    {
+      "name": "Wilfred Burchett",
+      "url": "https://www.marxists.org/archive/burchett/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Lance Sharkey",
+      "url": "https://www.marxists.org/archive/sharkey/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Fred Rose",
+      "url": "https://www.marxists.org/archive/rose/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Huberto Alvarado",
+      "url": "https://www.marxists.org/archive/alvarado/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Shripad Amrit Dange",
+      "url": "https://www.marxists.org/archive/dange/index.htm",
+      "collection": "C.P.U.S.A."
+    },
+    {
+      "name": "B. T. Ranadive",
+      "url": "https://www.marxists.org/archive/ranadive/index.htm",
+      "collection": "C.P.U.S.A."
+    },
+    {
+      "name": "Rıza Yürükoğlü",
+      "url": "https://www.marxists.org/archive/yurukoglu/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Schafik Jorge Handal",
+      "url": "https://www.marxists.org/archive/handal/index.htm",
+      "collection": "C.P.U.S.A."
+    },
+    {
+      "name": "Moshe Sneh",
+      "url": "https://www.marxists.org/archive/sneh/index.htm",
+      "collection": "C.P.U.S.A."
+    },
+    {
+      "name": "Esther Vilenska",
+      "url": "https://www.marxists.org/archive/vilenska/index.htm",
+      "collection": "C.P.U.S.A."
+    },
+    {
+      "name": "Meir Vilner",
+      "url": "https://www.marxists.org/archive/vilner/index.htm",
+      "collection": "C.P.U.S.A."
+    },
+    {
+      "name": "Emile Touma",
+      "url": "https://www.marxists.org/archive/touma/index.htm",
+      "collection": "C.P.U.S.A."
+    },
+    {
+      "name": "Enver Hoxha",
+      "url": "https://www.marxists.org/reference/archive/hoxha/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Ramiz Alia",
+      "url": "https://www.marxists.org/archive/alia/index.htm",
+      "collection": "C.P.U.S.A."
+    },
+    {
+      "name": "Hysni Kapo",
+      "url": "https://www.marxists.org/archive/kapo/index.htm",
+      "collection": "C.P.U.S.A."
+    },
+    {
+      "name": "Mehmet Shehu",
+      "url": "https://www.marxists.org/archive/shehu/index.htm",
+      "collection": "C.P.U.S.A."
+    },
+    {
+      "name": "Bill Bland",
+      "url": "https://www.marxists.org/archive/bland/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Kim Jong Il",
+      "url": "https://www.marxists.org/archive/kim-jong-il/index.htm",
+      "collection": "C.P.U.S.A."
+    },
+    {
+      "name": "Kim Il Sung",
+      "url": "https://www.marxists.org/archive/kim-il-sung/index.htm",
+      "collection": "C.P.U.S.A."
+    },
+    {
+      "name": "I. V. Michurin",
+      "url": "https://www.marxists.org/reference/archive/michurin/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "N. A. Semashko",
+      "url": "https://www.marxists.org/archive/semashko/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Vitaly Vygodsky",
+      "url": "https://www.marxists.org/archive/vygodsky/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Anton Makarenko",
+      "url": "https://www.marxists.org/reference/archive/makarenko/index.html",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Sergey Ivanovich Vavilov",
+      "url": "https://www.marxists.org/archive/vavilov/index.htm",
+      "collection": "Soviet Philosophers and Scientists"
+    },
+    {
+      "name": "T. D. Lysenko",
+      "url": "https://www.marxists.org/reference/archive/lysenko/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Evgeny Pashukanis",
+      "url": "https://www.marxists.org/archive/pashukanis/index.htm",
+      "collection": "Soviet Marxism"
+    },
+    {
+      "name": "Valentin Voloshinov",
+      "url": "https://www.marxists.org/archive/voloshinov/index.htm",
+      "collection": "Soviet Marxism"
+    },
+    {
+      "name": "Evald Ilyenkov",
+      "url": "https://www.marxists.org/archive/ilyenkov/index.htm",
+      "collection": "Soviet Marxism"
+    },
+    {
+      "name": "V A Lektorsky",
+      "url": "https://www.marxists.org/archive/lektorsky/index.htm",
+      "collection": "Soviet Marxism"
+    },
+    {
+      "name": "A I Meshcheryakov",
+      "url": "https://www.marxists.org/archive/meshcheryakov/index.htm",
+      "collection": "Soviet Marxism"
+    },
+    {
+      "name": "Feliks Mikhailov",
+      "url": "https://www.marxists.org/archive/mikhailov/index.htm",
+      "collection": "Soviet Marxism"
+    },
+    {
+      "name": "Lev Vygotsky",
+      "url": "https://www.marxists.org/archive/vygotsky/index.htm",
+      "collection": "Soviet Marxism"
+    },
+    {
+      "name": "Alexander Luria",
+      "url": "https://www.marxists.org/archive/luria/index.htm",
+      "collection": "Soviet Marxism"
+    },
+    {
+      "name": "Alexei Leont'ev",
+      "url": "https://www.marxists.org/archive/leontev/index.htm",
+      "collection": "Soviet Marxism"
+    },
+    {
+      "name": "Daniil El'konin",
+      "url": "https://www.marxists.org/archive/elkonin/index.htm",
+      "collection": "Soviet Marxism"
+    },
+    {
+      "name": "Roman Rosdolsky",
+      "url": "https://www.marxists.org/archive/rosdolsky/index.htm",
+      "collection": "Western Marxism"
+    },
+    {
+      "name": "JBS Haldane",
+      "url": "https://www.marxists.org/archive/haldane/index.htm",
+      "collection": "Western Marxism"
+    },
+    {
+      "name": "Samezō Kuruma",
+      "url": "https://www.marxists.org/archive/kuruma/index.htm",
+      "collection": "Western Marxism"
+    },
+    {
+      "name": "Jules de Gaultier",
+      "url": "https://www.marxists.org/archive/gaultier/index.htm",
+      "collection": "The French Left"
+    },
+    {
+      "name": "Pierre Morhange",
+      "url": "https://www.marxists.org/archive/morhange/index.htm",
+      "collection": "The French Left"
+    },
+    {
+      "name": "Jean-Paul Sartre",
+      "url": "https://www.marxists.org/reference/archive/sartre/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "André Gorz",
+      "url": "https://www.marxists.org/archive/gorz/index.htm",
+      "collection": "The French Left"
+    },
+    {
+      "name": "Paul Nizan",
+      "url": "https://www.marxists.org/archive/nizan/index.htm",
+      "collection": "The French Left"
+    },
+    {
+      "name": "Louis Althusser",
+      "url": "https://www.marxists.org/reference/archive/althusser/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Lucien Sève",
+      "url": "https://www.marxists.org/archive/seve/index.htm",
+      "collection": "The French Left"
+    },
+    {
+      "name": "Guy Debord",
+      "url": "https://www.marxists.org/reference/archive/debord/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Benny Lévy",
+      "url": "https://www.marxists.org/archive/levy-benny/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Michael Parenti",
+      "url": "https://www.marxists.org/archive/parenti/index.htm",
+      "collection": "The French Left"
+    },
+    {
+      "name": "Friedrich Adler",
+      "url": "https://www.marxists.org/archive/adler-friedrich/index.htm",
+      "collection": "The French Left"
+    },
+    {
+      "name": "Henryk Grossman",
+      "url": "https://www.marxists.org/archive/grossman/index.htm",
+      "collection": "The Frankfurt School"
+    },
+    {
+      "name": "Walter Benjamin",
+      "url": "https://www.marxists.org/reference/archive/benjamin/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Max Horkheimer",
+      "url": "https://www.marxists.org/reference/archive/horkheimer/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Leo Lowenthal",
+      "url": "https://www.marxists.org/reference/archive/lowenthal/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Erich Fromm",
+      "url": "https://www.marxists.org/archive/fromm/index.htm",
+      "collection": "The Frankfurt School"
+    },
+    {
+      "name": "Theodor Adorno",
+      "url": "https://www.marxists.org/reference/archive/adorno/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Herbert Marcuse",
+      "url": "https://www.marxists.org/reference/archive/marcuse/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Jürgen Habermas",
+      "url": "https://www.marxists.org/reference/archive/habermas/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Jack Fitzgerald",
+      "url": "https://www.marxists.org/archive/fitzgerald/index.htm",
+      "collection": "Socialist Party of Great Britain"
+    },
+    {
+      "name": "Gilbert McClatchie",
+      "url": "https://www.marxists.org/archive/mcclatchie/index.htm",
+      "collection": "Socialist Party of Great Britain"
+    },
+    {
+      "name": "Edgar Hardcastle",
+      "url": "https://www.marxists.org/archive/hardcastle/index.htm",
+      "collection": "Socialist Party of Great Britain"
+    },
+    {
+      "name": "Harry Young",
+      "url": "https://www.marxists.org/archive/young-harry/index.htm",
+      "collection": "Socialist Party of Great Britain"
+    },
+    {
+      "name": "Jim D’Arcy",
+      "url": "https://www.marxists.org/archive/darcy-jim/index.htm",
+      "collection": "Socialist Party of Great Britain"
+    },
+    {
+      "name": "Harry Baldwin",
+      "url": "https://www.marxists.org/archive/baldwin-harry/index.htm",
+      "collection": "Socialist Party of Great Britain"
+    },
+    {
+      "name": "Pieter Lawrence",
+      "url": "https://www.marxists.org/archive/lawrence/index.htm",
+      "collection": "Socialist Party of Great Britain"
+    },
+    {
+      "name": "Pandelis Pouliopoulos",
+      "url": "https://www.marxists.org/archive/pouliop/index.htm",
+      "collection": "Trotskyism"
+    },
+    {
+      "name": "Chen Bilan",
+      "url": "https://www.marxists.org/archive/chen/index.htm",
+      "collection": "Trotskyism"
+    },
+    {
+      "name": "Frank Glass",
+      "url": "https://www.marxists.org/archive/glass/index.htm",
+      "collection": "Trotskyism"
+    },
+    {
+      "name": "Ante Ciliga",
+      "url": "https://www.marxists.org/archive/ciliga/index.htm",
+      "collection": "Trotskyism"
+    },
+    {
+      "name": "Max Shachtman",
+      "url": "https://www.marxists.org/archive/shachtma/index.htm",
+      "collection": "Trotskyism"
+    },
+    {
+      "name": "George Novack",
+      "url": "https://www.marxists.org/archive/novack/index.htm",
+      "collection": "Trotskyism"
+    },
+    {
+      "name": "Felix Morrow",
+      "url": "https://www.marxists.org/archive/morrow-felix/index.htm",
+      "collection": "Trotskyism"
+    },
+    {
+      "name": "Joseph Hansen",
+      "url": "https://www.marxists.org/archive/hansen/index.htm",
+      "collection": "Trotskyism"
+    },
+    {
+      "name": "George Rawick",
+      "url": "https://www.marxists.org/archive/rawick/index.htm",
+      "collection": "Trotskyism"
+    },
+    {
+      "name": "Harry Braverman",
+      "url": "https://www.marxists.org/archive/braverman/index.htm",
+      "collection": "Trotskyism"
+    },
+    {
+      "name": "Peter Camejo",
+      "url": "https://www.marxists.org/archive/camejo/index.htm",
+      "collection": "Trotskyism"
+    },
+    {
+      "name": "Walter Held",
+      "url": "https://www.marxists.org/archive/held-walter/index.htm",
+      "collection": "Trotskyism"
+    },
+    {
+      "name": "Michel Pablo",
+      "url": "https://www.marxists.org/archive/pablo/index.htm",
+      "collection": "Trotskyism"
+    },
+    {
+      "name": "David Korner (Barta)",
+      "url": "https://www.marxists.org/archive/barta/index.htm",
+      "collection": "Trotskyism"
+    },
+    {
+      "name": "Ross Dowson",
+      "url": "https://www.marxists.org/archive/dowson/index.html",
+      "collection": "Trotskyism"
+    },
+    {
+      "name": "J. Posadas",
+      "url": "https://www.marxists.org/archive/posadas/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Luis Vitale",
+      "url": "https://www.marxists.org/archive/vitale/index.htm",
+      "collection": "Trotskyism"
+    },
+    {
+      "name": "Brian Pearce",
+      "url": "https://www.marxists.org/archive/pearce/index.htm",
+      "collection": "Trotskyism"
+    },
+    {
+      "name": "Geoff Pilling",
+      "url": "https://www.marxists.org/archive/pilling/index.htm",
+      "collection": "Trotskyism"
+    },
+    {
+      "name": "Balasz Nagy",
+      "url": "https://www.marxists.org/archive/nagy-balazs/index.htm",
+      "collection": "Trotskyism"
+    },
+    {
+      "name": "Daniel Bensaid",
+      "url": "https://www.marxists.org/archive/bensaid/index.htm",
+      "collection": "Trotskyism"
+    },
+    {
+      "name": "Celia Hart Santamaria",
+      "url": "https://www.marxists.org/archive/celia-hart/index.htm",
+      "collection": "Trotskyism"
+    },
+    {
+      "name": "Liborio Justo",
+      "url": "https://www.marxists.org/archive/justo/index.html",
+      "collection": "Trotskyism"
+    },
+    {
+      "name": "Ted Grant",
+      "url": "https://www.marxists.org/archive/grant/index.htm",
+      "collection": "Trotskyism"
+    },
+    {
+      "name": "Kurt Landau",
+      "url": "https://www.marxists.org/archive/norman/index.htm",
+      "collection": "Trotskyism"
+    },
+    {
+      "name": "Hugo Dewar",
+      "url": "https://www.marxists.org/archive/dewar/index.htm",
+      "collection": "Trotskyism"
+    },
+    {
+      "name": "Grandizo Munis",
+      "url": "https://www.marxists.org/archive/munis/index.htm",
+      "collection": "Trotskyism"
+    },
+    {
+      "name": "Ludvik Hass",
+      "url": "https://www.marxists.org/archive/hass/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Abram Leon",
+      "url": "https://www.marxists.org/archive/leon-abram/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Ernest Mandel",
+      "url": "https://www.marxists.org/archive/mandel/index.htm",
+      "collection": "Trotskyism"
+    },
+    {
+      "name": "Nahuel Moreno",
+      "url": "https://www.marxists.org/archive/moreno/index.htm",
+      "collection": "Trotskyism"
+    },
+    {
+      "name": "Tony Cliff",
+      "url": "https://www.marxists.org/archive/cliff/index.htm",
+      "collection": "International Socialist Tendency"
+    },
+    {
+      "name": "Duncan Hallas",
+      "url": "https://www.marxists.org/archive/hallas/index.htm",
+      "collection": "International Socialist Tendency"
+    },
+    {
+      "name": "Michael Kidron",
+      "url": "https://www.marxists.org/archive/kidron/index.htm",
+      "collection": "International Socialist Tendency"
+    },
+    {
+      "name": "Jim Higgins",
+      "url": "https://www.marxists.org/archive/higgins/index.htm",
+      "collection": "International Socialist Tendency"
+    },
+    {
+      "name": "Peter Sedgwick",
+      "url": "https://www.marxists.org/archive/sedgwick/index.htm",
+      "collection": "International Socialist Tendency"
+    },
+    {
+      "name": "Paul Foot",
+      "url": "https://www.marxists.org/archive/foot-paul/index.htm",
+      "collection": "International Socialist Tendency"
+    },
+    {
+      "name": "Chris Harman",
+      "url": "https://www.marxists.org/archive/harman/index.htm",
+      "collection": "International Socialist Tendency"
+    },
+    {
+      "name": "David Widgery",
+      "url": "https://www.marxists.org/archive/widgery/index.htm",
+      "collection": "International Socialist Tendency"
+    },
+    {
+      "name": "Mike Davis",
+      "url": "https://www.marxists.org/archive/davis-mike/index.htm",
+      "collection": "International Socialist Tendency"
+    },
+    {
+      "name": "Tom O'Lincoln",
+      "url": "https://www.marxists.org/archive/olincoln/index.htm",
+      "collection": "International Socialist Tendency"
+    },
+    {
+      "name": "Albert & Vera Weisbord",
+      "url": "https://www.marxists.org/archive/weisbord/index.htm",
+      "collection": "International Socialist Tendency"
+    },
+    {
+      "name": "Hal Draper",
+      "url": "https://www.marxists.org/archive/draper/index.htm",
+      "collection": "International Socialist Tendency"
+    },
+    {
+      "name": "Gilbert Giles Roper",
+      "url": "https://www.marxists.org/archive/roper/index.htm",
+      "collection": "International Socialist Tendency"
+    },
+    {
+      "name": "Bob Gould",
+      "url": "https://www.marxists.org/archive/gould/index.htm",
+      "collection": "International Socialist Tendency"
+    },
+    {
+      "name": "Saumyendranath Tagore",
+      "url": "https://www.marxists.org/archive/tagore/index.htm",
+      "collection": "International Socialist Tendency"
+    },
+    {
+      "name": "Hugo Blanco",
+      "url": "https://www.marxists.org/archive/blanco-hugo/index.htm",
+      "collection": "International Socialist Tendency"
+    },
+    {
+      "name": "Evelyn Reed",
+      "url": "https://www.marxists.org/archive/reed-evelyn/index.htm",
+      "collection": "International Socialist Tendency"
+    },
+    {
+      "name": "Neville Alexander",
+      "url": "https://www.marxists.org/archive/alexander/index.htm",
+      "collection": "International Socialist Tendency"
+    },
+    {
+      "name": "Baruch Hirson",
+      "url": "https://www.marxists.org/archive/hirson/index.htm",
+      "collection": "International Socialist Tendency"
+    },
+    {
+      "name": "Herman Gorter",
+      "url": "https://www.marxists.org/archive/gorter/index.htm",
+      "collection": "Left Communism"
+    },
+    {
+      "name": "Julian Borchardt",
+      "url": "https://www.marxists.org/archive/borchardt/index.htm",
+      "collection": "Left Communism"
+    },
+    {
+      "name": "Anton Pannekoek",
+      "url": "https://www.marxists.org/archive/pannekoe/index.htm",
+      "collection": "Left Communism"
+    },
+    {
+      "name": "Cajo Brendel",
+      "url": "https://www.marxists.org/archive/brendel/index.htm",
+      "collection": "Left Communism"
+    },
+    {
+      "name": "Otto Rühle",
+      "url": "https://www.marxists.org/archive/ruhle/index.htm",
+      "collection": "Left Communism"
+    },
+    {
+      "name": "Panait Istrati",
+      "url": "https://www.marxists.org/archive/istrati/index.htm",
+      "collection": "Left Communism"
+    },
+    {
+      "name": "Eugene Lanti",
+      "url": "https://www.marxists.org/archive/lanti/index.htm",
+      "collection": "Left Communism"
+    },
+    {
+      "name": "John Keracher",
+      "url": "https://www.marxists.org/archive/keracher/index.htm",
+      "collection": "Left Communism"
+    },
+    {
+      "name": "Scott Nearing",
+      "url": "https://www.marxists.org/archive/nearing/index.htm",
+      "collection": "Left Communism"
+    },
+    {
+      "name": "Haim Kantorovitch",
+      "url": "https://www.marxists.org/archive/kantorovitch/index.htm",
+      "collection": "Left Communism"
+    },
+    {
+      "name": "Walter Kendall",
+      "url": "https://www.marxists.org/archive/kendall/index.htm",
+      "collection": "Left Communism"
+    },
+    {
+      "name": "Maurice Brinton",
+      "url": "https://www.marxists.org/archive/brinton/index.htm",
+      "collection": "Left Communism"
+    },
+    {
+      "name": "Amadeo Bordiga",
+      "url": "https://www.marxists.org/archive/bordiga/index.htm",
+      "collection": "Left Communism"
+    },
+    {
+      "name": "Jacques Camatte",
+      "url": "https://www.marxists.org/archive/camatte/index.htm",
+      "collection": "Left Communism"
+    },
+    {
+      "name": "Onorato Damen",
+      "url": "https://www.marxists.org/archive/damen/index.htm",
+      "collection": "Left Communism"
+    },
+    {
+      "name": "Marceau Pivert",
+      "url": "https://www.marxists.org/archive/pivert/index.htm",
+      "collection": "Left Communism"
+    },
+    {
+      "name": "Paul Mattick",
+      "url": "https://www.marxists.org/archive/mattick-paul/index.htm",
+      "collection": "Left Communism"
+    },
+    {
+      "name": "Arrigo Cervetto",
+      "url": "https://www.marxists.org/archive/cervetto/index.htm",
+      "collection": "Left Communism"
+    },
+    {
+      "name": "Bernard Reichenbach",
+      "url": "https://www.marxists.org/archive/reichenbach/index.htm",
+      "collection": "Left Communism"
+    },
+    {
+      "name": "Franz Pfemfert",
+      "url": "https://www.marxists.org/archive/pfemfert/index.htm",
+      "collection": "Left Communism"
+    },
+    {
+      "name": "CLR James",
+      "url": "https://www.marxists.org/archive/james-clr/index.htm",
+      "collection": "Marxist Humanism"
+    },
+    {
+      "name": "Raya Dunayevskaya",
+      "url": "https://www.marxists.org/archive/dunayevskaya/index.htm",
+      "collection": "Marxist Humanism"
+    },
+    {
+      "name": "Martin Glaberman",
+      "url": "https://www.marxists.org/archive/glaberman/index.htm",
+      "collection": "Marxist Humanism"
+    },
+    {
+      "name": "Ernst Bloch",
+      "url": "https://www.marxists.org/archive/bloch/index.htm",
+      "collection": "Marxist Humanism"
+    },
+    {
+      "name": "Franz Jakubowski",
+      "url": "https://www.marxists.org/archive/jakubowski/index.htm",
+      "collection": "Marxist Humanism"
+    },
+    {
+      "name": "Z. A. Jordan",
+      "url": "https://www.marxists.org/archive/jordan/index.htm",
+      "collection": "Marxist Humanism"
+    },
+    {
+      "name": "Cornelius Castoriadis",
+      "url": "https://www.marxists.org/archive/castoriadis/index.htm",
+      "collection": "Marxist Humanism"
+    },
+    {
+      "name": "Claude Lefort",
+      "url": "https://www.marxists.org/archive/lefort/index.htm",
+      "collection": "Marxist Humanism"
+    },
+    {
+      "name": "Maximilien Rubel",
+      "url": "https://www.marxists.org/archive/rubel/index.htm",
+      "collection": "Marxist Humanism"
+    },
+    {
+      "name": "Howard L. Parsons",
+      "url": "https://www.marxists.org/archive/parsons-howard/index.htm",
+      "collection": "Marxist Humanism"
+    },
+    {
+      "name": "Sebastiano Timpanaro",
+      "url": "https://www.marxists.org/archive/timpanaro/index.htm",
+      "collection": "Marxist Humanism"
+    },
+    {
+      "name": "John Saville",
+      "url": "https://www.marxists.org/archive/saville/index.htm",
+      "collection": "Marxist Humanism"
+    },
+    {
+      "name": "E P Thompson",
+      "url": "https://www.marxists.org/archive/thompson-ep/index.htm",
+      "collection": "Marxist Humanism"
+    },
+    {
+      "name": "Ralph Miliband",
+      "url": "https://www.marxists.org/archive/miliband/index.htm",
+      "collection": "Marxist Humanism"
+    },
+    {
+      "name": "Marcel Liebman",
+      "url": "https://www.marxists.org/archive/liebman/index.htm",
+      "collection": "Marxist Humanism"
+    },
+    {
+      "name": "Joe McCarney",
+      "url": "https://www.marxists.org/archive/mccarney/index.htm",
+      "collection": "Marxist Humanism"
+    },
+    {
+      "name": "Eugene Kamenka",
+      "url": "https://www.marxists.org/archive/kamenka/index.htm",
+      "collection": "Marxist Humanism"
+    },
+    {
+      "name": "Rudi Supek",
+      "url": "https://www.marxists.org/archive/supek/index.htm",
+      "collection": "The Praxis Group"
+    },
+    {
+      "name": "Gajo Petrović",
+      "url": "https://www.marxists.org/archive/petrovic/index.htm",
+      "collection": "The Praxis Group"
+    },
+    {
+      "name": "Mihailo Marković",
+      "url": "https://www.marxists.org/archive/markovic/index.htm",
+      "collection": "The Praxis Group"
+    },
+    {
+      "name": "Deng Xiaoping",
+      "url": "https://www.marxists.org/reference/archive/deng-xiaoping/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Hu Yaobang",
+      "url": "https://www.marxists.org/archive/hu-yaobang/index.htm",
+      "collection": "&#8212;&#8212; Market Socialists / Workers&#8217; Self-Management &#8212;&#8212;"
+    },
+    {
+      "name": "Jiang Zemin",
+      "url": "https://www.marxists.org/archive/jiang-zemin/index.htm",
+      "collection": "&#8212;&#8212; Market Socialists / Workers&#8217; Self-Management &#8212;&#8212;"
+    },
+    {
+      "name": "Ota Šik",
+      "url": "https://www.marxists.org/archive/sik/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Branko Pribicevic",
+      "url": "https://www.marxists.org/archive/pribicevic/index.htm",
+      "collection": "&#8212;&#8212; Market Socialists / Workers&#8217; Self-Management &#8212;&#8212;"
+    },
+    {
+      "name": "Mansoor Hekmat",
+      "url": "https://www.marxists.org/archive/hekmat-mansoor/index.htm",
+      "collection": "&#8212;&#8212; New Worker / Communist Currents &#8212;&#8212;"
+    },
+    {
+      "name": "Shahrokh Zamani",
+      "url": "https://www.marxists.org/archive/zamani/index.htm",
+      "collection": "&#8212;&#8212; New Worker / Communist Currents &#8212;&#8212;"
+    },
+    {
+      "name": "Filemon Lagman",
+      "url": "https://www.marxists.org/archive/lagman/index.htm",
+      "collection": "&#8212;&#8212; New Worker / Communist Currents &#8212;&#8212;"
+    },
+    {
+      "name": "Geno Perente",
+      "url": "https://www.marxists.org/archive/perente/index.htm",
+      "collection": "&#8212;&#8212; New Worker / Communist Currents &#8212;&#8212;"
+    },
+    {
+      "name": "Salvador Allende",
+      "url": "https://www.marxists.org/archive/allende/index.htm",
+      "collection": "&#8212;&#8212; The Latin American Left &#8212;&#8212;"
+    },
+    {
+      "name": "Che Guevara",
+      "url": "https://www.marxists.org/archive/guevara/index.htm",
+      "collection": "Guerilla Marxism"
+    },
+    {
+      "name": "Hamid Ashraf",
+      "url": "https://www.marxists.org/archive/hamid-ashraf/index.htm",
+      "collection": "Guerilla Marxism"
+    },
+    {
+      "name": "Mahir Çayan",
+      "url": "https://www.marxists.org/archive/cayan/index.htm",
+      "collection": "Guerilla Marxism"
+    },
+    {
+      "name": "Juan Gelman",
+      "url": "https://www.marxists.org/archive/gelman/index.htm",
+      "collection": "Guerilla Marxism"
+    },
+    {
+      "name": "Mao Zedong",
+      "url": "https://www.marxists.org/reference/archive/mao/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Lin Biao",
+      "url": "https://www.marxists.org/reference/archive/lin-biao/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Zhou Enlai",
+      "url": "https://www.marxists.org/reference/archive/zhou-enlai/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Peng Zhen",
+      "url": "https://www.marxists.org/reference/archive/peng-zhen/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Zhu De",
+      "url": "https://www.marxists.org/reference/archive/zhu-de/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Li Lisan",
+      "url": "https://www.marxists.org/archive/li-lisan/index.htm",
+      "collection": "Maoism"
+    },
+    {
+      "name": "Liu Shaoqi",
+      "url": "https://www.marxists.org/reference/archive/liu-shaoqi/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Zhang Chunqiao",
+      "url": "https://www.marxists.org/reference/archive/zhang/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Soong Ch'ing-ling",
+      "url": "https://www.marxists.org/archive/soong/index.htm",
+      "collection": "Maoism"
+    },
+    {
+      "name": "Hua Guofeng",
+      "url": "https://www.marxists.org/reference/archive/hua-guofeng/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Song Renqiong",
+      "url": "https://www.marxists.org/archive/song/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Shibdas Ghosh",
+      "url": "https://www.marxists.org/archive/shibdas-ghosh/index.htm",
+      "collection": "Maoism"
+    },
+    {
+      "name": "İbrahim Kaypakkaya",
+      "url": "https://www.marxists.org/archive/kaypakkaya/index.htm",
+      "collection": "Maoism"
+    },
+    {
+      "name": "V. G. Wilcox",
+      "url": "https://www.marxists.org/archive/wilcox/index.htm",
+      "collection": "Maoism"
+    },
+    {
+      "name": "Jose Maria Sison",
+      "url": "https://www.marxists.org/archive/sison/index.htm",
+      "collection": "Maoism"
+    },
+    {
+      "name": "Amulya Sen",
+      "url": "https://www.marxists.org/archive/sen/index.htm",
+      "collection": "Maoism"
+    },
+    {
+      "name": "Charu Mazumdar",
+      "url": "https://www.marxists.org/reference/archive/mazumdar/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Vinod Mishra",
+      "url": "https://www.marxists.org/reference/archive/mishra/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Cherukuri Rajkumar",
+      "url": "https://www.marxists.org/archive/azad/index.htm",
+      "collection": "Naxalites"
+    },
+    {
+      "name": "Siraj Sikder",
+      "url": "https://www.marxists.org/archive/sikder/index.htm",
+      "collection": "Naxalites"
+    },
+    {
+      "name": "Santosh Rana",
+      "url": "https://www.marxists.org/archive/rana/index.htm",
+      "collection": "Naxalites"
+    },
+    {
+      "name": "Anuradha Gandhy",
+      "url": "https://www.marxists.org/archive/gandhy/index.htm",
+      "collection": "Naxalites"
+    },
+    {
+      "name": "Pol Pot",
+      "url": "https://www.marxists.org/archive/pol-pot/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Ho Chi Minh",
+      "url": "https://www.marxists.org/reference/archive/ho-chi-minh/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Truong Chinh",
+      "url": "https://www.marxists.org/archive/truong-chinh/index.htm",
+      "collection": "National Liberation"
+    },
+    {
+      "name": "Võ Nguyên Giáp",
+      "url": "https://www.marxists.org/archive/giap/index.htm",
+      "collection": "National Liberation"
+    },
+    {
+      "name": "Pham Van Dong",
+      "url": "https://www.marxists.org/reference/archive/pham/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Le Duan",
+      "url": "https://www.marxists.org/reference/archive/le-duan/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Pedro Albizu Campos",
+      "url": "https://www.marxists.org/archive/campos/index.htm",
+      "collection": "National Liberation"
+    },
+    {
+      "name": "Bhagat Singh",
+      "url": "https://www.marxists.org/archive/bhagat-singh/index.htm",
+      "collection": "National Liberation"
+    },
+    {
+      "name": "George Padmore",
+      "url": "https://www.marxists.org/archive/padmore/index.htm",
+      "collection": "National Liberation"
+    },
+    {
+      "name": "Harry Haywood",
+      "url": "https://www.marxists.org/archive/haywood/index.htm",
+      "collection": "National Liberation"
+    },
+    {
+      "name": "Lu Xun",
+      "url": "https://www.marxists.org/archive/lu-xun/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Messali Hadj",
+      "url": "https://www.marxists.org/archive/messali-hadj/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Edward Said",
+      "url": "https://www.marxists.org/archive/said/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Ghassan Kanafani",
+      "url": "https://www.marxists.org/archive/kanafani/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Ricardo Alarcon",
+      "url": "https://www.marxists.org/archive/alarcon/index.htm",
+      "collection": "National Liberation"
+    },
+    {
+      "name": "Cheddi Jagan",
+      "url": "https://www.marxists.org/archive/jagan/index.htm",
+      "collection": "National Liberation"
+    },
+    {
+      "name": "Marta Harnecker",
+      "url": "https://www.marxists.org/archive/harnecker/index.htm",
+      "collection": "National Liberation"
+    },
+    {
+      "name": "Hugo Chavez Frias",
+      "url": "https://www.marxists.org/archive/chavez/index.htm",
+      "collection": "National Liberation"
+    },
+    {
+      "name": "Mohamed Siad Barre",
+      "url": "https://www.marxists.org/archive/siad-barre/index.htm",
+      "collection": "African Liberation Movement"
+    },
+    {
+      "name": "Thomas Sankara",
+      "url": "https://www.marxists.org/archive/sankara/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Toussaint Louverture",
+      "url": "https://www.marxists.org/reference/archive/toussaint-louverture/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "John Brown",
+      "url": "https://www.marxists.org/archive/brown-john/index.htm",
+      "collection": "Black Liberation"
+    },
+    {
+      "name": "I don't believe in fighting today in any one front, but on all fronts. In fact I'm a Black Nationalist Freedom Fighter. Islam is my religion, but I believe my religion is my personal business.... The economic philosophy of Black Nationalism only means that we should own and operate and control the economy of our community.",
+      "url": "https://www.marxists.org/reference/archive/malcolm-x/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Huey P. Newton",
+      "url": "https://www.marxists.org/archive/newton/index.htm",
+      "collection": "Black Liberation"
+    },
+    {
+      "name": "Fred Hampton",
+      "url": "https://www.marxists.org/archive/hampton/index.htm",
+      "collection": "Black Liberation"
+    },
+    {
+      "name": "Claude McKay",
+      "url": "https://www.marxists.org/archive/mckay/index.htm",
+      "collection": "Black Liberation"
+    },
+    {
+      "name": "Julien La Mettrie",
+      "url": "https://www.marxists.org/reference/archive/la-mettrie/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Holbach",
+      "url": "https://www.marxists.org/reference/archive/holbach/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Auguste Blanqui",
+      "url": "https://www.marxists.org/reference/archive/blanqui/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Félix Pyat",
+      "url": "https://www.marxists.org/archive/pyat/index.htm",
+      "collection": "The French Revolution"
+    },
+    {
+      "name": "James Harrington",
+      "url": "https://www.marxists.org/reference/archive/harrington-james/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Charles Fourier",
+      "url": "https://www.marxists.org/reference/archive/fourier/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Edward Bellamy",
+      "url": "https://www.marxists.org/reference/archive/bellamy-ed/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Petr Kropotkin",
+      "url": "https://www.marxists.org/reference/archive/kropotkin-peter/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Ravachol",
+      "url": "https://www.marxists.org/reference/archive/ravachol/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Zo d’Axa",
+      "url": "https://www.marxists.org/reference/archive/zo-daxa/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Bernard Lazare",
+      "url": "https://www.marxists.org/reference/archive/lazare-bernard/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Emile Armand",
+      "url": "https://www.marxists.org/archive/armand/index.htm",
+      "collection": "Anarchists and Syndicalists"
+    },
+    {
+      "name": "Armand Barès",
+      "url": "https://www.marxists.org/archive/barbes/index.htm",
+      "collection": "Anarchists and Syndicalists"
+    },
+    {
+      "name": "Manuel Devaldes",
+      "url": "https://www.marxists.org/archive/devaldes/index.htm",
+      "collection": "Anarchists and Syndicalists"
+    },
+    {
+      "name": "Georges Etiévant",
+      "url": "https://www.marxists.org/archive/etievant/index.htm",
+      "collection": "Anarchists and Syndicalists"
+    },
+    {
+      "name": "Emile Henry",
+      "url": "https://www.marxists.org/reference/archive/henry/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Libertad",
+      "url": "https://www.marxists.org/archive/libertad/index.htm",
+      "collection": "Anarchists and Syndicalists"
+    },
+    {
+      "name": "Jean-Patrick Manchette",
+      "url": "https://www.marxists.org/archive/manchette/index.htm",
+      "collection": "Anarchists and Syndicalists"
+    },
+    {
+      "name": "Georges Palante",
+      "url": "https://www.marxists.org/archive/palante/index.htm",
+      "collection": "Anarchists and Syndicalists"
+    },
+    {
+      "name": "Emile Pouget",
+      "url": "https://www.marxists.org/archive/pouget/index.htm",
+      "collection": "Anarchists and Syndicalists"
+    },
+    {
+      "name": "Han Ryner",
+      "url": "https://www.marxists.org/archive/ryner/index.htm",
+      "collection": "Anarchists and Syndicalists"
+    },
+    {
+      "name": "Gustave Hervé",
+      "url": "https://www.marxists.org/archive/herve/index.htm",
+      "collection": "Anarchists and Syndicalists"
+    },
+    {
+      "name": "Sebastien Faure",
+      "url": "https://www.marxists.org/reference/archive/faure/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Andre Lorulot",
+      "url": "https://www.marxists.org/reference/archive/lorulot/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Fernando Tarrida del Marmol",
+      "url": "https://www.marxists.org/archive/tarrida/index.htm",
+      "collection": "Anarchists and Syndicalists"
+    },
+    {
+      "name": "Bill Haywood",
+      "url": "https://www.marxists.org/archive/haywood-b/index.htm",
+      "collection": "Anarchists and Syndicalists"
+    },
+    {
+      "name": "Linn A.E. Gale",
+      "url": "https://www.marxists.org/archive/gale/index.htm",
+      "collection": "Anarchists and Syndicalists"
+    },
+    {
+      "name": "Mikhail Bakunin",
+      "url": "https://www.marxists.org/reference/archive/bakunin/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Carlo Cafiero",
+      "url": "https://www.marxists.org/archive/cafiero/index.htm",
+      "collection": "Anarchists and Syndicalists"
+    },
+    {
+      "name": "James Guillaume",
+      "url": "https://www.marxists.org/reference/archive/guillaume/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Errico Malatesta",
+      "url": "https://www.marxists.org/archive/malatesta/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Alexander Berkman",
+      "url": "https://www.marxists.org/reference/archive/berkman/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Nestor Makhno",
+      "url": "https://www.marxists.org/reference/archive/makhno-nestor/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Emma Goldman",
+      "url": "https://www.marxists.org/reference/archive/goldman/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Ida Mett",
+      "url": "https://www.marxists.org/archive/mett/index.htm",
+      "collection": "Anarchists and Syndicalists"
+    },
+    {
+      "name": "Benjamin R Tucker",
+      "url": "https://www.marxists.org/archive/tucker/index.htm",
+      "collection": "Anarchists and Syndicalists"
+    },
+    {
+      "name": "Fredy Perlman",
+      "url": "https://www.marxists.org/reference/archive/perlman-fredy/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Murray Bookchin",
+      "url": "https://www.marxists.org/archive/bookchin/index.htm",
+      "collection": "Anarchists and Syndicalists"
+    },
+    {
+      "name": "Guy Aldred",
+      "url": "https://www.marxists.org/archive/aldred-guy/index.htm",
+      "collection": "Anarchists and Syndicalists"
+    },
+    {
+      "name": "Mary Wollstonecraft",
+      "url": "https://www.marxists.org/reference/archive/wollstonecraft-mary/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Mary Beard",
+      "url": "https://www.marxists.org/archive/beard/index.htm",
+      "collection": "Feminists"
+    },
+    {
+      "name": "Begum Roquia",
+      "url": "https://www.marxists.org/archive/begum-rokeya/index.htm",
+      "collection": "Feminists"
+    },
+    {
+      "name": "Clara Fraser",
+      "url": "https://www.marxists.org/archive/fraser/index.htm",
+      "collection": "Feminists"
+    },
+    {
+      "name": "Nicholas Chernyshevsky",
+      "url": "https://www.marxists.org/reference/archive/chernyshevsky/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Jack London",
+      "url": "https://www.marxists.org/archive/london/index.htm",
+      "collection": "Socialist Populists, Historians and Journalists"
+    },
+    {
+      "name": "Helen Keller",
+      "url": "https://www.marxists.org/reference/archive/keller-helen/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Arthur Rosenberg",
+      "url": "https://www.marxists.org/archive/rosenberg/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Morgan Philips Price",
+      "url": "https://www.marxists.org/archive/price/index.htm",
+      "collection": "Socialist Populists, Historians and Journalists"
+    },
+    {
+      "name": "William Chamberlin",
+      "url": "https://www.marxists.org/archive/chamberlin-william/index.htm",
+      "collection": "Socialist Populists, Historians and Journalists"
+    },
+    {
+      "name": "Peter Fryer",
+      "url": "https://www.marxists.org/archive/fryer/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Anna Louise Strong",
+      "url": "https://www.marxists.org/reference/archive/strong-anna-louise/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Mark Starr",
+      "url": "https://www.marxists.org/archive/starr-mark/index.htm",
+      "collection": "Socialist Populists, Historians and Journalists"
+    },
+    {
+      "name": "Paul Robeson",
+      "url": "https://www.marxists.org/archive/robeson/index.htm",
+      "collection": "Socialist Populists, Historians and Journalists"
+    },
+    {
+      "name": "Attila József",
+      "url": "https://www.marxists.org/archive/jozsef/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Isaac Deutscher",
+      "url": "https://www.marxists.org/archive/deutscher/index.htm",
+      "collection": "Socialist Populists, Historians and Journalists"
+    },
+    {
+      "name": "George Orwell",
+      "url": "https://www.marxists.org/archive/orwell/index.htm",
+      "collection": "Socialist Populists, Historians and Journalists"
+    },
+    {
+      "name": "Alice Field",
+      "url": "https://www.marxists.org/reference/archive/field-alice/index.html",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Howard Zinn",
+      "url": "https://www.marxists.org/archive/zinn/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Daniel Singer",
+      "url": "https://www.marxists.org/archive/singer/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "John Pilger",
+      "url": "https://www.marxists.org/archive/pilger/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Nicolo Machiavelli",
+      "url": "https://www.marxists.org/reference/archive/machiavelli/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Gerrard Winstanley",
+      "url": "https://www.marxists.org/reference/archive/winstanley/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Thomas Paine",
+      "url": "https://www.marxists.org/reference/archive/paine/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "General Carl von Clausewitz",
+      "url": "https://www.marxists.org/reference/archive/clausewitz/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Louis-René Villermé",
+      "url": "https://www.marxists.org/archive/villerme/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Alexis de Tocqueville",
+      "url": "https://www.marxists.org/reference/archive/de-tocqueville/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Moses Hess",
+      "url": "https://www.marxists.org/archive/hess/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Childe",
+      "url": "https://www.marxists.org/archive/childe/index.htm",
+      "collection": "Foundations of Political Science"
+    },
+    {
+      "name": "Edgar Morin",
+      "url": "https://www.marxists.org/archive/morin/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Francis Bacon",
+      "url": "https://www.marxists.org/reference/archive/bacon/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Blaise Pascal",
+      "url": "https://www.marxists.org/reference/archive/pascal/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Rene Descartes",
+      "url": "https://www.marxists.org/reference/archive/descartes/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Spinoza",
+      "url": "https://www.marxists.org/reference/archive/spinoza/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "François Voltaire",
+      "url": "https://www.marxists.org/reference/archive/voltaire/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Denis Diderot",
+      "url": "https://www.marxists.org/reference/archive/diderot/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Johann Gottfried Herder",
+      "url": "https://www.marxists.org/archive/herder/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Friedrich Jacobi",
+      "url": "https://www.marxists.org/reference/archive/jacobi/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Johann Gottlieb Fichte",
+      "url": "https://www.marxists.org/archive/fichte/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Friedrich Schelling",
+      "url": "https://www.marxists.org/archive/schelling/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "G W F Hegel",
+      "url": "https://www.marxists.org/reference/archive/hegel/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Heinrich Heine",
+      "url": "https://www.marxists.org/reference/archive/heine/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Auguste Comte",
+      "url": "https://www.marxists.org/reference/archive/comte/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Percy Bysshe Shelley",
+      "url": "https://www.marxists.org/archive/shelley/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Max Stirner",
+      "url": "https://www.marxists.org/reference/archive/stirner/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Ludwig Feuerbach",
+      "url": "https://www.marxists.org/reference/archive/feuerbach/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "John McTaggart",
+      "url": "https://www.marxists.org/reference/archive/mctaggart/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Benedetto Croce",
+      "url": "https://www.marxists.org/reference/archive/croce/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Max Weber",
+      "url": "https://www.marxists.org/reference/archive/weber/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "John Dewey",
+      "url": "https://www.marxists.org/archive/dewey/index.htm",
+      "collection": "Philosophy"
+    },
+    {
+      "name": "Cyril Smith",
+      "url": "https://www.marxists.org/reference/archive/smith-cyril/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Friedrich Nietzsche",
+      "url": "https://www.marxists.org/reference/archive/nietzsche/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Jean-Marie Guyau",
+      "url": "https://www.marxists.org/archive/guyau/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Adam Smith",
+      "url": "https://www.marxists.org/reference/archive/smith-adam/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "John Stuart Mill",
+      "url": "https://www.marxists.org/reference/archive/mill-john-stuart/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Bernice Shoul",
+      "url": "https://www.marxists.org/archive/shoul/index.htm",
+      "collection": "Political Economy"
+    },
+    {
+      "name": "John Hobson",
+      "url": "https://www.marxists.org/archive/hobson/index.htm",
+      "collection": "Political Economy"
+    },
+    {
+      "name": "Lewis Henry Morgan",
+      "url": "https://www.marxists.org/reference/archive/morgan-lewis/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    },
+    {
+      "name": "Sigmund Freud",
+      "url": "https://www.marxists.org/archive/freud/index.htm",
+      "collection": "Natural Science"
+    },
+    {
+      "name": "Richard Lewontin",
+      "url": "https://www.marxists.org/archive/lewontin/index.htm",
+      "collection": "Natural Science"
+    },
+    {
+      "name": "Albert Einstein",
+      "url": "https://www.marxists.org/reference/archive/einstein/index.htm",
+      "collection": "Marxists Internet Archive Library"
+    }
+  ]
+}

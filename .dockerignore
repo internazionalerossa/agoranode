@@ -1,0 +1,11 @@
+node_modules
+.git
+.env*
+.wrangler
+.next
+dist
+build-node
+*.log
+*.tar.gz
+outputs
+work

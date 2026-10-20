@@ -1,0 +1,260 @@
+[
+  [
+    "IS.RRS.TOTL.KM",
+    "Estensione della rete ferroviaria",
+    "Infrastrutture",
+    "Chilometri di linee"
+  ],
+  [
+    "IS.RRS.PASG.KM",
+    "Trasporto ferroviario di passeggeri",
+    "Infrastrutture",
+    "Milioni di passeggeri-km"
+  ],
+  [
+    "IS.RRS.GOOD.MT.K6",
+    "Trasporto ferroviario di merci",
+    "Infrastrutture",
+    "Milioni di tonnellate-km"
+  ],
+  [
+    "IS.AIR.PSGR",
+    "Passeggeri del trasporto aereo",
+    "Infrastrutture",
+    "Passeggeri trasportati"
+  ],
+  [
+    "IS.SHP.GOOD.TU",
+    "Traffico dei porti container",
+    "Infrastrutture",
+    "TEU: unità equivalenti a venti piedi"
+  ],
+  [
+    "IT.NET.USER.ZS",
+    "Persone che usano Internet",
+    "Infrastrutture",
+    "Percentuale della popolazione"
+  ],
+  [
+    "IT.NET.BBND.P2",
+    "Abbonamenti a banda larga fissa",
+    "Infrastrutture",
+    "Abbonamenti ogni 100 abitanti"
+  ],
+  [
+    "IT.CEL.SETS.P2",
+    "Abbonamenti di telefonia mobile",
+    "Infrastrutture",
+    "Abbonamenti ogni 100 abitanti"
+  ],
+  [
+    "SH.H2O.SMDW.ZS",
+    "Acqua potabile gestita in sicurezza",
+    "Servizi essenziali",
+    "Percentuale della popolazione"
+  ],
+  [
+    "SH.STA.SMSS.ZS",
+    "Servizi igienici gestiti in sicurezza",
+    "Servizi essenziali",
+    "Percentuale della popolazione"
+  ],
+  [
+    "EG.CFT.ACCS.ZS",
+    "Combustibili e tecnologie pulite per cucinare",
+    "Energia",
+    "Percentuale della popolazione"
+  ],
+  [
+    "EG.USE.ELEC.KH.PC",
+    "Consumo di elettricità per abitante",
+    "Energia",
+    "kWh per abitante"
+  ],
+  [
+    "EG.ELC.RNEW.ZS",
+    "Elettricità da fonti rinnovabili",
+    "Energia",
+    "Percentuale della produzione elettrica"
+  ],
+  [
+    "EG.FEC.RNEW.ZS",
+    "Energia rinnovabile nei consumi finali",
+    "Energia",
+    "Percentuale del consumo finale"
+  ],
+  [
+    "EG.ELC.LOSS.ZS",
+    "Perdite nelle reti elettriche",
+    "Energia",
+    "Percentuale della produzione elettrica"
+  ],
+  [
+    "NY.GNP.PCAP.PP.KD",
+    "Reddito nazionale per abitante a parità di potere d’acquisto",
+    "Reddito e potere d’acquisto",
+    "Dollari internazionali costanti 2021 per abitante"
+  ],
+  [
+    "NE.CON.PRVT.PP.KD",
+    "Consumi delle famiglie e delle istituzioni senza scopo di lucro",
+    "Reddito e potere d’acquisto",
+    "Dollari internazionali costanti 2021: totale nazionale"
+  ],
+  [
+    "SL.GDP.PCAP.EM.KD",
+    "Produttività per persona occupata",
+    "Lavoro",
+    "PIL in dollari internazionali costanti 2021 per occupato"
+  ],
+  [
+    "SL.EMP.WORK.ZS",
+    "Lavoratori dipendenti sul totale degli occupati",
+    "Lavoro",
+    "Percentuale degli occupati"
+  ],
+  [
+    "SL.EMP.VULN.ZS",
+    "Occupazione vulnerabile",
+    "Lavoro",
+    "Percentuale degli occupati"
+  ],
+  [
+    "SL.UEM.NEET.ZS",
+    "Giovani fuori da lavoro, studio e formazione",
+    "Lavoro",
+    "Percentuale dei giovani di 15–24 anni"
+  ],
+  [
+    "SL.TLF.TOTL.IN",
+    "Forza lavoro complessiva",
+    "Lavoro",
+    "Persone"
+  ],
+  [
+    "SL.TLF.ADVN.ZS",
+    "Partecipazione al lavoro delle persone con istruzione avanzata",
+    "Lavoro",
+    "Percentuale della popolazione in età lavorativa con istruzione avanzata"
+  ],
+  [
+    "SI.DST.FRST.20",
+    "Quota di reddito del quinto più povero",
+    "Reddito e potere d’acquisto",
+    "Percentuale del reddito o dei consumi"
+  ],
+  [
+    "FP.CPI.TOTL.ZG",
+    "Inflazione dei prezzi al consumo",
+    "Reddito e potere d’acquisto",
+    "Variazione percentuale annua"
+  ],
+  [
+    "SE.TER.TCHR",
+    "Personale docente dell’istruzione superiore",
+    "Istruzione e ricerca",
+    "Persone"
+  ],
+  [
+    "SE.TER.ENRL",
+    "Studenti dell’istruzione superiore",
+    "Istruzione e ricerca",
+    "Studenti iscritti"
+  ],
+  [
+    "SE.TER.GRAD.SC.ZS",
+    "Laureati in scienze naturali, matematica e statistica",
+    "Istruzione e ricerca",
+    "Percentuale dei diplomati dell’istruzione superiore"
+  ],
+  [
+    "SE.TER.GRAD.FE.SI.ZS",
+    "Donne fra i laureati STEM",
+    "Istruzione e ricerca",
+    "Percentuale dei laureati STEM"
+  ],
+  [
+    "SE.TER.CUAT.BA.ZS",
+    "Adulti con almeno una laurea di primo livello",
+    "Istruzione e ricerca",
+    "Percentuale della popolazione di almeno 25 anni"
+  ],
+  [
+    "SE.TER.CUAT.MS.ZS",
+    "Adulti con almeno un titolo di secondo livello",
+    "Istruzione e ricerca",
+    "Percentuale della popolazione di almeno 25 anni"
+  ],
+  [
+    "SE.XPD.TERT.PC.ZS",
+    "Spesa pubblica per studente dell’istruzione superiore",
+    "Istruzione e ricerca",
+    "Percentuale del PIL per abitante"
+  ],
+  [
+    "SP.POP.SCIE.RD.P6",
+    "Ricercatori nella ricerca e sviluppo",
+    "Istruzione e ricerca",
+    "Ricercatori equivalenti a tempo pieno per milione di abitanti"
+  ],
+  [
+    "SP.POP.TECH.RD.P6",
+    "Tecnici nella ricerca e sviluppo",
+    "Istruzione e ricerca",
+    "Tecnici equivalenti a tempo pieno per milione di abitanti"
+  ],
+  [
+    "IP.PAT.RESD",
+    "Domande di brevetto dei residenti",
+    "Istruzione e ricerca",
+    "Domande presentate"
+  ],
+  [
+    "IP.JRN.ARTC.SC",
+    "Articoli scientifici e tecnici",
+    "Istruzione e ricerca",
+    "Articoli pubblicati"
+  ],
+  [
+    "NV.AGR.EMPL.KD",
+    "Valore aggiunto agricolo per lavoratore",
+    "Produzione",
+    "Dollari USA costanti 2015 per occupato agricolo"
+  ],
+  [
+    "NV.IND.MANF.CD",
+    "Valore aggiunto manifatturiero, dollari correnti",
+    "Produzione e risorse",
+    "Dollari USA correnti"
+  ],
+  [
+    "NV.IND.MANF.KD",
+    "Valore aggiunto manifatturiero reale",
+    "Produzione e risorse",
+    "Dollari USA costanti 2015"
+  ],
+  [
+    "NY.GDP.TOTL.RT.ZS",
+    "Rendite delle risorse naturali sul PIL",
+    "Produzione e risorse",
+    "Percentuale del PIL"
+  ],
+  [
+    "NY.GDP.MINR.RT.ZS",
+    "Rendite minerarie sul PIL",
+    "Produzione e risorse",
+    "Percentuale del PIL"
+  ],
+  [
+    "EG.IMP.CONS.ZS",
+    "Importazioni nette di energia",
+    "Produzione e risorse",
+    "Percentuale dell’uso di energia"
+  ],
+  [
+    "NE.GDI.TOTL.ZS",
+    "Investimenti lordi sul PIL",
+    "Produzione e risorse",
+    "Percentuale del PIL"
+  ]
+]

@@ -1,0 +1,3368 @@
+{
+  "retrievedAt": "2026-10-20",
+  "period": [
+    1960,
+    2025
+  ],
+  "countries": [
+    {
+      "id": "ABW",
+      "name": "Aruba",
+      "region": "Latin America & Caribbean ",
+      "iso2": "AW"
+    },
+    {
+      "id": "AFG",
+      "name": "Afghanistan",
+      "region": "Middle East, North Africa, Afghanistan & Pakistan",
+      "iso2": "AF"
+    },
+    {
+      "id": "AGO",
+      "name": "Angola",
+      "region": "Sub-Saharan Africa ",
+      "iso2": "AO"
+    },
+    {
+      "id": "ALB",
+      "name": "Albania",
+      "region": "Europe & Central Asia",
+      "iso2": "AL"
+    },
+    {
+      "id": "AND",
+      "name": "Andorra",
+      "region": "Europe & Central Asia",
+      "iso2": "AD"
+    },
+    {
+      "id": "ARE",
+      "name": "United Arab Emirates",
+      "region": "Middle East, North Africa, Afghanistan & Pakistan",
+      "iso2": "AE"
+    },
+    {
+      "id": "ARG",
+      "name": "Argentina",
+      "region": "Latin America & Caribbean ",
+      "iso2": "AR"
+    },
+    {
+      "id": "ARM",
+      "name": "Armenia",
+      "region": "Europe & Central Asia",
+      "iso2": "AM"
+    },
+    {
+      "id": "ASM",
+      "name": "American Samoa",
+      "region": "East Asia & Pacific",
+      "iso2": "AS"
+    },
+    {
+      "id": "ATG",
+      "name": "Antigua and Barbuda",
+      "region": "Latin America & Caribbean ",
+      "iso2": "AG"
+    },
+    {
+      "id": "AUS",
+      "name": "Australia",
+      "region": "East Asia & Pacific",
+      "iso2": "AU"
+    },
+    {
+      "id": "AUT",
+      "name": "Austria",
+      "region": "Europe & Central Asia",
+      "iso2": "AT"
+    },
+    {
+      "id": "AZE",
+      "name": "Azerbaijan",
+      "region": "Europe & Central Asia",
+      "iso2": "AZ"
+    },
+    {
+      "id": "BDI",
+      "name": "Burundi",
+      "region": "Sub-Saharan Africa ",
+      "iso2": "BI"
+    },
+    {
+      "id": "BEL",
+      "name": "Belgium",
+      "region": "Europe & Central Asia",
+      "iso2": "BE"
+    },
+    {
+      "id": "BEN",
+      "name": "Benin",
+      "region": "Sub-Saharan Africa ",
+      "iso2": "BJ"
+    },
+    {
+      "id": "BFA",
+      "name": "Burkina Faso",
+      "region": "Sub-Saharan Africa ",
+      "iso2": "BF"
+    },
+    {
+      "id": "BGD",
+      "name": "Bangladesh",
+      "region": "South Asia",
+      "iso2": "BD"
+    },
+    {
+      "id": "BGR",
+      "name": "Bulgaria",
+      "region": "Europe & Central Asia",
+      "iso2": "BG"
+    },
+    {
+      "id": "BHR",
+      "name": "Bahrain",
+      "region": "Middle East, North Africa, Afghanistan & Pakistan",
+      "iso2": "BH"
+    },
+    {
+      "id": "BHS",
+      "name": "Bahamas, The",
+      "region": "Latin America & Caribbean ",
+      "iso2": "BS"
+    },
+    {
+      "id": "BIH",
+      "name": "Bosnia and Herzegovina",
+      "region": "Europe & Central Asia",
+      "iso2": "BA"
+    },
+    {
+      "id": "BLR",
+      "name": "Belarus",
+      "region": "Europe & Central Asia",
+      "iso2": "BY"
+    },
+    {
+      "id": "BLZ",
+      "name": "Belize",
+      "region": "Latin America & Caribbean ",
+      "iso2": "BZ"
+    },
+    {
+      "id": "BMU",
+      "name": "Bermuda",
+      "region": "North America",
+      "iso2": "BM"
+    },
+    {
+      "id": "BOL",
+      "name": "Bolivia",
+      "region": "Latin America & Caribbean ",
+      "iso2": "BO"
+    },
+    {
+      "id": "BRA",
+      "name": "Brazil",
+      "region": "Latin America & Caribbean ",
+      "iso2": "BR"
+    },
+    {
+      "id": "BRB",
+      "name": "Barbados",
+      "region": "Latin America & Caribbean ",
+      "iso2": "BB"
+    },
+    {
+      "id": "BRN",
+      "name": "Brunei Darussalam",
+      "region": "East Asia & Pacific",
+      "iso2": "BN"
+    },
+    {
+      "id": "BTN",
+      "name": "Bhutan",
+      "region": "South Asia",
+      "iso2": "BT"
+    },
+    {
+      "id": "BWA",
+      "name": "Botswana",
+      "region": "Sub-Saharan Africa ",
+      "iso2": "BW"
+    },
+    {
+      "id": "CAF",
+      "name": "Central African Republic",
+      "region": "Sub-Saharan Africa ",
+      "iso2": "CF"
+    },
+    {
+      "id": "CAN",
+      "name": "Canada",
+      "region": "North America",
+      "iso2": "CA"
+    },
+    {
+      "id": "CHE",
+      "name": "Switzerland",
+      "region": "Europe & Central Asia",
+      "iso2": "CH"
+    },
+    {
+      "id": "CHI",
+      "name": "Channel Islands",
+      "region": "Europe & Central Asia",
+      "iso2": "JG"
+    },
+    {
+      "id": "CHL",
+      "name": "Chile",
+      "region": "Latin America & Caribbean ",
+      "iso2": "CL"
+    },
+    {
+      "id": "CHN",
+      "name": "China",
+      "region": "East Asia & Pacific",
+      "iso2": "CN"
+    },
+    {
+      "id": "CIV",
+      "name": "Cote d'Ivoire",
+      "region": "Sub-Saharan Africa ",
+      "iso2": "CI"
+    },
+    {
+      "id": "CMR",
+      "name": "Cameroon",
+      "region": "Sub-Saharan Africa ",
+      "iso2": "CM"
+    },
+    {
+      "id": "COD",
+      "name": "Congo, Dem. Rep.",
+      "region": "Sub-Saharan Africa ",
+      "iso2": "CD"
+    },
+    {
+      "id": "COG",
+      "name": "Congo, Rep.",
+      "region": "Sub-Saharan Africa ",
+      "iso2": "CG"
+    },
+    {
+      "id": "COL",
+      "name": "Colombia",
+      "region": "Latin America & Caribbean ",
+      "iso2": "CO"
+    },
+    {
+      "id": "COM",
+      "name": "Comoros",
+      "region": "Sub-Saharan Africa ",
+      "iso2": "KM"
+    },
+    {
+      "id": "CPV",
+      "name": "Cabo Verde",
+      "region": "Sub-Saharan Africa ",
+      "iso2": "CV"
+    },
+    {
+      "id": "CRI",
+      "name": "Costa Rica",
+      "region": "Latin America & Caribbean ",
+      "iso2": "CR"
+    },
+    {
+      "id": "CUB",
+      "name": "Cuba",
+      "region": "Latin America & Caribbean ",
+      "iso2": "CU"
+    },
+    {
+      "id": "CUW",
+      "name": "Curacao",
+      "region": "Latin America & Caribbean ",
+      "iso2": "CW"
+    },
+    {
+      "id": "CYM",
+      "name": "Cayman Islands",
+      "region": "Latin America & Caribbean ",
+      "iso2": "KY"
+    },
+    {
+      "id": "CYP",
+      "name": "Cyprus",
+      "region": "Europe & Central Asia",
+      "iso2": "CY"
+    },
+    {
+      "id": "CZE",
+      "name": "Czechia",
+      "region": "Europe & Central Asia",
+      "iso2": "CZ"
+    },
+    {
+      "id": "DEU",
+      "name": "Germany",
+      "region": "Europe & Central Asia",
+      "iso2": "DE"
+    },
+    {
+      "id": "DJI",
+      "name": "Djibouti",
+      "region": "Middle East, North Africa, Afghanistan & Pakistan",
+      "iso2": "DJ"
+    },
+    {
+      "id": "DMA",
+      "name": "Dominica",
+      "region": "Latin America & Caribbean ",
+      "iso2": "DM"
+    },
+    {
+      "id": "DNK",
+      "name": "Denmark",
+      "region": "Europe & Central Asia",
+      "iso2": "DK"
+    },
+    {
+      "id": "DOM",
+      "name": "Dominican Republic",
+      "region": "Latin America & Caribbean ",
+      "iso2": "DO"
+    },
+    {
+      "id": "DZA",
+      "name": "Algeria",
+      "region": "Middle East, North Africa, Afghanistan & Pakistan",
+      "iso2": "DZ"
+    },
+    {
+      "id": "ECU",
+      "name": "Ecuador",
+      "region": "Latin America & Caribbean ",
+      "iso2": "EC"
+    },
+    {
+      "id": "EGY",
+      "name": "Egypt, Arab Rep.",
+      "region": "Middle East, North Africa, Afghanistan & Pakistan",
+      "iso2": "EG"
+    },
+    {
+      "id": "ERI",
+      "name": "Eritrea",
+      "region": "Sub-Saharan Africa ",
+      "iso2": "ER"
+    },
+    {
+      "id": "ESP",
+      "name": "Spain",
+      "region": "Europe & Central Asia",
+      "iso2": "ES"
+    },
+    {
+      "id": "EST",
+      "name": "Estonia",
+      "region": "Europe & Central Asia",
+      "iso2": "EE"
+    },
+    {
+      "id": "ETH",
+      "name": "Ethiopia",
+      "region": "Sub-Saharan Africa ",
+      "iso2": "ET"
+    },
+    {
+      "id": "FIN",
+      "name": "Finland",
+      "region": "Europe & Central Asia",
+      "iso2": "FI"
+    },
+    {
+      "id": "FJI",
+      "name": "Fiji",
+      "region": "East Asia & Pacific",
+      "iso2": "FJ"
+    },
+    {
+      "id": "FRA",
+      "name": "France",
+      "region": "Europe & Central Asia",
+      "iso2": "FR"
+    },
+    {
+      "id": "FRO",
+      "name": "Faroe Islands",
+      "region": "Europe & Central Asia",
+      "iso2": "FO"
+    },
+    {
+      "id": "FSM",
+      "name": "Micronesia, Fed. Sts.",
+      "region": "East Asia & Pacific",
+      "iso2": "FM"
+    },
+    {
+      "id": "GAB",
+      "name": "Gabon",
+      "region": "Sub-Saharan Africa ",
+      "iso2": "GA"
+    },
+    {
+      "id": "GBR",
+      "name": "United Kingdom",
+      "region": "Europe & Central Asia",
+      "iso2": "GB"
+    },
+    {
+      "id": "GEO",
+      "name": "Georgia",
+      "region": "Europe & Central Asia",
+      "iso2": "GE"
+    },
+    {
+      "id": "GHA",
+      "name": "Ghana",
+      "region": "Sub-Saharan Africa ",
+      "iso2": "GH"
+    },
+    {
+      "id": "GIB",
+      "name": "Gibraltar",
+      "region": "Europe & Central Asia",
+      "iso2": "GI"
+    },
+    {
+      "id": "GIN",
+      "name": "Guinea",
+      "region": "Sub-Saharan Africa ",
+      "iso2": "GN"
+    },
+    {
+      "id": "GMB",
+      "name": "Gambia, The",
+      "region": "Sub-Saharan Africa ",
+      "iso2": "GM"
+    },
+    {
+      "id": "GNB",
+      "name": "Guinea-Bissau",
+      "region": "Sub-Saharan Africa ",
+      "iso2": "GW"
+    },
+    {
+      "id": "GNQ",
+      "name": "Equatorial Guinea",
+      "region": "Sub-Saharan Africa ",
+      "iso2": "GQ"
+    },
+    {
+      "id": "GRC",
+      "name": "Greece",
+      "region": "Europe & Central Asia",
+      "iso2": "GR"
+    },
+    {
+      "id": "GRD",
+      "name": "Grenada",
+      "region": "Latin America & Caribbean ",
+      "iso2": "GD"
+    },
+    {
+      "id": "GRL",
+      "name": "Greenland",
+      "region": "Europe & Central Asia",
+      "iso2": "GL"
+    },
+    {
+      "id": "GTM",
+      "name": "Guatemala",
+      "region": "Latin America & Caribbean ",
+      "iso2": "GT"
+    },
+    {
+      "id": "GUM",
+      "name": "Guam",
+      "region": "East Asia & Pacific",
+      "iso2": "GU"
+    },
+    {
+      "id": "GUY",
+      "name": "Guyana",
+      "region": "Latin America & Caribbean ",
+      "iso2": "GY"
+    },
+    {
+      "id": "HKG",
+      "name": "Hong Kong SAR, China",
+      "region": "East Asia & Pacific",
+      "iso2": "HK"
+    },
+    {
+      "id": "HND",
+      "name": "Honduras",
+      "region": "Latin America & Caribbean ",
+      "iso2": "HN"
+    },
+    {
+      "id": "HRV",
+      "name": "Croatia",
+      "region": "Europe & Central Asia",
+      "iso2": "HR"
+    },
+    {
+      "id": "HTI",
+      "name": "Haiti",
+      "region": "Latin America & Caribbean ",
+      "iso2": "HT"
+    },
+    {
+      "id": "HUN",
+      "name": "Hungary",
+      "region": "Europe & Central Asia",
+      "iso2": "HU"
+    },
+    {
+      "id": "IDN",
+      "name": "Indonesia",
+      "region": "East Asia & Pacific",
+      "iso2": "ID"
+    },
+    {
+      "id": "IMN",
+      "name": "Isle of Man",
+      "region": "Europe & Central Asia",
+      "iso2": "IM"
+    },
+    {
+      "id": "IND",
+      "name": "India",
+      "region": "South Asia",
+      "iso2": "IN"
+    },
+    {
+      "id": "IRL",
+      "name": "Ireland",
+      "region": "Europe & Central Asia",
+      "iso2": "IE"
+    },
+    {
+      "id": "IRN",
+      "name": "Iran, Islamic Rep.",
+      "region": "Middle East, North Africa, Afghanistan & Pakistan",
+      "iso2": "IR"
+    },
+    {
+      "id": "IRQ",
+      "name": "Iraq",
+      "region": "Middle East, North Africa, Afghanistan & Pakistan",
+      "iso2": "IQ"
+    },
+    {
+      "id": "ISL",
+      "name": "Iceland",
+      "region": "Europe & Central Asia",
+      "iso2": "IS"
+    },
+    {
+      "id": "ISR",
+      "name": "Israel",
+      "region": "Middle East, North Africa, Afghanistan & Pakistan",
+      "iso2": "IL"
+    },
+    {
+      "id": "ITA",
+      "name": "Italy",
+      "region": "Europe & Central Asia",
+      "iso2": "IT"
+    },
+    {
+      "id": "JAM",
+      "name": "Jamaica",
+      "region": "Latin America & Caribbean ",
+      "iso2": "JM"
+    },
+    {
+      "id": "JOR",
+      "name": "Jordan",
+      "region": "Middle East, North Africa, Afghanistan & Pakistan",
+      "iso2": "JO"
+    },
+    {
+      "id": "JPN",
+      "name": "Japan",
+      "region": "East Asia & Pacific",
+      "iso2": "JP"
+    },
+    {
+      "id": "KAZ",
+      "name": "Kazakhstan",
+      "region": "Europe & Central Asia",
+      "iso2": "KZ"
+    },
+    {
+      "id": "KEN",
+      "name": "Kenya",
+      "region": "Sub-Saharan Africa ",
+      "iso2": "KE"
+    },
+    {
+      "id": "KGZ",
+      "name": "Kyrgyz Republic",
+      "region": "Europe & Central Asia",
+      "iso2": "KG"
+    },
+    {
+      "id": "KHM",
+      "name": "Cambodia",
+      "region": "East Asia & Pacific",
+      "iso2": "KH"
+    },
+    {
+      "id": "KIR",
+      "name": "Kiribati",
+      "region": "East Asia & Pacific",
+      "iso2": "KI"
+    },
+    {
+      "id": "KNA",
+      "name": "St. Kitts and Nevis",
+      "region": "Latin America & Caribbean ",
+      "iso2": "KN"
+    },
+    {
+      "id": "KOR",
+      "name": "Korea, Rep.",
+      "region": "East Asia & Pacific",
+      "iso2": "KR"
+    },
+    {
+      "id": "KWT",
+      "name": "Kuwait",
+      "region": "Middle East, North Africa, Afghanistan & Pakistan",
+      "iso2": "KW"
+    },
+    {
+      "id": "LAO",
+      "name": "Lao PDR",
+      "region": "East Asia & Pacific",
+      "iso2": "LA"
+    },
+    {
+      "id": "LBN",
+      "name": "Lebanon",
+      "region": "Middle East, North Africa, Afghanistan & Pakistan",
+      "iso2": "LB"
+    },
+    {
+      "id": "LBR",
+      "name": "Liberia",
+      "region": "Sub-Saharan Africa ",
+      "iso2": "LR"
+    },
+    {
+      "id": "LBY",
+      "name": "Libya",
+      "region": "Middle East, North Africa, Afghanistan & Pakistan",
+      "iso2": "LY"
+    },
+    {
+      "id": "LCA",
+      "name": "St. Lucia",
+      "region": "Latin America & Caribbean ",
+      "iso2": "LC"
+    },
+    {
+      "id": "LIE",
+      "name": "Liechtenstein",
+      "region": "Europe & Central Asia",
+      "iso2": "LI"
+    },
+    {
+      "id": "LKA",
+      "name": "Sri Lanka",
+      "region": "South Asia",
+      "iso2": "LK"
+    },
+    {
+      "id": "LSO",
+      "name": "Lesotho",
+      "region": "Sub-Saharan Africa ",
+      "iso2": "LS"
+    },
+    {
+      "id": "LTU",
+      "name": "Lithuania",
+      "region": "Europe & Central Asia",
+      "iso2": "LT"
+    },
+    {
+      "id": "LUX",
+      "name": "Luxembourg",
+      "region": "Europe & Central Asia",
+      "iso2": "LU"
+    },
+    {
+      "id": "LVA",
+      "name": "Latvia",
+      "region": "Europe & Central Asia",
+      "iso2": "LV"
+    },
+    {
+      "id": "MAC",
+      "name": "Macao SAR, China",
+      "region": "East Asia & Pacific",
+      "iso2": "MO"
+    },
+    {
+      "id": "MAF",
+      "name": "St. Martin (French part)",
+      "region": "Latin America & Caribbean ",
+      "iso2": "MF"
+    },
+    {
+      "id": "MAR",
+      "name": "Morocco",
+      "region": "Middle East, North Africa, Afghanistan & Pakistan",
+      "iso2": "MA"
+    },
+    {
+      "id": "MCO",
+      "name": "Monaco",
+      "region": "Europe & Central Asia",
+      "iso2": "MC"
+    },
+    {
+      "id": "MDA",
+      "name": "Moldova",
+      "region": "Europe & Central Asia",
+      "iso2": "MD"
+    },
+    {
+      "id": "MDG",
+      "name": "Madagascar",
+      "region": "Sub-Saharan Africa ",
+      "iso2": "MG"
+    },
+    {
+      "id": "MDV",
+      "name": "Maldives",
+      "region": "South Asia",
+      "iso2": "MV"
+    },
+    {
+      "id": "MEX",
+      "name": "Mexico",
+      "region": "Latin America & Caribbean ",
+      "iso2": "MX"
+    },
+    {
+      "id": "MHL",
+      "name": "Marshall Islands",
+      "region": "East Asia & Pacific",
+      "iso2": "MH"
+    },
+    {
+      "id": "MKD",
+      "name": "North Macedonia",
+      "region": "Europe & Central Asia",
+      "iso2": "MK"
+    },
+    {
+      "id": "MLI",
+      "name": "Mali",
+      "region": "Sub-Saharan Africa ",
+      "iso2": "ML"
+    },
+    {
+      "id": "MLT",
+      "name": "Malta",
+      "region": "Middle East, North Africa, Afghanistan & Pakistan",
+      "iso2": "MT"
+    },
+    {
+      "id": "MMR",
+      "name": "Myanmar",
+      "region": "East Asia & Pacific",
+      "iso2": "MM"
+    },
+    {
+      "id": "MNE",
+      "name": "Montenegro",
+      "region": "Europe & Central Asia",
+      "iso2": "ME"
+    },
+    {
+      "id": "MNG",
+      "name": "Mongolia",
+      "region": "East Asia & Pacific",
+      "iso2": "MN"
+    },
+    {
+      "id": "MNP",
+      "name": "Northern Mariana Islands",
+      "region": "East Asia & Pacific",
+      "iso2": "MP"
+    },
+    {
+      "id": "MOZ",
+      "name": "Mozambique",
+      "region": "Sub-Saharan Africa ",
+      "iso2": "MZ"
+    },
+    {
+      "id": "MRT",
+      "name": "Mauritania",
+      "region": "Sub-Saharan Africa ",
+      "iso2": "MR"
+    },
+    {
+      "id": "MUS",
+      "name": "Mauritius",
+      "region": "Sub-Saharan Africa ",
+      "iso2": "MU"
+    },
+    {
+      "id": "MWI",
+      "name": "Malawi",
+      "region": "Sub-Saharan Africa ",
+      "iso2": "MW"
+    },
+    {
+      "id": "MYS",
+      "name": "Malaysia",
+      "region": "East Asia & Pacific",
+      "iso2": "MY"
+    },
+    {
+      "id": "NAM",
+      "name": "Namibia",
+      "region": "Sub-Saharan Africa ",
+      "iso2": "NA"
+    },
+    {
+      "id": "NCL",
+      "name": "New Caledonia",
+      "region": "East Asia & Pacific",
+      "iso2": "NC"
+    },
+    {
+      "id": "NER",
+      "name": "Niger",
+      "region": "Sub-Saharan Africa ",
+      "iso2": "NE"
+    },
+    {
+      "id": "NGA",
+      "name": "Nigeria",
+      "region": "Sub-Saharan Africa ",
+      "iso2": "NG"
+    },
+    {
+      "id": "NIC",
+      "name": "Nicaragua",
+      "region": "Latin America & Caribbean ",
+      "iso2": "NI"
+    },
+    {
+      "id": "NLD",
+      "name": "Netherlands",
+      "region": "Europe & Central Asia",
+      "iso2": "NL"
+    },
+    {
+      "id": "NOR",
+      "name": "Norway",
+      "region": "Europe & Central Asia",
+      "iso2": "NO"
+    },
+    {
+      "id": "NPL",
+      "name": "Nepal",
+      "region": "South Asia",
+      "iso2": "NP"
+    },
+    {
+      "id": "NRU",
+      "name": "Naoero",
+      "region": "East Asia & Pacific",
+      "iso2": "NR"
+    },
+    {
+      "id": "NZL",
+      "name": "New Zealand",
+      "region": "East Asia & Pacific",
+      "iso2": "NZ"
+    },
+    {
+      "id": "OMN",
+      "name": "Oman",
+      "region": "Middle East, North Africa, Afghanistan & Pakistan",
+      "iso2": "OM"
+    },
+    {
+      "id": "PAK",
+      "name": "Pakistan",
+      "region": "Middle East, North Africa, Afghanistan & Pakistan",
+      "iso2": "PK"
+    },
+    {
+      "id": "PAN",
+      "name": "Panama",
+      "region": "Latin America & Caribbean ",
+      "iso2": "PA"
+    },
+    {
+      "id": "PER",
+      "name": "Peru",
+      "region": "Latin America & Caribbean ",
+      "iso2": "PE"
+    },
+    {
+      "id": "PHL",
+      "name": "Philippines",
+      "region": "East Asia & Pacific",
+      "iso2": "PH"
+    },
+    {
+      "id": "PLW",
+      "name": "Palau",
+      "region": "East Asia & Pacific",
+      "iso2": "PW"
+    },
+    {
+      "id": "PNG",
+      "name": "Papua New Guinea",
+      "region": "East Asia & Pacific",
+      "iso2": "PG"
+    },
+    {
+      "id": "POL",
+      "name": "Poland",
+      "region": "Europe & Central Asia",
+      "iso2": "PL"
+    },
+    {
+      "id": "PRI",
+      "name": "Puerto Rico (US)",
+      "region": "Latin America & Caribbean ",
+      "iso2": "PR"
+    },
+    {
+      "id": "PRK",
+      "name": "Korea, Dem. People's Rep.",
+      "region": "East Asia & Pacific",
+      "iso2": "KP"
+    },
+    {
+      "id": "PRT",
+      "name": "Portugal",
+      "region": "Europe & Central Asia",
+      "iso2": "PT"
+    },
+    {
+      "id": "PRY",
+      "name": "Paraguay",
+      "region": "Latin America & Caribbean ",
+      "iso2": "PY"
+    },
+    {
+      "id": "PSE",
+      "name": "West Bank and Gaza",
+      "region": "Middle East, North Africa, Afghanistan & Pakistan",
+      "iso2": "PS"
+    },
+    {
+      "id": "PYF",
+      "name": "French Polynesia",
+      "region": "East Asia & Pacific",
+      "iso2": "PF"
+    },
+    {
+      "id": "QAT",
+      "name": "Qatar",
+      "region": "Middle East, North Africa, Afghanistan & Pakistan",
+      "iso2": "QA"
+    },
+    {
+      "id": "ROU",
+      "name": "Romania",
+      "region": "Europe & Central Asia",
+      "iso2": "RO"
+    },
+    {
+      "id": "RUS",
+      "name": "Russian Federation",
+      "region": "Europe & Central Asia",
+      "iso2": "RU"
+    },
+    {
+      "id": "RWA",
+      "name": "Rwanda",
+      "region": "Sub-Saharan Africa ",
+      "iso2": "RW"
+    },
+    {
+      "id": "SAU",
+      "name": "Saudi Arabia",
+      "region": "Middle East, North Africa, Afghanistan & Pakistan",
+      "iso2": "SA"
+    },
+    {
+      "id": "SDN",
+      "name": "Sudan",
+      "region": "Sub-Saharan Africa ",
+      "iso2": "SD"
+    },
+    {
+      "id": "SEN",
+      "name": "Senegal",
+      "region": "Sub-Saharan Africa ",
+      "iso2": "SN"
+    },
+    {
+      "id": "SGP",
+      "name": "Singapore",
+      "region": "East Asia & Pacific",
+      "iso2": "SG"
+    },
+    {
+      "id": "SLB",
+      "name": "Solomon Islands",
+      "region": "East Asia & Pacific",
+      "iso2": "SB"
+    },
+    {
+      "id": "SLE",
+      "name": "Sierra Leone",
+      "region": "Sub-Saharan Africa ",
+      "iso2": "SL"
+    },
+    {
+      "id": "SLV",
+      "name": "El Salvador",
+      "region": "Latin America & Caribbean ",
+      "iso2": "SV"
+    },
+    {
+      "id": "SMR",
+      "name": "San Marino",
+      "region": "Europe & Central Asia",
+      "iso2": "SM"
+    },
+    {
+      "id": "SOM",
+      "name": "Somalia, Fed. Rep.",
+      "region": "Sub-Saharan Africa ",
+      "iso2": "SO"
+    },
+    {
+      "id": "SRB",
+      "name": "Serbia",
+      "region": "Europe & Central Asia",
+      "iso2": "RS"
+    },
+    {
+      "id": "SSD",
+      "name": "South Sudan",
+      "region": "Sub-Saharan Africa ",
+      "iso2": "SS"
+    },
+    {
+      "id": "STP",
+      "name": "Sao Tome and Principe",
+      "region": "Sub-Saharan Africa ",
+      "iso2": "ST"
+    },
+    {
+      "id": "SUR",
+      "name": "Suriname",
+      "region": "Latin America & Caribbean ",
+      "iso2": "SR"
+    },
+    {
+      "id": "SVK",
+      "name": "Slovak Republic",
+      "region": "Europe & Central Asia",
+      "iso2": "SK"
+    },
+    {
+      "id": "SVN",
+      "name": "Slovenia",
+      "region": "Europe & Central Asia",
+      "iso2": "SI"
+    },
+    {
+      "id": "SWE",
+      "name": "Sweden",
+      "region": "Europe & Central Asia",
+      "iso2": "SE"
+    },
+    {
+      "id": "SWZ",
+      "name": "Eswatini",
+      "region": "Sub-Saharan Africa ",
+      "iso2": "SZ"
+    },
+    {
+      "id": "SXM",
+      "name": "Sint Maarten (Dutch part)",
+      "region": "Latin America & Caribbean ",
+      "iso2": "SX"
+    },
+    {
+      "id": "SYC",
+      "name": "Seychelles",
+      "region": "Sub-Saharan Africa ",
+      "iso2": "SC"
+    },
+    {
+      "id": "SYR",
+      "name": "Syrian Arab Republic",
+      "region": "Middle East, North Africa, Afghanistan & Pakistan",
+      "iso2": "SY"
+    },
+    {
+      "id": "TCA",
+      "name": "Turks and Caicos Islands",
+      "region": "Latin America & Caribbean ",
+      "iso2": "TC"
+    },
+    {
+      "id": "TCD",
+      "name": "Chad",
+      "region": "Sub-Saharan Africa ",
+      "iso2": "TD"
+    },
+    {
+      "id": "TGO",
+      "name": "Togo",
+      "region": "Sub-Saharan Africa ",
+      "iso2": "TG"
+    },
+    {
+      "id": "THA",
+      "name": "Thailand",
+      "region": "East Asia & Pacific",
+      "iso2": "TH"
+    },
+    {
+      "id": "TJK",
+      "name": "Tajikistan",
+      "region": "Europe & Central Asia",
+      "iso2": "TJ"
+    },
+    {
+      "id": "TKM",
+      "name": "Turkmenistan",
+      "region": "Europe & Central Asia",
+      "iso2": "TM"
+    },
+    {
+      "id": "TLS",
+      "name": "Timor-Leste",
+      "region": "East Asia & Pacific",
+      "iso2": "TL"
+    },
+    {
+      "id": "TON",
+      "name": "Tonga",
+      "region": "East Asia & Pacific",
+      "iso2": "TO"
+    },
+    {
+      "id": "TTO",
+      "name": "Trinidad and Tobago",
+      "region": "Latin America & Caribbean ",
+      "iso2": "TT"
+    },
+    {
+      "id": "TUN",
+      "name": "Tunisia",
+      "region": "Middle East, North Africa, Afghanistan & Pakistan",
+      "iso2": "TN"
+    },
+    {
+      "id": "TUR",
+      "name": "Turkiye",
+      "region": "Europe & Central Asia",
+      "iso2": "TR"
+    },
+    {
+      "id": "TUV",
+      "name": "Tuvalu",
+      "region": "East Asia & Pacific",
+      "iso2": "TV"
+    },
+    {
+      "id": "TZA",
+      "name": "Tanzania",
+      "region": "Sub-Saharan Africa ",
+      "iso2": "TZ"
+    },
+    {
+      "id": "UGA",
+      "name": "Uganda",
+      "region": "Sub-Saharan Africa ",
+      "iso2": "UG"
+    },
+    {
+      "id": "UKR",
+      "name": "Ukraine",
+      "region": "Europe & Central Asia",
+      "iso2": "UA"
+    },
+    {
+      "id": "URY",
+      "name": "Uruguay",
+      "region": "Latin America & Caribbean ",
+      "iso2": "UY"
+    },
+    {
+      "id": "USA",
+      "name": "United States",
+      "region": "North America",
+      "iso2": "US"
+    },
+    {
+      "id": "UZB",
+      "name": "Uzbekistan",
+      "region": "Europe & Central Asia",
+      "iso2": "UZ"
+    },
+    {
+      "id": "VCT",
+      "name": "St. Vincent and the Grenadines",
+      "region": "Latin America & Caribbean ",
+      "iso2": "VC"
+    },
+    {
+      "id": "VEN",
+      "name": "Venezuela, RB",
+      "region": "Latin America & Caribbean ",
+      "iso2": "VE"
+    },
+    {
+      "id": "VGB",
+      "name": "British Virgin Islands",
+      "region": "Latin America & Caribbean ",
+      "iso2": "VG"
+    },
+    {
+      "id": "VIR",
+      "name": "Virgin Islands (U.S.)",
+      "region": "Latin America & Caribbean ",
+      "iso2": "VI"
+    },
+    {
+      "id": "VNM",
+      "name": "Viet Nam",
+      "region": "East Asia & Pacific",
+      "iso2": "VN"
+    },
+    {
+      "id": "VUT",
+      "name": "Vanuatu",
+      "region": "East Asia & Pacific",
+      "iso2": "VU"
+    },
+    {
+      "id": "WSM",
+      "name": "Samoa",
+      "region": "East Asia & Pacific",
+      "iso2": "WS"
+    },
+    {
+      "id": "XKX",
+      "name": "Kosovo",
+      "region": "Europe & Central Asia",
+      "iso2": "XK"
+    },
+    {
+      "id": "YEM",
+      "name": "Yemen, Rep.",
+      "region": "Middle East, North Africa, Afghanistan & Pakistan",
+      "iso2": "YE"
+    },
+    {
+      "id": "ZAF",
+      "name": "South Africa",
+      "region": "Sub-Saharan Africa ",
+      "iso2": "ZA"
+    },
+    {
+      "id": "ZMB",
+      "name": "Zambia",
+      "region": "Sub-Saharan Africa ",
+      "iso2": "ZM"
+    },
+    {
+      "id": "ZWE",
+      "name": "Zimbabwe",
+      "region": "Sub-Saharan Africa ",
+      "iso2": "ZW"
+    }
+  ],
+  "indicators": [
+    {
+      "id": "ESTAT.HOUSING.OVERBURDEN",
+      "label": "Costo della casa superiore al 40% del reddito disponibile",
+      "theme": "Abitazione",
+      "unit": "Percentuale delle persone",
+      "definition": "Persone in famiglie nelle quali il costo totale dell’abitazione, al netto dei sussidi, supera il 40% del reddito disponibile al netto dei sussidi abitativi. Popolazione in famiglie private, tutti i sessi e tutte le età.",
+      "definitionLanguage": "it",
+      "organization": "Eurostat · Housing cost overburden rate by age, sex and poverty status",
+      "provider": "Eurostat",
+      "source": "https://ec.europa.eu/eurostat/databrowser/view/ilc_lvho07a/default/table",
+      "api": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/ilc_lvho07a?lang=EN&unit=PC&rskpovth=TOTAL&age=TOTAL&sex=T",
+      "filters": {
+        "unit": "PC",
+        "rskpovth": "TOTAL",
+        "age": "TOTAL",
+        "sex": "T"
+      },
+      "transformation": "annual",
+      "countries": 37,
+      "observations": 702,
+      "updatedAt": "2026-10-19T23:00:00+0200",
+      "period": [
+        2003,
+        2025
+      ],
+      "defaultCountries": [
+        "ITA",
+        "FRA",
+        "DEU",
+        "ESP"
+      ]
+    },
+    {
+      "id": "ESTAT.HOUSING.OVERBURDEN.POOR",
+      "label": "Costo eccessivo della casa fra le persone a rischio di povertà",
+      "theme": "Abitazione",
+      "unit": "Percentuale delle persone a rischio di povertà",
+      "definition": "Stessa soglia del 40% per i costi abitativi, limitata alle persone con reddito equivalente sotto il 60% della mediana nazionale. La soglia di povertà è relativa al paese.",
+      "definitionLanguage": "it",
+      "organization": "Eurostat · Housing cost overburden rate by age, sex and poverty status",
+      "provider": "Eurostat",
+      "source": "https://ec.europa.eu/eurostat/databrowser/view/ilc_lvho07a/default/table",
+      "api": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/ilc_lvho07a?lang=EN&unit=PC&rskpovth=B_60&age=TOTAL&sex=T",
+      "filters": {
+        "unit": "PC",
+        "rskpovth": "B_60",
+        "age": "TOTAL",
+        "sex": "T"
+      },
+      "transformation": "annual",
+      "countries": 37,
+      "observations": 702,
+      "updatedAt": "2026-10-19T23:00:00+0200",
+      "period": [
+        2003,
+        2025
+      ],
+      "defaultCountries": [
+        "ITA",
+        "FRA",
+        "DEU",
+        "ESP"
+      ]
+    },
+    {
+      "id": "ESTAT.ENERGY.POVERTY",
+      "label": "Persone che non possono riscaldare adeguatamente la casa",
+      "theme": "Abitazione",
+      "unit": "Percentuale delle persone",
+      "definition": "Incapacità economica dichiarata di mantenere l’abitazione adeguatamente calda, indagine EU-SILC. Non misura un prezzo unitario del gas e non coincide con ogni definizione di povertà energetica.",
+      "definitionLanguage": "it",
+      "organization": "Eurostat · Inability to keep home adequately warm",
+      "provider": "Eurostat",
+      "source": "https://ec.europa.eu/eurostat/databrowser/view/ilc_mdes01/default/table",
+      "api": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/ilc_mdes01?lang=EN&unit=PC&rskpovth=TOTAL&hhcomp=TOTAL",
+      "filters": {
+        "unit": "PC",
+        "rskpovth": "TOTAL",
+        "hhcomp": "TOTAL"
+      },
+      "transformation": "annual",
+      "countries": 37,
+      "observations": 718,
+      "updatedAt": "2026-09-17T23:00:00+0200",
+      "period": [
+        2003,
+        2025
+      ],
+      "defaultCountries": [
+        "ITA",
+        "FRA",
+        "DEU",
+        "ESP"
+      ]
+    },
+    {
+      "id": "ESTAT.HOUSING.PRICES",
+      "label": "Prezzi delle abitazioni: variazione rispetto al 2015",
+      "theme": "Abitazione",
+      "unit": "Indice 2015 = 100",
+      "definition": "Indice dei prezzi delle abitazioni nuove ed esistenti acquistate dalle famiglie. Indice nominale: descrive la variazione entro ciascun paese, non il prezzo in euro di una casa né un confronto diretto dei livelli fra paesi.",
+      "definitionLanguage": "it",
+      "organization": "Eurostat · House price index - annual data",
+      "provider": "Eurostat",
+      "source": "https://ec.europa.eu/eurostat/databrowser/view/prc_hpi_a/default/table",
+      "api": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/prc_hpi_a?lang=EN&unit=I15_A_AVG&purchase=TOTAL",
+      "filters": {
+        "unit": "I15_A_AVG",
+        "purchase": "TOTAL"
+      },
+      "transformation": "annual",
+      "countries": 30,
+      "observations": 580,
+      "updatedAt": "2026-10-01T11:00:00+0200",
+      "period": [
+        2005,
+        2025
+      ],
+      "defaultCountries": [
+        "ITA",
+        "FRA",
+        "DEU",
+        "ESP"
+      ]
+    },
+    {
+      "id": "ESTAT.BOOK.TEN",
+      "label": "Adulti che hanno letto almeno dieci libri negli ultimi 12 mesi",
+      "theme": "Cultura e lettura",
+      "unit": "Percentuale delle persone di almeno 16 anni",
+      "definition": "EU-SILC, persone di almeno 16 anni in famiglie private, tutti i livelli di istruzione. Lettura autodichiarata; la rilevazione non è annuale.",
+      "definitionLanguage": "it",
+      "organization": "Eurostat · Persons reading books in the last 12 months by sex, age, educational attainment and number of books",
+      "provider": "Eurostat",
+      "source": "https://ec.europa.eu/eurostat/databrowser/view/ilc_scp27/default/table",
+      "api": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/ilc_scp27?lang=EN&n_book=GE10&isced11=TOTAL&sex=T&age=Y_GE16&unit=PC",
+      "filters": {
+        "n_book": "GE10",
+        "isced11": "TOTAL",
+        "sex": "T",
+        "age": "Y_GE16",
+        "unit": "PC"
+      },
+      "transformation": "annual",
+      "countries": 32,
+      "observations": 32,
+      "updatedAt": "2026-04-24T23:00:00+0200",
+      "period": [
+        2022,
+        2022
+      ],
+      "defaultCountries": [
+        "ITA",
+        "FRA",
+        "ESP"
+      ]
+    },
+    {
+      "id": "ESTAT.BOOK.READERS",
+      "label": "Adulti che hanno letto almeno un libro negli ultimi 12 mesi",
+      "theme": "Cultura e lettura",
+      "unit": "Percentuale delle persone di almeno 16 anni",
+      "definition": "Indicatore derivato come 100 meno la quota che non ha letto libri. EU-SILC, persone di almeno 16 anni in famiglie private, tutti i livelli di istruzione. Misura una quota, non il numero assoluto dei lettori; la rilevazione non è annuale.",
+      "definitionLanguage": "it",
+      "organization": "Eurostat · Persons reading books in the last 12 months by sex, age, educational attainment and number of books",
+      "provider": "Eurostat",
+      "source": "https://ec.europa.eu/eurostat/databrowser/view/ilc_scp27/default/table",
+      "api": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/ilc_scp27?lang=EN&n_book=0&isced11=TOTAL&sex=T&age=Y_GE16&unit=PC",
+      "filters": {
+        "n_book": "0",
+        "isced11": "TOTAL",
+        "sex": "T",
+        "age": "Y_GE16",
+        "unit": "PC"
+      },
+      "transformation": "complement",
+      "countries": 32,
+      "observations": 32,
+      "updatedAt": "2026-04-24T23:00:00+0200",
+      "period": [
+        2022,
+        2022
+      ],
+      "defaultCountries": [
+        "ITA",
+        "FRA",
+        "ESP"
+      ]
+    },
+    {
+      "id": "SG.GEN.PARL.ZS",
+      "label": "Donne nei parlamenti nazionali",
+      "theme": "Diritti",
+      "unit": "% dei seggi",
+      "definition": "Women in parliaments are the percentage of parliamentary seats in a single or lower chamber held by women.",
+      "organization": "Monthly ranking of women in national parliaments, Inter-Parliamentary Union (IPU), uri: https://data.ipu.org/women-ranking/, note: For the year of 1998, the data is as of August 10, 1998., type: Excel, date accessed: 2026-03-29",
+      "source": "https://data.worldbank.org/indicator/SG.GEN.PARL.ZS",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/SG.GEN.PARL.ZS?date=1960:2024&format=json&per_page=20000",
+      "countries": 193,
+      "observations": 5075,
+      "updatedAt": "2026-10-08",
+      "provider": "Banca Mondiale",
+      "definitionLanguage": "en",
+      "period": [
+        1997,
+        2024
+      ]
+    },
+    {
+      "id": "SI.POV.GINI",
+      "label": "Disuguaglianza dei redditi: indice di Gini",
+      "theme": "Economia",
+      "unit": "Indice, 0–100",
+      "definition": "Gini index measures the extent to which the distribution of income (or, in some cases, consumption expenditure) among individuals or households within an economy deviates from a perfectly equal distribution. A Lorenz curve plots the cumulative percentages of total income received against the cumulative number of recipients, starting with the poorest individual or household. The Gini index measures the area between the Lorenz curve and a hypothetical line of absolute equality, expressed as a percentage of the maximum area under the line. Thus a Gini index of 0 represents perfect equality, while an index of 100 implies perfect inequality.",
+      "organization": "World Bank, Poverty and Inequality Platform. Data are based on primary household survey data obtained from government statistical agencies and World Bank country departments. Data for high-income economies are mostly from the Luxembourg Income Study database. For more information and methodology, please see http://pip.worldbank.org., World Bank (WB), uri: http://pip.worldbank.org, note: Data are based on primary household survey data obtained from government statistical agencies and World Bank country departments. Data for high-income economies are mostly from the Luxembourg Income Study database.",
+      "source": "https://data.worldbank.org/indicator/SI.POV.GINI",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/SI.POV.GINI?date=1960:2024&format=json&per_page=20000",
+      "countries": 171,
+      "observations": 2430,
+      "updatedAt": "2026-10-08",
+      "provider": "Banca Mondiale",
+      "definitionLanguage": "en",
+      "period": [
+        1963,
+        2024
+      ]
+    },
+    {
+      "id": "NY.GDP.PCAP.PP.KD",
+      "label": "PIL per abitante a parità di potere d’acquisto",
+      "theme": "Economia",
+      "unit": "Dollari internazionali costanti 2021",
+      "definition": "This indicator provides values for gross domestic product (GDP) per person expressed in constant international dollars, converted by purchasing power parities (PPPs). PPPs account for the different price levels across countries and thus PPP-based comparisons of economic output are more appropriate for comparing the output of economies and the average material well-being of their inhabitants than exchange-rate based comparisons. \n\nGross domestic product is the total income earned through the production of goods and services in an economic territory during an accounting period. It can be measured in three different ways: using either the expenditure approach, the income approach, or the production approach. The core indicator has been divided by the general population to achieve a per capita estimate. This indicator is expressed in constant prices, meaning the series has been adjusted to account for price changes over time. The reference year for this adjustment is 2021. The PPP conversion factor is a currency conversion factor and a spatial price deflator. PPPs convert different currencies to a common currency and, in the process of conversion, equalize their purchasing power by eliminating the differences in price levels between countries, thereby allowing volume or output comparisons of GDP and its expenditure components.",
+      "organization": "International Comparison Program (ICP), World Bank (WB), uri: https://www.worldbank.org/en/programs/icp/data, note: This information is for ICP’s PPPs utilized in WDI, publisher: International Comparison Program (ICP), date accessed: May 30, 2024, date published: May 30, 2024;\nThe Eurostat PPP Programme, Eurostat (ESTAT), uri: https://ec.europa.eu/eurostat/databrowser/explore/all/all_themes, publisher: Eurostat;\nThe OECD PPP Programme, Organisation for Economic Co-operation and Development (OECD), uri: https://data-explorer.oecd.org/, publisher: OECD;\nStaff estimates, World Bank (WB);\nNational Accounts data files, Organisation for Economic Co-operation and Development (OECD);\nWorld Economic Outlook database, International Monetary Fund (IMF)",
+      "source": "https://data.worldbank.org/indicator/NY.GDP.PCAP.PP.KD",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/NY.GDP.PCAP.PP.KD?date=1960:2024&format=json&per_page=20000",
+      "countries": 199,
+      "observations": 6792,
+      "updatedAt": "2026-10-08",
+      "provider": "Banca Mondiale",
+      "definitionLanguage": "en",
+      "period": [
+        1990,
+        2024
+      ]
+    },
+    {
+      "id": "NY.GDP.MKTP.KD",
+      "label": "PIL reale complessivo",
+      "theme": "Economia",
+      "unit": "Dollari costanti 2015",
+      "definition": "Gross domestic product is the total income earned through the production of goods and services in an economic territory during an accounting period. It can be measured in three different ways: using either the expenditure approach, the income approach, or the production approach. This indicator is expressed in constant prices, meaning the series has been adjusted to account for price changes over time. The reference year for this adjustment is 2015. This indicator is expressed in United States dollars.",
+      "organization": "Country official statistics, National Statistical Organizations and/or Central Banks;\nNational Accounts data files, Organisation for Economic Co-operation and Development (OECD);\nStaff estimates, World Bank (WB)",
+      "source": "https://data.worldbank.org/indicator/NY.GDP.MKTP.KD",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/NY.GDP.MKTP.KD?date=1960:2024&format=json&per_page=20000",
+      "countries": 213,
+      "observations": 11347,
+      "updatedAt": "2026-10-08",
+      "provider": "Banca Mondiale",
+      "definitionLanguage": "en",
+      "period": [
+        1960,
+        2024
+      ]
+    },
+    {
+      "id": "NY.GDP.PCAP.KD",
+      "label": "PIL reale per abitante",
+      "theme": "Economia",
+      "unit": "Dollari costanti 2015",
+      "definition": "Gross domestic product is the total income earned through the production of goods and services in an economic territory during an accounting period. It can be measured in three different ways: using either the expenditure approach, the income approach, or the production approach. The core indicator has been divided by the general population to achieve a per capita estimate.This indicator is expressed in constant prices, meaning the series has been adjusted to account for price changes over time. The reference year for this adjustment is 2015. This indicator is expressed in United States dollars.",
+      "organization": "Country official statistics, National Statistical Organizations and/or Central Banks;\nNational Accounts data files, Organisation for Economic Co-operation and Development (OECD);\nStaff estimates, World Bank (WB)",
+      "source": "https://data.worldbank.org/indicator/NY.GDP.PCAP.KD",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/NY.GDP.PCAP.KD?date=1960:2024&format=json&per_page=20000",
+      "countries": 213,
+      "observations": 11347,
+      "updatedAt": "2026-10-08",
+      "provider": "Banca Mondiale",
+      "definitionLanguage": "en",
+      "period": [
+        1960,
+        2024
+      ]
+    },
+    {
+      "id": "SI.POV.DDAY",
+      "label": "Povertà estrema",
+      "theme": "Economia",
+      "unit": "% della popolazione; soglia nella definizione originale",
+      "definition": "Poverty headcount ratio at $3.00 a day is the percentage of the population living on less than $3.00 a day at 2021 purchasing power adjusted prices. As a result of revisions in PPP exchange rates, poverty rates for individual countries cannot be compared with poverty rates reported in earlier editions.",
+      "organization": "World Bank, Poverty and Inequality Platform. Data are based on primary household survey data obtained from government statistical agencies and World Bank country departments. Data for high-income economies are mostly from the Luxembourg Income Study database. For more information and methodology, please see http://pip.worldbank.org., World Bank (WB), uri: http://pip.worldbank.org, note: Data are based on primary household survey data obtained from government statistical agencies and World Bank country departments. Data for high-income economies are mostly from the Luxembourg Income Study database.",
+      "source": "https://data.worldbank.org/indicator/SI.POV.DDAY",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/SI.POV.DDAY?date=1960:2024&format=json&per_page=20000",
+      "countries": 171,
+      "observations": 2430,
+      "updatedAt": "2026-10-08",
+      "provider": "Banca Mondiale",
+      "definitionLanguage": "en",
+      "period": [
+        1963,
+        2024
+      ]
+    },
+    {
+      "id": "NV.IND.MANF.ZS",
+      "label": "Valore aggiunto della manifattura",
+      "theme": "Economia",
+      "unit": "% del PIL",
+      "definition": "Manufacturing includes industries classified in ISIC (Rev. 3) major division C and is defined as the physical or chemical transformation of materials or components into new products. Value added is the contribution to the economy by a producer or an industry or an institutional sector, which is estimated by the total value of output produced and deducting the total value of intermediate consumption of goods and services used to produce that output. This indicator is expressed as a percentage of Gross Domestic Product (GDP) which is the total income earned through the production of goods and services in an economic territory during an accounting period.",
+      "organization": "Country official statistics, National Statistical Offices (NSOs);\nNational Accounts data files, Central Banks;\nStaff estimates, World Bank (WB)",
+      "source": "https://data.worldbank.org/indicator/NV.IND.MANF.ZS",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/NV.IND.MANF.ZS?date=1960:2024&format=json&per_page=20000",
+      "countries": 204,
+      "observations": 8121,
+      "updatedAt": "2026-10-08",
+      "provider": "Banca Mondiale",
+      "definitionLanguage": "en",
+      "period": [
+        1960,
+        2024
+      ]
+    },
+    {
+      "id": "EG.CFT.ACCS.ZS",
+      "label": "Combustibili e tecnologie pulite per cucinare",
+      "theme": "Energia",
+      "unit": "Percentuale della popolazione",
+      "definition": "Access to clean fuels and technologies for cooking is the proportion of total population primarily using clean cooking fuels and technologies for cooking. Under WHO guidelines, kerosene is excluded from clean cooking fuels.",
+      "definitionLanguage": "en",
+      "organization": "Tracking SDG 7: The Energy Progress Report, ACRA Europe, uri: https://trackingsdg7.esmap.org/, note: License: Creative Commons Attribution—NonCommercial 3.0 IGO (CC BY-NC 3.0 IGO), publisher: International Energy Agency (IEA), International Renewable Energy Agency (IRENA), United Nations Statistical Division (UNSD), World Bank, World Health Organization (WHO), date published: 2025-06;\nInternational Renewable Energy Agency (IRENA), note: Tracking SDG 7: The Energy Progress Report;\nUnited Nations (UN), note: Tracking SDG 7: The Energy Progress Report, publisher: UN Statistics Division;\nWorld Bank (WB), note: Tracking SDG 7: The Energy Progress Report;\nWorld Health Organization (WHO), note: Tracking SDG 7: The Energy Progress Report",
+      "provider": "Banca Mondiale",
+      "source": "https://data.worldbank.org/indicator/EG.CFT.ACCS.ZS",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/EG.CFT.ACCS.ZS?date=1960:2025&format=json&per_page=20000",
+      "countries": 192,
+      "observations": 4800,
+      "updatedAt": "2026-10-08",
+      "period": [
+        2000,
+        2024
+      ]
+    },
+    {
+      "id": "EG.USE.ELEC.KH.PC",
+      "label": "Consumo di elettricità per abitante",
+      "theme": "Energia",
+      "unit": "kWh per abitante",
+      "definition": "Electric power consumption measures the production of power plants and combined heat and power plants less transmission, distribution, and transformation losses and own use by heat and power plants.",
+      "definitionLanguage": "en",
+      "organization": "IEA Energy Statistics Data Browser, International Energy Agency (IEA), uri: https://www.iea.org/data-and-statistics/data-tools/energy-statistics-data-browser, publisher: International Energy Agency (IEA), date accessed: 2025-03-25",
+      "provider": "Banca Mondiale",
+      "source": "https://data.worldbank.org/indicator/EG.USE.ELEC.KH.PC",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/EG.USE.ELEC.KH.PC?date=1960:2025&format=json&per_page=20000",
+      "countries": 150,
+      "observations": 5245,
+      "updatedAt": "2026-10-08",
+      "period": [
+        1990,
+        2025
+      ]
+    },
+    {
+      "id": "EG.ELC.RNEW.ZS",
+      "label": "Elettricità da fonti rinnovabili",
+      "theme": "Energia",
+      "unit": "Percentuale della produzione elettrica",
+      "definition": "Renewable electricity is the share of electricity generated by renewable power plants in total electricity generated by all types of plants.",
+      "definitionLanguage": "en",
+      "organization": "IEA Energy Statistics Data Browser, International Energy Agency (IEA), uri: https://www.iea.org/data-and-statistics/data-tools/energy-statistics-data-browser, publisher: International Energy Agency (IEA), date accessed: 2025-03-25",
+      "provider": "Banca Mondiale",
+      "source": "https://data.worldbank.org/indicator/EG.ELC.RNEW.ZS",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/EG.ELC.RNEW.ZS?date=1960:2025&format=json&per_page=20000",
+      "countries": 209,
+      "observations": 5797,
+      "updatedAt": "2026-10-08",
+      "period": [
+        1990,
+        2021
+      ]
+    },
+    {
+      "id": "ESTAT.ELECTRIC.PPS",
+      "label": "Elettricità domestica: prezzo a potere d’acquisto comparabile",
+      "theme": "Energia",
+      "unit": "PPS per kWh",
+      "definition": "Fascia DC: 2.500–4.999 kWh annui, imposte incluse; media aritmetica dei due semestri completi. PPS è lo standard di potere d’acquisto Eurostat, non una valuta da pagare né il salario disponibile.",
+      "definitionLanguage": "it",
+      "organization": "Eurostat · Electricity prices for household consumers - bi-annual data",
+      "provider": "Eurostat",
+      "source": "https://ec.europa.eu/eurostat/databrowser/view/nrg_pc_204/default/table",
+      "api": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/nrg_pc_204?lang=EN&siec=E7000&nrg_cons=KWH2500-4999&unit=KWH&tax=I_TAX&currency=PPS",
+      "filters": {
+        "siec": "E7000",
+        "nrg_cons": "KWH2500-4999",
+        "unit": "KWH",
+        "tax": "I_TAX",
+        "currency": "PPS"
+      },
+      "transformation": "semesters",
+      "countries": 36,
+      "observations": 625,
+      "updatedAt": "2026-10-19T23:00:00+0200",
+      "period": [
+        2007,
+        2025
+      ],
+      "defaultCountries": [
+        "ITA",
+        "FRA",
+        "DEU",
+        "ESP"
+      ]
+    },
+    {
+      "id": "ESTAT.ELECTRIC.EUR",
+      "label": "Elettricità domestica: prezzo medio dei due semestri",
+      "theme": "Energia",
+      "unit": "Euro per kWh",
+      "definition": "Fascia DC: 2.500–4.999 kWh annui, imposte e oneri inclusi. Media aritmetica dei due prezzi semestrali: non è ponderata per i consumi. Non equivale alla spesa di una famiglia.",
+      "definitionLanguage": "it",
+      "organization": "Eurostat · Electricity prices for household consumers - bi-annual data",
+      "provider": "Eurostat",
+      "source": "https://ec.europa.eu/eurostat/databrowser/view/nrg_pc_204/default/table",
+      "api": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/nrg_pc_204?lang=EN&siec=E7000&nrg_cons=KWH2500-4999&unit=KWH&tax=I_TAX&currency=EUR",
+      "filters": {
+        "siec": "E7000",
+        "nrg_cons": "KWH2500-4999",
+        "unit": "KWH",
+        "tax": "I_TAX",
+        "currency": "EUR"
+      },
+      "transformation": "semesters",
+      "countries": 41,
+      "observations": 673,
+      "updatedAt": "2026-10-19T23:00:00+0200",
+      "period": [
+        2007,
+        2025
+      ],
+      "defaultCountries": [
+        "ITA",
+        "FRA",
+        "DEU",
+        "ESP"
+      ]
+    },
+    {
+      "id": "EG.FEC.RNEW.ZS",
+      "label": "Energia rinnovabile nei consumi finali",
+      "theme": "Energia",
+      "unit": "Percentuale del consumo finale",
+      "definition": "Renewable energy consumption is the share of renewable energy in total final energy consumption.",
+      "definitionLanguage": "en",
+      "organization": "IEA Energy Statistics Data Browser, International Energy Agency (IEA), uri: https://www.iea.org/data-and-statistics/data-tools/energy-statistics-data-browser, publisher: International Energy Agency (IEA), date accessed: 2025-03-25",
+      "provider": "Banca Mondiale",
+      "source": "https://data.worldbank.org/indicator/EG.FEC.RNEW.ZS",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/EG.FEC.RNEW.ZS?date=1960:2025&format=json&per_page=20000",
+      "countries": 212,
+      "observations": 6746,
+      "updatedAt": "2026-10-08",
+      "period": [
+        1990,
+        2022
+      ]
+    },
+    {
+      "id": "ESTAT.GAS.PPS",
+      "label": "Gas domestico: prezzo a potere d’acquisto comparabile",
+      "theme": "Energia",
+      "unit": "PPS per kWh",
+      "definition": "Fascia D2, da 20 a meno di 200 GJ annui, imposte incluse. Media aritmetica dei due semestri completi. PPS misura differenze generali nel livello dei prezzi, non il reddito di una famiglia.",
+      "definitionLanguage": "it",
+      "organization": "Eurostat · Gas prices for household consumers - bi-annual data",
+      "provider": "Eurostat",
+      "source": "https://ec.europa.eu/eurostat/databrowser/view/nrg_pc_202/default/table",
+      "api": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/nrg_pc_202?lang=EN&siec=G3000&nrg_cons=GJ20-199&unit=KWH&tax=I_TAX&currency=PPS",
+      "filters": {
+        "siec": "G3000",
+        "nrg_cons": "GJ20-199",
+        "unit": "KWH",
+        "tax": "I_TAX",
+        "currency": "PPS"
+      },
+      "transformation": "semesters",
+      "countries": 30,
+      "observations": 497,
+      "updatedAt": "2026-10-19T11:00:00+0200",
+      "period": [
+        2007,
+        2025
+      ],
+      "defaultCountries": [
+        "ITA",
+        "FRA",
+        "DEU",
+        "ESP"
+      ]
+    },
+    {
+      "id": "ESTAT.GAS.EUR",
+      "label": "Gas domestico: prezzo medio dei due semestri",
+      "theme": "Energia",
+      "unit": "Euro per kWh",
+      "definition": "Fascia D2: consumo annuo da 20 a meno di 200 GJ, prezzo per kWh, imposte incluse. Media aritmetica dei due semestri completi; non è ponderata per i consumi.",
+      "definitionLanguage": "it",
+      "organization": "Eurostat · Gas prices for household consumers - bi-annual data",
+      "provider": "Eurostat",
+      "source": "https://ec.europa.eu/eurostat/databrowser/view/nrg_pc_202/default/table",
+      "api": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/nrg_pc_202?lang=EN&siec=G3000&nrg_cons=GJ20-199&unit=KWH&tax=I_TAX&currency=EUR",
+      "filters": {
+        "siec": "G3000",
+        "nrg_cons": "GJ20-199",
+        "unit": "KWH",
+        "tax": "I_TAX",
+        "currency": "EUR"
+      },
+      "transformation": "semesters",
+      "countries": 34,
+      "observations": 533,
+      "updatedAt": "2026-10-19T11:00:00+0200",
+      "period": [
+        2007,
+        2025
+      ],
+      "defaultCountries": [
+        "ITA",
+        "FRA",
+        "DEU",
+        "ESP"
+      ]
+    },
+    {
+      "id": "EG.ELC.LOSS.ZS",
+      "label": "Perdite nelle reti elettriche",
+      "theme": "Energia",
+      "unit": "Percentuale della produzione elettrica",
+      "definition": "Electric power transmission and distribution losses include losses in transmission between sources of supply and points of distribution and in the distribution to consumers, including pilferage. The losses are expressed as a share of the total output.",
+      "definitionLanguage": "en",
+      "organization": "IEA Energy Statistics Data Browser, International Energy Agency (IEA), uri: https://www.iea.org/data-and-statistics/data-tools/energy-statistics-data-browser, publisher: International Energy Agency (IEA), date accessed: 2025-03-25",
+      "provider": "Banca Mondiale",
+      "source": "https://data.worldbank.org/indicator/EG.ELC.LOSS.ZS",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/EG.ELC.LOSS.ZS?date=1960:2025&format=json&per_page=20000",
+      "countries": 150,
+      "observations": 5179,
+      "updatedAt": "2026-10-08",
+      "period": [
+        1990,
+        2025
+      ]
+    },
+    {
+      "id": "IT.NET.BBND.P2",
+      "label": "Abbonamenti a banda larga fissa",
+      "theme": "Infrastrutture",
+      "unit": "Abbonamenti ogni 100 abitanti",
+      "definition": "Fixed broadband subscriptions refers to fixed subscriptions to high-speed access to the public Internet (a TCP/IP connection), at downstream speeds equal to, or greater than, 256 kbit/s. This includes cable modem, DSL, fiber-to-the-home/building, other fixed (wired)-broadband subscriptions, satellite broadband and terrestrial fixed wireless broadband. This total is measured irrespective of the method of payment. It excludes subscriptions that have access to data communications (including the Internet) via mobile-cellular networks. It should include fixed WiMAX and any other fixed wireless technologies. It includes both residential subscriptions and subscriptions for organizations.",
+      "definitionLanguage": "en",
+      "organization": "World Telecommunication/ICT Indicators Database, International Telecommunication Union (ITU)",
+      "provider": "Banca Mondiale",
+      "source": "https://data.worldbank.org/indicator/IT.NET.BBND.P2",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/IT.NET.BBND.P2?date=1960:2025&format=json&per_page=20000",
+      "countries": 208,
+      "observations": 4330,
+      "updatedAt": "2026-10-08",
+      "period": [
+        1998,
+        2024
+      ]
+    },
+    {
+      "id": "IT.CEL.SETS.P2",
+      "label": "Abbonamenti di telefonia mobile",
+      "theme": "Infrastrutture",
+      "unit": "Abbonamenti ogni 100 abitanti",
+      "definition": "Mobile cellular telephone subscriptions are subscriptions to a public mobile telephone service that provide access to the PSTN using cellular technology. The indicator includes (and is split into) the number of postpaid subscriptions, and the number of active prepaid accounts (i.e. that have been used during the last three months). The indicator applies to all mobile cellular subscriptions that offer voice communications. It excludes subscriptions via data cards or USB modems, subscriptions to public mobile data services, private trunked mobile radio, telepoint, radio paging and telemetry services.",
+      "definitionLanguage": "en",
+      "organization": "World Telecommunication/ICT Indicators Database, International Telecommunication Union (ITU)",
+      "provider": "Banca Mondiale",
+      "source": "https://data.worldbank.org/indicator/IT.CEL.SETS.P2",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/IT.CEL.SETS.P2?date=1960:2025&format=json&per_page=20000",
+      "countries": 214,
+      "observations": 10594,
+      "updatedAt": "2026-10-08",
+      "period": [
+        1960,
+        2024
+      ]
+    },
+    {
+      "id": "IS.RRS.TOTL.KM",
+      "label": "Estensione della rete ferroviaria",
+      "theme": "Infrastrutture",
+      "unit": "Chilometri di linee",
+      "definition": "The total length of rail line in the country operated for passenger transport, goods transport, or both.",
+      "definitionLanguage": "en",
+      "organization": "Railisa Database, International Union of Railways (UIC), uri: https://uic-stats.uic.org/",
+      "provider": "Banca Mondiale",
+      "source": "https://data.worldbank.org/indicator/IS.RRS.TOTL.KM",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/IS.RRS.TOTL.KM?date=1960:2025&format=json&per_page=20000",
+      "countries": 116,
+      "observations": 2139,
+      "updatedAt": "2026-10-08",
+      "period": [
+        1995,
+        2021
+      ]
+    },
+    {
+      "id": "IS.AIR.PSGR",
+      "label": "Passeggeri del trasporto aereo",
+      "theme": "Infrastrutture",
+      "unit": "Passeggeri trasportati",
+      "definition": "Air carrier data per country refers to passengers carried by airlines registered in that country regardless of the origin or destination of the passengers.",
+      "definitionLanguage": "en",
+      "organization": "Civil Aviation Statistics of the World, International Civil Aviation Organization (ICAO), uri: https://data.icao.int/newdataplus/#:~:text=ICAO%20data%20is%20comprised%20of,information%20about%20commercial%20air%20carriers;\nICAO Staff estimates, International Civil Aviation Organization (ICAO), uri: https://data.icao.int/newdataplus/#:~:text=ICAO%20data%20is%20comprised%20of,information%20about%20commercial%20air%20carriers",
+      "provider": "Banca Mondiale",
+      "source": "https://data.worldbank.org/indicator/IS.AIR.PSGR",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/IS.AIR.PSGR?date=1960:2025&format=json&per_page=20000",
+      "countries": 185,
+      "observations": 7929,
+      "updatedAt": "2026-10-08",
+      "period": [
+        1970,
+        2023
+      ]
+    },
+    {
+      "id": "IT.NET.USER.ZS",
+      "label": "Persone che usano Internet",
+      "theme": "Infrastrutture",
+      "unit": "Percentuale della popolazione",
+      "definition": "Internet users are individuals who have used the Internet (from any location) in the last 3 months. The Internet can be used via a computer, mobile phone, personal digital assistant, games machine, digital TV etc.",
+      "definitionLanguage": "en",
+      "organization": "World Telecommunication/ICT Indicators Database, International Telecommunication Union (ITU), uri: https://datahub.itu.int/",
+      "provider": "Banca Mondiale",
+      "source": "https://data.worldbank.org/indicator/IT.NET.USER.ZS",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/IT.NET.USER.ZS?date=1960:2025&format=json&per_page=20000",
+      "countries": 213,
+      "observations": 6224,
+      "updatedAt": "2026-10-08",
+      "period": [
+        1990,
+        2025
+      ]
+    },
+    {
+      "id": "IS.SHP.GOOD.TU",
+      "label": "Traffico dei porti container",
+      "theme": "Infrastrutture",
+      "unit": "TEU: unità equivalenti a venti piedi",
+      "definition": "Port container traffic measures the flow of containers from land to sea transport modes, and vice versa, in twenty-foot equivalent units (TEUs), a standard-size container. Data refer to coastal shipping as well as international journeys. Transshipment traffic is counted as two lifts at the intermediate port (once to off-load and again as an outbound lift) and includes empty units.",
+      "definitionLanguage": "en",
+      "organization": "UN Conference on Trade and Development (UNCTAD), uri: http://unctad.org/en/Pages/statistics.aspx",
+      "provider": "Banca Mondiale",
+      "source": "https://data.worldbank.org/indicator/IS.SHP.GOOD.TU",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/IS.SHP.GOOD.TU?date=1960:2025&format=json&per_page=20000",
+      "countries": 168,
+      "observations": 2232,
+      "updatedAt": "2026-10-08",
+      "period": [
+        2005,
+        2024
+      ]
+    },
+    {
+      "id": "IS.RRS.GOOD.MT.K6",
+      "label": "Trasporto ferroviario di merci",
+      "theme": "Infrastrutture",
+      "unit": "Milioni di tonnellate-km",
+      "definition": "Goods transported by railway are the volume of goods transported by railway, measured in metric tons times kilometers traveled.",
+      "definitionLanguage": "en",
+      "organization": "Railisa Database (UIC), International Union of Railways (UIC), uri: https://uic-stats.uic.org/select/;\nOECD Statistics, Organisation for Economic Co-operation and Development (OECD)",
+      "provider": "Banca Mondiale",
+      "source": "https://data.worldbank.org/indicator/IS.RRS.GOOD.MT.K6",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/IS.RRS.GOOD.MT.K6?date=1960:2025&format=json&per_page=20000",
+      "countries": 113,
+      "observations": 2165,
+      "updatedAt": "2026-10-08",
+      "period": [
+        1995,
+        2021
+      ]
+    },
+    {
+      "id": "IS.RRS.PASG.KM",
+      "label": "Trasporto ferroviario di passeggeri",
+      "theme": "Infrastrutture",
+      "unit": "Milioni di passeggeri-km",
+      "definition": "Passengers carried by railway are the number of passengers transported by rail multiplied by kilometers traveled.",
+      "definitionLanguage": "en",
+      "organization": "Railisa Database (UIC), International Union of Railways (UIC), uri: https://uic-stats.uic.org/select/;\nOECD Statistics, Organisation for Economic Co-operation and Development (OECD)",
+      "provider": "Banca Mondiale",
+      "source": "https://data.worldbank.org/indicator/IS.RRS.PASG.KM",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/IS.RRS.PASG.KM?date=1960:2025&format=json&per_page=20000",
+      "countries": 107,
+      "observations": 2137,
+      "updatedAt": "2026-10-08",
+      "period": [
+        1995,
+        2021
+      ]
+    },
+    {
+      "id": "SE.ADT.LITR.ZS",
+      "label": "Alfabetizzazione degli adulti",
+      "theme": "Istruzione",
+      "unit": "% dai 15 anni",
+      "definition": "Adult literacy rate is the percentage of people ages 15 and above who can both read and write with understanding a short simple statement about their everyday life.",
+      "organization": "Data API, UN Educational, Scientific and Cultural Organization (UNESCO), uri: https://databrowser.uis.unesco.org/resources, note: The data are obtained through the UIS API.  Detailed documentation is available at: https://api.uis.unesco.org/api/public/documentation/, publisher: UNESCO Institute for Statistics (UIS), type: Excel (bulk file), date accessed: 2026-03-19, date published: 2026-02",
+      "source": "https://data.worldbank.org/indicator/SE.ADT.LITR.ZS",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/SE.ADT.LITR.ZS?date=1960:2024&format=json&per_page=20000",
+      "countries": 170,
+      "observations": 1121,
+      "updatedAt": "2026-10-08",
+      "provider": "Banca Mondiale",
+      "definitionLanguage": "en",
+      "period": [
+        1970,
+        2024
+      ]
+    },
+    {
+      "id": "SE.ADT.1524.LT.ZS",
+      "label": "Alfabetizzazione dei giovani",
+      "theme": "Istruzione",
+      "unit": "% tra 15 e 24 anni",
+      "definition": "Youth literacy rate is the percentage of people ages 15-24 who can both read and write with understanding a short simple statement about their everyday life.",
+      "organization": "Data API, UN Educational, Scientific and Cultural Organization (UNESCO), uri: https://databrowser.uis.unesco.org/resources, note: The data are obtained through the UIS API.  Detailed documentation is available at: https://api.uis.unesco.org/api/public/documentation/, publisher: UNESCO Institute for Statistics (UIS), type: Excel (bulk file), date accessed: 2026-03-19, date published: 2026-02",
+      "source": "https://data.worldbank.org/indicator/SE.ADT.1524.LT.ZS",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/SE.ADT.1524.LT.ZS?date=1960:2024&format=json&per_page=20000",
+      "countries": 172,
+      "observations": 1270,
+      "updatedAt": "2026-10-08",
+      "provider": "Banca Mondiale",
+      "definitionLanguage": "en",
+      "period": [
+        1970,
+        2024
+      ]
+    },
+    {
+      "id": "SE.PRM.CMPT.ZS",
+      "label": "Completamento della scuola primaria",
+      "theme": "Istruzione",
+      "unit": "% del gruppo di età pertinente",
+      "definition": "Primary completion rate, or gross intake ratio to the last grade of primary education, is the number of new entrants (enrollments minus repeaters) in the last grade of primary education, regardless of age, divided by the population at the entrance age for the last grade of primary education. Data limitations preclude adjusting for students who drop out during the final year of primary education.",
+      "organization": "Data API, UN Educational, Scientific and Cultural Organization (UNESCO), uri: https://databrowser.uis.unesco.org/resources, note: The data are obtained through the UIS API.  Detailed documentation is available at: https://api.uis.unesco.org/api/public/documentation/, publisher: UNESCO Institute for Statistics (UIS), type: Bulk file (csv), date accessed: 2026-03-19, date published: 2026-02",
+      "source": "https://data.worldbank.org/indicator/SE.PRM.CMPT.ZS",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/SE.PRM.CMPT.ZS?date=1960:2024&format=json&per_page=20000",
+      "countries": 198,
+      "observations": 5038,
+      "updatedAt": "2026-10-08",
+      "provider": "Banca Mondiale",
+      "definitionLanguage": "en",
+      "period": [
+        1970,
+        2024
+      ]
+    },
+    {
+      "id": "SE.SEC.ENRR",
+      "label": "Iscrizione alla scuola secondaria",
+      "theme": "Istruzione",
+      "unit": "Tasso lordo, %",
+      "definition": "Gross enrollment ratio is the ratio of total enrollment, regardless of age, to the population of the age group that officially corresponds to the level of education shown. Secondary education completes the provision of basic education that began at the primary level, and aims at laying the foundations for lifelong learning and human development, by offering more subject- or skill-oriented instruction using more specialized teachers.",
+      "organization": "Data API, UN Educational, Scientific and Cultural Organization (UNESCO), uri: https://databrowser.uis.unesco.org/resources, note: The data are obtained through the UIS API.  Detailed documentation is available at: https://api.uis.unesco.org/api/public/documentation/, publisher: UNESCO Institute for Statistics (UIS), type: Bulk file (csv), date accessed: 2026-03-19, date published: 2026-02",
+      "source": "https://data.worldbank.org/indicator/SE.SEC.ENRR",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/SE.SEC.ENRR?date=1960:2024&format=json&per_page=20000",
+      "countries": 208,
+      "observations": 6271,
+      "updatedAt": "2026-10-08",
+      "provider": "Banca Mondiale",
+      "definitionLanguage": "en",
+      "period": [
+        1970,
+        2024
+      ]
+    },
+    {
+      "id": "SE.TER.ENRR",
+      "label": "Iscrizione all’istruzione superiore",
+      "theme": "Istruzione",
+      "unit": "Tasso lordo, %",
+      "definition": "Gross enrollment ratio is the ratio of total enrollment, regardless of age, to the population of the age group that officially corresponds to the level of education shown. Tertiary education, whether or not to an advanced research qualification, normally requires, as a minimum condition of admission, the successful completion of education at the secondary level.",
+      "organization": "Data API, UN Educational, Scientific and Cultural Organization (UNESCO), uri: https://databrowser.uis.unesco.org/resources, note: The data are obtained through the UIS API.  Detailed documentation is available at: https://api.uis.unesco.org/api/public/documentation/, publisher: UNESCO Institute for Statistics (UIS), type: Bulk file (csv), date accessed: 2026-03-19, date published: 2026-02",
+      "source": "https://data.worldbank.org/indicator/SE.TER.ENRR",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/SE.TER.ENRR?date=1960:2024&format=json&per_page=20000",
+      "countries": 203,
+      "observations": 5344,
+      "updatedAt": "2026-10-08",
+      "provider": "Banca Mondiale",
+      "definitionLanguage": "en",
+      "period": [
+        1970,
+        2024
+      ]
+    },
+    {
+      "id": "SE.XPD.TOTL.GD.ZS",
+      "label": "Spesa pubblica per l’istruzione",
+      "theme": "Istruzione",
+      "unit": "% del PIL",
+      "definition": "General government expenditure on education (current, capital, and transfers) is expressed as a percentage of GDP. It includes expenditure funded by transfers from international sources to government. General government usually refers to local, regional and central governments.",
+      "organization": "Data API, UN Educational, Scientific and Cultural Organization (UNESCO), uri: https://databrowser.uis.unesco.org/resources, note: The data are obtained through the UIS API.  Detailed documentation is available at: https://api.uis.unesco.org/api/public/documentation/, publisher: UNESCO Institute for Statistics (UIS), date accessed: 2026-03-19, date published: 2026-02",
+      "source": "https://data.worldbank.org/indicator/SE.XPD.TOTL.GD.ZS",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/SE.XPD.TOTL.GD.ZS?date=1960:2024&format=json&per_page=20000",
+      "countries": 203,
+      "observations": 5123,
+      "updatedAt": "2026-10-08",
+      "provider": "Banca Mondiale",
+      "definitionLanguage": "en",
+      "period": [
+        1970,
+        2024
+      ]
+    },
+    {
+      "id": "SE.TER.CUAT.MS.ZS",
+      "label": "Adulti con almeno un titolo di secondo livello",
+      "theme": "Istruzione e ricerca",
+      "unit": "Percentuale della popolazione di almeno 25 anni",
+      "definition": "The percentage of population ages 25 and over that attained or completed Master's or equivalent.",
+      "definitionLanguage": "en",
+      "organization": "Data API, UN Educational, Scientific and Cultural Organization (UNESCO), uri: https://databrowser.uis.unesco.org/resources, note: The data are obtained through the UIS API.  Detailed documentation is available at: https://api.uis.unesco.org/api/public/documentation/, publisher: UNESCO Institute for Statistics (UIS), type: Bulk file (csv), date accessed: 2026-03-19, date published: 2026-02",
+      "provider": "Banca Mondiale",
+      "source": "https://data.worldbank.org/indicator/SE.TER.CUAT.MS.ZS",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/SE.TER.CUAT.MS.ZS?date=1960:2025&format=json&per_page=20000",
+      "countries": 170,
+      "observations": 1095,
+      "updatedAt": "2026-10-08",
+      "period": [
+        1990,
+        2024
+      ]
+    },
+    {
+      "id": "SE.TER.CUAT.BA.ZS",
+      "label": "Adulti con almeno una laurea di primo livello",
+      "theme": "Istruzione e ricerca",
+      "unit": "Percentuale della popolazione di almeno 25 anni",
+      "definition": "The percentage of population ages 25 and over that attained or completed Bachelor's or equivalent.",
+      "definitionLanguage": "en",
+      "organization": "Data API, UN Educational, Scientific and Cultural Organization (UNESCO), uri: https://databrowser.uis.unesco.org/resources, note: The data are obtained through the UIS API.  Detailed documentation is available at: https://api.uis.unesco.org/api/public/documentation/, publisher: UNESCO Institute for Statistics (UIS), type: Bulk file (csv), date accessed: 2026-03-19, date published: 2026-02",
+      "provider": "Banca Mondiale",
+      "source": "https://data.worldbank.org/indicator/SE.TER.CUAT.BA.ZS",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/SE.TER.CUAT.BA.ZS?date=1960:2025&format=json&per_page=20000",
+      "countries": 188,
+      "observations": 1403,
+      "updatedAt": "2026-10-08",
+      "period": [
+        1970,
+        2024
+      ]
+    },
+    {
+      "id": "IP.JRN.ARTC.SC",
+      "label": "Articoli scientifici e tecnici",
+      "theme": "Istruzione e ricerca",
+      "unit": "Articoli pubblicati",
+      "definition": "Article counts refer to publications from a selection of conference proceedings and peer-reviewed journals from Scopus in science and engineering fields, according to the National Center for Science and Engineering Statistics Taxonomy of Disciplines.",
+      "definitionLanguage": "en",
+      "organization": "Science and Engineering Indicators, National Science Foundation (NSF), uri: https://ncses.nsf.gov/indicators",
+      "provider": "Banca Mondiale",
+      "source": "https://data.worldbank.org/indicator/IP.JRN.ARTC.SC",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/IP.JRN.ARTC.SC?date=1960:2025&format=json&per_page=20000",
+      "countries": 197,
+      "observations": 5516,
+      "updatedAt": "2026-10-08",
+      "period": [
+        1996,
+        2023
+      ]
+    },
+    {
+      "id": "ESTAT.STEM.GRAD.TOTAL",
+      "label": "Diplomati STEM: numero complessivo nell’anno",
+      "theme": "Istruzione e ricerca",
+      "unit": "Diplomati nell’anno",
+      "definition": "Somma dei diplomati dell’istruzione superiore nei campi disgiunti ISCED-F 05 (scienze naturali, matematica e statistica), 06 (ICT) e 07 (ingegneria, manifattura e costruzioni). Sono inclusi soltanto paese e anno con tutte e tre le componenti disponibili. Flusso annuale di diplomati, non totale dei professionisti STEM occupati.",
+      "definitionLanguage": "it",
+      "organization": "Eurostat · Graduates by education level, programme orientation, sex and field of education",
+      "provider": "Eurostat",
+      "source": "https://ec.europa.eu/eurostat/databrowser/view/educ_uoe_grad02/default/table",
+      "api": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/educ_uoe_grad02?lang=EN&unit=NR&isced11=ED5-8&sex=T&iscedf13=F05&iscedf13=F06&iscedf13=F07",
+      "filters": {
+        "isced11": "ED5-8",
+        "sex": "T",
+        "unit": "NR",
+        "iscedf13": [
+          "F05",
+          "F06",
+          "F07"
+        ]
+      },
+      "transformation": "Sum F05 + F06 + F07, only complete country-year observations",
+      "countries": 39,
+      "observations": 438,
+      "updatedAt": "2026-10-06T23:00:00+0200",
+      "period": [
+        2005,
+        2024
+      ],
+      "defaultCountries": [
+        "ITA",
+        "FRA",
+        "DEU",
+        "ESP"
+      ],
+      "components": [
+        "ESTAT.SCIENCE.GRAD",
+        "ESTAT.ICT.GRAD",
+        "ESTAT.ENGINEERING.GRAD"
+      ]
+    },
+    {
+      "id": "ESTAT.ENGINEERING.GRAD",
+      "label": "Diplomati in ingegneria, manifattura e costruzioni",
+      "theme": "Istruzione e ricerca",
+      "unit": "Diplomati nell’anno",
+      "definition": "Diplomati dell’istruzione superiore nel campo ISCED-F 07: ingegneria, attività manifatturiere e costruzioni. Campo più ampio della sola ingegneria. Flusso annuo, non numero di ingegneri presenti nel paese.",
+      "definitionLanguage": "it",
+      "organization": "Eurostat · Graduates by education level, programme orientation, sex and field of education",
+      "provider": "Eurostat",
+      "source": "https://ec.europa.eu/eurostat/databrowser/view/educ_uoe_grad02/default/table",
+      "api": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/educ_uoe_grad02?lang=EN&unit=NR&isced11=ED5-8&iscedf13=F07&sex=T",
+      "filters": {
+        "unit": "NR",
+        "isced11": "ED5-8",
+        "iscedf13": "F07",
+        "sex": "T"
+      },
+      "transformation": "annual",
+      "countries": 39,
+      "observations": 440,
+      "updatedAt": "2026-10-06T23:00:00+0200",
+      "period": [
+        2005,
+        2024
+      ],
+      "defaultCountries": [
+        "ITA",
+        "FRA",
+        "DEU",
+        "ESP"
+      ]
+    },
+    {
+      "id": "ESTAT.SCIENCE.GRAD",
+      "label": "Diplomati in scienze naturali, matematica e statistica",
+      "theme": "Istruzione e ricerca",
+      "unit": "Diplomati nell’anno",
+      "definition": "Diplomati dell’istruzione superiore nel campo ISCED-F 05. Flusso annuale; una persona può conseguire più qualifiche nel tempo.",
+      "definitionLanguage": "it",
+      "organization": "Eurostat · Graduates by education level, programme orientation, sex and field of education",
+      "provider": "Eurostat",
+      "source": "https://ec.europa.eu/eurostat/databrowser/view/educ_uoe_grad02/default/table",
+      "api": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/educ_uoe_grad02?lang=EN&unit=NR&isced11=ED5-8&iscedf13=F05&sex=T",
+      "filters": {
+        "unit": "NR",
+        "isced11": "ED5-8",
+        "iscedf13": "F05",
+        "sex": "T"
+      },
+      "transformation": "annual",
+      "countries": 39,
+      "observations": 440,
+      "updatedAt": "2026-10-06T23:00:00+0200",
+      "period": [
+        2005,
+        2024
+      ],
+      "defaultCountries": [
+        "ITA",
+        "FRA",
+        "DEU",
+        "ESP"
+      ]
+    },
+    {
+      "id": "ESTAT.ICT.GRAD",
+      "label": "Diplomati in tecnologie dell’informazione e comunicazione",
+      "theme": "Istruzione e ricerca",
+      "unit": "Diplomati nell’anno",
+      "definition": "Diplomati dell’istruzione superiore nel campo ISCED-F 06 (ICT). Flusso annuale, non consistenza degli specialisti occupati.",
+      "definitionLanguage": "it",
+      "organization": "Eurostat · Graduates by education level, programme orientation, sex and field of education",
+      "provider": "Eurostat",
+      "source": "https://ec.europa.eu/eurostat/databrowser/view/educ_uoe_grad02/default/table",
+      "api": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/educ_uoe_grad02?lang=EN&unit=NR&isced11=ED5-8&iscedf13=F06&sex=T",
+      "filters": {
+        "unit": "NR",
+        "isced11": "ED5-8",
+        "iscedf13": "F06",
+        "sex": "T"
+      },
+      "transformation": "annual",
+      "countries": 39,
+      "observations": 438,
+      "updatedAt": "2026-10-06T23:00:00+0200",
+      "period": [
+        2005,
+        2024
+      ],
+      "defaultCountries": [
+        "ITA",
+        "FRA",
+        "DEU",
+        "ESP"
+      ]
+    },
+    {
+      "id": "IP.PAT.RESD",
+      "label": "Domande di brevetto dei residenti",
+      "theme": "Istruzione e ricerca",
+      "unit": "Domande presentate",
+      "definition": "Patent applications are worldwide patent applications filed through the Patent Cooperation Treaty procedure or with a national patent office for exclusive rights for an invention--a product or process that provides a new way of doing something or offers a new technical solution to a problem. A patent provides protection for the invention to the owner of the patent for a limited period, generally 20 years.",
+      "definitionLanguage": "en",
+      "organization": "WIPO Patent Report: Statistics on Worldwide Patent Activity, World Intellectual Property Organization (WIPO), note: The International Bureau of WIPO assumes no responsibility with respect to the transformation of these data.",
+      "provider": "Banca Mondiale",
+      "source": "https://data.worldbank.org/indicator/IP.PAT.RESD",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/IP.PAT.RESD?date=1960:2025&format=json&per_page=20000",
+      "countries": 160,
+      "observations": 4226,
+      "updatedAt": "2026-10-08",
+      "period": [
+        1980,
+        2024
+      ]
+    },
+    {
+      "id": "SE.TER.GRAD.FE.SI.ZS",
+      "label": "Donne fra i laureati STEM",
+      "theme": "Istruzione e ricerca",
+      "unit": "Percentuale dei laureati STEM",
+      "definition": "Quota di donne fra i diplomati dei programmi STEM dell’istruzione superiore. Non è la quota di donne occupate in professioni STEM né la percentuale di donne laureate sulla popolazione. La serie è distribuita da EdStats; la scheda API acquisita non dettaglia la classificazione dei campi di studio, da verificare nella fonte per confronti specifici.",
+      "definitionLanguage": "it",
+      "organization": "Banca Mondiale · Education Statistics (EdStats)",
+      "provider": "Banca Mondiale",
+      "source": "https://data.worldbank.org/indicator/SE.TER.GRAD.FE.SI.ZS",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/SE.TER.GRAD.FE.SI.ZS?date=1960:2025&format=json&per_page=20000",
+      "countries": 158,
+      "observations": 1723,
+      "updatedAt": "2026-10-14",
+      "period": [
+        1998,
+        2025
+      ]
+    },
+    {
+      "id": "ESTAT.STEM.GRAD.RATE",
+      "label": "Laureati STEM rispetto alla popolazione giovane",
+      "theme": "Istruzione e ricerca",
+      "unit": "Laureati ogni 1.000 abitanti di 20–29 anni",
+      "definition": "Diplomati dell’istruzione terziaria in scienze naturali, matematica e statistica, ICT, ingegneria, manifattura e costruzioni (ISCED-F 05, 06 e 07), rapportati alla popolazione di 20–29 anni. Il denominatore non limita l’età dei diplomati. Flusso annuo, non totale degli ingegneri occupati.",
+      "definitionLanguage": "it",
+      "organization": "Eurostat · Graduates in tertiary education in STEM fields by sex - per thousand population aged 20 to 29",
+      "provider": "Eurostat",
+      "source": "https://ec.europa.eu/eurostat/databrowser/view/educ_uoe_grad04/default/table",
+      "api": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/educ_uoe_grad04?lang=EN&unit=P_THAB&isced11=ED5-8&sex=T",
+      "filters": {
+        "unit": "P_THAB",
+        "isced11": "ED5-8",
+        "sex": "T"
+      },
+      "transformation": "annual",
+      "countries": 37,
+      "observations": 409,
+      "updatedAt": "2026-10-06T23:00:00+0200",
+      "period": [
+        2012,
+        2024
+      ],
+      "defaultCountries": [
+        "ITA",
+        "FRA",
+        "DEU",
+        "ESP"
+      ]
+    },
+    {
+      "id": "SE.TER.GRAD.SC.ZS",
+      "label": "Laureati in scienze naturali, matematica e statistica",
+      "theme": "Istruzione e ricerca",
+      "unit": "Percentuale dei diplomati dell’istruzione superiore",
+      "definition": "Share of all tertiary graduates who completed Natural Sciences, Mathematics and Statistics programmes in the reference year.",
+      "definitionLanguage": "en",
+      "organization": "UNESCO Institute for Statistics",
+      "provider": "Banca Mondiale",
+      "source": "https://data.worldbank.org/indicator/SE.TER.GRAD.SC.ZS",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/SE.TER.GRAD.SC.ZS?date=1960:2025&format=json&per_page=20000",
+      "countries": 152,
+      "observations": 1263,
+      "updatedAt": "2024-06-25",
+      "period": [
+        1998,
+        2020
+      ]
+    },
+    {
+      "id": "SE.TER.TCHR",
+      "label": "Personale docente dell’istruzione superiore",
+      "theme": "Istruzione e ricerca",
+      "unit": "Persone",
+      "definition": "Total number of teachers in public and private tertiary education institutions (ISCED 5-8). Teachers are persons employed full time or part time in an official capacity to guide and direct the learning experience of pupils and students, irrespective of their qualifications or the delivery mechanism, i.e. face-to-face and/or at a distance. This definition excludes educational personnel who have no active teaching duties (e.g. headmasters, headmistresses or principals who do not teach) and persons who work occasionally or in a voluntary capacity in educational institutions.",
+      "definitionLanguage": "en",
+      "organization": "UNESCO Institute for Statistics",
+      "provider": "Banca Mondiale",
+      "source": "https://data.worldbank.org/indicator/SE.TER.TCHR",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/SE.TER.TCHR?date=1960:2025&format=json&per_page=20000",
+      "countries": 201,
+      "observations": 4027,
+      "updatedAt": "2024-06-25",
+      "period": [
+        1970,
+        2020
+      ]
+    },
+    {
+      "id": "ESTAT.ACADEMIC.STAFF",
+      "label": "Personale docente e accademico dell’istruzione superiore",
+      "theme": "Istruzione e ricerca",
+      "unit": "Persone",
+      "definition": "Personale docente e accademico dei livelli ISCED 5–8, entrambi i sessi e tutte le età. Conteggio di persone, non equivalenti a tempo pieno; non identifica soltanto i professori ordinari.",
+      "definitionLanguage": "it",
+      "organization": "Eurostat · Classroom teachers and academic staff by education level, programme orientation, sex and age groups",
+      "provider": "Eurostat",
+      "source": "https://ec.europa.eu/eurostat/databrowser/view/educ_uoe_perp01/default/table",
+      "api": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/educ_uoe_perp01?lang=EN&unit=NR&isced11=ED5-8&age=TOTAL&sex=T",
+      "filters": {
+        "unit": "NR",
+        "isced11": "ED5-8",
+        "age": "TOTAL",
+        "sex": "T"
+      },
+      "transformation": "annual",
+      "countries": 37,
+      "observations": 407,
+      "updatedAt": "2026-08-05T11:00:00+0200",
+      "period": [
+        2013,
+        2024
+      ],
+      "defaultCountries": [
+        "ITA",
+        "FRA",
+        "DEU",
+        "ESP"
+      ]
+    },
+    {
+      "id": "SP.POP.SCIE.RD.P6",
+      "label": "Ricercatori nella ricerca e sviluppo",
+      "theme": "Istruzione e ricerca",
+      "unit": "Ricercatori equivalenti a tempo pieno per milione di abitanti",
+      "definition": "The number of researchers engaged in Research &Development (R&D), expressed as per million. Researchers are professionals who conduct research and improve or develop concepts, theories, models techniques instrumentation, software of operational methods. R&D covers basic research, applied research, and experimental development.",
+      "definitionLanguage": "en",
+      "organization": "Stat Bulk Data Download Service, UN Educational, Scientific and Cultural Organization (UNESCO), uri: https://databrowser.uis.unesco.org/resources/bulk, publisher: UNESCO Institute for Statistics (UIS), date accessed: 2025-03-26, date published: 2025-02",
+      "provider": "Banca Mondiale",
+      "source": "https://data.worldbank.org/indicator/SP.POP.SCIE.RD.P6",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/SP.POP.SCIE.RD.P6?date=1960:2025&format=json&per_page=20000",
+      "countries": 145,
+      "observations": 1973,
+      "updatedAt": "2026-10-08",
+      "period": [
+        1996,
+        2024
+      ]
+    },
+    {
+      "id": "ESTAT.SCIENTISTS.ENGINEERS",
+      "label": "Specialisti scientifici, sanitari e ICT occupati",
+      "theme": "Istruzione e ricerca",
+      "unit": "Migliaia di persone",
+      "definition": "Persone di 15–74 anni occupate come specialisti nelle scienze e nell’ingegneria e nelle professioni sanitarie e ICT, secondo l’aggregato occupazionale Eurostat SE. Le professioni sanitarie sono incluse: non è il conteggio dei soli ingegneri. Indagine sulle forze di lavoro; leggere le segnalazioni di discontinuità.",
+      "definitionLanguage": "it",
+      "organization": "Eurostat · Human resources in science and technology (HRST) by category, sex and age",
+      "provider": "Eurostat",
+      "source": "https://ec.europa.eu/eurostat/databrowser/view/hrst_st_ncat/default/table",
+      "api": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/hrst_st_ncat?lang=EN&unit=THS_PER&category=SE&age=Y15-74&sex=T",
+      "filters": {
+        "unit": "THS_PER",
+        "category": "SE",
+        "age": "Y15-74",
+        "sex": "T"
+      },
+      "transformation": "annual",
+      "countries": 36,
+      "observations": 983,
+      "updatedAt": "2026-09-10T23:00:00+0200",
+      "period": [
+        1994,
+        2025
+      ],
+      "defaultCountries": [
+        "ITA",
+        "FRA",
+        "DEU",
+        "ESP"
+      ]
+    },
+    {
+      "id": "SE.XPD.TERT.PC.ZS",
+      "label": "Spesa pubblica per studente dell’istruzione superiore",
+      "theme": "Istruzione e ricerca",
+      "unit": "Percentuale del PIL per abitante",
+      "definition": "Government expenditure per student is the average general government expenditure (current, capital, and transfers) per student in the given level of education, expressed as a percentage of GDP per capita.",
+      "definitionLanguage": "en",
+      "organization": "Stat Bulk Data Download Service, UN Educational, Scientific and Cultural Organization (UNESCO), uri: https://uis.unesco.org/bdds, publisher: UNESCO Institute for Statistics (UIS)",
+      "provider": "Banca Mondiale",
+      "source": "https://data.worldbank.org/indicator/SE.XPD.TERT.PC.ZS",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/SE.XPD.TERT.PC.ZS?date=1960:2025&format=json&per_page=20000",
+      "countries": 168,
+      "observations": 1457,
+      "updatedAt": "2026-10-08",
+      "period": [
+        1970,
+        2018
+      ]
+    },
+    {
+      "id": "SE.TER.ENRL",
+      "label": "Studenti dell’istruzione superiore",
+      "theme": "Istruzione e ricerca",
+      "unit": "Studenti iscritti",
+      "definition": "The total number of students enrolled at public and private tertiary education institutions.",
+      "definitionLanguage": "en",
+      "organization": "UNESCO Institute for Statistics",
+      "provider": "Banca Mondiale",
+      "source": "https://data.worldbank.org/indicator/SE.TER.ENRL",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/SE.TER.ENRL?date=1960:2025&format=json&per_page=20000",
+      "countries": 203,
+      "observations": 5857,
+      "updatedAt": "2024-06-25",
+      "period": [
+        1970,
+        2020
+      ]
+    },
+    {
+      "id": "SP.POP.TECH.RD.P6",
+      "label": "Tecnici nella ricerca e sviluppo",
+      "theme": "Istruzione e ricerca",
+      "unit": "Tecnici equivalenti a tempo pieno per milione di abitanti",
+      "definition": "The number of technicians participated in Research & Development (R&D), expressed as per million. Technicians and equivalent staff are people who perform scientific and technical tasks involving the application of concepts and operational methods, normally under the supervision of researchers. R&D covers basic research, applied research, and experimental development.",
+      "definitionLanguage": "en",
+      "organization": "UNESCO Institute of Statistics (UIS), UN Educational, Scientific and Cultural Organization (UNESCO), uri: http://uis.unesco.org, note: Data as of March 2021, publisher: UNESCO Institute of Statistics (UIS)",
+      "provider": "Banca Mondiale",
+      "source": "https://data.worldbank.org/indicator/SP.POP.TECH.RD.P6",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/SP.POP.TECH.RD.P6?date=1960:2025&format=json&per_page=20000",
+      "countries": 122,
+      "observations": 1166,
+      "updatedAt": "2026-10-08",
+      "period": [
+        1996,
+        2018
+      ]
+    },
+    {
+      "id": "SL.UEM.TOTL.ZS",
+      "label": "Disoccupazione",
+      "theme": "Lavoro",
+      "unit": "% della forza lavoro; stima ILO",
+      "definition": "Unemployment refers to the share of the labor force that is without work but available for and seeking employment.",
+      "organization": "ILO Modelled Estimates database (ILOEST), International Labour Organization (ILO), uri: https://ilostat.ilo.org/data/bulk/, publisher: ILOSTAT, type: external database, date accessed: January 17, 2026",
+      "source": "https://data.worldbank.org/indicator/SL.UEM.TOTL.ZS",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/SL.UEM.TOTL.ZS?date=1960:2024&format=json&per_page=20000",
+      "countries": 187,
+      "observations": 6349,
+      "updatedAt": "2026-10-08",
+      "provider": "Banca Mondiale",
+      "definitionLanguage": "en",
+      "period": [
+        1991,
+        2024
+      ]
+    },
+    {
+      "id": "SL.TLF.TOTL.IN",
+      "label": "Forza lavoro complessiva",
+      "theme": "Lavoro",
+      "unit": "Persone",
+      "definition": "Labor force comprises people ages 15 and older who supply labor for the production of goods and services during a specified period. It includes people who are currently employed and people who are unemployed but seeking work as well as first-time job-seekers. Not everyone who works is included, however. Unpaid workers, family workers, and students are often omitted, and some countries do not count members of the armed forces. Labor force size tends to vary during the year as seasonal workers enter and leave.",
+      "definitionLanguage": "en",
+      "organization": "International Labour Organization (ILO), type: estimates based on external database;\nUnited Nations (UN), publisher: UN Population Division;\nStaff estimates, World Bank (WB)",
+      "provider": "Banca Mondiale",
+      "source": "https://data.worldbank.org/indicator/SL.TLF.TOTL.IN",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/SL.TLF.TOTL.IN?date=1960:2025&format=json&per_page=20000",
+      "countries": 187,
+      "observations": 6718,
+      "updatedAt": "2026-10-08",
+      "period": [
+        1990,
+        2025
+      ]
+    },
+    {
+      "id": "SL.UEM.NEET.ZS",
+      "label": "Giovani fuori da lavoro, studio e formazione",
+      "theme": "Lavoro",
+      "unit": "Percentuale dei giovani di 15–24 anni",
+      "definition": "The share of youth not in education, employment or training (also known as “the NEET rate”) conveys the number of young persons not in education, employment or training as a percentage of the total youth population. Youth not in education are those who were neither enrolled in school nor in a formal training program (e.g. vocational training). For the purposes of this indicator, youth is defined as all persons between the ages of 15 and 24 (inclusive).",
+      "definitionLanguage": "en",
+      "organization": "Labour Force Statistics database (LFS), International Labour Organization (ILO), uri: https://ilostat.ilo.org/data/bulk/, publisher: ILOSTAT, type: external database, date accessed: September 28, 2026",
+      "provider": "Banca Mondiale",
+      "source": "https://data.worldbank.org/indicator/SL.UEM.NEET.ZS",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/SL.UEM.NEET.ZS?date=1960:2025&format=json&per_page=20000",
+      "countries": 183,
+      "observations": 2572,
+      "updatedAt": "2026-10-08",
+      "period": [
+        1970,
+        2025
+      ]
+    },
+    {
+      "id": "SL.EMP.WORK.ZS",
+      "label": "Lavoratori dipendenti sul totale degli occupati",
+      "theme": "Lavoro",
+      "unit": "Percentuale degli occupati",
+      "definition": "Wage and salaried workers (employees) are those workers who hold the type of jobs defined as \"paid employment jobs,\" where the incumbents hold explicit (written or oral) or implicit employment contracts that give them a basic remuneration that is not directly dependent upon the revenue of the unit for which they work.",
+      "definitionLanguage": "en",
+      "organization": "ILO Modelled Estimates database (ILOEST), International Labour Organization (ILO), uri: https://ilostat.ilo.org/data/bulk/, publisher: ILOSTAT, type: external database, date accessed: January 17, 2026",
+      "provider": "Banca Mondiale",
+      "source": "https://data.worldbank.org/indicator/SL.EMP.WORK.ZS",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/SL.EMP.WORK.ZS?date=1960:2025&format=json&per_page=20000",
+      "countries": 187,
+      "observations": 6531,
+      "updatedAt": "2026-10-08",
+      "period": [
+        1991,
+        2025
+      ]
+    },
+    {
+      "id": "SL.EMP.VULN.ZS",
+      "label": "Occupazione vulnerabile",
+      "theme": "Lavoro",
+      "unit": "Percentuale degli occupati",
+      "definition": "Vulnerable employment is contributing family workers and own-account workers as a percentage of total employment.",
+      "definitionLanguage": "en",
+      "organization": "ILO Modelled Estimates database (ILOEST), International Labour Organization (ILO), uri: https://ilostat.ilo.org/data/bulk/, publisher: ILOSTAT, type: estimates based on external database;\nStaff estimates, World Bank (WB)",
+      "provider": "Banca Mondiale",
+      "source": "https://data.worldbank.org/indicator/SL.EMP.VULN.ZS",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/SL.EMP.VULN.ZS?date=1960:2025&format=json&per_page=20000",
+      "countries": 187,
+      "observations": 6531,
+      "updatedAt": "2026-10-08",
+      "period": [
+        1991,
+        2025
+      ]
+    },
+    {
+      "id": "SL.TLF.ADVN.ZS",
+      "label": "Partecipazione al lavoro delle persone con istruzione avanzata",
+      "theme": "Lavoro",
+      "unit": "Percentuale della popolazione in età lavorativa con istruzione avanzata",
+      "definition": "The ratio of the labor force with advanced education to the working-age population with advanced education. Advanced education comprises short-cycle tertiary education, a bachelor’s degree or equivalent education level, a master’s degree or equivalent education level, or doctoral degree or equivalent education level according to the International Standard Classification of Education 2011 (ISCED 2011).",
+      "definitionLanguage": "en",
+      "organization": "Education and Mismatch Indicators database (EMI), International Labour Organization (ILO), uri: https://ilostat.ilo.org/data/bulk/, publisher: ILOSTAT, type: external database, date accessed: March 30, 2026",
+      "provider": "Banca Mondiale",
+      "source": "https://data.worldbank.org/indicator/SL.TLF.ADVN.ZS",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/SL.TLF.ADVN.ZS?date=1960:2025&format=json&per_page=20000",
+      "countries": 183,
+      "observations": 2446,
+      "updatedAt": "2026-10-08",
+      "period": [
+        1970,
+        2025
+      ]
+    },
+    {
+      "id": "SL.TLF.CACT.FE.ZS",
+      "label": "Partecipazione femminile al lavoro",
+      "theme": "Lavoro",
+      "unit": "% delle donne dai 15 anni; stima ILO",
+      "definition": "The labor force participation rate is the labor force as a percent of the population ages 15 and older. The labor force is the sum of all persons of working age who are employed and those who are unemployed.",
+      "organization": "ILO Modelled Estimates database (ILOEST), International Labour Organization (ILO), uri: https://ilostat.ilo.org/data/bulk/, publisher: ILOSTAT, type: external database, date accessed: January 17, 2026",
+      "source": "https://data.worldbank.org/indicator/SL.TLF.CACT.FE.ZS",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/SL.TLF.CACT.FE.ZS?date=1960:2024&format=json&per_page=20000",
+      "countries": 187,
+      "observations": 6536,
+      "updatedAt": "2026-10-08",
+      "provider": "Banca Mondiale",
+      "definitionLanguage": "en",
+      "period": [
+        1990,
+        2024
+      ]
+    },
+    {
+      "id": "ILO.OUTPUT.HOUR.PPP",
+      "label": "Produttività per ora lavorata",
+      "theme": "Lavoro",
+      "unit": "PIL in dollari internazionali costanti 2021 per ora",
+      "definition": "PIL reale per ora lavorata, stima modellata ILO di novembre 2025, in dollari internazionali costanti 2021. Misura la produttività economica media, non quanto riceve il lavoratore come salario. Sono escluse tutte le osservazioni successive al 2025.",
+      "definitionLanguage": "it",
+      "organization": "Organizzazione internazionale del lavoro · ILOSTAT",
+      "provider": "ILOSTAT",
+      "source": "https://ilostat.ilo.org/data/",
+      "api": "https://rplumber.ilo.org/data/indicator/?id=GDP_2HRW_NOC_NB_A&format=.csv",
+      "countries": 186,
+      "observations": 3892,
+      "updatedAt": "02/12/2025 12:06:11",
+      "period": [
+        2005,
+        2025
+      ],
+      "defaultCountries": [
+        "CHN",
+        "VNM",
+        "CUB",
+        "USA"
+      ],
+      "filters": {},
+      "selection": "Longest country survey coverage, then latest year, then source code ascending"
+    },
+    {
+      "id": "SL.GDP.PCAP.EM.KD",
+      "label": "Produttività per persona occupata",
+      "theme": "Lavoro",
+      "unit": "PIL in dollari internazionali costanti 2021 per occupato",
+      "definition": "GDP per person employed is gross domestic product (GDP) divided by total employment in the economy. Purchasing power parity (PPP) GDP is GDP converted to 2021 constant international dollars using PPP rates. An international dollar has the same purchasing power over GDP that a U.S. dollar has in the United States.",
+      "definitionLanguage": "en",
+      "organization": "Staff estimates, World Bank (WB), note: Estimates are based on employment, population, GDP, and PPP data obtained from International Labour Organization, United Nations Population Division, Eurostat, OECD, and World Bank., type: estimates based on external database;\nInternational Labour Organization (ILO);\nUnited Nations (UN), publisher: UN Population Division;\nEurostat (ESTAT);\nOrganisation for Economic Co-operation and Development (OECD);\nWorld Development Indicators database, World Bank (WB)",
+      "provider": "Banca Mondiale",
+      "source": "https://data.worldbank.org/indicator/SL.GDP.PCAP.EM.KD",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/SL.GDP.PCAP.EM.KD?date=1960:2025&format=json&per_page=20000",
+      "countries": 177,
+      "observations": 6119,
+      "updatedAt": "2026-10-08",
+      "period": [
+        1991,
+        2025
+      ]
+    },
+    {
+      "id": "NV.AGR.EMPL.KD",
+      "label": "Valore aggiunto agricolo per lavoratore",
+      "theme": "Produzione",
+      "unit": "Dollari USA costanti 2015 per occupato agricolo",
+      "definition": "Agriculture, forestry, and fishing corresponds to ISIC (Rev. 4) divisions 01-03 and includes the exploitation of vegetal and animal natural resources, comprising the activities of growing of crops, raising and breeding of animals, harvesting of timber and other plants, animals or animal products from a farm or their natural habitats.Value added is the contribution to the economy by a producer or an industry or an institutional sector, which is estimated by the total value of output produced and deducting the total value of intermediate consumption of goods and services used to produce that output. This indicator is expressed in constant prices, meaning the series has been adjusted to account for price changes over time. The reference year for this adjustment is 2015. This indicator is expressed in United States dollars.",
+      "definitionLanguage": "en",
+      "organization": "World Development Indicators database, World Bank (WB);\nILOSTAT database, International Labour Organization (ILO)",
+      "provider": "Banca Mondiale",
+      "source": "https://data.worldbank.org/indicator/NV.AGR.EMPL.KD",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/NV.AGR.EMPL.KD?date=1960:2025&format=json&per_page=20000",
+      "countries": 179,
+      "observations": 5610,
+      "updatedAt": "2026-10-08",
+      "period": [
+        1991,
+        2025
+      ]
+    },
+    {
+      "id": "EG.IMP.CONS.ZS",
+      "label": "Importazioni nette di energia",
+      "theme": "Produzione e risorse",
+      "unit": "Percentuale dell’uso di energia",
+      "definition": "Net energy imports are estimated as gross imports less gross exports, both measured in tons of oil equivalents (toe). A negative value indicates that the country is a net exporter. Energy use refers to use of primary energy before transformation to other end-use fuels, which is equal to indigenous production plus imports and stock changes, minus exports and fuels supplied to ships and aircraft engaged in international transport.",
+      "definitionLanguage": "en",
+      "organization": "IEA Energy Statistics Data Browser, International Energy Agency (IEA), uri: https://www.iea.org/data-and-statistics/data-tools/energy-statistics-data-browser, publisher: International Energy Agency (IEA), date accessed: 2025-03-25",
+      "provider": "Banca Mondiale",
+      "source": "https://data.worldbank.org/indicator/EG.IMP.CONS.ZS",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/EG.IMP.CONS.ZS?date=1960:2025&format=json&per_page=20000",
+      "countries": 145,
+      "observations": 4617,
+      "updatedAt": "2026-10-08",
+      "period": [
+        1990,
+        2024
+      ]
+    },
+    {
+      "id": "NE.GDI.TOTL.ZS",
+      "label": "Investimenti lordi sul PIL",
+      "theme": "Produzione e risorse",
+      "unit": "Percentuale del PIL",
+      "definition": "Gross capital formation includes acquisitions less disposals of produced assets for purposes of fixed capital formation, inventories or valuables. This indicator is expressed as a percentage of Gross Domestic Product (GDP) which is the total income earned through the production of goods and services in an economic territory during an accounting period.",
+      "definitionLanguage": "en",
+      "organization": "Country official statistics, National Statistical Organizations and/or Central Banks;\nNational Accounts data files, Organisation for Economic Co-operation and Development (OECD);\nStaff estimates, World Bank (WB)",
+      "provider": "Banca Mondiale",
+      "source": "https://data.worldbank.org/indicator/NE.GDI.TOTL.ZS",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/NE.GDI.TOTL.ZS?date=1960:2025&format=json&per_page=20000",
+      "countries": 187,
+      "observations": 8670,
+      "updatedAt": "2026-10-08",
+      "period": [
+        1960,
+        2025
+      ]
+    },
+    {
+      "id": "NY.GDP.TOTL.RT.ZS",
+      "label": "Rendite delle risorse naturali sul PIL",
+      "theme": "Produzione e risorse",
+      "unit": "Percentuale del PIL",
+      "definition": "Total natural resources rents are the sum of oil rents, natural gas rents, coal rents (hard and soft), mineral rents, and forest rents.",
+      "definitionLanguage": "en",
+      "organization": "The Changing Wealth of Nations, World Bank (WB), uri: https://www.worldbank.org/en/publication/changing-wealth-of-nations/data, note: World Bank staff estimates based on sources and methods described in the World Bank's The Changing Wealth of Nations., publisher: World Bank (WB);\nStaff estimates, World Bank (WB), note: World Bank staff estimates based on sources and methods described in the World Bank's The Changing Wealth of Nations.",
+      "provider": "Banca Mondiale",
+      "source": "https://data.worldbank.org/indicator/NY.GDP.TOTL.RT.ZS",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/NY.GDP.TOTL.RT.ZS?date=1960:2025&format=json&per_page=20000",
+      "countries": 214,
+      "observations": 9235,
+      "updatedAt": "2026-10-08",
+      "period": [
+        1970,
+        2021
+      ]
+    },
+    {
+      "id": "NY.GDP.MINR.RT.ZS",
+      "label": "Rendite minerarie sul PIL",
+      "theme": "Produzione e risorse",
+      "unit": "Percentuale del PIL",
+      "definition": "Mineral rents are the difference between the value of production for a stock of minerals at world prices and their total costs of production. Minerals included in the calculation are tin, gold, lead, zinc, iron, copper, nickel, silver, bauxite, and phosphate.",
+      "definitionLanguage": "en",
+      "organization": "The Changing Wealth of Nations, World Bank (WB), uri: https://www.worldbank.org/en/publication/changing-wealth-of-nations/data, note: World Bank staff estimates based on sources and methods described in the World Bank's The Changing Wealth of Nations., publisher: World Bank (WB);\nStaff estimates, World Bank (WB), note: World Bank staff estimates based on sources and methods described in the World Bank's The Changing Wealth of Nations.",
+      "provider": "Banca Mondiale",
+      "source": "https://data.worldbank.org/indicator/NY.GDP.MINR.RT.ZS",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/NY.GDP.MINR.RT.ZS?date=1960:2025&format=json&per_page=20000",
+      "countries": 214,
+      "observations": 9267,
+      "updatedAt": "2026-10-08",
+      "period": [
+        1970,
+        2021
+      ]
+    },
+    {
+      "id": "NV.IND.MANF.KD",
+      "label": "Valore aggiunto manifatturiero reale",
+      "theme": "Produzione e risorse",
+      "unit": "Dollari USA costanti 2015",
+      "definition": "Manufacturing includes industries classified in ISIC (Rev. 3) major division C and is defined as the physical or chemical transformation of materials or components into new products. Value added is the contribution to the economy by a producer or an industry or an institutional sector, which is estimated by the total value of output produced and deducting the total value of intermediate consumption of goods and services used to produce that output. This indicator is expressed in constant prices, meaning the series has been adjusted to account for price changes over time. The reference year for this adjustment is 2015. This indicator is expressed in United States dollars.",
+      "definitionLanguage": "en",
+      "organization": "Country official statistics, National Statistical Offices (NSOs);\nNational Accounts data files, Central Banks;\nStaff estimates, World Bank (WB)",
+      "provider": "Banca Mondiale",
+      "source": "https://data.worldbank.org/indicator/NV.IND.MANF.KD",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/NV.IND.MANF.KD?date=1960:2025&format=json&per_page=20000",
+      "countries": 194,
+      "observations": 7491,
+      "updatedAt": "2026-10-08",
+      "period": [
+        1960,
+        2025
+      ]
+    },
+    {
+      "id": "NV.IND.MANF.CD",
+      "label": "Valore aggiunto manifatturiero, dollari correnti",
+      "theme": "Produzione e risorse",
+      "unit": "Dollari USA correnti",
+      "definition": "Manufacturing includes industries classified in ISIC (Rev. 3) major division C and is defined as the physical or chemical transformation of materials or components into new products. Value added is the contribution to the economy by a producer or an industry or an institutional sector, which is estimated by the total value of output produced and deducting the total value of intermediate consumption of goods and services used to produce that output. This indicator is expressed in current prices, meaning no adjustment has been made to account for price changes over time. This indicator is expressed in United States dollars.",
+      "definitionLanguage": "en",
+      "organization": "Country official statistics, National Statistical Offices (NSOs);\nNational Accounts data files, Central Banks;\nStaff estimates, World Bank (WB)",
+      "provider": "Banca Mondiale",
+      "source": "https://data.worldbank.org/indicator/NV.IND.MANF.CD",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/NV.IND.MANF.CD?date=1960:2025&format=json&per_page=20000",
+      "countries": 204,
+      "observations": 8243,
+      "updatedAt": "2026-10-08",
+      "period": [
+        1960,
+        2025
+      ]
+    },
+    {
+      "id": "NE.CON.PRVT.PP.KD",
+      "label": "Consumi delle famiglie e delle istituzioni senza scopo di lucro",
+      "theme": "Reddito e potere d’acquisto",
+      "unit": "Dollari internazionali costanti 2021: totale nazionale",
+      "definition": "This indicator provides values for final consumption expenditure expressed in constant international dollars, converted by purchasing power parities (PPPs). PPPs account for the different price levels across countries and thus PPP-based comparisons of economic output are more appropriate for comparing the output of economies and the average material well-being of their inhabitants than exchange-rate based comparisons. \n\nHouseholds and NPISHs final consumption expenditure includes expenditure on goods and services by the Household and NPISH sector for the direct satisfaction of human needs or wants, whether individual or collective. This indicator is expressed in constant prices, meaning the series has been adjusted to account for price changes over time. The reference year for this adjustment is 2021. The PPP conversion factor is a currency conversion factor and a spatial price deflator. PPPs convert different currencies to a common currency and, in the process of conversion, equalize their purchasing power by eliminating the differences in price levels between countries, thereby allowing volume or output comparisons of GDP and its expenditure components.",
+      "definitionLanguage": "en",
+      "organization": "International Comparison Program (ICP), World Bank (WB), uri: https://www.worldbank.org/en/programs/icp/data, note: This information is for ICP’s PPPs utilized in WDI, publisher: International Comparison Program (ICP), date accessed: May 30, 2024, date published: May 30, 2024;\nThe Eurostat PPP Programme, Eurostat (ESTAT), uri: https://ec.europa.eu/eurostat/databrowser/explore/all/all_themes, publisher: Eurostat;\nThe OECD PPP Programme, Organisation for Economic Co-operation and Development (OECD), uri: https://data-explorer.oecd.org/, publisher: OECD;\nStaff estimates, World Bank (WB);\nNational Accounts data files, Organisation for Economic Co-operation and Development (OECD);\nWorld Economic Outlook database, International Monetary Fund (IMF)",
+      "provider": "Banca Mondiale",
+      "source": "https://data.worldbank.org/indicator/NE.CON.PRVT.PP.KD",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/NE.CON.PRVT.PP.KD?date=1960:2025&format=json&per_page=20000",
+      "countries": 176,
+      "observations": 5145,
+      "updatedAt": "2026-10-08",
+      "period": [
+        1990,
+        2025
+      ]
+    },
+    {
+      "id": "DERIVED.CONSUMPTION.PCAP.PPP",
+      "label": "Consumi privati per abitante a parità di potere d’acquisto",
+      "theme": "Reddito e potere d’acquisto",
+      "unit": "Dollari internazionali costanti 2021 per abitante",
+      "definition": "Consumi finali delle famiglie e delle istituzioni senza scopo di lucro al servizio delle famiglie, in PPP a prezzi costanti 2021, divisi per la popolazione dello stesso paese e anno. Non è salario, reddito disponibile individuale o consumo mediano; non include nello stesso modo i servizi collettivi finanziati direttamente dallo Stato.",
+      "definitionLanguage": "it",
+      "organization": "International Comparison Program (ICP), World Bank (WB), uri: https://www.worldbank.org/en/programs/icp/data, note: This information is for ICP’s PPPs utilized in WDI, publisher: International Comparison Program (ICP), date accessed: May 30, 2024, date published: May 30, 2024;\nThe Eurostat PPP Programme, Eurostat (ESTAT), uri: https://ec.europa.eu/eurostat/databrowser/explore/all/all_themes, publisher: Eurostat;\nThe OECD PPP Programme, Organisation for Economic Co-operation and Development (OECD), uri: https://data-explorer.oecd.org/, publisher: OECD;\nStaff estimates, World Bank (WB);\nNational Accounts data files, Organisation for Economic Co-operation and Development (OECD);\nWorld Economic Outlook database, International Monetary Fund (IMF)",
+      "provider": "Banca Mondiale",
+      "source": "https://data.worldbank.org/indicator/NE.CON.PRVT.PP.KD",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/NE.CON.PRVT.PP.KD?date=1960:2025&format=json&per_page=20000",
+      "countries": 176,
+      "observations": 5015,
+      "updatedAt": "2026-10-08",
+      "period": [
+        1990,
+        2024
+      ],
+      "components": [
+        "NE.CON.PRVT.PP.KD",
+        "SP.POP.TOTL"
+      ],
+      "transformation": "Private consumption PPP / population, matched country and year, positive denominator"
+    },
+    {
+      "id": "FP.CPI.TOTL.ZG",
+      "label": "Inflazione dei prezzi al consumo",
+      "theme": "Reddito e potere d’acquisto",
+      "unit": "Variazione percentuale annua",
+      "definition": "Inflation as measured by the consumer price index reflects the annual percentage change in the cost to the average consumer of acquiring a basket of goods and services that may be fixed or changed at specified intervals, such as yearly.",
+      "definitionLanguage": "en",
+      "organization": "International Financial Statistics database, International Monetary Fund (IMF)",
+      "provider": "Banca Mondiale",
+      "source": "https://data.worldbank.org/indicator/FP.CPI.TOTL.ZG",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/FP.CPI.TOTL.ZG?date=1960:2025&format=json&per_page=20000",
+      "countries": 193,
+      "observations": 9151,
+      "updatedAt": "2026-10-08",
+      "period": [
+        1960,
+        2025
+      ]
+    },
+    {
+      "id": "SI.DST.FRST.20",
+      "label": "Quota di reddito del quinto più povero",
+      "theme": "Reddito e potere d’acquisto",
+      "unit": "Percentuale del reddito o dei consumi",
+      "definition": "Percentage share of income or consumption is the share that accrues to subgroups of population indicated by deciles or quintiles. Percentage shares by quintile may not sum to 100 because of rounding.",
+      "definitionLanguage": "en",
+      "organization": "World Bank, Poverty and Inequality Platform. Data are based on primary household survey data obtained from government statistical agencies and World Bank country departments. Data for high-income economies are mostly from the Luxembourg Income Study database. For more information and methodology, please see http://pip.worldbank.org., World Bank (WB), uri: http://pip.worldbank.org, note: Data are based on primary household survey data obtained from government statistical agencies and World Bank country departments. Data for high-income economies are mostly from the Luxembourg Income Study database.",
+      "provider": "Banca Mondiale",
+      "source": "https://data.worldbank.org/indicator/SI.DST.FRST.20",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/SI.DST.FRST.20?date=1960:2025&format=json&per_page=20000",
+      "countries": 171,
+      "observations": 2434,
+      "updatedAt": "2026-10-08",
+      "period": [
+        1963,
+        2025
+      ]
+    },
+    {
+      "id": "NY.GNP.PCAP.PP.KD",
+      "label": "Reddito nazionale per abitante a parità di potere d’acquisto",
+      "theme": "Reddito e potere d’acquisto",
+      "unit": "Dollari internazionali costanti 2021 per abitante",
+      "definition": "This indicator provides values for gross national income (GNI) per person expressed in constant international dollars, converted by purchasing power parities (PPPs). PPPs account for the different price levels across countries and thus PPP-based comparisons of economic output are more appropriate for comparing the output of economies and the average material well-being of their inhabitants than exchange-rate based comparisons. \n\nGross national income is the total income earned by all residents within an economic territory during an accounting period. It is equal to gross domestic product plus earned income receivable from abroad minus earned income payable abroad. The core indicator has been divided by the general population to achieve a per capita estimate. This indicator is expressed in constant prices, meaning the series has been adjusted to account for price changes over time. The reference year for this adjustment is 2021. The PPP conversion factor is a currency conversion factor and a spatial price deflator. PPPs convert different currencies to a common currency and, in the process of conversion, equalize their purchasing power by eliminating the differences in price levels between countries, thereby allowing volume or output comparisons of GDP and its expenditure components.",
+      "definitionLanguage": "en",
+      "organization": "International Comparison Program (ICP), World Bank (WB), uri: https://www.worldbank.org/en/programs/icp/data, note: This information is for ICP’s PPPs utilized in WDI, publisher: International Comparison Program (ICP), date accessed: May 30, 2024, date published: May 30, 2024;\nThe Eurostat PPP Programme, Eurostat (ESTAT), uri: https://ec.europa.eu/eurostat/databrowser/explore/all/all_themes, publisher: Eurostat;\nThe OECD PPP Programme, Organisation for Economic Co-operation and Development (OECD), uri: https://data-explorer.oecd.org/, publisher: OECD;\nStaff estimates, World Bank (WB);\nNational Accounts data files, Organisation for Economic Co-operation and Development (OECD);\nWorld Economic Outlook database, International Monetary Fund (IMF)",
+      "provider": "Banca Mondiale",
+      "source": "https://data.worldbank.org/indicator/NY.GNP.PCAP.PP.KD",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/NY.GNP.PCAP.PP.KD?date=1960:2025&format=json&per_page=20000",
+      "countries": 197,
+      "observations": 4590,
+      "updatedAt": "2026-10-08",
+      "period": [
+        1990,
+        2025
+      ]
+    },
+    {
+      "id": "ILO.WAGE.MONTH.MEDIAN.PPP",
+      "label": "Salario mensile mediano a parità di potere d’acquisto",
+      "theme": "Salari e potere d’acquisto",
+      "unit": "Dollari PPP 2021 per mese",
+      "definition": "Retribuzione dei lavoratori dipendenti, totale dei sessi, convertita da ILOSTAT con la classificazione CUR_TYPE_PPP (PPP 2021). La media e la mediana descrivono distribuzioni diverse. Copertura settoriale, lavoratori inclusi e trattamento delle componenti retributive possono variare fra indagini: leggere i metadati originali. Non è reddito netto disponibile e non va interpretata automaticamente come salario reale a prezzi costanti nel tempo. Le serie nazionali selezionate sono riportate sotto il grafico.",
+      "definitionLanguage": "it",
+      "organization": "Organizzazione internazionale del lavoro · ILOSTAT",
+      "provider": "ILOSTAT",
+      "source": "https://ilostat.ilo.org/data/",
+      "api": "https://rplumber.ilo.org/data/indicator/?id=EAR_EMTM_SEX_CUR_NB_A&format=.csv",
+      "countries": 138,
+      "observations": 1482,
+      "updatedAt": "13/10/2026 07:00:06",
+      "period": [
+        1990,
+        2025
+      ],
+      "defaultCountries": [
+        "VNM",
+        "USA",
+        "ITA",
+        "FRA"
+      ],
+      "filters": {
+        "sex": "SEX_T",
+        "classif1": "CUR_TYPE_PPP"
+      },
+      "selection": "Longest country survey coverage, then latest year, then source code ascending"
+    },
+    {
+      "id": "ILO.WAGE.MONTH.PPP",
+      "label": "Salario mensile medio a parità di potere d’acquisto",
+      "theme": "Salari e potere d’acquisto",
+      "unit": "Dollari PPP 2021 per mese",
+      "definition": "Retribuzione dei lavoratori dipendenti, totale dei sessi, convertita da ILOSTAT con la classificazione CUR_TYPE_PPP (PPP 2021). La media e la mediana descrivono distribuzioni diverse. Copertura settoriale, lavoratori inclusi e trattamento delle componenti retributive possono variare fra indagini: leggere i metadati originali. Non è reddito netto disponibile e non va interpretata automaticamente come salario reale a prezzi costanti nel tempo. Le serie nazionali selezionate sono riportate sotto il grafico.",
+      "definitionLanguage": "it",
+      "organization": "Organizzazione internazionale del lavoro · ILOSTAT",
+      "provider": "ILOSTAT",
+      "source": "https://ilostat.ilo.org/data/",
+      "api": "https://rplumber.ilo.org/data/indicator/?id=EAR_EMTA_SEX_CUR_NB_A&format=.csv",
+      "countries": 168,
+      "observations": 1977,
+      "updatedAt": "15/10/2026 07:00:04",
+      "period": [
+        1990,
+        2025
+      ],
+      "defaultCountries": [
+        "CHN",
+        "VNM",
+        "USA",
+        "ITA"
+      ],
+      "filters": {
+        "sex": "SEX_T",
+        "classif1": "CUR_TYPE_PPP"
+      },
+      "selection": "Longest country survey coverage, then latest year, then source code ascending"
+    },
+    {
+      "id": "ILO.WAGE.HOUR.MEDIAN.PPP",
+      "label": "Salario orario mediano a parità di potere d’acquisto",
+      "theme": "Salari e potere d’acquisto",
+      "unit": "Dollari PPP 2021 per ora",
+      "definition": "Retribuzione dei lavoratori dipendenti, totale dei sessi, convertita da ILOSTAT con la classificazione CUR_TYPE_PPP (PPP 2021). La media e la mediana descrivono distribuzioni diverse. Copertura settoriale, lavoratori inclusi e trattamento delle componenti retributive possono variare fra indagini: leggere i metadati originali. Non è reddito netto disponibile e non va interpretata automaticamente come salario reale a prezzi costanti nel tempo. Le serie nazionali selezionate sono riportate sotto il grafico.",
+      "definitionLanguage": "it",
+      "organization": "Organizzazione internazionale del lavoro · ILOSTAT",
+      "provider": "ILOSTAT",
+      "source": "https://ilostat.ilo.org/data/",
+      "api": "https://rplumber.ilo.org/data/indicator/?id=EAR_EHRM_SEX_CUR_NB_A&format=.csv",
+      "countries": 96,
+      "observations": 810,
+      "updatedAt": "13/10/2026 07:00:06",
+      "period": [
+        1991,
+        2025
+      ],
+      "defaultCountries": [
+        "VNM",
+        "USA",
+        "ITA",
+        "FRA"
+      ],
+      "filters": {
+        "sex": "SEX_T",
+        "classif1": "CUR_TYPE_PPP"
+      },
+      "selection": "Longest country survey coverage, then latest year, then source code ascending"
+    },
+    {
+      "id": "ILO.WAGE.HOUR.PPP",
+      "label": "Salario orario medio a parità di potere d’acquisto",
+      "theme": "Salari e potere d’acquisto",
+      "unit": "Dollari PPP 2021 per ora",
+      "definition": "Retribuzione dei lavoratori dipendenti, totale dei sessi, convertita da ILOSTAT con la classificazione CUR_TYPE_PPP (PPP 2021). La media e la mediana descrivono distribuzioni diverse. Copertura settoriale, lavoratori inclusi e trattamento delle componenti retributive possono variare fra indagini: leggere i metadati originali. Non è reddito netto disponibile e non va interpretata automaticamente come salario reale a prezzi costanti nel tempo. Le serie nazionali selezionate sono riportate sotto il grafico.",
+      "definitionLanguage": "it",
+      "organization": "Organizzazione internazionale del lavoro · ILOSTAT",
+      "provider": "ILOSTAT",
+      "source": "https://ilostat.ilo.org/data/",
+      "api": "https://rplumber.ilo.org/data/indicator/?id=EAR_EHRA_SEX_CUR_NB_A&format=.csv",
+      "countries": 133,
+      "observations": 1036,
+      "updatedAt": "13/10/2026 07:00:06",
+      "period": [
+        1991,
+        2025
+      ],
+      "defaultCountries": [
+        "VNM",
+        "USA",
+        "ITA",
+        "FRA"
+      ],
+      "filters": {
+        "sex": "SEX_T",
+        "classif1": "CUR_TYPE_PPP"
+      },
+      "selection": "Longest country survey coverage, then latest year, then source code ascending"
+    },
+    {
+      "id": "SP.DYN.LE00.IN",
+      "label": "Aspettativa di vita",
+      "theme": "Salute",
+      "unit": "Anni",
+      "definition": "Life expectancy at birth indicates the number of years a newborn infant would live if prevailing patterns of mortality at the time of its birth were to stay the same throughout its life.",
+      "organization": "World Population Prospects, United Nations (UN), uri: UN Population Division;\nStatistical databases and publications from national statistical offices, National Statistical Offices (NSOs), note: Derived from male and female life expectancy at birth from sources such as statistical databases and publications from national statistical offices.;\nDemographic Statistics, Eurostat (ESTAT), note: Derived from male and female life expectancy at birth from sources such as Eurostat: Demographic Statistics.",
+      "source": "https://data.worldbank.org/indicator/SP.DYN.LE00.IN",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/SP.DYN.LE00.IN?date=1960:2024&format=json&per_page=20000",
+      "countries": 217,
+      "observations": 14071,
+      "updatedAt": "2026-10-08",
+      "provider": "Banca Mondiale",
+      "definitionLanguage": "en",
+      "period": [
+        1960,
+        2024
+      ]
+    },
+    {
+      "id": "SH.MED.PHYS.ZS",
+      "label": "Medici",
+      "theme": "Salute",
+      "unit": "Per 1.000 abitanti",
+      "definition": "Physicians include generalist and specialist medical practitioners.",
+      "organization": "Global Health Workforce Statistics, World Health Organization (WHO);\nOrganisation for Economic Co-operation and Development (OECD);\nCountry data",
+      "source": "https://data.worldbank.org/indicator/SH.MED.PHYS.ZS",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/SH.MED.PHYS.ZS?date=1960:2024&format=json&per_page=20000",
+      "countries": 208,
+      "observations": 5359,
+      "updatedAt": "2026-10-08",
+      "provider": "Banca Mondiale",
+      "definitionLanguage": "en",
+      "period": [
+        1960,
+        2023
+      ]
+    },
+    {
+      "id": "SP.DYN.IMRT.IN",
+      "label": "Mortalità infantile",
+      "theme": "Salute",
+      "unit": "Decessi per 1.000 nati vivi",
+      "definition": "Infant mortality rate is the number of infants dying before reaching one year of age, per 1,000 live births in a given year.",
+      "organization": "UN Inter-agency Group for Child Mortality Estimation, UN Children's Fund (UNICEF), uri: www.childmortality.org;\nWorld Health Organization (WHO), uri: www.childmortality.org, note: UN Inter-agency Group for Child Mortality Estimation;\nWorld Bank (WB), uri: www.childmortality.org, note: UN Inter-agency Group for Child Mortality Estimation;\nUnited Nations (UN), uri: www.childmortality.org, note: UN Inter-agency Group for Child Mortality Estimation, publisher: UN Population Division",
+      "source": "https://data.worldbank.org/indicator/SP.DYN.IMRT.IN",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/SP.DYN.IMRT.IN?date=1960:2024&format=json&per_page=20000",
+      "countries": 196,
+      "observations": 11830,
+      "updatedAt": "2026-10-08",
+      "provider": "Banca Mondiale",
+      "definitionLanguage": "en",
+      "period": [
+        1960,
+        2024
+      ]
+    },
+    {
+      "id": "SH.STA.MMRT",
+      "label": "Mortalità materna",
+      "theme": "Salute",
+      "unit": "Decessi per 100.000 nati vivi",
+      "definition": "Maternal mortality ratio is the number of women who die from pregnancy-related causes while pregnant or within 42 days of pregnancy termination per 100,000 live births. The data are estimated with a regression model using information on the proportion of maternal deaths among non-AIDS deaths in women ages 15-49, fertility, birth attendants, and GDP measured using purchasing power parities (PPPs).",
+      "organization": "Trends in Maternal Mortality, World Health Organization (WHO), uri: https://www.who.int/news/item/23-02-2023-a-woman-dies-every-two-minutes-due-to-pregnancy-or-childbirth--un-agencies;\nUN Children's Fund (UNICEF), note: Trends in Maternal Mortality;\nUN Population Fund (UNFPA), note: Trends in Maternal Mortality;\nWorld Bank Group (WBG), note: Trends in Maternal Mortality",
+      "source": "https://data.worldbank.org/indicator/SH.STA.MMRT",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/SH.STA.MMRT?date=1960:2024&format=json&per_page=20000",
+      "countries": 194,
+      "observations": 7566,
+      "updatedAt": "2026-10-08",
+      "provider": "Banca Mondiale",
+      "definitionLanguage": "en",
+      "period": [
+        1985,
+        2023
+      ]
+    },
+    {
+      "id": "SH.DYN.MORT",
+      "label": "Mortalità sotto i cinque anni",
+      "theme": "Salute",
+      "unit": "Decessi per 1.000 nati vivi",
+      "definition": "Under-five mortality rate is the probability per 1,000 that a newborn baby will die before reaching age five, if subject to age-specific mortality rates of the specified year.",
+      "organization": "UN Inter-agency Group for Child Mortality Estimation, UN Children's Fund (UNICEF), uri: www.childmortality.org, publisher: UNICEF, WHO, World Bank, United Nations Population Division;\nWorld Health Organization (WHO), uri: www.childmortality.org, note: UN Inter-agency Group for Child Mortality Estimation;\nWorld Bank (WB), uri: www.childmortality.org, note: UN Inter-agency Group for Child Mortality Estimation;\nUnited Nations (UN), uri: www.childmortality.org, note: UN Inter-agency Group for Child Mortality Estimation, publisher: UN Population Division",
+      "source": "https://data.worldbank.org/indicator/SH.DYN.MORT",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/SH.DYN.MORT?date=1960:2024&format=json&per_page=20000",
+      "countries": 196,
+      "observations": 11861,
+      "updatedAt": "2026-10-08",
+      "provider": "Banca Mondiale",
+      "definitionLanguage": "en",
+      "period": [
+        1960,
+        2024
+      ]
+    },
+    {
+      "id": "SH.MED.BEDS.ZS",
+      "label": "Posti letto ospedalieri",
+      "theme": "Salute",
+      "unit": "Per 1.000 abitanti",
+      "definition": "Hospital beds include inpatient beds available in public, private, general, and specialized hospitals and rehabilitation centers. In most cases beds for both acute and chronic care are included.",
+      "organization": "WHO data, supplemented by country data, World Health Organization (WHO)",
+      "source": "https://data.worldbank.org/indicator/SH.MED.BEDS.ZS",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/SH.MED.BEDS.ZS?date=1960:2024&format=json&per_page=20000",
+      "countries": 201,
+      "observations": 4717,
+      "updatedAt": "2026-10-08",
+      "provider": "Banca Mondiale",
+      "definitionLanguage": "en",
+      "period": [
+        1960,
+        2023
+      ]
+    },
+    {
+      "id": "SH.XPD.CHEX.GD.ZS",
+      "label": "Spesa sanitaria corrente",
+      "theme": "Salute",
+      "unit": "% del PIL",
+      "definition": "Level of current health expenditure expressed as a percentage of GDP.  Estimates of current health expenditures include healthcare goods and services consumed during each year. This indicator does not include capital health expenditures such as buildings, machinery, IT and stocks of vaccines for emergency or outbreaks.",
+      "organization": "Global Health Expenditure Database, updated December 12th, 2025, World Health Organization (WHO), uri: https://apps.who.int/nha/database",
+      "source": "https://data.worldbank.org/indicator/SH.XPD.CHEX.GD.ZS",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/SH.XPD.CHEX.GD.ZS?date=1960:2024&format=json&per_page=20000",
+      "countries": 193,
+      "observations": 4562,
+      "updatedAt": "2026-10-08",
+      "provider": "Banca Mondiale",
+      "definitionLanguage": "en",
+      "period": [
+        2000,
+        2024
+      ]
+    },
+    {
+      "id": "GB.XPD.RSDV.GD.ZS",
+      "label": "Spesa in ricerca e sviluppo",
+      "theme": "Scienza",
+      "unit": "% del PIL",
+      "definition": "Gross domestic expenditures on research and development (R&D), expressed as a percent of GDP. They include both capital and current expenditures in the four main sectors: Business enterprise, Government, Higher education and Private non-profit. R&D covers basic research, applied research, and experimental development.",
+      "organization": "Stat Bulk Data Download Service, UN Educational, Scientific and Cultural Organization (UNESCO), uri: https://databrowser.uis.unesco.org/resources/bulk, publisher: UNESCO Institute for Statistics (UIS), date accessed: 2025-03-26, date published: 2025-02",
+      "source": "https://data.worldbank.org/indicator/GB.XPD.RSDV.GD.ZS",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/GB.XPD.RSDV.GD.ZS?date=1960:2024&format=json&per_page=20000",
+      "countries": 156,
+      "observations": 2467,
+      "updatedAt": "2026-10-08",
+      "provider": "Banca Mondiale",
+      "definitionLanguage": "en",
+      "period": [
+        1996,
+        2024
+      ]
+    },
+    {
+      "id": "EG.ELC.ACCS.ZS",
+      "label": "Accesso all’elettricità",
+      "theme": "Servizi",
+      "unit": "% della popolazione",
+      "definition": "Access to electricity is the percentage of population with access to electricity. Electrification data are collected from industry, national surveys and international sources.",
+      "organization": "SDG 7.1.1 Electrification Dataset, World Bank (WB), uri: https://trackingsdg7.esmap.org/downloads, note: Data is downloaded from ESMAP website. Data is released when a new Tracking SDG7 report is released., publisher: World Bank (WB), date accessed: 2024-05-16, date published: 2023",
+      "source": "https://data.worldbank.org/indicator/EG.ELC.ACCS.ZS",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/EG.ELC.ACCS.ZS?date=1960:2024&format=json&per_page=20000",
+      "countries": 216,
+      "observations": 6747,
+      "updatedAt": "2026-10-08",
+      "provider": "Banca Mondiale",
+      "definitionLanguage": "en",
+      "period": [
+        1990,
+        2024
+      ]
+    },
+    {
+      "id": "SH.STA.BASS.ZS",
+      "label": "Accesso almeno di base ai servizi igienici",
+      "theme": "Servizi",
+      "unit": "% della popolazione",
+      "definition": "The percentage of people using at least basic sanitation services, that is, improved sanitation facilities that are not shared with other households.  This indicator encompasses both people using basic sanitation services as well as those using safely managed sanitation services.   Improved sanitation facilities include flush/pour flush to piped sewer systems, septic tanks or pit latrines; ventilated improved pit latrines, composting toilets or pit latrines with slabs.",
+      "organization": "WHO/UNICEF Joint Monitoring Programme (JMP) for Water Supply, Sanitation and Hygiene, World Health Organization (WHO), uri: washdata.org, publisher: WHO/UNICEF Joint Monitoring Programme (JMP) for Water Supply, Sanitation and Hygiene (washdata.org), date accessed: 2025-09-30, date published: 2025-08-25;\nUN Children's Fund (UNICEF), uri: washdata.org, note: WHO/UNICEF Joint Monitoring Programme (JMP) for Water Supply, Sanitation and Hygiene",
+      "source": "https://data.worldbank.org/indicator/SH.STA.BASS.ZS",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/SH.STA.BASS.ZS?date=1960:2024&format=json&per_page=20000",
+      "countries": 214,
+      "observations": 5166,
+      "updatedAt": "2026-10-08",
+      "provider": "Banca Mondiale",
+      "definitionLanguage": "en",
+      "period": [
+        2000,
+        2024
+      ]
+    },
+    {
+      "id": "SH.H2O.BASW.ZS",
+      "label": "Accesso almeno di base all’acqua potabile",
+      "theme": "Servizi",
+      "unit": "% della popolazione",
+      "definition": "The percentage of people using at least basic water services.  This indicator encompasses both people using basic water services as well as those using safely managed water services.  Basic drinking water services is defined as drinking water from an improved source, provided collection time is not more than 30 minutes for a round trip.  Improved water sources include piped water, boreholes or tubewells, protected dug wells, protected springs, and packaged or delivered water.",
+      "organization": "WHO/UNICEF Joint Monitoring Programme (JMP) for Water Supply, Sanitation and Hygiene, World Health Organization (WHO), uri: washdata.org, publisher: WHO/UNICEF Joint Monitoring Programme (JMP) for Water Supply, Sanitation and Hygiene (washdata.org), date accessed: 2025-09-30, date published: 2025-08-25;\nUN Children's Fund (UNICEF), uri: washdata.org, note: WHO/UNICEF Joint Monitoring Programme (JMP) for Water Supply, Sanitation and Hygiene",
+      "source": "https://data.worldbank.org/indicator/SH.H2O.BASW.ZS",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/SH.H2O.BASW.ZS?date=1960:2024&format=json&per_page=20000",
+      "countries": 214,
+      "observations": 5209,
+      "updatedAt": "2026-10-08",
+      "provider": "Banca Mondiale",
+      "definitionLanguage": "en",
+      "period": [
+        2000,
+        2024
+      ]
+    },
+    {
+      "id": "SH.H2O.SMDW.ZS",
+      "label": "Acqua potabile gestita in sicurezza",
+      "theme": "Servizi essenziali",
+      "unit": "Percentuale della popolazione",
+      "definition": "The percentage of people using drinking water from an improved source that is accessible on premises, available when needed and free from fecal and priority chemical contamination. Improved water sources include piped water, boreholes or tubewells, protected dug wells, protected springs, and packaged or delivered water.",
+      "definitionLanguage": "en",
+      "organization": "WHO/UNICEF Joint Monitoring Programme (JMP) for Water Supply, Sanitation and Hygiene, World Health Organization (WHO), uri: washdata.org, note: Aggregate data by groups are computed based on the groupings for the World Bank fiscal year in which the data was released by the WHO/UNICEF Joint Monitoring Programme (JMP) for Water Supply, Sanitation and Hygiene., publisher: WHO/UNICEF Joint Monitoring Programme (JMP) for Water Supply, Sanitation and Hygiene (washdata.org), date accessed: 2025-09-30, date published: 2025-08-25;\nUN Children's Fund (UNICEF), uri: washdata.org, note: WHO/UNICEF Joint Monitoring Programme (JMP) for Water Supply, Sanitation and Hygiene",
+      "provider": "Banca Mondiale",
+      "source": "https://data.worldbank.org/indicator/SH.H2O.SMDW.ZS",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/SH.H2O.SMDW.ZS?date=1960:2025&format=json&per_page=20000",
+      "countries": 151,
+      "observations": 3716,
+      "updatedAt": "2026-10-08",
+      "period": [
+        2000,
+        2024
+      ]
+    },
+    {
+      "id": "SH.STA.SMSS.ZS",
+      "label": "Servizi igienici gestiti in sicurezza",
+      "theme": "Servizi essenziali",
+      "unit": "Percentuale della popolazione",
+      "definition": "The percentage of people using improved sanitation facilities that are not shared with other households and where excreta are safely disposed of in situ or transported and treated offsite. Improved sanitation facilities include flush/pour flush to piped sewer systems, septic tanks or pit latrines: ventilated improved pit latrines, composting toilets or pit latrines with slabs.",
+      "definitionLanguage": "en",
+      "organization": "WHO/UNICEF Joint Monitoring Programme (JMP) for Water Supply, Sanitation and Hygiene, World Health Organization (WHO), uri: washdata.org, note: Aggregate data by groups are computed based on the groupings for the World Bank fiscal year in which the data was released by the WHO/UNICEF Joint Monitoring Programme (JMP) for Water Supply, Sanitation and Hygiene., publisher: WHO/UNICEF Joint Monitoring Programme (JMP) for Water Supply, Sanitation and Hygiene (washdata.org), date accessed: 2025-09-30, date published: 2025-08-25;\nUN Children's Fund (UNICEF), uri: washdata.org, note: WHO/UNICEF Joint Monitoring Programme (JMP) for Water Supply, Sanitation and Hygiene",
+      "provider": "Banca Mondiale",
+      "source": "https://data.worldbank.org/indicator/SH.STA.SMSS.ZS",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/SH.STA.SMSS.ZS?date=1960:2025&format=json&per_page=20000",
+      "countries": 146,
+      "observations": 3569,
+      "updatedAt": "2026-10-08",
+      "period": [
+        2000,
+        2024
+      ]
+    },
+    {
+      "id": "SP.POP.TOTL",
+      "label": "Popolazione",
+      "theme": "Società",
+      "unit": "Persone",
+      "definition": "Total population is based on the de facto definition of population, which counts all residents regardless of legal status or citizenship. The values shown are midyear estimates.",
+      "organization": "World Population Prospects, United Nations (UN), uri: https://population.un.org/wpp/, publisher: UN Population Division;\nStatistical databases and publications from national statistical offices, National Statistical Offices (NSOs), uri: https://unstats.un.org/home/nso_sites/, publisher: National Statistical Offices;\nEurostat: Demographic Statistics, Eurostat (ESTAT), uri: https://ec.europa.eu/eurostat/data/database?node_code=earn_ses_monthly, publisher: Eurostat;\nPopulation and Vital Statistics Report (various years), United Nations (UN), uri: https://unstats.un.org, publisher: UN Statistics Division",
+      "source": "https://data.worldbank.org/indicator/SP.POP.TOTL",
+      "api": "https://api.worldbank.org/v2/country/all/indicator/SP.POP.TOTL?date=1960:2024&format=json&per_page=20000",
+      "countries": 217,
+      "observations": 14075,
+      "updatedAt": "2026-10-08",
+      "provider": "Banca Mondiale",
+      "definitionLanguage": "en",
+      "period": [
+        1960,
+        2024
+      ]
+    }
+  ],
+  "observations": 408963
+}

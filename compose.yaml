@@ -1,0 +1,23 @@
+services:
+  postgres:
+    image: postgres:17-bookworm
+    environment:
+      POSTGRES_USER: development
+      POSTGRES_PASSWORD: development-only
+      POSTGRES_DB: internazionalerossa
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - development-db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U development -d internazionalerossa"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+  mail:
+    image: axllent/mailpit:v1.31.5
+    ports:
+      - "127.0.0.1:1025:1025"
+      - "127.0.0.1:8025:8025"
+volumes:
+  development-db:

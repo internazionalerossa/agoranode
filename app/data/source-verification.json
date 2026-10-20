@@ -1,0 +1,718 @@
+{
+  "verifiedAt": "2026-10-19",
+  "feeds": [
+    {
+      "id": "mintpress",
+      "feedTitle": "MintPress News",
+      "entriesObserved": 10,
+      "latestDateObserved": "Sat, 17 Oct 2026 14:59:01 +0000",
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "grayzone",
+      "feedTitle": "The Grayzone",
+      "entriesObserved": 12,
+      "latestDateObserved": "Wed, 14 Oct 2026 18:52:02 +0000",
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "fair",
+      "feedTitle": "FAIR",
+      "entriesObserved": 10,
+      "latestDateObserved": "Fri, 16 Oct 2026 18:04:09 +0000",
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "geopolitical-economy",
+      "feedTitle": "Geopolitical Economy Report",
+      "entriesObserved": 10,
+      "latestDateObserved": "Mon, 19 Oct 2026 10:55:49 +0000",
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "truthdig",
+      "feedTitle": "Truthdig",
+      "entriesObserved": 20,
+      "latestDateObserved": "Mon, 19 Oct 2026 15:53:02 +0000",
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "dissent",
+      "feedTitle": "Dissent Magazine",
+      "entriesObserved": 50,
+      "latestDateObserved": "Fri, 16 Oct 2026 14:00:44 +0000",
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "dropsite",
+      "feedTitle": "Drop Site News",
+      "entriesObserved": 20,
+      "latestDateObserved": "Mon, 19 Oct 2026 17:25:38 GMT",
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "real-news",
+      "feedTitle": "The Real News Network",
+      "entriesObserved": 25,
+      "latestDateObserved": "Fri, 16 Oct 2026 00:07:23 +0000",
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "breach",
+      "feedTitle": "The Breach",
+      "entriesObserved": 20,
+      "latestDateObserved": "Thu, 15 Oct 2026 21:20:59 +0000",
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "ricochet",
+      "feedTitle": "Ricochet",
+      "entriesObserved": 10,
+      "latestDateObserved": "Mon, 19 Oct 2026 15:54:06 +0000",
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "brasil-wire",
+      "feedTitle": "BRASILWIRE",
+      "entriesObserved": 10,
+      "latestDateObserved": "Fri, 16 Oct 2026 04:53:41 +0000",
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "rabble",
+      "feedTitle": "rabble.ca",
+      "entriesObserved": 12,
+      "latestDateObserved": "Fri, 16 Oct 2026 19:06:35 +0000",
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "merce",
+      "feedTitle": "Mérce",
+      "entriesObserved": 10,
+      "latestDateObserved": "Mon, 19 Oct 2026 13:02:59 +0000",
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "krytyka",
+      "feedTitle": "Krytyka Polityczna",
+      "entriesObserved": 10,
+      "latestDateObserved": "Mon, 19 Oct 2026 08:10:19 +0000",
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "alarm",
+      "feedTitle": "Deník Alarm",
+      "entriesObserved": 20,
+      "latestDateObserved": "Mon, 19 Oct 2026 04:20:00 +0000",
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "directa",
+      "feedTitle": "directa.cat",
+      "entriesObserved": 10,
+      "latestDateObserved": "Mon, 19 Oct 2026 16:46:27 +0000",
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "birgun",
+      "feedTitle": "BirGun.net",
+      "entriesObserved": 108,
+      "latestDateObserved": "Mon, 19 Oct 2026 21:40:00 +0300",
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "efsyn",
+      "feedTitle": "Η Εφημερίδα των Συντακτών",
+      "entriesObserved": 90,
+      "latestDateObserved": "Mon, 19 Oct 2026 19:46:41 +0000",
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "flamman",
+      "feedTitle": "Flamman",
+      "entriesObserved": 10,
+      "latestDateObserved": "Mon, 19 Oct 2026 14:05:00 +0000",
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "arbejderen",
+      "feedTitle": "Arbejderen",
+      "entriesObserved": 10,
+      "latestDateObserved": "Mon, 19 Oct 2026 13:35:37 +0000",
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "klassekampen",
+      "feedTitle": "Klassekampen - Siste saker",
+      "entriesObserved": 264,
+      "latestDateObserved": "Sun, 18 Oct 2026 22:01:00 GMT",
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "opera-mundi",
+      "feedTitle": "Opera Mundi",
+      "entriesObserved": 10,
+      "latestDateObserved": "Mon, 19 Oct 2026 18:49:14 +0000",
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "brasil247",
+      "feedTitle": "Brasil 247",
+      "entriesObserved": 10,
+      "latestDateObserved": "Mon, 19 Oct 2026 19:54:23 +0000",
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "midia-ninja",
+      "feedTitle": "Mídia NINJA",
+      "entriesObserved": 50,
+      "latestDateObserved": "Mon, 19 Oct 2026 19:43:20 +0000",
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "transform",
+      "feedTitle": "transform!europe",
+      "entriesObserved": 10,
+      "latestDateObserved": "Wed, 14 Oct 2026 13:16:35 +0000",
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "apublica",
+      "feedTitle": "Agência Pública",
+      "entriesObserved": 10,
+      "latestDateObserved": "Mon, 19 Oct 2026 18:00:00 +0000",
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "de-olho",
+      "feedTitle": "De Olho nos Ruralistas",
+      "entriesObserved": 10,
+      "latestDateObserved": "Fri, 16 Oct 2026 20:57:46 +0000",
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "colombia-informa",
+      "feedTitle": "Colombia Informa",
+      "entriesObserved": 10,
+      "latestDateObserved": "Mon, 19 Oct 2026 17:02:46 +0000",
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "prensa-rural",
+      "feedTitle": "Agencia Prensa Rural",
+      "entriesObserved": 10,
+      "latestDateObserved": null,
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "brecha",
+      "feedTitle": "Semanario Brecha",
+      "entriesObserved": 100,
+      "latestDateObserved": "Fri, 16 Oct 2026 03:19:00 +0000",
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "revista-crisis",
+      "feedTitle": "Revista Crisis",
+      "entriesObserved": 50,
+      "latestDateObserved": "Mon, 19 Oct 2026 19:53:44 +0000",
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "revista-comun",
+      "feedTitle": "Revista Común",
+      "entriesObserved": 10,
+      "latestDateObserved": "Fri, 09 Oct 2026 13:30:00 +0000",
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "venezuelanalysis",
+      "feedTitle": "Venezuelanalysis",
+      "entriesObserved": 16,
+      "latestDateObserved": "Mon, 19 Oct 2026 17:00:00 +0000",
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "orinoco-tribune",
+      "feedTitle": "Orinoco Tribune",
+      "entriesObserved": 12,
+      "latestDateObserved": "Mon, 19 Oct 2026 18:13:23 +0000",
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "elephant",
+      "feedTitle": "The Elephant",
+      "entriesObserved": 12,
+      "latestDateObserved": "Mon, 19 Oct 2026 14:00:00 +0000",
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "chimurenga",
+      "feedTitle": "Chimurenga",
+      "entriesObserved": 20,
+      "latestDateObserved": "Thu, 15 Oct 2026 13:47:56 +0000",
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "bulatlat",
+      "feedTitle": "Bulatlat",
+      "entriesObserved": 10,
+      "latestDateObserved": "Fri, 16 Oct 2026 08:20:59 +0000",
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "kodao",
+      "feedTitle": "Kodao Productions",
+      "entriesObserved": 10,
+      "latestDateObserved": "Mon, 19 Oct 2026 00:50:31 +0000",
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "altermidya",
+      "feedTitle": "AlterMidya",
+      "entriesObserved": 10,
+      "latestDateObserved": "Mon, 19 Oct 2026 10:27:27 +0000",
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "indoprogress",
+      "feedTitle": "IndoPROGRESS",
+      "entriesObserved": 10,
+      "latestDateObserved": "Mon, 19 Oct 2026 08:47:19 +0000",
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "feminism-india",
+      "feedTitle": "Feminism in India",
+      "entriesObserved": 10,
+      "latestDateObserved": "Mon, 19 Oct 2026 02:04:33 +0000",
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "himal",
+      "feedTitle": "Himal Southasian",
+      "entriesObserved": 15,
+      "latestDateObserved": "Thu, 15 Oct 2026 12:24:56 GMT",
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "project-multatuli",
+      "feedTitle": "Project Multatuli",
+      "entriesObserved": 10,
+      "latestDateObserved": "Fri, 16 Oct 2026 08:42:30 +0000",
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "new-bloom",
+      "feedTitle": "New Bloom Magazine",
+      "entriesObserved": 10,
+      "latestDateObserved": "Sun, 18 Oct 2026 08:18:17 +0000",
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "lausancollective",
+      "feedTitle": "Lausan",
+      "entriesObserved": 10,
+      "latestDateObserved": "Wed, 26 Aug 2026 20:05:00 +0000",
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "dindeng",
+      "feedTitle": "DinDeng – ดินแดง",
+      "entriesObserved": 10,
+      "latestDateObserved": "Fri, 16 Oct 2026 01:40:33 +0000",
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "maktoob",
+      "feedTitle": "Maktoob",
+      "entriesObserved": 50,
+      "latestDateObserved": "Mon, 19 Oct 2026 22:28:21 +0530",
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "asia-times",
+      "feedTitle": "Asia Times",
+      "entriesObserved": 20,
+      "latestDateObserved": "Mon, 19 Oct 2026 19:38:46 +0000",
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "responsible-statecraft",
+      "feedTitle": "Responsible Statecraft",
+      "entriesObserved": 30,
+      "latestDateObserved": "Mon, 19 Oct 2026 04:05:02 +0000",
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "972mag",
+      "feedTitle": "+972 Magazine",
+      "entriesObserved": 10,
+      "latestDateObserved": "Mon, 19 Oct 2026 17:59:22 +0000",
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "indian-punchline",
+      "feedTitle": "Indian Punchline",
+      "entriesObserved": 10,
+      "latestDateObserved": "Sun, 16 Aug 2026 06:13:51 +0000",
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "dawn",
+      "feedTitle": "Dawn - Home",
+      "entriesObserved": 28,
+      "latestDateObserved": "Mon, 19 Oct 2026 23:56:40 +0500",
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "the-hindu",
+      "feedTitle": "The Hindu: Latest News today from India and the World, Breaking news, Top Headlines and Trending News Videos.",
+      "entriesObserved": 60,
+      "latestDateObserved": "Tue, 20 Oct 2026 01:18:25 +0530",
+      "verifiedAt": "2026-10-19"
+    }
+  ],
+  "referenceIndex": {
+    "site": "https://ottolinatv.it/",
+    "publishedPosts": 3385,
+    "examinedPosts": 3385,
+    "distinctExternalDomains": 523,
+    "failedPages": [],
+    "references": [
+      {
+        "source": "mintpress",
+        "articlesWithLink": 1,
+        "examples": [
+          {
+            "article": "https://ottolinatv.it/2025/09/21/desaparecinema-ep-46-documenti-wikileaks-mostrano-hollywood-lavora-con-israele-per-difendere-crimini-guerra/",
+            "reference": "https://www.mintpressnews.com/israel-files-wikileaks-docs-hollywood-producers-working-with-israel/281987"
+          }
+        ]
+      },
+      {
+        "source": "geopolitical-economy",
+        "articlesWithLink": 1,
+        "examples": [
+          {
+            "article": "https://ottolinatv.it/2023/12/14/la-disfatta-gaza-ucraina-vietnam-per-limperialismo-usa-la-debacle-e-mondiale/",
+            "reference": "https://geopoliticaleconomy.com/2023/11/03/us-blockade-cuba-vote-un/"
+          }
+        ]
+      },
+      {
+        "source": "venezuelanalysis",
+        "articlesWithLink": 1,
+        "examples": [
+          {
+            "article": "https://ottolinatv.it/2025/09/13/gli-usa-si-preparano-a-invadere-il-venezuela/",
+            "reference": "https://venezuelanalysis.com/news/us-threatens-venezuela-with-southern-caribbean-sea-troop-deployment-maduro-mobilizes-peoples-militia/"
+          }
+        ]
+      },
+      {
+        "source": "asia-times",
+        "articlesWithLink": 59,
+        "examples": [
+          {
+            "article": "https://ottolinatv.it/2026/03/26/hezbollah-sommerge-di-razzi-invasore-sionista-trump-vuole-chiudere-la-partita/",
+            "reference": "https://asiatimes.com/2026/03/trump-fed-a-daily-propaganda-reel-of-iran-stuff-blowing-up-nbc/"
+          },
+          {
+            "article": "https://ottolinatv.it/2026/03/25/trump-si-prepara-a-far-massacrare-i-marines-usa-a-hormuz/",
+            "reference": "https://asiatimes.com/2026/03/china-steps-into-iran-breach-as-investments-face-fire/"
+          }
+        ]
+      },
+      {
+        "source": "responsible-statecraft",
+        "articlesWithLink": 16,
+        "examples": [
+          {
+            "article": "https://ottolinatv.it/2026/03/27/i-mercati-si-stanno-preparando-a-una-recessione-globale-senza-precedenti/",
+            "reference": "https://responsiblestatecraft.org/israel-lebanon-war/"
+          },
+          {
+            "article": "https://ottolinatv.it/2026/03/25/trump-si-prepara-a-far-massacrare-i-marines-usa-a-hormuz/",
+            "reference": "https://responsiblestatecraft.org/veterans-iran/"
+          }
+        ]
+      },
+      {
+        "source": "972mag",
+        "articlesWithLink": 2,
+        "examples": [
+          {
+            "article": "https://ottolinatv.it/2025/09/26/anche-microsoft-scarica-idf-israele-sempre-piu-isolato/",
+            "reference": "https://www.972mag.com/microsoft-azure-openai-israeli-army-cloud/"
+          },
+          {
+            "article": "https://ottolinatv.it/2024/04/03/se-israele-per-evitare-la-catastrofe-trascina-loccidente-nella-guerra-totale-con-liran/",
+            "reference": "https://www.972mag.com/ceasefire-opposition-israelis-gaza/"
+          }
+        ]
+      },
+      {
+        "source": "indian-punchline",
+        "articlesWithLink": 2,
+        "examples": [
+          {
+            "article": "https://ottolinatv.it/2025/09/08/la-bolla-ai-su-orlo-esplosione-gli-usa-si-ritirano-da-asia-per-risolvere-i-guai-a-casa/",
+            "reference": "https://www.indianpunchline.com/india-disavows-tianjin-spirit-turns-to-eu/"
+          },
+          {
+            "article": "https://ottolinatv.it/2024/04/25/limperialismo-a-guida-usa-sta-obbligando-leuropa-a-inviare-truppe-in-ucraina/",
+            "reference": "https://www.indianpunchline.com/ukraine-us-doubles-down-russia-is-cool/"
+          }
+        ]
+      },
+      {
+        "source": "dawn",
+        "articlesWithLink": 17,
+        "examples": [
+          {
+            "article": "https://ottolinatv.it/2026/03/26/hezbollah-sommerge-di-razzi-invasore-sionista-trump-vuole-chiudere-la-partita/",
+            "reference": "https://www.dawn.com/news/1985481/pakistan-navigates-shifting-us-iran-dynamics-amid-ongoing-war"
+          },
+          {
+            "article": "https://ottolinatv.it/2026/03/25/trump-si-prepara-a-far-massacrare-i-marines-usa-a-hormuz/",
+            "reference": "https://www.dawn.com/news/1985117"
+          }
+        ]
+      },
+      {
+        "source": "the-hindu",
+        "articlesWithLink": 19,
+        "examples": [
+          {
+            "article": "https://ottolinatv.it/2026/03/26/hezbollah-sommerge-di-razzi-invasore-sionista-trump-vuole-chiudere-la-partita/",
+            "reference": "https://www.thehindu.com/news/national/jaishankar-defends-indias-stand-as-opposition-targets-govt-on-pak-mediation-in-west-asia/article70785266.ece"
+          },
+          {
+            "article": "https://ottolinatv.it/2026/03/25/trump-si-prepara-a-far-massacrare-i-marines-usa-a-hormuz/",
+            "reference": "https://www.thehindu.com/news/national/trumps-use-of-pakistan-as-possible-mediator-with-iran-sparks-memories-of-nixons-china-talks-and-bangladesh-liberation/article70782579.ece"
+          }
+        ]
+      }
+    ]
+  },
+  "videos": [
+    {
+      "id": "consortiumnews",
+      "channelId": "UClm8aDoahGh612X2NaaDx1g",
+      "verifiedTitle": "consortiumnews",
+      "entriesObserved": 3,
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "mintpressnews",
+      "channelId": "UCc9UUSOBWC6VCkJUqnh-CLw",
+      "verifiedTitle": "MintPress News",
+      "entriesObserved": 3,
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "thecradlemedia",
+      "channelId": "UC2liaNc5y50YBVjgXiQxdHQ",
+      "verifiedTitle": "The Cradle",
+      "entriesObserved": 3,
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "almayadeenenglish",
+      "channelId": "UCzW1oJMWo5BpHys5QGbpJrA",
+      "verifiedTitle": "Al Mayadeen English",
+      "entriesObserved": 3,
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "duedissidence",
+      "channelId": "UC743NEuMiqYOaUHO4oPhI2Q",
+      "verifiedTitle": "Due Dissidence",
+      "entriesObserved": 3,
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "thekatiehalpershow",
+      "channelId": "UCUsMkDtVyel9USjCTaM42rw",
+      "verifiedTitle": "Katie Halper",
+      "entriesObserved": 3,
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "paulcockshott8733",
+      "channelId": "UCVBfIU1_zO-P_R9keEGdDHQ",
+      "verifiedTitle": "Paul Cockshott",
+      "entriesObserved": 3,
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "prolekult",
+      "channelId": "UCEBbylt9Rax3nOP_hyPnMPA",
+      "verifiedTitle": "Prolekult",
+      "entriesObserved": 3,
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "thebreachmedia",
+      "channelId": "UCJTO9R9tqH1vQTB-h5UcTwQ",
+      "verifiedTitle": "The Breach Media",
+      "entriesObserved": 3,
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "rabbletv",
+      "channelId": "UCMsWTbr8EdXTXsmRTWqkZMA",
+      "verifiedTitle": "rabble.ca News for the rest of us",
+      "entriesObserved": 3,
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "marxismtoday",
+      "channelId": "UCaqqzB_ojb8J-uvMAY9oKEg",
+      "verifiedTitle": "MarxismToday",
+      "entriesObserved": 3,
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "mediapart",
+      "channelId": "UCdnaDhU-LDQrIEEmSIfq0-Q",
+      "verifiedTitle": "Mediapart",
+      "entriesObserved": 3,
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "offinvestigation",
+      "channelId": "UCEFGCs68E9Vr5te5qZuJsbg",
+      "verifiedTitle": "Off Investigation",
+      "entriesObserved": 3,
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "rosaluxstiftung",
+      "channelId": "UClp4017ICvSPjIEBZLeEwaQ",
+      "verifiedTitle": "Rosa-Luxemburg-Stiftung",
+      "entriesObserved": 3,
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "ndaktuell",
+      "channelId": "UCIPA0hqTbjsUCBG50qHMSnQ",
+      "verifiedTitle": "nd.aktuell",
+      "entriesObserved": 3,
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "jungewelt",
+      "channelId": "UCKOVSr_T3pvWTjV2D-JVAbQ",
+      "verifiedTitle": "Rosa-Luxemburg-Konferenz",
+      "entriesObserved": 3,
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "eldiarioes",
+      "channelId": "UCig8aKQHLt8E35_LJKwOscA",
+      "verifiedTitle": "elDiarioes",
+      "entriesObserved": 3,
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "galasfeios",
+      "channelId": "UC2bZgihqibFD_vhaYEXQZFg",
+      "verifiedTitle": "Galãs Feios",
+      "entriesObserved": 3,
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "humbertomatos",
+      "channelId": "UC3qAUf53j_dUv09jH7jsUJw",
+      "verifiedTitle": "Humberto Matos",
+      "entriesObserved": 3,
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "jornalistaslivres",
+      "channelId": "UCjwyfg7vfsScSPfzPyWkEUg",
+      "verifiedTitle": "Jornalistas Livres",
+      "entriesObserved": 3,
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "teseonze",
+      "channelId": "UC0fGGprihDIlQ3ykWvcb9hg",
+      "verifiedTitle": "Tese Onze",
+      "entriesObserved": 3,
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "desinformemonos",
+      "channelId": "UCNrGZZlL9SEhMbXotTIABCw",
+      "verifiedTitle": "Desinformémonos",
+      "entriesObserved": 3,
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "agenciapublica",
+      "channelId": "UCLMBnZ341AyUpMksImhoO1A",
+      "verifiedTitle": "AgenciaPublica",
+      "entriesObserved": 2,
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "canalcaribe",
+      "channelId": "UCOh5dNCZ12K0PD0a2UhY7cw",
+      "verifiedTitle": "Canal Caribe.",
+      "entriesObserved": 3,
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "maktoobmedia",
+      "channelId": "UCMGw-hnrISup0oNNDo3FCRA",
+      "verifiedTitle": "Maktoob",
+      "entriesObserved": 3,
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "thewirenews",
+      "channelId": "UChWtJey46brNr7qHQpN6KLQ",
+      "verifiedTitle": "The Wire",
+      "entriesObserved": 3,
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "theelephantinfo",
+      "channelId": "UCWgQRp7Ops6PGLEVLxZzqrQ",
+      "verifiedTitle": "The Elephant",
+      "entriesObserved": 3,
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "altermidya",
+      "channelId": "UC9OzvUB6mcw21YzzN9eEYog",
+      "verifiedTitle": "AlterMidya",
+      "entriesObserved": 3,
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "kodaoproductions",
+      "channelId": "UCkR6EgT7X5ECacYNeWV27xA",
+      "verifiedTitle": "KODAO Productions",
+      "entriesObserved": 2,
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "qiaocollective",
+      "channelId": "UCPi2i0AZTD2IkENqN3GAbsA",
+      "verifiedTitle": "Qiao Collective",
+      "entriesObserved": 3,
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "panafricantelevision",
+      "channelId": "UCLDLajToqG5hR8zhxS3OgDQ",
+      "verifiedTitle": "Pan African Television",
+      "entriesObserved": 3,
+      "verifiedAt": "2026-10-19"
+    }
+  ]
+}

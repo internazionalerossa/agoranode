@@ -1,0 +1,69 @@
+[
+  {
+    "id": "manufacturing",
+    "period": "2021",
+    "title": "La fabbrica del mondo cambia baricentro",
+    "value": "×1,94",
+    "label": "valore aggiunto manifatturiero cinese rispetto agli Stati Uniti",
+    "text": "Nel 2021: circa 4.846 miliardi di dollari in Cina e 2.497 negli Stati Uniti. Lo stesso anno e la stessa unità rendono il confronto leggibile. Sono dollari correnti: il rapporto risente dei cambi e non misura il salario o il benessere per abitante. È l’ultimo anno comune nelle serie acquisite.",
+    "sources": [
+      {
+        "name": "Banca Mondiale · valore aggiunto manifatturiero",
+        "url": "https://data.worldbank.org/indicator/NV.IND.MANF.CD"
+      }
+    ],
+    "indicator": "NV.IND.MANF.CD",
+    "calculation": {
+      "year": 2021,
+      "CHN": 4845643957683.2,
+      "USA": 2497131582000,
+      "ratio": 1.9404840308023465
+    }
+  },
+  {
+    "id": "huawei",
+    "period": "2025",
+    "title": "Ricerca industriale su scala di massa",
+    "value": "21,8%",
+    "label": "dei ricavi Huawei reinvestito in ricerca e sviluppo",
+    "text": "192,3 miliardi di yuan e 114.000 addetti alla ricerca. Huawei è un’impresa privata con un piano di partecipazione dei dipendenti, non un’azienda statale. I rappresentanti degli azionisti dipendenti sono eletti per quota posseduta: partecipazione azionaria e uguaglianza del potere di voto non sono la stessa cosa.",
+    "sources": [
+      {
+        "name": "Huawei · rapporto annuale 2025",
+        "url": "https://www.huawei.com/en/annual-report/2025"
+      },
+      {
+        "name": "Huawei · proprietà e rappresentanza",
+        "url": "https://www.huawei.com/en/corporate-governance"
+      }
+    ]
+  },
+  {
+    "id": "codelco",
+    "period": "2025",
+    "title": "Il rame contribuisce al bilancio pubblico",
+    "value": "1,778 mld $",
+    "label": "versati da Codelco al fisco cileno",
+    "text": "Un contributo al bilancio pubblico superiore del 16% al 2024, secondo i risultati dell’impresa. Il trasferimento al fisco non va confuso con l’utile netto né con un dividendo distribuito direttamente agli abitanti. La produzione propria è stata di 1,334 milioni di tonnellate di rame fino.",
+    "sources": [
+      {
+        "name": "Codelco · risultati 2025",
+        "url": "https://www.codelco.com/prensa/2026/codelco-cerro-2025-con-un-ebitda-de-us-6-670-millones-una-utilidad"
+      }
+    ]
+  },
+  {
+    "id": "equinor",
+    "period": "Assetto proprietario · 2026",
+    "title": "Controllo pubblico dentro un’economia mista",
+    "value": "67%",
+    "label": "delle azioni Equinor detenuto dallo Stato norvegese",
+    "text": "La maggioranza statale convive con la quotazione in borsa e azionisti privati. È un caso di controllo pubblico di una grande impresa energetica: non significa che tutta l’economia norvegese sia pubblica o che il paese sia uno Stato socialista.",
+    "sources": [
+      {
+        "name": "Equinor · azionisti e diritti di voto",
+        "url": "https://www.equinor.com/investors/our-shareholders"
+      }
+    ]
+  }
+]

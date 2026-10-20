@@ -1,0 +1,254 @@
+[
+  {
+    "id": "casa",
+    "title": "Casa, terra e città",
+    "intro": "Abitare significa poter contare su una casa accessibile, salubre e vicina ai servizi. Queste letture collegano rendita, urbanizzazione e proprietà alle politiche abitative; i dati distinguono prezzi degli immobili, pressione sul reddito e possibilità di riscaldare la casa.",
+    "indicator": "ESTAT.HOUSING.OVERBURDEN",
+    "books": [
+      {
+        "id": "abitazione",
+        "why": "La critica di Engels alle soluzioni che lasciano intatte rendita e condizioni del lavoro."
+      },
+      {
+        "id": "marx-nazionalizzazione-terra",
+        "why": "Il rapporto fra proprietà fondiaria, rendita e organizzazione della produzione."
+      },
+      {
+        "id": "capitale-3",
+        "why": "Per approfondire rendita, profitto e distribuzione del prodotto sociale."
+      },
+      {
+        "id": "kropotkin-campi-fabbriche",
+        "why": "Un progetto di integrazione fra insediamenti, produzione e territorio."
+      }
+    ],
+    "resources": [
+      [
+        "Costi abitativi · Eurostat",
+        "https://ec.europa.eu/eurostat/databrowser/view/ilc_lvho07a/default/table"
+      ]
+    ]
+  },
+  {
+    "id": "reti",
+    "title": "Infrastrutture, trasporti e industria",
+    "intro": "Ferrovie, reti idriche e comunicazioni rendono possibili scambi, lavoro e accesso ai servizi. La loro estensione va letta insieme all’uso, alla qualità e alla distribuzione territoriale: più chilometri o più passeggeri non descrivono da soli l’utilità sociale di una rete.",
+    "indicator": "IS.RRS.TOTL.KM",
+    "books": [
+      {
+        "id": "lenin-sviluppo-capitalismo",
+        "why": "Trasformazioni dell’industria, delle campagne e del mercato interno nella Russia dell’Ottocento."
+      },
+      {
+        "id": "kropotkin-campi-fabbriche",
+        "why": "Produzione decentrata e formazione tecnica dentro un diverso disegno del territorio."
+      },
+      {
+        "id": "text-8ef5e8b6d541",
+        "why": "Il piano economico di Tan Malaka nel contesto della lotta indonesiana."
+      },
+      {
+        "id": "lenin-compiti-immediati",
+        "why": "Le questioni dell’organizzazione produttiva nella ricostruzione postrivoluzionaria."
+      }
+    ],
+    "resources": [
+      [
+        "Serie ferroviarie · Banca Mondiale",
+        "https://data.worldbank.org/indicator/IS.RRS.TOTL.KM"
+      ]
+    ]
+  },
+  {
+    "id": "salari",
+    "title": "Salari, prezzi e tempo di lavoro",
+    "intro": "Il potere d’acquisto dipende da quanto si guadagna, da quante ore si lavora e da ciò che occorre pagare. Media e mediana, retribuzione lorda e reddito disponibile rispondono a domande diverse; la produttività misura il valore prodotto, non la parte che arriva in busta paga.",
+    "indicator": "ILO.WAGE.HOUR.PPP",
+    "books": [
+      {
+        "id": "salario-capitale",
+        "why": "Una prima analisi dei rapporti fra lavoro salariato, capitale e condizioni di vita."
+      },
+      {
+        "id": "salario-prezzo-profitto",
+        "why": "Il rapporto fra salari, prezzi e profitti nel conflitto distributivo."
+      },
+      {
+        "id": "text-5988476b54c3",
+        "why": "Il tempo libero come questione sociale, nel pamphlet di Paul Lafargue."
+      },
+      {
+        "id": "lavoro-utile",
+        "why": "William Morris distingue l’attività utile dalla fatica imposta dalla necessità."
+      }
+    ],
+    "resources": [
+      [
+        "Salari e orari · ILOSTAT",
+        "https://ilostat.ilo.org/data/"
+      ],
+      [
+        "Global Wage Report 2024–25 · ILO",
+        "https://www.ilo.org/sites/default/files/2024-11/GWR-2024_Layout_E_RGB_Web.pdf"
+      ]
+    ]
+  },
+  {
+    "id": "energia",
+    "title": "Energia, risorse e beni comuni",
+    "intro": "L’elettrificazione e l’accesso all’energia incidono sulla vita domestica e sulla capacità produttiva. Qui si incontrano accessibilità delle bollette, reti, risorse naturali e gestione collettiva: accesso, consumo e prezzo sono misure complementari, non intercambiabili.",
+    "indicator": "ESTAT.ELECTRIC.PPS",
+    "books": [
+      {
+        "id": "commons-viventi",
+        "why": "Esperienze e principi di governo condiviso delle risorse."
+      },
+      {
+        "id": "marx-nazionalizzazione-terra",
+        "why": "Proprietà delle risorse e appropriazione della rendita."
+      },
+      {
+        "id": "lenin-compiti-immediati",
+        "why": "Amministrazione economica e organizzazione delle forze produttive."
+      },
+      {
+        "id": "mao-dieci-rapporti",
+        "why": "Il rapporto fra settori produttivi e priorità di sviluppo nel dibattito cinese."
+      }
+    ],
+    "resources": [
+      [
+        "Prezzi domestici dell’elettricità · Eurostat",
+        "https://ec.europa.eu/eurostat/databrowser/view/nrg_pc_204/default/table"
+      ],
+      [
+        "Prezzi domestici del gas · Eurostat",
+        "https://ec.europa.eu/eurostat/databrowser/view/nrg_pc_202/default/table"
+      ]
+    ]
+  },
+  {
+    "id": "formazione",
+    "title": "Scuola, università e capacità scientifica",
+    "intro": "L’istruzione apre possibilità individuali e costruisce capacità collettive. Leggere insieme accesso agli studi, personale docente, diplomi e ricerca aiuta a capire come si formano competenze; i diplomati di un anno non vanno confusi con i professionisti già occupati.",
+    "indicator": "ESTAT.STEM.GRAD.RATE",
+    "books": [
+      {
+        "id": "lenin-istruzione-politecnica",
+        "why": "Il rapporto fra formazione generale, sapere tecnico e lavoro."
+      },
+      {
+        "id": "lenin-giovani",
+        "why": "Lo studio e la formazione dei giovani nel progetto educativo sovietico."
+      },
+      {
+        "id": "text-c35dd814c07c",
+        "why": "Krupskaja racconta un metodo di studio e di formazione intellettuale."
+      },
+      {
+        "id": "text-f8834ac704c7",
+        "why": "Tan Malaka mette in relazione materialismo, dialettica e logica."
+      }
+    ],
+    "resources": [
+      [
+        "UNESCO Science Report 2021 · accesso aperto",
+        "https://www.unesco.org/reports/science/2021/en/download-report"
+      ],
+      [
+        "Diplomati STEM · Eurostat",
+        "https://ec.europa.eu/eurostat/databrowser/view/educ_uoe_grad04/default/table"
+      ]
+    ]
+  },
+  {
+    "id": "cultura",
+    "title": "Libri, arte e accesso alla cultura",
+    "intro": "Saper leggere, avere libri disponibili e trovare tempo per leggerli sono condizioni differenti. Le indagini sulla lettura descrivono pratiche culturali concrete; questi testi ragionano su istruzione, arte, vita quotidiana e possibilità di partecipare alla produzione del sapere.",
+    "indicator": "ESTAT.BOOK.READERS",
+    "books": [
+      {
+        "id": "morris-arte-socialismo",
+        "why": "L’accesso alla bellezza e alla cultura come parte delle condizioni materiali di vita."
+      },
+      {
+        "id": "gramsci-citta-futura",
+        "why": "Educazione, cultura e partecipazione nella formazione politica di Gramsci."
+      },
+      {
+        "id": "mao-arte-letteratura",
+        "why": "Il ruolo della letteratura e dell’arte nel dibattito rivoluzionario cinese."
+      },
+      {
+        "id": "text-bc8bbf01d437",
+        "why": "Plechanov affronta i rapporti fra creazione artistica e contesto sociale."
+      }
+    ],
+    "resources": [
+      [
+        "Pratiche di lettura · Eurostat",
+        "https://ec.europa.eu/eurostat/databrowser/view/ilc_scp27/default/table"
+      ]
+    ]
+  },
+  {
+    "id": "cura",
+    "title": "Cura, salute ed emancipazione",
+    "intro": "La salute e la libertà personale dipendono anche da servizi, lavoro di cura e tempo disponibile. Le letture affrontano maternità, organizzazione familiare ed emancipazione, collegando i diritti alle condizioni che consentono di esercitarli.",
+    "indicator": "SH.MED.PHYS.ZS",
+    "books": [
+      {
+        "id": "text-d79c4b7c9f59",
+        "why": "Kollontaj discute il rapporto fra trasformazione sociale e organizzazione della famiglia."
+      },
+      {
+        "id": "text-93641ea4a269",
+        "why": "Le prime misure sovietiche di tutela della maternità, raccontate da una protagonista."
+      },
+      {
+        "id": "zetkin-donne-socialismo",
+        "why": "La condizione delle lavoratrici nel movimento socialista."
+      },
+      {
+        "id": "text-8f722f8694bb",
+        "why": "Emma Goldman mette a fuoco i limiti di un’emancipazione soltanto formale."
+      }
+    ],
+    "resources": [
+      [
+        "Personale medico · Banca Mondiale",
+        "https://data.worldbank.org/indicator/SH.MED.PHYS.ZS"
+      ]
+    ]
+  },
+  {
+    "id": "cooperazione",
+    "title": "Cooperazione, agricoltura e organizzazione collettiva",
+    "intro": "La cooperazione assume forme diverse secondo territorio, rapporti di proprietà e storia del lavoro. Mettere in dialogo esperienze europee, latinoamericane e asiatiche aiuta a leggere le istituzioni concrete, senza ridurre paesi differenti a un modello unico.",
+    "indicator": "NV.AGR.EMPL.KD",
+    "books": [
+      {
+        "id": "cooperazione-lenin",
+        "why": "La cooperazione nel dibattito sulla trasformazione dell’economia sovietica."
+      },
+      {
+        "id": "text-8f1c01370d74",
+        "why": "Mariátegui collega terra, rapporti sociali e realtà indigene nel Perù."
+      },
+      {
+        "id": "mao-cooperazione-agricola",
+        "why": "Mutuo aiuto e cooperazione nel contesto rurale cinese."
+      },
+      {
+        "id": "text-0d2c5bdd9695",
+        "why": "Recabarren presenta il socialismo nel contesto del movimento operaio cileno."
+      }
+    ],
+    "resources": [
+      [
+        "Produzione agricola per lavoratore · Banca Mondiale",
+        "https://data.worldbank.org/indicator/NV.AGR.EMPL.KD"
+      ]
+    ]
+  }
+]

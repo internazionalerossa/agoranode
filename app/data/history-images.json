@@ -1,0 +1,62 @@
+[
+  {
+    "id": "paris-1871",
+    "path": "/history/paris-1871.webp",
+    "event": "1871",
+    "alt": "Barricata in rue de la Paix a Parigi, nel 1871.",
+    "caption": "Parigi, rue de la Paix, 1871.",
+    "author": "Bruno Braquehais · Biblioteca nazionale del Brasile",
+    "url": "https://commons.wikimedia.org/wiki/File:Barricade_in_the_Rue_de_la_Paix_(Place_Vend%C3%B4me)_WDL1271.png",
+    "license": "Pubblico dominio",
+    "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+    "changes": "Ridimensionamento e conversione WebP.",
+    "country": "Francia",
+    "width": 1100,
+    "height": 842
+  },
+  {
+    "id": "vienna-karl-marx-hof",
+    "path": "/history/vienna-karl-marx-hof.webp",
+    "event": "1919–1934",
+    "alt": "La facciata del complesso di edilizia municipale Karl-Marx-Hof a Vienna.",
+    "caption": "Karl-Marx-Hof, Vienna. Fotografia del 2017.",
+    "author": "Thomas Ledl · Wikimedia Austria",
+    "url": "https://commons.wikimedia.org/wiki/File:Karl_Marx_Hof.jpg",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "changes": "Ridimensionamento e conversione WebP; la fotografia mantiene CC BY-SA 4.0.",
+    "country": "Austria",
+    "width": 1100,
+    "height": 733
+  },
+  {
+    "id": "lenin-1920",
+    "path": "/history/lenin-1920.webp",
+    "event": "1917",
+    "country": "Russia rivoluzionaria",
+    "alt": "Vladimir Lenin parla a Mosca il 5 maggio 1920. La fotografia è successiva ai decreti del 1917.",
+    "caption": "Vladimir Lenin parla a Mosca il 5 maggio 1920. La fotografia è successiva ai decreti del 1917.",
+    "author": "Grigorij Petrovič Goldštejn",
+    "url": "https://commons.wikimedia.org/wiki/File:Vladimir_Lenin_Speech_in_May_1920.jpg",
+    "license": "Pubblico dominio",
+    "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+    "changes": "Ridimensionamento e conversione WebP.",
+    "width": 1100,
+    "height": 735
+  },
+  {
+    "id": "sputnik-replica",
+    "path": "/history/sputnik-replica.webp",
+    "event": "1957 · 1961 · 1963",
+    "country": "URSS",
+    "alt": "Una replica di Sputnik 1, il satellite con cui l’URSS aprì l’era spaziale nel 1957.",
+    "caption": "Una replica di Sputnik 1, il satellite con cui l’URSS aprì l’era spaziale nel 1957.",
+    "author": "NSSDC / NASA",
+    "url": "https://commons.wikimedia.org/wiki/File:Sputnik_asm.jpg",
+    "license": "Pubblico dominio",
+    "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+    "changes": "Ridimensionamento e conversione WebP.",
+    "width": 1094,
+    "height": 896
+  }
+]

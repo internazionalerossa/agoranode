@@ -1,0 +1,11 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {createElement} from 'react';
+import {renderToStaticMarkup} from 'react-dom/server';
+import DiscussionText from '../app/components/DiscussionText';
+import RULES from '../app/data/community-rules.json' with {type:'json'};
+test('forum and chat link text safely without executing HTML or script schemes',()=>{const html=renderToStaticMarkup(createElement(DiscussionText,{text:'https://example.org/articolo?x=1&y=2.\n\n/?view=teoria #archivio-conquiste\n<script>alert(1)</script> javascript:alert(1)',language:'it'}));assert.match(html,/href="https:\/\/example.org\/articolo\?x=1&amp;y=2"/);assert.match(html,/href="\/\?view=teoria"/);assert.match(html,/href="#archivio-conquiste"/);assert.match(html,/&lt;script&gt;/);assert.doesNotMatch(html,/<script|href="javascript:/);assert.match(html,/noopener noreferrer ugc nofollow/);});
+test('long permanent forum paragraphs remain complete and links are not split at a display chunk boundary',()=>{const text='Un ragionamento. '.repeat(1200)+'https://example.org/documento';const html=renderToStaticMarkup(createElement(DiscussionText,{text}));assert.equal((html.match(/Un ragionamento\./g)??[]).length,1200);assert.match(html,/href="https:\/\/example.org\/documento"/);});
+test('public rules are sequential, remove the bootstrap rule and distinguish temporary chat from permanent forum',()=>{assert.deepEqual(RULES.map(rule=>rule.id),RULES.map((_,i)=>i+1));assert.ok(!RULES.some(rule=>/Avviare la comunità|inviti individuali/i.test(rule.title+' '+rule.text)));const chat=RULES.find(rule=>rule.title==='La chat delle stanze')!;assert.match(chat.text,/200 parole/);assert.match(chat.text,/uno al minuto/);assert.match(chat.text,/48 ore/);assert.match(chat.text,/solo nella memoria/);assert.match(chat.text,/forum rimane permanente/);});
+
+test('selectable topic titles remain plain text even when they contain links',()=>{const html=renderToStaticMarkup(createElement('button',null,createElement(DiscussionText,{text:'Discussione https://example.org/documento',inline:true,links:false})));assert.doesNotMatch(html,/<a /);assert.match(html,/https:\/\/example.org\/documento/);assert.doesNotMatch(html,/<div|<p/);});

@@ -67,7 +67,7 @@ import BrandName from './BrandName';
 import {brandName} from '@/app/lib/brand';
 import { historyId } from "@/app/lib/history-navigation";
 import { VideoCarousel } from "./VideoCarousel";
-import { WorldWatch } from "./WorldWatch";
+import { useRegionalNews } from "./useRegionalNews";
 import { useCloudBookmarks, type RestoredCollection } from "./CloudBookmarks";
 import { createPublisherResolver } from "@/app/lib/publisher";
 import { useSourceHighlights } from "./SourceHighlights";
@@ -91,7 +91,7 @@ import {
 } from "@/app/lib/editorial-ranking";
 
 type FeedPayload = { articles: Article[]; statuses: SourceStatus[] };
-import {viewFromUrl,viewUrl,type View} from "@/app/lib/view-navigation";
+import {viewFromUrl,viewUrl,newsDaysFromUrl,type View} from "@/app/lib/view-navigation";
 type DirectorySource = SourceDefinition & {
   count: number;
   status?: SourceStatus;
@@ -112,7 +112,6 @@ const NAV: { id: View; label: string }[] = [
   { id: "partecipa", label: "Partecipa" },
 ];
 const HEADINGS = {
-  osservatorio:{overline:"OSSERVATORIO MONDIALE",title:<LocalizedText>Le notizie delle ultime sei ore.</LocalizedText>,description:"L’Osservatorio concentra l’attenzione sulle pubblicazioni delle ultime sei ore, mentre la rassegna permette una lettura più ampia. Ogni scheda mantiene titolo, testata e paese della fonte. La finestra usa la data di pubblicazione: un articolo precedente non diventa recente soltanto perché il sito lo ha appena raccolto. Le date prive di un orario utilizzabile restano fuori da questa selezione."},
   crediti:{overline:"UN LAVORO COLLETTIVO",title:<LocalizedText>Fonti, crediti e ringraziamenti.</LocalizedText>,description:"Questo progetto vive grazie al lavoro di redazioni, autori, traduttori, bibliotecari, archivisti, ricercatori e comunità del software libero. Qui puoi risalire alle risorse utilizzate."},
   fonti: {
     overline: "L’ATLANTE",
@@ -149,12 +148,12 @@ const HEADINGS = {
         <LocalizedText>{"Come funziona"}</LocalizedText>
         <br />
         <em>
-          <LocalizedText>{"Polis-Rossa."}</LocalizedText>
+          <LocalizedText>{"PolisRossa."}</LocalizedText>
         </em>
       </>
     ),
     description:
-      "Polis-Rossa è uno strumento per orientarsi nell’informazione socialista, comunista, sindacale e anticoloniale. Qui spieghiamo come funziona e quali sono i suoi limiti.",
+      "PolisRossa è uno strumento per orientarsi nell’informazione socialista, comunista, sindacale e anticoloniale. Qui spieghiamo come funziona e quali sono i suoi limiti.",
   },
 };
 
@@ -162,12 +161,19 @@ export function AggregatorApp() {
   const [quoteIndex, setQuoteIndex] = useState(0);
   const [browserLanguage, setBrowserLanguage] = useState("it");
   const [view, setView] = useState<View>("notizie");
-  const [observatoryVisible,setObservatoryVisible]=useState(false);
-  useEffect(()=>{if(view!=="notizie"){setObservatoryVisible(false);return;}const node=document.getElementById("osservatorio-sei-ore");if(!node||typeof IntersectionObserver==="undefined")return;const observer=new IntersectionObserver(([entry])=>setObservatoryVisible(entry.isIntersecting),{threshold:0});observer.observe(node);return()=>observer.disconnect();},[view]);
   useEffect(() => {
-    const sync=()=>setView(viewFromUrl(window.location.href));
-    sync();window.addEventListener('popstate',sync);window.addEventListener('hashchange',sync);
-    return()=>{window.removeEventListener('popstate',sync);window.removeEventListener('hashchange',sync);};
+    const sync = () => {
+      const url = new URL(window.location.href);
+      const legacy = url.searchParams.get("view") === "osservatorio" || url.hash === "#osservatorio-sei-ore";
+      setView(legacy ? "notizie" : viewFromUrl(url.href));
+      setDays(newsDaysFromUrl(url.href));
+      if (legacy) {
+        url.searchParams.delete("view"); url.searchParams.set("periodo", "6h"); url.hash = "";
+        window.history.replaceState(window.history.state, "", url.pathname + url.search);
+      }
+    };
+    sync(); window.addEventListener("popstate", sync); window.addEventListener("hashchange", sync);
+    return () => { window.removeEventListener("popstate", sync); window.removeEventListener("hashchange", sync); };
   }, []);
   const [articles, setArticles] = useState<Article[]>([]);
   const [statuses, setStatuses] = useState<Record<string, SourceStatus>>({});
@@ -179,6 +185,7 @@ export function AggregatorApp() {
   const [query, setQuery] = useState("");
   const deferredQuery = useDeferredValue(query);
   const [region, setRegion] = useState(ALL);
+  const [country, setCountry] = useState(ALL);
   const [language, setLanguage] = useState(ALL);
   const [kind, setKind] = useState(ALL);
   const [ideology, setIdeology] = useState(ALL);
@@ -187,7 +194,15 @@ export function AggregatorApp() {
   const [days, setDays] = useState("1");
   const [sort, setSort] = useState("balanced");
   const sourceHighlights = useSourceHighlights(articles, view === "notizie" || view === "salvati");
-  const displayArticles = useMemo(() => applySourceImages(articles, sourceHighlights.images), [articles, sourceHighlights.images]);
+  const regional = useRegionalNews(view === "notizie");
+  const networkArticles = useMemo(() => mergeArticles(articles, regional.articles), [articles, regional.articles]);
+  const displayArticles = useMemo(() => applySourceImages(networkArticles, sourceHighlights.images), [networkArticles, sourceHighlights.images]);
+  const choosePeriod = (value: string) => {
+    setDays(value);
+    const url = new URL(window.location.href);
+    if (value === "1") url.searchParams.delete("periodo"); else url.searchParams.set("periodo", value === "0.25" ? "6h" : value);
+    window.history.replaceState(window.history.state, "", url.pathname + url.search + url.hash);
+  };
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
   const [loading, setLoading] = useState(true);
@@ -315,11 +330,15 @@ export function AggregatorApp() {
     setQuery("");
     setEditorialAxis("all");
     setRegion(ALL);
+    setCountry(ALL);
     setKind(ALL);
     setIdeology(ALL);
     setTopic(ALL);
     setSourceId(ALL);
     setDays("1");
+    const url = new URL(window.location.href);
+    url.searchParams.delete("periodo");
+    window.history.replaceState(window.history.state, "", url.pathname + url.search + url.hash);
     setSort("balanced");
     setVisibleCount(PAGE_SIZE);
   }, []);
@@ -591,7 +610,7 @@ export function AggregatorApp() {
       filterArticles(
         view === "salvati"
           ? allArticles.filter((a) => savedIds.has(a.id))
-          : displayArticles.filter(isNewsArticle),
+          : displayArticles.filter(article => isNewsArticle(article) && (country === ALL || publisherFor(article).country === country)),
         {
           query: deferredQuery,
           region,
@@ -612,6 +631,7 @@ export function AggregatorApp() {
       savedIds,
       deferredQuery,
       region,
+      country,
       language,
       kind,
       ideology,
@@ -648,6 +668,7 @@ export function AggregatorApp() {
     view,
     query,
     region,
+    country,
     language,
     kind,
     ideology,
@@ -687,7 +708,7 @@ export function AggregatorApp() {
         { ...s, count: 0, status: statuses[s.id] },
       ]),
     );
-    for (const article of articles) {
+    for (const article of networkArticles) {
       counts.set(article.sourceId, (counts.get(article.sourceId) ?? 0) + 1);
       if (!sources.has(article.sourceId))
         sources.set(article.sourceId, {
@@ -717,12 +738,13 @@ export function AggregatorApp() {
             Number(a.language === preferredLanguage) ||
           a.name.localeCompare(b.name, "it"),
       );
-  }, [articles, statuses, preferredLanguage]);
+  }, [networkArticles, statuses, preferredLanguage]);
   const visibleSources = useMemo(
     () =>
       directory.filter(
         (s) =>
           (region === ALL || s.region === region) &&
+          (country === ALL || s.country === country) &&
           (language === ALL || s.language === language) &&
           (kind === ALL || s.kind === kind) &&
           (ideology === ALL || s.ideologies.includes(ideology)) &&
@@ -731,7 +753,7 @@ export function AggregatorApp() {
               .toLowerCase()
               .includes(query.trim().toLowerCase())),
       ),
-    [directory, region, language, kind, ideology, query],
+    [directory, region, country, language, kind, ideology, query],
   );
   const languages = useMemo(
     () => [...new Set(SOURCE_CATALOG.map((s) => s.language))].sort(),
@@ -748,7 +770,7 @@ export function AggregatorApp() {
   const failedRadars = SOURCE_CATALOG.filter(source => source.kind === "radar" && statuses[source.id]?.ok === false).length;
   const failedCount = failedPublishers + failedRadars;
   const filterCount =
-    [region, language, kind, ideology, topic, sourceId, editorialAxis].filter((f) => f !== ALL).length +
+    [region, country, language, kind, ideology, topic, sourceId, editorialAxis].filter((f) => f !== ALL).length +
     (days !== "1" ? 1 : 0) +
     (query ? 1 : 0);
   const heading = view in HEADINGS ? HEADINGS[view as keyof typeof HEADINGS] : null;
@@ -835,9 +857,9 @@ export function AggregatorApp() {
               <>
                 <details className="reading-controls-banner" ref={controls}>
                   <summary>
-                    <span className="controls-banner-title"><SlidersHorizontal size={17} /><LocalizedText>{view === "notizie" ? "La rassegna" : view === "salvati" ? "Le tue letture" : "Atlante delle fonti"}</LocalizedText>{view === "fonti" ? <span className="controls-banner-count">{visibleSources.length}</span> : null}</span>
+                    <span className="controls-banner-title"><SlidersHorizontal size={17} /><LocalizedText>{view === "notizie" ? "Guida e aggiornamento" : view === "salvati" ? "Le tue letture" : "Atlante delle fonti"}</LocalizedText>{view === "fonti" ? <span className="controls-banner-count">{visibleSources.length}</span> : null}</span>
                     <span className="controls-banner-state"><LocalizedText>Lettura</LocalizedText>: {languagePreferences.original?<LocalizedText>Lingua originale</LocalizedText>:<LanguageName code={readingLanguage} />}<span aria-hidden="true"> · </span><LocalizedText>Fonti</LocalizedText>: {language === ALL ? <LocalizedText>Tutte</LocalizedText> : <LanguageName code={language} />}{filterCount ? <> · {filterCount} <LocalizedText>filtri</LocalizedText></> : null}</span>
-                    <span className="controls-banner-action"><LocalizedText>Personalizza</LocalizedText><ChevronDown size={17} /></span>
+                    <span className="controls-banner-action"><LocalizedText>Apri</LocalizedText><ChevronDown size={17} /></span>
                   </summary>
                   <div className="reading-controls-content">
                 <div className="section-heading">
@@ -868,7 +890,7 @@ export function AggregatorApp() {
                       className="button button-outline"
                       aria-label="Aggiorna le notizie"
                       disabled={collecting}
-                      onClick={() => { if (!collecting) void refresh("all"); }}
+                      onClick={() => { regional.refresh(); if (!collecting) void refresh("all"); }}
                     >
                       <RefreshCcw size={15} />
                       <span>
@@ -893,7 +915,9 @@ export function AggregatorApp() {
                 ) : null}
                 {view !== "salvati" && cloud.status === "local" && savedIds.size + savedBooks.size > 0 ? <p className="account-save-note"><LocalizedText>Salvati su questo dispositivo.</LocalizedText> <a href={cloud.signInUrl} target="_top"><LocalizedText>Accedi per conservarli nel tuo account</LocalizedText></a></p> : null}
                 <TranslationNotice />
-                <div className="filter-toolbar">
+                  </div>
+                </details>
+                <div className="filter-toolbar" aria-label="Filtri della rassegna">
                   <label className="search-box">
                     <Search size={18} />
                     <LocalizedInput
@@ -922,6 +946,41 @@ export function AggregatorApp() {
                       </kbd>
                     )}
                   </label>
+                  {view === "notizie" ? <>
+                    <Select label="Periodo" value={days} change={choosePeriod}>
+                      {[["0.25", "Ultime 6 ore"], ["0.5", "Ultime 12 ore"], ["1", "Ultime 24 ore"], ["3", "Ultimi 3 giorni"], ["7", "Ultimi 7 giorni"], ["30", "Ultimi 30 giorni"], ["Infinity", "Tutte le date"]].map(([value, label]) => <option key={value} value={value}><LocalizedText>{label}</LocalizedText></option>)}
+                    </Select>
+                  </> : null}
+                  {view !== "fonti" ? (
+                    <label className="inline-select news-order">
+                      <span><LocalizedText>Ordina</LocalizedText></span>
+                      <select aria-label="Ordina le notizie" value={sort} onChange={event => setSort(event.target.value)}>
+                        <option value="balanced"><LocalizedText>Rassegna internazionale</LocalizedText></option>
+                        <option value="fresh"><LocalizedText>Ultimi articoli · ordine cronologico</LocalizedText></option>
+                        <option value="featured"><LocalizedText>In evidenza dalle fonti</LocalizedText></option>
+                        <option value="editorial"><LocalizedText>Priorità politica e formativa</LocalizedText></option>
+                        <option value="popular"><LocalizedText>Più letti sulle fonti</LocalizedText></option>
+                      </select>
+                      <ChevronDown size={14} />
+                    </label>
+                  ) : null}
+                  <button
+                    className={`filter-toggle ${filtersOpen ? "active" : ""}`}
+                    onClick={() => setFiltersOpen(!filtersOpen)}
+                    aria-expanded={filtersOpen}
+                    aria-controls="advanced-filters"
+                  >
+                    <SlidersHorizontal size={16} />
+                    <LocalizedText>{" Altri filtri"}</LocalizedText>
+                    <LocalizedText> </LocalizedText>
+                    {filterCount > 0 ? (
+                      <span>
+                        <LocalizedText>{filterCount}</LocalizedText>
+                      </span>
+                    ) : null}
+                  </button>
+                </div>
+                <div id="advanced-filters" className="advanced-filters unified-filters" hidden={!filtersOpen}>
                   <label className="source-language-control source-language-inline">
                     <Newspaper size={16} />
                     <span>
@@ -953,43 +1012,15 @@ export function AggregatorApp() {
                       ))}
                     </select>
                   </label>
-                  {view !== "fonti" ? (
-                    <label className="inline-select news-order">
-                      <span><LocalizedText>Ordina</LocalizedText></span>
-                      <select aria-label="Ordina le notizie" value={sort} onChange={event => setSort(event.target.value)}>
-                        <option value="balanced"><LocalizedText>Rassegna internazionale</LocalizedText></option>
-                        <option value="fresh"><LocalizedText>Ultimi articoli · ordine cronologico</LocalizedText></option>
-                        <option value="featured"><LocalizedText>In evidenza dalle fonti</LocalizedText></option>
-                        <option value="editorial"><LocalizedText>Priorità politica e formativa</LocalizedText></option>
-                        <option value="popular"><LocalizedText>Più letti sulle fonti</LocalizedText></option>
-                      </select>
-                      <ChevronDown size={14} />
-                    </label>
-                  ) : null}
-                  <button
-                    className={`filter-toggle ${filtersOpen ? "active" : ""}`}
-                    onClick={() => setFiltersOpen(!filtersOpen)}
-                    aria-expanded={filtersOpen}
-                    aria-controls="advanced-filters"
-                  >
-                    <SlidersHorizontal size={16} />
-                    <LocalizedText>{" Filtri"}</LocalizedText>
-                    <LocalizedText> </LocalizedText>
-                    {filterCount > 0 ? (
-                      <span>
-                        <LocalizedText>{filterCount}</LocalizedText>
-                      </span>
-                    ) : null}
-                  </button>
-                </div>
-                <div id="advanced-filters" className="advanced-filters unified-filters" hidden={!filtersOpen}>
+
 
                     <Select label="Area geografica" value={region} change={setRegion}>
                       <option value={ALL}><LocalizedText>Tutto il mondo</LocalizedText></option>
                       {REGION_ORDER.map(value => <option key={value} value={value}><LocalizedText>{value}</LocalizedText></option>)}
                     </Select>
-                    <Select label="Periodo" value={days} change={setDays}>
-                      {[["0.25", "Ultime 6 ore"], ["0.5", "Ultime 12 ore"], ["1", "Ultime 24 ore"], ["3", "Ultimi 3 giorni"], ["7", "Ultimi 7 giorni"], ["30", "Ultimi 30 giorni"], ["Infinity", "Tutte le date"]].map(([value, label]) => <option key={value} value={value}><LocalizedText>{label}</LocalizedText></option>)}
+                    <Select label="Paese della testata" value={country} change={setCountry}>
+                      <option value={ALL}><LocalizedText>Tutti i paesi</LocalizedText></option>
+                      {[...new Set(directory.map(source => source.country).filter(Boolean))].sort().map(value => <option key={value} value={value}><LocalizedText>{value}</LocalizedText></option>)}
                     </Select>
                     <Select label="Fonte" value={sourceId} change={setSourceId}>
                       <option value={ALL}><LocalizedText>Tutte le fonti</LocalizedText></option>
@@ -1036,7 +1067,8 @@ export function AggregatorApp() {
                       <LocalizedText>{" Azzera filtri"}</LocalizedText>
                     </button>
                 </div>
-                {view === "notizie" ? <p className="news-window-label"><LocalizedText>{days === "1" ? "Ultime 24 ore" : days === "Infinity" ? "Tutte le date, comprese quelle non indicate dalle fonti" : `Periodo selezionato: ${Number(days) * 24} ore`}</LocalizedText>{" · "}<LocalizedText>{sort === "fresh" ? "Dalla pubblicazione più recente" : sort === "balanced" ? "Paesi e testate alternati nella giornata" : "Ordine scelto nel pannello Personalizza"}</LocalizedText></p> : null}
+                {view === "notizie" ? <p className="news-window-label"><LocalizedText>{days === "1" ? "Ultime 24 ore" : days === "Infinity" ? "Tutte le date, comprese quelle non indicate dalle fonti" : `Periodo selezionato: ${Number(days) * 24} ore`}</LocalizedText>{" · "}<LocalizedText>{sort === "fresh" ? "Dalla pubblicazione più recente" : sort === "balanced" ? "Paesi e testate alternati nella giornata" : "Ordinamento selezionato"}</LocalizedText></p> : null}
+                {view === "notizie" && regional.failed > 0 ? <p className="feed-note" role="status"><LocalizedText>Alcuni canali regionali non rispondono. La rassegna mostra le notizie disponibili e riprova al prossimo aggiornamento.</LocalizedText></p> : null}
                 {view === "notizie" && (sort === "popular" || sort === "featured") && !hasSourceSelection ? (
                   <p className="sort-note" role="status"><LocalizedText>{sourceHighlights.coverage.busy
                     ? "Le notizie sono già leggibili. Si aggiornano le selezioni delle fonti."
@@ -1113,8 +1145,6 @@ export function AggregatorApp() {
                     ) : null}
                   </details>
                 ) : null}
-                  </div>
-                </details>
                 {view === "fonti" ? (
                   <SourcesDirectory
                     sources={visibleSources}
@@ -1123,7 +1153,7 @@ export function AggregatorApp() {
                 ) : (
                   <div className="news-layout">
                     <div className="news-main" id="rassegna-articoli">
-                      {view==="notizie"&&<header className="news-reading-header"><div><p className="eyebrow"><LocalizedText>NOTIZIE · ANALISI · APPROFONDIMENTI</LocalizedText></p><h2><LocalizedText>La rassegna</LocalizedText></h2><p><LocalizedText>L’intera raccolta, nell’ordine che scegli. Leggi, cerca e confronta le fonti.</LocalizedText></p></div><a className="watch-jump-link" hidden={observatoryVisible} href="/?view=osservatorio" onClick={event=>{event.preventDefault();navigate("osservatorio");}}><LocalizedText>Apri l’osservatorio · ultime 6 ore</LocalizedText><ArrowUpRight size={15}/></a></header>}
+                      {view==="notizie"&&<header className="news-reading-header"><div><p className="eyebrow"><LocalizedText>NOTIZIE · ANALISI · APPROFONDIMENTI</LocalizedText></p><h2><LocalizedText>La rassegna</LocalizedText></h2><p><LocalizedText>L’intera raccolta, nell’ordine che scegli. Leggi, cerca e confronta le fonti.</LocalizedText></p></div></header>}
 
                       {topic !== ALL ? (
                         <div className="topic-intro">
@@ -1171,7 +1201,7 @@ export function AggregatorApp() {
                           onExplore={() =>
                             navigate(view === "salvati" ? "notizie" : "fonti")
                           }
-                          onRetry={() => void refresh("all")}
+                          onRetry={() => { regional.refresh(); void refresh("all"); }}
                         />
                       ) : null}
                       {filtered.length > visibleCount ? (
@@ -1192,12 +1222,12 @@ export function AggregatorApp() {
                         </p>
                       ) : null}
                     </div>
-                    {view === "notizie" ? <WorldWatch networkArticles={displayArticles} /> : null}
+
                   </div>
                 )}
               </>
             ) : null}
-            {view === "osservatorio" ? <div className="observatory-page"><button className="text-link" onClick={()=>navigate("notizie")}><LocalizedText>Torna alla rassegna completa</LocalizedText></button><WorldWatch networkArticles={displayArticles} expanded /></div> : null}
+
             {view === "crediti" ? <Suspense fallback={<p role="status"><LocalizedText>Apertura dei crediti…</LocalizedText></p>}><Acknowledgements/></Suspense> : null}
             {view === "teoria" ? (
               <Suspense fallback={<p className="reader-message" role="status"><LocalizedText>Apertura della biblioteca…</LocalizedText></p>}><LibraryView query={query} setQuery={setQuery} savedBooks={savedBooks} onToggleBook={toggleBook} /></Suspense>
@@ -1234,7 +1264,7 @@ export function AggregatorApp() {
             </button>
           </div>
           <div className="footer-acknowledgements"><p><LocalizedText>Grazie alle redazioni, agli archivi, agli autori, ai traduttori e alle comunità del software libero che rendono possibile questa raccolta.</LocalizedText></p><a href="/?view=crediti" onClick={event=>{event.preventDefault();navigate("crediti");}}><LocalizedText>Fonti, crediti e ringraziamenti</LocalizedText><ArrowUpRight size={14}/></a></div>
-          <div className="footer-privacy"><a href="/?view=privacy" onClick={event=>{event.preventDefault();navigate("privacy");}}><LocalizedText>Privacy e dati</LocalizedText></a><span aria-hidden="true"> · </span><a href="https://github.com/internazionalerossa/polisrossa" target="_blank" rel="noopener noreferrer"><LocalizedText>Codice sorgente</LocalizedText></a><span aria-hidden="true"> · </span><a href="https://github.com/internazionalerossa/polisrossa/blob/main/NOTICE" target="_blank" rel="noopener noreferrer"><LocalizedText>Licenza e avvisi</LocalizedText></a></div>
+          <div className="footer-privacy"><a href="/?view=privacy" onClick={event=>{event.preventDefault();navigate("privacy");}}><LocalizedText>Privacy, cookie e diritti</LocalizedText></a><span aria-hidden="true"> · </span><a href="https://github.com/internazionalerossa/polisrossa" target="_blank" rel="noopener noreferrer"><LocalizedText>Codice sorgente</LocalizedText></a><span aria-hidden="true"> · </span><a href="https://github.com/internazionalerossa/polisrossa/blob/main/NOTICE" target="_blank" rel="noopener noreferrer"><LocalizedText>Licenza e avvisi</LocalizedText></a></div>
           <div className="footer-bottom">
             <span>
               <LocalizedText>
@@ -1743,7 +1773,7 @@ function ArticleReader({
     <div className="article-reader">
       <div className="reader-top">
         <span className="eyebrow">
-          <LocalizedText>{"LA SCHEDA / Polis-Rossa"}</LocalizedText>
+          <LocalizedText>{"LA SCHEDA / PolisRossa"}</LocalizedText>
         </span>
         <button
           className="icon-button"

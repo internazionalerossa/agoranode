@@ -1,3 +1,4 @@
+import {handlePrivacyExport} from '../app/lib/privacy-export';
 import {brandManifestResponse} from '../app/lib/brand-manifest';
 import {handleLiveChat} from './live-chat';
 import {visitorCountryResponse} from '../app/lib/visitor-country';
@@ -20,13 +21,14 @@ import {readBook} from '../app/lib/book-reader';
 import type {PostgresDatabase} from './database';
 const sourceIds=new Set(SOURCE_CATALOG.map(s=>s.id)),bookIds=new Set(THEORY_LIBRARY.map(b=>b.id));
 const publicEndpoints:Record<string,(r:Request)=>Promise<Response>>={'/api/articles':articles,'/api/videos':videos,'/api/highlights':highlights,'/api/pulse':pulse};
-export const privatePaths=new Set(['/api/bookmarks','/api/reading-progress','/api/library/read','/api/community','/api/community/mine','/api/community/forum','/api/community/chat','/api/community/chat-image']);
+export const privatePaths=new Set(['/api/privacy/export','/api/bookmarks','/api/reading-progress','/api/library/read','/api/community','/api/community/mine','/api/community/forum','/api/community/chat','/api/community/chat-image']);
 export async function api(request:Request,db:PostgresDatabase,userId:string|null,bootstrapHash:string|undefined,background:(p:Promise<unknown>)=>void,participationOpen=true):Promise<Response>{
  const url=new URL(request.url),path=url.pathname;
  if(path==='/api/manifest')return brandManifestResponse(request);
  if(path==='/api/visitor-country')return visitorCountryResponse(request);
  const reply=(body:unknown,status=200)=>Response.json(body,{status,headers:{'cache-control':'private, no-store',vary:'cookie'}});
  if(request.method==='POST'&&privatePaths.has(path)&&request.headers.get('origin')!==url.origin)return reply({error:'Invalid origin'},403);
+ if(path==='/api/privacy/export')return handlePrivacyExport(request,db,userId);
  if(path==='/api/bookmarks')return handleBookmarks(request,db as unknown as BookmarkDatabase,userId,bookIds);
  if(path==='/api/reading-progress')return handleReadingProgress(request,db,userId,'/account?return_to=%2Fread');
  if(path==='/api/community/chat'||path==='/api/community/chat-image')return handleLiveChat(request,db,userId,undefined,participationOpen);

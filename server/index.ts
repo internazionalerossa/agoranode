@@ -52,5 +52,5 @@ const server=createServer({maxHeaderSize:16384,requestTimeout:30000,headersTimeo
 });
 // Clear expired chat memory even when nobody is polling; no persistence on shutdown.
 const chatCleanup=setInterval(()=>liveChat.sweep(),1000);chatCleanup.unref();
-server.listen(config.port,'0.0.0.0',()=>console.info('Polis-Rossa server ready'));
+server.listen(config.port,'0.0.0.0',()=>console.info('PolisRossa server ready'));
 for(const signal of ['SIGTERM','SIGINT'])process.on(signal,()=>{server.close(()=>{void Promise.allSettled([...jobs,settle()]).then(()=>pool.end()).then(()=>process.exit(0));});setTimeout(()=>process.exit(1),20000).unref();});

@@ -1,4 +1,4 @@
-# GitHub Copilot — Polis-Rossa
+# GitHub Copilot — PolisRossa
 
 Leggere [AGENTS.md](../AGENTS.md), [README.md](../README.md), [CONTRIBUTING.md](../CONTRIBUTING.md) e [l'architettura](../docs/ARCHITECTURE.md). AGENTS.md è la guida comune per tutti gli assistenti: mantenere il modello del sistema comprensibile, evitare espansioni speculative, verificare i comportamenti integrati e proteggere le scelte difficili da invertire.
 

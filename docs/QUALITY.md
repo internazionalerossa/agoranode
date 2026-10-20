@@ -4,6 +4,7 @@ Aggiornamento: 20 ottobre 2026. Questo registro distingue codice verificato, com
 
 ## Evidenze disponibili
 
+- Informativa cookie e memoria locale ampliata, copie pubbliche eliminabili senza rimuovere i salvati, traduzione della comunità facoltativa e interrotta al ritorno all’originale. Esportazione privata nel runtime indipendente; procedure del titolare ancora da completare.
 - Anteprima pubblica disponibile; autenticazione indipendente e scritture della comunità non attive su quell’indirizzo.
 - Revisione delle spiegazioni in README e guide, pagine principali, 64 tappe storiche, 11 introduzioni ai dossier, 32 descrizioni di libri e 18 ambiti statistici. Valori, date, fonti, edizioni e identificativi conservati; la revisione non riscrive i testi originali degli editori.
 - Compilazione, controlli dei tipi e suite automatiche verificati. I risultati puntuali accompagnano ogni consegna; non attestano il funzionamento remoto delle funzioni chiuse.
@@ -17,7 +18,7 @@ Aggiornamento: 20 ottobre 2026. Questo registro distingue codice verificato, com
 
 | Requisito | Stato e riscontro |
 | --- | --- |
-| Nome Polis-Rossa in marchio, caricamento e pagine | **verifica parziale**. Marchio, caricamento, testi, metadati e documenti rinominati; Polis invariato e colore tradotto localmente nella lingua di lettura. Verifica visiva integrale ancora necessaria. |
+| Nome PolisRossa in marchio, caricamento e pagine | **verifica parziale**. Marchio, caricamento, testi, metadati e documenti rinominati; Polis invariato e colore tradotto localmente nella lingua di lettura. Verifica visiva integrale ancora necessaria. |
 | Stella rossa a cinque punte e logo senza note musicali | **codice e anteprima**. Componenti di identità aggiornati; giudizio visivo finale aperto. |
 | Eliminare dati personali dai sorgenti pubblici | **verifica parziale**. Sorgenti indipendenti ripuliti; vecchio URL pubblico contiene ancora un identificativo personale. |
 | Repository pubblico sul nuovo account | **pubblicato**. Importazione completa sul ramo `main`, commit `75794622383652392ae0c288f50848da9bc8b151`; copia remota verificata. |
@@ -34,7 +35,7 @@ Aggiornamento: 20 ottobre 2026. Questo registro distingue codice verificato, com
 | Fonti di sinistra e università solo pubbliche | **verifica parziale**. Policy ed esclusioni implementate; revisione editoriale completa non conclusa. |
 | Ampliare fonti da tutto il mondo e riferimenti di Ottolina | **parziale**. 177 fonti dirette e 136 radar; copertura mondiale non esaustiva. |
 | Consultare automaticamente tutte le fonti senza carica altre fonti | **codice verificato**. Raccolta concorrente limitata e cancellabile; disponibilità live di ogni fonte non garantita. |
-| Distinguere rassegna e osservatorio ultime sei ore | **codice e anteprima**. Viste distinte; audit completo dei rimandi aperto. |
+| Integrare l’Osservatorio nei filtri della rassegna | **codice verificato**. Raccolta e filtri comuni; periodo sei ore e vecchi URL compatibili. Verifica visiva su dispositivi reali ancora da eseguire. |
 | Escludere notizie vecchie e future dalla finestra sei ore | **codice verificato**. Filtri temporali testati; sessioni lunghe sul servizio reale da verificare. |
 | Ordinamento cronologico e alternative editoriali | **codice verificato**. Ordine cronologico distinto dalla rassegna: alternanza di paesi e testate nell’intera giornata, conservata anche nella cache limitata; date uguali ammesse. |
 | Rilevanza e più letti ricavati dalle fonti | **parziale**. Estrazione dei segnali presente; copertura e qualità variabili per editore. |

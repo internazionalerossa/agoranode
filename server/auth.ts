@@ -9,7 +9,7 @@ export function createAuth(pool:pg.Pool,config:ReturnType<typeof configuration>,
  const jobs=new Set<Promise<unknown>>();
  const send=(email:string,url:string,reset=false)=>{const job=(sendMail?sendMail(email,url,reset):deliver(email,url,reset)).catch(()=>{console.error('Authentication email delivery failed');}).finally(()=>jobs.delete(job));jobs.add(job);};
  const auth=betterAuth({
-  appName:'Polis-Rossa',baseURL:config.origin,basePath:'/api/identity',secret:config.secret,database:pool,trustedOrigins:[config.origin],
+  appName:'PolisRossa',baseURL:config.origin,basePath:'/api/identity',secret:config.secret,database:pool,trustedOrigins:[config.origin],
   emailAndPassword:{enabled:true,minPasswordLength:12,maxPasswordLength:128,requireEmailVerification:true,autoSignIn:false,revokeSessionsOnPasswordReset:true,sendResetPassword:async({user,url})=>{send(user.email,url,true);}},
   emailVerification:{sendOnSignUp:true,sendOnSignIn:true,autoSignInAfterVerification:false,sendVerificationEmail:async({user,url})=>{send(user.email,url);}},
   session:{expiresIn:7*86400,updateAge:86400,cookieCache:{enabled:false}},

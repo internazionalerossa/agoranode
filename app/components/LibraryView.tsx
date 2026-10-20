@@ -140,7 +140,7 @@ export function LibraryView({
             >
               <span>
                 <LocalizedText defer>
-                  {"LA BIBLIOTECA / Polis-Rossa"}
+                  {"LA BIBLIOTECA / PolisRossa"}
                 </LocalizedText>
               </span>
               <strong>

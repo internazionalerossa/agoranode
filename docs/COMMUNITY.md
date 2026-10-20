@@ -48,7 +48,7 @@ Issue, proposte, votazioni e risultati sono pubblici. Le discussioni sono pubbli
 
 ## Regola 11 — Rispettare persone e dati
 
-Non pubblicare dati privati altrui, molestie o spam. Puoi rimuovere i tuoi interventi; le decisioni di moderazione sono motivate. Nel forum sono consentiti 30 commenti all’ora. La traduzione automatica può inviare il testo al servizio esterno indicato. Puoi disattivarla scegliendo Lingua originale senza cambiare la lingua dei comandi. Polis-Rossa non conserva queste traduzioni nella cache del sito o del browser; i fornitori esterni applicano condizioni proprie. Quando rispondi, rendi comprensibile il punto che discuti e distingui una critica alle idee da un attacco alla persona. Per le informazioni riservate usa i recapiti del gestore, non una discussione o un’issue pubblica.
+Non pubblicare dati privati altrui, molestie o spam. Puoi rimuovere i tuoi interventi; le decisioni di moderazione sono motivate. Nel forum sono consentiti 30 commenti all’ora. La traduzione automatica può inviare il testo al servizio esterno indicato. Puoi disattivarla scegliendo Lingua originale senza cambiare la lingua dei comandi. PolisRossa non conserva queste traduzioni nella cache del sito o del browser; i fornitori esterni applicano condizioni proprie. Quando rispondi, rendi comprensibile il punto che discuti e distingui una critica alle idee da un attacco alla persona. Per le informazioni riservate usa i recapiti del gestore, non una discussione o un’issue pubblica.
 
 ## Regola 12 — Un progetto comune e aperto
 

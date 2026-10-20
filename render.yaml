@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: polis-rossa
+    name: polisrossa
     runtime: docker
     plan: free
     region: frankfurt

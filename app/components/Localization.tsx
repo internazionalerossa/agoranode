@@ -221,7 +221,7 @@ const translationQueue = createTranslationQueue(async (task) => {
   }
 });
 function translate(text: string, from: string, to: string, priority = 0):Promise<string|null> {
-  if(text.includes("Polis-Rossa"))return translateAroundBrand(text,part=>translate(part,from,to,priority));
+  if(text.includes("PolisRossa"))return translateAroundBrand(text,part=>translate(part,from,to,priority));
   from = normalizeLanguage(from);
   to = normalizeLanguage(to);
   if (from === to) return Promise.resolve(text);

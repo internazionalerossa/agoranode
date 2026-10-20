@@ -1,4 +1,4 @@
-# Contribuire / Contribute · Polis-Rossa
+# Contribuire / Contribute · PolisRossa
 
 [Italiano](#italiano) · [English](#english) · [Español](#español) · [Français](#français) · [Deutsch](#deutsch) · [Português](#português)
 
@@ -90,7 +90,7 @@ Read [AGENTS.md](AGENTS.md), [README.md](README.md) and the relevant section of 
 
 1. Fork the repository and create a short branch from `main`.
 2. Run `npm ci`, then `npm run dev` for local development. Node.js 24 is required.
-3. Preserve source IDs, book IDs, personal collections and existing storage keys. The product name is Polis-Rossa; legacy `rassegna-rossa.*` keys remain for compatibility.
+3. Preserve source IDs, book IDs, personal collections and existing storage keys. The product name is PolisRossa; legacy `rassegna-rossa.*` keys remain for compatibility.
 4. For code or structured catalogue changes, run `npm test` and `npm run typecheck`. Add meaningful regression coverage for changed behavior. Check small screens and keyboard access when changing the UI; state any verification you could not perform. Documentation-only changes do not require building the application.
 5. Open a pull request using the template. Explain the result and validation. If dependency inputs change, update the lockfile too.
 

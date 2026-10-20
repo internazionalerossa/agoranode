@@ -1,6 +1,6 @@
 {
-  "name": "Polis-Rossa",
-  "short_name": "Polis-Rossa",
+  "name": "PolisRossa",
+  "short_name": "PolisRossa",
   "description": "Notizie, fonti e percorsi di lettura per uno sguardo internazionale.",
   "start_url": "/",
   "display": "standalone",

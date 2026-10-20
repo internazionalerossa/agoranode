@@ -7,9 +7,9 @@ export function brandColour(language='it'){
  if(/^zh-(tw|hk|mo|hant)(-|$)/.test(code))return BRAND_RED['zh-tw'];
  return BRAND_RED[code]??BRAND_RED[code.split('-')[0]]??BRAND_RED.en;
 }
-export function brandName(language='it'){return 'Polis-'+brandColour(language);}
-export function localizeBrand(text:string,language:string){return text.replaceAll('Polis-Rossa',brandName(language));}
+export function brandName(language='it'){return 'Polis'+brandColour(language);}
+export function localizeBrand(text:string,language:string){return text.replaceAll('PolisRossa',brandName(language));}
 export async function translateAroundBrand(text:string,translatePart:(part:string)=>Promise<string|null>):Promise<string|null>{
- const parts=await Promise.all(text.split('Polis-Rossa').map(part=>part.trim()?translatePart(part):Promise.resolve(part)));
- return parts.some(part=>part===null)?null:parts.join('Polis-Rossa');
+ const parts=await Promise.all(text.split('PolisRossa').map(part=>part.trim()?translatePart(part):Promise.resolve(part)));
+ return parts.some(part=>part===null)?null:parts.join('PolisRossa');
 }

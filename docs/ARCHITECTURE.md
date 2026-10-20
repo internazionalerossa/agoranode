@@ -4,6 +4,12 @@ Questa guida descrive il percorso di una richiesta, dalla pagina aperta nel brow
 
 Leggi prima i componenti e i confini dei dati, poi la sezione relativa alla funzione che vuoi modificare. Le descrizioni del codice non attestano che gli stessi flussi siano già attivi sull’hosting pubblico: lo stato operativo è registrato in QUALITY.md.
 
+## Rassegna e dimensioni dello schermo
+
+La rassegna integra anche gli otto canali regionali dell’Osservatorio: “Ultime 6 ore” è una selezione del periodo nella lista comune. `useRegionalNews.ts` conserva acquisizione concorrente, timeout, recuperi indipendenti e cache pubblica, senza coinvolgere i salvataggi privati. I vecchi collegamenti all’Osservatorio aprono la rassegna con il periodo corrispondente; gli altri periodi possono essere condivisi nello stesso URL.
+
+Ricerca, periodo e ordinamento sono visibili. Un solo pannello raccoglie lingua originale, area geografica, fonte e criteri tematici. La superficie centrata ha larghezza massima di 1.360 pixel; le colonne si adattano e i contenuti possono restringersi senza imporre la larghezza minima del testo o dei menu. Il marchio è scritto senza trattino in ogni lingua.
+
 ## Componenti
 
 L’applicazione ha un’interfaccia React compilata con Vite e un server Node.js. Il server espone API same-origin e distribuisce i file compilati. PostgreSQL conserva account, sessioni, raccolte private e dati del forum. La lettura dei contenuti esterni avviene attraverso endpoint con destinazioni e dimensioni limitate.
@@ -89,7 +95,7 @@ Il forum conserva invece post e commenti in PostgreSQL: testo principale fino a 
 
 La Biblioteca mantiene catalogo, percorsi e racconto storico nella stessa pagina. Una breve guida iniziale introduce gli strumenti e collega direttamente all’archivio comparativo. Le preferenze in `internazionalerossa.language-preferences` separano interfaccia e contenuti; `original` disattiva la traduzione dei contenuti mantenendo localizzati menu e comandi. I filtri per la lingua delle fonti restano indipendenti. Le preferenze precedenti vengono migrate.
 
-La traduzione di forum e chat è differita ai paragrafi visibili, con due richieste concorrenti. Conserva i collegamenti, non modifica testi o schede di voto nel database e non scrive traduzioni in localStorage o nella cache del server. Il testo è inviato al servizio esterno dichiarato nell’interfaccia; il progetto non garantisce la cancellazione dei dati trattati da quel servizio. Le richieste pendenti si interrompono scegliendo l’originale, cambiando lingua o chiudendo il contenuto. La traduzione del libro cambia la presentazione, non l’edizione o l’identificatore del segnalibro.
+La traduzione di forum e chat richiede prima il comando esplicito sul testo e viene poi differita ai paragrafi visibili, con due richieste concorrenti. Conserva i collegamenti, non modifica testi o schede di voto nel database e non scrive traduzioni in localStorage o nella cache del server. Il testo è inviato al servizio esterno dichiarato nell’interfaccia; il progetto non garantisce la cancellazione dei dati trattati da quel servizio. Le richieste pendenti si interrompono scegliendo l’originale, cambiando lingua o chiudendo il contenuto. La traduzione del libro cambia la presentazione, non l’edizione o l’identificatore del segnalibro.
 
 ## Identità multilingue
 

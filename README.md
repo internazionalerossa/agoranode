@@ -1,6 +1,6 @@
-# Polis-Rossa
+# PolisRossa
 
-**Notizie, conoscenza e strumenti comuni.** Polis-Rossa è un progetto editoriale e software che mette in relazione l’informazione quotidiana con gli strumenti necessari a comprenderla. Raccoglie fonti socialiste, comuniste, sindacali e anticoloniali da paesi diversi; accanto alle notizie offre libri gratuiti, percorsi introduttivi, ricostruzioni storiche e dati internazionali consultabili. Ogni articolo rimanda alla pubblicazione originale: l’obiettivo è facilitare la scoperta delle fonti e sostenere la lettura del loro lavoro.
+**Notizie, conoscenza e strumenti comuni.** PolisRossa è un progetto editoriale e software che mette in relazione l’informazione quotidiana con gli strumenti necessari a comprenderla. Raccoglie fonti socialiste, comuniste, sindacali e anticoloniali da paesi diversi; accanto alle notizie offre libri gratuiti, percorsi introduttivi, ricostruzioni storiche e dati internazionali consultabili. Ogni articolo rimanda alla pubblicazione originale: l’obiettivo è facilitare la scoperta delle fonti e sostenere la lettura del loro lavoro.
 
 Il progetto si rivolge anche a chi non conosce il lessico delle sinistre. Un termine come salario, proprietà pubblica o cooperazione apre domande concrete: come si guadagna da vivere, chi decide gli investimenti, come si organizzano servizi e risorse condivise? La biblioteca e il racconto storico aiutano a passare dalla singola notizia al suo contesto, con spiegazioni progressive e documenti da verificare. Non occorre aderire a una posizione politica per consultare, interrogare o discutere i contenuti.
 
@@ -18,13 +18,15 @@ Questa distinzione è importante: una copia temporanea nel browser rende la lett
 
 Il primo deployment indipendente è in preparazione. Il suo indirizzo sarà inserito qui dopo la verifica. Iscrizioni e forum sono disabilitati per impostazione predefinita: l’apertura richiede configurazione dell’hosting, invio email, verifiche dei dati e completamento degli adempimenti operativi. La presenza del codice non significa che ogni funzione sia già attiva su un servizio pubblico.
 
-Il nome mantiene “Polis” invariato e traduce il colore nella lingua di lettura: Polis-Rossa, Polis-Red, Polis-Rouge. Le traduzioni del marchio sono incluse nel codice e non richiedono servizi esterni.
+Il nome mantiene “Polis” invariato e traduce il colore nella lingua di lettura: PolisRossa, PolisRed, PolisRouge. Le traduzioni del marchio sono incluse nel codice e non richiedono servizi esterni.
 
 ## Come orientarsi
 
-Puoi iniziare dalle notizie e aprire subito una fonte, oppure seguire una domanda più ampia nella Biblioteca. La rassegna alterna paesi e testate per non lasciare tutto lo spazio all’editore che pubblica di più; l’ordine cronologico rimane una scelta separata. L’Osservatorio restringe invece la lettura alle ultime sei ore. Nella Biblioteca i percorsi aiutano a scegliere un primo testo, mentre Conquiste mette in relazione eventi, diritti e risultati misurabili. L’archivio statistico si usa quando vuoi approfondire un confronto specifico, senza dover attraversare i filtri per leggere il racconto.
+Puoi iniziare dalle notizie e aprire subito una fonte, oppure seguire una domanda più ampia nella Biblioteca. La rassegna alterna paesi e testate per non lasciare tutto lo spazio all’editore che pubblica di più; l’ordine cronologico rimane una scelta separata. Per seguire l’attualità immediata scegli “Ultime 6 ore” nel filtro Periodo della rassegna: i canali regionali dell’Osservatorio confluiscono nella stessa lista e rispettano gli stessi filtri. Nella Biblioteca i percorsi aiutano a scegliere un primo testo, mentre Conquiste mette in relazione eventi, diritti e risultati misurabili. L’archivio statistico si usa quando vuoi approfondire un confronto specifico, senza dover attraversare i filtri per leggere il racconto.
 
 Partecipa distingue il confronto libero dalle decisioni sul funzionamento del sito. Il forum permette conversazioni articolate; le issue descrivono problemi o miglioramenti; le votazioni scelgono fra proposte esplicite. Queste funzioni richiedono il servizio indipendente attivo e l’ammissione prevista dalle regole.
+
+La rassegna mostra subito ricerca, periodo e ordinamento. “Altri filtri” raccoglie lingua originale, area geografica, fonte e argomenti senza ulteriori pannelli annidati. L’impaginazione è centrata e più compatta: tre colonne sugli schermi ampi, due su quelli intermedi e una sul telefono. I vecchi collegamenti all’Osservatorio aprono direttamente il periodo delle ultime sei ore.
 
 ## Cosa offre
 
@@ -85,3 +87,5 @@ Articoli, immagini, video, libri, traduzioni editoriali e dataset mantengono le 
 ## Biblioteca e lingue
 
 La Biblioteca comprende libri gratuiti, percorsi di lettura, storia e un archivio statistico consultabile. La guida iniziale spiega gli strumenti senza aggiungere livelli di navigazione. Partecipa ospita il forum, le votazioni sul progetto e le chat temporanee. Il comando Lingue separa interfaccia e lettura, con la possibilità di vedere i contenuti originali. Le funzioni di partecipazione richiedono il servizio indipendente configurato.
+
+Per portare online il servizio indipendente, seguire [Prima pubblicazione](docs/PUBLICATION.md): configurazione gratuita, verifiche reali, informative e procedure necessarie prima di aprire account e comunità.

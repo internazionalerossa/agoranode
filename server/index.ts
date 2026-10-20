@@ -20,7 +20,7 @@ async function staticResponse(pathname:string){
  if(decoded.includes('\0')||decoded.includes('\\'))return new Response('Not found',{status:404});
  const filename=['/','/read','/account'].includes(decoded)?resolve(root,'index.html'):resolve(root,'.'+decoded);
  if(!filename.startsWith(root+sep))return new Response('Not found',{status:404});
- try{if(!(await stat(filename)).isFile())throw Error();return new Response(await readFile(filename),{headers:{'content-type':types[extname(filename)]??'application/octet-stream','cache-control':filename.endsWith('index.html')?'no-cache':decoded.startsWith('/assets/')?'public, max-age=31536000, immutable':'public, max-age=3600'}});}catch{return new Response('Not found',{status:404});}
+ try{if(!(await stat(filename)).isFile())throw Error();return new Response(await readFile(filename),{headers:{'content-type':types[extname(filename)]??'application/octet-stream','cache-control':filename.endsWith('index.html')||decoded==='/sw.js'?'no-cache':decoded.startsWith('/assets/')?'public, max-age=31536000, immutable':'public, max-age=3600'}});}catch{return new Response('Not found',{status:404});}
 }
 const server=createServer({maxHeaderSize:16384,requestTimeout:30000,headersTimeout:15000},async(incoming,outgoing)=>{
  try{

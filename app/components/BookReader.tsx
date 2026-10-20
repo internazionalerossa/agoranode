@@ -5,13 +5,14 @@ import { BOOK_LANGUAGES, THEORY_LIBRARY, bookEdition } from "@/app/data/library"
 import type { ReaderDocument } from "@/app/lib/book-reader";
 import type { Progress } from "@/app/lib/reading-progress";
 import { readerDestination } from "@/app/lib/book-navigation";
+import {AppRuntime} from "./MobileApp";
 import LanguageSettings,{useLanguagePreferences} from "./LanguageSettings";
 import { LocalizationProvider, LocalizedText } from "./Localization";
 
 export function BookReader() {
  const preferences=useLanguagePreferences();
  const [ready,setReady]=useState(false);useEffect(()=>setReady(true),[]);
- return <LocalizationProvider language={preferences.interfaceLanguage} contentLanguage={preferences.contentLanguage} original={preferences.original}><LanguageSettings/><Reader language={preferences.interfaceLanguage} ready={ready}/></LocalizationProvider>;
+ return <LocalizationProvider language={preferences.interfaceLanguage} contentLanguage={preferences.contentLanguage} original={preferences.original}><AppRuntime/><LanguageSettings/><Reader language={preferences.interfaceLanguage} ready={ready}/></LocalizationProvider>;
 }
 function Reader({language,ready}:{language:string;ready:boolean}) {
  const [bookId,setBookId]=useState("");

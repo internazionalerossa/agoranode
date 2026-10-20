@@ -4547,3 +4547,27 @@ body { min-width: 0; width: 100%; overflow-x: clip; }
 .project-participation > a { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; }
 .project-participation > small { display: block; font-size: 11px; line-height: 1.6; color: var(--muted); margin-top: 8px; }
 @media(max-width:650px) { .project-participation { padding-block: 16px; } .project-participation p { font-size: 13px; } .project-participation > a { white-space: normal; text-align: start; } }
+
+.app-install { position: relative; z-index: 110; max-width: 100%; }
+.app-install > summary { display: inline-flex; gap: 6px; align-items: center; min-height: 44px; cursor: pointer; font-weight: 600; list-style: none; }
+.app-install > summary::-webkit-details-marker { display: none; }
+.app-install > div { position: absolute; inset: 100% 0 auto auto; width: min(340px,calc(100vw - 32px)); padding: 18px; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); box-shadow: 0 8px 32px #0002; font-size: 13px; line-height: 1.6; color: var(--ink); }
+.app-install > div > small { display: block; color: var(--muted); }
+.app-network-status { padding: 10px 16px; background: #f5ddae; color: #382d16; font: 12px/1.6 var(--sans); overflow-wrap: anywhere; }
+.utility-bar { min-height: 44px; height: auto; gap: 12px; }
+@media(max-width:650px) {
+ .app-shell { padding-bottom: calc(90px + env(safe-area-inset-bottom)); }
+ .app-shell .main-nav { position: fixed; inset: auto 0 0; z-index: 85; width: 100%; padding: 0 max(12px,env(safe-area-inset-left)) env(safe-area-inset-bottom) max(12px,env(safe-area-inset-right)); background: var(--paper); border-top: 1px solid var(--line); border-bottom: 0; box-shadow: 0 -4px 20px #00000008; gap: 4px; }
+ .app-shell .main-nav .nav-links > button, .app-shell .main-nav .source-directory-button { min-height: 54px; font-size: 12px; }
+ .main-nav .nav-links > button[aria-current="page"]:after { bottom: auto; top: 0; }
+ body[data-keyboard-open="true"] .app-shell .main-nav { display: none; }
+ .community-form { padding: 16px 12px; }
+ .community-form-row { grid-template-columns: minmax(0,1fr); gap: 10px; }
+ .chat-message-list { max-height: 54dvh; min-height: 160px; overscroll-behavior-y: contain; }
+ .chat-composer-tools { flex-wrap: wrap; gap: 10px; }
+ .chat-composer textarea, .account-view input { font-size: 16px; }
+ .book-reader { padding-bottom: env(safe-area-inset-bottom); }
+}
+@media(hover:none) and (pointer:coarse) { .app-shell button, .app-shell summary, .app-shell input:not([type=checkbox]):not([type=radio]), .app-shell select { min-height: 44px; } }
+
+.book-reader { max-width: 1080px; }

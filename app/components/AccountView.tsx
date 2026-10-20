@@ -1,6 +1,7 @@
 "use client";
 import {useEffect,useState} from 'react';
 import {LocalizationProvider,LocalizedText as T} from './Localization';
+import {AppRuntime} from "./MobileApp";
 import LanguageSettings,{useLanguagePreferences} from './LanguageSettings';
 import {accountReturnPath} from '@/app/lib/account-navigation';
 import BrandName from './BrandName';
@@ -8,7 +9,7 @@ import {useReadingLocale} from './Localization';
 import AccessLevels from './AccessLevels';
 export default function AccountView(){
  const preferences=useLanguagePreferences();
- return <LocalizationProvider language={preferences.interfaceLanguage} contentLanguage={preferences.contentLanguage} original={preferences.original}><LanguageSettings/><Account/></LocalizationProvider>;
+ return <LocalizationProvider language={preferences.interfaceLanguage} contentLanguage={preferences.contentLanguage} original={preferences.original}><AppRuntime/><LanguageSettings/><Account/></LocalizationProvider>;
 }
 function Account(){
  const readingLanguage=useReadingLocale();

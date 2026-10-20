@@ -1,4 +1,5 @@
 "use client";
+import {AppRuntime,InstallApp} from "./MobileApp";
 import LanguageSettings,{useLanguagePreferences} from "./LanguageSettings";
 
 import {
@@ -747,6 +748,7 @@ export function AggregatorApp() {
 
   return (
     <LocalizationProvider language={languagePreferences.interfaceLanguage} contentLanguage={readingLanguage} original={languagePreferences.original}>
+      <AppRuntime/>
       <InitialLoadBoundary collecting={(view === "notizie" && !initialWindowReady && orderedArticles.length < PAGE_SIZE) || (view === "salvati" && cloud.status === "checking")} progress={progress} language={languagePreferences.interfaceLanguage} brandLanguage={readingLanguage}>
       <div className="app-shell">
         <a className="skip-link" href="#letture">
@@ -754,7 +756,7 @@ export function AggregatorApp() {
         </a>
         <header className="site-header">
           <div className="utility-bar">
-            <span>{dateLabel}</span>
+            <span>{dateLabel}</span><InstallApp/>
 
           </div>
           <div className="masthead">
@@ -785,12 +787,12 @@ export function AggregatorApp() {
                 </button>
               ))}
             </div>
-            <button className="source-directory-button" aria-current={view==="fonti"?"page":undefined} onClick={()=>navigate("fonti")}><Newspaper size={15}/><LocalizedText>Fonti</LocalizedText><strong>{SOURCE_CATALOG.filter(source=>source.kind!=="radar").length}</strong><span>+ {SOURCE_CATALOG.filter(source=>source.kind==="radar").length} <LocalizedText>radar</LocalizedText></span></button>
+            <button className="source-directory-button" aria-label="Consulta le fonti" aria-current={view==="fonti"?"page":undefined} onClick={()=>navigate("fonti")}><Newspaper size={15}/><LocalizedText>Fonti</LocalizedText><strong>{SOURCE_CATALOG.filter(source=>source.kind!=="radar").length}</strong><span>+ {SOURCE_CATALOG.filter(source=>source.kind==="radar").length} <LocalizedText>radar</LocalizedText></span></button>
           </nav>
         </header>
 
         <main>
-          {view === "notizie" ? <><VideoCarousel /><aside className="news-library-invitation" aria-label="Approfondimenti e comunità"><a href="/?view=teoria" onClick={event=>{event.preventDefault();navigate("teoria");}}><strong><LocalizedText>Biblioteca</LocalizedText> →</strong><span><LocalizedText>Libri gratuiti, percorsi di lettura, storia delle conquiste e un archivio di dati da confrontare.</LocalizedText></span></a><a href="/?view=partecipa" onClick={event=>{event.preventDefault();navigate("partecipa");}}><strong><LocalizedText>Aiutaci a farlo meglio</LocalizedText> →</strong><span><LocalizedText>Il progetto ha bisogno del tuo sguardo: valuta testi, fonti, grafici e ogni dettaglio della pagina. Proponi miglioramenti con parole tue, senza saper programmare.</LocalizedText></span></a></aside></> : null}
+          {view === "notizie" ? <><VideoCarousel /><aside className="news-library-invitation" aria-label="Approfondimenti e comunità"><a href="/?view=teoria" onClick={event=>{event.preventDefault();navigate("teoria");}}><strong><LocalizedText>Biblioteca</LocalizedText> →</strong><span><LocalizedText>Libri gratuiti, percorsi di lettura, storia delle conquiste e un archivio di dati da confrontare.</LocalizedText></span></a><a href="/?view=partecipa" onClick={event=>{event.preventDefault();navigate("partecipa");}}><strong><LocalizedText>Partecipa · forum, chat e proposte</LocalizedText> →</strong><span><LocalizedText>Forum per discutere e approfondire, chat per incontrarsi e conversare, proposte per migliorare insieme testi, fonti, dati e ogni dettaglio del sito. Non serve saper programmare.</LocalizedText></span></a></aside></> : null}
           {heading ? (
             <section className="editorial-hero hero-compact" aria-labelledby="page-title">
               <div className="hero-copy">

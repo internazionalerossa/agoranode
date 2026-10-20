@@ -1,7 +1,7 @@
 import type {CommunityDecision} from './community-model.ts';
 export const VOTING_METHODS={single:'Scelta singola',approval:'Approvazione multipla',ranked:'Preferenze ordinate'} as const;
 export type VotingMethod=keyof typeof VOTING_METHODS;
-export type Member={id:string;alias:string;intro:string;identityName:string;identityKind:'person'|'organization';identityUrl:string;language:string;status:string;createdAt:number;deadline:number;admittedAt:number|null};
+export type Member={id:string;alias:string;intro:string;identityName:string;identityKind:'person'|'organization';identityUrl:string;identityProvider?:string|null;language:string;status:string;createdAt:number;deadline:number;admittedAt:number|null};
 export type Admission={member:Member;eligible:number;yes:number;no:number;threshold:number;myVote:number|null;canVote:boolean};
 export type ForumTopic={private:boolean;kind:'discussion'|'proposal';id:string;author:string;title:string;body:string;references:string;category:string;language:string;options:string[];method:VotingMethod;quorum:number;createdAt:number;startsAt:number;endsAt:number;eligible:number;turnout:number;phase:'discussion'|'voting'|'closed'|'withdrawn';own:boolean;decision:CommunityDecision|null};
 export type Ballot={receipt:string;choices:number[]};

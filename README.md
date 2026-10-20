@@ -26,7 +26,7 @@ Puoi iniziare dalle notizie e aprire subito una fonte, oppure seguire una domand
 
 Partecipa distingue il confronto libero dalle decisioni sul funzionamento del sito. Il forum permette conversazioni articolate; le issue descrivono problemi o miglioramenti; le votazioni scelgono fra proposte esplicite. Queste funzioni richiedono il servizio indipendente attivo e l’ammissione prevista dalle regole.
 
-La rassegna mostra subito ricerca, periodo e ordinamento. “Altri filtri” raccoglie lingua originale, area geografica, fonte e argomenti senza ulteriori pannelli annidati. L’impaginazione è centrata e più compatta: tre colonne sugli schermi ampi, due su quelli intermedi e una sul telefono. I vecchi collegamenti all’Osservatorio aprono direttamente il periodo delle ultime sei ore.
+La rassegna mostra subito ricerca, periodo e ordinamento. “Filtri” raccoglie lingua originale, area geografica, fonte e argomenti senza ulteriori pannelli annidati. L’impaginazione è centrata e più compatta: tre colonne sugli schermi ampi, due su quelli intermedi e una sul telefono. I vecchi collegamenti all’Osservatorio aprono direttamente il periodo delle ultime sei ore.
 
 ## Cosa offre
 
@@ -47,11 +47,11 @@ I numeri descrivono il catalogo incluso in questa versione, non la disponibilit�
 
 **Il progetto ha bisogno del tuo sguardo.** Cerchiamo persone che aiutino a valutare contenuti, testi, fonti, dati e direzione del progetto. Ogni scelta può essere discussa: una spiegazione, una traduzione, un confronto fra paesi, una funzione, un’immagine o la posizione di un pulsante. Anche chi arriva per la prima volta può notare qualcosa che sfugge a chi costruisce il sito. Non servono competenze tecniche né una soluzione già pronta: racconta con parole tue che cosa vorresti migliorare. Le proposte vengono discusse, verificate e sviluppate insieme prima della pubblicazione.
 
-Apri [una proposta](https://github.com/internazionalerossa/polisrossa/issues/new/choose) e scegli il modulo più vicino alla tua idea. Un’issue è una pagina pubblica dedicata a un problema o a un miglioramento, con risposte raccolte nello stesso luogo. Non devi sapere programmare: indica la pagina interessata, descrivi che cosa è poco chiaro o non funziona e spiega quale risultato vorresti ottenere. Un esempio concreto aiuta più di una formulazione tecnica.
+Apri [una proposta](https://rassegnarossa.luigilmnc.chatgpt.site/?view=partecipa&nuova=proposta) nel forum del sito. Per pubblicare serve PR2: collega un social tramite autorizzazione e presenta la domanda ai membri. Un’issue è una pagina pubblica dedicata a un problema o a un miglioramento, con risposte raccolte nello stesso luogo. Non devi sapere programmare: indica la pagina interessata, descrivi che cosa è poco chiaro o non funziona e spiega quale risultato vorresti ottenere. Un esempio concreto aiuta più di una formulazione tecnica.
 
 Per dati storici, libri e nuove fonti aggiungi riferimenti verificabili e, quando disponibili, indicazioni sulla licenza. Puoi scrivere nella tua lingua e proporre direttamente una frase alternativa. Non pubblicare informazioni personali, credenziali o documenti riservati: il testo delle issue è visibile a chiunque.
 
-Per correggere un file puoi usare la matita di GitHub e proporre una pull request, cioè una modifica che i manutentori possono leggere e verificare prima di integrarla. La modifica proposta non sostituisce immediatamente il progetto pubblico. La [guida ai contributi](CONTRIBUTING.md), disponibile in sei lingue, descrive i passaggi anche per chi non ha mai usato questi strumenti. Issue e pull request consentono di collaborare già prima dell’apertura del forum interno.
+Per correggere un file puoi usare la matita di GitHub e proporre una pull request, cioè una modifica che i manutentori possono leggere e verificare prima di integrarla. La modifica proposta non sostituisce immediatamente il progetto pubblico. La [guida ai contributi](CONTRIBUTING.md), disponibile in sei lingue, descrive i passaggi anche per chi non ha mai usato questi strumenti. Le proposte, le issue e le votazioni si svolgono nel forum interno. GitHub conserva sorgenti e revisioni tecniche.
 
 ## Eseguire e verificare il codice
 
@@ -95,3 +95,4 @@ Per portare online il servizio indipendente, seguire [Prima pubblicazione](docs/
 ## App per telefono
 
 Il codice prepara l’installazione dalla schermata Home su Android e iPhone, con icone dedicate, avvio in finestra autonoma, navigazione inferiore su telefono e schermata di assenza di rete. Account, forum, chat e aggiornamenti richiedono il servizio online. Lo stato del collaudo e i prerequisiti effettivamente mancanti sono descritti in [Rilascio dell’app](docs/APP-RELEASE.md). La preparazione dei sorgenti non equivale a un’attivazione del backend né a una pubblicazione sugli store.
+

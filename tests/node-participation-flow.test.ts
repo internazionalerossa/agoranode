@@ -33,9 +33,9 @@ test('verified reader accounts, member admission, discussions and ballots persis
  const call=async(cookie:string,path:string,data?:unknown,forumOpen=true)=>{
   const request=new Request(config.origin+path,{method:data?'POST':'GET',headers:{cookie,origin:config.origin,'content-type':'application/json'},body:data?JSON.stringify(data):undefined});
   const session=await authSession(identity.auth,request);
-  return session.finish(await api(request,db,session.user?.id??null,hash,()=>{},forumOpen));
+  return session.finish(await api(request,db,session.user?.id??null,hash,()=>{},forumOpen,session.user?{provider:'discord',subject:BigInt('0x'+createHash('sha256').update(session.user.id).digest('hex').slice(0,15)).toString(),name:'Persona di prova',url:'https://discord.com/users/'+BigInt('0x'+createHash('sha256').update(session.user.id).digest('hex').slice(0,15)).toString()}:null));
  };
- const application=(alias:string)=>({action:'apply',requestId:crypto.randomUUID(),alias,intro:'Una presentazione pubblica per la gestione delle fonti.',identityName:'Persona '+alias,identityKind:'person',identityUrl:'https://example.org/'+alias,language:'it',consent:true});
+ const application=(alias:string)=>({action:'apply',requestId:crypto.randomUUID(),alias,intro:'Una presentazione pubblica per la gestione delle fonti.',language:'it',consent:true});
  try{
   for(const filename of (await readdir(new URL('../server/migrations',import.meta.url))).filter(n=>n.endsWith('.sql')).sort())await database.exec(await readFile(new URL('../server/migrations/'+filename,import.meta.url),'utf8'));
   await(await getMigrations(identity.auth.options)).runMigrations();

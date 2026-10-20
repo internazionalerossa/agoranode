@@ -4638,12 +4638,12 @@ body { min-width: 0; width: 100%; max-width: 100vw; overflow-x: hidden; }
 }
 
 /* Utility controls share both dimensions; mobile uses two equal columns. */
-:root { --utility-width: 164px; --utility-height: 56px; }
+:root { --utility-width: 136px; --utility-height: 44px; }
 .header-account-actions.utility-controls { display:grid; grid-template-columns:repeat(4,var(--utility-width)); gap:8px; width:auto; }
 .utility-controls > a, .utility-controls > .global-language-settings,
 .video-carousel-actions .video-filter-toggle, .forum-header .forum-members-count { width:var(--utility-width); min-width:0; max-width:none; height:var(--utility-height); min-height:var(--utility-height); flex:none; box-sizing:border-box; }
 .header-account-actions.utility-controls > a, .utility-controls > .global-language-settings > summary,
-.video-carousel-actions .video-filter-toggle, .forum-header .forum-members-count { display:flex; align-items:center; justify-content:center; gap:8px; padding:8px 10px; border:1px solid var(--line); border-radius:var(--control-radius); font:600 12px/1.3 var(--sans); text-align:center; background:transparent; color:var(--ink); }
+.video-carousel-actions .video-filter-toggle, .forum-header .forum-members-count { display:flex; align-items:center; justify-content:center; gap:6px; padding:5px 8px; border:1px solid var(--line); border-radius:var(--control-radius); font:600 11px/1.25 var(--sans); text-align:center; background:transparent; color:var(--ink); }
 .utility-controls > .global-language-settings > summary { width:100%; height:var(--utility-height); min-height:var(--utility-height); flex-direction:column; gap:3px; }
 .utility-controls > .global-language-settings { grid-column:auto; }
 .utility-controls > .global-language-settings > div { right:auto; left:0; width:min(390px,calc(100vw - 32px)); }
@@ -4681,3 +4681,77 @@ body { min-width: 0; width: 100%; max-width: 100vw; overflow-x: hidden; }
 }
 
 .header-account-actions.utility-controls .source-directory-button > strong { display:inline; }
+
+/* Compact rhythm and aligned controls, retaining 44px touch targets. */
+.masthead { min-height:84px; gap:16px; padding-block:12px; }
+.main-nav { border-top:1px solid var(--line); min-height:44px; }
+.app-shell .main-nav .nav-links > a { min-height:44px; }
+.reading-section { margin-top:20px; }
+.news-controls-heading { margin-bottom:10px; }
+.filter-toolbar { gap:6px; border:0; background:transparent; grid-template-columns:minmax(150px,1fr) minmax(110px,.5fr) minmax(140px,.7fr) 84px; }
+.filter-toolbar > .search-box, .filter-toolbar > .select-field, .filter-toolbar > .inline-select, .filter-toolbar > .filter-toggle { border:1px solid var(--line); border-radius:var(--control-radius); margin:0; background:var(--surface); min-height:44px; }
+.filter-toolbar > .search-box { padding:0 10px; }
+.filter-toolbar > .select-field, .filter-toolbar > .inline-select { padding:3px 8px; gap:0 4px; }
+.filter-toolbar .select-field > span, .filter-toolbar .inline-select > span { font-size:9px; line-height:12px; }
+.filter-toolbar .select-field select, .filter-toolbar .inline-select select { min-height:26px; font-size:12px; line-height:1.3; }
+.filter-toolbar .search-box input { min-height:42px; }
+.filter-toolbar .filter-toggle { padding:6px 8px; gap:5px; font-size:12px; justify-content:center; }
+.advanced-filters.unified-filters { margin-top:8px; padding:12px; gap:12px; }
+.video-carousel { margin-block:16px; padding-block:12px; }
+.video-carousel-heading { margin-bottom:10px; }
+.project-participation { margin:16px 0; padding:14px 0; border-top:0; }
+.project-participation h2, .project-participation h3 { margin-block:6px 10px; }
+.community-space-switch { margin:12px 0; gap:6px; }
+.community-space-switch button { padding:6px 14px; flex-basis:136px; }
+.community-toolbar { margin-block:12px; }
+.community-form { padding:16px; gap:12px; }
+.community-form > p, .forum-registration > p { margin-block:8px; }
+.forum-registration h2, .forum-admissions h2 { font:600 18px/1.3 var(--sans); margin:0; }
+.forum-admissions { padding:14px; margin-block:14px; border:1px solid var(--line); border-radius:var(--control-radius); background:var(--surface); }
+.forum-admissions-heading { display:flex; align-items:center; flex-wrap:wrap; justify-content:space-between; gap:8px; }
+.forum-admissions > p, .forum-admissions-heading > span { font-size:12px; color:var(--muted); line-height:1.6; margin:8px 0; }
+.forum-admission-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr)); gap:12px; }
+.forum-admission-grid > article { min-width:0; padding:12px; background:var(--paper); border:1px solid var(--line); border-radius:var(--control-radius); }
+.forum-admission-grid p { font-size:12px; line-height:1.6; margin-block:8px; }
+.forum-admission-grid h3 { margin:0; font:600 15px/1.4 var(--sans); }
+.forum-inline-actions { gap:6px; }
+.forum-inline-actions > button { min-height:44px; padding:6px 12px; border:1px solid var(--line); border-radius:var(--control-radius); }
+.admission-tally, .social-provider-actions { display:flex; flex-wrap:wrap; gap:12px; }
+.forum-social-note { font-size:12px; line-height:1.6; color:var(--muted); }
+.social-identity-confirmed { padding:10px; background:var(--surface); border:1px solid var(--line); border-radius:var(--control-radius); }
+@media(max-width:850px) {
+ .filter-toolbar { grid-template-columns:minmax(0,1fr) minmax(0,1fr) 78px; }
+ .filter-toolbar .search-box { grid-column:1 / 3; grid-row:1; }
+ .filter-toolbar .filter-toggle { grid-column:3; grid-row:1; }
+ .filter-toolbar > .select-field { grid-column:1; grid-row:2; }
+ .filter-toolbar > .inline-select { grid-column:2 / 4; grid-row:2; }
+}
+@media(max-width:650px) {
+ .masthead { gap:10px; padding-block:12px; min-height:0; }
+ .header-account-actions.utility-controls { gap:6px; }
+ :root { --utility-width:calc((100vw - 38px) / 2); }
+ .utility-controls > .global-language-settings > summary { gap:1px; font-size:11px; }
+ .video-carousel-actions .video-filter-toggle, .forum-header .forum-members-count { font-size:11px; }
+ .video-carousel-actions, .video-carousel-heading { gap:6px; }
+ .video-carousel { padding-block:10px; margin-block:12px; }
+ .filter-toolbar { gap:6px; }
+ .filter-toolbar .search-box input, .filter-toolbar select { font-size:16px; }
+ .filter-toolbar .select-field select, .filter-toolbar .inline-select select { min-height:32px; font-size:16px; }
+ .filter-toolbar > .select-field, .filter-toolbar > .inline-select { min-height:50px; }
+ .forum-header { gap:8px; margin-bottom:10px; }
+ .forum-members-count strong { font-size:14px; }
+ .forum-header h1 { font-size:25px; }
+ .forum-admissions, .community-form { padding:12px; }
+ .community-toolbar > .forum-inline-actions { justify-content:flex-start; }
+ .community-toolbar > .forum-inline-actions > button { flex:1 1 130px; font-size:12px; }
+ .community-introduction > p { font-size:13px; line-height:1.65; }
+ .forum-registration input, .forum-registration select, .forum-registration textarea { font-size:16px; }
+}
+
+.access-explanation { margin-block:14px; border-bottom:1px solid var(--line); }
+.access-explanation > summary { min-height:44px; padding-block:10px; cursor:pointer; font-size:12px; }
+@media(max-width:650px) {
+ .filter-toolbar > .select-field, .filter-toolbar > .inline-select { position:relative; padding:0 8px; min-height:48px; }
+ .filter-toolbar .select-field > span, .filter-toolbar .inline-select > span { position:absolute; top:3px; left:8px; pointer-events:none; }
+ .filter-toolbar .select-field select, .filter-toolbar .inline-select select { min-height:46px; height:46px; padding-top:11px; }
+}

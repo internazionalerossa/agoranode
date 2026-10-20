@@ -16,7 +16,9 @@ export function configuration(env:Record<string,string|undefined>=process.env){
  const brevoKey=mailTransport==='brevo'?required('BREVO_API_KEY'):undefined;
  const bootstrapHash=env.COMMUNITY_BOOTSTRAP_HASH;
  if(bootstrapHash&&(!/^[0-9a-f]{64}(?:,[0-9a-f]{64}){0,2}$/.test(bootstrapHash)||new Set(bootstrapHash.split(',')).size!==bootstrapHash.split(',').length))throw Error('Invalid bootstrap hash');
+ const socialProviders:Partial<Record<'discord'|'facebook',{clientId:string;clientSecret:string;disableImplicitSignUp:true}>>={};
+ for(const provider of ['discord','facebook'] as const){const prefix=provider.toUpperCase(),clientId=env[prefix+'_CLIENT_ID'],clientSecret=env[prefix+'_CLIENT_SECRET'];if(Boolean(clientId)!==Boolean(clientSecret))throw Error('Configure both credentials for '+prefix);if(clientId&&clientSecret)socialProviders[provider]={clientId,clientSecret,disableImplicitSignUp:true};}
  const operator=publicOperator(env);
  if(env.NODE_ENV==='production'&&(env.REGISTRATIONS_OPEN==='true'||env.FORUM_OPEN==='true')&&!operator)throw Error('Configure PUBLIC_OPERATOR_NAME and PUBLIC_PRIVACY_CONTACT before opening registrations or participation');
- return {operator,registrationOpen:env.REGISTRATIONS_OPEN==='true',forumOpen:env.FORUM_OPEN==='true',origin:origin.origin,secret,connectionString,bootstrapHash,port:Number(env.PORT??8000),mailTransport,smtp,brevoKey,mailFrom:required('MAIL_FROM').replace(/[\r\n]/g,'')};
+ return {operator,socialProviders,registrationOpen:env.REGISTRATIONS_OPEN==='true',forumOpen:env.FORUM_OPEN==='true',origin:origin.origin,secret,connectionString,bootstrapHash,port:Number(env.PORT??8000),mailTransport,smtp,brevoKey,mailFrom:required('MAIL_FROM').replace(/[\r\n]/g,'')};
 }

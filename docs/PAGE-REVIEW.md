@@ -30,3 +30,11 @@ Il client delle traduzioni usa soltanto `/api/translate`: in caso di errore cons
 ## Confini della pubblicazione
 
 L’aggiornamento del sito pubblico non apre automaticamente account, forum o chat. Sono ancora necessari nome/denominazione e recapito privacy del titolare, configurazione e prova dei servizi remoti, basi e procedure per PR2, tempi effettivi dei registri e dei backup, gestione delle segnalazioni e dei diritti. Per gli obblighi applicabili e i riferimenti normativi vedere PUBLICATION.md e LEGAL-OPERATIONS.md. Non qualificare la pubblicazione come certificata GDPR.
+
+## PR2, proposte interne e densità dei comandi
+
+I controlli utilità ora condividono un’altezza di 44 px e larghezza di 136 px su desktop, con due colonne uniformi su mobile. La barra rassegna usa due righe su schermi piccoli: ricerca/filtri e periodo/ordine. Ridotti spazi e divisori senza disabilitare lo zoom.
+
+Partecipa: collegamento social OAuth per nuove domande PR2, dashboard delle richieste per tutti i membri attivi, esito reale sia positivo sia negativo. Le CTA delle proposte aprono il modulo interno del forum. Le istruzioni estese per PR1/PR2 sono espandibili.
+
+Verifica OAuth locale con provider simulato: avvio, callback, blocco di state contraffatto, associazione alla sessione, verifica server del profilo, token cifrati. Verifica dominio: impossibilità di presentare un profilo manuale, unicità del social, voto dei nuovi membri sulle domande già aperte e rifiuto dopo tre no. Il collaudo con provider reale e quello visivo del sito pubblicato restano da eseguire: i precedenti tentativi browser sono stati bloccati dal proxy.

@@ -1,3 +1,4 @@
+import type {SocialIdentity} from '../app/lib/social-identity';
 import {handlePrivacyExport} from '../app/lib/privacy-export';
 import {brandManifestResponse} from '../app/lib/brand-manifest';
 import {handleLiveChat} from './live-chat';
@@ -23,7 +24,7 @@ import type {PostgresDatabase} from './database';
 const sourceIds=new Set(SOURCE_CATALOG.map(s=>s.id)),bookIds=new Set(THEORY_LIBRARY.map(b=>b.id));
 const publicEndpoints:Record<string,(r:Request)=>Promise<Response>>={'/api/articles':articles,'/api/videos':videos,'/api/highlights':highlights,'/api/pulse':pulse};
 export const privatePaths=new Set(['/api/privacy/export','/api/bookmarks','/api/reading-progress','/api/library/read','/api/community','/api/community/mine','/api/community/forum','/api/community/chat','/api/community/chat-image']);
-export async function api(request:Request,db:PostgresDatabase,userId:string|null,bootstrapHash:string|undefined,background:(p:Promise<unknown>)=>void,participationOpen=true):Promise<Response>{
+export async function api(request:Request,db:PostgresDatabase,userId:string|null,bootstrapHash:string|undefined,background:(p:Promise<unknown>)=>void,participationOpen=true,socialIdentity?:SocialIdentity|null):Promise<Response>{
  const url=new URL(request.url),path=url.pathname;
  if(path==='/api/manifest')return brandManifestResponse(request);
  if(path==='/api/visitor-country')return visitorCountryResponse(request);
@@ -35,7 +36,7 @@ export async function api(request:Request,db:PostgresDatabase,userId:string|null
  if(path==='/api/community/chat'||path==='/api/community/chat-image')return handleLiveChat(request,db,userId,undefined,participationOpen);
  if(path==='/api/community/forum'){
   if(request.method==='POST'&&!participationOpen)return reply({error:'Adesioni, interventi e votazioni sono temporaneamente chiusi.'},503);
-  const response=await handleForum(request,db,userId,bootstrapHash);
+  const response=await handleForum(request,db,userId,bootstrapHash,Date.now,socialIdentity);
   if(request.method==='GET'&&(url.searchParams.get('kind')??'board')==='board'&&response.ok)return reply({...await response.json(),participationOpen});
   return response;
  }

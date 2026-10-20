@@ -1,6 +1,6 @@
 # Forum, voto e chat
 
-PolisRossa cerca persone che contribuiscano a valutarne contenuti, testi e sviluppo. Il primo incontro con una pagina è già un’occasione per notare una lacuna: una frase difficile, una fonte da verificare, un grafico poco leggibile o un dettaglio dell’interfaccia. Puoi proporre cambiamenti con parole tue, senza competenze tecniche e senza dover difendere ogni scelta esistente. Indica il punto che vuoi discutere, il motivo e, se la hai, un’alternativa. Le proposte vengono approfondite insieme, quindi verificate prima della realizzazione e della pubblicazione. Puoi già usare le Issues del repository GitHub, con un account gratuito; il forum del sito segue invece lo stato di apertura del servizio indipendente.
+PolisRossa cerca persone che contribuiscano a valutarne contenuti, testi e sviluppo. Il primo incontro con una pagina è già un’occasione per notare una lacuna: una frase difficile, una fonte da verificare, un grafico poco leggibile o un dettaglio dell’interfaccia. Puoi proporre cambiamenti con parole tue, senza competenze tecniche e senza dover difendere ogni scelta esistente. Indica il punto che vuoi discutere, il motivo e, se la hai, un’alternativa. Le proposte vengono approfondite insieme, quindi verificate prima della realizzazione e della pubblicazione. Segnalazioni, proposte e voti si svolgono nel forum interno del sito, secondo lo stato di apertura del servizio indipendente. GitHub ospita il codice e le revisioni tecniche.
 
 Partecipare significa poter comprendere il progetto, discutere con altre persone e proporre miglioramenti verificabili. Le funzioni hanno scopi diversi: l’account PR1 conserva privatamente le letture; l’ammissione PR2 permette di scrivere nel forum, usare la chat, presentare issue e votare sulle modifiche del sito. Non serve un profilo social per l’account personale.
 
@@ -14,7 +14,7 @@ Registrati con email e password e conferma l’indirizzo. Non serve l’approvaz
 
 ## Regola 2 — PR2: partecipare alla comunità
 
-Presenta una domanda con il nome della persona o dell’ente e un riferimento pubblico verificabile. Per l’ammissione servono almeno tre sì di membri PR2 distinti entro 72 ore. Senza tre sì, la domanda scade. Ogni voto di ammissione è definitivo. Il riferimento deve permettere ai membri di capire chi presenta la domanda e di riscontrarne il controllo; il solo nome dichiarato non è sufficiente. Non pubblicare documenti d’identità o dati riservati.
+Per chiedere PR2, accedi al tuo account e collega un social tramite la sua schermata di autorizzazione. Nome e riferimento provengono dal provider, non da un link dichiarato a mano. Il collegamento prova il controllo del profilo, non l’identità anagrafica. Presenta una breve introduzione: tutti i membri PR2, anche quelli appena ammessi, possono valutare le domande aperte nella dashboard. Tre sì ammettono; tre no respingono. Senza un esito entro 72 ore la domanda scade. Ogni membro esprime un solo voto definitivo. Non pubblicare documenti o dati riservati.
 
 ## Regola 3 — Discutere
 
@@ -22,7 +22,7 @@ I membri PR2 possono conversare su qualsiasi argomento nel forum, rispettando le
 
 ## Regola 4 — Segnalare e proporre
 
-Ogni membro PR2 può aprire tutte le issue che desidera. Bastano un titolo e una descrizione comprensibili; le domande del modulo aiutano a spiegare il problema e sono facoltative. Una proposta sottoposta al voto può avere una o più soluzioni, senza un limite editoriale al loro numero. Un’issue è una segnalazione dedicata a un problema o a un miglioramento. Puoi partire dall’esperienza concreta, indicare il risultato desiderato e aggiungere alternative: non occorre conoscere il codice né compilare tutte le domande di aiuto.
+Issue, proposte, commenti e votazioni si svolgono nel forum del sito. Ogni membro PR2 può aprire tutte le issue che desidera. Bastano un titolo e una descrizione comprensibili; le domande del modulo aiutano a spiegare il problema e sono facoltative. Una proposta sottoposta al voto può avere una o più soluzioni, senza un limite editoriale al loro numero. Un’issue è una segnalazione dedicata a un problema o a un miglioramento. Puoi partire dall’esperienza concreta, indicare il risultato desiderato e aggiungere alternative: non occorre conoscere il codice né compilare tutte le domande di aiuto.
 
 ## Regola 5 — La chat delle stanze
 
@@ -54,4 +54,4 @@ Non pubblicare dati privati altrui, molestie o spam. Puoi rimuovere i tuoi inter
 
 ## Regola 12 — Un progetto comune e aperto
 
-Codice, regole e miglioramenti sono discutibili e modificabili attraverso proposte pubbliche. Le decisioni approvate richiedono attuazione e verifica. Account, salvataggi, thread del forum e voti sono conservati online; i registri rendono possibili controlli, ma non eliminano i poteri tecnici del gestore del server né certificano da soli l’unicità delle persone. La gestione condivisa permette di confrontare esigenze e rendere leggibili le scelte. Una votazione approvata indica una direzione di lavoro: il cambiamento diventa operativo dopo la realizzazione e le verifiche necessarie.
+PolisRossa cresce attraverso l’attenzione e le proposte di chi lo usa. Testi, fonti, dati, percorsi, funzioni, regole e dettagli visivi sono aperti alla valutazione collettiva. Puoi raccontare con parole tue ciò che non funziona, fare una domanda o proporre un’alternativa: non servono competenze tecniche né una soluzione già pronta. Le proposte vengono discusse e verificate; quelle approvate richiedono realizzazione e controllo prima di diventare operative. Account, salvataggi, thread del forum e voti sono conservati online quando il servizio indipendente è attivo; i registri consentono controlli ma non eliminano i poteri tecnici del gestore né certificano da soli l’unicità delle persone.

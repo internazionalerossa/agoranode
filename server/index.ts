@@ -1,3 +1,4 @@
+import {socialIdentityEndpoint,verifiedSocialIdentity,allowedIdentityCallback} from './social-identity';
 import {createServer} from 'node:http';
 import {readFile,stat} from 'node:fs/promises';
 import {resolve,extname,sep,dirname} from 'node:path';
@@ -36,11 +37,14 @@ const server=createServer({maxHeaderSize:16384,requestTimeout:30000,headersTimeo
   else if(url.pathname==='/healthz'){
    try{await pool.query('SELECT 1');response=Response.json({ok:true},{headers:{'cache-control':'no-store'}});}catch{response=Response.json({ok:false},{status:503,headers:{'cache-control':'no-store'}});}
   }else if(url.pathname==='/api/auth')response=await accountEndpoint(auth,request,connections(pool),config.registrationOpen);
+  else if(url.pathname==='/api/community/identity')response=await socialIdentityEndpoint(auth,request,config);
   else if(url.pathname.startsWith('/api/identity/')){
-   const allowed=method==='GET'&&(url.pathname==='/api/identity/verify-email'||url.pathname.startsWith('/api/identity/reset-password/'));
+   const allowed=method==='GET'&&(url.pathname==='/api/identity/verify-email'||url.pathname.startsWith('/api/identity/reset-password/')||allowedIdentityCallback(url.pathname,method,config));
    response=allowed?await auth.handler(request):new Response('Not found',{status:404});
   }else if(url.pathname.startsWith('/api/')){
-   if(privatePaths.has(url.pathname)){const session=await authSession(auth,request);response=session.finish(await api(request,db,session.user?.id??null,config.bootstrapHash,background,config.forumOpen));}
+   if(privatePaths.has(url.pathname)){const session=await authSession(auth,request);let socialIdentity=null;
+    if(session.user&&config.forumOpen&&url.pathname==='/api/community/forum'&&method==='POST'&&request.headers.get('origin')===config.origin&&request.headers.get('sec-fetch-site')!=='cross-site'){let action;try{action=(await request.clone().json()).action;}catch{}if(action==='apply')socialIdentity=await verifiedSocialIdentity(auth,request,config);}
+    response=session.finish(await api(request,db,session.user?.id??null,config.bootstrapHash,background,config.forumOpen,socialIdentity));}
    else response=await api(request,db,null,config.bootstrapHash,background,config.forumOpen);
   }else response=['GET','HEAD'].includes(method)?await staticResponse(url.pathname):new Response('Method not allowed',{status:405});
   outgoing.setHeader('x-content-type-options','nosniff');outgoing.setHeader('referrer-policy','no-referrer');outgoing.setHeader('x-frame-options','DENY');outgoing.setHeader('permissions-policy','camera=(), microphone=(), geolocation=()');outgoing.setHeader('strict-transport-security','max-age=31536000');

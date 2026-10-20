@@ -918,7 +918,7 @@ export function AggregatorApp() {
                     aria-controls="advanced-filters"
                   >
                     <SlidersHorizontal size={16} />
-                    <LocalizedText>{" Filtra per fonte e argomento"}</LocalizedText>
+                    <LocalizedText>{"Filtri"}</LocalizedText>
                     <LocalizedText> </LocalizedText>
                     {filterCount > 0 ? (
                       <span>
@@ -1559,8 +1559,8 @@ function MethodView({ onSources }: { onSources: () => void }) {
         <h3 id="project-participation-title"><LocalizedText>PolisRossa prende forma anche con te.</LocalizedText></h3>
         <p><LocalizedText>Cerchiamo persone disposte a leggere con attenzione, fare domande e suggerire alternative. Puoi rivedere una spiegazione, verificare una fonte, discutere un confronto statistico, ripensare una funzione o segnalare un dettaglio visivo che rende difficile orientarsi. Anche un titolo, un colore, un’immagine o la posizione di un pulsante meritano una proposta: nessuna parte del progetto è sottratta al confronto.</LocalizedText></p>
         <p><LocalizedText>Comincia da ciò che noti: indica la pagina, racconta che cosa non ti convince e quale risultato vorresti. Non serve scrivere codice, conoscere il lessico tecnico o arrivare con una soluzione completa. Una domanda ben posta può aprire il cambiamento; le proposte vengono discusse, verificate e migliorate insieme prima della pubblicazione.</LocalizedText></p>
-        <a className="text-link" href="https://github.com/internazionalerossa/polisrossa/issues/new?template=01-idea.yml" target="_blank" rel="noopener noreferrer"><LocalizedText>Scrivi una proposta con parole tue</LocalizedText><ArrowUpRight size={14}/></a>
-        <small><LocalizedText>Si apre GitHub: per pubblicare serve un account gratuito. La proposta è pubblica.</LocalizedText></small>
+        <a className="text-link" href="/?view=partecipa&nuova=proposta"><LocalizedText>Scrivi una proposta con parole tue</LocalizedText><ArrowUpRight size={14}/></a>
+        <small><LocalizedText>La proposta si scrive nel forum. I membri PR2 possono discuterla e votarla.</LocalizedText></small>
       </section>
       <div className="method-grid">
         {[

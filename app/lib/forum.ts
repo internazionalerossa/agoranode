@@ -1,3 +1,4 @@
+import {validSocialIdentity,type SocialIdentity} from './social-identity.ts';
 import {COMMUNITY_CATEGORIES,proposalId} from './community-model.ts';
 import {VOTING_METHODS,validChoices,tally,type Member,type ForumTopic,type Admission,type Ballot,type VotingMethod} from './forum-model.ts';
 import DECISIONS from '../data/community-decisions.json' with {type:'json'};
@@ -12,12 +13,12 @@ const text=(x:unknown,min:number,max:number):x is string=>typeof x==='string'&&x
 const count=(x:unknown)=>Number(x??0);
 const changed=(x:Partial<Result>)=>Number(x.meta?.changes??x.changes??0)>0;
 const digest=async(value:string)=>[...new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(value)))].map(n=>n.toString(16).padStart(2,'0')).join('');
-const member=(r:Row):Member=>({id:String(r.id),alias:String(r.alias),intro:String(r.intro),identityName:String(r.identity_name),identityKind:r.identity_kind as Member['identityKind'],identityUrl:String(r.identity_url),language:String(r.language),status:String(r.status),createdAt:count(r.created_at),deadline:count(r.deadline),admittedAt:r.admitted_at===null?null:count(r.admitted_at)});
+const member=(r:Row):Member=>({id:String(r.id),alias:String(r.alias),intro:String(r.intro),identityName:String(r.identity_name),identityKind:r.identity_kind as Member['identityKind'],identityUrl:String(r.identity_url),identityProvider:r.identity_provider?String(r.identity_provider):null,language:String(r.language),status:String(r.status),createdAt:count(r.created_at),deadline:count(r.deadline),admittedAt:r.admitted_at===null?null:count(r.admitted_at)});
 const safeEqual=(a:string,b:string)=>{if(a.length!==b.length)return false;let result=0;for(let i=0;i<a.length;i++)result|=a.charCodeAt(i)^b.charCodeAt(i);return result===0;};
 const topicSelect=`SELECT t.*,m.alias AS author,(SELECT COUNT(*) FROM forum_electorate e WHERE e.topic_id=t.id) AS eligible,(SELECT COUNT(*) FROM forum_ballots b WHERE b.topic_id=t.id) AS turnout FROM forum_topics t JOIN forum_members m ON m.id=t.author_id`;
 function publicTopic(r:Row,now:number,memberId?:string):ForumTopic{const discussion=JSON.parse(String(r.options_json)).length===0;return {private:count(r.private)===1,kind:discussion?'discussion':'proposal',id:String(r.id),author:String(r.author),title:String(r.title),body:String(r.body),references:String(r.references_text),category:String(r.category),language:String(r.language),options:JSON.parse(String(r.options_json)),method:r.method as VotingMethod,quorum:count(r.quorum),createdAt:count(r.created_at),startsAt:count(r.starts_at),endsAt:count(r.ends_at),eligible:count(r.eligible),turnout:count(r.turnout),phase:r.withdrawn?'withdrawn':discussion?'discussion':now<count(r.starts_at)?'discussion':now<count(r.ends_at)?'voting':'closed',own:r.author_id===memberId,decision:(DECISIONS as Record<string,import('./community-model.ts').CommunityDecision>)[String(r.id)]??null};}
 
-export async function handleForum(request:Request,db:ForumDatabase|undefined,userId:string|null,bootstrapHash?:string,clock=Date.now):Promise<Response>{
+export async function handleForum(request:Request,db:ForumDatabase|undefined,userId:string|null,bootstrapHash?:string,clock=Date.now,socialIdentity?:SocialIdentity|null):Promise<Response>{
  const reply=(data:unknown,status=200)=>Response.json(data,{status,headers});
  const bootstrapHashes=(bootstrapHash??'').split(',').filter(value=>/^[0-9a-f]{64}$/.test(value)).slice(0,3);
  const url=new URL(request.url),signInUrl='/account?return_to=%2F%3Fview%3Dpartecipa';
@@ -48,11 +49,10 @@ export async function handleForum(request:Request,db:ForumDatabase|undefined,use
      active?all("SELECT * FROM forum_members WHERE status='pending' AND deadline>? ORDER BY created_at,id LIMIT 21 OFFSET ?",now,applicationsOffset):Promise.resolve([]),
     ]);
     const applications:Admission[]=await Promise.all(candidates.slice(0,20).map(async row=>{
-     const id=String(row.id),[totals,eligibility,vote]=await Promise.all([
-      all('SELECT (SELECT COUNT(*) FROM forum_admission_electorate WHERE candidate_id=?) AS eligible,SUM(CASE WHEN value=1 THEN 1 ELSE 0 END) AS yes,SUM(CASE WHEN value=-1 THEN 1 ELSE 0 END) AS no FROM forum_admission_votes WHERE candidate_id=?',id,id),
-      all('SELECT member_id FROM forum_admission_electorate WHERE candidate_id=? AND member_id=?',id,own!.id),
+     const id=String(row.id),[totals,vote]=await Promise.all([
+      all('SELECT SUM(CASE WHEN value=1 THEN 1 ELSE 0 END) AS yes,SUM(CASE WHEN value=-1 THEN 1 ELSE 0 END) AS no FROM forum_admission_votes WHERE candidate_id=?',id),
       all('SELECT value FROM forum_admission_votes WHERE candidate_id=? AND member_id=?',id,own!.id),
-     ]);const total=totals[0];return {member:member(row),eligible:count(total.eligible),yes:count(total.yes),no:count(total.no),threshold:3,myVote:vote.length?count(vote[0].value):null,canVote:Boolean(eligibility.length&&!vote.length)};
+     ]);const total=totals[0];return {member:member(row),eligible:count(counts[0].active),yes:count(total.yes),no:count(total.no),threshold:3,myVote:vote.length?count(vote[0].value):null,canVote:Boolean(active&&id!==own!.id&&!vote.length)};
     }));
     return reply({authenticated:Boolean(userId),signInUrl,member:own,activeCount:count(counts[0].active),pendingCount:count(counts[0].pending),bootstrapAvailable:Boolean(bootstrapHashes.some((_,index)=>!bootstrap.some(row=>count(row.id)===index+1))&&count(counts[0].active)<3),topics:rows.slice(0,20).map(r=>publicTopic(r,now,own?.id)),nextOffset:rows.length>20?offset+20:null,applications,applicationsNextOffset:candidates.length>20?applicationsOffset+20:null,serverNow:now});
    }
@@ -84,14 +84,14 @@ export async function handleForum(request:Request,db:ForumDatabase|undefined,use
   now=clock();
   if(!data||Array.isArray(data)||typeof data!=='object'||['ownerKey','userId','memberId','status','eligible','turnout'].some(key=>Object.hasOwn(data,key)))return reply({error:'Invalid input'},400);
   if(data.action==='apply'){
-   if(data.consent!==true||!text(data.identityName,4,120)||!['person','organization'].includes(String(data.identityKind))||!text(data.identityUrl,10,500)||!text(data.alias,3,40)||!text(data.intro,20,1500)||!language(data.language)||!proposalId(data.requestId))return reply({error:'Controlla nome pubblico, presentazione, lingua e consenso.'},400);
+   if(data.consent!==true||['identityName','identityKind','identityUrl','identityProvider','identitySubject'].some(key=>Object.hasOwn(data,key))||!text(data.alias,3,40)||!text(data.intro,20,1500)||!language(data.language)||!proposalId(data.requestId))return reply({error:'Controlla nome pubblico, presentazione, lingua e consenso.'},400);
    if(own)return reply({error:'Hai già una domanda di adesione.',member:own},409);
-   let identityUrl:URL;try{identityUrl=new URL(String(data.identityUrl));if(identityUrl.protocol!=='https:'||identityUrl.username||identityUrl.password)throw Error();}catch{return reply({error:'Indica un profilo di riferimento HTTPS verificabile.'},400);}
+   if(!validSocialIdentity(socialIdentity))return reply({error:'Collega un social e autorizza la verifica del profilo prima di inviare la domanda.'},403);
    const alias=data.alias.trim().normalize('NFKC'),aliasKey=alias.toLocaleLowerCase('und');
    const existing=await all('SELECT id FROM forum_members WHERE alias_key=?',aliasKey);if(existing.length)return reply({error:'Questo nome pubblico è già in uso.'},409);
-   const values=[data.requestId,owner,alias,aliasKey,data.intro.trim(),String(data.identityName).trim(),data.identityKind,identityUrl.href,data.language,now,now+72*3600000];
+   const values=[data.requestId,owner,alias,aliasKey,data.intro.trim(),socialIdentity.name,'person',socialIdentity.url,data.language,now,now+72*3600000,socialIdentity.provider,socialIdentity.subject];
    const results=await db.batch([
-    sql("INSERT INTO forum_members (id,owner_key,alias,alias_key,intro,identity_name,identity_kind,identity_url,language,status,created_at,deadline) VALUES (?,?,?,?,?,?,?,?,?,'pending',?,?) ON CONFLICT DO NOTHING",...values),
+    sql("INSERT INTO forum_members (id,owner_key,alias,alias_key,intro,identity_name,identity_kind,identity_url,language,status,created_at,deadline,identity_provider,identity_subject) VALUES (?,?,?,?,?,?,?,?,?,'pending',?,?,?,?) ON CONFLICT DO NOTHING",...values),
     sql("INSERT INTO forum_admission_electorate (candidate_id,member_id) SELECT ?,id FROM forum_members WHERE status='active' AND EXISTS(SELECT 1 FROM forum_members WHERE id=? AND owner_key=?) ON CONFLICT DO NOTHING",data.requestId,data.requestId,owner),
    ]);
    return changed(results[0])?reply({ok:true,id:data.requestId},201):reply({error:'Domanda non inviata o nome già in uso. Aggiorna e verifica prima di riprovare.'},409);
@@ -116,11 +116,13 @@ export async function handleForum(request:Request,db:ForumDatabase|undefined,use
   if(data.action==='admit'){
    if(!proposalId(data.id)||![1,-1].includes(data.value as number)||(data.value===1&&data.identityChecked!==true))return reply({error:'Invalid admission vote'},400);
    const result=await db.batch([
+    sql("INSERT INTO forum_admission_electorate(candidate_id,member_id) SELECT ?,? WHERE EXISTS(SELECT 1 FROM forum_members WHERE id=? AND status='pending' AND deadline>?) ON CONFLICT DO NOTHING",data.id,own!.id,data.id,now),
     sql("INSERT INTO forum_admission_votes (candidate_id,member_id,value,identity_checked,created_at) SELECT ?,?,?,?,? WHERE EXISTS(SELECT 1 FROM forum_members WHERE id=? AND status='pending' AND deadline>?) AND EXISTS(SELECT 1 FROM forum_admission_electorate WHERE candidate_id=? AND member_id=?) ON CONFLICT DO NOTHING",data.id,own!.id,data.value,data.identityChecked===true?1:0,now,data.id,now,data.id,own!.id),
+    sql("UPDATE forum_members SET status='rejected' WHERE id=? AND status='pending' AND deadline>? AND (SELECT COUNT(*) FROM forum_admission_votes WHERE candidate_id=? AND value=-1)>=3",data.id,now,data.id),
     sql("UPDATE forum_members SET status='active',admitted_at=? WHERE id=? AND status='pending' AND deadline>? AND (SELECT COUNT(*) FROM forum_admission_votes WHERE candidate_id=? AND value=1)>=3",now,data.id,now,data.id),
     sql("INSERT INTO forum_electorate (topic_id,member_id) SELECT t.id,m.id FROM forum_topics t JOIN forum_members m ON m.id=? WHERE m.status='active' AND t.ends_at>? AND t.withdrawn=0 AND t.options_json<>'[]' ON CONFLICT DO NOTHING",data.id,now),
    ]);
-   return changed(result[0])?reply({ok:true}):reply({error:'Voto già espresso, domanda scaduta o nessun diritto di voto su questa ammissione.'},409);
+   return changed(result[1])?reply({ok:true}):reply({error:'Voto già espresso, domanda scaduta o nessun diritto di voto su questa ammissione.'},409);
   }
   if(data.action==='create'){
    const discussion=data.kind==='discussion';

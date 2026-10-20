@@ -5,6 +5,7 @@ Aggiornamento: 20 ottobre 2026. Questo registro distingue codice verificato, com
 ## Evidenze disponibili
 
 - Anteprima pubblica disponibile; autenticazione indipendente e scritture della comunità non attive su quell’indirizzo.
+- Revisione delle spiegazioni in README e guide, pagine principali, 64 tappe storiche, 11 introduzioni ai dossier, 32 descrizioni di libri e 18 ambiti statistici. Valori, date, fonti, edizioni e identificativi conservati; la revisione non riscrive i testi originali degli editori.
 - Compilazione, controlli dei tipi e suite automatiche verificati. I risultati puntuali accompagnano ogni consegna; non attestano il funzionamento remoto delle funzioni chiuse.
 - Account, ammissioni, salvataggi e forum testati con PGlite e sessioni sintetiche; non sono prove di email reali, disponibilità del provider, backup remoto o concorrenza fra repliche.
 - Prove browser precedenti hanno rilevato immagini assenti. Non è stato completato un controllo manuale di ogni percorso.

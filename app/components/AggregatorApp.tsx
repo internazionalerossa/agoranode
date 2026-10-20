@@ -112,7 +112,7 @@ const NAV: { id: View; label: string }[] = [
   { id: "partecipa", label: "Partecipa" },
 ];
 const HEADINGS = {
-  osservatorio:{overline:"OSSERVATORIO MONDIALE",title:<LocalizedText>Le notizie delle ultime sei ore.</LocalizedText>,description:"Una vista separata dalla rassegna: soltanto articoli con data di pubblicazione nella finestra recente. Le date senza orario verificabile restano fuori."},
+  osservatorio:{overline:"OSSERVATORIO MONDIALE",title:<LocalizedText>Le notizie delle ultime sei ore.</LocalizedText>,description:"L’Osservatorio concentra l’attenzione sulle pubblicazioni delle ultime sei ore, mentre la rassegna permette una lettura più ampia. Ogni scheda mantiene titolo, testata e paese della fonte. La finestra usa la data di pubblicazione: un articolo precedente non diventa recente soltanto perché il sito lo ha appena raccolto. Le date prive di un orario utilizzabile restano fuori da questa selezione."},
   crediti:{overline:"UN LAVORO COLLETTIVO",title:<LocalizedText>Fonti, crediti e ringraziamenti.</LocalizedText>,description:"Questo progetto vive grazie al lavoro di redazioni, autori, traduttori, bibliotecari, archivisti, ricercatori e comunità del software libero. Qui puoi risalire alle risorse utilizzate."},
   fonti: {
     overline: "L’ATLANTE",
@@ -126,7 +126,7 @@ const HEADINGS = {
       </>
     ),
     description:
-      "Giornali, riviste, sindacati e movimenti: esplora le fonti per paese, lingua e orientamento. Il punto di partenza di ogni notizia resta visibile.",
+      "Dietro ogni notizia c’è una redazione, un’organizzazione o un autore. Qui puoi conoscere le pubblicazioni raccolte, vedere da quale paese e lingua provengono e aprire i loro siti. I filtri aiutano a trovare una voce precisa; la presenza nel catalogo non sostituisce la lettura e la valutazione dei suoi contenuti.",
   },
   salvati: {
     overline: "IL TUO TACCUINO",
@@ -140,7 +140,7 @@ const HEADINGS = {
       </>
     ),
     description:
-      "Articoli e libri da ritrovare. Accedi al tuo account per conservarli nel tuo archivio personale anche dopo la cancellazione dei dati del browser.",
+      "Questo è il tuo spazio per ritrovare le letture che vuoi conservare: articoli da approfondire, libri da riprendere e percorsi da continuare. Quando il servizio indipendente è attivo, l’accesso al tuo account permette di conservare la raccolta online e ritrovarla anche dopo la cancellazione dei dati del browser o da un altro dispositivo. La raccolta personale rimane privata.",
   },
   metodo: {
     overline: "IL PROGETTO",
@@ -1660,17 +1660,17 @@ function MethodView({ onSources }: { onSources: () => void }) {
           {
             n: "01",
             title: "Da dove arrivano le notizie",
-            text: "Un catalogo di fonti e canali radar alimenta la raccolta tramite feed RSS e Atom. Per i canali YouTube configurati, leggiamo anche i titoli pubblici nella pagina dei video quando il feed non è utilizzabile. I radar sono ricerche tematiche: possono far emergere editori non inclusi nel catalogo. Una corrispondenza con una parola chiave non prova un orientamento politico.",
+            text: "Un catalogo di fonti e canali radar alimenta la raccolta tramite feed RSS e Atom. Per i canali YouTube configurati, leggiamo anche i titoli pubblici nella pagina dei video quando il feed non è utilizzabile. Un feed è un elenco aggiornabile di articoli; RSS e Atom sono formati con cui gli editori lo rendono leggibile alle applicazioni. I radar cercano contenuti per tema, ma ammettono soltanto editori approvati dalla politica delle fonti. Una parola chiave nel titolo non basta a rendere una pubblicazione coerente con il progetto.",
           },
           {
             n: "02",
             title: "Come sono organizzate",
-            text: "Puoi scegliere le aperture delle testate, gli ultimi articoli, le classifiche dei più letti pubblicate dalle fonti o la priorità politica e formativa. Le classifiche non sono disponibili per ogni testata e non sono indici SEO. La modalità politica usa segnali di organizzazione collettiva, formazione, competenze e analisi del potere nel titolo e nell’estratto. Titoli ed estratti vengono filtrati per provenienza e classificati con parole chiave. Il punteggio tematico è un’euristica, non una misura di verità, qualità o rilevanza assoluta. La rassegna alterna paesi e testate nell’intera giornata, passando poi alle giornate precedenti se il periodo selezionato le comprende; Ultimi articoli mantiene invece l’ordine cronologico integrale. Puoi ampliare il periodo; le finestre recenti escludono date mancanti, non valide o future.",
+            text: "Puoi scegliere le aperture delle testate, gli ultimi articoli, le classifiche dei più letti pubblicate dalle fonti o la priorità politica e formativa. Le classifiche non sono disponibili per ogni testata e non sono indici SEO. La modalità politica usa segnali di organizzazione collettiva, formazione, competenze e analisi del potere nel titolo e nell’estratto. Titoli ed estratti vengono filtrati per provenienza e classificati con parole chiave. Il punteggio tematico usa un’euristica, cioè una regola pratica basata su indizi: aiuta a ordinare, ma non dimostra che un testo sia vero, ben argomentato o importante in assoluto. La rassegna alterna paesi e testate nell’intera giornata, passando poi alle giornate precedenti se il periodo selezionato le comprende; Ultimi articoli mantiene invece l’ordine cronologico integrale. Puoi ampliare il periodo; le finestre recenti escludono date mancanti, non valide o future.",
           },
           {
             n: "03",
             title: "Cosa puoi leggere qui",
-            text: "Ogni scheda offre ciò che il feed rende disponibile, con il link all’articolo originale. Non ospitiamo una copia integrale autorevole. Alcuni editori limitano estratti o anteprime: il sito originale resta il riferimento.",
+            text: "La scheda aiuta a decidere che cosa leggere: presenta il titolo, la provenienza e l’estratto disponibile, quando l’editore lo fornisce. Un estratto non è l’articolo completo e può omettere passaggi importanti del ragionamento. Il collegamento originale permette di leggere il contesto, conoscere l’autore e sostenere la pubblicazione. Alcuni editori limitano testi o anteprime; in questi casi la scheda mantiene il rimando alla fonte.",
           },
           {
             n: "04",
@@ -1685,7 +1685,7 @@ function MethodView({ onSources }: { onSources: () => void }) {
           {
             n: "06",
             title: "Disponibilità, attribuzione, limiti",
-            text: "I feed possono cambiare, non rispondere o essere incompleti. Le cache sono temporanee e ogni aggiornamento è un tentativo di raccolta. Testi e immagini appartengono ai rispettivi titolari: la presenza in rassegna non implica adesione dell’editore al progetto.",
+            text: "Le pubblicazioni esterne possono modificare un indirizzo, limitare gli accessi o rendere disponibili dati incompleti. La raccolta distingue quindi un contenuto ricevuto da una fonte momentaneamente irraggiungibile; le copie temporanee aiutano la consultazione, ma non garantiscono che ogni collegamento sia sempre disponibile. Testi, immagini e marchi mantengono i rispettivi diritti. Ringraziare e citare una fonte non significa che questa abbia approvato o sostenga il progetto.",
           },
         ].map((item) => (
           <article key={item.n}>

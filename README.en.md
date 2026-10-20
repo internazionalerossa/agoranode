@@ -1,5 +1,9 @@
 # Polis-Rossa
 
+Polis-Rossa connects daily news with the knowledge needed to understand its wider context. It brings together socialist, communist, trade-union and anticolonial publications, free books, introductory reading paths, documented social history and international statistics. Readers do not need to know the vocabulary of the left: the explanations start from everyday questions about work, housing, education, health and the control of shared resources. Articles remain linked to their original publishers, whose work the project invites readers to explore and support.
+
+Start with the news review to discover different publishers, choose chronological order for the latest articles, or use the Observatory for the six-hour publication window. The Library combines a book catalogue with reading paths and a chronological history; its statistical archive supports more detailed questions about comparable countries, years and measures. Participation distinguishes open-ended conversations from decisions about improving the website. Account and community features become operational only after the independent service is configured and verified.
+
 Original software is licensed under **AGPL-3.0-or-later**, including its network-source obligations for modified versions. See [LICENSE](LICENSE), [NOTICE](NOTICE), [licensing scope](docs/LICENSING.md) and the separate [name and logo policy](TRADEMARKS.md). Contributors retain their copyright. Third-party publications and datasets retain their own terms; software warranty exclusions do not remove the operator's legal duties.
 
 **News, knowledge and shared tools.** Polis-Rossa brings together socialist, communist, trade union and anti-colonial sources, links readers to original publishers, and offers a multilingual library and documented historical resources.

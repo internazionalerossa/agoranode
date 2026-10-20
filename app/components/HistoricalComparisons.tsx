@@ -9,7 +9,7 @@ export default function HistoricalComparisons(){
  const locale=useLocale();
  const number=(value:number)=>new Intl.NumberFormat(locale,{maximumFractionDigits:2}).format(value);
  return <section className="historical-comparisons" aria-labelledby="history-comparisons-title">
-  <header><p className="eyebrow"><T content>RISULTATI, DISTANZE, DIRITTI</T></p><h3 id="history-comparisons-title"><T>Quattro confronti che meritano attenzione</T></h3><p><T content>Economia, salute, ricerca e tempo di vita: quattro modi diversi di confrontare risultati concreti con gli Stati Uniti. Ogni numero conserva il proprio significato, il periodo e la fonte.</T></p></header>
+  <header><p className="eyebrow"><T content>RISULTATI, DISTANZE, DIRITTI</T></p><h3 id="history-comparisons-title"><T>Quattro confronti che meritano attenzione</T></h3><p><T content>Che cosa rende significativo un confronto internazionale? Non basta affiancare due numeri: devono misurare lo stesso fenomeno e riferirsi a periodi confrontabili. Questi quattro esempi riguardano crescita economica, sopravvivenza infantile, ricerca spaziale e tempo di riposo. Mostrano risultati importanti attraverso domande concrete; sotto ciascuno trovi la spiegazione necessaria per capire che cosa dice il numero e quali conclusioni richiedono altre prove.</T></p></header>
   <div className="history-comparison-grid">{COMPARISONS.map(comparison=>{
    const maximum=Math.max(...comparison.values.map(v=>v.value));
    return <figure key={comparison.id} className="history-comparison-card">

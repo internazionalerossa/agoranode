@@ -4325,3 +4325,6 @@ a.book-cover:focus-visible { outline:3px solid var(--red); outline-offset:4px; }
 
 /* The wordmark keeps its spelling and direction in every reading language. */
 .brand-name{white-space:nowrap;direction:ltr;unicode-bidi:isolate}.brand-name .brand-prefix{color:var(--red)}.brand-name .brand-suffix{color:var(--ink)}
+
+/* Explanatory prose keeps a comfortable measure beside the original definition. */
+.history-indicator-guidance { max-width: 74ch; font-size: 14px; line-height: 1.75; margin: 12px 0 20px; }

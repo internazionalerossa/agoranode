@@ -3,13 +3,13 @@
     "id": "origini",
     "period": "1848–1917",
     "title": "Il lavoro si organizza, le rivoluzioni aprono nuove possibilità",
-    "intro": "Salario, orario, terra e partecipazione diventano rivendicazioni organizzate. Il movimento operaio costruisce idee e legami internazionali, affrontando anche stragi, processi e repressione.",
+    "intro": "Salario, orario, terra e partecipazione diventano rivendicazioni organizzate. Il movimento operaio costruisce idee e legami internazionali, affrontando anche stragi, processi e repressione.\n\nIl punto di partenza è una domanda semplice: quali possibilità ha una persona di migliorare le proprie condizioni se affronta da sola il datore di lavoro o il proprietario della terra? Associazioni, sindacati e organizzazioni politiche provano a trasformare una debolezza individuale in una capacità collettiva. Le idee diventano strumenti per interpretare l’esperienza e costruire rivendicazioni comuni.",
     "events": [
       {
         "year": "1848",
         "country": "Europa",
         "title": "Marx ed Engels: il lavoro entra al centro della storia",
-        "text": "Il Manifesto del Partito comunista mette in relazione proprietà, produzione e potere politico. Non è ancora una conquista legislativa: è uno degli strumenti con cui il movimento operaio impara a leggere la società e a organizzarsi oltre i confini nazionali.",
+        "text": "Il Manifesto del Partito comunista mette in relazione proprietà, produzione e potere politico. Non è ancora una conquista legislativa: è uno degli strumenti con cui il movimento operaio impara a leggere la società e a organizzarsi oltre i confini nazionali.\n\nPer chi si avvicina a queste idee, la domanda iniziale è concreta: da che cosa dipende il fatto di dover lavorare per altri e quale rapporto esiste fra quella necessità e il potere nella società?",
         "cards": [],
         "detail": {
           "paragraphs": [
@@ -40,7 +40,7 @@
         "year": "1864",
         "country": "Internazionale",
         "title": "L’Internazionale: salari, orario e cooperazione diventano una causa comune",
-        "text": "L’Associazione internazionale degli operai collega esperienze di paesi diversi. Nell’Indirizzo inaugurale Marx valorizza la limitazione della giornata lavorativa e le cooperative: la solidarietà internazionale prende forma intorno a bisogni materiali e capacità di organizzazione.",
+        "text": "L’Associazione internazionale degli operai collega esperienze di paesi diversi. Nell’Indirizzo inaugurale Marx valorizza la limitazione della giornata lavorativa e le cooperative: la solidarietà internazionale prende forma intorno a bisogni materiali e capacità di organizzazione.\n\nUna rivendicazione locale diventa più forte quando altre persone la riconoscono come propria. Il collegamento internazionale permette di confrontare esperienze e di immaginare una solidarietà capace di superare la concorrenza fra lavoratori.",
         "cards": [],
         "detail": {
           "paragraphs": [
@@ -59,7 +59,7 @@
         "year": "1871",
         "country": "Francia",
         "title": "La Comune: il potere pubblico si avvicina alla vita di chi lavora",
-        "text": "Parigi sperimenta una forma di autogoverno che entrerà nel patrimonio del movimento socialista. Il lavoro, la rappresentanza e i servizi della città diventano parte di un progetto di trasformazione sociale. La Settimana sanguinosa del maggio 1871 interrompe questa esperienza con la repressione militare.",
+        "text": "Parigi sperimenta una forma di autogoverno che entrerà nel patrimonio del movimento socialista. Il lavoro, la rappresentanza e i servizi della città diventano parte di un progetto di trasformazione sociale. La Settimana sanguinosa del maggio 1871 interrompe questa esperienza con la repressione militare.\n\nIl significato dell’esperienza sta anche in questo passaggio: i bisogni delle persone che abitano e lavorano nella città entrano direttamente nella discussione su come amministrarla e a chi debba rispondere il potere.",
         "dossier": "comune",
         "cards": [
           "fr-comune"
@@ -82,7 +82,7 @@
         "country": "Stati Uniti",
         "kind": "Repressione operaia",
         "title": "Haymarket: il prezzo della lotta per le otto ore",
-        "text": "La mobilitazione per ridurre la giornata lavorativa incontra violenza, arresti e condanne. A Chicago, le giornate del maggio 1886 diventano un passaggio decisivo nella memoria internazionale del lavoro.",
+        "text": "La mobilitazione per ridurre la giornata lavorativa incontra violenza, arresti e condanne. A Chicago, le giornate del maggio 1886 diventano un passaggio decisivo nella memoria internazionale del lavoro.\n\nRidurre l’orario significa contendere all’impresa una parte del tempo quotidiano. Quel tempo può diventare riposo, studio, cura e partecipazione: per questo una richiesta apparentemente contrattuale assume un significato sociale molto più ampio.",
         "cards": [],
         "detail": {
           "paragraphs": [
@@ -101,7 +101,7 @@
         "year": "1896",
         "country": "Germania e movimento internazionale",
         "title": "Clara Zetkin: l’emancipazione delle donne riguarda anche salario e lavoro",
-        "text": "Nel suo intervento sulle donne proletarie e il socialismo, Clara Zetkin lega subordinazione economica e organizzazione politica. La questione femminile entra nel movimento operaio come parte della trasformazione dei rapporti sociali, non come tema accessorio.",
+        "text": "Nel suo intervento sulle donne proletarie e il socialismo, Clara Zetkin lega subordinazione economica e organizzazione politica. La questione femminile entra nel movimento operaio come parte della trasformazione dei rapporti sociali, non come tema accessorio.\n\nL’indipendenza personale richiede possibilità materiali. Se il reddito, la cura e l’accesso all’organizzazione restano diseguali, una libertà riconosciuta formalmente può essere difficile da esercitare nella vita quotidiana.",
         "cards": [],
         "detail": {
           "paragraphs": [
@@ -126,7 +126,7 @@
         "year": "1906",
         "country": "Polonia, Russia e Germania",
         "title": "Rosa Luxemburg: lo sciopero come scuola di partecipazione",
-        "text": "Dall’esperienza rivoluzionaria del 1905, Rosa Luxemburg ricava una riflessione sullo sciopero di massa. Rivendicazioni salariali e libertà politiche si alimentano a vicenda: chi lotta per una condizione concreta può acquisire anche strumenti per intervenire nella vita pubblica.",
+        "text": "Dall’esperienza rivoluzionaria del 1905, Rosa Luxemburg ricava una riflessione sullo sciopero di massa. Rivendicazioni salariali e libertà politiche si alimentano a vicenda: chi lotta per una condizione concreta può acquisire anche strumenti per intervenire nella vita pubblica.\n\nLo sciopero viene così letto non soltanto come interruzione del lavoro, ma come esperienza attraverso cui le persone discutono, prendono decisioni e riconoscono interessi che prima potevano sembrare problemi individuali.",
         "cards": [],
         "detail": {
           "paragraphs": [
@@ -153,7 +153,7 @@
         "country": "Cile",
         "kind": "Strage di lavoratori",
         "title": "Iquique: l’esercito spara su chi chiede salario e dignità",
-        "text": "Il 21 dicembre, nella scuola Santa María, l’esercito apre il fuoco sui lavoratori del salnitro riuniti durante lo sciopero. Le richieste riguardano condizioni di vita e di lavoro, nel pieno di una crisi del potere d’acquisto.",
+        "text": "Il 21 dicembre, nella scuola Santa María, l’esercito apre il fuoco sui lavoratori del salnitro riuniti durante lo sciopero. Le richieste riguardano condizioni di vita e di lavoro, nel pieno di una crisi del potere d’acquisto.\n\nLa vicenda rende evidente quanto possa essere rischioso trasformare un bisogno condiviso in una domanda pubblica. Ricordarla significa conservare anche le richieste dei lavoratori, oltre alla memoria della violenza subita.",
         "cards": [],
         "detail": {
           "paragraphs": [
@@ -172,7 +172,7 @@
         "year": "1917",
         "country": "Messico",
         "title": "Otto ore e diritti del lavoro dentro la Costituzione",
-        "text": "L’articolo 123 della Costituzione rivoluzionaria riconosce la giornata di otto ore e una struttura di diritti del lavoro. Una conquista sociale non richiede che un paese si definisca socialista: conta anche la forza con cui le rivendicazioni popolari cambiano le sue istituzioni.",
+        "text": "L’articolo 123 della Costituzione rivoluzionaria riconosce la giornata di otto ore e una struttura di diritti del lavoro. Una conquista sociale non richiede che un paese si definisca socialista: conta anche la forza con cui le rivendicazioni popolari cambiano le sue istituzioni.\n\nPortare queste richieste dentro una costituzione significa riconoscerle come questioni pubbliche, anziché lasciarle soltanto alla trattativa fra singolo lavoratore e impresa. L’applicazione concreta richiede poi strumenti, controlli e organizzazione.",
         "cards": [
           "mx-lavoro"
         ]
@@ -181,7 +181,7 @@
         "year": "1917",
         "country": "Russia rivoluzionaria",
         "title": "Pace e terra: le rivendicazioni popolari cambiano il potere",
-        "text": "I decreti sulla pace e sulla terra portano al centro del nuovo governo sovietico due richieste decisive di soldati e contadini. Lenin le presenta al Congresso dei soviet: la rivoluzione interviene sulla guerra e sulla grande proprietà fondiaria.",
+        "text": "I decreti sulla pace e sulla terra portano al centro del nuovo governo sovietico due richieste decisive di soldati e contadini. Lenin le presenta al Congresso dei soviet: la rivoluzione interviene sulla guerra e sulla grande proprietà fondiaria.\n\nLe parole d’ordine acquistano significato perché riguardano le condizioni immediate di chi combatte e di chi coltiva. La trasformazione politica viene collegata alla possibilità di vivere senza guerra e senza dipendere dalla grande proprietà.",
         "cards": [],
         "detail": {
           "paragraphs": [
@@ -209,13 +209,13 @@
     "id": "organizzare",
     "period": "1919–1935",
     "title": "Casa, sapere e autonomia: la trasformazione entra nella vita quotidiana",
-    "intro": "Casa, cura e istruzione diventano progetti collettivi. Nello stesso periodo, squadrismo e dittature colpiscono le organizzazioni che danno voce al lavoro: i diritti possono avanzare e possono essere distrutti.",
+    "intro": "Casa, cura e istruzione diventano progetti collettivi. Nello stesso periodo, squadrismo e dittature colpiscono le organizzazioni che danno voce al lavoro: i diritti possono avanzare e possono essere distrutti.\n\nIl cambiamento non riguarda soltanto chi governa. Entra negli spazi della vita quotidiana: l’alloggio, la fabbrica, il lavoro domestico e la scuola. Leggere questa epoca significa osservare sia la costruzione di istituzioni sociali sia gli attacchi ai luoghi in cui le persone imparano a rappresentare i propri interessi.",
     "events": [
       {
         "year": "1919–1934",
         "country": "Austria",
         "title": "Vienna Rossa costruisce una risposta pubblica al bisogno di casa",
-        "text": "L’amministrazione socialdemocratica realizza oltre 64.000 appartamenti municipali. Il comune interviene direttamente sull’abitare: la casa entra in una rete di servizi, salute e opportunità per le famiglie lavoratrici.",
+        "text": "L’amministrazione socialdemocratica realizza oltre 64.000 appartamenti municipali. Il comune interviene direttamente sull’abitare: la casa entra in una rete di servizi, salute e opportunità per le famiglie lavoratrici.\n\nPer una famiglia lavoratrice, un intervento pubblico sull’abitazione può cambiare il rapporto fra salario e spese essenziali. Il progetto municipale permette di pensare insieme casa, servizi e qualità degli spazi comuni.",
         "dossier": "vienna",
         "cards": []
       },
@@ -223,7 +223,7 @@
         "year": "1919",
         "country": "Italia",
         "title": "Gramsci e i consigli: chi produce può imparare a governare",
-        "text": "A Torino, la riflessione di Antonio Gramsci su L’Ordine Nuovo mette al centro le organizzazioni operaie. I consigli sono pensati anche come luoghi in cui acquisire esperienza amministrativa, responsabilità e conoscenza del processo produttivo.",
+        "text": "A Torino, la riflessione di Antonio Gramsci su L’Ordine Nuovo mette al centro le organizzazioni operaie. I consigli sono pensati anche come luoghi in cui acquisire esperienza amministrativa, responsabilità e conoscenza del processo produttivo.\n\nIl consiglio non è descritto soltanto come luogo di protesta: è anche un’occasione per comprendere e discutere decisioni che normalmente rimangono nelle mani della direzione dell’impresa.",
         "cards": [],
         "detail": {
           "paragraphs": [
@@ -251,7 +251,7 @@
         "country": "Stati Uniti",
         "kind": "Persecuzione politica",
         "title": "Le retate Palmer: idee politiche, arresti ed espulsioni",
-        "text": "Durante il primo Red Scare, le autorità federali colpiscono ambienti anarchici e comunisti con retate ed espulsioni. L’origine straniera e l’attività politica diventano motivi di sospetto collettivo.",
+        "text": "Durante il primo Red Scare, le autorità federali colpiscono ambienti anarchici e comunisti con retate ed espulsioni. L’origine straniera e l’attività politica diventano motivi di sospetto collettivo.\n\nQuando il sospetto riguarda interi ambienti politici, la libertà di esprimersi e di associarsi viene ristretta ben oltre il singolo caso giudiziario. La repressione incide sulla possibilità stessa di costruire solidarietà.",
         "cards": [],
         "detail": {
           "paragraphs": [
@@ -270,7 +270,7 @@
         "year": "1920",
         "country": "Russia sovietica",
         "title": "Kollontai: rendere la cura una responsabilità sociale",
-        "text": "Aleksandra Kollontai mette in discussione l’idea che educazione dei figli e lavoro domestico debbano ricadere sulle sole donne. Servizi comuni e autonomia economica entrano nel progetto socialista dell’emancipazione.",
+        "text": "Aleksandra Kollontai mette in discussione l’idea che educazione dei figli e lavoro domestico debbano ricadere sulle sole donne. Servizi comuni e autonomia economica entrano nel progetto socialista dell’emancipazione.\n\nIl punto è rendere meno dipendente l’autonomia individuale dalla disponibilità di aiuti privati. Condividere socialmente una parte della cura permette di discutere in modo diverso tempo, lavoro e possibilità di partecipazione.",
         "cards": [],
         "detail": {
           "paragraphs": [
@@ -298,7 +298,7 @@
         "country": "Italia",
         "kind": "Violenza fascista",
         "title": "Sedi devastate: spezzare l’organizzazione prima di vietarla",
-        "text": "Le aggressioni squadriste colpiscono circoli politici e sedi sindacali. Distruggere i luoghi dell’organizzazione significa indebolire la possibilità di riunirsi, scioperare e difendere collettivamente le conquiste del lavoro.",
+        "text": "Le aggressioni squadriste colpiscono circoli politici e sedi sindacali. Distruggere i luoghi dell’organizzazione significa indebolire la possibilità di riunirsi, scioperare e difendere collettivamente le conquiste del lavoro.\n\nUna sede non è soltanto un edificio: custodisce relazioni, conoscenze e strumenti organizzativi. Colpirla significa ostacolare il passaggio dalla difficoltà vissuta da una persona alla rivendicazione sostenuta da molte.",
         "cards": [],
         "detail": {
           "paragraphs": [
@@ -317,7 +317,7 @@
         "year": "1926–1939",
         "country": "URSS",
         "title": "In tredici anni, l’alfabetizzazione passa dal 56,6% all’87,4%",
-        "text": "Le statistiche sovietiche sulla popolazione fra 9 e 49 anni registrano un aumento di 30,8 punti percentuali. Fra le donne il dato passa dal 42,7% all’81,6%: leggere e scrivere diventano una capacità accessibile a una parte molto più ampia della popolazione.",
+        "text": "Le statistiche sovietiche sulla popolazione fra 9 e 49 anni registrano un aumento di 30,8 punti percentuali. Fra le donne il dato passa dal 42,7% all’81,6%: leggere e scrivere diventano una capacità accessibile a una parte molto più ampia della popolazione.\n\nUn punto percentuale è la distanza fra due percentuali, non una crescita relativa: questa distinzione aiuta a leggere la scala del cambiamento. Saper leggere amplia l’accesso a documenti, formazione e vita pubblica.",
         "cards": [],
         "detail": {
           "paragraphs": [
@@ -348,7 +348,7 @@
         "country": "Italia",
         "kind": "Soppressione delle libertà",
         "title": "Il fascismo elimina lo spazio legale delle opposizioni",
-        "text": "Il riconoscimento del solo sindacato fascista e lo scioglimento delle organizzazioni politiche svuotano il pluralismo. Il lavoro organizzato perde la possibilità di rappresentarsi liberamente.",
+        "text": "Il riconoscimento del solo sindacato fascista e lo scioglimento delle organizzazioni politiche svuotano il pluralismo. Il lavoro organizzato perde la possibilità di rappresentarsi liberamente.\n\nIl problema non riguarda solo la presenza di un’organizzazione autorizzata, ma la possibilità di scegliere liberamente chi rappresenta il lavoro. Senza questa autonomia, anche il conflitto sulle condizioni materiali cambia profondamente.",
         "cards": [],
         "detail": {
           "paragraphs": [
@@ -367,7 +367,7 @@
         "year": "1928",
         "country": "Perù",
         "title": "Mariátegui: un socialismo che parte dalla terra e dai popoli indigeni",
-        "text": "Nei Sette saggi di interpretazione della realtà peruviana, José Carlos Mariátegui collega l’oppressione indigena alla struttura della proprietà agraria. Il socialismo latinoamericano costruisce così domande e strumenti a partire dalla propria storia.",
+        "text": "Nei Sette saggi di interpretazione della realtà peruviana, José Carlos Mariátegui collega l’oppressione indigena alla struttura della proprietà agraria. Il socialismo latinoamericano costruisce così domande e strumenti a partire dalla propria storia.\n\nLa domanda centrale diventa chi possiede la terra e quali rapporti di dipendenza ne derivano. Il riferimento al contesto peruviano mostra perché una teoria politica debba confrontarsi con esperienze storiche concrete.",
         "cards": [],
         "detail": {
           "paragraphs": [
@@ -395,7 +395,7 @@
         "country": "Germania",
         "kind": "Soppressione delle libertà",
         "title": "Il nazismo occupa i sindacati e cancella il pluralismo",
-        "text": "Il 2 maggio le SA occupano le sedi sindacali. La soppressione delle organizzazioni indipendenti accompagna arresti degli oppositori e distruzione della democrazia parlamentare.",
+        "text": "Il 2 maggio le SA occupano le sedi sindacali. La soppressione delle organizzazioni indipendenti accompagna arresti degli oppositori e distruzione della democrazia parlamentare.\n\nLa perdita di organizzazioni autonome priva i lavoratori di strumenti per discutere e difendere interessi propri. È uno dei passaggi che permette di capire la distanza fra rappresentanza effettiva e mobilitazione imposta dal regime.",
         "cards": [],
         "detail": {
           "paragraphs": [
@@ -416,7 +416,7 @@
         "country": "Austria",
         "kind": "Repressione armata",
         "title": "Vienna Rossa sotto il fuoco dell’artiglieria",
-        "text": "Nel febbraio 1934 il governo Dollfuß reprime la resistenza operaia; a Vienna l’esercito bombarda anche gli alloggi municipali. Seguono il divieto della socialdemocrazia e la soppressione delle sue organizzazioni.",
+        "text": "Nel febbraio 1934 il governo Dollfuß reprime la resistenza operaia; a Vienna l’esercito bombarda anche gli alloggi municipali. Seguono il divieto della socialdemocrazia e la soppressione delle sue organizzazioni.\n\nLa vicenda collega direttamente istituzioni sociali e libertà politica: gli alloggi costruiti per migliorare la vita popolare diventano anche luoghi di una resistenza colpita militarmente.",
         "cards": [],
         "detail": {
           "paragraphs": [
@@ -437,13 +437,13 @@
     "id": "tempo-diritti",
     "period": "1936–1948",
     "title": "Antifascismo, diritti e ricostruzione",
-    "intro": "Scioperi, Fronte popolare, lotta al nazismo e movimenti di liberazione cambiano le priorità del potere pubblico. Ferie, servizi e industria entrano nella costruzione di una cittadinanza sociale.",
+    "intro": "Scioperi, Fronte popolare, lotta al nazismo e movimenti di liberazione cambiano le priorità del potere pubblico. Ferie, servizi e industria entrano nella costruzione di una cittadinanza sociale.\n\nUna libertà scritta sulla carta ha bisogno anche di condizioni materiali per essere esercitata. Avere tempo per riposare, un servizio sanitario accessibile o una scuola comune cambia ciò che una persona può scegliere davvero. Le tappe mostrano come lotte sociali, ricostruzione e responsabilità pubblica si intrecciano in percorsi nazionali differenti.",
     "events": [
       {
         "year": "1936",
         "country": "Francia",
         "title": "Quaranta ore e ferie pagate: il tempo di vita si conquista",
-        "text": "Il Fronte popolare e le mobilitazioni del lavoro portano due riforme concrete: settimana legale di quaranta ore e ferie retribuite. La legge sulle ferie riconosce quattordici giorni dopo un anno di servizio continuo: il riposo diventa un diritto sostenuto dal salario.",
+        "text": "Il Fronte popolare e le mobilitazioni del lavoro portano due riforme concrete: settimana legale di quaranta ore e ferie retribuite. La legge sulle ferie riconosce quattordici giorni dopo un anno di servizio continuo: il riposo diventa un diritto sostenuto dal salario.\n\nEssere pagati durante il riposo cambia il significato delle ferie: non occorre rinunciare interamente al reddito per avere tempo fuori dal lavoro. La conquista riguarda quindi sia il tempo sia la sicurezza economica.",
         "dossier": "francia",
         "cards": [
           "fr-ferie",
@@ -454,7 +454,7 @@
         "year": "1936",
         "country": "URSS",
         "title": "Lavoro, riposo, istruzione: il progetto sociale sovietico",
-        "text": "La Costituzione sovietica raccoglie diritti sociali che legano economia e responsabilità pubblica. Il testo costituzionale permette di studiare il progetto; scuola, servizi e risultati scientifici ne richiedono una lettura storica concreta.",
+        "text": "La Costituzione sovietica raccoglie diritti sociali che legano economia e responsabilità pubblica. Il testo costituzionale permette di studiare il progetto; scuola, servizi e risultati scientifici ne richiedono una lettura storica concreta.\n\nPer comprendere un diritto sociale bisogna chiedere quali servizi, risorse e possibilità di accesso gli danno consistenza. Il documento è il punto di partenza di questa domanda, non la sua risposta completa.",
         "dossier": "urss",
         "cards": []
       },
@@ -464,7 +464,7 @@
         "country": "Spagna",
         "kind": "Persecuzione politica",
         "title": "Il franchismo punisce anche il sostegno alla Repubblica",
-        "text": "La legge sulle responsabilità politiche trasforma l’opposizione al nuovo regime in motivo di sanzione. Confische e interdizioni colpiscono persone e organizzazioni, prolungando la repressione oltre la guerra civile.",
+        "text": "La legge sulle responsabilità politiche trasforma l’opposizione al nuovo regime in motivo di sanzione. Confische e interdizioni colpiscono persone e organizzazioni, prolungando la repressione oltre la guerra civile.\n\nLa repressione non termina quando cessano i combattimenti: può proseguire attraverso perdita di beni, esclusione dal lavoro e limitazione dei diritti. Anche questi strumenti incidono sulla sopravvivenza delle organizzazioni popolari.",
         "cards": [],
         "detail": {
           "paragraphs": [
@@ -483,7 +483,7 @@
         "year": "1945",
         "country": "Europa",
         "title": "L’Armata Rossa apre i cancelli di Auschwitz",
-        "text": "Il 27 gennaio 1945 le truppe sovietiche liberano il complesso di Auschwitz. Il contributo dell’URSS alla sconfitta del nazismo appartiene alla storia dell’antifascismo europeo e della liberazione dei deportati.",
+        "text": "Il 27 gennaio 1945 le truppe sovietiche liberano il complesso di Auschwitz. Il contributo dell’URSS alla sconfitta del nazismo appartiene alla storia dell’antifascismo europeo e della liberazione dei deportati.\n\nQuesta tappa mette al centro un atto concreto di liberazione e le persone sottratte alla persecuzione. La memoria dell’antifascismo comprende il ruolo dei combattenti e la conservazione dei luoghi e delle testimonianze.",
         "cards": [],
         "detail": {
           "paragraphs": [
@@ -502,7 +502,7 @@
         "year": "1945",
         "country": "Vietnam",
         "title": "Hồ Chí Minh: l’uguaglianza dei popoli contro il dominio coloniale",
-        "text": "La dichiarazione d’indipendenza del 2 settembre 1945 rivendica per il Vietnam libertà e autodeterminazione. Hồ Chí Minh richiama anche le dichiarazioni americana e francese, estendendo ai popoli i diritti che le potenze coloniali proclamavano per gli individui.",
+        "text": "La dichiarazione d’indipendenza del 2 settembre 1945 rivendica per il Vietnam libertà e autodeterminazione. Hồ Chí Minh richiama anche le dichiarazioni americana e francese, estendendo ai popoli i diritti che le potenze coloniali proclamavano per gli individui.\n\nL’autodeterminazione significa poter decidere il proprio ordinamento e il proprio futuro senza subordinazione coloniale. La dichiarazione collega questa richiesta alla promessa universale di uguaglianza contenuta nei testi richiamati.",
         "cards": [],
         "detail": {
           "paragraphs": [
@@ -528,7 +528,7 @@
         "year": "1946",
         "country": "Francia",
         "title": "Un sistema elettrico nazionale e una ricerca al servizio dell’industria",
-        "text": "La nazionalizzazione del 1946 riunisce produzione e distribuzione nell’EDF. La costruzione della rete elettrica e dei grandi impianti si accompagna alla ricerca tecnica: energia e conoscenza diventano infrastrutture della ricostruzione.",
+        "text": "La nazionalizzazione del 1946 riunisce produzione e distribuzione nell’EDF. La costruzione della rete elettrica e dei grandi impianti si accompagna alla ricerca tecnica: energia e conoscenza diventano infrastrutture della ricostruzione.\n\nUna rete nazionale richiede coordinamento fra investimenti, ricerca e distribuzione del servizio. Il caso permette di osservare come un’impresa pubblica possa essere pensata anche come strumento di una strategia industriale.",
         "cards": [],
         "detail": {
           "paragraphs": [
@@ -553,7 +553,7 @@
         "country": "Italia",
         "kind": "Strage di lavoratori",
         "title": "Portella della Ginestra: colpire il Primo maggio contadino",
-        "text": "Il 1° maggio la banda Giuliano spara sui partecipanti alla festa dei lavoratori. Il massacro colpisce il movimento contadino siciliano e la sua richiesta di terra e rappresentanza.",
+        "text": "Il 1° maggio la banda Giuliano spara sui partecipanti alla festa dei lavoratori. Il massacro colpisce il movimento contadino siciliano e la sua richiesta di terra e rappresentanza.\n\nLa festa del lavoro diventa il luogo in cui una comunità rende visibili le proprie richieste. Colpirla significa colpire insieme le persone riunite e la possibilità di rappresentare pubblicamente un progetto di cambiamento.",
         "cards": [],
         "detail": {
           "paragraphs": [
@@ -574,7 +574,7 @@
         "country": "Stati Uniti",
         "kind": "Restrizioni sindacali",
         "title": "Taft-Hartley: il diritto del lavoro cambia direzione",
-        "text": "Il Congresso limita strumenti sindacali costruiti nell’epoca del New Deal. Il divieto dei boicottaggi secondari restringe la possibilità di estendere un conflitto oltre l’impresa direttamente coinvolta.",
+        "text": "Il Congresso limita strumenti sindacali costruiti nell’epoca del New Deal. Il divieto dei boicottaggi secondari restringe la possibilità di estendere un conflitto oltre l’impresa direttamente coinvolta.\n\nLa solidarietà fra luoghi di lavoro diversi può ampliare la forza di una vertenza. Restringerne gli strumenti modifica quindi non soltanto una procedura, ma il rapporto fra potere dell’impresa e capacità collettiva dei lavoratori.",
         "cards": [],
         "detail": {
           "paragraphs": [
@@ -597,7 +597,7 @@
         "year": "1948",
         "country": "Italia e Regno Unito",
         "title": "Dalla ricostruzione a un’idea più ampia di cittadinanza",
-        "text": "La Costituzione italiana mette al centro lavoro e uguaglianza sostanziale. Nel Regno Unito il governo laburista avvia il NHS: l’assistenza viene organizzata intorno al bisogno, con accesso universale. Sono due percorsi diversi in cui la dignità materiale entra nella responsabilità dello Stato.",
+        "text": "La Costituzione italiana mette al centro lavoro e uguaglianza sostanziale. Nel Regno Unito il governo laburista avvia il NHS: l’assistenza viene organizzata intorno al bisogno, con accesso universale. Sono due percorsi diversi in cui la dignità materiale entra nella responsabilità dello Stato.\n\nEssere cittadini significa qui anche poter esercitare diritti che richiedono risorse e servizi. La responsabilità pubblica entra così in ambiti che incidono direttamente sulla sicurezza e sull’autonomia delle persone.",
         "dossier": "nhs",
         "cards": [
           "it-costituzione",
@@ -608,7 +608,7 @@
         "year": "1948–1992",
         "country": "Italia",
         "title": "L’IRI e la capacità di costruire un sistema industriale",
-        "text": "Nell’economia mista del dopoguerra, le partecipazioni statali sostengono acciaio, cantieristica, trasporti e telecomunicazioni. L’Autostrada del Sole e la rete telefonica nazionale raccontano un intervento pubblico capace di coordinare investimenti, imprese e competenze.",
+        "text": "Nell’economia mista del dopoguerra, le partecipazioni statali sostengono acciaio, cantieristica, trasporti e telecomunicazioni. L’Autostrada del Sole e la rete telefonica nazionale raccontano un intervento pubblico capace di coordinare investimenti, imprese e competenze.\n\nPer leggere questa storia occorre distinguere le origini dell’istituzione dalla funzione svolta nel dopoguerra. L’intervento pubblico non coincide automaticamente con il socialismo, ma permette di studiare investimenti coordinati e competenze costruite nel tempo.",
         "cards": [],
         "detail": {
           "paragraphs": [
@@ -634,13 +634,13 @@
     "id": "sapere-cura",
     "period": "1949–1965",
     "title": "Dalla ricostruzione ai primati scientifici e alla cura",
-    "intro": "La rivoluzione cinese, i risultati spaziali sovietici, l’alfabetizzazione cubana e le riforme italiane portano il racconto dentro scuola, salute e conoscenza. Le conquiste nascono dal lavoro di istituzioni e di milioni di persone.",
+    "intro": "La rivoluzione cinese, i risultati spaziali sovietici, l’alfabetizzazione cubana e le riforme italiane portano il racconto dentro scuola, salute e conoscenza. Le conquiste nascono dal lavoro di istituzioni e di milioni di persone.\n\nScuola e sanità non sono soltanto voci di spesa: formano capacità che restano nelle persone e rendono possibili altre trasformazioni. Per questo le campagne di alfabetizzazione, la formazione tecnica e l’assistenza territoriale vanno lette insieme ai risultati scientifici. Il racconto distingue i progetti dichiarati dalle istituzioni costruite e dai risultati documentati.",
     "events": [
       {
         "year": "1949",
         "country": "Cina",
         "title": "Mao Zedong e la nascita di una nuova sovranità politica",
-        "text": "Nel settembre 1949 Mao Zedong presenta il progetto della nuova Repubblica popolare: indipendenza nazionale, ricostruzione e trasformazione dei rapporti sociali. La costruzione di scuole, servizi e capacità industriali si colloca dentro questa svolta storica.",
+        "text": "Nel settembre 1949 Mao Zedong presenta il progetto della nuova Repubblica popolare: indipendenza nazionale, ricostruzione e trasformazione dei rapporti sociali. La costruzione di scuole, servizi e capacità industriali si colloca dentro questa svolta storica.\n\nSovranità politica e sviluppo materiale vengono presentati come problemi collegati: decidere del proprio futuro richiede anche istituzioni, conoscenze e risorse con cui rendere praticabili quelle decisioni.",
         "cards": [],
         "detail": {
           "paragraphs": [
@@ -668,7 +668,7 @@
         "country": "Sudafrica",
         "kind": "Persecuzione anticomunista",
         "title": "L’apartheid usa l’anticomunismo per isolare il dissenso",
-        "text": "Il Suppression of Communism Act mette fuori legge il partito comunista e amplia il potere di vietare organizzazioni, pubblicazioni e attività politiche. Una definizione estesa di comunismo permette di colpire anche altre richieste di cambiamento.",
+        "text": "Il Suppression of Communism Act mette fuori legge il partito comunista e amplia il potere di vietare organizzazioni, pubblicazioni e attività politiche. Una definizione estesa di comunismo permette di colpire anche altre richieste di cambiamento.\n\nQuando un’etichetta politica è definita in modo molto ampio, può diventare uno strumento per colpire rivendicazioni differenti. Il testo della legge aiuta a capire il rapporto fra repressione del comunismo e difesa dell’ordine razziale.",
         "cards": [],
         "detail": {
           "paragraphs": [
@@ -689,7 +689,7 @@
         "country": "Nuova Zelanda",
         "kind": "Restrizioni sindacali",
         "title": "I portuali sotto emergenza: censura e solidarietà vietata",
-        "text": "Una controversia salariale diventa serrata e confronto nazionale. Il governo proclama l’emergenza, impiega truppe nei porti e introduce pesanti restrizioni alla stampa e agli aiuti agli scioperanti.",
+        "text": "Una controversia salariale diventa serrata e confronto nazionale. Il governo proclama l’emergenza, impiega truppe nei porti e introduce pesanti restrizioni alla stampa e agli aiuti agli scioperanti.\n\nLa vertenza mostra che il conflitto di lavoro può investire la libertà di informare e di aiutare altre persone. Censura e divieto di solidarietà modificano le condizioni in cui una protesta può farsi conoscere.",
         "cards": [],
         "detail": {
           "paragraphs": [
@@ -710,7 +710,7 @@
         "country": "Guatemala",
         "kind": "Colpo di Stato",
         "title": "Árbenz: la riforma della terra incontra l’operazione clandestina",
-        "text": "Il rovesciamento del governo di Jacobo Árbenz interrompe un progetto riformatore sostenuto anche dai comunisti. La redistribuzione delle terre inutilizzate aveva toccato gli interessi dei grandi proprietari e della United Fruit.",
+        "text": "Il rovesciamento del governo di Jacobo Árbenz interrompe un progetto riformatore sostenuto anche dai comunisti. La redistribuzione delle terre inutilizzate aveva toccato gli interessi dei grandi proprietari e della United Fruit.\n\nIl possesso della terra riguarda insieme reddito, autonomia e capacità di decidere come impiegare una risorsa produttiva. Il caso invita a leggere le riforme anche attraverso gli interessi economici che vengono coinvolti.",
         "cards": [],
         "detail": {
           "paragraphs": [
@@ -729,7 +729,7 @@
         "year": "1957 · 1961 · 1963",
         "country": "URSS",
         "title": "Dalla formazione scientifica ai primi viaggi nello spazio",
-        "text": "Nel 1957 l’URSS mette in orbita Sputnik; nel 1961 Jurij Gagarin compie il primo volo umano; nel 1963 Valentina Tereškova diventa la prima donna nello spazio. La prima astronauta statunitense volerà nel 1983, vent’anni dopo: una distanza che rende immediatamente visibile la portata del primato sovietico.",
+        "text": "Nel 1957 l’URSS mette in orbita Sputnik; nel 1961 Jurij Gagarin compie il primo volo umano; nel 1963 Valentina Tereškova diventa la prima donna nello spazio. La prima astronauta statunitense volerà nel 1983, vent’anni dopo: una distanza che rende immediatamente visibile la portata del primato sovietico.\n\nIl risultato non nasce soltanto nel momento del lancio: rende visibile un insieme di capacità scientifiche, tecniche e produttive. Il confronto delle date descrive quel primato specifico, senza riassumere tutta la condizione delle donne nei due paesi.",
         "dossier": "urss",
         "cards": [
           "su-gagarin",
@@ -763,7 +763,7 @@
         "year": "1960–1979",
         "country": "Cina",
         "title": "La prevenzione e le cure di base raggiungono le campagne",
-        "text": "I medici scalzi avvicinano assistenza primaria e prevenzione alle comunità rurali. Questa esperienza entra nel confronto internazionale sulla salute pubblica e permette di studiare come personale, territorio e organizzazione dei servizi possano ampliare l’accesso.",
+        "text": "I medici scalzi avvicinano assistenza primaria e prevenzione alle comunità rurali. Questa esperienza entra nel confronto internazionale sulla salute pubblica e permette di studiare come personale, territorio e organizzazione dei servizi possano ampliare l’accesso.\n\nAvvicinare le cure al territorio significa ridurre la distanza fra chi ha bisogno di assistenza e chi può offrirla. La prevenzione richiede inoltre continuità, conoscenza delle condizioni locali e collegamenti con gli altri servizi.",
         "dossier": "rivoluzione-culturale",
         "cards": [
           "cn-medici"
@@ -773,7 +773,7 @@
         "year": "1961",
         "country": "Cuba",
         "title": "Un paese si mobilita per imparare a leggere",
-        "text": "La campagna di alfabetizzazione coinvolge brigate, volontari e comunità. L’UNESCO ne conserva il patrimonio documentario e riconosce l’eredità nell’educazione popolare internazionale: il sapere diventa una capacità da condividere.",
+        "text": "La campagna di alfabetizzazione coinvolge brigate, volontari e comunità. L’UNESCO ne conserva il patrimonio documentario e riconosce l’eredità nell’educazione popolare internazionale: il sapere diventa una capacità da condividere.\n\nL’alfabetizzazione non è soltanto un titolo scolastico: permette di leggere istruzioni, comunicazioni e testi che prima richiedevano la mediazione di altri. La campagna diventa perciò anche un’esperienza di partecipazione e autonomia.",
         "dossier": "cuba",
         "cards": [
           "cu-lettura"
@@ -785,7 +785,7 @@
         "country": "Congo",
         "kind": "Assassinio politico",
         "title": "Lumumba: l’indipendenza perde uno dei suoi protagonisti",
-        "text": "Patrice Lumumba, primo capo del governo del Congo indipendente, viene assassinato il 17 gennaio insieme a Maurice Mpolo e Joseph Okito. La decolonizzazione incontra una violenza che ne colpisce la direzione politica.",
+        "text": "Patrice Lumumba, primo capo del governo del Congo indipendente, viene assassinato il 17 gennaio insieme a Maurice Mpolo e Joseph Okito. La decolonizzazione incontra una violenza che ne colpisce la direzione politica.\n\nL’assassinio di una figura politica va letto insieme alle possibilità che la sua azione cercava di aprire. Il caso richiama il problema di rendere effettiva l’indipendenza in un contesto di forti interessi esterni e interni.",
         "cards": [],
         "detail": {
           "paragraphs": [
@@ -804,7 +804,7 @@
         "year": "1962–1978",
         "country": "Italia",
         "title": "Scuola comune, dignità sul lavoro, tempo per studiare, sanità per tutti",
-        "text": "Scuola media unificata, Statuto dei lavoratori, permessi retribuiti per lo studio e Servizio sanitario nazionale trasformano bisogni quotidiani in diritti e servizi. Le conquiste derivano da lotte, contrattazione e iniziative legislative, con contributi socialisti, comunisti, sindacali e di altre culture riformatrici.",
+        "text": "Scuola media unificata, Statuto dei lavoratori, permessi retribuiti per lo studio e Servizio sanitario nazionale trasformano bisogni quotidiani in diritti e servizi. Le conquiste derivano da lotte, contrattazione e iniziative legislative, con contributi socialisti, comunisti, sindacali e di altre culture riformatrici.\n\nLe 150 ore sono permessi retribuiti per lo studio previsti dalla contrattazione, secondo condizioni definite: non indicano una riduzione settimanale dell’orario. Rendono concreto il diritto di tornare a formarsi anche durante la vita lavorativa.",
         "dossier": "italia",
         "cards": [
           "it-scuola",
@@ -818,7 +818,7 @@
         "country": "Cuba",
         "kind": "Pressione economica",
         "title": "L’embargo: colpire gli scambi per isolare il governo cubano",
-        "text": "Il proclama di Kennedy del febbraio 1962 dispone l’embargo commerciale fra Stati Uniti e Cuba. L’isolamento economico diventa uno strumento esplicito del confronto con il governo allineato alle potenze comuniste.",
+        "text": "Il proclama di Kennedy del febbraio 1962 dispone l’embargo commerciale fra Stati Uniti e Cuba. L’isolamento economico diventa uno strumento esplicito del confronto con il governo allineato alle potenze comuniste.\n\nPer comprendere uno strumento di pressione economica occorre osservare quali scambi limita e quali conseguenze documentano le fonti. L’esistenza dell’embargo non sostituisce l’analisi delle altre scelte e condizioni dell’economia cubana.",
         "cards": [],
         "detail": {
           "paragraphs": [
@@ -837,7 +837,7 @@
         "year": "1964",
         "country": "Cuba e paesi decolonizzati",
         "title": "Che Guevara: la liberazione politica incontra l’indipendenza economica",
-        "text": "Nel discorso all’ONU dell’11 dicembre 1964, Ernesto Che Guevara collega anticolonialismo, sovranità e sviluppo. L’esperienza cubana entra in una rete di discussione e solidarietà con movimenti di altri continenti.",
+        "text": "Nel discorso all’ONU dell’11 dicembre 1964, Ernesto Che Guevara collega anticolonialismo, sovranità e sviluppo. L’esperienza cubana entra in una rete di discussione e solidarietà con movimenti di altri continenti.\n\nL’indipendenza economica riguarda la possibilità di trasformare una sovranità formale in decisioni effettive su produzione e risorse. Il discorso permette di seguire questa domanda nel linguaggio dell’anticolonialismo.",
         "cards": [],
         "detail": {
           "paragraphs": [
@@ -864,7 +864,7 @@
         "country": "Brasile",
         "kind": "Dittatura e repressione",
         "title": "Sindacati e leghe contadine sotto la dittatura brasiliana",
-        "text": "Dopo il golpe del 1964, la repressione colpisce organizzazioni del lavoro, leghe contadine e rappresentanze studentesche. Il contenimento dei salari si accompagna al controllo politico dei luoghi dell’organizzazione.",
+        "text": "Dopo il golpe del 1964, la repressione colpisce organizzazioni del lavoro, leghe contadine e rappresentanze studentesche. Il contenimento dei salari si accompagna al controllo politico dei luoghi dell’organizzazione.\n\nIl controllo dei luoghi associativi riduce le possibilità di discutere salari e condizioni di vita. Politica economica e repressione si incontrano quindi nel modo in cui viene organizzata la rappresentanza del lavoro.",
         "cards": [],
         "detail": {
           "paragraphs": [
@@ -885,7 +885,7 @@
         "country": "Indonesia",
         "kind": "Persecuzione anticomunista",
         "title": "L’annientamento della sinistra indonesiana",
-        "text": "Uccisioni di massa e persecuzioni colpiscono membri e presunti sostenitori del Partito comunista indonesiano. La distruzione delle sue reti modifica profondamente le possibilità di organizzazione politica nel paese.",
+        "text": "Uccisioni di massa e persecuzioni colpiscono membri e presunti sostenitori del Partito comunista indonesiano. La distruzione delle sue reti modifica profondamente le possibilità di organizzazione politica nel paese.\n\nLa persecuzione distrugge anche legami di fiducia e capacità di azione comune. Raccontare la vicenda richiede attenzione alla distinzione fra appartenenza effettiva, appartenenza attribuita e responsabilità individuali.",
         "cards": [],
         "detail": {
           "paragraphs": [
@@ -906,13 +906,13 @@
     "id": "liberazione",
     "period": "1966–1977",
     "title": "Sovranità, risorse e capacità produttive",
-    "intro": "Liberazione nazionale, risorse e ricerca pubblica aprono possibilità nuove. Colpi di Stato e apparati repressivi cercano di spezzare governi riformatori, sindacati e movimenti popolari, anche oltre i confini.",
+    "intro": "Liberazione nazionale, risorse e ricerca pubblica aprono possibilità nuove. Colpi di Stato e apparati repressivi cercano di spezzare governi riformatori, sindacati e movimenti popolari, anche oltre i confini.\n\nOttenere l’indipendenza politica non risolve automaticamente il problema di chi controlla miniere, imprese e conoscenze tecniche. Queste esperienze interrogano il rapporto fra sovranità e possibilità di sviluppo: poter decidere gli investimenti, formare competenze e trattenere risorse per obiettivi sociali. La repressione interrompe spesso proprio queste capacità organizzate.",
     "events": [
       {
         "year": "1966",
         "country": "Guinea-Bissau e Capo Verde",
         "title": "Amílcar Cabral: la liberazione deve cambiare anche la vita materiale",
-        "text": "Alla Tricontinentale dell’Avana, Amílcar Cabral ragiona sul rapporto fra teoria, struttura sociale e lotta anticoloniale. Il fine della liberazione non si esaurisce nel cambio della bandiera: riguarda il controllo delle condizioni dello sviluppo.",
+        "text": "Alla Tricontinentale dell’Avana, Amílcar Cabral ragiona sul rapporto fra teoria, struttura sociale e lotta anticoloniale. Il fine della liberazione non si esaurisce nel cambio della bandiera: riguarda il controllo delle condizioni dello sviluppo.\n\nLa domanda non è soltanto chi amministra il nuovo Stato, ma quali rapporti economici continuano a limitare le scelte della popolazione. È su questo terreno che la liberazione politica incontra la trasformazione sociale.",
         "cards": [],
         "detail": {
           "paragraphs": [
@@ -938,7 +938,7 @@
         "year": "1969–1975",
         "country": "India",
         "title": "Dalla ricerca pubblica al primo satellite indiano",
-        "text": "L’ISRO nasce nel 1969. Il 19 aprile 1975 Aryabhata, progettato e costruito in India, raggiunge l’orbita con un lanciatore sovietico. La formazione scientifica e la cooperazione internazionale sostengono la costruzione di una capacità tecnologica nazionale.",
+        "text": "L’ISRO nasce nel 1969. Il 19 aprile 1975 Aryabhata, progettato e costruito in India, raggiunge l’orbita con un lanciatore sovietico. La formazione scientifica e la cooperazione internazionale sostengono la costruzione di una capacità tecnologica nazionale.\n\nCostruire competenze significa rendere possibile la progettazione, non soltanto l’acquisto di una tecnologia. Il caso distingue il contributo della cooperazione internazionale dalla formazione di capacità presenti nel paese.",
         "cards": [],
         "detail": {
           "paragraphs": [
@@ -961,7 +961,7 @@
         "year": "1969–1994",
         "country": "Brasile",
         "title": "Embraer: la costruzione pubblica di competenze aeronautiche",
-        "text": "La nascita di Embraer nel 1969 collega ricerca, formazione e produzione aeronautica. Il Bandeirante rende concreta una strategia di sviluppo tecnologico nazionale. La successiva privatizzazione del 1994 apre una fase diversa della storia aziendale.",
+        "text": "La nascita di Embraer nel 1969 collega ricerca, formazione e produzione aeronautica. Il Bandeirante rende concreta una strategia di sviluppo tecnologico nazionale. La successiva privatizzazione del 1994 apre una fase diversa della storia aziendale.\n\nLa capacità tecnologica richiede collegamenti fra ricerca, formazione e produzione. Seguire le diverse fasi dell’impresa permette di chiedere quali investimenti l’abbiano resa possibile e come ne sia cambiato il controllo.",
         "cards": [],
         "detail": {
           "paragraphs": [
@@ -981,7 +981,7 @@
         "year": "1971",
         "country": "Cile",
         "title": "Allende e il rame: una risorsa strategica torna al paese",
-        "text": "L’11 luglio 1971 il Congresso cileno approva all’unanimità la riforma che rende possibile la nazionalizzazione integrale della grande industria del rame. Durante la presidenza di Salvador Allende, il controllo di una risorsa decisiva diventa una scelta di sovranità economica.",
+        "text": "L’11 luglio 1971 il Congresso cileno approva all’unanimità la riforma che rende possibile la nazionalizzazione integrale della grande industria del rame. Durante la presidenza di Salvador Allende, il controllo di una risorsa decisiva diventa una scelta di sovranità economica.\n\nLa nazionalizzazione sposta il controllo di un’attività strategica e apre una domanda sul suo impiego: a quali obiettivi collettivi possono essere destinate le risorse prodotte? Proprietà, gestione e distribuzione dei benefici restano questioni distinte.",
         "cards": [],
         "detail": {
           "paragraphs": [
@@ -1009,7 +1009,7 @@
         "country": "Cile",
         "kind": "Colpo di Stato",
         "title": "Il golpe contro Allende chiude la via democratica",
-        "text": "L’11 settembre le forze armate rovesciano il governo di Salvador Allende. Il nuovo regime smantella il Congresso e vieta partiti della sinistra: il progetto di trasformazione viene interrotto con la forza.",
+        "text": "L’11 settembre le forze armate rovesciano il governo di Salvador Allende. Il nuovo regime smantella il Congresso e vieta partiti della sinistra: il progetto di trasformazione viene interrotto con la forza.\n\nIl rovesciamento di un governo cambia anche lo spazio disponibile per sindacati, partiti e riforme. La tappa permette di leggere la violenza politica attraverso le possibilità sociali che vengono interrotte.",
         "cards": [],
         "detail": {
           "paragraphs": [
@@ -1030,7 +1030,7 @@
         "country": "Cono Sud",
         "kind": "Repressione transnazionale",
         "title": "Operazione Cóndor: la persecuzione attraversa i confini",
-        "text": "I servizi delle dittature del Cono Sud coordinano la caccia agli oppositori. L’esilio non offre più una protezione sufficiente: sorveglianza, sequestri, torture e sparizioni seguono le persone oltre frontiera.",
+        "text": "I servizi delle dittature del Cono Sud coordinano la caccia agli oppositori. L’esilio non offre più una protezione sufficiente: sorveglianza, sequestri, torture e sparizioni seguono le persone oltre frontiera.\n\nLa collaborazione repressiva fra apparati rende più fragile anche la scelta dell’esilio. Per ricostruire queste vicende diventano essenziali gli archivi, le testimonianze e le indagini che collegano luoghi e responsabilità.",
         "cards": [],
         "detail": {
           "paragraphs": [
@@ -1051,7 +1051,7 @@
         "country": "Argentina",
         "kind": "Terrorismo di Stato",
         "title": "Le sparizioni entrano anche nei luoghi di lavoro",
-        "text": "La dittatura argentina perseguita oppositori e militanti; tra le vittime vi sono lavoratrici e lavoratori fatti sparire o assassinati. Il terrore spezza rapporti personali, organizzazioni e memoria collettiva.",
+        "text": "La dittatura argentina perseguita oppositori e militanti; tra le vittime vi sono lavoratrici e lavoratori fatti sparire o assassinati. Il terrore spezza rapporti personali, organizzazioni e memoria collettiva.\n\nLa sparizione colpisce la persona e lascia familiari e compagni senza informazioni e senza certezza. Nei luoghi di lavoro, il terrore può così interrompere anche le relazioni che sostengono una rivendicazione collettiva.",
         "cards": [],
         "detail": {
           "paragraphs": [
@@ -1072,13 +1072,13 @@
     "id": "sviluppo",
     "period": "1978–2000",
     "title": "Trasformare l’economia, costruire diritti",
-    "intro": "Crescita, servizi e autonomia economica incontrano strategie diverse. La svolta neoliberale modifica le regole del conflitto del lavoro; scioperi e resistenze mettono in gioco il futuro di intere comunità.",
+    "intro": "Crescita, servizi e autonomia economica incontrano strategie diverse. La svolta neoliberale modifica le regole del conflitto del lavoro; scioperi e resistenze mettono in gioco il futuro di intere comunità.\n\nLe scelte economiche non riguardano soltanto la quantità di beni prodotti. Cambiano il potere contrattuale di chi lavora, l’accesso ai servizi e il futuro dei territori. I confronti numerici aiutano a riconoscere la scala di alcune trasformazioni; le storie di scioperi e riforme permettono di vedere come quelle scelte vengono vissute e contestate.",
     "events": [
       {
         "year": "1978–2024",
         "country": "Cina",
         "title": "Un’economia reale cinquanta volte più grande",
-        "text": "Nella serie della Banca Mondiale, il PIL reale cinese del 2024 è circa cinquanta volte quello del 1978. Nello stesso intervallo il rapporto è 3,31 per gli Stati Uniti e 2,53 per il Regno Unito. È una differenza nella crescita relativa, non un confronto del reddito iniziale: popolazione, condizioni di partenza e politiche effettive restano essenziali per interpretarla.",
+        "text": "Nella serie della Banca Mondiale, il PIL reale cinese del 2024 è circa cinquanta volte quello del 1978. Nello stesso intervallo il rapporto è 3,31 per gli Stati Uniti e 2,53 per il Regno Unito. È una differenza nella crescita relativa, non un confronto del reddito iniziale: popolazione, condizioni di partenza e politiche effettive restano essenziali per interpretarla.\n\nPIL reale significa che il confronto cerca di separare l’aumento della produzione dall’aumento dei prezzi. Il moltiplicatore misura il cambiamento rispetto al punto di partenza: non significa che ogni persona disponga di un reddito cinquanta volte maggiore.",
         "dossier": "cina",
         "cards": [
           "cn-poverta"
@@ -1091,7 +1091,7 @@
         "country": "Cile",
         "kind": "Riduzione delle tutele",
         "title": "Il Plan Laboral frammenta la forza contrattuale",
-        "text": "La dittatura introduce un sistema che concentra la contrattazione nell’impresa e restringe le materie negoziabili. La trasformazione neoliberale prende forma anche nelle regole che organizzano il conflitto del lavoro.",
+        "text": "La dittatura introduce un sistema che concentra la contrattazione nell’impresa e restringe le materie negoziabili. La trasformazione neoliberale prende forma anche nelle regole che organizzano il conflitto del lavoro.\n\nLa scala della contrattazione conta: negoziare soltanto nella singola impresa offre possibilità differenti rispetto a una trattativa che coinvolge un settore. Le regole contribuiscono quindi a determinare la forza delle parti.",
         "cards": [],
         "detail": {
           "paragraphs": [
@@ -1112,7 +1112,7 @@
         "country": "Corea del Sud",
         "kind": "Repressione militare",
         "title": "Gwangju: la rivolta democratica contro il regime militare",
-        "text": "Dal 18 al 27 maggio la mobilitazione di studenti e cittadini di Gwangju affronta il regime militare. La repressione diventa una ferita centrale della storia democratica sudcoreana.",
+        "text": "Dal 18 al 27 maggio la mobilitazione di studenti e cittadini di Gwangju affronta il regime militare. La repressione diventa una ferita centrale della storia democratica sudcoreana.\n\nIl diritto di partecipare alla vita pubblica riguarda la possibilità di discutere e organizzarsi senza subire repressione. La conservazione della memoria permette di ricostruire sia le richieste del movimento sia l’azione degli apparati.",
         "cards": [],
         "detail": {
           "paragraphs": [
@@ -1133,7 +1133,7 @@
         "country": "Regno Unito",
         "kind": "Restrizioni sindacali",
         "title": "Il governo Thatcher restringe gli strumenti del conflitto sindacale",
-        "text": "L’Employment Act del 1980 limita la protezione legale del picchettaggio. Il mutamento delle regole incide sulla possibilità di esercitare pressione collettiva, prima dello scontro con i minatori.",
+        "text": "L’Employment Act del 1980 limita la protezione legale del picchettaggio. Il mutamento delle regole incide sulla possibilità di esercitare pressione collettiva, prima dello scontro con i minatori.\n\nIl picchettaggio serve a rendere visibile e sostenere uno sciopero nel luogo del conflitto. Cambiarne le protezioni legali incide sugli strumenti disponibili a chi cerca di negoziare collettivamente.",
         "cards": [],
         "detail": {
           "paragraphs": [
@@ -1152,7 +1152,7 @@
         "year": "1981",
         "country": "Francia",
         "title": "Il TGV porta la ricerca ferroviaria dentro la vita quotidiana",
-        "text": "Il 27 settembre 1981 comincia il servizio commerciale del TGV a 260 chilometri orari. Il risultato nasce da un lungo percorso di ricerca, progettazione e investimenti nella rete ferroviaria: un servizio pubblico diventa anche un luogo di innovazione industriale.",
+        "text": "Il 27 settembre 1981 comincia il servizio commerciale del TGV a 260 chilometri orari. Il risultato nasce da un lungo percorso di ricerca, progettazione e investimenti nella rete ferroviaria: un servizio pubblico diventa anche un luogo di innovazione industriale.\n\nL’innovazione entra nella vita quotidiana quando diventa un servizio utilizzabile. Per questo un risultato tecnico va letto insieme alle reti, all’organizzazione e agli investimenti che ne rendono possibile l’impiego.",
         "cards": [],
         "detail": {
           "paragraphs": [
@@ -1173,7 +1173,7 @@
         "country": "Stati Uniti",
         "kind": "Licenziamenti antisciopero",
         "title": "PATCO: Reagan risponde allo sciopero con i licenziamenti",
-        "text": "Il presidente impone un ultimatum di 48 ore ai controllori di volo in sciopero. Chi non rientra perde il posto: il governo federale affronta il conflitto facendo valere il divieto di sciopero previsto per quei dipendenti.",
+        "text": "Il presidente impone un ultimatum di 48 ore ai controllori di volo in sciopero. Chi non rientra perde il posto: il governo federale affronta il conflitto facendo valere il divieto di sciopero previsto per quei dipendenti.\n\nLa vicenda riguarda uno specifico rapporto di pubblico impiego e le norme che lo disciplinano. Il suo significato più ampio sta nel modo in cui l’autorità pubblica affronta una rivendicazione collettiva sul lavoro.",
         "cards": [],
         "detail": {
           "paragraphs": [
@@ -1196,7 +1196,7 @@
         "year": "1984",
         "country": "Burkina Faso",
         "title": "Thomas Sankara: salute, dignità e autonomia al centro dello sviluppo",
-        "text": "Nel discorso all’ONU del 4 ottobre 1984, Thomas Sankara presenta la lotta contro fame, ignoranza e dipendenza economica come una responsabilità politica. Il progetto rivoluzionario insiste anche sulla partecipazione delle donne e sulla capacità di decidere le proprie priorità.",
+        "text": "Nel discorso all’ONU del 4 ottobre 1984, Thomas Sankara presenta la lotta contro fame, ignoranza e dipendenza economica come una responsabilità politica. Il progetto rivoluzionario insiste anche sulla partecipazione delle donne e sulla capacità di decidere le proprie priorità.\n\nLa dignità materiale riguarda la possibilità di nutrirsi, curarsi, apprendere e decidere. Letto in questa prospettiva, lo sviluppo non coincide soltanto con la crescita di un totale economico, ma con le capacità accessibili alle persone.",
         "cards": [],
         "detail": {
           "paragraphs": [
@@ -1224,7 +1224,7 @@
         "country": "Regno Unito",
         "kind": "Violenza e repressione sindacale",
         "title": "I minatori, Orgreave e la difesa delle comunità del carbone",
-        "text": "Lo sciopero contro le chiusure delle miniere mette al centro lavoro e futuro dei territori. A Orgreave, il 18 giugno 1984, l’operazione di polizia lascia feriti e porta a 95 arresti.",
+        "text": "Lo sciopero contro le chiusure delle miniere mette al centro lavoro e futuro dei territori. A Orgreave, il 18 giugno 1984, l’operazione di polizia lascia feriti e porta a 95 arresti.\n\nUna miniera è anche il centro di relazioni economiche e sociali che coinvolgono famiglie e servizi. La difesa del posto di lavoro si intreccia quindi con la domanda su quale futuro offrire a un territorio.",
         "cards": [],
         "detail": {
           "paragraphs": [
@@ -1247,7 +1247,7 @@
         "year": "Dal 1986",
         "country": "Vietnam",
         "title": "Đổi Mới e la riduzione della povertà",
-        "text": "Il rinnovamento avviato nel 1986 modifica produzione, commercio e investimenti. Un confronto documentato del 2022 misura la povertà dal 16,8% nel 2010 al 5% nel 2020, con la stessa soglia di 3,20 dollari al giorno a parità di potere d’acquisto 2011: una diminuzione di 11,8 punti percentuali.",
+        "text": "Il rinnovamento avviato nel 1986 modifica produzione, commercio e investimenti. Un confronto documentato del 2022 misura la povertà dal 16,8% nel 2010 al 5% nel 2020, con la stessa soglia di 3,20 dollari al giorno a parità di potere d’acquisto 2011: una diminuzione di 11,8 punti percentuali.\n\nLa parità di potere d’acquisto prova a confrontare ciò che una somma permette di comprare, tenendo conto delle differenze di prezzo. Usare la stessa soglia e la stessa base rende leggibile il cambiamento del tasso di povertà.",
         "dossier": "vietnam",
         "cards": [
           "vn-doimoi"
@@ -1257,7 +1257,7 @@
         "year": "1996–1998",
         "country": "Sudafrica e India",
         "title": "Diritti sociali e organizzazione dal basso oltre un’unica etichetta",
-        "text": "La Costituzione sudafricana del dopo-apartheid riconosce diritti a casa, salute, acqua e istruzione. Nel Kerala, Kudumbashree sostiene gruppi di vicinato femminili, iniziative economiche e partecipazione locale. I due casi mostrano il contributo di movimenti di liberazione, sindacati, sinistre e amministrazioni pubbliche anche in paesi non dichiaratamente socialisti.",
+        "text": "La Costituzione sudafricana del dopo-apartheid riconosce diritti a casa, salute, acqua e istruzione. Nel Kerala, Kudumbashree sostiene gruppi di vicinato femminili, iniziative economiche e partecipazione locale. I due casi mostrano il contributo di movimenti di liberazione, sindacati, sinistre e amministrazioni pubbliche anche in paesi non dichiaratamente socialisti.\n\nUn diritto riconosciuto e un’organizzazione locale rispondono a livelli differenti dello stesso problema: rendere accessibili risorse e possibilità di partecipazione. Il confronto invita a studiare come le istituzioni incontrano le iniziative delle persone.",
         "cards": [
           "za-diritti",
           "in-kerala"
@@ -1269,13 +1269,13 @@
     "id": "cooperazione",
     "period": "2003–2024",
     "title": "Conquiste da estendere, risultati da verificare",
-    "intro": "Le politiche sociali cambiano la vita, ma la loro continuità non è garantita. Crisi, austerità e riforme del lavoro riaprono il conflitto su salari, protezioni e possibilità di organizzarsi.",
+    "intro": "Le politiche sociali cambiano la vita, ma la loro continuità non è garantita. Crisi, austerità e riforme del lavoro riaprono il conflitto su salari, protezioni e possibilità di organizzarsi.\n\nOgni conquista apre una domanda sulla sua continuità: chi la finanzia, chi può utilizzarla e quali protezioni la rendono durevole? I casi di questo periodo collegano politiche sociali, risultati sanitari e conflitti sulle tutele del lavoro. Per valutarli servono sia dati confrontabili sia attenzione alle persone e alle istituzioni coinvolte.",
     "events": [
       {
         "year": "2003–2007",
         "country": "Brasile, Bolivia e Uruguay",
         "title": "Sicurezza economica, continuità scolastica e salute entrano nelle riforme",
-        "text": "Bolsa Família in Brasile, il Bono Juancito Pinto in Bolivia e il sistema sanitario integrato dell’Uruguay rendono visibili tre modi di impiegare risorse pubbliche per bisogni sociali. Sono esperienze di governi di sinistra con strumenti e contesti differenti, da seguire nei risultati e nelle fonti.",
+        "text": "Bolsa Família in Brasile, il Bono Juancito Pinto in Bolivia e il sistema sanitario integrato dell’Uruguay rendono visibili tre modi di impiegare risorse pubbliche per bisogni sociali. Sono esperienze di governi di sinistra con strumenti e contesti differenti, da seguire nei risultati e nelle fonti.\n\nUn trasferimento economico, un sostegno alla frequenza scolastica e un sistema sanitario agiscono su bisogni diversi. Per valutarli occorre osservare chi raggiungono, quali condizioni prevedono e come cambiano nel tempo.",
         "cards": [
           "br-bolsa",
           "bo-scuola",
@@ -1288,7 +1288,7 @@
         "country": "Grecia",
         "kind": "Riduzione delle tutele",
         "title": "L’austerità riduce salari minimi e forza della contrattazione",
-        "text": "Nella crisi del debito, gli interventi su salari e contratti spostano i rapporti di forza a sfavore del lavoro. La protezione collettiva diventa uno dei terreni centrali dei programmi di aggiustamento.",
+        "text": "Nella crisi del debito, gli interventi su salari e contratti spostano i rapporti di forza a sfavore del lavoro. La protezione collettiva diventa uno dei terreni centrali dei programmi di aggiustamento.\n\nIl salario minimo stabilisce una soglia; la contrattazione regola condizioni che possono riguardare molti aspetti del lavoro. Intervenire su entrambi modifica la protezione del reddito e la possibilità di negoziarlo collettivamente.",
         "cards": [],
         "detail": {
           "paragraphs": [
@@ -1313,7 +1313,7 @@
         "country": "Sudafrica",
         "kind": "Strage di lavoratori",
         "title": "Marikana: la polizia uccide 34 persone durante il conflitto minerario",
-        "text": "Il 16 agosto, nel conflitto alle miniere di platino, la polizia spara e uccide 34 persone. La rivendicazione salariale incontra una violenza che segna il Sudafrica dopo l’apartheid.",
+        "text": "Il 16 agosto, nel conflitto alle miniere di platino, la polizia spara e uccide 34 persone. La rivendicazione salariale incontra una violenza che segna il Sudafrica dopo l’apartheid.\n\nIl caso richiede di ascoltare le richieste dei lavoratori e di ricostruire l’azione delle istituzioni. Le indagini permettono di distinguere fatti documentati, responsabilità accertate e questioni rimaste aperte.",
         "cards": [],
         "detail": {
           "paragraphs": [
@@ -1334,7 +1334,7 @@
         "country": "Italia",
         "kind": "Riduzione delle tutele",
         "title": "Il Jobs Act riduce la tutela contro il licenziamento illegittimo",
-        "text": "Il governo Renzi introduce il contratto a tutele crescenti: per i rapporti soggetti al decreto 23/2015, l’indennizzo assume un ruolo prevalente e la reintegrazione viene circoscritta. Cambia la protezione effettiva del posto di lavoro.",
+        "text": "Il governo Renzi introduce il contratto a tutele crescenti: per i rapporti soggetti al decreto 23/2015, l’indennizzo assume un ruolo prevalente e la reintegrazione viene circoscritta. Cambia la protezione effettiva del posto di lavoro.\n\nLa reintegrazione comporta il ritorno al lavoro; l’indennizzo è una compensazione economica. Distinguere queste tutele aiuta a comprendere perché una modifica delle regole possa cambiare la sicurezza percepita da chi dipende dal proprio salario.",
         "cards": [],
         "detail": {
           "paragraphs": [
@@ -1357,7 +1357,7 @@
         "year": "2015",
         "country": "Cuba",
         "title": "Un primato mondiale nella prevenzione materno-infantile",
-        "text": "Cuba è il primo paese a ottenere dall’OMS la validazione dell’eliminazione della trasmissione materno-infantile di HIV e sifilide come problema di salute pubblica. Il risultato riguarda una rete di prevenzione e assistenza: un traguardo specifico, verificato dall’organizzazione internazionale.",
+        "text": "Cuba è il primo paese a ottenere dall’OMS la validazione dell’eliminazione della trasmissione materno-infantile di HIV e sifilide come problema di salute pubblica. Il risultato riguarda una rete di prevenzione e assistenza: un traguardo specifico, verificato dall’organizzazione internazionale.\n\nLa validazione riguarda un obiettivo sanitario definito e verificato, non l’assenza assoluta di ogni singolo caso. Per apprezzarne il significato bisogna leggere i criteri della fonte e l’organizzazione dei servizi che sostengono il risultato.",
         "dossier": "cuba",
         "cards": [
           "cu-salute"

@@ -22,7 +22,7 @@ export default function HistoricalStatistics(){
   const [year,setYear]=useState(2024);
   const health=DATA.health.series;
   return <section className="history-statistics" aria-labelledby="history-statistics-title">
-    <header><p className="eyebrow"><T content>RISULTATI DA MISURARE</T></p><h3 id="history-statistics-title"><T>Le trasformazioni, in numeri.</T></h3><p><T content>Crescita, povertà e salute raccontano aspetti diversi della vita di un paese. Qui puoi seguirne l’andamento e consultare i dati originali.</T></p></header>
+    <header><p className="eyebrow"><T content>RISULTATI DA MISURARE</T></p><h3 id="history-statistics-title"><T>Le trasformazioni, in numeri.</T></h3><p><T content>Un’economia può produrre di più senza che ogni famiglia migliori nella stessa misura; una maggiore disponibilità di risorse può invece sostenere scuole, ospedali e servizi più accessibili. Per capire che cosa cambia servono quindi domande diverse. Questi grafici osservano produzione, povertà e salute separatamente: leggi prima il risultato principale, poi la spiegazione sotto il grafico e, se vuoi verificarlo, apri i valori e la fonte originale.</T></p></header>
     <div className="history-chart-tabs" role="group" aria-label="Scegli un indicatore">
       {([['gdp','Cina · crescita reale'],['poverty','Vietnam · povertà'],['health','Salute · confronto']] as const).map(([id,label])=><button key={id} type="button" aria-pressed={selected===id} onClick={()=>setSelected(id)}><T>{label}</T></button>)}
     </div>

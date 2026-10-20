@@ -1,5 +1,7 @@
 # Licenze e attribuzioni
 
+Il progetto comprende materiali di natura diversa: il programma che fa funzionare il sito, le sue dipendenze, le descrizioni redazionali e i contenuti collegati agli editori e agli archivi. Non basta applicare una stessa etichetta a tutto. Questa guida spiega come distinguere i diritti, conservare attribuzioni e documentare le condizioni che permettono il riuso. Per chi contribuisce, la domanda iniziale è semplice: posso offrire questo materiale alle condizioni dichiarate e ne ho indicato correttamente la provenienza?
+
 ## Codice, identità e contenuti
 
 La scelta è **AGPL-3.0-or-later**, senza modificare il testo standard di `LICENSE`. È una licenza open source con copyleft anche per le versioni modificate utilizzate attraverso la rete. Consente anche usi commerciali: il progetto non impone divieti d'uso incompatibili con questa libertà.

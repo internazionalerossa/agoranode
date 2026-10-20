@@ -8,7 +8,7 @@ export default function AchievementReadings(){
  return <section className="achievement-reading-section" aria-labelledby="achievement-readings-title">
   <p className="eyebrow"><T content>STORIA, DATI E LETTURE</T></p>
   <h3 id="achievement-readings-title"><T>Le trasformazioni nella vita quotidiana</T></h3>
-  <p><T content>Casa, salario, servizi, istruzione e tempo libero sono modi concreti di leggere il cambiamento sociale. Questi percorsi uniscono testi di tradizioni e paesi differenti a rapporti e serie statistiche. Apri un tema per trovare le letture e passare direttamente ai dati pertinenti.</T></p>
+  <p><T content>Puoi leggere il cambiamento sociale partendo da ciò che conosci: trovare una casa, ricevere un salario, studiare, curarti o avere tempo per le persone che ami. Ogni tema collega libri, domande storiche e dati che osservano un aspetto della vita quotidiana. Aprilo per capire perché leggere un testo e quale misura può aiutare il confronto; non occorre conoscere già un autore o scegliere subito un indicatore statistico.</T></p>
   <div className="achievement-reading-topics">{PATHS.map(path=><details key={path.id}>
    <summary><T>{path.title}</T></summary><p><T content>{path.intro}</T></p>
    <ul>{path.books.map(reading=>{

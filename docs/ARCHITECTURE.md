@@ -1,5 +1,9 @@
 # Architettura
 
+Questa guida descrive il percorso di una richiesta, dalla pagina aperta nel browser ai servizi che restituiscono contenuti e conservano dati. Serve a chi deve capire dove intervenire, quali informazioni possono essere pubbliche e quali devono rimanere separate per account. Per interfaccia si intende ciò che il visitatore vede e usa; per API gli indirizzi attraverso cui l’interfaccia chiede operazioni al server. Il database è invece l’archivio persistente: non deve dipendere dalla memoria temporanea del processo o dalla cache di un singolo dispositivo.
+
+Leggi prima i componenti e i confini dei dati, poi la sezione relativa alla funzione che vuoi modificare. Le descrizioni del codice non attestano che gli stessi flussi siano già attivi sull’hosting pubblico: lo stato operativo è registrato in QUALITY.md.
+
 ## Componenti
 
 L’applicazione ha un’interfaccia React compilata con Vite e un server Node.js. Il server espone API same-origin e distribuisce i file compilati. PostgreSQL conserva account, sessioni, raccolte private e dati del forum. La lettura dei contenuti esterni avviene attraverso endpoint con destinazioni e dimensioni limitate.

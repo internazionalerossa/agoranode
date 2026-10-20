@@ -1,5 +1,9 @@
 # Biblioteca e lettura online
 
+La Biblioteca è pensata per accompagnare una curiosità iniziale verso una comprensione più solida. Libri, percorsi, storia e statistiche rimangono collegati: una domanda sul lavoro può portare a un testo sul salario, a una conquista contrattuale e infine a un confronto fra dati. Non occorre usare tutti gli strumenti né seguire un programma obbligatorio.
+
+Per iniziare, scegli un percorso introduttivo o cerca un’opera. Un’edizione è una versione concreta del testo, in una lingua e presso un archivio determinati: due edizioni dello stesso libro possono avere impaginazione, capitoli e traduzione differenti. Conquiste offre invece un racconto da leggere in sequenza, con approfondimenti espandibili. L’archivio comparativo si usa quando vuoi trasformare una domanda in una ricerca più precisa, scegliendo misura, paesi e periodo.
+
 Il catalogo contiene 176 opere, saggi e raccolte, 724 edizioni linguistiche e 37 lingue. La disponibilità è quella degli archivi esterni; la completezza delle traduzioni può variare. Le tre schede tematiche storiche restano nel catalogo e nei salvataggi, ma non sono conteggiate come libri gratuiti leggibili nel sito.
 
 ## Provenienza
@@ -30,7 +34,7 @@ I collegamenti sono sottoposti a verifiche HTTP e di parsing; una risposta riusc
 
 `/read?book=…&edition=…` carica esclusivamente un’edizione del catalogo tramite `/api/library/read`. Il runtime indipendente richiede un account personale con email verificata prima di leggere il testo. Le pagine remote sono limitate a 3,5 MB e non eseguono JavaScript; i redirect restano nel dominio configurato. Il testo è restituito in blocchi di stringhe, resi da React senza HTML non sanificato. Gli indici permettono soltanto capitoli HTML nel percorso dell’opera. Un libro pubblicato come pagina unica viene suddiviso in sezioni e pagine di lettura, conservando l’ordine del testo. La cache contiene solo documenti pubblici già scaricati, con limite di circa 8 MB e nessuna promessa I/O condivisa tra invocazioni.
 
-`/api/reading-progress` richiede sempre un account e usa `private, no-store`. La tabella `reading_progress`, aggiunta dalla migrazione `0002_stormy_elektra`, ha chiave composta da proprietario, libro ed edizione. Conserva capitolo, pagina di lettura, posizione nello scorrimento, impronta del testo e data dell’aggiornamento. Gli aggiornamenti sono serializzati nel client e quelli temporali più vecchi non sovrascrivono una posizione più recente. Un errore di salvataggio è visibile e permette di riprovare. Il lettore non usa localStorage per simulare la persistenza del segnalibro. Un nuovo libro letto compare nella raccolta privata, senza riattivare un libro precedentemente rimosso.
+`/api/reading-progress` richiede sempre un account e usa `private, no-store`. La tabella `reading_progress`, definita nello schema del runtime indipendente in `server/migrations/001-schema.sql`, ha chiave composta da proprietario, libro ed edizione. Conserva capitolo, pagina di lettura, posizione nello scorrimento, impronta del testo e data dell’aggiornamento. Gli aggiornamenti sono serializzati nel client e quelli temporali più vecchi non sovrascrivono una posizione più recente. Un errore di salvataggio è visibile e permette di riprovare. Il lettore non usa localStorage per simulare la persistenza del segnalibro. Un nuovo libro letto compare nella raccolta privata, senza riattivare un libro precedentemente rimosso.
 
 Le prove automatiche verificano autenticazione, isolamento di account ed edizioni, ripristino da nuove richieste, richieste non valide o da altre origini, ordinamento degli aggiornamenti, testo inerte, capitoli confinati all’opera e continuità dei salvataggi esistenti. Non sostituiscono una verifica visiva in un browser autenticato.
 
@@ -61,7 +65,7 @@ Gli stipendi in PPP non sono il PIL per abitante, il reddito netto disponibile o
 
 Il totale dei diplomati STEM somma i campi ISCED-F 05, 06 e 07 soltanto con tutte le componenti per lo stesso paese e anno. I diplomati annuali sono distinti dagli specialisti occupati. L’aggregato Eurostat degli scienziati e ingegneri include anche professioni sanitarie e ICT; il personale accademico non identifica soltanto professori ordinari. La lettura è una percentuale delle persone di almeno 16 anni in famiglie private, non un conteggio mondiale di lettori; la rilevazione non è annuale.
 
-Otto percorsi nelle Conquiste collegano 32 suggerimenti di lettura a casa, infrastrutture, salari, energia, formazione, cultura, cura e cooperazione. Sei nuove opere sono integrate nello stesso catalogo degli altri autori. I rapporti e le tavole degli enti statistici sono identificati come risorse documentarie e non gonfiano il numero dei libri.
+Otto percorsi nelle Conquiste collegano 32 suggerimenti di lettura a casa, infrastrutture, salari, energia, formazione, cultura, cura e cooperazione. Le opere appartengono al catalogo comune: uno stesso testo può aiutare a esplorare più domande, senza creare raccolte separate per ogni percorso. I rapporti e le tavole degli enti statistici sono identificati come risorse documentarie e non gonfiano il numero dei libri.
 
 Aggiornamento riproducibile, in sequenza dalla radice del progetto:
 

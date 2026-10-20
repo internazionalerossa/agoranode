@@ -1,5 +1,9 @@
 # Gestione e pubblicazione
 
+Pubblicare il servizio significa collegare il codice a un server raggiungibile, a un database duraturo e a un sistema che invii le email necessarie all’account. Caricare i file su GitHub rende disponibili i sorgenti, ma non attiva da solo questi componenti. Questa guida accompagna il passaggio dalla compilazione alla verifica del servizio reale e distingue ciò che può essere preparato nel repository da ciò che deve essere configurato presso i fornitori.
+
+Le variabili di ambiente sono impostazioni fornite al server senza scriverle nel codice pubblico. Alcune sono credenziali e devono rimanere segrete; altre descrivono l’indirizzo e il gestore del servizio. Una migrazione prepara o aggiorna la struttura del database: va eseguita controllando versione, permessi e possibilità di ripristino.
+
 ## Runtime indipendente
 
 Il target Node contiene interfaccia React, API, autenticazione Better Auth e database PostgreSQL. `npm run build` produce `build-node/`; `Dockerfile` esegue il processo senza privilegi di root. La compilazione non necessita di credenziali. `node build-node/server.mjs` avvia il servizio sulla porta `PORT` (8000 per impostazione predefinita). Preparare un’immagine non trasferisce dominio, utenti o dati da un altro servizio.

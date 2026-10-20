@@ -1,5 +1,9 @@
 # Pubblicazione, diritti e dati personali
 
+Questo documento aiuta a individuare le responsabilità operative prima dell’apertura del servizio. Una licenza open source regola il riuso del codice; non sostituisce le condizioni per trattare dati personali, pubblicare contenuti di terzi o gestire segnalazioni. Per ogni funzione occorre capire quali dati entrano nel sistema, perché servono, chi può leggerli e come possono essere cancellati o rettificati.
+
+Le indicazioni sono una traccia di lavoro, non una certificazione di conformità in ogni giurisdizione. I testi pubblici devono descrivere il servizio effettivamente offerto, i fornitori realmente utilizzati e i recapiti del titolare. Le questioni che dipendono dalla forma concreta dell’attività richiedono una valutazione specifica prima di essere presentate come risolte.
+
 Verifica iniziale: 19 ottobre 2026. Questo documento identifica condizioni e controlli del servizio; non è una certificazione di conformità. La legge applicabile dipende dal gestore, dalle attività effettive, dalle persone coinvolte e dai paesi interessati. Rendere un sito accessibile da un paese non permette di garantire automaticamente il rispetto di ogni norma di quel paese.
 
 ## Un progetto personale dall’Italia

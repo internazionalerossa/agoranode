@@ -5,7 +5,7 @@ title: '[Idea] '
 body:
 - type: markdown
   attributes:
-    value: 'Write in any language. No coding required. / Scrivi nella tua lingua: non serve programmare.
+    value: 'Write in any language. You do not need technical terms: describe the page, what you want to understand or change, and a concrete example. / Scrivi nella tua lingua: non servono termini tecnici. Indica la pagina, che cosa vorresti capire o cambiare e un esempio concreto.
 
 
       Italiano · English · Español · Français · Deutsch · Português · all other languages welcome.
@@ -22,8 +22,7 @@ body:
   id: proposal
   attributes:
     label: Your proposal / La tua proposta
-    description: What would you change and why? Describe it in your own language. Che cosa cambieresti
-      e perché?
+    description: What would you change, for whom, and why? / Spiega che cosa cambieresti e quale difficoltà risolverebbe per chi usa il sito. Puoi proporre una spiegazione più chiara, un comportamento diverso o più alternative, senza preparare codice.
   validations:
     required: true
 - type: textarea

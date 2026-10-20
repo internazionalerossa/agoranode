@@ -2,7 +2,7 @@
   {
     "id": "casa",
     "title": "Casa, terra e città",
-    "intro": "Abitare significa poter contare su una casa accessibile, salubre e vicina ai servizi. Queste letture collegano rendita, urbanizzazione e proprietà alle politiche abitative; i dati distinguono prezzi degli immobili, pressione sul reddito e possibilità di riscaldare la casa.",
+    "intro": "Abitare significa poter contare su una casa accessibile, salubre e vicina ai servizi. Queste letture collegano rendita, urbanizzazione e proprietà alle politiche abitative; i dati distinguono prezzi degli immobili, pressione sul reddito e possibilità di riscaldare la casa. Per iniziare, parti dalla differenza fra il prezzo di una casa e il peso delle spese sul reddito di chi la abita. Le letture discutono proprietà e organizzazione urbana; i dati aiutano a osservare condizioni specifiche, senza sostituire la domanda su chi possa accedere a un alloggio adeguato.",
     "indicator": "ESTAT.HOUSING.OVERBURDEN",
     "books": [
       {
@@ -32,7 +32,7 @@
   {
     "id": "reti",
     "title": "Infrastrutture, trasporti e industria",
-    "intro": "Ferrovie, reti idriche e comunicazioni rendono possibili scambi, lavoro e accesso ai servizi. La loro estensione va letta insieme all’uso, alla qualità e alla distribuzione territoriale: più chilometri o più passeggeri non descrivono da soli l’utilità sociale di una rete.",
+    "intro": "Ferrovie, reti idriche e comunicazioni rendono possibili scambi, lavoro e accesso ai servizi. La loro estensione va letta insieme all’uso, alla qualità e alla distribuzione territoriale: più chilometri o più passeggeri non descrivono da soli l’utilità sociale di una rete. Segui il passaggio fra un investimento e il servizio che rende possibile. Una ferrovia, per esempio, può essere descritta dalla lunghezza della rete o dal trasporto effettuato: le due misure non rispondono alla stessa domanda. I testi aiutano a interrogare obiettivi e organizzazione degli investimenti.",
     "indicator": "IS.RRS.TOTL.KM",
     "books": [
       {
@@ -62,7 +62,7 @@
   {
     "id": "salari",
     "title": "Salari, prezzi e tempo di lavoro",
-    "intro": "Il potere d’acquisto dipende da quanto si guadagna, da quante ore si lavora e da ciò che occorre pagare. Media e mediana, retribuzione lorda e reddito disponibile rispondono a domande diverse; la produttività misura il valore prodotto, non la parte che arriva in busta paga.",
+    "intro": "Il potere d’acquisto dipende da quanto si guadagna, da quante ore si lavora e da ciò che occorre pagare. Media e mediana, retribuzione lorda e reddito disponibile rispondono a domande diverse; la produttività misura il valore prodotto, non la parte che arriva in busta paga. Puoi partire da una domanda quotidiana: che cosa rimane del compenso dopo le spese necessarie e quante ore occorrono per ottenerlo? I libri chiariscono i rapporti fra lavoro e capitale; le misure statistiche permettono di distinguere retribuzione, produttività e differenze dei prezzi fra paesi.",
     "indicator": "ILO.WAGE.HOUR.PPP",
     "books": [
       {
@@ -96,7 +96,7 @@
   {
     "id": "energia",
     "title": "Energia, risorse e beni comuni",
-    "intro": "L’elettrificazione e l’accesso all’energia incidono sulla vita domestica e sulla capacità produttiva. Qui si incontrano accessibilità delle bollette, reti, risorse naturali e gestione collettiva: accesso, consumo e prezzo sono misure complementari, non intercambiabili.",
+    "intro": "L’elettrificazione e l’accesso all’energia incidono sulla vita domestica e sulla capacità produttiva. Qui si incontrano accessibilità delle bollette, reti, risorse naturali e gestione collettiva: accesso, consumo e prezzo sono misure complementari, non intercambiabili. Un collegamento alla rete è un primo requisito, ma non racconta da solo la possibilità di pagare consumi adeguati. Leggi insieme l’organizzazione della produzione e le condizioni dell’accesso domestico. Le fonti indicano quali consumi, fasce tariffarie e imposte entrano nei confronti dei prezzi.",
     "indicator": "ESTAT.ELECTRIC.PPS",
     "books": [
       {
@@ -130,7 +130,7 @@
   {
     "id": "formazione",
     "title": "Scuola, università e capacità scientifica",
-    "intro": "L’istruzione apre possibilità individuali e costruisce capacità collettive. Leggere insieme accesso agli studi, personale docente, diplomi e ricerca aiuta a capire come si formano competenze; i diplomati di un anno non vanno confusi con i professionisti già occupati.",
+    "intro": "L’istruzione apre possibilità individuali e costruisce capacità collettive. Leggere insieme accesso agli studi, personale docente, diplomi e ricerca aiuta a capire come si formano competenze; i diplomati di un anno non vanno confusi con i professionisti già occupati. STEM raccoglie scienze, tecnologia, ingegneria e matematica, secondo le classificazioni della fonte. I dati aiutano a distinguere chi conclude un percorso di studio da chi lavora già in una professione scientifica; le letture interrogano il rapporto fra apprendimento, produzione e autonomia delle persone.",
     "indicator": "ESTAT.STEM.GRAD.RATE",
     "books": [
       {
@@ -164,7 +164,7 @@
   {
     "id": "cultura",
     "title": "Libri, arte e accesso alla cultura",
-    "intro": "Saper leggere, avere libri disponibili e trovare tempo per leggerli sono condizioni differenti. Le indagini sulla lettura descrivono pratiche culturali concrete; questi testi ragionano su istruzione, arte, vita quotidiana e possibilità di partecipare alla produzione del sapere.",
+    "intro": "Saper leggere, avere libri disponibili e trovare tempo per leggerli sono condizioni differenti. Le indagini sulla lettura descrivono pratiche culturali concrete; questi testi ragionano su istruzione, arte, vita quotidiana e possibilità di partecipare alla produzione del sapere. Una percentuale di lettori descrive un comportamento rilevato da un’indagine, mentre l’alfabetizzazione riguarda capacità di base. Mettere in relazione le due domande aiuta a vedere anche l’importanza di biblioteche, disponibilità delle opere e tempo di vita. I testi aprono il confronto sul ruolo sociale della cultura.",
     "indicator": "ESTAT.BOOK.READERS",
     "books": [
       {
@@ -194,7 +194,7 @@
   {
     "id": "cura",
     "title": "Cura, salute ed emancipazione",
-    "intro": "La salute e la libertà personale dipendono anche da servizi, lavoro di cura e tempo disponibile. Le letture affrontano maternità, organizzazione familiare ed emancipazione, collegando i diritti alle condizioni che consentono di esercitarli.",
+    "intro": "La salute e la libertà personale dipendono anche da servizi, lavoro di cura e tempo disponibile. Le letture affrontano maternità, organizzazione familiare ed emancipazione, collegando i diritti alle condizioni che consentono di esercitarli. Pensa a chi sostiene un bisogno quando una persona si ammala, cresce o perde autonomia. Una risposta può dipendere dalla famiglia, dal mercato o da un servizio comune, con effetti diversi su tempo e indipendenza. Le letture rendono visibile questo lavoro e le relazioni che lo organizzano.",
     "indicator": "SH.MED.PHYS.ZS",
     "books": [
       {
@@ -224,7 +224,7 @@
   {
     "id": "cooperazione",
     "title": "Cooperazione, agricoltura e organizzazione collettiva",
-    "intro": "La cooperazione assume forme diverse secondo territorio, rapporti di proprietà e storia del lavoro. Mettere in dialogo esperienze europee, latinoamericane e asiatiche aiuta a leggere le istituzioni concrete, senza ridurre paesi differenti a un modello unico.",
+    "intro": "La cooperazione assume forme diverse secondo territorio, rapporti di proprietà e storia del lavoro. Mettere in dialogo esperienze europee, latinoamericane e asiatiche aiuta a leggere le istituzioni concrete, senza ridurre paesi differenti a un modello unico. Per leggere un’esperienza cooperativa chiedi chi decide, chi contribuisce e come vengono distribuiti risultati e responsabilità. Una forma giuridica, da sola, non risponde a tutte queste domande. I testi permettono di confrontare progetti differenti e le condizioni che li rendono praticabili.",
     "indicator": "NV.AGR.EMPL.KD",
     "books": [
       {

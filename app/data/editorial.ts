@@ -4,7 +4,7 @@ export const DOSSIERS = [
     number: "01",
     title: "Il lavoro al centro",
     description:
-      "Salari, scioperi, sindacati. Le condizioni materiali dietro le notizie.",
+      "Quanto si guadagna, quanto si lavora e quale forza si ha nel negoziare: notizie su salari, scioperi e sindacati per leggere i rapporti fra imprese e persone che lavorano.",
     short: "Lavoro e sindacati",
   },
   {
@@ -12,14 +12,14 @@ export const DOSSIERS = [
     number: "02",
     title: "Un mondo in conflitto",
     description:
-      "Guerre, colonialismo e relazioni internazionali: leggere oltre i confini.",
+      "Guerre, dominio coloniale e rapporti fra Stati incidono sulla vita delle popolazioni. Questo percorso collega gli avvenimenti alle risorse, agli interessi e alle richieste di indipendenza che li attraversano.",
     short: "Guerra e imperialismo",
   },
   {
     id: "economia",
     number: "03",
     title: "Seguire il capitale",
-    description: "Produzione, finanza e disuguaglianze. Chi decide e chi paga.",
+    description: "Da dove viene la ricchezza e come viene distribuita? Produzione, finanza e proprietà aiutano a capire chi prende le decisioni economiche e come costi e benefici ricadono sulle persone.",
     short: "Economia politica",
   },
   {
@@ -27,7 +27,7 @@ export const DOSSIERS = [
     number: "04",
     title: "Un pianeta comune",
     description:
-      "Crisi ecologica, risorse e giustizia sociale nella transizione.",
+      "La trasformazione ecologica riguarda energia, trasporti, territorio e lavoro. Leggere insieme ambiente e giustizia sociale permette di chiedere chi sostiene i costi del cambiamento e chi ne beneficia.",
     short: "Ecologia",
   },
   {
@@ -35,14 +35,14 @@ export const DOSSIERS = [
     number: "05",
     title: "La vita che sostiene la vita",
     description:
-      "Cura, genere e riproduzione sociale, dentro e fuori il lavoro salariato.",
+      "La cura delle persone, la casa e l’educazione rendono possibile la vita quotidiana, anche quando non ricevono un salario. I femminismi interrogano la distribuzione di questo lavoro e le condizioni dell’autonomia personale.",
     short: "Femminismi",
   },
   {
     id: "movimenti",
     number: "06",
     title: "Organizzarsi, cambiare",
-    description: "Piazze, movimenti e forme di azione collettiva nel mondo.",
+    description: "Come si passa da un bisogno vissuto individualmente a una richiesta condivisa? Segui assemblee, mobilitazioni e organizzazioni che sperimentano forme di azione collettiva in contesti differenti.",
     short: "Movimenti",
   },
 ];
@@ -140,21 +140,21 @@ export const GLOSSARY = [
   {
     term: "Classe",
     definition:
-      "Nell’analisi marxista, una posizione nei rapporti di produzione, legata al controllo dei mezzi di produzione e al modo di ottenere il proprio reddito.",
+      "Nell’analisi marxista, una classe riunisce persone che occupano una posizione simile nell’organizzazione della produzione. La distinzione riguarda soprattutto chi controlla imprese, terra e strumenti produttivi e chi deve vendere il proprio lavoro per vivere. Non coincide semplicemente con una fascia di reddito: aiuta a comprendere interessi, dipendenze e possibilità di azione collettiva.",
   },
   {
     term: "Plusvalore",
     definition:
-      "In Marx, la differenza tra il valore prodotto dal lavoro e il valore della forza-lavoro: un concetto centrale della sua analisi dello sfruttamento.",
+      "Per Marx, il lavoro può creare un valore superiore a quello necessario a riprodurre la forza-lavoro, cioè a sostenere la vita e la capacità lavorativa di chi lo svolge. La differenza è il plusvalore, appropriato da chi controlla il processo produttivo. È un concetto della teoria marxiana del valore: non equivale automaticamente all’utile contabile che compare nel bilancio di una singola impresa.",
   },
   {
     term: "Egemonia",
     definition:
-      "Nella tradizione gramsciana, la capacità di una classe di esercitare direzione politica e culturale, costruendo consenso oltre al dominio coercitivo.",
+      "Nella riflessione di Gramsci, il potere non si mantiene soltanto attraverso leggi e forza. Una classe può dirigere la società anche facendo apparire condivisibili le proprie idee, priorità e immagini del mondo. Egemonia indica questa capacità di costruire consenso e alleanze attraverso politica, cultura e vita sociale; studiarla significa chiedere come un interesse particolare diventa un modo comune di interpretare la realtà.",
   },
   {
     term: "Riproduzione sociale",
     definition:
-      "Le attività e le relazioni che sostengono la vita e rinnovano la forza-lavoro: dalla cura all’educazione, nel lavoro retribuito e in quello non retribuito.",
+      "È l’insieme delle attività che permettono alle persone di vivere e alla società di continuare nel tempo: nutrire, curare, educare, mantenere una casa e sostenere chi non è autonomo. Una parte avviene nei servizi retribuiti, un’altra nelle famiglie e nelle reti informali. Il concetto rende visibile un lavoro spesso considerato naturale o privato, pur essendo indispensabile anche all’economia.",
   },
 ];

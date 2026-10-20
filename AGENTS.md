@@ -24,6 +24,15 @@ Leggere `README.md`, `docs/ARCHITECTURE.md`, `CONTRIBUTING.md` e il codice perti
 - Mantenere criteri uniformi per opere, autori, lingue, paesi e periodi. Segnalare i limiti di copertura; non presentare il catalogo come completo.
 - Usare italiano naturale e termini adatti al pubblico: “lettura online” per la funzione, “lettore” per una persona o, nei dettagli tecnici, per il componente software.
 
+## Chiarezza delle spiegazioni
+
+- Scrivere anche per chi non conosce storia delle sinistre, lessico politico o statistica. Spiegare il problema concreto prima di introdurre una categoria teorica.
+- Aprire con un orientamento breve; sviluppare contesto, meccanismo ed esempio nei paragrafi successivi. Definire sigle e termini al primo uso.
+- Ampliare le spiegazioni quando aggiungono comprensione, senza sostituire la precisione con aggettivi o ripetere lo stesso avviso in ogni scheda.
+- Conservare concisi pulsanti, etichette e titoli; usare corpo del testo e approfondimenti per la lettura distesa. Separare paragrafi con funzioni diverse.
+- Distinguere fonti originali, interpretazioni redazionali e istruzioni del prodotto. Non riscrivere citazioni o articoli di terzi come se fossero testi del progetto.
+- Nelle statistiche spiegare unità, popolazione osservata e significato del confronto. Conservare definizioni originali, anni e valori anche quando si aggiunge una spiegazione accessibile.
+
 ## Invarianti del progetto
 
 - Conservare attribuzioni, URL originali e trasparenza degli errori delle fonti.

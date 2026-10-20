@@ -1,8 +1,10 @@
 # Polis-Rossa
 
-**Notizie, conoscenza e strumenti comuni.** Polis-Rossa raccoglie fonti socialiste, comuniste, sindacali e anticoloniali, collega le notizie agli editori originali e mette a disposizione una biblioteca multilingue e approfondimenti storici documentati.
+**Notizie, conoscenza e strumenti comuni.** Polis-Rossa è un progetto editoriale e software che mette in relazione l’informazione quotidiana con gli strumenti necessari a comprenderla. Raccoglie fonti socialiste, comuniste, sindacali e anticoloniali da paesi diversi; accanto alle notizie offre libri gratuiti, percorsi introduttivi, ricostruzioni storiche e dati internazionali consultabili. Ogni articolo rimanda alla pubblicazione originale: l’obiettivo è facilitare la scoperta delle fonti e sostenere la lettura del loro lavoro.
 
-Il progetto ha un orientamento dichiarato e una vocazione internazionale. La scelta delle fonti è discutibile e migliorabile; un algoritmo non certifica la qualità di una notizia. Le traduzioni automatiche aiutano la consultazione e possono contenere errori. Aprire la fonte originale resta il modo per leggere il testo completo, verificarne il contesto e sostenere chi lo pubblica.
+Il progetto si rivolge anche a chi non conosce il lessico delle sinistre. Un termine come salario, proprietà pubblica o cooperazione apre domande concrete: come si guadagna da vivere, chi decide gli investimenti, come si organizzano servizi e risorse condivise? La biblioteca e il racconto storico aiutano a passare dalla singola notizia al suo contesto, con spiegazioni progressive e documenti da verificare. Non occorre aderire a una posizione politica per consultare, interrogare o discutere i contenuti.
+
+L’orientamento editoriale è dichiarato e la prospettiva è internazionale. Fonti e interpretazioni possono essere discusse e migliorate: una classificazione automatica aiuta a organizzare la raccolta, ma non certifica che ogni notizia sia corretta. Le traduzioni rendono accessibili testi di altre lingue, pur potendo perdere sfumature o commettere errori. Per questo la fonte originale rimane sempre il riferimento per leggere il testo completo, verificare il contesto e riconoscere il lavoro di chi lo pubblica.
 
 [English](README.en.md) · [Contribuire / Contribute](CONTRIBUTING.md) · [Partecipazione](docs/COMMUNITY.md) · [Documentazione tecnica](docs/ARCHITECTURE.md)
 
@@ -10,11 +12,19 @@ Il progetto ha un orientamento dichiarato e una vocazione internazionale. La sce
 
 ## Stato del progetto
 
-Questa repository contiene il runtime indipendente: React e TypeScript per l’interfaccia, Node.js per le API, PostgreSQL per i dati persistenti e Better Auth per gli account.
+Questa repository contiene il codice dell’applicazione indipendente, compresi interfaccia, server, configurazione e struttura del database. React e TypeScript costruiscono le pagine che il visitatore usa; Node.js esegue sul server le operazioni necessarie a raccogliere i contenuti e gestire le richieste. PostgreSQL è l’archivio remoto dei dati che devono durare, come account, salvataggi, discussioni e voti. Better Auth gestisce accesso, sessioni e recupero dell’account.
+
+Questa distinzione è importante: una copia temporanea nel browser rende la lettura più veloce, ma può scomparire cancellando i dati locali. Un salvataggio associato all’account viene invece conservato nel database del servizio e può essere ritrovato da un altro dispositivo, quando il servizio indipendente è configurato e attivo.
 
 Il primo deployment indipendente è in preparazione. Il suo indirizzo sarà inserito qui dopo la verifica. Iscrizioni e forum sono disabilitati per impostazione predefinita: l’apertura richiede configurazione dell’hosting, invio email, verifiche dei dati e completamento degli adempimenti operativi. La presenza del codice non significa che ogni funzione sia già attiva su un servizio pubblico.
 
 Il nome mantiene “Polis” invariato e traduce il colore nella lingua di lettura: Polis-Rossa, Polis-Red, Polis-Rouge. Le traduzioni del marchio sono incluse nel codice e non richiedono servizi esterni.
+
+## Come orientarsi
+
+Puoi iniziare dalle notizie e aprire subito una fonte, oppure seguire una domanda più ampia nella Biblioteca. La rassegna alterna paesi e testate per non lasciare tutto lo spazio all’editore che pubblica di più; l’ordine cronologico rimane una scelta separata. L’Osservatorio restringe invece la lettura alle ultime sei ore. Nella Biblioteca i percorsi aiutano a scegliere un primo testo, mentre Conquiste mette in relazione eventi, diritti e risultati misurabili. L’archivio statistico si usa quando vuoi approfondire un confronto specifico, senza dover attraversare i filtri per leggere il racconto.
+
+Partecipa distingue il confronto libero dalle decisioni sul funzionamento del sito. Il forum permette conversazioni articolate; le issue descrivono problemi o miglioramenti; le votazioni scelgono fra proposte esplicite. Queste funzioni richiedono il servizio indipendente attivo e l’ammissione prevista dalle regole.
 
 ## Cosa offre
 
@@ -33,9 +43,11 @@ I numeri descrivono il catalogo incluso in questa versione, non la disponibilit�
 
 ## Partecipare senza programmare
 
-Apri [una proposta](https://github.com/internazionalerossa/polisrossa/issues/new/choose), scegli il modulo e spiega quale pagina o funzione vuoi migliorare, con quali modifiche e per quale motivo. Per dati storici, libri e fonti aggiungi riferimenti verificabili. Puoi scrivere nella tua lingua. Non pubblicare informazioni personali, credenziali o documenti riservati.
+Apri [una proposta](https://github.com/internazionalerossa/polisrossa/issues/new/choose) e scegli il modulo più vicino alla tua idea. Un’issue è una pagina pubblica dedicata a un problema o a un miglioramento, con risposte raccolte nello stesso luogo. Non devi sapere programmare: indica la pagina interessata, descrivi che cosa è poco chiaro o non funziona e spiega quale risultato vorresti ottenere. Un esempio concreto aiuta più di una formulazione tecnica.
 
-Per correggere un file puoi usare la matita di GitHub e proporre una pull request. La [guida ai contributi](CONTRIBUTING.md) è disponibile in sei lingue. Issue e pull request consentono di contribuire anche prima dell’apertura del forum interno.
+Per dati storici, libri e nuove fonti aggiungi riferimenti verificabili e, quando disponibili, indicazioni sulla licenza. Puoi scrivere nella tua lingua e proporre direttamente una frase alternativa. Non pubblicare informazioni personali, credenziali o documenti riservati: il testo delle issue è visibile a chiunque.
+
+Per correggere un file puoi usare la matita di GitHub e proporre una pull request, cioè una modifica che i manutentori possono leggere e verificare prima di integrarla. La modifica proposta non sostituisce immediatamente il progetto pubblico. La [guida ai contributi](CONTRIBUTING.md), disponibile in sei lingue, descrive i passaggi anche per chi non ha mai usato questi strumenti. Issue e pull request consentono di collaborare già prima dell’apertura del forum interno.
 
 ## Eseguire e verificare il codice
 

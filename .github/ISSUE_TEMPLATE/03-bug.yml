@@ -5,7 +5,7 @@ title: '[Bug] '
 body:
 - type: markdown
   attributes:
-    value: 'Write in any language. No coding required. / Scrivi nella tua lingua: non serve programmare.
+    value: 'Write in any language. You do not need technical terms: describe the page, what you want to understand or change, and a concrete example. / Scrivi nella tua lingua: non servono termini tecnici. Indica la pagina, che cosa vorresti capire o cambiare e un esempio concreto.
 
 
       Italiano · English · Español · Français · Deutsch · Português · all other languages welcome.
@@ -17,7 +17,7 @@ body:
   id: problem
   attributes:
     label: What happened? / Che cosa succede?
-    description: Describe what you see and what you expected. Indica cosa vedi e cosa ti aspettavi.
+    description: Describe what you see, what you expected instead, and whether it happens every time. / Racconta che cosa vedi, che cosa ti aspettavi al suo posto e se il problema si ripete. Anche una descrizione quotidiana aiuta a ricostruire il percorso.
   validations:
     required: true
 - type: textarea

@@ -1,5 +1,9 @@
 # Fonti e verifica del catalogo
 
+Le fonti sono il punto di partenza della raccolta: giornali, riviste, organizzazioni sindacali e altri editori con un orientamento coerente con il progetto. Questa guida spiega come riconoscere la provenienza di un contenuto, aggiungere una pubblicazione e controllare che il collegamento restituisca davvero gli articoli attesi. Una fonte può avere più canali di distribuzione; un feed è un elenco aggiornabile di pubblicazioni, non un nuovo giornale.
+
+La verifica tecnica e quella editoriale rispondono a domande diverse. La prima controlla se il canale funziona e se i dati sono leggibili; la seconda valuta identità, pertinenza e trasparenza della pubblicazione. Entrambe sono necessarie e devono restare riconoscibili nei dati del catalogo.
+
 Il catalogo distingue 177 fonti dirette da 136 canali tematici di ricerca. I canali di ricerca aggregano risultati esterni e non rappresentano altrettante testate. Le fonti dirette comprendono giornali, riviste, organizzazioni, sindacati e canali editoriali: la loro inclusione non attribuisce automaticamente la stessa natura o lo stesso orientamento a tutti.
 
 La sezione video comprende 84 canali, in 27 paesi o contesti editoriali e 11 lingue. I filtri riguardano lingua originale, paese, argomento e nome. La lingua di lettura rimane una scelta distinta. Gli identificatori dei canali sono ricavati dai metadati pubblici della piattaforma; gli account omonimi o estranei sono esclusi.

@@ -8,3 +8,4 @@ await build({entryPoints:['server/index.ts'],outfile:'build-node/server.mjs',bun
 await build({entryPoints:['server/migrate.ts'],outfile:'build-node/migrate.mjs',bundle:true,platform:'node',target:'node24',format:'esm',packages:'external'});
 await mkdir('build-node/migrations',{recursive:true});
 await cp('server/migrations','build-node/migrations',{recursive:true});
+await cp('scripts/start-node.sh','build-node/start.sh');

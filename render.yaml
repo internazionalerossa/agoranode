@@ -6,7 +6,7 @@ services:
     region: frankfurt
     autoDeployTrigger: "off"
     healthCheckPath: /healthz
-    dockerCommand: sh -c 'node build-node/migrate.mjs && node build-node/server.mjs'
+    dockerCommand: sh build-node/start.sh
     envVars:
       - key: NODE_ENV
         value: production

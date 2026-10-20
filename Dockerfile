@@ -13,4 +13,4 @@ RUN npm ci --omit=dev --no-audit --no-fund && npm cache clean --force
 COPY --from=build --chown=node:node /app/build-node ./build-node
 USER node
 EXPOSE 8000
-CMD ["node", "build-node/server.mjs"]
+CMD ["sh", "build-node/start.sh"]

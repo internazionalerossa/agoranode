@@ -7,7 +7,7 @@
   {
     "id": 2,
     "title": "PR2: partecipare alla comunità",
-    "text": "Presenta una domanda con il nome della persona o dell’ente e un riferimento pubblico verificabile. Per l’ammissione servono almeno tre sì di membri PR2 distinti entro 72 ore. Senza tre sì, la domanda scade. Ogni voto di ammissione è definitivo. Il riferimento deve permettere ai membri di capire chi presenta la domanda e di riscontrarne il controllo; il solo nome dichiarato non è sufficiente. Non pubblicare documenti d’identità o dati riservati."
+    "text": "Per chiedere PR2, accedi al tuo account e collega un social tramite la sua schermata di autorizzazione. Nome e riferimento provengono dal provider, non da un link dichiarato a mano. Il collegamento prova il controllo del profilo, non l’identità anagrafica. Presenta una breve introduzione: tutti i membri PR2, anche quelli appena ammessi, possono valutare le domande aperte nella dashboard. Tre sì ammettono; tre no respingono. Senza un esito entro 72 ore la domanda scade. Ogni membro esprime un solo voto definitivo. Non pubblicare documenti o dati riservati."
   },
   {
     "id": 3,
@@ -17,7 +17,7 @@
   {
     "id": 4,
     "title": "Segnalare e proporre",
-    "text": "Ogni membro PR2 può aprire tutte le issue che desidera. Bastano un titolo e una descrizione comprensibili; le domande del modulo aiutano a spiegare il problema e sono facoltative. Una proposta sottoposta al voto può avere una o più soluzioni, senza un limite editoriale al loro numero. Un’issue è una segnalazione dedicata a un problema o a un miglioramento. Puoi partire dall’esperienza concreta, indicare il risultato desiderato e aggiungere alternative: non occorre conoscere il codice né compilare tutte le domande di aiuto."
+    "text": "Issue, proposte, commenti e votazioni si svolgono nel forum del sito. Ogni membro PR2 può aprire tutte le issue che desidera. Bastano un titolo e una descrizione comprensibili; le domande del modulo aiutano a spiegare il problema e sono facoltative. Una proposta sottoposta al voto può avere una o più soluzioni, senza un limite editoriale al loro numero. Un’issue è una segnalazione dedicata a un problema o a un miglioramento. Puoi partire dall’esperienza concreta, indicare il risultato desiderato e aggiungere alternative: non occorre conoscere il codice né compilare tutte le domande di aiuto."
   },
   {
     "id": 5,

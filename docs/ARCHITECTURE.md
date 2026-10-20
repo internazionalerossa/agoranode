@@ -8,7 +8,7 @@ Leggi prima i componenti e i confini dei dati, poi la sezione relativa alla funz
 
 La rassegna integra anche gli otto canali regionali dell’Osservatorio: “Ultime 6 ore” è una selezione del periodo nella lista comune. `useRegionalNews.ts` conserva acquisizione concorrente, timeout, recuperi indipendenti e cache pubblica, senza coinvolgere i salvataggi privati. I vecchi collegamenti all’Osservatorio aprono la rassegna con il periodo corrispondente; gli altri periodi possono essere condivisi nello stesso URL.
 
-Ricerca, periodo e ordinamento sono visibili. Un solo pannello raccoglie lingua originale, area geografica, fonte e criteri tematici. La superficie centrata ha larghezza massima di 1.360 pixel; le colonne si adattano e i contenuti possono restringersi senza imporre la larghezza minima del testo o dei menu. Il marchio è scritto senza trattino in ogni lingua.
+Ricerca, periodo e ordinamento sono visibili. Un solo pannello raccoglie lingua originale, area geografica, fonte e criteri tematici. La superficie centrata ha larghezza massima di 1.080 pixel; le colonne si adattano e i contenuti possono restringersi senza imporre la larghezza minima del testo o dei menu. Il marchio è scritto senza trattino in ogni lingua.
 
 ## Componenti
 
@@ -114,3 +114,10 @@ Il periodo offre ultime 6 ore, ultime 24 ore o tutta la raccolta disponibile. Qu
 ## Accessi alla Biblioteca
 
 `library-navigation.ts` risolve le destinazioni Libri e percorsi, Timeline storica e Dati e grafici, mantenendo i collegamenti precedenti con `percorso=conquiste`, `storia` e `indicatore`. La timeline e i confronti statistici si caricano indipendentemente: Dati e grafici monta direttamente l’esploratore, senza il racconto o un pannello intermedio. Il catalogo e i suoi filtri rimangono nello spazio Libri e percorsi. I pulsanti aggiornano la cronologia e rispondono a indietro/avanti. Lingua di lettura (traduzioni), lingua originale delle fonti (selezione degli articoli) e paese della testata (sede editoriale) conservano preferenze e significati distinti.
+
+
+## Adesioni social e decisioni interne
+
+`server/social-identity.ts` espone soltanto provider configurati, avvia un collegamento OAuth esplicito da una sessione verificata e recente e rilegge l’identità dal provider. Il callback è ammesso solo per Facebook/Discord configurati; state e cookie sono validati da Better Auth. L’associazione implicita è disabilitata, i token sono cifrati. `handleForum` riceve una claim esclusivamente server-side e rifiuta i vecchi campi di verifica forniti dal browser. La migrazione 007 aggiunge un vincolo univoco sul social e sull’identificativo.
+
+La dashboard delle ammissioni è visibile ai PR2 senza introduzione o pannello chiuso. Tutti i PR2 attivi possono votare richieste aperte, inclusi quelli appena ammessi. Tre voti favorevoli ammettono, tre contrari respingono; le transazioni PostgreSQL serializzano decisioni concorrenti. Proposte e issue vengono create dal forum; `?view=partecipa&nuova=proposta` apre il modulo con votazione. I link GitHub restano soltanto per il codice e le revisioni tecniche.

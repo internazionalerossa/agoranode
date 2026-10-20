@@ -1,4 +1,4 @@
-export const VIEWS=['notizie','fonti','teoria','salvati','metodo','partecipa','crediti','privacy'] as const;
+export const VIEWS=['notizie','fonti','teoria','salvati','metodo','partecipa','crediti','privacy','condizioni'] as const;
 export type View=(typeof VIEWS)[number];
 export function viewFromUrl(raw:string):View{
  const url=new URL(raw,'https://site.invalid');const requested=url.searchParams.get('view');

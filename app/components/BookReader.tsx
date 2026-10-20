@@ -5,13 +5,14 @@ import { BOOK_LANGUAGES, THEORY_LIBRARY, bookEdition } from "@/app/data/library"
 import type { ReaderDocument } from "@/app/lib/book-reader";
 import type { Progress } from "@/app/lib/reading-progress";
 import { readerDestination } from "@/app/lib/book-navigation";
+import {AppRuntime} from "./MobileApp";
 import LanguageSettings,{useLanguagePreferences} from "./LanguageSettings";
 import { LocalizationProvider, LocalizedText } from "./Localization";
 
 export function BookReader() {
  const preferences=useLanguagePreferences();
  const [ready,setReady]=useState(false);useEffect(()=>setReady(true),[]);
- return <LocalizationProvider language={preferences.interfaceLanguage} contentLanguage={preferences.contentLanguage} original={preferences.original}><LanguageSettings/><Reader language={preferences.interfaceLanguage} ready={ready}/></LocalizationProvider>;
+ return <LocalizationProvider language={preferences.interfaceLanguage} contentLanguage={preferences.contentLanguage} original={preferences.original}><AppRuntime/><LanguageSettings/><Reader language={preferences.interfaceLanguage} ready={ready}/></LocalizationProvider>;
 }
 function Reader({language,ready}:{language:string;ready:boolean}) {
  const [bookId,setBookId]=useState("");
@@ -141,5 +142,6 @@ function Reader({language,ready}:{language:string;ready:boolean}) {
    </footer>
    <div className="reader-source"><span>{document.source} · {BOOK_LANGUAGES[edition]??edition}</span><a href={document.url} target="_blank" rel="noopener noreferrer"><LocalizedText>Testo, attribuzione e licenza nell’archivio originale</LocalizedText></a><button className="text-link" onClick={()=>queueSave(true)}><BookmarkCheck size={16}/><LocalizedText>Segna questa pagina</LocalizedText></button></div>
   </>:null}
+ <p className="footer-privacy"><a href="/?view=privacy"><LocalizedText>Privacy, cookie e diritti</LocalizedText></a>{" · "}<a href="/?view=condizioni"><LocalizedText>Condizioni d’uso</LocalizedText></a></p>
  </main>;
 }

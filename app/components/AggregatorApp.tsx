@@ -1,4 +1,6 @@
 "use client";
+import {attachReaderNavigation} from "@/app/lib/reader-navigation";
+import {AppRuntime,InstallApp} from "./MobileApp";
 import LanguageSettings,{useLanguagePreferences} from "./LanguageSettings";
 
 import {
@@ -95,6 +97,7 @@ const ALL = "all";
 const validBookIds = new Set(BOOK_IDS);
 const LibraryView = lazy(() => import("./LibraryView").then(module => ({ default: module.LibraryView })));
 const PrivacyView = lazy(()=>import("./PrivacyView"));
+const TermsView = lazy(()=>import("./TermsView"));
 const Acknowledgements = lazy(()=>import("./Acknowledgements"));
 const CommunityView = lazy(() => import("./CommunityView"));
 const SavedBooks = lazy(() => import("./LibraryView").then(module => ({ default: module.SavedBooks })));
@@ -335,7 +338,7 @@ export function AggregatorApp() {
     setView(next);
     reset();
     setFiltersOpen(false);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
   };
   const stopRefresh = () => {
     ++refreshNumber.current;
@@ -643,12 +646,13 @@ export function AggregatorApp() {
     sort,
   ]);
   const selectedArticle = allArticles.find((a) => a.id === selectedId) ?? null;
+  const readerOpen = Boolean(selectedArticle);
   useEffect(() => {
-    if (selectedArticle) {
-      if (!readerDialog.current?.open) readerDialog.current?.showModal();
-      readerDialog.current?.scrollTo({ top: 0 });
-    }
-  }, [selectedArticle]);
+    const dialog = readerDialog.current;
+    if (!readerOpen || !dialog) return;
+    return attachReaderNavigation(dialog, () => setSelectedId(null));
+  }, [readerOpen]);
+  useEffect(() => { readerDialog.current?.scrollTo({ top: 0 }); }, [selectedArticle?.id]);
 
   const toggleSave = useCallback((article: Article) => {
     const saving = !savedIds.has(article.id);
@@ -722,9 +726,7 @@ export function AggregatorApp() {
     () => [...new Set(SOURCE_CATALOG.map((s) => s.language))].sort(),
     [],
   );
-  const failedPublishers = SOURCE_CATALOG.filter(source => source.kind !== "radar" && statuses[source.id]?.ok === false).length;
-  const failedRadars = SOURCE_CATALOG.filter(source => source.kind === "radar" && statuses[source.id]?.ok === false).length;
-  const failedCount = failedPublishers + failedRadars;
+
   const filterCount =
     [region, country, language, topic, sourceId].filter((f) => f !== ALL).length +
     (days !== "1" ? 1 : 0) +
@@ -747,6 +749,7 @@ export function AggregatorApp() {
 
   return (
     <LocalizationProvider language={languagePreferences.interfaceLanguage} contentLanguage={readingLanguage} original={languagePreferences.original}>
+      <AppRuntime/>
       <InitialLoadBoundary collecting={(view === "notizie" && !initialWindowReady && orderedArticles.length < PAGE_SIZE) || (view === "salvati" && cloud.status === "checking")} progress={progress} language={languagePreferences.interfaceLanguage} brandLanguage={readingLanguage}>
       <div className="app-shell">
         <a className="skip-link" href="#letture">
@@ -754,7 +757,7 @@ export function AggregatorApp() {
         </a>
         <header className="site-header">
           <div className="utility-bar">
-            <span>{dateLabel}</span>
+            <span>{dateLabel}</span><InstallApp/>
 
           </div>
           <div className="masthead">
@@ -770,27 +773,27 @@ export function AggregatorApp() {
                 <BrandName language={readingLanguage}/>
               </span>
             </button><p className="brand-tagline"><LocalizedText>Leggere le fonti, sostenere chi informa.</LocalizedText></p></div>
-            <div className="header-account-actions"><LanguageSettings/><a href="/?view=salvati" onClick={event=>{event.preventDefault();navigate("salvati");}}><Bookmark size={16}/><LocalizedText>I tuoi salvati</LocalizedText>{savedIds.size+savedBooks.size>0&&<span>{savedIds.size+savedBooks.size}</span>}</a><a className="header-account-link" href={"/account?"+new URLSearchParams({return_to:view==="notizie"?"/":"/?view="+view})}><UserRound size={17}/><LocalizedText>{cloud.account?"Il tuo account":"Accedi / Registrati"}</LocalizedText></a></div>
+            <div className="header-account-actions utility-controls"><LanguageSettings/><a href="/?view=salvati" onClick={event=>{event.preventDefault();navigate("salvati");}}><Bookmark size={16}/><LocalizedText>I tuoi salvati</LocalizedText>{savedIds.size+savedBooks.size>0&&<span>{savedIds.size+savedBooks.size}</span>}</a><a className="header-account-link" href={"/account?"+new URLSearchParams({return_to:view==="notizie"?"/":"/?view="+view})}><UserRound size={17}/><LocalizedText>{cloud.account?"Il tuo account":"Accedi / Registrati"}</LocalizedText></a><a href="/?view=fonti" className="source-directory-button" aria-current={view==="fonti"?"page":undefined} onClick={event=>{if(event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;event.preventDefault();navigate("fonti");}}><Newspaper size={16}/><LocalizedText>Fonti</LocalizedText><strong>{SOURCE_CATALOG.length}</strong></a></div>
           </div>
           <nav className="main-nav" aria-label="Navigazione principale">
             <div className="nav-links">
               {NAV.map((item) => (
-                <button
+                <a
+                  href={item.id==="notizie"?"/":"/?view="+item.id}
                   key={item.id}
                   aria-current={view === item.id ? "page" : undefined}
-                  onClick={() => navigate(item.id)}
+                  onClick={event=>{if(event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;event.preventDefault();navigate(item.id);}}
                 >
                   <LocalizedText>{item.label}</LocalizedText>
-
-                </button>
+                </a>
               ))}
             </div>
-            <button className="source-directory-button" aria-current={view==="fonti"?"page":undefined} onClick={()=>navigate("fonti")}><Newspaper size={15}/><LocalizedText>Fonti</LocalizedText><strong>{SOURCE_CATALOG.filter(source=>source.kind!=="radar").length}</strong><span>+ {SOURCE_CATALOG.filter(source=>source.kind==="radar").length} <LocalizedText>radar</LocalizedText></span></button>
+
           </nav>
         </header>
 
         <main>
-          {view === "notizie" ? <><VideoCarousel /><aside className="news-library-invitation" aria-label="Approfondimenti e comunità"><a href="/?view=teoria" onClick={event=>{event.preventDefault();navigate("teoria");}}><strong><LocalizedText>Biblioteca</LocalizedText> →</strong><span><LocalizedText>Libri gratuiti, percorsi di lettura, storia delle conquiste e un archivio di dati da confrontare.</LocalizedText></span></a><a href="/?view=partecipa" onClick={event=>{event.preventDefault();navigate("partecipa");}}><strong><LocalizedText>Aiutaci a farlo meglio</LocalizedText> →</strong><span><LocalizedText>Il progetto ha bisogno del tuo sguardo: valuta testi, fonti, grafici e ogni dettaglio della pagina. Proponi miglioramenti con parole tue, senza saper programmare.</LocalizedText></span></a></aside></> : null}
+          {view === "notizie" ? <><VideoCarousel /><aside className="news-library-invitation" aria-label="Approfondimenti e comunità"><a href="/?view=teoria" onClick={event=>{event.preventDefault();navigate("teoria");}}><strong><LocalizedText>Biblioteca</LocalizedText> →</strong><span><LocalizedText>Libri gratuiti, percorsi di lettura, storia delle conquiste e un archivio di dati da confrontare.</LocalizedText></span></a><a href="/?view=partecipa" onClick={event=>{event.preventDefault();navigate("partecipa");}}><strong><LocalizedText>Partecipa · forum, chat e proposte</LocalizedText> →</strong><span><LocalizedText>Forum per discutere e approfondire, chat per incontrarsi e conversare, proposte per migliorare insieme testi, fonti, dati e ogni dettaglio del sito. Non serve saper programmare.</LocalizedText></span></a></aside></> : null}
           {heading ? (
             <section className="editorial-hero hero-compact" aria-labelledby="page-title">
               <div className="hero-copy">
@@ -915,7 +918,7 @@ export function AggregatorApp() {
                     aria-controls="advanced-filters"
                   >
                     <SlidersHorizontal size={16} />
-                    <LocalizedText>{" Filtra per fonte e argomento"}</LocalizedText>
+                    <LocalizedText>{"Filtri"}</LocalizedText>
                     <LocalizedText> </LocalizedText>
                     {filterCount > 0 ? (
                       <span>
@@ -983,7 +986,6 @@ export function AggregatorApp() {
                     </button>
                 </div>
                 {view !== "fonti" ? <div className="news-selection-status" role="status" aria-live="polite" aria-atomic="true"><strong>{filtered.length} <LocalizedText>articoli trovati</LocalizedText></strong><span><LocalizedText>{NEWS_ORDERS.find(([value]) => value === sort)?.[1] ?? "Più recenti prima"}</LocalizedText>{view === "notizie" ? <> · <LocalizedText>{NEWS_PERIODS.find(([value]) => value === days)?.[1] ?? "Ultime 24 ore"}</LocalizedText></> : null}</span><small><LocalizedText>{sort === "balanced" ? "Una notizia per testata prima di ripetere una fonte, alternando i paesi nelle 24 ore. All’interno di ogni fonte, prima le più recenti." : sort === "source" ? "Testate in ordine alfabetico; per ogni testata, prima gli articoli più recenti." : "Ordine basato sulla data di pubblicazione indicata dalla fonte."}</LocalizedText></small>{days === "Infinity" && view === "notizie" ? <small><LocalizedText>Include solo gli articoli ricevuti dai feed e conservati sul dispositivo, anche senza data. Non è un archivio storico completo.</LocalizedText></small> : null}</div> : null}
-                {view === "notizie" && regional.failed > 0 ? <p className="feed-note" role="status"><LocalizedText>Alcuni canali regionali non rispondono. La rassegna mostra le notizie disponibili e riprova al prossimo aggiornamento.</LocalizedText></p> : null}
                 {sourceId !== ALL ? (
                   <div className="active-source">
                     <Newspaper size={16} />
@@ -1020,7 +1022,7 @@ export function AggregatorApp() {
                     <LocalizedText>{refreshNotice}</LocalizedText>
                   </p>
                 ) : null}
-                {view !== "salvati" ? <p className="feed-status" role="status"><span className="live-dot"/><LocalizedText>{collecting?"Aggiornamento delle fonti in corso. Puoi già leggere e filtrare.":"Raccolta aggiornata automaticamente. Aggiorna per riprovare le fonti."}</LocalizedText>{collecting&&<button className="text-link" onClick={stopRefresh}><LocalizedText>Interrompi</LocalizedText></button>}</p> : null}
+                {view !== "salvati" && collecting ? <p className="feed-status" role="status"><span className="live-dot"/><LocalizedText>Aggiornamento in corso…</LocalizedText>{collecting&&<button className="text-link" onClick={stopRefresh}><LocalizedText>Interrompi</LocalizedText></button>}</p> : null}
                 {view === "fonti" ? (
                   <SourcesDirectory
                     sources={visibleSources}
@@ -1088,15 +1090,7 @@ export function AggregatorApp() {
                           <LocalizedText>Continua la lettura</LocalizedText><ArrowDown size={16} />
                         </button>
                       ) : null}
-                      {!loading && failedCount > 0 && view === "notizie" ? (
-                        <p className="feed-note">
-                          <CircleHelp size={15} />{" "}
-                          <span>{failedPublishers} <LocalizedText>fonti dirette con feed da ricontrollare</LocalizedText> · {failedRadars} <LocalizedText>ricerche radar non disponibili</LocalizedText>. <LocalizedText>Le copie già raccolte restano leggibili.</LocalizedText></span>
-                          <button onClick={() => navigate("fonti")}>
-                            <LocalizedText>{"Consulta le fonti"}</LocalizedText>
-                          </button>
-                        </p>
-                      ) : null}
+
                     </div>
 
                   </div>
@@ -1109,6 +1103,7 @@ export function AggregatorApp() {
               <Suspense fallback={<p className="reader-message" role="status"><LocalizedText>Apertura della biblioteca…</LocalizedText></p>}><LibraryView query={query} setQuery={setQuery} savedBooks={savedBooks} onToggleBook={toggleBook} /></Suspense>
             ) : null}
             {view === "partecipa" ? <Suspense fallback={<p className="reader-message" role="status"><LocalizedText>Apertura della comunità…</LocalizedText></p>}><CommunityView/></Suspense> : null}
+            {view === "condizioni" ? <Suspense fallback={<p role="status"><LocalizedText>Apertura delle condizioni…</LocalizedText></p>}><TermsView/></Suspense> : null}
             {view === "privacy" ? <Suspense fallback={<p role="status"><LocalizedText>Apertura delle informazioni…</LocalizedText></p>}><PrivacyView/></Suspense> : null}
             {view === "metodo" ? (
               <MethodView onSources={() => navigate("fonti")} />
@@ -1140,7 +1135,7 @@ export function AggregatorApp() {
             </button>
           </div>
           <div className="footer-acknowledgements"><p><LocalizedText>Grazie alle redazioni, agli archivi, agli autori, ai traduttori e alle comunità del software libero che rendono possibile questa raccolta. Anche il tuo sguardo conta: testi, contenuti e interfaccia possono migliorare grazie alle tue proposte.</LocalizedText></p><a href="/?view=crediti" onClick={event=>{event.preventDefault();navigate("crediti");}}><LocalizedText>Fonti, crediti e ringraziamenti</LocalizedText><ArrowUpRight size={14}/></a></div>
-          <div className="footer-privacy"><a href="/?view=privacy" onClick={event=>{event.preventDefault();navigate("privacy");}}><LocalizedText>Privacy, cookie e diritti</LocalizedText></a><span aria-hidden="true"> · </span><a href="https://github.com/internazionalerossa/polisrossa" target="_blank" rel="noopener noreferrer"><LocalizedText>Codice sorgente</LocalizedText></a><span aria-hidden="true"> · </span><a href="https://github.com/internazionalerossa/polisrossa/blob/main/NOTICE" target="_blank" rel="noopener noreferrer"><LocalizedText>Licenza e avvisi</LocalizedText></a></div>
+          <div className="footer-privacy"><a href="/?view=privacy" onClick={event=>{event.preventDefault();navigate("privacy");}}><LocalizedText>Privacy, cookie e diritti</LocalizedText></a><span aria-hidden="true"> · </span><a href="/?view=condizioni" onClick={event=>{event.preventDefault();navigate("condizioni");}}><LocalizedText>Condizioni e segnalazioni</LocalizedText></a><span aria-hidden="true"> · </span><a href="https://github.com/internazionalerossa/polisrossa" target="_blank" rel="noopener noreferrer"><LocalizedText>Codice sorgente</LocalizedText></a><span aria-hidden="true"> · </span><a href="https://github.com/internazionalerossa/polisrossa/blob/main/NOTICE" target="_blank" rel="noopener noreferrer"><LocalizedText>Licenza e avvisi</LocalizedText></a></div>
           <div className="footer-bottom">
             <span>
               <LocalizedText>
@@ -1160,8 +1155,6 @@ export function AggregatorApp() {
           ref={readerDialog}
           className="reader-dialog"
           aria-labelledby="reader-title"
-          onClose={() => setSelectedId(null)}
-          onCancel={() => setSelectedId(null)}
         >
           {selectedArticle ? (
             <ArticleReader
@@ -1566,8 +1559,8 @@ function MethodView({ onSources }: { onSources: () => void }) {
         <h3 id="project-participation-title"><LocalizedText>PolisRossa prende forma anche con te.</LocalizedText></h3>
         <p><LocalizedText>Cerchiamo persone disposte a leggere con attenzione, fare domande e suggerire alternative. Puoi rivedere una spiegazione, verificare una fonte, discutere un confronto statistico, ripensare una funzione o segnalare un dettaglio visivo che rende difficile orientarsi. Anche un titolo, un colore, un’immagine o la posizione di un pulsante meritano una proposta: nessuna parte del progetto è sottratta al confronto.</LocalizedText></p>
         <p><LocalizedText>Comincia da ciò che noti: indica la pagina, racconta che cosa non ti convince e quale risultato vorresti. Non serve scrivere codice, conoscere il lessico tecnico o arrivare con una soluzione completa. Una domanda ben posta può aprire il cambiamento; le proposte vengono discusse, verificate e migliorate insieme prima della pubblicazione.</LocalizedText></p>
-        <a className="text-link" href="https://github.com/internazionalerossa/polisrossa/issues/new?template=01-idea.yml" target="_blank" rel="noopener noreferrer"><LocalizedText>Scrivi una proposta con parole tue</LocalizedText><ArrowUpRight size={14}/></a>
-        <small><LocalizedText>Si apre GitHub: per pubblicare serve un account gratuito. La proposta è pubblica.</LocalizedText></small>
+        <a className="text-link" href="/?view=partecipa&nuova=proposta"><LocalizedText>Scrivi una proposta con parole tue</LocalizedText><ArrowUpRight size={14}/></a>
+        <small><LocalizedText>La proposta si scrive nel forum. I membri PR2 possono discuterla e votarla.</LocalizedText></small>
       </section>
       <div className="method-grid">
         {[
@@ -1749,14 +1742,14 @@ function ArticleReader({
               }
             </LocalizedText>
           </p>
-          {embed ? (
+          {embed ? (<><button type="button" className="button button-outline" onClick={()=>setEmbed(false)}><LocalizedText>Chiudi anteprima esterna</LocalizedText></button>
             <iframe
               title={`Anteprima: ${article.title}`}
               src={safeWebUrl(article.link) ?? undefined}
               sandbox="allow-scripts allow-popups allow-forms"
               referrerPolicy="no-referrer"
               loading="lazy"
-            />
+            /></>
           ) : (
             <button
               className="button button-outline"

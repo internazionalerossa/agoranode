@@ -91,7 +91,7 @@ export function InitialLoadBoundary({ children, collecting, progress, language, 
       <p>{collecting ? copy[1] : copy[2]}</p>
       {collecting ? <><progress max={progress.total || 1} value={progress.done} aria-label={copy[1]} /><small>{progress.done} / {progress.total}</small></> : <progress aria-label={copy[2]} />}
     </div> : null}
-    <div ref={root} className={!revealed ? "edition-preparing" : undefined} inert={!revealed} aria-hidden={!revealed || undefined}>
+    <div ref={root} className={!revealed ? "edition-frame edition-preparing" : "edition-frame"} inert={!revealed} aria-hidden={!revealed || undefined}>
       {children}
     </div>
   </Preparation.Provider>;

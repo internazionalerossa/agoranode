@@ -1,13 +1,11 @@
 "use client";
-import { memo, useEffect, useMemo, useRef, useState } from "react";
+import { memo, useEffect, useRef, useState } from "react";
 import { SOURCE_CATALOG } from "@/app/data/catalog";
-import { articleImages } from "@/app/lib/article-images";
-import { createPhotoLoader, resolvePhoto } from "@/app/lib/photo-loader";
+import { createPhotoLoader } from "@/app/lib/photo-loader";
 import { usePagePreparation } from "./InitialLoadBoundary";
 
 const nativeSources = new Set(SOURCE_CATALOG.map(source => source.id));
 // Separate queues let recovery proceed while a publisher's downloads are stalled.
-const direct = createPhotoLoader(() => new Image(), 8);
 const recoverOnce = createPhotoLoader(() => new Image(), 4);
 const recover = async (url: string) => {
   const result = await recoverOnce(url);
@@ -20,7 +18,6 @@ export const ArticleImage = memo(function ArticleImage({ image, fallbacks, sourc
   image: string | null; fallbacks?: string[]; sourceId: string; articleId: string; articleLink: string;
 }) {
   const { preparing, begin } = usePagePreparation();
-  const candidates = useMemo(() => articleImages(image, fallbacks), [image, fallbacks]);
   const frame = useRef<HTMLDivElement>(null);
   const [near, setNear] = useState(false);
   const [src, setSrc] = useState<string | null>(null);
@@ -40,12 +37,14 @@ export const ArticleImage = memo(function ArticleImage({ image, fallbacks, sourc
     const end = begin();
     // Bound only the opening screen; a late successful download can still be used.
     const deadline = setTimeout(end, 12000);
-    void resolvePhoto(candidates, proxy, direct, recover).then(url => {
+    // Only our validated image endpoint contacts publishers. No visitor cookies,
+    // IP address or referring page are forwarded to the source's image host.
+    void (proxy ? recover(proxy) : Promise.resolve(null)).then(url => {
       if (alive && url) setSrc(url);
       clearTimeout(deadline); end();
     });
     return () => { alive = false; clearTimeout(deadline); end(); };
-  }, [active, candidates, proxy, begin]);
+  }, [active, proxy, begin]);
   return <div ref={frame} className={`article-image ${!src ? "image-unavailable" : ""}`}>
     {src ? <img src={src} alt="" width={640} height={360} loading="eager" decoding="async" referrerPolicy="no-referrer" /> : null}
   </div>;

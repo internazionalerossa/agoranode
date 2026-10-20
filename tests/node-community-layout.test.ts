@@ -1,0 +1,11 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {createElement as h} from 'react';
+import {renderToStaticMarkup} from 'react-dom/server';
+import {CommunityIntroduction} from '../app/components/CommunityView';
+import type {Member} from '../app/lib/forum-model';
+const member:Member={id:'fixture',alias:'Lettrice',intro:'Presentazione di prova',identityName:'Persona di prova',identityKind:'person',identityUrl:'https://example.test/profile',language:'it',status:'active',createdAt:0,deadline:0,admittedAt:1};
+const render=(person:Member|null,ready=true)=>renderToStaticMarkup(h(CommunityIntroduction,{member:person,ready}));
+test('PR2 members reach the forum without the invitation, access explanation or external issue CTA',()=>{assert.equal(render(member),'');});
+test('membership loading does not flash the visitor introduction',()=>{assert.equal(render(null,false),'');});
+test('visitors and pending applicants still receive an invitation that explains forum and chat',()=>{for(const person of [null,{...member,status:'pending',admittedAt:null}]){const html=render(person);assert.match(html,/forum per discutere/);assert.match(html,/chat per conversare/);assert.match(html,/PR2/);assert.match(html,/view=partecipa(?:&amp;|&)nuova=proposta/);assert.doesNotMatch(html,/github.com/);}});

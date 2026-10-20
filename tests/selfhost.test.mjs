@@ -62,6 +62,7 @@ test('snapshot commands pass only validated basenames to the isolated tool conta
 });
 test('only the signing tool receives the private key mount',async()=>{
  const compose=await readFile(new URL('../deploy/selfhost/compose.yaml',import.meta.url),'utf8');
+ assert.match(compose,/postmaster\.pid[\s\S]*= 1 && pg_isready/);
  const app=compose.slice(compose.indexOf('  app:'),compose.indexOf('  proxy:'));
  const snapshot=compose.slice(compose.indexOf('  snapshot:'),compose.indexOf('  snapshot-db:'));
  const database=compose.slice(compose.indexOf('  snapshot-db:'),compose.indexOf('  snapshot-sign:'));

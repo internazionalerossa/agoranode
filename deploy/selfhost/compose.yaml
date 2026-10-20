@@ -13,7 +13,11 @@ services:
       - database:/var/lib/postgresql/data
       - socket:/var/run/postgresql
     healthcheck:
-      test: [CMD-SHELL, "pg_isready -h /var/run/postgresql -U polisrossa -d polisrossa"]
+      # The official image briefly starts a temporary PostgreSQL process while
+      # initializing a new volume. Only PID 1 is the final server.
+      test:
+        - CMD-SHELL
+        - 'test "$$(head -n 1 "$$PGDATA/postmaster.pid" 2>/dev/null)" = 1 && pg_isready -h /var/run/postgresql -U polisrossa -d polisrossa'
       interval: 5s
       timeout: 3s
       retries: 20

@@ -142,5 +142,6 @@ function Reader({language,ready}:{language:string;ready:boolean}) {
    </footer>
    <div className="reader-source"><span>{document.source} · {BOOK_LANGUAGES[edition]??edition}</span><a href={document.url} target="_blank" rel="noopener noreferrer"><LocalizedText>Testo, attribuzione e licenza nell’archivio originale</LocalizedText></a><button className="text-link" onClick={()=>queueSave(true)}><BookmarkCheck size={16}/><LocalizedText>Segna questa pagina</LocalizedText></button></div>
   </>:null}
+ <p className="footer-privacy"><a href="/?view=privacy"><LocalizedText>Privacy, cookie e diritti</LocalizedText></a>{" · "}<a href="/?view=condizioni"><LocalizedText>Condizioni d’uso</LocalizedText></a></p>
  </main>;
 }

@@ -42,7 +42,7 @@ export async function accountEndpoint(auth:Auth,request:Request,limits?:Connecti
  const action=String(input.action),route=routes[action];if(!route)return reply({error:'Unknown action'},400);
  if(limits&&!await allowAuthAttempt(limits,action,email))return reply({error:'Troppe richieste. Riprova più tardi.'},429);
  if(action==='signup'&&!registrationOpen)return reply({error:'Le iscrizioni sono in preparazione. Puoi consultare il sito senza creare un account.'},503);
- if(action==='signup'&&input.consent!==true)return reply({error:'Serve il consenso per creare l’account.'},400);
+ if(action==='signup'&&input.consent!==true)return reply({error:'Conferma la richiesta di creazione dell’account e le condizioni d’uso.'},400);
  if(['signup','signin','recover'].includes(action)&&(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)||email.length>254))return reply({error:'Controlla l’email.'},400);
  if(['signup','password'].includes(action)&&(password.length<12||password.length>128))return reply({error:'Scegli una password di almeno 12 caratteri.'},400);
  const headers=new Headers(request.headers);headers.delete('content-length');headers.set('content-type','application/json');

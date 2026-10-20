@@ -131,11 +131,8 @@ export const VideoCarousel = memo(function VideoCarousel() {
 });
 
 const VideoThumbnail=memo(function VideoThumbnail({video,eager}:{video:VideoItem;eager:boolean}){
- const youtube=videoChannel(video.channel)?.platform==='youtube';
- const source=youtube?`https://i.ytimg.com/vi/${video.id}/mqdefault.jpg`:video.image;
+ const source=`/api/video-image?${new URLSearchParams({channel:video.channel,id:video.id})}`;
  const [failed,setFailed]=useState<string|null>(null);
- const fallback=youtube?`https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`:null;
- const src=failed===source?fallback:source;
- if(!src||(failed!==null&&failed===fallback))return null;
- return <img src={src} alt="" width={320} height={180} loading={eager?'eager':'lazy'} decoding="async" fetchPriority={eager?'high':'low'} referrerPolicy="no-referrer" onError={()=>setFailed(src)}/>;
+ if(failed===source)return null;
+ return <img src={source} alt="" width={320} height={180} loading={eager?'eager':'lazy'} decoding="async" fetchPriority={eager?'high':'low'} referrerPolicy="no-referrer" onError={()=>setFailed(source)}/>;
 });

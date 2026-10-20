@@ -97,6 +97,7 @@ const ALL = "all";
 const validBookIds = new Set(BOOK_IDS);
 const LibraryView = lazy(() => import("./LibraryView").then(module => ({ default: module.LibraryView })));
 const PrivacyView = lazy(()=>import("./PrivacyView"));
+const TermsView = lazy(()=>import("./TermsView"));
 const Acknowledgements = lazy(()=>import("./Acknowledgements"));
 const CommunityView = lazy(() => import("./CommunityView"));
 const SavedBooks = lazy(() => import("./LibraryView").then(module => ({ default: module.SavedBooks })));
@@ -772,7 +773,7 @@ export function AggregatorApp() {
                 <BrandName language={readingLanguage}/>
               </span>
             </button><p className="brand-tagline"><LocalizedText>Leggere le fonti, sostenere chi informa.</LocalizedText></p></div>
-            <div className="header-account-actions"><LanguageSettings/><a href="/?view=salvati" onClick={event=>{event.preventDefault();navigate("salvati");}}><Bookmark size={16}/><LocalizedText>I tuoi salvati</LocalizedText>{savedIds.size+savedBooks.size>0&&<span>{savedIds.size+savedBooks.size}</span>}</a><a className="header-account-link" href={"/account?"+new URLSearchParams({return_to:view==="notizie"?"/":"/?view="+view})}><UserRound size={17}/><LocalizedText>{cloud.account?"Il tuo account":"Accedi / Registrati"}</LocalizedText></a></div>
+            <div className="header-account-actions utility-controls"><LanguageSettings/><a href="/?view=salvati" onClick={event=>{event.preventDefault();navigate("salvati");}}><Bookmark size={16}/><LocalizedText>I tuoi salvati</LocalizedText>{savedIds.size+savedBooks.size>0&&<span>{savedIds.size+savedBooks.size}</span>}</a><a className="header-account-link" href={"/account?"+new URLSearchParams({return_to:view==="notizie"?"/":"/?view="+view})}><UserRound size={17}/><LocalizedText>{cloud.account?"Il tuo account":"Accedi / Registrati"}</LocalizedText></a><a href="/?view=fonti" className="source-directory-button" aria-current={view==="fonti"?"page":undefined} onClick={event=>{if(event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;event.preventDefault();navigate("fonti");}}><Newspaper size={16}/><LocalizedText>Fonti</LocalizedText><strong>{SOURCE_CATALOG.length}</strong></a></div>
           </div>
           <nav className="main-nav" aria-label="Navigazione principale">
             <div className="nav-links">
@@ -787,7 +788,7 @@ export function AggregatorApp() {
                 </a>
               ))}
             </div>
-            <a href="/?view=fonti" className="source-directory-button" aria-label="Consulta le fonti" aria-current={view==="fonti"?"page":undefined} onClick={event=>{if(event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;event.preventDefault();navigate("fonti");}}><Newspaper size={15}/><LocalizedText>Fonti</LocalizedText><strong>{SOURCE_CATALOG.filter(source=>source.kind!=="radar").length}</strong><span>+ {SOURCE_CATALOG.filter(source=>source.kind==="radar").length} <LocalizedText>radar</LocalizedText></span></a>
+
           </nav>
         </header>
 
@@ -1102,6 +1103,7 @@ export function AggregatorApp() {
               <Suspense fallback={<p className="reader-message" role="status"><LocalizedText>Apertura della biblioteca…</LocalizedText></p>}><LibraryView query={query} setQuery={setQuery} savedBooks={savedBooks} onToggleBook={toggleBook} /></Suspense>
             ) : null}
             {view === "partecipa" ? <Suspense fallback={<p className="reader-message" role="status"><LocalizedText>Apertura della comunità…</LocalizedText></p>}><CommunityView/></Suspense> : null}
+            {view === "condizioni" ? <Suspense fallback={<p role="status"><LocalizedText>Apertura delle condizioni…</LocalizedText></p>}><TermsView/></Suspense> : null}
             {view === "privacy" ? <Suspense fallback={<p role="status"><LocalizedText>Apertura delle informazioni…</LocalizedText></p>}><PrivacyView/></Suspense> : null}
             {view === "metodo" ? (
               <MethodView onSources={() => navigate("fonti")} />
@@ -1133,7 +1135,7 @@ export function AggregatorApp() {
             </button>
           </div>
           <div className="footer-acknowledgements"><p><LocalizedText>Grazie alle redazioni, agli archivi, agli autori, ai traduttori e alle comunità del software libero che rendono possibile questa raccolta. Anche il tuo sguardo conta: testi, contenuti e interfaccia possono migliorare grazie alle tue proposte.</LocalizedText></p><a href="/?view=crediti" onClick={event=>{event.preventDefault();navigate("crediti");}}><LocalizedText>Fonti, crediti e ringraziamenti</LocalizedText><ArrowUpRight size={14}/></a></div>
-          <div className="footer-privacy"><a href="/?view=privacy" onClick={event=>{event.preventDefault();navigate("privacy");}}><LocalizedText>Privacy, cookie e diritti</LocalizedText></a><span aria-hidden="true"> · </span><a href="https://github.com/internazionalerossa/polisrossa" target="_blank" rel="noopener noreferrer"><LocalizedText>Codice sorgente</LocalizedText></a><span aria-hidden="true"> · </span><a href="https://github.com/internazionalerossa/polisrossa/blob/main/NOTICE" target="_blank" rel="noopener noreferrer"><LocalizedText>Licenza e avvisi</LocalizedText></a></div>
+          <div className="footer-privacy"><a href="/?view=privacy" onClick={event=>{event.preventDefault();navigate("privacy");}}><LocalizedText>Privacy, cookie e diritti</LocalizedText></a><span aria-hidden="true"> · </span><a href="/?view=condizioni" onClick={event=>{event.preventDefault();navigate("condizioni");}}><LocalizedText>Condizioni e segnalazioni</LocalizedText></a><span aria-hidden="true"> · </span><a href="https://github.com/internazionalerossa/polisrossa" target="_blank" rel="noopener noreferrer"><LocalizedText>Codice sorgente</LocalizedText></a><span aria-hidden="true"> · </span><a href="https://github.com/internazionalerossa/polisrossa/blob/main/NOTICE" target="_blank" rel="noopener noreferrer"><LocalizedText>Licenza e avvisi</LocalizedText></a></div>
           <div className="footer-bottom">
             <span>
               <LocalizedText>
@@ -1740,14 +1742,14 @@ function ArticleReader({
               }
             </LocalizedText>
           </p>
-          {embed ? (
+          {embed ? (<><button type="button" className="button button-outline" onClick={()=>setEmbed(false)}><LocalizedText>Chiudi anteprima esterna</LocalizedText></button>
             <iframe
               title={`Anteprima: ${article.title}`}
               src={safeWebUrl(article.link) ?? undefined}
               sandbox="allow-scripts allow-popups allow-forms"
               referrerPolicy="no-referrer"
               loading="lazy"
-            />
+            /></>
           ) : (
             <button
               className="button button-outline"

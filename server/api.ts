@@ -3,6 +3,7 @@ import {brandManifestResponse} from '../app/lib/brand-manifest';
 import {handleLiveChat} from './live-chat';
 import {visitorCountryResponse} from '../app/lib/visitor-country';
 import {GET as articles} from '../app/api/articles/route';
+import {GET as videoImage} from '../app/api/video-image/route';
 import {GET as videos} from '../app/api/videos/route';
 import {GET as highlights} from '../app/api/highlights/route';
 import {GET as pulse} from '../app/api/pulse/route';
@@ -51,6 +52,7 @@ export async function api(request:Request,db:PostgresDatabase,userId:string|null
   try{return reply(await readBook(bookId,edition,chapter));}catch(error){return reply({error:error instanceof RangeError?'Capitolo non disponibile':'Edizione temporaneamente non disponibile. Puoi aprire l’archivio originale.'},error instanceof RangeError?400:503);}
  }
  if(path==='/api/translate')return request.method==='POST'?translate(request):reply({error:'Method not allowed'},405);
+ if(path==='/api/video-image')return videoImage(request);
  if(path==='/api/sources')return request.method==='GET'?sources():reply({error:'Method not allowed'},405);
  if(path==='/api/article-image')return request.method==='GET'?photo(request,(source,id)=>createArticlePhotoStore(db,sourceIds).find(source,id)):reply({error:'Method not allowed'},405);
  if(publicEndpoints[path])return request.method==='GET'?publicDataResponse(request,{cache:createPublicNewsStore(db,sourceIds),load:()=>publicEndpoints[path](request),waitUntil:background}):reply({error:'Method not allowed'},405);

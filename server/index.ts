@@ -36,10 +36,10 @@ const server=createServer({maxHeaderSize:16384,requestTimeout:30000,headersTimeo
   if(url.pathname==='/api/service-info')response=serviceInfoResponse(request,config.operator,config.registrationOpen,config.forumOpen);
   else if(url.pathname==='/healthz'){
    try{await pool.query('SELECT 1');response=Response.json({ok:true},{headers:{'cache-control':'no-store'}});}catch{response=Response.json({ok:false},{status:503,headers:{'cache-control':'no-store'}});}
-  }else if(url.pathname==='/api/auth')response=await accountEndpoint(auth,request,connections(pool),config.registrationOpen);
+  }else if(url.pathname==='/api/auth')response=await accountEndpoint(auth,request,connections(pool),config.registrationOpen,config);
   else if(url.pathname==='/api/community/identity')response=await socialIdentityEndpoint(auth,request,config);
   else if(url.pathname.startsWith('/api/identity/')){
-   const allowed=method==='GET'&&(url.pathname==='/api/identity/verify-email'||url.pathname.startsWith('/api/identity/reset-password/')||allowedIdentityCallback(url.pathname,method,config));
+   const allowed=method==='GET'&&((config.mailTransport!=='none'&&(url.pathname==='/api/identity/verify-email'||url.pathname.startsWith('/api/identity/reset-password/')))||allowedIdentityCallback(url.pathname,method,config));
    response=allowed?await auth.handler(request):new Response('Not found',{status:404});
   }else if(url.pathname.startsWith('/api/')){
    if(privatePaths.has(url.pathname)){const session=await authSession(auth,request);let socialIdentity=null;

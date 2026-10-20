@@ -17,7 +17,7 @@ test('verified reader accounts, member admission, discussions and ballots persis
  const query=async(sql:string,values:unknown[]=[])=>{const r=await database.query(sql,values);return {rows:r.rows as Record<string,unknown>[],rowCount:r.affectedRows??r.rows.length,command:sql.trim().split(/\s/)[0].toUpperCase()};};
  const pool={query,connect:async()=>({query,release(){}}),end:async()=>{},options:{}} as unknown as pg.Pool;
  const connection={query},db=new PostgresDatabase({...connection,connect:async()=>connection} satisfies Connections);
- const config=configuration({APP_URL:'https://example.test',DATABASE_URL:'postgres://test:test@localhost/test',AUTH_SECRET:'integration-test-only-0123456789012345678901234',SMTP_HOST:'localhost',SMTP_USER:'test',SMTP_PASSWORD:'test',MAIL_FROM:'test@example.test'});
+ const config=configuration({APP_URL:'https://example.test',DATABASE_URL:'postgres://test:test@localhost/test',AUTH_SECRET:'integration-test-only-0123456789012345678901234',MAIL_TRANSPORT:'smtp',SMTP_HOST:'localhost',SMTP_USER:'test',SMTP_PASSWORD:'test',MAIL_FROM:'test@example.test'});
  const messages:{email:string;url:string}[]=[];
  const makeAuth=()=>createAuth(pool,config,async(email,url)=>{messages.push({email,url});});
  let identity=makeAuth();

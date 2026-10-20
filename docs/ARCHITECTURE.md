@@ -23,14 +23,14 @@ L’applicazione ha un’interfaccia React compilata con Vite e un server Node.j
 | `app/lib/` | Parsing, selezione, sincronizzazione e regole della comunità |
 | `server/index.ts` | Server HTTP, distribuzione dei file e instradamento |
 | `server/api.ts` | Confine delle API pubbliche e private |
-| `server/auth.ts` | Account, conferma email, accesso e recupero |
+| `server/auth.ts` | Account, accesso social e sessioni |
 | `server/database.ts` | Contratto delle istruzioni SQL e transazioni PostgreSQL |
 | `server/migrations/` | Schema e vincoli persistenti |
 | `public/data/history/` | Serie annuali e provenienza degli indicatori |
 
 ## Account e dati privati
 
-Better Auth gestisce password, conferma email, sessioni e recupero. Le API verificano la sessione nel database: header o identificatori inviati dal browser non attribuiscono un’identità. Le operazioni private controllano l’origine della richiesta e non entrano nelle cache condivise. I cookie sono HttpOnly e sicuri; le credenziali restano sul server.
+Better Auth gestisce accesso OAuth e sessioni. Con `MAIL_TRANSPORT=none`, predefinito, registrazione con password, recupero e invio email sono disabilitati anche sul server. Gli eventuali indirizzi verificati provengono dal provider social. Le API verificano la sessione nel database: header o identificatori inviati dal browser non attribuiscono un’identità. Le operazioni private controllano l’origine della richiesta e non entrano nelle cache condivise. I cookie sono HttpOnly e sicuri; le credenziali restano sul server.
 
 Le raccolte sono separate per account. Le copie nel browser facilitano l’uso e l’importazione, ma non sostituiscono PostgreSQL. Le posizioni di lettura sono separate per libro ed edizione; un aggiornamento più vecchio non deve sovrascrivere il più recente. Gli ID dei libri, delle fonti e le chiavi browser esistenti sono mantenuti per compatibilità.
 

@@ -9,7 +9,7 @@ test('independent accounts require verified email, use secure sessions and revok
  const database=new PGlite();
  const query=async(sql:string,values:unknown[]=[])=>{const result=await database.query(sql,values);return {rows:result.rows,rowCount:result.affectedRows??result.rows.length,command:sql.trim().split(/\s/)[0].toUpperCase()};};
  const pool={query,connect:async()=>({query,release(){}}),end:async()=>{},options:{}} as unknown as pg.Pool;
- const config=configuration({APP_URL:'https://example.test',DATABASE_URL:'postgres://test:test@localhost/test',AUTH_SECRET:'only-tests-not-production-01234567890123456789',SMTP_HOST:'localhost',SMTP_USER:'test',SMTP_PASSWORD:'test',MAIL_FROM:'test@example.test'});
+ const config=configuration({APP_URL:'https://example.test',DATABASE_URL:'postgres://test:test@localhost/test',AUTH_SECRET:'only-tests-not-production-01234567890123456789',MAIL_TRANSPORT:'smtp',SMTP_HOST:'localhost',SMTP_USER:'test',SMTP_PASSWORD:'test',MAIL_FROM:'test@example.test'});
  const messages:{email:string;url:string;reset:boolean}[]=[];
  const {auth,settle}=createAuth(pool,config,async(email,url,reset)=>{messages.push({email,url,reset});});
  const call=(data?:unknown,cookie='',origin='https://example.test')=>accountEndpoint(auth,new Request('https://example.test/api/auth',{method:data?'POST':'GET',headers:{origin,cookie,'content-type':'application/json'},body:data?JSON.stringify(data):undefined}),undefined,true);

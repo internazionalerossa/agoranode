@@ -7,11 +7,11 @@ import type {configuration} from './config';
 export function createAuth(pool:pg.Pool,config:ReturnType<typeof configuration>,sendMail?:(email:string,url:string,reset:boolean)=>Promise<unknown>){
  const deliver=createAccountMailer(config);
  const jobs=new Set<Promise<unknown>>();
- const send=(email:string,url:string,reset=false)=>{const job=(sendMail?sendMail(email,url,reset):deliver(email,url,reset)).catch(()=>{console.error('Authentication email delivery failed');}).finally(()=>jobs.delete(job));jobs.add(job);};
+ const send=(email:string,url:string,reset=false)=>{if(config.mailTransport==='none')return;const job=(sendMail?sendMail(email,url,reset):deliver(email,url,reset)).catch(()=>{console.error('Authentication email delivery failed');}).finally(()=>jobs.delete(job));jobs.add(job);};
  const auth=betterAuth({
   appName:'PolisRossa',baseURL:config.origin,basePath:'/api/identity',secret:config.secret,database:pool,trustedOrigins:[config.origin],
-  emailAndPassword:{enabled:true,minPasswordLength:12,maxPasswordLength:128,requireEmailVerification:true,autoSignIn:false,revokeSessionsOnPasswordReset:true,sendResetPassword:async({user,url})=>{send(user.email,url,true);}},
-  emailVerification:{sendOnSignUp:true,sendOnSignIn:true,autoSignInAfterVerification:false,sendVerificationEmail:async({user,url})=>{send(user.email,url);}},
+  emailAndPassword:{enabled:config.mailTransport!=='none',minPasswordLength:12,maxPasswordLength:128,requireEmailVerification:true,autoSignIn:false,revokeSessionsOnPasswordReset:true,sendResetPassword:async({user,url})=>{send(user.email,url,true);}},
+  emailVerification:{sendOnSignUp:config.mailTransport!=='none',sendOnSignIn:config.mailTransport!=='none',autoSignInAfterVerification:false,sendVerificationEmail:async({user,url})=>{send(user.email,url);}},
   socialProviders:config.socialProviders,
   account:{encryptOAuthTokens:true,accountLinking:{enabled:true,disableImplicitLinking:true,allowDifferentEmails:true}},
   session:{expiresIn:7*86400,updateAge:86400,cookieCache:{enabled:false}},
@@ -29,14 +29,29 @@ export async function authSession(auth:Auth,request:Request){
  const data=await response.json();
  return {user:data?.user?.emailVerified?data.user as {id:string;email:string}:null,finish:(result:Response)=>{const headers=new Headers(result.headers);for(const [key,value]of Object.entries(privateHeaders))headers.set(key,value);for(const cookie of response.headers.getSetCookie())headers.append('set-cookie',cookie);return new Response(result.body,{status:result.status,headers});}};
 }
-export async function accountEndpoint(auth:Auth,request:Request,limits?:Connection,registrationOpen=false){
+export async function accountEndpoint(auth:Auth,request:Request,limits?:Connection,registrationOpen=false,config?:ReturnType<typeof configuration>){
  const url=new URL(request.url),reply=(data:unknown,status=200)=>Response.json(data,{status,headers:privateHeaders});
- if(request.method==='GET'){const session=await authSession(auth,request);return session.finish(reply({configured:true,registrationOpen,authenticated:Boolean(session.user),email:session.user?.email??null}));}
+ if(request.method==='GET'){const session=await authSession(auth,request);return session.finish(reply({configured:true,registrationOpen,emailEnabled:config?.mailTransport!=='none',providers:Object.keys(config?.socialProviders??{}),authenticated:Boolean(session.user),email:session.user?.email??null}));}
  if(request.method!=='POST')return reply({error:'Method not allowed'},405);
  if(request.headers.get('origin')!==url.origin||request.headers.get('sec-fetch-site')==='cross-site')return reply({error:'Invalid origin'},403);
  if(!request.headers.get('content-type')?.startsWith('application/json'))return reply({error:'JSON required'},415);
  let input:Record<string,unknown>;
  try{const raw=await request.text();if(new TextEncoder().encode(raw).length>8000)return reply({error:'Payload too large'},413);input=JSON.parse(raw);if(!input||Array.isArray(input)||typeof input!=='object')throw Error();}catch{return reply({error:'Invalid JSON'},400);}
+ const actionName=String(input.action);
+ if(config?.mailTransport==='none'&&actionName!=='signout'&&actionName!=='social')return reply({error:'Questo servizio usa soltanto l’accesso social. Non invia email.'},400);
+ if(actionName==='social'){
+  const provider=String(input.provider);
+  if(!config||!Object.hasOwn(config.socialProviders,provider))return reply({error:'Social non disponibile.'},400);
+  if(!registrationOpen)return reply({error:'L’accesso social non è ancora aperto.'},503);
+  if(input.consent!==true)return reply({error:'Accetta le condizioni e leggi l’informativa prima di continuare.'},400);
+  if(limits&&!await allowAuthAttempt(limits,'social',provider))return reply({error:'Troppe richieste. Riprova più tardi.'},429);
+  const headers=new Headers(request.headers);headers.delete('content-length');
+  const result=await auth.handler(new Request(new URL('/api/identity/sign-in/social',url),{method:'POST',headers,body:JSON.stringify({provider,requestSignUp:true,disableRedirect:true,callbackURL:url.origin+'/account',errorCallbackURL:url.origin+'/account?error=social'})}));
+  if(!result.ok)return reply({error:'Accesso social non avviato. Riprova.'},result.status);
+  const data=await result.json();let target:URL;try{target=new URL(data.url);}catch{return reply({error:'Risposta social non valida.'},502);}
+  if(target.protocol!=='https:'||!(provider==='discord'?['discord.com']:['www.facebook.com','facebook.com']).includes(target.hostname))return reply({error:'Destinazione social non valida.'},502);
+  const response=reply({url:target.href});for(const cookie of result.headers.getSetCookie())response.headers.append('set-cookie',cookie);return response;
+ }
  const email=typeof input.email==='string'?input.email.trim():'',password=typeof input.password==='string'?input.password:'';
  const routes:Record<string,[string,Record<string,unknown>]>={
   signin:['sign-in/email',{email,password}],signup:['sign-up/email',{email,password,name:'Lettore',callbackURL:url.origin+'/account'}],signout:['sign-out',{}],recover:['request-password-reset',{email,redirectTo:url.origin+'/account?recovery=1'}],password:['reset-password',{newPassword:password,token:input.token}],

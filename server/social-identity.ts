@@ -26,7 +26,7 @@ export async function socialIdentityEndpoint(auth:Auth,request:Request,config:Co
  if(!['GET','POST'].includes(request.method))return reply({error:'Method not allowed'},405);
  if(request.method==='POST'&&(request.headers.get('origin')!==config.origin||request.headers.get('sec-fetch-site')==='cross-site'))return reply({error:'Invalid origin'},403);
  const session=await authSession(auth,request);
- if(!session.user)return session.finish(reply({error:'Accedi e conferma la tua email prima di collegare il social.'},401));
+ if(!session.user)return session.finish(reply({error:'Accedi al tuo account prima di collegare il social.'},401));
  const providers=Object.keys(config.socialProviders).map(id=>({id,name:SOCIAL_NAMES[id as keyof typeof SOCIAL_NAMES]}));
  try{
   if(request.method==='GET'){

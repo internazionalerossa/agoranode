@@ -64,7 +64,7 @@ npm test
 npm run typecheck
 ```
 
-Per sviluppo, database e invio email consulta [DEPLOYMENT.md](docs/DEPLOYMENT.md). Il filesystem del container non è un archivio permanente: account, salvataggi, messaggi e voti risiedono in PostgreSQL. Il deployment usa `Dockerfile`; non è un sito statico distribuibile integralmente con GitHub Pages.
+Per sviluppo, database e accesso social consulta [DEPLOYMENT.md](docs/DEPLOYMENT.md). Il filesystem del container non è un archivio permanente: account, salvataggi, messaggi e voti risiedono in PostgreSQL. Il deployment usa `Dockerfile`; non è un sito statico distribuibile integralmente con GitHub Pages.
 
 ## Documentazione
 

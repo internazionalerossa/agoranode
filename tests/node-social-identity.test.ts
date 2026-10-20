@@ -6,7 +6,7 @@ import {getMigrations} from 'better-auth/db/migration';
 import {createAuth,accountEndpoint} from '../server/auth';
 import {configuration} from '../server/config';
 import {socialIdentityEndpoint,verifiedSocialIdentity,allowedIdentityCallback} from '../server/social-identity';
-const env={APP_URL:'https://example.test',DATABASE_URL:'postgres://test:test@localhost/test',AUTH_SECRET:'social-tests-only-not-production-01234567890123456789',SMTP_HOST:'localhost',SMTP_USER:'test',SMTP_PASSWORD:'test',MAIL_FROM:'test@example.test',FORUM_OPEN:'true',DISCORD_CLIENT_ID:'client-test',DISCORD_CLIENT_SECRET:'client-secret-test'};
+const env={APP_URL:'https://example.test',DATABASE_URL:'postgres://test:test@localhost/test',AUTH_SECRET:'social-tests-only-not-production-01234567890123456789',MAIL_TRANSPORT:'smtp',SMTP_HOST:'localhost',SMTP_USER:'test',SMTP_PASSWORD:'test',MAIL_FROM:'test@example.test',FORUM_OPEN:'true',DISCORD_CLIENT_ID:'client-test',DISCORD_CLIENT_SECRET:'client-secret-test'};
 test('social linking uses a real OAuth callback, binds the authenticated user, encrypts tokens and rejects untrusted input',async()=>{
  const database=new PGlite(),config=configuration(env),messages:string[]=[];
  const query=async(sql:string,values:unknown[]=[])=>{const r=await database.query(sql,values);return {rows:r.rows as Record<string,unknown>[],rowCount:r.affectedRows??r.rows.length};};

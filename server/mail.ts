@@ -3,6 +3,7 @@ import type {configuration} from './config';
 export function createAccountMailer(config:ReturnType<typeof configuration>,fetcher:typeof fetch=fetch){
  const smtp=config.mailTransport==='smtp'?nodemailer.createTransport(config.smtp!):null;
  return async(to:string,url:string,reset=false)=>{
+  if(config.mailTransport==='none')throw Error('Email delivery is disabled');
   const subject=reset?'PolisRossa · Recupero dell’account':'PolisRossa · Conferma la tua email';
   const text=reset?'Per scegliere una nuova password apri questo collegamento: '+url:'Conferma la tua email per attivare l’account personale: '+url;
   if(smtp)return smtp.sendMail({from:config.mailFrom,to,subject,text});

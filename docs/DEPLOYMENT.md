@@ -1,3 +1,7 @@
+# Accesso senza email
+
+Il servizio usa `MAIL_TRANSPORT=none`: non richiede Brevo, SMTP o un mittente. Account e forum rimangono in PostgreSQL; non aggiungere Redis come archivio dei dati permanenti. Prima di aprire `REGISTRATIONS_OPEN`, configurare una coppia OAuth Discord o Facebook e il relativo callback `/api/identity/callback/discord` o `/api/identity/callback/facebook` sul dominio pubblico. La schermata Account mostra solo provider configurati. Il recupero avviene sul social; PR2 conserva la votazione separata. Le istruzioni SMTP/Brevo seguenti valgono soltanto per installazioni alternative che scelgano esplicitamente l’accesso email.
+
 # Gestione e pubblicazione
 
 Pubblicare il servizio significa collegare il codice a un server raggiungibile, a un database duraturo e a un sistema che invii le email necessarie all’account. Caricare i file su GitHub rende disponibili i sorgenti, ma non attiva da solo questi componenti. Questa guida accompagna il passaggio dalla compilazione alla verifica del servizio reale e distingue ciò che può essere preparato nel repository da ciò che deve essere configurato presso i fornitori.

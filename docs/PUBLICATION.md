@@ -1,10 +1,10 @@
 # Prima pubblicazione di PolisRossa
 
-Questa guida riguarda il servizio indipendente, con accesso PR1 tramite email e password e collegamento social per l’adesione PR2. GitHub conserva i sorgenti; non esegue il server, non conserva gli account e non pubblica automaticamente l’anteprima. Il nome visibile è PolisRossa, senza trattino; nelle altre lingue Polis rimane invariato e il colore viene tradotto.
+Questa guida riguarda il servizio indipendente, con accesso PR1 tramite social e ammissione comunitaria separata per PR2. GitHub conserva i sorgenti; non esegue il server, non conserva gli account e non pubblica automaticamente l’anteprima. Il nome visibile è PolisRossa, senza trattino; nelle altre lingue Polis rimane invariato e il colore viene tradotto.
 
 ## Cosa è pronto e che cosa richiede dati reali
 
-Il codice comprende rassegna, biblioteca, server Node, PostgreSQL, invio email, accesso personale, ammissioni, forum e voto. I controlli locali verificano il codice con dati sintetici. Non attestano il funzionamento del mittente, l’accesso al database remoto, i backup o le procedure del titolare. Registrazioni e forum sono chiusi per impostazione predefinita.
+Il codice comprende rassegna, biblioteca, server Node, PostgreSQL, accesso social senza email, ammissioni, forum e voto. I controlli locali verificano il codice con dati sintetici. Non attestano il funzionamento dei provider OAuth, l’accesso al database remoto, i backup o le procedure del titolare. Registrazioni e forum sono chiusi per impostazione predefinita.
 
 La rassegna integra l’Osservatorio: ricerca, periodo e ordinamento sono subito visibili; “Ultime 6 ore” usa la stessa lista e gli stessi filtri. I canali regionali non hanno una pagina separata. L’impaginazione è centrata, con larghezze ridimensionabili e dimensioni più compatte. La verifica visiva su dispositivi reali deve accompagnare il collaudo finale.
 
@@ -39,11 +39,11 @@ Render ha assegnato al servizio gratuito l’indirizzo **https://polisrossa.onre
 ## Passaggi di pubblicazione
 
 1. Apri [il Blueprint predisposto per questa repository](https://dashboard.render.com/blueprint/new?repo=https://github.com/internazionalerossa/polisrossa). Nel tuo account scegli lo spazio di lavoro del progetto. Verifica `plan: free` e Francoforte prima di creare il servizio. Il file `render.yaml` deve essere presente nel ramo `main`.
-2. Configura in Render i valori richiesti dal Blueprint: `APP_URL`, `DATABASE_URL`, mittente e credenziale email, `PUBLIC_OPERATOR_NAME` e `PUBLIC_PRIVACY_CONTACT`. Il segreto di autenticazione viene generato dal servizio. Le credenziali vanno inserite nei campi protetti del provider, mai in chat, nei file pubblici o nelle issue.
+2. Configura in Render i valori richiesti dal Blueprint: `APP_URL`, `DATABASE_URL`, credenziali OAuth, `PUBLIC_OPERATOR_NAME` e `PUBLIC_PRIVACY_CONTACT`. Il segreto di autenticazione viene generato dal servizio. Le credenziali vanno inserite nei campi protetti del provider, mai in chat, nei file pubblici o nelle issue.
 3. Il database deve essere raggiungibile dal runtime Render con TLS verificato. Il processo di avvio esegue le migrazioni prima del server; controllarne l’esito. Per Supabase aprire Connect e scegliere **Session pooler**, porta 5432, compatibile con la rete IPv4 di Render. Copiare l’indirizzo effettivo mostrato dal progetto e sostituire la password soltanto nel campo protetto `DATABASE_URL`; non indovinare il nome del pooler e non usare la connessione diretta IPv6. Conservare la verifica dei certificati TLS.
 4. Verifica `/healthz`, caricamento pubblico delle notizie, filtri, biblioteca, immagini e traduzioni. Mantieni `REGISTRATIONS_OPEN=false` e `FORUM_OPEN=false` durante questa fase.
-5. Completa le sette aree applicabili con i dati e le procedure reali del gestore. Verifica dominio del mittente e consegna delle email; prova un backup e il suo ripristino. Non usare il test locale come prova di questi passaggi.
-6. Apri le registrazioni solo dopo il collaudo. Prova un account reale: registrazione, conferma email, recupero password, salvataggio e ripristino da un secondo browser, esportazione dati e gestione di una richiesta di cancellazione.
+5. Completa le sette aree applicabili con i dati e le procedure reali del gestore. Verifica il ritorno OAuth al dominio pubblico; prova un backup e il suo ripristino. Non usare il test locale come prova di questi passaggi.
+6. Apri le registrazioni solo dopo il collaudo. Prova un account reale: registrazione social, uscita e nuovo accesso, salvataggio e ripristino da un secondo browser, esportazione dati e gestione di una richiesta di cancellazione.
 7. Configura gli inviti iniziali come hash e verifica PR2: ammissione, discussione libera, proposta, voto, permessi e visibilità. Apri il forum solo quando anche procedure privacy e moderazione sono operative. Verifica che un account PR1 non possa scrivere o votare.
 8. Inserisci l’URL ufficiale verificato nel README e nelle informazioni del servizio. Comunica quali funzioni sono attive e i limiti del piano gratuito. Un aggiornamento di GitHub non aggiorna da solo il vecchio indirizzo dell’anteprima.
 
@@ -72,6 +72,6 @@ Il server supporta Facebook e Discord. Sono mostrati soltanto i provider configu
 
 La prova automatizzata percorre il callback OAuth con un provider simulato e verifica stato, sessione, cifratura e rifiuto dei dati contraffatti. Non sostituisce il collaudo con le credenziali reali del provider.
 
-Stato infrastruttura ricontrollato il 20 ottobre 2026: servizio Render Free creato nel workspace confermato, primo avvio da completare; Supabase Free è attivo con le 21 tabelle applicative e la persistenza verificata. La connessione privata al database, il mittente email e le credenziali OAuth devono essere verificati sul runtime prima dell’apertura. Il titolare e il recapito privacy devono ancora essere confermati. Registrazione, consegna email, accesso social e forum sul nuovo hosting non sono ancora stati collaudati. Questi passaggi non vanno segnati come completati sulla base dei soli test locali.
+Stato infrastruttura ricontrollato il 20 ottobre 2026: servizio Render Free creato nel workspace confermato, primo avvio da completare; Supabase Free è attivo con le 21 tabelle applicative e la persistenza verificata. La connessione privata al database, le credenziali OAuth devono essere verificati sul runtime prima dell’apertura. Il titolare e il recapito privacy devono ancora essere confermati. Registrazione, accesso social e forum sul nuovo hosting non sono ancora stati collaudati. Questi passaggi non vanno segnati come completati sulla base dei soli test locali.
 
 Riferimenti: [Better Auth — Discord](https://better-auth.com/docs/authentication/discord), [Facebook](https://better-auth.com/docs/authentication/facebook), [account collegati](https://better-auth.com/docs/concepts/users-accounts), [Render — variabili e segreti](https://render.com/docs/configure-environment-variables).

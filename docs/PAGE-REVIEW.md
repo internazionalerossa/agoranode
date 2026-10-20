@@ -21,6 +21,12 @@ Il controllo dei sorgenti copre le destinazioni seguenti. La build e i test auto
 
 Lingua di lettura, I tuoi salvati, Accedi/Registrati, Fonti, Filtri e canali e Membri ammessi usano lo stesso modulo: 164 × 56 px su desktop. Sul telefono la larghezza è metà della superficie utile meno lo spazio fra le colonne; l’altezza resta 56 px. I comandi dell’intestazione formano una griglia 2 × 2. I tre pulsanti della navigazione inferiore formano un gruppo uniforme separato. Il conteggio membri è informativo e non simula un pulsante cliccabile.
 
+## Verifica dal browser pubblico
+
+Il controllo remoto della versione 58, il 20 ottobre 2026 alle 16:41 UTC, è stato bloccato da `ERR_SOCKS_CONNECTION_FAILED` prima del caricamento delle pagine, anche al secondo tentativo. Non ha prodotto misure del layout, verifiche delle immagini o una sessione autenticata. La pubblicazione Sites è riuscita, ma il controllo visivo sul sito rimane da completare. Non considerare questo errore del percorso di accesso una prova che il sito sia indisponibile per tutti.
+
+Il client delle traduzioni usa soltanto `/api/translate`: in caso di errore conserva il testo originale e il comando di ripetizione, senza chiamare direttamente fornitori esterni dal browser. Il comportamento è coperto da una prova che simula il fallimento del server.
+
 ## Confini della pubblicazione
 
 L’aggiornamento del sito pubblico non apre automaticamente account, forum o chat. Sono ancora necessari nome/denominazione e recapito privacy del titolare, configurazione e prova dei servizi remoti, basi e procedure per PR2, tempi effettivi dei registri e dei backup, gestione delle segnalazioni e dei diritti. Per gli obblighi applicabili e i riferimenti normativi vedere PUBLICATION.md e LEGAL-OPERATIONS.md. Non qualificare la pubblicazione come certificata GDPR.

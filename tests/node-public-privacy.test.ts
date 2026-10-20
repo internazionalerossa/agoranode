@@ -1,3 +1,4 @@
+import {requestPublicTranslation} from '../app/lib/browser-translation';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {GET as thumbnail} from '../app/api/video-image/route';
@@ -30,4 +31,12 @@ test('device cleanup removes only public copies and preserves unsynced private r
 });
 test('legal destinations survive direct links and navigation from a selected discussion',()=>{
  assert.equal(viewFromUrl('https://site.test/?view=condizioni'),'condizioni');assert.equal(viewUrl('/?view=partecipa&proposal=selected','condizioni'),'/?view=condizioni');assert.equal(viewFromUrl('/?view=privacy'),'privacy');
+});
+
+test('translation failures preserve the same-origin boundary instead of contacting providers from the browser',async()=>{
+ const destinations:string[]=[];
+ const fetcher:typeof fetch=async input=>{destinations.push(String(input));return Response.json({error:'unavailable'},{status:503});};
+ await assert.rejects(requestPublicTranslation('Public title','en','it',fetcher));
+ assert.deepEqual(destinations,['/api/translate']);
+ assert.equal(await requestPublicTranslation('Public title','en','it',async input=>{assert.equal(input,'/api/translate');return Response.json({translatedText:'Titolo pubblico'});}), 'Titolo pubblico');
 });

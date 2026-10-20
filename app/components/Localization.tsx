@@ -12,11 +12,11 @@ import {
 
 import {brandName,localizeBrand,translateAroundBrand} from '@/app/lib/brand';
 import { usePagePreparation } from "./InitialLoadBoundary";
-import { translateAvailableText, normalizeLanguage, chunkTranslationText } from "@/app/lib/translation";
+import { normalizeLanguage, chunkTranslationText } from "@/app/lib/translation";
 import { createAvailabilityCircuit } from "@/app/lib/availability-circuit";
 import { createTranslationQueue } from "@/app/lib/translation-queue";
 
-let useDirectUntil = 0;
+import {requestPublicTranslation} from "@/app/lib/browser-translation";
 const translationHealth = createAvailabilityCircuit();
 const failedKeys = new Set<string>();
 const Locale = createContext("it");
@@ -190,21 +190,7 @@ const translationQueue = createTranslationQueue(async (task) => {
   const pair = `${task.from}:${task.to}`;
   try {
     if (translationHealth.blocked(pair)) throw new Error("Translation providers temporarily unavailable");
-    let value: string;
-    try {
-      if (Date.now() < useDirectUntil) throw new Error("Use public CORS endpoint");
-      const response = await fetch("/api/translate", {
-        method: "POST", headers: { "content-type": "application/json" },
-        body: JSON.stringify({ text: task.text, from: task.from, to: task.to }),
-        signal: AbortSignal.timeout(14000),
-      });
-      const data = await response.json();
-      if (!response.ok || typeof data.translatedText !== "string" || !data.translatedText.trim()) throw new Error("Server translation unavailable");
-      value = data.translatedText;
-    } catch {
-      useDirectUntil = Date.now() + 60_000;
-      value = await translateAvailableText(task.text, task.from, task.to);
-    }
+    const value = await requestPublicTranslation(task.text,task.from,task.to);
     translationHealth.success(pair);
     if (memory.size >= 800) memory.delete(memory.keys().next().value!);
     memory.set(task.key, value);
@@ -390,7 +376,6 @@ export function TranslationNotice() {
             failedKeys.clear();
             translationHealth.clear();
             failed = false;
-            useDirectUntil = 0;
             retryVersion++;
             emit();
           }}

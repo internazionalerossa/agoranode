@@ -8,7 +8,8 @@ export function configuration(env:Record<string,string|undefined>=process.env){
  const connectionString=required('DATABASE_URL');let database:URL;try{database=new URL(connectionString);}catch{throw Error('DATABASE_URL has an invalid format; URL-encode the database password');}
  if(!['postgres:','postgresql:'].includes(database.protocol))throw Error('DATABASE_URL must use PostgreSQL');
  if(env.NODE_ENV==='production'&&secret.startsWith('development-only'))throw Error('Replace the development auth secret');
- const mailTransport=env.MAIL_TRANSPORT??'none';
+ const mirror=env.MIRROR_MODE==='true';
+ const mailTransport=mirror?'none':env.MAIL_TRANSPORT??'none';
  if(!['none','smtp','brevo'].includes(mailTransport))throw Error('MAIL_TRANSPORT must be none, smtp or brevo');
  const smtpPort=Number(env.SMTP_PORT??465);
  if(mailTransport==='smtp'&&![465,587].includes(smtpPort)&&!(local&&smtpPort===1025))throw Error('SMTP_PORT must be 465 or 587');
@@ -17,8 +18,8 @@ export function configuration(env:Record<string,string|undefined>=process.env){
  const bootstrapHash=env.COMMUNITY_BOOTSTRAP_HASH;
  if(bootstrapHash&&(!/^[0-9a-f]{64}(?:,[0-9a-f]{64}){0,2}$/.test(bootstrapHash)||new Set(bootstrapHash.split(',')).size!==bootstrapHash.split(',').length))throw Error('Invalid bootstrap hash');
  const socialProviders:Partial<Record<'discord'|'facebook',{clientId:string;clientSecret:string;disableImplicitSignUp:true}>>={};
- for(const provider of ['discord','facebook'] as const){const prefix=provider.toUpperCase(),clientId=env[prefix+'_CLIENT_ID'],clientSecret=env[prefix+'_CLIENT_SECRET'];if(Boolean(clientId)!==Boolean(clientSecret))throw Error('Configure both credentials for '+prefix);if(clientId&&clientSecret)socialProviders[provider]={clientId,clientSecret,disableImplicitSignUp:true};}
+ for(const provider of ['discord','facebook'] as const){const prefix=provider.toUpperCase(),clientId=env[prefix+'_CLIENT_ID'],clientSecret=env[prefix+'_CLIENT_SECRET'];if(Boolean(clientId)!==Boolean(clientSecret))throw Error('Configure both credentials for '+prefix);if(!mirror&&clientId&&clientSecret)socialProviders[provider]={clientId,clientSecret,disableImplicitSignUp:true};}
  const operator=publicOperator(env);
- if(env.NODE_ENV==='production'&&(env.REGISTRATIONS_OPEN==='true'||env.FORUM_OPEN==='true')&&!operator)throw Error('Configure PUBLIC_OPERATOR_NAME and PUBLIC_PRIVACY_CONTACT before opening registrations or participation');
- return {operator,socialProviders,registrationOpen:env.REGISTRATIONS_OPEN==='true',forumOpen:env.FORUM_OPEN==='true',origin:origin.origin,secret,connectionString,bootstrapHash,port:Number(env.PORT??8000),mailTransport,smtp,brevoKey,mailFrom:(mailTransport==='none'?'':required('MAIL_FROM')).replace(/[\r\n]/g,'')};
+ if(!mirror&&env.NODE_ENV==='production'&&(env.REGISTRATIONS_OPEN==='true'||env.FORUM_OPEN==='true')&&!operator)throw Error('Configure PUBLIC_OPERATOR_NAME and PUBLIC_PRIVACY_CONTACT before opening registrations or participation');
+ return {mirror,operator,socialProviders,registrationOpen:!mirror&&env.REGISTRATIONS_OPEN==='true',forumOpen:!mirror&&env.FORUM_OPEN==='true',origin:origin.origin,secret,connectionString,bootstrapHash,port:Number(env.PORT??8000),mailTransport,smtp,brevoKey,mailFrom:(mailTransport==='none'?'':required('MAIL_FROM')).replace(/[\r\n]/g,'')};
 }

@@ -6,3 +6,7 @@ build-node/
 .participation-test-*/
 .DS_Store
 !.env.example
+
+.selfhost/
+*.dump
+*.dump.age

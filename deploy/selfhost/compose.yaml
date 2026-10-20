@@ -1,0 +1,71 @@
+name: polisrossa
+services:
+  database:
+    image: postgres:17-bookworm
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: polisrossa
+      POSTGRES_DB: polisrossa
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Run selfhost init first}
+      POSTGRES_INITDB_ARGS: --auth-local=scram-sha-256 --auth-host=scram-sha-256
+    command: [postgres, -c, "listen_addresses=", -c, unix_socket_permissions=0777]
+    volumes:
+      - database:/var/lib/postgresql/data
+      - socket:/var/run/postgresql
+    healthcheck:
+      test: [CMD-SHELL, "pg_isready -h /var/run/postgresql -U polisrossa -d polisrossa"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+  app:
+    build:
+      context: ../..
+    restart: unless-stopped
+    env_file: ../../.selfhost/runtime.env
+    volumes:
+      - socket:/var/run/postgresql:ro
+    depends_on:
+      database:
+        condition: service_healthy
+    healthcheck:
+      test: [CMD, node, -e, "fetch('http://127.0.0.1:8000/healthz').then(r=>{if(!r.ok)process.exit(1)}).catch(()=>process.exit(1))"]
+      interval: 15s
+      timeout: 8s
+      start_period: 90s
+      retries: 5
+  proxy:
+    image: caddy:2
+    restart: unless-stopped
+    ports:
+      - "${BIND_ADDRESS:-127.0.0.1}:${HTTPS_PORT:-8443}:443"
+      - "${BIND_ADDRESS:-127.0.0.1}:${HTTP_PORT:-8080}:80"
+    volumes:
+      - ../../.selfhost/Caddyfile:/etc/caddy/Caddyfile:ro
+      - certificates:/data
+      - proxy-config:/config
+    depends_on:
+      app:
+        condition: service_healthy
+  backup:
+    user: "${LOCAL_UID:-1000}:${LOCAL_GID:-1000}"
+    profiles: [tools]
+    build:
+      context: .
+      dockerfile: Backup.Dockerfile
+    environment:
+      PGHOST: /var/run/postgresql
+      PGUSER: polisrossa
+      PGDATABASE: polisrossa
+      PGPASSWORD: ${POSTGRES_PASSWORD:?Run selfhost init first}
+    volumes:
+      - socket:/var/run/postgresql:ro
+      - ../../.selfhost/recipients.txt:/recipients.txt:ro
+      - ../../.selfhost/backups:/backups
+    depends_on:
+      database:
+        condition: service_healthy
+volumes:
+  database:
+  socket:
+  certificates:
+  proxy-config:

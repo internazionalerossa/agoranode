@@ -9,3 +9,7 @@ build-node
 *.tar.gz
 outputs
 work
+
+.selfhost/
+*.dump
+*.dump.age

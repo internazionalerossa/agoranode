@@ -53,6 +53,10 @@ Per dati storici, libri e nuove fonti aggiungi riferimenti verificabili e, quand
 
 Per correggere un file puoi usare la matita di GitHub e proporre una pull request, cioè una modifica che i manutentori possono leggere e verificare prima di integrarla. La modifica proposta non sostituisce immediatamente il progetto pubblico. La [guida ai contributi](CONTRIBUTING.md), disponibile in sei lingue, descrive i passaggi anche per chi non ha mai usato questi strumenti. Le proposte, le issue e le votazioni si svolgono nel forum interno. GitHub conserva sorgenti e revisioni tecniche.
 
+## Ospitare il progetto
+
+La [guida al server domestico e alle copie pubbliche](docs/SELF-HOSTING.md) include avvio Docker, database persistente locale e backup age cifrati per custodi separati. Le copie pubbliche non ricevono account o dati privati. Replica P2P e subentro automatico del database non sono ancora implementati.
+
 ## Eseguire e verificare il codice
 
 Richiede Node.js 24 e npm. I servizi locali di prova possono essere avviati con Docker Compose; non servono credenziali di produzione.

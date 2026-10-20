@@ -17,3 +17,9 @@ Per contenuti, fonti o traduzioni, aggiungi riferimenti e attribuzioni pertinent
 State what you checked and any limitations. For code/catalogue changes: `npm test`, `npm run typecheck`; for UI changes: keyboard and small screens when available. For documentation only, say so; a build is not required.
 
 Do not include credentials, private information or unredacted personal screenshots.
+
+## Rights / Diritti
+
+- [ ] I may submit this contribution under AGPL-3.0-or-later for original software. I identified third-party material, its license and attribution. / Posso proporre questo contributo sotto AGPL-3.0-or-later per il codice originale; ho indicato materiali di terzi, licenze e attribuzioni.
+
+Contributors retain their copyright. Do not tick this box if the rights are uncertain; explain the missing evidence instead.

@@ -97,3 +97,9 @@ Read [AGENTS.md](AGENTS.md), [README.md](README.md) and the relevant section of 
 Keep credentials, `.env`, caches, personal collections, local paths and build outputs out of commits. Use synthetic fixtures for private data. Do not add a new dependency or hosting service without explaining the need. Existing database migrations are immutable.
 
 GitHub checks code. Production deployment is configured separately and takes place after review. Contributors do not need production credentials.
+
+## Contribution rights / Diritti sui contributi
+
+By submitting original software for inclusion, you confirm that you can offer it under AGPL-3.0-or-later. You retain your copyright. Identify third-party material, its source, license and any changes; flag uncertain rights before review. No copyright assignment is required. See [licensing scope](docs/LICENSING.md) and the rights checkbox in the pull request template.
+
+Proponendo codice originale per l'integrazione confermi di poterlo offrire sotto AGPL-3.0-or-later. Conservi il copyright. Per materiali di terzi indica origine, licenza e modifiche; segnala i diritti incerti prima della revisione. Non è richiesta una cessione di copyright. La conferma nel modulo della pull request aiuta la verifica e non sostituisce le autorizzazioni necessarie.

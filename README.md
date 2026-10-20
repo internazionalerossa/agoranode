@@ -66,6 +66,8 @@ Per sviluppo, database e invio email consulta [DEPLOYMENT.md](docs/DEPLOYMENT.md
 
 Il codice originale è **AGPL-3.0-or-later**: sono consentite copie e modifiche alle condizioni della [licenza](LICENSE). L’obiettivo della partecipazione è migliorare uno strumento comune; la gestione comunitaria non limita il diritto di crearne versioni derivate.
 
+La licenza mantiene aperti anche i sorgenti delle versioni modificate offerte online. [NOTICE](NOTICE) riporta gli avvisi e i limiti di garanzia; [TRADEMARKS.md](TRADEMARKS.md) distingue il riuso del codice dall'uso del nome e del logo come identità di un servizio ufficiale. I contributori conservano i propri diritti. Queste condizioni non sostituiscono gli obblighi legali del gestore.
+
 Articoli, immagini, video, libri, traduzioni editoriali e dataset mantengono le rispettive condizioni. Essere consultabili gratuitamente non equivale a essere liberamente ripubblicabili. Il progetto non promette disponibilità continua delle fonti, traduzioni infallibili, identità anagrafiche certificate o votazioni tecnicamente incorruttibili.
 
 ## Biblioteca e lingue

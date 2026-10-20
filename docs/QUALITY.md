@@ -8,7 +8,7 @@ Aggiornamento: 20 ottobre 2026. Questo registro distingue codice verificato, com
 - Compilazione, controlli dei tipi e suite automatiche verificati. I risultati puntuali accompagnano ogni consegna; non attestano il funzionamento remoto delle funzioni chiuse.
 - Account, ammissioni, salvataggi e forum testati con PGlite e sessioni sintetiche; non sono prove di email reali, disponibilità del provider, backup remoto o concorrenza fra repliche.
 - Prove browser precedenti hanno rilevato immagini assenti. Non è stato completato un controllo manuale di ogni percorso.
-- GitHub: repository pubblico ancora vuoto e nessuna installazione accessibile all’integrazione. Database ed email di produzione non configurati.
+- GitHub: sorgenti pubblicati in `internazionalerossa/polisrossa`; 316 file della prima importazione verificati tramite una nuova clonazione e confronto degli hash, senza differenze. Database ed email di produzione non configurati.
 
 ## Requisiti per area
 
@@ -19,11 +19,12 @@ Aggiornamento: 20 ottobre 2026. Questo registro distingue codice verificato, com
 | Nome Polis-Rossa in marchio, caricamento e pagine | **verifica parziale**. Marchio, caricamento, testi, metadati e documenti rinominati; Polis invariato e colore tradotto localmente nella lingua di lettura. Verifica visiva integrale ancora necessaria. |
 | Stella rossa a cinque punte e logo senza note musicali | **codice e anteprima**. Componenti di identità aggiornati; giudizio visivo finale aperto. |
 | Eliminare dati personali dai sorgenti pubblici | **verifica parziale**. Sorgenti indipendenti ripuliti; vecchio URL pubblico contiene ancora un identificativo personale. |
-| Repository pubblico sul nuovo account | **bloccato**. Primo commit non eseguito; integrazione GitHub priva di autorizzazione alla scrittura. |
+| Repository pubblico sul nuovo account | **pubblicato**. Importazione completa sul ramo `main`, commit `75794622383652392ae0c288f50848da9bc8b151`; copia remota verificata. |
 | Link al sito nel README e istruzioni di contribuzione | **verifica parziale**. Documenti predisposti; indirizzo definitivo e revisione finale da completare. |
 | Sorgenti completi scaricabili | **consegnato**. ZIP completo disponibile; aggiornare il pacchetto insieme ai sorgenti. |
 | Anteprima sul vecchio indirizzo | **pubblicato**. Anteprima pubblicata; deployment e sorgenti devono restare riferiti allo stesso commit verificato. |
 | Hosting gratuito indipendente in Europa, senza Koyeb | **bloccato**. Configurazione predisposta; database, email e servizio non collegati. |
+| Licenza, avvisi e identità del progetto | **implementato**. AGPL-3.0-or-later, ambito dei diritti di terzi, avvisi di garanzia, politica separata per nome e logo, dichiarazione sui diritti dei contributi e collegamenti ai sorgenti nell’interfaccia. Nessuna registrazione del marchio o conformità globale attestata. |
 
 ### Notizie e fonti
 

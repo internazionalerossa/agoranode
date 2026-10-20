@@ -1,5 +1,7 @@
 # Polis-Rossa
 
+Original software is licensed under **AGPL-3.0-or-later**, including its network-source obligations for modified versions. See [LICENSE](LICENSE), [NOTICE](NOTICE), [licensing scope](docs/LICENSING.md) and the separate [name and logo policy](TRADEMARKS.md). Contributors retain their copyright. Third-party publications and datasets retain their own terms; software warranty exclusions do not remove the operator's legal duties.
+
 **News, knowledge and shared tools.** Polis-Rossa brings together socialist, communist, trade union and anti-colonial sources, links readers to original publishers, and offers a multilingual library and documented historical resources.
 
 Its editorial orientation is explicit. Source selection is open to criticism and improvement; automated ranking does not certify accuracy. Translations can contain errors. Opening the original source remains essential for context, verification and support for the publisher.

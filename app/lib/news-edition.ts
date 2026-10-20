@@ -1,4 +1,4 @@
-import {comparePublication,type ReadingArticle} from './reading.ts';
+import {filterArticles,comparePublication,type ReadingArticle} from './reading.ts';
 
 /** Alternate countries and publishers across each rolling day of the selected publication period.
  * Every item remains accessible; this is a declared reading order, not a popularity score.
@@ -36,4 +36,20 @@ export function internationalEdition(articles:ReadingArticle[],now=Date.now()):R
   }
  }
  return result;
+}
+
+export const NEWS_PERIODS = [
+  ["0.25", "Ultime 6 ore"],
+  ["1", "Ultime 24 ore"],
+  ["Infinity", "Tutta la raccolta disponibile"],
+] as const;
+export const NEWS_ORDERS = [
+  ["balanced", "Alterna le fonti e i paesi"],
+  ["fresh", "Più recenti prima"],
+  ["source", "Fonte · dalla A alla Z"],
+] as const;
+/** The UI and tests use the same complete selection, including its reading order. */
+export function selectNews(articles: ReadingArticle[], filters: Parameters<typeof filterArticles>[1], now = Date.now()): ReadingArticle[] {
+  const matched = filterArticles(articles, filters, now);
+  return filters.sort === "balanced" ? internationalEdition(matched, now) : matched;
 }

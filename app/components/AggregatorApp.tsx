@@ -42,7 +42,6 @@ import BOOK_IDS from "@/app/data/book-ids.json" with { type: "json" };
 import { DOSSIERS } from "@/app/data/editorial";
 import {
   comparePublication,
-  filterArticles,
   validateArticles,
   mergeArticles,
   restoreSavedArticles,
@@ -59,7 +58,7 @@ import type { SourceStatus } from "@/app/lib/feed";
 import { createBatchedSink } from "@/app/lib/batched-sink";
 import { CommunityEmblem } from "./CommunityEmblem";
 import { QUOTATIONS, nextQuotation } from "@/app/data/quotes";
-import { internationalEdition } from "@/app/lib/news-edition";
+import { internationalEdition, selectNews, NEWS_PERIODS, NEWS_ORDERS } from "@/app/lib/news-edition";
 import { isNewsArticle } from "@/app/lib/news-eligibility";
 import { ArticleImage } from "./ArticleImage";
 import { InitialLoadBoundary } from "./InitialLoadBoundary";
@@ -319,6 +318,8 @@ export function AggregatorApp() {
     setQuery("");
     setRegion(ALL);
     setCountry(ALL);
+    setLanguage(ALL);
+    try { localStorage.setItem("rassegna-rossa.source-language", ALL); } catch { /* Optional preference storage. */ }
     setTopic(ALL);
     setSourceId(ALL);
     setDays("1");
@@ -579,7 +580,7 @@ export function AggregatorApp() {
       const search = document.getElementById("rassegna-search");
       if (search) {
         event.preventDefault();
-        
+
         requestAnimationFrame(() => search.focus());
       }
     };
@@ -591,9 +592,9 @@ export function AggregatorApp() {
     () => mergeArticles(savedArticles, displayArticles),
     [savedArticles, displayArticles],
   );
-  const matched = useMemo(
+  const filtered = useMemo(
     () =>
-      filterArticles(
+      selectNews(
         view === "salvati"
           ? allArticles.filter((a) => savedIds.has(a.id))
           : displayArticles.filter(isNewsArticle),
@@ -627,7 +628,6 @@ export function AggregatorApp() {
       newsClock,
     ],
   );
-  const filtered = useMemo(() => view !== "salvati" && sort === "balanced" ? internationalEdition(matched, newsClock) : matched, [matched,view,sort,newsClock]);
   const orderedArticles = filtered;
   useEffect(() => {
     setVisibleCount(PAGE_SIZE);
@@ -710,12 +710,13 @@ export function AggregatorApp() {
           (region === ALL || s.region === region) &&
           (country === ALL || s.country === country) &&
           (language === ALL || s.language === language) &&
+          (sourceId === ALL || s.id === sourceId) &&
           (!query.trim() ||
             `${s.name} ${s.country} ${s.tags.join(" ")} ${s.ideologies.join(" ")}`
               .toLowerCase()
               .includes(query.trim().toLowerCase())),
       ),
-    [directory, region, country, language, query],
+    [directory, region, country, language, sourceId, query],
   );
   const languages = useMemo(
     () => [...new Set(SOURCE_CATALOG.map((s) => s.language))].sort(),
@@ -895,15 +896,14 @@ export function AggregatorApp() {
                   </label>
                   {view === "notizie" ? <>
                     <Select label="Periodo" value={days} change={choosePeriod}>
-                      {[["0.25", "Ultime 6 ore"], ["0.5", "Ultime 12 ore"], ["1", "Ultime 24 ore"], ["3", "Ultimi 3 giorni"], ["7", "Ultimi 7 giorni"], ["30", "Ultimi 30 giorni"], ["Infinity", "Tutte le date"]].map(([value, label]) => <option key={value} value={value}><LocalizedText>{label}</LocalizedText></option>)}
+                      {NEWS_PERIODS.map(([value, label]) => <option key={value} value={value}><LocalizedText>{label}</LocalizedText></option>)}
                     </Select>
                   </> : null}
                   {view !== "fonti" ? (
                     <label className="inline-select news-order">
                       <span><LocalizedText>Ordina</LocalizedText></span>
                       <select aria-label="Ordina le notizie" value={sort} onChange={event => setSort(event.target.value)}>
-                        <option value="balanced"><LocalizedText>Rassegna internazionale</LocalizedText></option>
-                        <option value="fresh"><LocalizedText>Ultimi articoli · ordine cronologico</LocalizedText></option>
+                        {NEWS_ORDERS.map(([value, label]) => <option key={value} value={value}><LocalizedText>{label}</LocalizedText></option>)}
                       </select>
                       <ChevronDown size={14} />
                     </label>
@@ -915,7 +915,7 @@ export function AggregatorApp() {
                     aria-controls="advanced-filters"
                   >
                     <SlidersHorizontal size={16} />
-                    <LocalizedText>{" Altri filtri"}</LocalizedText>
+                    <LocalizedText>{" Filtra per fonte e argomento"}</LocalizedText>
                     <LocalizedText> </LocalizedText>
                     {filterCount > 0 ? (
                       <span>
@@ -982,7 +982,7 @@ export function AggregatorApp() {
                       <LocalizedText>{" Azzera filtri"}</LocalizedText>
                     </button>
                 </div>
-                {view === "notizie" ? <p className="news-window-label"><LocalizedText>{days === "1" ? "Ultime 24 ore" : days === "Infinity" ? "Tutte le date, comprese quelle non indicate dalle fonti" : `Periodo selezionato: ${Number(days) * 24} ore`}</LocalizedText>{" · "}<LocalizedText>{sort === "fresh" ? "Dalla pubblicazione più recente" : sort === "balanced" ? "Paesi e testate alternati nella giornata" : "Ordinamento selezionato"}</LocalizedText></p> : null}
+                {view !== "fonti" ? <div className="news-selection-status" role="status" aria-live="polite" aria-atomic="true"><strong>{filtered.length} <LocalizedText>articoli trovati</LocalizedText></strong><span><LocalizedText>{NEWS_ORDERS.find(([value]) => value === sort)?.[1] ?? "Più recenti prima"}</LocalizedText>{view === "notizie" ? <> · <LocalizedText>{NEWS_PERIODS.find(([value]) => value === days)?.[1] ?? "Ultime 24 ore"}</LocalizedText></> : null}</span><small><LocalizedText>{sort === "balanced" ? "Una notizia per testata prima di ripetere una fonte, alternando i paesi nelle 24 ore. All’interno di ogni fonte, prima le più recenti." : sort === "source" ? "Testate in ordine alfabetico; per ogni testata, prima gli articoli più recenti." : "Ordine basato sulla data di pubblicazione indicata dalla fonte."}</LocalizedText></small>{days === "Infinity" && view === "notizie" ? <small><LocalizedText>Include solo gli articoli ricevuti dai feed e conservati sul dispositivo, anche senza data. Non è un archivio storico completo.</LocalizedText></small> : null}</div> : null}
                 {view === "notizie" && regional.failed > 0 ? <p className="feed-note" role="status"><LocalizedText>Alcuni canali regionali non rispondono. La rassegna mostra le notizie disponibili e riprova al prossimo aggiornamento.</LocalizedText></p> : null}
                 {sourceId !== ALL ? (
                   <div className="active-source">
@@ -1029,7 +1029,7 @@ export function AggregatorApp() {
                 ) : (
                   <div className="news-layout">
                     <div className="news-main" id="rassegna-articoli">
-                      {view==="notizie"&&<header className="news-reading-header"><div><p className="eyebrow"><LocalizedText>NOTIZIE · ANALISI · APPROFONDIMENTI</LocalizedText></p><h2><LocalizedText>La rassegna</LocalizedText></h2><p><LocalizedText>L’intera raccolta, nell’ordine che scegli. Leggi, cerca e confronta le fonti.</LocalizedText></p></div></header>}
+
 
                       {topic !== ALL ? (
                         <div className="topic-intro">

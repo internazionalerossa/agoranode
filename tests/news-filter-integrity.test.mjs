@@ -32,3 +32,24 @@ test('incidental letter sequences in technology words are not labour or war topi
  const unrelated={...article,title:'Software per una rete network',excerpt:'Nuova versione del programma',categories:[],topics:['lavoro','imperialismo']};
  for(const topic of ['lavoro','imperialismo'])assert.equal(filterArticles([unrelated],{...filters,topic},now).length,0);
 });
+
+import {selectNews,NEWS_PERIODS,NEWS_ORDERS} from '../app/lib/news-edition.ts';
+test('every displayed order runs through the UI selection path and produces its declared order',()=>{
+ const item=(id,name,age)=>({...article,id,sourceId:id,kind:'giornale',sourceName:name,sourceHomepage:`https://${id.split('-')[0]}.example/`,country:id.startsWith('a')?'Italia':'Francia',publishedAt:new Date(now-age*60000).toISOString()});
+ const cards=[item('a-new','Zeta',1),item('a-next','Zeta',2),item('b-older','Alfa',90)];
+ const orders=Object.fromEntries(NEWS_ORDERS.map(([sort])=>[sort,selectNews(cards,{...filters,sort},now).map(a=>a.id)]));
+ assert.deepEqual(orders.fresh,['a-new','a-next','b-older']);
+ assert.deepEqual(orders.balanced,['a-new','b-older','a-next']);
+ assert.deepEqual(orders.source,['b-older','a-new','a-next']);
+ for(const ids of Object.values(orders))assert.deepEqual([...ids].sort(),cards.map(a=>a.id).sort());
+});
+test('visible periods select real publication dates; selecting a source and resetting changes the same result set',()=>{
+ const ages=[1,8,30];
+ const cards=ages.map((age,index)=>({...article,id:'age-'+age,publishedAt:new Date(now-age*3600000).toISOString()}));
+ cards.push({...article,id:'undated',publishedAt:null});
+ const periods=Object.fromEntries(NEWS_PERIODS.map(([days])=>[days,selectNews(cards,{...filters,days:Number(days)},now).length]));
+ assert.deepEqual(periods,{'0.25':1,'1':2,Infinity:4});
+ assert.equal(selectNews(cards,{...filters,source:'morning-star'},now).length,0);
+ assert.equal(selectNews(cards,filters,now).length,2);
+ assert.equal(selectNews(cards,{...filters,query:'no matching phrase'},now).length,0);
+});

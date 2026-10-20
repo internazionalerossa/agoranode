@@ -10,8 +10,10 @@ test('legacy observatory links resolve to the news collection with a six-hour pe
 test('navigation clears parameters owned by other areas while preserving unrelated links',()=>{const from='https://site.example/?view=teoria&storia=italia&percorso=conquiste&indicatore=SP.DYN.LE00.IN&stanza=generale&proposal=topic&ref=shared#world-history-title';assert.equal(viewUrl(from,'notizie'),'/?ref=shared');assert.equal(viewUrl(from,'partecipa'),'/?view=partecipa&stanza=generale&proposal=topic&ref=shared');assert.equal(viewUrl(from,'teoria'),'/?view=teoria&storia=italia&percorso=conquiste&indicatore=SP.DYN.LE00.IN&ref=shared');assert.equal(viewFromUrl('https://site.example/?stanza=generale'),'partecipa');});
 
 test('shared periods survive reload and invalid periods fall back to a day',()=>{
- for(const value of ['0.25','0.5','1','3','7','30','Infinity'])assert.equal(newsDaysFromUrl('https://site.example/?periodo='+value),value);
+ for(const value of ['0.25','1','Infinity'])assert.equal(newsDaysFromUrl('https://site.example/?periodo='+value),value);
  assert.equal(newsDaysFromUrl('https://site.example/?periodo=6h'),'0.25');
  assert.equal(newsDaysFromUrl('https://site.example/?periodo=bad'),'1');
  assert.equal(viewUrl('https://site.example/?periodo=6h','teoria'),'/?view=teoria');
 });
+
+test('legacy windows resolve to a visible, available collection period',()=>{assert.equal(newsDaysFromUrl('https://site.example/?periodo=0.5'),'1');for(const value of ['3','7','30'])assert.equal(newsDaysFromUrl('https://site.example/?periodo='+value),'Infinity');});

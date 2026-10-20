@@ -4330,8 +4330,16 @@ a.book-cover:focus-visible { outline:3px solid var(--red); outline-offset:4px; }
 .history-indicator-guidance { max-width: 74ch; font-size: 14px; line-height: 1.75; margin: 12px 0 20px; }
 
 /* One centered reading surface; intrinsic content must shrink inside the viewport. */
-body { min-width: 0; }
-.app-shell { width: 100%; max-width: 1360px; padding-inline: clamp(12px, 3vw, 40px); }
+/* The document never becomes a horizontal scroller. Wide data and video
+   remain scrollable inside their own bounded surfaces; zoom stays available. */
+html { overflow-x: clip; }
+body { min-width: 0; width: 100%; overflow-x: clip; }
+@supports not (overflow: clip) { html, body { overflow-x: hidden; } }
+.app-shell { width: 100%; max-width: 1080px; padding-inline: 32px; border-inline: 0; }
+.app-shell :where(div, form, figure, ul, ol) { min-inline-size: 0; }
+.app-shell > *, .app-shell main > * { max-inline-size: 100%; }
+.video-carousel, .video-track, .story-period-nav, .history-data-table { width: 100%; max-width: 100%; }
+.history-data-table { overflow-x: auto; overscroll-behavior-x: contain; }
 .app-shell :where(main, section, article, aside, header, footer, nav, details, label, fieldset) { min-width: 0; }
 .app-shell :where(h1, h2, h3, h4, p, a, summary) { overflow-wrap: anywhere; }
 .app-shell :where(img, video, iframe, svg) { max-width: 100%; }
@@ -4437,3 +4445,66 @@ body { min-width: 0; }
 .feed-status button { margin-inline-start: auto; font-size: inherit; }
 .filter-explanation { grid-column: 1 / -1; font-size: 11px; line-height: 1.6; color: var(--muted); }
 .reset-reading-filters { margin-bottom: 12px; font-size: 11px; }
+
+/* One responsive measure for all pages, including nested history details. */
+.app-shell .wordmark { font-size: 36px; }
+.app-shell .brand-symbol { width: 36px; height: 36px; flex: none; }
+.app-shell .article-card .article-copy h3 { font-size: 19px; }
+.app-shell .article-card .article-copy > p { font-size: 12px; }
+.story-detail-metrics { grid-template-columns: repeat(auto-fit, minmax(min(100%, 170px), 1fr)); }
+.story-comparison-tabs, .video-carousel-heading, .video-carousel-heading > div { flex-wrap: wrap; }
+.story-comparison-tabs button { flex: 1 1 100px; }
+.video-carousel-heading > div { row-gap: 4px; }
+.video-carousel-actions { flex-wrap: wrap; }
+@media (max-width: 850px) {
+  .app-shell { padding-inline: 24px; }
+}
+@media (max-width: 650px) {
+  .app-shell { padding-inline: max(16px, env(safe-area-inset-left)) max(16px, env(safe-area-inset-right)); }
+  .app-shell .wordmark { font-size: 29px; gap: 9px; white-space: normal; }
+  .app-shell .brand-symbol { width: 30px; height: 30px; }
+  .masthead { min-height: 0; padding-block: 14px 8px; gap: 8px; }
+  .brand-tagline { margin-top: 5px; }
+  .header-account-actions { justify-content: space-between; gap: 6px; }
+  .header-account-actions > * { max-width: 100%; }
+  .main-nav { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; align-items: center; }
+  .main-nav .nav-links { width: auto; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; overflow: visible; }
+  .main-nav .nav-links > button { justify-content: center; white-space: normal; font-size: 10px; line-height: 1.3; min-height: 48px; padding: 8px 2px; }
+  .source-directory-button { margin: 0; gap: 4px; min-height: 48px; font-size: 10px; }
+  .source-directory-button > strong, .source-directory-button > span { display: none; }
+  .app-shell .news-grid { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+  .app-shell .article-card .article-open { display: flow-root; }
+  .app-shell .article-card .article-image { float: right; width: 88px; height: 70px; aspect-ratio: auto; margin: 0 0 8px 12px; border-radius: 5px; }
+  .app-shell .article-card .article-copy { width: auto; }
+  .app-shell .article-card .article-meta { display: block; font-size: 10px; margin-bottom: 6px; }
+  .article-meta time { display: block; margin-top: 2px; }
+  .app-shell .article-card .article-copy h3 { font-size: 17px; line-height: 1.3; margin-bottom: 7px; display: block; }
+  .app-shell .article-card .article-copy > p { clear: both; font-size: 12px; line-height: 1.5; -webkit-line-clamp: 2; margin-bottom: 0; }
+  .image-category { display: none; }
+  .app-shell .article-card .publisher-link { font-size: 10px; margin-top: 8px; }
+  .app-shell .article-card .article-bottom { padding-top: 5px; }
+  .video-track { grid-auto-columns: 152px; gap: 10px; }
+  .video-card { height: 161px; }
+  .video-carousel-heading { gap: 5px; }
+  .news-library-invitation { font-size: 11px; padding-block: 10px; }
+  .news-library-invitation > a span { font-size: 11px; }
+  .news-reading-header h2 { font-size: 25px; }
+  .story-opening h3 { font-size: 28px; }
+  .story-era > header h3, .story-event-body > h4 { font-size: 21px; }
+  .story-growth-bars > div { grid-template-columns: minmax(0, 1fr) auto; gap: 7px; }
+  .story-growth-track { grid-column: 1 / -1; grid-row: 2; }
+  .story-growth-bars strong { font-size: 19px; }
+  .story-detail-metrics { padding: 12px; }
+  .story-era-number { font-size: 30px; }
+  .story-events { margin-left: 5px; padding-left: 15px; }
+  .story-event::before { left: -21px; }
+  .story-period-nav { flex-wrap: wrap; gap: 0 15px; overflow: visible; }
+  .story-period-nav a { min-height: 40px; }
+  .story-period-nav, .story-event-details[open] > summary { position: static; }
+  .reader-dialog { width: calc(100% - 24px); max-width: calc(100% - 24px); }
+}
+
+.news-selection-status { display: grid; gap: 5px; padding: 14px 0; margin-bottom: 16px; border-bottom: 1px solid var(--line); font-size: 12px; }
+.news-selection-status > span { color: var(--red); font-weight: 600; }
+.news-selection-status > small { max-width: 85ch; font-size: 11px; line-height: 1.5; color: var(--muted); }
+@media(max-width:650px) { .filter-toggle { white-space: normal; justify-content: center; min-height: 44px; } }

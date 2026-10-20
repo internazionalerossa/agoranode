@@ -23,5 +23,7 @@ export function newsDaysFromUrl(raw:string):string {
  if(url.searchParams.get('view')==='osservatorio'||url.hash==='#osservatorio-sei-ore')return '0.25';
  const value=url.searchParams.get('periodo');
  if(value==='6h')return '0.25';
- return value&&['0.25','0.5','1','3','7','30','Infinity'].includes(value)?value:'1';
+ if(value==='0.5')return '1';
+ if(value&&['3','7','30'].includes(value))return 'Infinity';
+ return value&&['0.25','1','Infinity'].includes(value)?value:'1';
 }

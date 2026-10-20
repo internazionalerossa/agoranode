@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {createElement as h} from 'react';
 import {renderToStaticMarkup} from 'react-dom/server';
 import {LocalizationProvider,LocalizedText} from '../app/components/Localization';
-import {resolveLanguagePreferences} from '../app/lib/language-preferences';
+import {resolveLanguagePreferences,readingModePreferences} from '../app/lib/language-preferences';
 import {translateTransientText} from '../app/lib/transient-translation';
 import {POST} from '../app/api/translate/route';
 
@@ -14,3 +14,5 @@ test('same-language and cancelled transient translations never contact a provide
 test('temporary endpoint does not reuse public cached translations or populate their cache',async()=>{const original=globalThis.fetch;let calls=0;globalThis.fetch=async()=>{calls++;return Response.json([[[String(calls),null]],null,'it']);};const request=(text:string,temporary=false)=>POST(new Request('https://example.test/api/translate',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({text,from:'it',to:'en',temporary})}));try{const text='Testo isolato '+crypto.randomUUID();await request(text);assert.equal(calls,1);await request(text);assert.equal(calls,1);const response=await request(text,true);assert.equal(response.headers.get('cache-control'),'private, no-store');assert.equal(calls,2);await request(text,true);assert.equal(calls,3);const separate='Solo temporaneo '+crypto.randomUUID();await request(separate,true);await request(separate);assert.equal(calls,5);}finally{globalThis.fetch=original;}});
 
 test('library explains its catalogue and comparative archive without imposing new navigation sections',async()=>{const {LibraryView}=await import('../app/components/LibraryView');const html=renderToStaticMarkup(h(LibraryView,{query:'',setQuery:()=>{},savedBooks:new Set<string>(),onToggleBook:()=>{}}));assert.match(html,/Come orientarsi/);assert.match(html,/Apri i dati e i confronti/);assert.match(html,/indicatore=SP.DYN.LE00.IN/);assert.doesNotMatch(html,/library-sections|Biblioteca interattiva/);assert.match(html,/class="book-grid"/);assert.match(html,/id="page-title"/);});
+
+test('reading shortcuts preserve the selected UI language and switch original/translated content atomically',()=>{const initial={interface:'fr',content:'en'};const original=readingModePreferences(initial,'original');const resolved=resolveLanguagePreferences(original,'it-IT');assert.equal(resolved.interfaceLanguage,'fr');assert.equal(resolved.original,true);assert.deepEqual(readingModePreferences(original,'translated'),{interface:'fr',content:'fr'});const automatic=resolveLanguagePreferences(readingModePreferences({interface:'auto',content:'de'},'original'),'es-ES');assert.equal(automatic.interfaceLanguage,'es');assert.equal(automatic.original,true);assert.deepEqual(initial,{interface:'fr',content:'en'});});

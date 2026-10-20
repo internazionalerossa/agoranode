@@ -4508,3 +4508,23 @@ body { min-width: 0; width: 100%; overflow-x: clip; }
 .news-selection-status > span { color: var(--red); font-weight: 600; }
 .news-selection-status > small { max-width: 85ch; font-size: 11px; line-height: 1.5; color: var(--muted); }
 @media(max-width:650px) { .filter-toggle { white-space: normal; justify-content: center; min-height: 44px; } }
+
+/* Reading language belongs to the visible header; the standalone reader keeps
+   its existing floating access to the same preferences. */
+.global-language-settings > summary { display: grid; gap: 3px; }
+.global-language-settings > summary > small { font-size: 10px; font-weight: 400; }
+.global-language-settings > div > h2 { margin: 0 0 16px; font: 600 18px/1.3 var(--sans); }
+.global-language-settings .reading-mode-options { display: grid; gap: 8px; margin-bottom: 18px; }
+.reading-mode-options > button { display: grid; gap: 5px; text-align: start; padding: 12px; min-height: 44px; border: 1px solid var(--line); border-radius: 5px; background: var(--paper); }
+.reading-mode-options > button[aria-pressed="true"] { border: 2px solid var(--red); padding: 11px; background: #f1e9df; }
+.reading-mode-options > button > span { font-size: 11px; line-height: 1.5; color: var(--muted); }
+.header-account-actions > .global-language-settings { position: relative; inset: auto; z-index: 95; max-width: 100%; }
+.header-account-actions > .global-language-settings > summary { min-height: 44px; padding: 7px 10px; box-shadow: none; border-radius: 5px; }
+.header-account-actions > .global-language-settings > div { top: calc(100% + 8px); bottom: auto; width: min(390px, calc(100vw - 32px)); max-height: 70dvh; overscroll-behavior: contain; }
+.global-language-settings summary::-webkit-details-marker { display: none; }
+@media(max-width:650px) {
+ .header-account-actions > .global-language-settings { flex-basis: 100%; }
+ .header-account-actions > .global-language-settings > summary { display: flex; justify-content: space-between; align-items: center; width: 100%; font-size: 12px; }
+ .header-account-actions > .global-language-settings > div { width: 100%; right: 0; }
+ .global-language-settings select { font-size: 16px; }
+}

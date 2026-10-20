@@ -86,6 +86,6 @@ Articoli, immagini, video, libri, traduzioni editoriali e dataset mantengono le 
 
 ## Biblioteca e lingue
 
-La Biblioteca comprende libri gratuiti, percorsi di lettura, storia e un archivio statistico consultabile. La guida iniziale spiega gli strumenti senza aggiungere livelli di navigazione. Partecipa ospita il forum, le votazioni sul progetto e le chat temporanee. Il comando Lingue separa interfaccia e lettura, con la possibilità di vedere i contenuti originali. Le funzioni di partecipazione richiedono il servizio indipendente configurato.
+La Biblioteca comprende libri gratuiti, percorsi di lettura, storia e un archivio statistico consultabile. La guida iniziale spiega gli strumenti senza aggiungere livelli di navigazione. Partecipa ospita il forum, le votazioni sul progetto e le chat temporanee. Il comando Lingua di lettura è visibile nell’intestazione: consente di usare l’interfaccia nella lingua del lettore con i contenuti originali, tradurre entrambi nella stessa lingua o scegliere separatamente le due lingue. Le funzioni di partecipazione richiedono il servizio indipendente configurato.
 
 Per portare online il servizio indipendente, seguire [Prima pubblicazione](docs/PUBLICATION.md): configurazione gratuita, verifiche reali, informative e procedure necessarie prima di aprire account e comunità.

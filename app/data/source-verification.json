@@ -1,5 +1,5 @@
 {
-  "verifiedAt": "2026-10-19",
+  "verifiedAt": "2026-10-20",
   "feeds": [
     {
       "id": "mintpress",
@@ -371,6 +371,48 @@
       "entriesObserved": 60,
       "latestDateObserved": "Tue, 20 Oct 2026 01:18:25 +0530",
       "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "ilfatto-politica",
+      "feedTitle": "Politica – Il Fatto Quotidiano",
+      "entriesObserved": 25,
+      "latestDateObserved": "Tue, 20 Oct 2026 12:26:52 +0000",
+      "verifiedAt": "2026-10-20"
+    },
+    {
+      "id": "left-it",
+      "feedTitle": "Left",
+      "entriesObserved": 20,
+      "latestDateObserved": "Tue, 20 Oct 2026 12:02:17 +0000",
+      "verifiedAt": "2026-10-20"
+    },
+    {
+      "id": "pcf-fr",
+      "feedTitle": "L'actualité du PCF",
+      "entriesObserved": 20,
+      "latestDateObserved": "Sun, 18 Oct 2026 21:29:47 +0200",
+      "verifiedAt": "2026-10-20"
+    },
+    {
+      "id": "the-left-eu",
+      "feedTitle": "The Left",
+      "entriesObserved": 10,
+      "latestDateObserved": "Thu, 15 Oct 2026 14:26:56 +0000",
+      "verifiedAt": "2026-10-20"
+    },
+    {
+      "id": "alencontre",
+      "feedTitle": "A l'encontre",
+      "entriesObserved": 10,
+      "latestDateObserved": "Tue, 20 Oct 2026 12:39:46 +0000",
+      "verifiedAt": "2026-10-20"
+    },
+    {
+      "id": "saftu",
+      "feedTitle": "South African Federation of Trade Unions – SAFTU",
+      "entriesObserved": 10,
+      "latestDateObserved": "Tue, 20 Oct 2026 07:31:21 +0000",
+      "verifiedAt": "2026-10-20"
     }
   ],
   "referenceIndex": {

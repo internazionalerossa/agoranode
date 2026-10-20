@@ -952,5 +952,132 @@
     "feedUrls": [
       "https://www.thehindu.com/feeder/default.rss"
     ]
+  },
+  {
+    "id": "ilfatto-politica",
+    "name": "Il Fatto Quotidiano · Politica",
+    "homepage": "https://www.ilfattoquotidiano.it/politica-palazzo/",
+    "feedUrls": [
+      "https://www.ilfattoquotidiano.it/category/politica-palazzo/feed/"
+    ],
+    "region": "Italia",
+    "country": "Italia",
+    "language": "it",
+    "kind": "giornale",
+    "ideologies": [
+      "informazione critica"
+    ],
+    "tags": [
+      "politica",
+      "lavoro",
+      "diritti"
+    ],
+    "priority": 4
+  },
+  {
+    "id": "left-it",
+    "name": "Left",
+    "homepage": "https://left.it/",
+    "feedUrls": [
+      "https://left.it/feed/"
+    ],
+    "region": "Italia",
+    "country": "Italia",
+    "language": "it",
+    "kind": "rivista",
+    "ideologies": [
+      "sinistra"
+    ],
+    "tags": [
+      "lavoro",
+      "diritti",
+      "femminismi"
+    ],
+    "priority": 4
+  },
+  {
+    "id": "pcf-fr",
+    "name": "Parti communiste français · Actualités",
+    "homepage": "https://www.pcf.fr/",
+    "feedUrls": [
+      "https://www.pcf.fr/actualites.rss"
+    ],
+    "region": "Europa",
+    "country": "Francia",
+    "language": "fr",
+    "kind": "partito",
+    "ideologies": [
+      "comunista"
+    ],
+    "tags": [
+      "lavoro",
+      "politica"
+    ],
+    "priority": 3
+  },
+  {
+    "id": "the-left-eu",
+    "name": "The Left · Parlamento europeo",
+    "homepage": "https://left.eu/",
+    "feedUrls": [
+      "https://left.eu/feed/"
+    ],
+    "region": "Europa",
+    "country": "Belgio",
+    "language": "en",
+    "kind": "istituzione",
+    "ideologies": [
+      "sinistra"
+    ],
+    "tags": [
+      "lavoro",
+      "femminismi",
+      "diritti"
+    ],
+    "priority": 3
+  },
+  {
+    "id": "alencontre",
+    "name": "À l’encontre · La Brèche",
+    "homepage": "https://alencontre.org/",
+    "feedUrls": [
+      "https://alencontre.org/feed"
+    ],
+    "region": "Europa",
+    "country": "Svizzera",
+    "language": "fr",
+    "kind": "rivista",
+    "ideologies": [
+      "socialista",
+      "internazionalista"
+    ],
+    "tags": [
+      "lavoro",
+      "politica",
+      "internazionale"
+    ],
+    "priority": 3
+  },
+  {
+    "id": "saftu",
+    "name": "SAFTU · South African Federation of Trade Unions",
+    "homepage": "https://saftu.org.za/",
+    "feedUrls": [
+      "https://saftu.org.za/feed/"
+    ],
+    "region": "Africa",
+    "country": "Sudafrica",
+    "language": "en",
+    "kind": "sindacato",
+    "ideologies": [
+      "sindacale",
+      "socialista"
+    ],
+    "tags": [
+      "lavoro",
+      "sindacati",
+      "diritti"
+    ],
+    "priority": 3
   }
 ]

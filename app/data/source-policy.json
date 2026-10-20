@@ -5,7 +5,8 @@
     "indian-punchline",
     "dawn",
     "the-hindu",
-    "eff"
+    "eff",
+    "jornal-usp"
   ],
   "excludedPublisherDomains": [
     "vanityfair.com",
@@ -37,7 +38,17 @@
   "criteria": [
     "La rassegna raccoglie testate e organizzazioni della sinistra, dei movimenti sociali e sindacali e dell’informazione anticoloniale e femminista.",
     "La presenza di parole chiave politiche non qualifica una testata: il radar ammette soltanto editori già presenti nel catalogo editoriale.",
-    "Le fonti universitarie devono appartenere ad atenei pubblici verificati. Un ateneo pubblico non viene per questo qualificato come socialista.",
-    "Dati statistici, testi di legge e documenti originali sono riferimenti documentali, distinti dalle testate della rassegna. Il loro uso non attribuisce agli enti una linea politica."
+    "Gli atenei pubblici e gli enti statistici restano riferimenti documentari: non diventano fonti della rassegna politica per il solo fatto di essere pubblici.",
+    "Dati statistici, testi di legge e documenti originali sono riferimenti documentali, distinti dalle testate della rassegna. Il loro uso non attribuisce agli enti una linea politica.",
+    "La selezione di una sezione politica non equivale a classificare tutta una testata come socialista: Il Fatto Quotidiano entra soltanto con il feed Politica richiesto, con una descrizione distinta dalle fonti di partito."
+  ],
+  "scopedPublisherSources": [
+    {
+      "domain": "ilfattoquotidiano.it",
+      "sourceIds": [
+        "ilfatto-politica"
+      ],
+      "reason": "Inclusione richiesta della sola sezione Politica. Il feed generale e le ricerche radar non autorizzano gossip, sport o altre sezioni."
+    }
   ]
 }

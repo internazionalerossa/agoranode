@@ -17,20 +17,21 @@ export default function HistoricalDossiers() {
   const locale = useReadingLocale();
   useEffect(() => {
     const sync=()=>{const id=historyId(new URL(location.href).searchParams.get('storia'));if(id)setSelected(id);};
-    sync();window.addEventListener('popstate',sync);return()=>window.removeEventListener('popstate',sync);
+    sync();window.addEventListener('popstate',sync);window.addEventListener('hashchange',sync);return()=>{window.removeEventListener('popstate',sync);window.removeEventListener('hashchange',sync);};
   },[]);
+  useEffect(()=>{const url=new URL(location.href);if(historyId(url.searchParams.get('storia'))!==selected||(url.hash&&!url.hash.startsWith('#dossier-')))return;const frame=requestAnimationFrame(()=>{heading.current?.focus({preventScroll:true});heading.current?.scrollIntoView({block:'start',behavior:'instant'});});return()=>cancelAnimationFrame(frame);},[selected]);
   const choose = (id:string) => {
     if(!historyId(id))return;
     setSelected(id);
-    const url=new URL(location.href);url.searchParams.set('storia',id);
-    history.replaceState(history.state,'',url);
+    const url=new URL(historyLink(id),location.origin);
+    history.pushState(history.state,'',url);
     requestAnimationFrame(()=>{heading.current?.focus({preventScroll:true});heading.current?.scrollIntoView({block:'start',behavior:'auto'});});
   };
   const dossier = DATA.dossiers.find(item => item.id === selected) ?? DATA.dossiers[0];
   const bibliography=[...new Set([...dossier.sections.flatMap(item=>item.sources),...dossier.timeline.map(item=>item.source),...dossier.changes.map(item=>item.source),...dossier.metrics.map(item=>item.source)])];
   return <section className="history-dossiers" aria-label="Approfondimenti storici">
     <label className="history-dossier-select"><span><T>Scegli un approfondimento storico</T></span><select value={selected} onChange={event=>choose(event.target.value)}>{HISTORY_INDEX.map(item=><option key={item.id} value={item.id}><T>{item.country}</T> · <T content>{item.title}</T></option>)}</select></label>
-    <article className="history-article" key={dossier.id} aria-labelledby="history-article-title">
+    <article id={"dossier-"+dossier.id} className="history-article" key={dossier.id} aria-labelledby="history-article-title">
       <header className="history-article-header"><p className="eyebrow"><T content>{dossier.country}</T> / <T>{dossier.period}</T></p><h3 id="history-article-title" ref={heading} tabIndex={-1}><T>{dossier.title}</T></h3><p className="history-deck"><T content>{dossier.deck}</T></p><p className="history-article-meta"><span><Clock size={14}/>{dossier.minutes} <T>min di lettura circa</T></span><a href={historyLink(dossier.id)}><T>Link a questo dossier</T><ArrowUpRight size={14}/></a></p><p className="history-intro"><T content>{dossier.intro}</T></p></header>
       {dossier.metrics.length>0 && <div className="history-metrics">{dossier.metrics.map(metric=><div key={metric.label}><strong><T defer>{metric.value}</T></strong><h4><T content defer>{metric.label}</T></h4><p><T content defer>{metric.note}</T></p><SourceLinks ids={[metric.source]}/></div>)}</div>}
       <div className="history-article-layout">

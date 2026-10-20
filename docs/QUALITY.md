@@ -4,6 +4,12 @@ Aggiornamento: 20 ottobre 2026. Questo registro distingue codice verificato, com
 
 ## Evidenze disponibili
 
+- Link ai dossier con vista, percorso e ancora; corretto ripristino delle ancore dopo caricamento differito.
+- Rassegna con controlli visibili, due ordini e filtri basati sulla provenienza reale e sul testo degli articoli. Rimossa la guida duplicata; la cache non riporta nell’atlante editori esclusi.
+- Sei feed notizie e sei canali ufficiali aggiunti con verifica dal vivo e riferimenti documentati.
+- Condizioni di vita in primo piano e comparazioni industriali come approfondimento facoltativo.
+
+
 - Informativa cookie e memoria locale ampliata, copie pubbliche eliminabili senza rimuovere i salvati, traduzione della comunità facoltativa e interrotta al ritorno all’originale. Esportazione privata nel runtime indipendente; procedure del titolare ancora da completare.
 - Anteprima pubblica disponibile; autenticazione indipendente e scritture della comunità non attive su quell’indirizzo.
 - Revisione delle spiegazioni in README e guide, pagine principali, 64 tappe storiche, 11 introduzioni ai dossier, 32 descrizioni di libri e 18 ambiti statistici. Valori, date, fonti, edizioni e identificativi conservati; la revisione non riscrive i testi originali degli editori.
@@ -33,7 +39,7 @@ Aggiornamento: 20 ottobre 2026. Questo registro distingue codice verificato, com
 | Requisito | Stato e riscontro |
 | --- | --- |
 | Fonti di sinistra e università solo pubbliche | **verifica parziale**. Policy ed esclusioni implementate; revisione editoriale completa non conclusa. |
-| Ampliare fonti da tutto il mondo e riferimenti di Ottolina | **parziale**. 177 fonti dirette e 136 radar; copertura mondiale non esaustiva. |
+| Ampliare fonti da tutto il mondo e riferimenti di Ottolina | **parziale**. 182 fonti dirette e 136 radar; copertura mondiale non esaustiva. |
 | Consultare automaticamente tutte le fonti senza carica altre fonti | **codice verificato**. Raccolta concorrente limitata e cancellabile; disponibilità live di ogni fonte non garantita. |
 | Integrare l’Osservatorio nei filtri della rassegna | **codice verificato**. Raccolta e filtri comuni; periodo sei ore e vecchi URL compatibili. Verifica visiva su dispositivi reali ancora da eseguire. |
 | Escludere notizie vecchie e future dalla finestra sei ore | **codice verificato**. Filtri temporali testati; sessioni lunghe sul servizio reale da verificare. |
@@ -63,7 +69,7 @@ Aggiornamento: 20 ottobre 2026. Questo registro distingue codice verificato, com
 | Guide brevi iniziali a biblioteca e conquiste e accesso ai dati | **pubblicato**. Legende e collegamento diretto all’archivio comparativo. |
 | Ridurre ridondanze, contatori notizie e pulsanti fuori contesto | **verifica parziale**. Numerosi interventi presenti; controllo di tutte le varianti ancora aperto. |
 | Carosello video sottile sotto header e prima dei filtri | **pubblicato**. Componente compatto e filtri raccolti; misurazione visiva attuale da completare. |
-| Molti canali globali con filtri, senza filtro piattaforma | **parziale**. 84 canali; filtri per lingua, paese, tema e canale. |
+| Molti canali globali con filtri, senza filtro piattaforma | **parziale**. 90 canali; filtri per lingua, paese, tema e canale. |
 | Orario e visualizzazioni reali dei video | **parziale**. Mostrati quando il fornitore li rende disponibili; niente valori inventati. |
 | Thumbnail stabili e video del paese prima degli altri | **verifica parziale**. Priorità e conservazione immagini testate; disponibilità immagini esterne aperta. |
 

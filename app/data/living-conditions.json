@@ -1,0 +1,82 @@
+[
+  {
+    "id": "salute",
+    "place": "Cina",
+    "period": "1978–2024",
+    "headline": "54,1 → 4,1",
+    "short": "Meno morti nel primo anno di vita",
+    "title": "Nascere con molte più possibilità di sopravvivere",
+    "measure": "Morti entro un anno per 1.000 nati vivi: circa il 92% in meno.",
+    "meaning": "Dietro questa diminuzione ci sono bambini che superano il primo anno e famiglie che hanno maggiori possibilità di vederli crescere. Nel 2024 la stessa serie internazionale stima 4,1 morti per mille in Cina e 5,5 negli Stati Uniti: la Cina ottiene un risultato migliore su questa misura specifica della salute infantile.",
+    "context": "La storia sanitaria cinese comprende campagne di prevenzione, servizi di base, espansione dell’istruzione e delle infrastrutture, riforme economiche e successivi ampliamenti della copertura sanitaria. La capacità di raggiungere territori e famiglie conta quanto la crescita della produzione: il risultato va letto dentro questo percorso, non come un numero isolato.",
+    "limit": "Sono stime armonizzate UN IGME pubblicate dalla Banca Mondiale. Il 1978 e il 2024 appartengono alla stessa serie; il confronto con gli Stati Uniti usa il solo 2024. La mortalità entro un anno non è quella entro cinque anni. Il dato non misura da solo qualità di tutte le cure o disuguaglianze interne e non isola statisticamente l’effetto di una singola politica.",
+    "sources": [
+      {
+        "name": "Banca Mondiale · mortalità infantile, stime UN IGME",
+        "url": "https://data.worldbank.org/indicator/SP.DYN.IMRT.IN"
+      }
+    ],
+    "indicator": "SP.DYN.IMRT.IN",
+    "dossier": "cina"
+  },
+  {
+    "id": "scuola",
+    "place": "URSS",
+    "period": "1926–1970",
+    "headline": "42,7% → 99,7%",
+    "short": "Le donne conquistano la lettura e la scrittura",
+    "title": "Il sapere smette di essere un privilegio per poche",
+    "measure": "Donne alfabetizzate fra 9 e 49 anni: da meno della metà alla quasi totalità.",
+    "meaning": "Leggere una lettera, capire un contratto, continuare gli studi, partecipare a una riunione: l’alfabetizzazione amplia l’autonomia personale e la possibilità di intervenire nella vita collettiva. Per le donne la trasformazione è particolarmente netta: la quota rilevata passa dal 42,7% nel 1926 al 99,7% nel 1970.",
+    "context": "Le campagne contro l’analfabetismo, la scuola di massa e l’istruzione degli adulti sono parte del progetto sovietico di trasformazione sociale. Nella popolazione complessiva della stessa fascia d’età la quota passa dal 56,6% al 99,7%. Il percorso rende visibile il legame fra investimento pubblico nel sapere ed emancipazione materiale.",
+    "limit": "La serie riguarda persone fra 9 e 49 anni nei censimenti sovietici; non è il moderno indicatore UNESCO sugli adulti dai 15 anni. I valori sono riprodotti nello studio Blumenthal–Benson del 1978: non vanno sovrapposti a fasce d’età diverse o usati come misura di tutte le libertà politiche.",
+    "sources": [
+      {
+        "name": "Banca Mondiale · Blumenthal e Benson, tabella II, p. 86 (PDF p. 98)",
+        "url": "https://documents1.worldbank.org/curated/en/363441468768731106/pdf/multi0page.pdf#page=98"
+      }
+    ],
+    "indicator": "",
+    "dossier": "urss"
+  },
+  {
+    "id": "poverta",
+    "place": "Vietnam",
+    "period": "1992–2022",
+    "headline": "57,5% → 1,6%",
+    "short": "Un cambiamento di massa nella povertà estrema",
+    "title": "Dalla sopravvivenza a possibilità di vita più ampie",
+    "measure": "Popolazione sotto 3 dollari al giorno, a parità di potere d’acquisto 2021.",
+    "meaning": "Nel 1992 più della metà della popolazione rilevata vive sotto questa soglia internazionale; nel 2022 la quota è dell’1,6%. La differenza è di 55,9 punti percentuali. È una trasformazione materiale di massa, che aiuta a capire perché il cambiamento delle condizioni di vita debba stare al centro del racconto.",
+    "context": "La ricostruzione dopo la guerra e le riforme Đổi Mới hanno trasformato un’economia guidata dal Partito comunista, combinando direzione pubblica, attività di mercato, agricoltura, industria e apertura commerciale. Il caso permette di discutere quali scelte abbiano ampliato redditi e opportunità e quali disuguaglianze rimangano.",
+    "limit": "La soglia è di 3 dollari internazionali al giorno, non 3 dollari convertiti al cambio corrente. I valori derivano da indagini sulle famiglie nella stessa serie della Banca Mondiale. Uscire da questa soglia molto bassa non equivale a una vita agiata né dimostra che ogni forma di povertà sia scomparsa.",
+    "sources": [
+      {
+        "name": "Banca Mondiale · Poverty and Inequality Platform",
+        "url": "https://data.worldbank.org/indicator/SI.POV.DDAY?locations=VN"
+      }
+    ],
+    "indicator": "SI.POV.DDAY",
+    "dossier": "vietnam"
+  },
+  {
+    "id": "casa",
+    "place": "Vienna",
+    "period": "Dalla Vienna Rossa al patrimonio abitativo attuale",
+    "headline": "220.000",
+    "short": "Alloggi municipali: la casa come infrastruttura sociale",
+    "title": "Una casa dignitosa può essere una scelta collettiva",
+    "measure": "Alloggi municipali, affiancati da circa 200.000 abitazioni sovvenzionate.",
+    "meaning": "Una città può costruire e conservare abitazioni per rispondere a un bisogno, invece di affidarne l’accessibilità soltanto al prezzo di mercato. Il patrimonio municipale viennese conta circa 220.000 alloggi; altre circa 200.000 abitazioni sono state realizzate con sovvenzioni. Non sono due nomi per lo stesso tipo di proprietà.",
+    "context": "L’edilizia della Vienna socialdemocratica nasce come progetto di dignità per la classe lavoratrice: abitazioni, servizi comuni, luce e spazi per la vita quotidiana. L’esperienza continua nel tempo attraverso strumenti pubblici e cooperativi. È una conquista della sinistra municipale in un’economia mista, non la prova che tutta l’Austria sia socialista.",
+    "limit": "Sono consistenze del patrimonio abitativo, non alloggi costruiti in un solo anno o persone ospitate. Le cifre sono quelle presentate dalle fonti istituzionali del modello viennese. Disponibilità, criteri d’accesso, attese e costo effettivo richiedono indicatori distinti; non si deduce da questi numeri che ogni abitante sia privo di difficoltà abitative.",
+    "sources": [
+      {
+        "name": "Social Housing Vienna · il modello viennese",
+        "url": "https://socialhousing.wien/policy/the-vienna-model"
+      }
+    ],
+    "indicator": "",
+    "dossier": "vienna"
+  }
+]

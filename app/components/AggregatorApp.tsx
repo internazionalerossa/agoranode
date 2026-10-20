@@ -71,7 +71,7 @@ import { useRegionalNews } from "./useRegionalNews";
 import { useCloudBookmarks, type RestoredCollection } from "./CloudBookmarks";
 import { createPublisherResolver } from "@/app/lib/publisher";
 import { useSourceHighlights } from "./SourceHighlights";
-import { applySourceImages, highlightLinkKey, rankSourceHighlights } from "@/app/lib/source-highlights";
+import { applySourceImages } from "@/app/lib/source-highlights";
 import {
   LocalizationProvider,
   LocalizedText,
@@ -83,12 +83,7 @@ import {
 } from "./Localization";
 
 import { collectionOrder, collectAll, COLLECTION_CONCURRENCY } from "@/app/lib/collection";
-import {
-  EDITORIAL_AXES,
-  editorialAssessment,
-  rankEditorial,
-  type EditorialAxis,
-} from "@/app/lib/editorial-ranking";
+
 
 type FeedPayload = { articles: Article[]; statuses: SourceStatus[] };
 import {viewFromUrl,viewUrl,newsDaysFromUrl,type View} from "@/app/lib/view-navigation";
@@ -187,8 +182,6 @@ export function AggregatorApp() {
   const [region, setRegion] = useState(ALL);
   const [country, setCountry] = useState(ALL);
   const [language, setLanguage] = useState(ALL);
-  const [kind, setKind] = useState(ALL);
-  const [ideology, setIdeology] = useState(ALL);
   const [topic, setTopic] = useState(ALL);
   const [sourceId, setSourceId] = useState(ALL);
   const [days, setDays] = useState("1");
@@ -209,9 +202,6 @@ export function AggregatorApp() {
   const [collecting, setCollecting] = useState(false);
   const [initialWindowReady, setInitialWindowReady] = useState(false);
   const languagePreferences=useLanguagePreferences();
-  const [editorialAxis, setEditorialAxis] = useState<EditorialAxis | "all">(
-    "all",
-  );
   const preferredRef = useRef("it");
   const hasArticlesRef = useRef(false);
   const collectingRef = useRef(false);
@@ -234,7 +224,6 @@ export function AggregatorApp() {
   const refreshNumber = useRef(0);
   const abortRef = useRef<AbortController | null>(null);
   const readerDialog = useRef<HTMLDialogElement>(null);
-  const controls = useRef<HTMLDetailsElement>(null);
 
   const restoreCollection = useCallback((snapshot: RestoredCollection) => {
     const removedArticles = new Set(snapshot.removed.filter(item => item.kind === "article").map(item => item.key));
@@ -328,11 +317,8 @@ export function AggregatorApp() {
 
   const reset = useCallback(() => {
     setQuery("");
-    setEditorialAxis("all");
     setRegion(ALL);
     setCountry(ALL);
-    setKind(ALL);
-    setIdeology(ALL);
     setTopic(ALL);
     setSourceId(ALL);
     setDays("1");
@@ -554,6 +540,7 @@ export function AggregatorApp() {
 
   const chooseSourceLanguage = (value: string) => {
     setLanguage(value);
+    setSourceId(ALL);
     try {
       localStorage.setItem("rassegna-rossa.source-language", value);
     } catch {
@@ -565,10 +552,9 @@ export function AggregatorApp() {
     }
   };
   const openSource = (id: string) => {
-    reset();
-    setView("notizie");
+    navigate("notizie");
     setSourceId(id);
-    setDays("Infinity");
+    choosePeriod("Infinity");
     void refresh("selection", preferredLanguage, [id]);
     requestAnimationFrame(() =>
       document
@@ -593,7 +579,7 @@ export function AggregatorApp() {
       const search = document.getElementById("rassegna-search");
       if (search) {
         event.preventDefault();
-        if (controls.current) controls.current.open = true;
+        
         requestAnimationFrame(() => search.focus());
       }
     };
@@ -610,13 +596,14 @@ export function AggregatorApp() {
       filterArticles(
         view === "salvati"
           ? allArticles.filter((a) => savedIds.has(a.id))
-          : displayArticles.filter(article => isNewsArticle(article) && (country === ALL || publisherFor(article).country === country)),
+          : displayArticles.filter(isNewsArticle),
         {
           query: deferredQuery,
           region,
+          country,
           language,
-          kind,
-          ideology,
+          kind: ALL,
+          ideology: ALL,
           topic,
           source: sourceId,
           days: view === "salvati" ? Infinity : Number(days),
@@ -633,8 +620,6 @@ export function AggregatorApp() {
       region,
       country,
       language,
-      kind,
-      ideology,
       topic,
       sourceId,
       days,
@@ -642,25 +627,7 @@ export function AggregatorApp() {
       newsClock,
     ],
   );
-  const filtered = useMemo(() => {
-    const selected =
-      editorialAxis === "all" || view === "salvati"
-        ? matched
-        : matched.filter((article) =>
-            editorialAssessment(article).axes.includes(editorialAxis),
-          );
-    if (view !== "salvati" && sort === "balanced") return internationalEdition(selected, newsClock);
-    if (view !== "salvati" && sort === "featured")
-      return rankSourceHighlights(selected, sourceHighlights.highlights, "featured");
-    if (sort === "popular") {
-      const links = new Set(sourceHighlights.highlights.filter(item => item.placement === "popular").map(item => highlightLinkKey(item.link)));
-      const ranked = selected.filter(article => links.has(highlightLinkKey(article.link)));
-      return ranked.length ? rankSourceHighlights(ranked, sourceHighlights.highlights, "popular") : selected;
-    }
-    return sort === "editorial" && view !== "salvati"
-      ? rankEditorial(selected, preferredLanguage)
-      : selected;
-  }, [matched, editorialAxis, view, sort, preferredLanguage, sourceHighlights.highlights, newsClock]);
+  const filtered = useMemo(() => view !== "salvati" && sort === "balanced" ? internationalEdition(matched, newsClock) : matched, [matched,view,sort,newsClock]);
   const orderedArticles = filtered;
   useEffect(() => {
     setVisibleCount(PAGE_SIZE);
@@ -670,13 +637,10 @@ export function AggregatorApp() {
     region,
     country,
     language,
-    kind,
-    ideology,
     topic,
     sourceId,
     days,
     sort,
-    editorialAxis,
   ]);
   const selectedArticle = allArticles.find((a) => a.id === selectedId) ?? null;
   useEffect(() => {
@@ -708,7 +672,7 @@ export function AggregatorApp() {
         { ...s, count: 0, status: statuses[s.id] },
       ]),
     );
-    for (const article of networkArticles) {
+    for (const article of networkArticles.filter(isNewsArticle)) {
       counts.set(article.sourceId, (counts.get(article.sourceId) ?? 0) + 1);
       if (!sources.has(article.sourceId))
         sources.set(article.sourceId, {
@@ -746,38 +710,26 @@ export function AggregatorApp() {
           (region === ALL || s.region === region) &&
           (country === ALL || s.country === country) &&
           (language === ALL || s.language === language) &&
-          (kind === ALL || s.kind === kind) &&
-          (ideology === ALL || s.ideologies.includes(ideology)) &&
           (!query.trim() ||
             `${s.name} ${s.country} ${s.tags.join(" ")} ${s.ideologies.join(" ")}`
               .toLowerCase()
               .includes(query.trim().toLowerCase())),
       ),
-    [directory, region, country, language, kind, ideology, query],
+    [directory, region, country, language, query],
   );
   const languages = useMemo(
     () => [...new Set(SOURCE_CATALOG.map((s) => s.language))].sort(),
-    [],
-  );
-  const ideologies = useMemo(
-    () =>
-      [...new Set(SOURCE_CATALOG.flatMap((s) => s.ideologies))]
-        .filter((i) => i !== "radar" && i !== "trasversale")
-        .sort(),
     [],
   );
   const failedPublishers = SOURCE_CATALOG.filter(source => source.kind !== "radar" && statuses[source.id]?.ok === false).length;
   const failedRadars = SOURCE_CATALOG.filter(source => source.kind === "radar" && statuses[source.id]?.ok === false).length;
   const failedCount = failedPublishers + failedRadars;
   const filterCount =
-    [region, country, language, kind, ideology, topic, sourceId, editorialAxis].filter((f) => f !== ALL).length +
+    [region, country, language, topic, sourceId].filter((f) => f !== ALL).length +
     (days !== "1" ? 1 : 0) +
     (query ? 1 : 0);
   const heading = view in HEADINGS ? HEADINGS[view as keyof typeof HEADINGS] : null;
   const ContentHeading = view === "notizie" ? "h1" : "h2";
-  const matchedLinks = useMemo(() => new Set(matched.map(article => highlightLinkKey(article.link))), [matched]);
-  const hasSourceSelection = sourceHighlights.highlights.some(item =>
-    (sort === "popular" ? item.placement === "popular" : item.placement !== "popular") && matchedLinks.has(highlightLinkKey(item.link)));
   const readingLanguage =
     languagePreferences.contentLanguage;
   const quote = QUOTATIONS[quoteIndex];
@@ -855,12 +807,7 @@ export function AggregatorApp() {
           >
             {view === "notizie" || view === "salvati" || view === "fonti" ? (
               <>
-                <details className="reading-controls-banner" ref={controls}>
-                  <summary>
-                    <span className="controls-banner-title"><SlidersHorizontal size={17} /><LocalizedText>{view === "notizie" ? "Guida e aggiornamento" : view === "salvati" ? "Le tue letture" : "Atlante delle fonti"}</LocalizedText>{view === "fonti" ? <span className="controls-banner-count">{visibleSources.length}</span> : null}</span>
-                    <span className="controls-banner-state"><LocalizedText>Lettura</LocalizedText>: {languagePreferences.original?<LocalizedText>Lingua originale</LocalizedText>:<LanguageName code={readingLanguage} />}<span aria-hidden="true"> · </span><LocalizedText>Fonti</LocalizedText>: {language === ALL ? <LocalizedText>Tutte</LocalizedText> : <LanguageName code={language} />}{filterCount ? <> · {filterCount} <LocalizedText>filtri</LocalizedText></> : null}</span>
-                    <span className="controls-banner-action"><LocalizedText>Apri</LocalizedText><ChevronDown size={17} /></span>
-                  </summary>
+                <div className="news-controls-heading">
                   <div className="reading-controls-content">
                 <div className="section-heading">
                   <div className="reading-heading-copy">
@@ -916,7 +863,7 @@ export function AggregatorApp() {
                 {view !== "salvati" && cloud.status === "local" && savedIds.size + savedBooks.size > 0 ? <p className="account-save-note"><LocalizedText>Salvati su questo dispositivo.</LocalizedText> <a href={cloud.signInUrl} target="_top"><LocalizedText>Accedi per conservarli nel tuo account</LocalizedText></a></p> : null}
                 <TranslationNotice />
                   </div>
-                </details>
+                </div>
                 <div className="filter-toolbar" aria-label="Filtri della rassegna">
                   <label className="search-box">
                     <Search size={18} />
@@ -957,9 +904,6 @@ export function AggregatorApp() {
                       <select aria-label="Ordina le notizie" value={sort} onChange={event => setSort(event.target.value)}>
                         <option value="balanced"><LocalizedText>Rassegna internazionale</LocalizedText></option>
                         <option value="fresh"><LocalizedText>Ultimi articoli · ordine cronologico</LocalizedText></option>
-                        <option value="featured"><LocalizedText>In evidenza dalle fonti</LocalizedText></option>
-                        <option value="editorial"><LocalizedText>Priorità politica e formativa</LocalizedText></option>
-                        <option value="popular"><LocalizedText>Più letti sulle fonti</LocalizedText></option>
                       </select>
                       <ChevronDown size={14} />
                     </label>
@@ -1014,54 +958,25 @@ export function AggregatorApp() {
                   </label>
 
 
-                    <Select label="Area geografica" value={region} change={setRegion}>
+                    <Select label="Area della testata" value={region} change={value=>{setRegion(value);setCountry(ALL);setSourceId(ALL);}}>
                       <option value={ALL}><LocalizedText>Tutto il mondo</LocalizedText></option>
                       {REGION_ORDER.map(value => <option key={value} value={value}><LocalizedText>{value}</LocalizedText></option>)}
                     </Select>
-                    <Select label="Paese della testata" value={country} change={setCountry}>
+                    <Select label="Paese della testata" value={country} change={value=>{setCountry(value);setSourceId(ALL);}}>
                       <option value={ALL}><LocalizedText>Tutti i paesi</LocalizedText></option>
-                      {[...new Set(directory.map(source => source.country).filter(Boolean))].sort().map(value => <option key={value} value={value}><LocalizedText>{value}</LocalizedText></option>)}
+                      {[...new Set(directory.filter(source=>region===ALL||source.region===region).map(source => source.country).filter(Boolean))].sort().map(value => <option key={value} value={value}><LocalizedText>{value}</LocalizedText></option>)}
                     </Select>
                     <Select label="Fonte" value={sourceId} change={setSourceId}>
                       <option value={ALL}><LocalizedText>Tutte le fonti</LocalizedText></option>
-                      {directory.map(source => <option key={source.id} value={source.id}>{source.name}</option>)}
+                      {directory.filter(source=>source.kind!=="radar"&&(region===ALL||source.region===region)&&(country===ALL||source.country===country)&&(language===ALL||source.language===language)).map(source => <option key={source.id} value={source.id}>{source.name}</option>)}
                     </Select>
                     {view !== "fonti" ? <>
-                      <Select label="Argomento" value={topic} change={setTopic}>
+                      <Select label="Tema nel titolo o nell’estratto" value={topic} change={setTopic}>
                         <option value={ALL}><LocalizedText>Tutti gli argomenti</LocalizedText></option>
                         {TOPIC_TAXONOMY.map(item => <option key={item.id} value={item.id}><LocalizedText>{item.label}</LocalizedText></option>)}
                       </Select>
-                      <Select label="Approfondimento" value={editorialAxis} change={value => setEditorialAxis(value as EditorialAxis | "all")}>
-                        <option value={ALL}><LocalizedText>Tutti gli approfondimenti</LocalizedText></option>
-                        {EDITORIAL_AXES.map(axis => <option key={axis.id} value={axis.id}><LocalizedText>{axis.label}</LocalizedText></option>)}
-                      </Select>
                     </> : null}
-                    <Select label="Tipo di fonte" value={kind} change={setKind}>
-                      <option value={ALL}>
-                        <LocalizedText>{"Tutti i tipi"}</LocalizedText>
-                      </option>
-                      {[...new Set(directory.map((s) => s.kind))].map((k) => (
-                        <option key={k} value={k}>
-                          <LocalizedText>{k}</LocalizedText>
-                        </option>
-                      ))}
-                    </Select>
-                    <Select
-                      label="Orientamento dichiarato nel catalogo"
-                      value={ideology}
-                      change={setIdeology}
-                    >
-                      <option value={ALL}>
-                        <LocalizedText>
-                          {"Tutti gli orientamenti"}
-                        </LocalizedText>
-                      </option>
-                      {ideologies.map((i) => (
-                        <option key={i} value={i}>
-                          <LocalizedText>{i}</LocalizedText>
-                        </option>
-                      ))}
-                    </Select>
+                    <p className="filter-explanation"><LocalizedText>Area e paese indicano dove ha sede la testata. La ricerca usa il testo originale delle fonti. Il tema è riconosciuto nel titolo, nell’estratto e nelle categorie, con possibili errori.</LocalizedText></p>
                     <button className="text-link" onClick={() => { reset(); chooseSourceLanguage(ALL); }}>
                       <X size={14} />
                       <LocalizedText>{" Azzera filtri"}</LocalizedText>
@@ -1069,13 +984,6 @@ export function AggregatorApp() {
                 </div>
                 {view === "notizie" ? <p className="news-window-label"><LocalizedText>{days === "1" ? "Ultime 24 ore" : days === "Infinity" ? "Tutte le date, comprese quelle non indicate dalle fonti" : `Periodo selezionato: ${Number(days) * 24} ore`}</LocalizedText>{" · "}<LocalizedText>{sort === "fresh" ? "Dalla pubblicazione più recente" : sort === "balanced" ? "Paesi e testate alternati nella giornata" : "Ordinamento selezionato"}</LocalizedText></p> : null}
                 {view === "notizie" && regional.failed > 0 ? <p className="feed-note" role="status"><LocalizedText>Alcuni canali regionali non rispondono. La rassegna mostra le notizie disponibili e riprova al prossimo aggiornamento.</LocalizedText></p> : null}
-                {view === "notizie" && (sort === "popular" || sort === "featured") && !hasSourceSelection ? (
-                  <p className="sort-note" role="status"><LocalizedText>{sourceHighlights.coverage.busy
-                    ? "Le notizie sono già leggibili. Si aggiornano le selezioni delle fonti."
-                    : sort === "popular"
-                      ? "Nessuna classifica dei più letti disponibile per questi articoli. Mostriamo gli ultimi pubblicati."
-                      : "Selezioni delle prime pagine non disponibili per questi articoli. Mostriamo gli ultimi pubblicati."}</LocalizedText></p>
-                ) : null}
                 {sourceId !== ALL ? (
                   <div className="active-source">
                     <Newspaper size={16} />
@@ -1097,6 +1005,7 @@ export function AggregatorApp() {
                     </button>
                   </div>
                 ) : null}
+                {filterCount>0&&<button className="reset-reading-filters text-link" onClick={()=>{reset();chooseSourceLanguage(ALL);}}><X size={14}/><LocalizedText>Ripristina la rassegna</LocalizedText></button>}
                 {storageWarning ? (
                   <p className="notice" role="status">
                     <LocalizedText>
@@ -1111,40 +1020,7 @@ export function AggregatorApp() {
                     <LocalizedText>{refreshNotice}</LocalizedText>
                   </p>
                 ) : null}
-                {view !== "salvati" ? (
-                  <details className="collection-status">
-                    <summary>
-                      <span className="live-dot" />
-                      <LocalizedText>
-                        {collecting
-                          ? "Rete completa in raccolta automatica"
-                          : "Ultimo ciclo di raccolta"}
-                      </LocalizedText>
-                      <span>
-                        {progress.done}/{progress.total}{" "}
-                        <LocalizedText>canali consultati</LocalizedText>
-                      </span>
-                    </summary>
-                    <p>
-                      <LocalizedText>
-                        Tutte le fonti partecipano, con richieste parallele
-                        limitate per mantenere il sito utilizzabile. Puoi
-                        leggere, cercare e filtrare durante la raccolta. Una
-                        fonte lenta non blocca le altre.
-                      </LocalizedText>
-                    </p>
-                    <progress
-                      value={progress.done}
-                      max={progress.total || 1}
-                      aria-label="Copertura della raccolta"
-                    />
-                    {collecting ? (
-                      <button className="text-link" onClick={stopRefresh}>
-                        <LocalizedText>Interrompi questo ciclo</LocalizedText>
-                      </button>
-                    ) : null}
-                  </details>
-                ) : null}
+                {view !== "salvati" ? <p className="feed-status" role="status"><span className="live-dot"/><LocalizedText>{collecting?"Aggiornamento delle fonti in corso. Puoi già leggere e filtrare.":"Raccolta aggiornata automaticamente. Aggiorna per riprovare le fonti."}</LocalizedText>{collecting&&<button className="text-link" onClick={stopRefresh}><LocalizedText>Interrompi</LocalizedText></button>}</p> : null}
                 {view === "fonti" ? (
                   <SourcesDirectory
                     sources={visibleSources}
@@ -1695,7 +1571,7 @@ function MethodView({ onSources }: { onSources: () => void }) {
           {
             n: "02",
             title: "Come sono organizzate",
-            text: "Puoi scegliere le aperture delle testate, gli ultimi articoli, le classifiche dei più letti pubblicate dalle fonti o la priorità politica e formativa. Le classifiche non sono disponibili per ogni testata e non sono indici SEO. La modalità politica usa segnali di organizzazione collettiva, formazione, competenze e analisi del potere nel titolo e nell’estratto. Titoli ed estratti vengono filtrati per provenienza e classificati con parole chiave. Il punteggio tematico usa un’euristica, cioè una regola pratica basata su indizi: aiuta a ordinare, ma non dimostra che un testo sia vero, ben argomentato o importante in assoluto. La rassegna alterna paesi e testate nell’intera giornata, passando poi alle giornate precedenti se il periodo selezionato le comprende; Ultimi articoli mantiene invece l’ordine cronologico integrale. Puoi ampliare il periodo; le finestre recenti escludono date mancanti, non valide o future.",
+            text: "La rassegna offre due ordini: alternanza fra paesi e testate, oppure pubblicazione più recente. Il periodo limita la data di pubblicazione, non quella di raccolta. Area e paese si riferiscono alla testata; la fonte comprende anche i suoi articoli trovati dai radar. Il tema viene riconosciuto nel titolo, nell’estratto e nelle categorie dell’articolo, senza attribuire a ogni testo tutti i temi generali del suo editore. Il riconoscimento resta automatico e può sbagliare: non è una certificazione politica o di verità. I filtri si combinano fra loro e le finestre recenti escludono date mancanti, non valide o future.",
           },
           {
             n: "03",

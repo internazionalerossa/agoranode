@@ -1,6 +1,7 @@
 import CHANNELS from "./video-channels.json" with { type: "json" };
 export type VideoChannel = {
   id: string; name: string; language: string; country: string;
+  includeWords?: string[]; excludeWords?: string[];
   topics: string[]; platform: "youtube" | "peertube"; url: string; channelId?: string; apiUrl?: string;
 };
 export const VIDEO_CHANNELS: VideoChannel[] = CHANNELS as VideoChannel[];

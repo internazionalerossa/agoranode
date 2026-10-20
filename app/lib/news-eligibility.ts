@@ -13,6 +13,8 @@ export function isNewsArticle(article: { sourceId: string; feedSourceId?: string
   if(excludedIds.has(article.sourceId)||excludedIds.has(feed))return false;
   const publisher=hostname(article.sourceHomepage??article.link),destination=hostname(article.link);
   if(!destination||excludedHost(publisher)||excludedHost(destination))return false;
+  const scoped=policy.scopedPublisherSources.find(rule=>publisher===rule.domain||publisher.endsWith('.'+rule.domain));
+  if(scoped&&!scoped.sourceIds.includes(feed.replace(/^pulse-direct-/,'')))return false;
   const radar=article.kind==='radar'||article.sourceId.startsWith('radar:')||feed.startsWith('radar-');
   if(radar&&!approvedHosts.has(publisher))return false;
   const prefixes = rules[feed] ?? rules[article.sourceId];

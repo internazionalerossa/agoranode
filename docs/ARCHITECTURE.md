@@ -38,7 +38,7 @@ L’account personale non concede diritti di voto. L’adesione al forum richied
 
 ## Raccolta delle notizie
 
-177 fonti dirette e 136 ricerche radar partecipano alla raccolta automatica, senza pulsanti per caricare altre fonti. Le code hanno concorrenza limitata: 24 richieste dirette e 6 radar. Un feed dichiarato evita l’esplorazione della homepage; errori, risposte vuote e risposte disponibili restano distinti.
+182 fonti dirette e 136 ricerche radar partecipano alla raccolta automatica, senza pulsanti per caricare altre fonti. Le code hanno concorrenza limitata: 24 richieste dirette e 6 radar. Un feed dichiarato evita l’esplorazione della homepage; errori, risposte vuote e risposte disponibili restano distinti.
 
 All’apertura la rassegna alterna paesi e testate nell’intera giornata selezionata, limitandosi alle ultime 24 ore. La modalità Ogni editore disponibile riceve un primo spazio prima di riproporre altri suoi articoli nella stessa giornata. Ultimi articoli mantiene separatamente l’ordine cronologico integrale. Nessun articolo viene eliminato per ottenere questa alternanza. I filtri aggiornano subito i risultati; il pulsante Aggiorna richiede nuovi dati alle fonti. Il filtro Periodo rende consultabili anche gli articoli precedenti. Le date assenti, non valide o future restano fuori dalle finestre recenti. La finestra viene ricalcolata ogni minuto e quando la pagina torna visibile. L’archivio completo conserva anche le voci prive di una data affidabile, dichiarandone il limite.
 
@@ -100,3 +100,9 @@ La traduzione di forum e chat richiede prima il comando esplicito sul testo e vi
 ## Identità multilingue
 
 `app/lib/brand.ts` definisce il marchio: Polis resta invariato, mentre il colore segue la lingua di lettura. Il logo non passa ai traduttori automatici; nei testi circostanti il nome viene preservato e ricomposto localmente. Le chiavi persistenti precedenti e gli indirizzi dei servizi esistenti restano compatibili: una rinomina editoriale non migra account, raccolte o domini.
+
+## Filtri e destinazioni della Biblioteca
+
+La rassegna espone due soli ordini e un solo pannello di filtri aggiuntivi: niente guida duplicata, classificatori politici o classifiche prive di copertura adeguata. Geografia, lingua e fonte seguono l’editore effettivo anche nei risultati radar. Il tema si ricava da titolo, estratto e categorie dell’articolo, senza i tag generali della testata. Il cambio di area, paese o lingua rimuove le selezioni di fonte incompatibili.
+
+I dossier hanno URL espliciti e ancore al proprio titolo; i vecchi link brevi, la navigazione del browser e le ancore delle tappe riaprono il contenuto dopo il caricamento differito. I quattro casi sulle condizioni di vita hanno contesto, misure e fonti verificabili. Il blocco su produzione e proprietà è un approfondimento facoltativo dopo la cronologia, con modelli distinti.

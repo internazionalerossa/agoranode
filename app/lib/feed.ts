@@ -1,3 +1,4 @@
+import { articleTopics } from './topics.ts';
 import { isNewsArticle } from "./news-eligibility.ts";
 import { parseYouTubeListing } from "./youtube";
 import { createBoundedCache } from "./bounded-cache";
@@ -140,7 +141,7 @@ async function fetchSourceResult(
               excerpt:
                 "Video disponibile sul canale originale. La pagina del canale non fornisce una data esatta: consulta YouTube per i dettagli.",
               categories: source.tags,
-              topics: classifyTopics(`${video.title} ${source.tags.join(" ")}`),
+              topics: articleTopics({title:video.title}),
               image: video.image,
               score: 0,
             } satisfies ArticleRecord;
@@ -449,7 +450,7 @@ function parseItemBlock(
   const articleText = `${title} ${excerpt} ${categories.join(" ")} ${source.tags.join(
     " ",
   )}`;
-  const topics = classifyTopics(articleText);
+  const topics = articleTopics({title,excerpt,categories});
   const ideologies = inferIdeologies(articleText, source.ideologies);
   const idSeed =
     extractTag(block, ["guid", "id"]) ?? `${source.id}:${link}:${title}`;

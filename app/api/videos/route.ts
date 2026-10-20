@@ -26,7 +26,7 @@ export async function GET(request: Request) {
     if (channel.platform === "peertube") videos = parsePeerTubeVideos(JSON.parse(await load(channel.apiUrl!, 500000)), channel);
     else {
       try { videos = parseVideoFeed(await load(`https://www.youtube.com/feeds/videos.xml?channel_id=${channel.channelId}`, 500000), channel); } catch { /* Try the channel's actual video tab. */ }
-      if (!videos.length && !signal.aborted) videos = validateVideos(parseYouTubeListing(await load(channel.url + "/videos", 2500000)).slice(0,3).map(video => ({ id: video.videoId, channel: channel.id, title: video.title, url: `https://www.youtube.com/watch?v=${video.videoId}`, image: video.image, publishedAt: null })));
+      if (!videos.length && !signal.aborted) videos = validateVideos(parseYouTubeListing(await load(channel.url + "/videos", 2500000)).slice(0,30).map(video => ({ id: video.videoId, channel: channel.id, title: video.title, url: `https://www.youtube.com/watch?v=${video.videoId}`, image: video.image, publishedAt: null }))).slice(0,3);
     }
     if (!videos.length) throw Error("No readable videos");
     cache.set(channel.id, { until: Date.now() + 300000, videos });

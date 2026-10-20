@@ -78,7 +78,7 @@ test("filters combine topics, geography, source and date excluding undated items
   const cards = [
     article(),
     article({ id: "b", region: "Asia" }),
-    article({ id: "c", topics: ["ecologia"] }),
+    article({ id: "c", title: "La biodiversità nelle aree protette", excerpt: "Ambiente naturale", categories: ["ecologia"], topics: ["ecologia"] }),
     article({ id: "d", publishedAt: "2025-01-01T12:00:00Z" }),
     article({ id: "e", publishedAt: null }),
   ];

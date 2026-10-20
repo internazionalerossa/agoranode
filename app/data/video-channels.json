@@ -1090,5 +1090,118 @@
     "platform": "youtube",
     "url": "https://www.youtube.com/@SendikaOrg",
     "channelId": "UC4MQsthKKD3wiLczlrn-B9g"
+  },
+  {
+    "id": "ilfatto-politica",
+    "name": "Il Fatto Quotidiano · video politici",
+    "language": "it",
+    "country": "Italia",
+    "platform": "youtube",
+    "url": "https://www.youtube.com/@ilfattoquotidiano",
+    "channelId": "UCPfFXhCgc6cciu3aYm-9AdA",
+    "topics": [
+      "Politica",
+      "Lavoro",
+      "Diritti"
+    ],
+    "includeWords": [
+      "politica",
+      "governo",
+      "parlament",
+      "meloni",
+      "salvini",
+      "schlein",
+      "conte",
+      "trump",
+      "elezion",
+      "scioper",
+      "salari",
+      "sindac",
+      "palestina",
+      "gaza",
+      "diritti",
+      "lavoro",
+      "sanità",
+      "sanita",
+      "costituzion",
+      "referendum"
+    ],
+    "excludeWords": [
+      "gossip",
+      "sanremo",
+      "calciomercato",
+      "grande fratello",
+      "beauty",
+      "oroscopo"
+    ]
+  },
+  {
+    "id": "pcf-officiel",
+    "name": "PCF · Parti communiste français",
+    "language": "fr",
+    "country": "Francia",
+    "platform": "youtube",
+    "url": "https://www.youtube.com/user/CNPCF",
+    "channelId": "UCSwPcnzaMTuDcTgjRiJvZnw",
+    "topics": [
+      "Politica",
+      "Formazione"
+    ]
+  },
+  {
+    "id": "the-left-eu",
+    "name": "The Left · Parlamento europeo",
+    "language": "en",
+    "country": "Belgio",
+    "platform": "youtube",
+    "url": "https://www.youtube.com/user/GUENGL",
+    "channelId": "UCd0B4xk88w6cDX9aItXAfPQ",
+    "topics": [
+      "Politica",
+      "Lavoro",
+      "Diritti"
+    ]
+  },
+  {
+    "id": "collettiva-cgil",
+    "name": "Collettiva · CGIL",
+    "language": "it",
+    "country": "Italia",
+    "platform": "youtube",
+    "url": "https://www.youtube.com/user/RassegnaOnline",
+    "channelId": "UCFbVYrGYGIJeyBtj8QdleJQ",
+    "topics": [
+      "Lavoro",
+      "Diritti",
+      "Politica"
+    ]
+  },
+  {
+    "id": "leftstreamed",
+    "name": "LeftStreamed · Socialist Project",
+    "language": "en",
+    "country": "Canada",
+    "platform": "youtube",
+    "url": "https://www.youtube.com/@LeftStreamed",
+    "channelId": "UCzEPcy15oRke2f_ze6yrDOA",
+    "topics": [
+      "Formazione",
+      "Lavoro",
+      "Politica"
+    ]
+  },
+  {
+    "id": "mst-oficial",
+    "name": "MST · Movimento dos Trabalhadores Rurais Sem Terra",
+    "language": "pt",
+    "country": "Brasile",
+    "platform": "youtube",
+    "url": "https://www.youtube.com/channel/UC3C5WLLfrDnNsMR7Z-46eug",
+    "channelId": "UC3C5WLLfrDnNsMR7Z-46eug",
+    "topics": [
+      "Lavoro",
+      "Politica",
+      "Formazione"
+    ]
   }
 ]

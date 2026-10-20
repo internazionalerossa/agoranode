@@ -1,0 +1,96 @@
+{
+  "verifiedAt": "2026-10-20",
+  "sources": [
+    {
+      "id": "ilfatto-politica",
+      "name": "Il Fatto Quotidiano · Politica",
+      "evidence": "https://www.ilfattoquotidiano.it/politica-palazzo/",
+      "scope": "Solo feed Politica, su richiesta esplicita; non qualifica l’intera testata come socialista.",
+      "feedChecked": true
+    },
+    {
+      "id": "left-it",
+      "name": "Left",
+      "evidence": "https://left.it/",
+      "scope": "Fonte di sinistra, socialista o comunista; identità verificata sul sito ufficiale.",
+      "feedChecked": true
+    },
+    {
+      "id": "pcf-fr",
+      "name": "Parti communiste français · Actualités",
+      "evidence": "https://www.pcf.fr/",
+      "scope": "Fonte di sinistra, socialista o comunista; identità verificata sul sito ufficiale.",
+      "feedChecked": true
+    },
+    {
+      "id": "the-left-eu",
+      "name": "The Left · Parlamento europeo",
+      "evidence": "https://left.eu/",
+      "scope": "Fonte di sinistra, socialista o comunista; identità verificata sul sito ufficiale.",
+      "feedChecked": true
+    },
+    {
+      "id": "alencontre",
+      "name": "À l’encontre · La Brèche",
+      "evidence": "https://alencontre.org/",
+      "scope": "Fonte di sinistra, socialista o comunista; identità verificata sul sito ufficiale.",
+      "feedChecked": true
+    },
+    {
+      "id": "saftu",
+      "name": "SAFTU",
+      "evidence": "https://saftu.org.za/",
+      "scope": "Federazione sindacale sudafricana, fonte ufficiale di organizzazioni del lavoro.",
+      "feedChecked": true
+    }
+  ],
+  "videos": [
+    {
+      "id": "ilfatto-politica",
+      "channelId": "UCPfFXhCgc6cciu3aYm-9AdA",
+      "url": "https://www.youtube.com/@ilfattoquotidiano",
+      "officialReference": "https://www.ilfattoquotidiano.it/"
+    },
+    {
+      "id": "pcf-officiel",
+      "channelId": "UCSwPcnzaMTuDcTgjRiJvZnw",
+      "url": "https://www.youtube.com/user/CNPCF",
+      "officialReference": "https://www.pcf.fr/"
+    },
+    {
+      "id": "the-left-eu",
+      "channelId": "UCd0B4xk88w6cDX9aItXAfPQ",
+      "url": "https://www.youtube.com/user/GUENGL",
+      "officialReference": "https://left.eu/"
+    },
+    {
+      "id": "collettiva-cgil",
+      "channelId": "UCFbVYrGYGIJeyBtj8QdleJQ",
+      "url": "https://www.youtube.com/user/RassegnaOnline",
+      "officialReference": "https://www.cgil.it/"
+    },
+    {
+      "id": "leftstreamed",
+      "channelId": "UCzEPcy15oRke2f_ze6yrDOA",
+      "url": "https://www.youtube.com/@LeftStreamed",
+      "officialReference": "https://socialistproject.ca/"
+    },
+    {
+      "id": "mst-oficial",
+      "channelId": "UC3C5WLLfrDnNsMR7Z-46eug",
+      "url": "https://www.youtube.com/channel/UC3C5WLLfrDnNsMR7Z-46eug",
+      "officialReference": "https://mst.org.br/"
+    }
+  ],
+  "notAdmitted": [
+    {
+      "name": "L’Unità",
+      "reason": "Il feed verificato il 20 ottobre 2026 si ferma al 7 luglio 2026: non aggiunto alla raccolta attiva con questo indirizzo.",
+      "url": "https://www.unita.it/feed/"
+    },
+    {
+      "name": "Jornal da USP",
+      "reason": "Un’università pubblica è un riferimento documentario, non automaticamente una testata di sinistra."
+    }
+  ]
+}

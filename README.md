@@ -30,10 +30,10 @@ La rassegna mostra subito ricerca, periodo e ordinamento. “Altri filtri” rac
 
 ## Cosa offre
 
-- **Rassegna e fonti.** 177 fonti dirette e 136 canali tematici di ricerca. Ricerca, filtri per argomento, paese, lingua e testata; ordine cronologico, aperture delle fonti e classifiche dei più letti quando pubblicate dagli editori. Nessun contatore di popolarità inventato dal progetto.
+- **Rassegna e fonti.** 182 fonti dirette e 136 canali tematici di ricerca. Ricerca, filtri per argomento, paese, lingua e testata; ordine cronologico oppure alternanza fra paesi e testate. I temi sono riconosciuti nei singoli articoli, senza ereditare i tag generali degli editori. Nessun contatore di popolarità inventato dal progetto.
 - **Lingue distinte.** Menu e comandi seguono la lingua dell’interfaccia; titoli e contenuti seguono la lingua di lettura, con l’opzione di conservarli in originale. Il filtro delle fonti seleziona separatamente le lingue delle pubblicazioni. I testi già nella lingua scelta non vengono ritradotti.
 - **Osservatorio mondiale.** Notizie pubblicate nelle ultime sei ore, con testata, paese di provenienza e collegamento originale. La disponibilità dipende dalle fonti.
-- **Video.** 84 canali in 27 paesi e 11 lingue, con filtri per lingua, paese, tema e nome del canale. Le riproduzioni si aprono sulle piattaforme originali, senza autoplay.
+- **Video.** 90 canali in 28 paesi e 11 lingue, con filtri per lingua, paese, tema e nome del canale. Le riproduzioni si aprono sulle piattaforme originali, senza autoplay.
 - **Biblioteca.** 176 opere fra libri, saggi e raccolte, 724 edizioni in 37 lingue, percorsi introduttivi e filtri per lingua, autore, contesto e tema. Un indice separato collega 589 archivi di autori e 83 raccolte storiche: non vengono conteggiati come libri ospitati nel sito.
 - **Storia e confronti.** Un racconto cronologico in sette epoche, con sessantaquattro tappe espandibili e un archivio documentario consultabile separatamente; un esploratore di 93 indicatori per 217 paesi o economie, con 408.963 osservazioni dal 1960 al 2025. I dati mancanti restano tali; i confronti non dimostrano da soli rapporti causali.
 - **Raccolta personale.** Articoli e libri salvati e ultima posizione di lettura conservati nel database per account, separati dalle cache pubbliche. Le edizioni disponibili per la lettura interna devono avere una base documentata alla riproduzione.

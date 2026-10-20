@@ -4,9 +4,9 @@ Le fonti sono il punto di partenza della raccolta: giornali, riviste, organizzaz
 
 La verifica tecnica e quella editoriale rispondono a domande diverse. La prima controlla se il canale funziona e se i dati sono leggibili; la seconda valuta identità, pertinenza e trasparenza della pubblicazione. Entrambe sono necessarie e devono restare riconoscibili nei dati del catalogo.
 
-Il catalogo distingue 177 fonti dirette da 136 canali tematici di ricerca. I canali di ricerca aggregano risultati esterni e non rappresentano altrettante testate. Le fonti dirette comprendono giornali, riviste, organizzazioni, sindacati e canali editoriali: la loro inclusione non attribuisce automaticamente la stessa natura o lo stesso orientamento a tutti.
+Il catalogo distingue 182 fonti dirette da 136 canali tematici di ricerca. I canali di ricerca aggregano risultati esterni e non rappresentano altrettante testate. Le fonti dirette comprendono giornali, riviste, organizzazioni, sindacati e canali editoriali: la loro inclusione non attribuisce automaticamente la stessa natura o lo stesso orientamento a tutti.
 
-La sezione video comprende 84 canali, in 27 paesi o contesti editoriali e 11 lingue. I filtri riguardano lingua originale, paese, argomento e nome. La lingua di lettura rimane una scelta distinta. Gli identificatori dei canali sono ricavati dai metadati pubblici della piattaforma; gli account omonimi o estranei sono esclusi.
+La sezione video comprende 90 canali, in 28 paesi o contesti editoriali e 11 lingue. I filtri riguardano lingua originale, paese, argomento e nome. La lingua di lettura rimane una scelta distinta. Gli identificatori dei canali sono ricavati dai metadati pubblici della piattaforma; gli account omonimi o estranei sono esclusi.
 
 ## Criteri di manutenzione
 
@@ -25,3 +25,11 @@ Le sezioni non editoriali presenti in feed generici vengono escluse attraverso r
 ## Ammissione degli editori
 
 La ricerca per parole chiave non costituisce una verifica editoriale. I risultati radar sono ammessi solo se l’editore corrisponde a un dominio del catalogo diretto. I controlli operano in acquisizione, ripristino della cache del browser e selezione dell’osservatorio; la versione della cache pubblica è aggiornata al cambio di politica. `app/data/source-policy.json` conserva i criteri, le esclusioni e le prove sul carattere pubblico degli atenei. Le fonti statistiche e i documenti originali sono distinti dalle testate della rassegna.
+
+## Aggiunte editoriali e selezioni delimitate
+
+Il catalogo aggiunge Left, SAFTU, À l’encontre, PCF, The Left e il feed Politica del Fatto Quotidiano. Il Fatto è una selezione esplicitamente richiesta di informazione politica: non viene qualificato come testata socialista nel suo complesso. La politica di provenienza impedisce che l’autorizzazione del feed politico apra l’intero dominio tramite radar.
+
+Sei canali video ufficiali si aggiungono al catalogo: Il Fatto, PCF, The Left, Collettiva-CGIL, LeftStreamed e MST. Gli identificativi sono confrontati con i metadati del canale e con i collegamenti dei siti ufficiali; non vengono dedotti dal nome di un handle. I video del Fatto sono selezionati per titoli politici, con esclusioni esplicite dell’intrattenimento; è un filtro lessicale e non una valutazione politica di ogni intervento. Il registro `app/data/editorial-source-evidence.json` conserva riferimenti, ambito e data della verifica.
+
+Vanity Fair resta esclusa anche dai metadati ricostruiti dalla cache nell’atlante. Le copie personali già salvate non vengono cancellate.

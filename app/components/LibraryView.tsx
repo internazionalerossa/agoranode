@@ -29,8 +29,9 @@ export function LibraryView({
   const [showAchievements, setShowAchievements] = useState(false);
   const [archivesOpen,setArchivesOpen]=useState(false);
   useEffect(() => {
-    const params=new URL(window.location.href).searchParams;
-    if (historyId(params.get("storia")) || params.get("percorso")==="conquiste") setShowAchievements(true);
+    const sync=()=>{const params=new URL(window.location.href).searchParams;if(historyId(params.get("storia"))||params.get("percorso")==="conquiste")setShowAchievements(true);};
+    sync();window.addEventListener('popstate',sync);window.addEventListener('hashchange',sync);
+    return()=>{window.removeEventListener('popstate',sync);window.removeEventListener('hashchange',sync);};
   }, []);
   const readingLink = (book: typeof THEORY_LIBRARY[number]) => {
     const preferred = bookLanguage === "all" ? readingLanguage : bookLanguage;

@@ -1,7 +1,14 @@
+import { SOURCE_CATALOG } from "../data/catalog.ts";
+import { articleTopics } from "./topics.ts";
 import { isNewsArticle } from "./news-eligibility.ts";
 import type { ArticleRecord } from "./feed";
 
 export type ReadingArticle = ArticleRecord;
+const publisherHost=(raw:string)=>{try{return new URL(raw).hostname.toLowerCase().replace(/^www\./,'');}catch{return '';}};
+const publisherSources=SOURCE_CATALOG.filter(source=>source.kind!=='radar');
+const publishersById=new Map(publisherSources.map(source=>[source.id,source]));
+const publishersByHost=new Map(publisherSources.map(source=>[publisherHost(source.homepage),source]));
+
 
 export function safeWebUrl(value: unknown): string | null {
   if (typeof value !== "string") return null;
@@ -99,6 +106,7 @@ export function filterArticles(
   filters: {
     query: string;
     region: string;
+    country?: string;
     language: string;
     kind: string;
     ideology: string;
@@ -114,19 +122,24 @@ export function filterArticles(
   return articles
     .filter((article) => {
       const published = Date.parse(article.publishedAt ?? "");
+      const publisher=publishersById.get(article.sourceId.replace(/^pulse-direct-/,''))??publishersByHost.get(publisherHost(article.sourceHomepage));
+      const region=publisher?.region??article.region;
+      const language=article.kind==='radar'?(publisher?.language??article.language):article.language;
+      const country=publisher?.country??article.country;
       return (
-        (filters.region === "all" || article.region === filters.region) &&
-        (filters.language === "all" || article.language === filters.language) &&
+        (filters.region === "all" || region === filters.region) &&
+        (filters.language === "all" || language === filters.language) &&
+        (!filters.country || filters.country === "all" || country === filters.country) &&
         (filters.kind === "all" || article.kind === filters.kind) &&
         (filters.ideology === "all" ||
           article.ideologies.includes(filters.ideology)) &&
-        (filters.topic === "all" || article.topics.includes(filters.topic)) &&
-        (filters.source === "all" || article.sourceId === filters.source) &&
+        (filters.topic === "all" || articleTopics(article).includes(filters.topic)) &&
+        (filters.source === "all" || article.sourceId === filters.source || publisher?.id === filters.source) &&
         (filters.days === Infinity ||
           (Number.isFinite(published) && published <= now &&
             now - published <= filters.days * 864e5)) &&
         (!query ||
-          `${article.title} ${article.excerpt} ${article.sourceName} ${article.categories.join(" ")}`
+          `${article.title} ${article.excerpt} ${article.sourceName} ${country} ${article.categories.join(" ")}`
             .toLocaleLowerCase("it")
             .includes(query))
       );

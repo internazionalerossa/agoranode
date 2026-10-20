@@ -16,7 +16,7 @@ test('radar admission depends on approved publisher, never on a socialist keywor
 test('excluded publishers cannot reappear through direct feeds or stale public cache provenance',()=>{
  assert.equal(SOURCE_CATALOG.some(source=>['the-hindu','asia-times','eff','responsible-statecraft','dawn','indian-punchline'].includes(source.id)),false);
  for(const sourceId of ['the-hindu','pulse-direct-the-hindu','old-cache'])assert.equal(isNewsArticle({sourceId,sourceHomepage:'https://thehindu.com/',link:'https://thehindu.com/news/old'}),false);
- assert.ok(SOURCE_CATALOG.some(source=>source.id==='jornal-usp'));
+ assert.equal(SOURCE_CATALOG.some(source=>source.id==='jornal-usp'),false,'a public university is documentation, not automatically a left-wing news publisher');
 });
 
 test('live radar parsing drops unapproved publishers before returning articles',async()=>{

@@ -7,6 +7,9 @@ export function validateVideos(raw: unknown): VideoItem[] {
     if (!item || typeof item.id !== "string" || typeof item.channel !== "string" || typeof item.title !== "string" || !item.title.trim() || item.title.length > 600) return [];
     const channel = videoChannel(item.channel);
     if (!channel) return [];
+    const title=item.title.normalize('NFKD').replace(/\p{M}/gu,'').toLowerCase();
+    const fold=(word:string)=>word.normalize('NFKD').replace(/\p{M}/gu,'').toLowerCase();
+    if(channel.excludeWords?.some(word=>title.includes(fold(word)))||channel.includeWords&&!channel.includeWords.some(word=>title.includes(fold(word))))return [];
     try {
       const url = new URL(item.url), home = new URL(channel.url);
       if (url.protocol !== "https:" || url.username || url.password) return [];

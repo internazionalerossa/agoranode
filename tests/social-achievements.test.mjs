@@ -47,6 +47,8 @@ test('dossier navigation accepts catalogue IDs only and creates stable shareable
   const target=new URL(historyLink(item.id),'https://example.test');
   assert.equal(target.origin,'https://example.test');
   assert.equal(historyId(target.searchParams.get('storia')),item.id);
+  assert.equal(target.searchParams.get('view'),'teoria');
+  assert.equal(target.hash,'#dossier-'+item.id);
  }
  for(const value of [null,undefined,'','missing','../italia','https://evil.example','<script>','ITALIA']){
   assert.equal(historyId(value),null);

@@ -1,5 +1,5 @@
 "use client";
-import { lazy, Suspense, useState, useRef } from 'react';
+import { lazy, Suspense, useState, useRef, useEffect } from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import { ACHIEVEMENT_COUNTRIES, ACHIEVEMENT_THEMES, SOCIAL_ACHIEVEMENTS, selectAchievements } from '@/app/data/social-achievements';
 import HISTORY from '@/app/data/history-world-index.json';
@@ -18,6 +18,7 @@ export default function SocialAchievements() {
   const [atlasOpen,setAtlasOpen] = useState(false);
   const [archivesOpen,setArchivesOpen]=useState(false);
   const [dataOpen,setDataOpen]=useState(()=>typeof window!=='undefined'&&HISTORY.indicators.some(item=>item.id===new URL(location.href).searchParams.get('indicatore'))),[reportsOpen,setReportsOpen]=useState(false),[dossiersOpen,setDossiersOpen]=useState(()=>typeof window!=='undefined'&&new URL(window.location.href).searchParams.has('storia'));
+  useEffect(()=>{const sync=()=>{const params=new URL(location.href).searchParams;if(params.has('storia'))setDossiersOpen(true);if(HISTORY.indicators.some(item=>item.id===params.get('indicatore')))setDataOpen(true);};sync();window.addEventListener('popstate',sync);window.addEventListener('hashchange',sync);return()=>{window.removeEventListener('popstate',sync);window.removeEventListener('hashchange',sync);};},[]);
   const dataRef=useRef<HTMLDetailsElement>(null);
   const openData=()=>{setDataOpen(true);requestAnimationFrame(()=>{dataRef.current?.scrollIntoView({block:'start'});dataRef.current?.querySelector('summary')?.focus();});};
   const results = selectAchievements(country,theme);

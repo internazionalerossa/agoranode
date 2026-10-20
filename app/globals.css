@@ -4540,3 +4540,10 @@ body { min-width: 0; width: 100%; overflow-x: clip; }
 .library-research-intro p { font-size: 14px; line-height: 1.75; }
 #library-section-panel:focus { outline: none; }
 @media(max-width:650px) { .library-destinations { gap: 7px; margin-block: 14px 20px; } .library-destinations > a { padding: 10px 7px; min-height: 78px; gap: 6px; grid-template-columns: minmax(0,1fr); } .library-destinations > a > strong { font-size: 12px; line-height: 1.4; } .library-destinations > a > span { font-size: 10px; } .library-destinations > a > svg { display: none; } .library-research-intro p { font-size: 13px; } }
+
+.project-participation { margin: 24px 0; padding: 22px 0; border-block: 1px solid var(--line); max-width: 85ch; }
+.project-participation h2, .project-participation h3 { font: 500 clamp(22px,2.6vw,29px)/1.25 var(--serif); margin: 9px 0 14px; }
+.project-participation p { font-size: 14px; line-height: 1.75; }
+.project-participation > a { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; }
+.project-participation > small { display: block; font-size: 11px; line-height: 1.6; color: var(--muted); margin-top: 8px; }
+@media(max-width:650px) { .project-participation { padding-block: 16px; } .project-participation p { font-size: 13px; } .project-participation > a { white-space: normal; text-align: start; } }

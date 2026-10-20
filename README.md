@@ -45,6 +45,8 @@ I numeri descrivono il catalogo incluso in questa versione, non la disponibilit�
 
 ## Partecipare senza programmare
 
+**Il progetto ha bisogno del tuo sguardo.** Cerchiamo persone che aiutino a valutare contenuti, testi, fonti, dati e direzione del progetto. Ogni scelta può essere discussa: una spiegazione, una traduzione, un confronto fra paesi, una funzione, un’immagine o la posizione di un pulsante. Anche chi arriva per la prima volta può notare qualcosa che sfugge a chi costruisce il sito. Non servono competenze tecniche né una soluzione già pronta: racconta con parole tue che cosa vorresti migliorare. Le proposte vengono discusse, verificate e sviluppate insieme prima della pubblicazione.
+
 Apri [una proposta](https://github.com/internazionalerossa/polisrossa/issues/new/choose) e scegli il modulo più vicino alla tua idea. Un’issue è una pagina pubblica dedicata a un problema o a un miglioramento, con risposte raccolte nello stesso luogo. Non devi sapere programmare: indica la pagina interessata, descrivi che cosa è poco chiaro o non funziona e spiega quale risultato vorresti ottenere. Un esempio concreto aiuta più di una formulazione tecnica.
 
 Per dati storici, libri e nuove fonti aggiungi riferimenti verificabili e, quando disponibili, indicazioni sulla licenza. Puoi scrivere nella tua lingua e proporre direttamente una frase alternativa. Non pubblicare informazioni personali, credenziali o documenti riservati: il testo delle issue è visibile a chiunque.

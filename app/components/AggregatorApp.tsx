@@ -790,7 +790,7 @@ export function AggregatorApp() {
         </header>
 
         <main>
-          {view === "notizie" ? <><VideoCarousel /><aside className="news-library-invitation" aria-label="Approfondimenti e comunità"><a href="/?view=teoria" onClick={event=>{event.preventDefault();navigate("teoria");}}><strong><LocalizedText>Biblioteca</LocalizedText> →</strong><span><LocalizedText>Libri gratuiti, percorsi di lettura, storia delle conquiste e un archivio di dati da confrontare.</LocalizedText></span></a><a href="/?view=partecipa" onClick={event=>{event.preventDefault();navigate("partecipa");}}><strong><LocalizedText>Partecipa</LocalizedText> →</strong><span><LocalizedText>Discussioni nel forum, stanze di chat e proposte con votazione per migliorare il progetto.</LocalizedText></span></a></aside></> : null}
+          {view === "notizie" ? <><VideoCarousel /><aside className="news-library-invitation" aria-label="Approfondimenti e comunità"><a href="/?view=teoria" onClick={event=>{event.preventDefault();navigate("teoria");}}><strong><LocalizedText>Biblioteca</LocalizedText> →</strong><span><LocalizedText>Libri gratuiti, percorsi di lettura, storia delle conquiste e un archivio di dati da confrontare.</LocalizedText></span></a><a href="/?view=partecipa" onClick={event=>{event.preventDefault();navigate("partecipa");}}><strong><LocalizedText>Aiutaci a farlo meglio</LocalizedText> →</strong><span><LocalizedText>Il progetto ha bisogno del tuo sguardo: valuta testi, fonti, grafici e ogni dettaglio della pagina. Proponi miglioramenti con parole tue, senza saper programmare.</LocalizedText></span></a></aside></> : null}
           {heading ? (
             <section className="editorial-hero hero-compact" aria-labelledby="page-title">
               <div className="hero-copy">
@@ -1139,7 +1139,7 @@ export function AggregatorApp() {
               <ArrowUpRight size={16} />
             </button>
           </div>
-          <div className="footer-acknowledgements"><p><LocalizedText>Grazie alle redazioni, agli archivi, agli autori, ai traduttori e alle comunità del software libero che rendono possibile questa raccolta.</LocalizedText></p><a href="/?view=crediti" onClick={event=>{event.preventDefault();navigate("crediti");}}><LocalizedText>Fonti, crediti e ringraziamenti</LocalizedText><ArrowUpRight size={14}/></a></div>
+          <div className="footer-acknowledgements"><p><LocalizedText>Grazie alle redazioni, agli archivi, agli autori, ai traduttori e alle comunità del software libero che rendono possibile questa raccolta. Anche il tuo sguardo conta: testi, contenuti e interfaccia possono migliorare grazie alle tue proposte.</LocalizedText></p><a href="/?view=crediti" onClick={event=>{event.preventDefault();navigate("crediti");}}><LocalizedText>Fonti, crediti e ringraziamenti</LocalizedText><ArrowUpRight size={14}/></a></div>
           <div className="footer-privacy"><a href="/?view=privacy" onClick={event=>{event.preventDefault();navigate("privacy");}}><LocalizedText>Privacy, cookie e diritti</LocalizedText></a><span aria-hidden="true"> · </span><a href="https://github.com/internazionalerossa/polisrossa" target="_blank" rel="noopener noreferrer"><LocalizedText>Codice sorgente</LocalizedText></a><span aria-hidden="true"> · </span><a href="https://github.com/internazionalerossa/polisrossa/blob/main/NOTICE" target="_blank" rel="noopener noreferrer"><LocalizedText>Licenza e avvisi</LocalizedText></a></div>
           <div className="footer-bottom">
             <span>
@@ -1561,6 +1561,14 @@ function MethodView({ onSources }: { onSources: () => void }) {
           </LocalizedText>
         </p>
       </div>
+      <section className="project-participation" aria-labelledby="project-participation-title">
+        <p className="eyebrow"><LocalizedText>UNO SGUARDO IN PIÙ CAMBIA LE COSE</LocalizedText></p>
+        <h3 id="project-participation-title"><LocalizedText>PolisRossa prende forma anche con te.</LocalizedText></h3>
+        <p><LocalizedText>Cerchiamo persone disposte a leggere con attenzione, fare domande e suggerire alternative. Puoi rivedere una spiegazione, verificare una fonte, discutere un confronto statistico, ripensare una funzione o segnalare un dettaglio visivo che rende difficile orientarsi. Anche un titolo, un colore, un’immagine o la posizione di un pulsante meritano una proposta: nessuna parte del progetto è sottratta al confronto.</LocalizedText></p>
+        <p><LocalizedText>Comincia da ciò che noti: indica la pagina, racconta che cosa non ti convince e quale risultato vorresti. Non serve scrivere codice, conoscere il lessico tecnico o arrivare con una soluzione completa. Una domanda ben posta può aprire il cambiamento; le proposte vengono discusse, verificate e migliorate insieme prima della pubblicazione.</LocalizedText></p>
+        <a className="text-link" href="https://github.com/internazionalerossa/polisrossa/issues/new?template=01-idea.yml" target="_blank" rel="noopener noreferrer"><LocalizedText>Scrivi una proposta con parole tue</LocalizedText><ArrowUpRight size={14}/></a>
+        <small><LocalizedText>Si apre GitHub: per pubblicare serve un account gratuito. La proposta è pubblica.</LocalizedText></small>
+      </section>
       <div className="method-grid">
         {[
           {

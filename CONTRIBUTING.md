@@ -6,6 +6,10 @@
 
 ## Italiano
 
+### Il tuo sguardo fa parte del progetto
+
+Cerchiamo persone che leggano, valutino e mettano in discussione ciò che costruiamo. Puoi contribuire ai contenuti e alla direzione del progetto, oltre che al codice: testi e traduzioni, scelte delle fonti, interpretazione dei dati, percorsi di lettura, funzioni, accessibilità e dettagli visivi. Nessuna scelta è troppo piccola per essere migliorata. Non occorre conoscere già il progetto o avere una soluzione pronta: anche raccontare con chiarezza dove ti sei perso è un contributo utile.
+
 ### Proporre, senza programmare
 
 1. Apri la scheda **Issues** del repository e premi **New issue**.
@@ -89,17 +93,11 @@ A proposal may simply name a page: knowing these files is optional. Source artic
 Read [AGENTS.md](AGENTS.md), [README.md](README.md) and the relevant section of [ARCHITECTURE.md](docs/ARCHITECTURE.md). Start from a concrete problem and keep each change focused. An issue is helpful for large changes but is not mandatory for small fixes.
 
 1. Fork the repository and create a short branch from `main`.
-2. Run `npm ci`, then `npm run dev` for local development. Node.js 24 is required.
-3. Preserve source IDs, book IDs, personal collections and existing storage keys. The product name is PolisRossa; legacy `rassegna-rossa.*` keys remain for compatibility.
+2. Run `npm ci`, then `npm run dev` for local development. Node.js 22.13+ is required; CI uses Node.js 24.
+3. Preserve source IDs, book IDs, personal collections and existing storage keys. The product is now PolisRossa; legacy `rassegna-rossa.*` keys remain for compatibility.
 4. For code or structured catalogue changes, run `npm test` and `npm run typecheck`. Add meaningful regression coverage for changed behavior. Check small screens and keyboard access when changing the UI; state any verification you could not perform. Documentation-only changes do not require building the application.
 5. Open a pull request using the template. Explain the result and validation. If dependency inputs change, update the lockfile too.
 
 Keep credentials, `.env`, caches, personal collections, local paths and build outputs out of commits. Use synthetic fixtures for private data. Do not add a new dependency or hosting service without explaining the need. Existing database migrations are immutable.
 
-GitHub checks code. Production deployment is configured separately and takes place after review. Contributors do not need production credentials.
-
-## Contribution rights / Diritti sui contributi
-
-By submitting original software for inclusion, you confirm that you can offer it under AGPL-3.0-or-later. You retain your copyright. Identify third-party material, its source, license and any changes; flag uncertain rights before review. No copyright assignment is required. See [licensing scope](docs/LICENSING.md) and the rights checkbox in the pull request template.
-
-Proponendo codice originale per l'integrazione confermi di poterlo offrire sotto AGPL-3.0-or-later. Conservi il copyright. Per materiali di terzi indica origine, licenza e modifiche; segnala i diritti incerti prima della revisione. Non è richiesta una cessione di copyright. La conferma nel modulo della pull request aiuta la verifica e non sostituisce le autorizzazioni necessarie.
+GitHub checks code; it does not deploy the Site automatically. Publication is handled separately after review. Contributors do not need production credentials.

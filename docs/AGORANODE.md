@@ -24,7 +24,7 @@ Una **istanza** è un nodo dedicato a un argomento, con un proprio ambito di dat
 
 AgoràNode non è una pagina interna o una seconda istanza di PolisRossa. La home principale presenta piattaforma, nodi e coordinamento comune; il futuro forum federale governerà soltanto protocollo e risorse condivise. Il forum PolisRossa governa soltanto PolisRossa. Nel monolite corrente i record federali hanno tabelle e contratti separati, ma la UI e il servizio federale di produzione non sono attivati: questa separazione logica non va descritta come un database federale già operativo.
 
-Il runtime supporta oggi una sola istanza tematica costruita, `polisrossa`. Il manifesto comune è una base verificabile per estrarre le parti riusabili; non è ancora un generatore con cui creare un nodo completo premendo un pulsante. Anche il repository resta `internazionalerossa/polisrossa`: un’eventuale rinomina o separazione del nucleo AgoràNode richiede una decisione esplicita, perché modifica URL, automazioni e riferimenti esistenti.
+Il runtime supporta oggi una sola istanza tematica costruita, `polisrossa`. Il manifesto comune è una base verificabile per estrarre le parti riusabili; non è ancora un generatore con cui creare un nodo completo premendo un pulsante. Il repository canonico è `internazionalerossa/agoranode`. La rinomina del repository non cambia gli identificatori tecnici `polisrossa` dell’istanza, dei database, dei volumi o delle configurazioni esistenti: un’eventuale migrazione di quei nomi richiederebbe una procedura distinta, esplicita e reversibile.
 
 ## PR1, PR2 e PR3
 

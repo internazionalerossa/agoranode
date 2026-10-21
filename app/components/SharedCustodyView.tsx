@@ -78,8 +78,8 @@ export default function SharedCustodyView() {
         <p className="eyebrow"><T>UN NODO LOCALE DI SOLA CONSULTAZIONE</T></p>
         <h2 id="custody-node-title"><T>Scarica, avvia, verifica.</T></h2>
         <p><T>Servono Git, Node.js 24 e Docker con Compose. I comandi creano una configurazione privata, avviano app, PostgreSQL e HTTPS, e non sovrascrivono un’installazione già presente.</T></p>
-        <pre className="custody-command" tabIndex={0} aria-label="Comandi per avviare un nodo di sola consultazione"><code>{`git clone https://github.com/internazionalerossa/polisrossa.git
-cd polisrossa
+        <pre className="custody-command" tabIndex={0} aria-label="Comandi per avviare un nodo di sola consultazione"><code>{`git clone https://github.com/internazionalerossa/agoranode.git
+cd agoranode
 git switch main
 node scripts/selfhost.mjs init https://localhost:9443 mirror --project polisrossa-nodo --http-port 9080
 node scripts/selfhost.mjs start

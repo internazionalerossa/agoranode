@@ -1,6 +1,6 @@
 # AgoràNode
 
-**Public knowledge and communities governed in common.** AgoràNode is the main platform: it defines the shared format, federal coordination and tools used to build thematic nodes. Its home is `/`. **PolisRossa** is the first instance, with its own home at `/polisrossa`, subject, data, accounts, forum and authority. The repository keeps its historical `polisrossa` name for now so existing installations, volumes and URLs are not broken without an explicit decision.
+**Public knowledge and communities governed in common.** AgoràNode is the main platform: it defines the shared format, federal coordination and tools used to build thematic nodes. Its home is `/`. **PolisRossa** is the first instance, with its own home at `/polisrossa`, subject, data, accounts, forum and authority. The canonical repository is `internazionalerossa/agoranode`; historical `polisrossa` technical identifiers used by the instance, databases, volumes and configuration remain unchanged so existing installations keep their data and compatibility.
 
 PolisRossa connects daily news with the books, history and data needed to understand it. It brings together socialist, communist, trade-union, anarchist and anticolonial sources from different countries while keeping their origin and original link visible. Readers are not asked to adopt a political position: the project offers material to verify, compare and discuss.
 

@@ -37,9 +37,9 @@ export const POLISROSSA_MANIFEST = {
     community: {label: 'Forum e autogestione', status: 'implemented', route: '/polisrossa?view=partecipa'},
   },
   links: {
-    repository: 'https://github.com/internazionalerossa/polisrossa',
-    notice: 'https://github.com/internazionalerossa/polisrossa/blob/main/NOTICE',
-    selfHosting: 'https://github.com/internazionalerossa/polisrossa/blob/main/docs/SELF-HOSTING.md',
+    repository: 'https://github.com/internazionalerossa/agoranode',
+    notice: 'https://github.com/internazionalerossa/agoranode/blob/main/NOTICE',
+    selfHosting: 'https://github.com/internazionalerossa/agoranode/blob/main/docs/SELF-HOSTING.md',
   },
   governance: {
     model: 'polisrossa-pr1-pr2',

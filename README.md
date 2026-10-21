@@ -1,6 +1,6 @@
 # AgoràNode
 
-**Conoscenza pubblica e comunità governate in comune.** AgoràNode è la piattaforma principale: definisce il formato condiviso, il coordinamento federale e gli strumenti con cui comunità diverse possono costruire nodi tematici. La sua home è `/`. **PolisRossa** è la prima istanza e ha una propria home in `/polisrossa`, un proprio argomento, dati, account, forum e autorità. Il repository conserva per ora il nome storico `polisrossa` per non rompere installazioni, volumi e URL senza una decisione esplicita.
+**Conoscenza pubblica e comunità governate in comune.** AgoràNode è la piattaforma principale: definisce il formato condiviso, il coordinamento federale e gli strumenti con cui comunità diverse possono costruire nodi tematici. La sua home è `/`. **PolisRossa** è la prima istanza e ha una propria home in `/polisrossa`, un proprio argomento, dati, account, forum e autorità. Il repository canonico è `internazionalerossa/agoranode`; gli identificatori tecnici storici `polisrossa` usati da istanza, database, volumi e configurazioni restano invariati per non perdere dati né rompere installazioni esistenti.
 
 PolisRossa collega l'informazione quotidiana ai libri, alla storia e ai dati necessari per capirla. Raccoglie fonti socialiste, comuniste, sindacali, anarchiche e anticoloniali di paesi diversi, mantenendo visibili provenienza e collegamento originale. Non chiede a chi legge di aderire a una posizione politica: offre materiali per verificare, confrontare e discutere.
 

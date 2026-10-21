@@ -37,8 +37,7 @@ test('independent accounts require verified email, use secure sessions and revok
   for(let i=0;i<40;i++)assert.ok((await authSession(auth,new Request('https://example.test/api/bookmarks',{headers:{cookie}}))).user);
 
   const forged=await authSession(auth,new Request('https://example.test/api/auth',{headers:{'x-user-id':'forged','x-oai-user-id':'forged'}}));assert.equal(forged.user,null);
-  assert.equal((await call({action:'recover',email:credentials.email})).status,403);
-  assert.equal((await call({action:'recover',email:credentials.email,accessCode})).status,200);await settle();assert.equal(permits.at(-1)?.purpose,'reset');
+  assert.equal((await call({action:'recover',email:credentials.email})).status,200);await settle();assert.equal(permits.at(-1)?.purpose,'reset');
   const reset=messages.find(m=>m.reset)!;assert.ok(reset);
   const landing=await auth.handler(new Request(reset.url));const target=new URL(landing.headers.get('location')!);const token=target.searchParams.get('token');assert.ok(token);
   const next='a-new-test-password-5678';assert.equal((await call({action:'password',password:next,token})).status,200);

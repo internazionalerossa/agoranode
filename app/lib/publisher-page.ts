@@ -1,6 +1,7 @@
 import type { SourceDefinition } from "../data/catalog";
 import { parseSourcePage, type SourceHighlight, type SourceImage } from "./source-highlights.ts";
 import { createBoundedCache } from "./bounded-cache.ts";
+import {instanceUserAgent} from './instance';
 const cache = createBoundedCache<string, PublisherPage>(128, 8_000_000, entry => JSON.stringify(entry).length * 2);
 export type PublisherPage = { until: number; highlights: SourceHighlight[]; images: SourceImage[]; ok: boolean };
 export async function fetchPublisherPage(source: Pick<SourceDefinition, "homepage">, signal?: AbortSignal): Promise<PublisherPage> {
@@ -9,7 +10,7 @@ export async function fetchPublisherPage(source: Pick<SourceDefinition, "homepag
   if (!value || value.until <= Date.now()) {
     try {
       const response = await fetch(source.homepage, {
-        headers: { accept: "text/html", "user-agent": "PolisRossa/1.0 (public source highlights)" },
+        headers: { accept: "text/html", "user-agent": instanceUserAgent('public source highlights') },
         signal: signal ? AbortSignal.any([signal, AbortSignal.timeout(4500)]) : AbortSignal.timeout(4500), redirect: "follow",
       });
       if (!response.ok || !response.headers.get("content-type")?.includes("text/html")) throw new Error("Publisher unavailable");

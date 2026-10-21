@@ -66,10 +66,12 @@ import { ArticleImage } from "./ArticleImage";
 import { InitialLoadBoundary } from "./InitialLoadBoundary";
 import BrandName from './BrandName';
 import {brandName} from '@/app/lib/brand';
+import {INSTANCE_MANIFEST} from '@/app/lib/instance';
 import { historyId } from "@/app/lib/history-navigation";
 import { VideoCarousel } from "./VideoCarousel";
 import { useRegionalNews } from "./useRegionalNews";
 import { useCloudBookmarks, type RestoredCollection } from "./CloudBookmarks";
+import AgoraNodeIdentityLink from "./AgoraNodeIdentityLink";
 import { createPublisherResolver } from "@/app/lib/publisher";
 import { useSourceHighlights } from "./SourceHighlights";
 import { applySourceImages } from "@/app/lib/source-highlights";
@@ -99,7 +101,6 @@ const LibraryView = lazy(() => import("./LibraryView").then(module => ({ default
 const PrivacyView = lazy(()=>import("./PrivacyView"));
 const TermsView = lazy(()=>import("./TermsView"));
 const Acknowledgements = lazy(()=>import("./Acknowledgements"));
-const SharedCustodyView = lazy(()=>import("./SharedCustodyView"));
 const CommunityView = lazy(() => import("./CommunityView"));
 const SavedBooks = lazy(() => import("./LibraryView").then(module => ({ default: module.SavedBooks })));
 const publisherFor = createPublisherResolver(SOURCE_CATALOG);
@@ -758,7 +759,7 @@ export function AggregatorApp() {
         </a>
         <header className="site-header">
           <div className="utility-bar">
-            <span>{dateLabel}</span><InstallApp/>
+            <span>{dateLabel}</span><AgoraNodeIdentityLink/><InstallApp/>
 
           </div>
           <div className="masthead">
@@ -774,13 +775,13 @@ export function AggregatorApp() {
                 <BrandName language={readingLanguage}/>
               </span>
             </button></div>
-            <div className="header-account-actions utility-controls"><LanguageSettings/><a href="/?view=salvati" onClick={event=>{event.preventDefault();navigate("salvati");}}><Bookmark size={16}/><LocalizedText>I tuoi salvati</LocalizedText>{savedIds.size+savedBooks.size>0&&<span>{savedIds.size+savedBooks.size}</span>}</a><a className="header-account-link" href={"/account?"+new URLSearchParams({return_to:view==="notizie"?"/":"/?view="+view})}><UserRound size={17}/><LocalizedText>{cloud.account?"Il tuo account":"Accedi / Registrati"}</LocalizedText></a><a href="/?view=fonti" className="source-directory-button" aria-current={view==="fonti"?"page":undefined} onClick={event=>{if(event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;event.preventDefault();navigate("fonti");}}><Newspaper size={16}/><LocalizedText>Fonti</LocalizedText><strong>{SOURCE_CATALOG.length}</strong></a></div>
+            <div className="header-account-actions utility-controls"><LanguageSettings/><a href="/polisrossa?view=salvati" onClick={event=>{event.preventDefault();navigate("salvati");}}><Bookmark size={16}/><LocalizedText>I tuoi salvati</LocalizedText>{savedIds.size+savedBooks.size>0&&<span>{savedIds.size+savedBooks.size}</span>}</a><a className="header-account-link" href={"/polisrossa/account?"+new URLSearchParams({return_to:view==="notizie"?"/polisrossa":"/polisrossa?view="+view})}><UserRound size={17}/><LocalizedText>{cloud.account?"Il tuo account":"Accedi / Registrati"}</LocalizedText></a><a href="/polisrossa?view=fonti" className="source-directory-button" aria-current={view==="fonti"?"page":undefined} onClick={event=>{if(event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;event.preventDefault();navigate("fonti");}}><Newspaper size={16}/><LocalizedText>Fonti</LocalizedText><strong>{SOURCE_CATALOG.length}</strong></a></div>
           </div>
           <nav className="main-nav" aria-label="Navigazione principale">
             <div className="nav-links">
               {NAV.map((item) => (
                 <a
-                  href={item.id==="notizie"?"/":"/?view="+item.id}
+                  href={item.id==="notizie"?"/polisrossa":"/polisrossa?view="+item.id}
                   key={item.id}
                   aria-current={view === item.id ? "page" : undefined}
                   onClick={event=>{if(event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;event.preventDefault();navigate(item.id);}}
@@ -794,7 +795,7 @@ export function AggregatorApp() {
         </header>
 
         <main>
-          {view === "notizie" ? <><VideoCarousel /><aside className="news-library-invitation" aria-label="Approfondimenti e comunità"><a href="/?view=teoria" onClick={event=>{event.preventDefault();navigate("teoria");}}><strong><LocalizedText>Biblioteca</LocalizedText> →</strong><span><LocalizedText>Libri gratuiti, percorsi di lettura, storia delle conquiste e un archivio di dati da confrontare.</LocalizedText></span></a><a href="/?view=partecipa" onClick={event=>{event.preventDefault();navigate("partecipa");}}><strong><LocalizedText>Partecipa · forum, chat e proposte</LocalizedText> →</strong><span><LocalizedText>Forum per discutere e approfondire, chat per incontrarsi e conversare, proposte per migliorare insieme testi, fonti, dati e ogni dettaglio del sito. Non serve saper programmare.</LocalizedText></span></a></aside></> : null}
+          {view === "notizie" ? <><VideoCarousel /><aside className="news-library-invitation" aria-label="Approfondimenti e comunità"><a href="/polisrossa?view=teoria" onClick={event=>{event.preventDefault();navigate("teoria");}}><strong><LocalizedText>Biblioteca</LocalizedText> →</strong><span><LocalizedText>Libri gratuiti, percorsi di lettura, storia delle conquiste e un archivio di dati da confrontare.</LocalizedText></span></a><a href="/polisrossa?view=partecipa" onClick={event=>{event.preventDefault();navigate("partecipa");}}><strong><LocalizedText>Partecipa · forum, chat e proposte</LocalizedText> →</strong><span><LocalizedText>Forum per discutere e approfondire, chat per incontrarsi e conversare, proposte per migliorare insieme testi, fonti, dati e ogni dettaglio del sito. Non serve saper programmare.</LocalizedText></span></a></aside></> : null}
           {heading ? (
             <section className="editorial-hero hero-compact" aria-labelledby="page-title">
               <div className="hero-copy">
@@ -1106,9 +1107,8 @@ export function AggregatorApp() {
             {view === "partecipa" ? <Suspense fallback={<p className="reader-message" role="status"><LocalizedText>Apertura della comunità…</LocalizedText></p>}><CommunityView/></Suspense> : null}
             {view === "condizioni" ? <Suspense fallback={<p role="status"><LocalizedText>Apertura delle condizioni…</LocalizedText></p>}><TermsView/></Suspense> : null}
             {view === "privacy" ? <Suspense fallback={<p role="status"><LocalizedText>Apertura delle informazioni…</LocalizedText></p>}><PrivacyView/></Suspense> : null}
-            {view === "custodia" ? <Suspense fallback={<p role="status"><LocalizedText>Apertura della guida ai nodi…</LocalizedText></p>}><SharedCustodyView/></Suspense> : null}
             {view === "metodo" ? (
-              <MethodView onSources={() => navigate("fonti")} onCustody={() => navigate("custodia")} />
+              <MethodView onSources={() => navigate("fonti")} onCustody={() => window.location.assign("/")} />
             ) : null}
           </section>
           {view === "notizie" ? (
@@ -1136,8 +1136,8 @@ export function AggregatorApp() {
               <ArrowUpRight size={16} />
             </button>
           </div>
-          <div className="footer-acknowledgements"><p><LocalizedText>Grazie alle redazioni, agli archivi, agli autori, ai traduttori e alle comunità del software libero che rendono possibile questa raccolta. Anche il tuo sguardo conta: testi, contenuti e interfaccia possono migliorare grazie alle tue proposte.</LocalizedText></p><a href="/?view=crediti" onClick={event=>{event.preventDefault();navigate("crediti");}}><LocalizedText>Fonti, crediti e ringraziamenti</LocalizedText><ArrowUpRight size={14}/></a></div>
-          <div className="footer-privacy"><a href="/?view=custodia" onClick={event=>{event.preventDefault();navigate("custodia");}}><LocalizedText>Nodi e custodia condivisa</LocalizedText></a><span aria-hidden="true"> · </span><a href="/?view=privacy" onClick={event=>{event.preventDefault();navigate("privacy");}}><LocalizedText>Privacy, cookie e diritti</LocalizedText></a><span aria-hidden="true"> · </span><a href="/?view=condizioni" onClick={event=>{event.preventDefault();navigate("condizioni");}}><LocalizedText>Condizioni e segnalazioni</LocalizedText></a><span aria-hidden="true"> · </span><a href="https://github.com/internazionalerossa/polisrossa" target="_blank" rel="noopener noreferrer"><LocalizedText>Codice sorgente</LocalizedText></a><span aria-hidden="true"> · </span><a href="https://github.com/internazionalerossa/polisrossa/blob/main/NOTICE" target="_blank" rel="noopener noreferrer"><LocalizedText>Licenza e avvisi</LocalizedText></a></div>
+          <div className="footer-acknowledgements"><p><LocalizedText>Grazie alle redazioni, agli archivi, agli autori, ai traduttori e alle comunità del software libero che rendono possibile questa raccolta. Anche il tuo sguardo conta: testi, contenuti e interfaccia possono migliorare grazie alle tue proposte.</LocalizedText></p><a href="/polisrossa?view=crediti" onClick={event=>{event.preventDefault();navigate("crediti");}}><LocalizedText>Fonti, crediti e ringraziamenti</LocalizedText><ArrowUpRight size={14}/></a></div>
+          <div className="footer-privacy"><a href="/"><LocalizedText>AgoràNode e custodia condivisa</LocalizedText></a><span aria-hidden="true"> · </span><a href="/polisrossa?view=privacy" onClick={event=>{event.preventDefault();navigate("privacy");}}><LocalizedText>Privacy, cookie e diritti</LocalizedText></a><span aria-hidden="true"> · </span><a href="/polisrossa?view=condizioni" onClick={event=>{event.preventDefault();navigate("condizioni");}}><LocalizedText>Condizioni e segnalazioni</LocalizedText></a><span aria-hidden="true"> · </span><a href={INSTANCE_MANIFEST.links.repository} target="_blank" rel="noopener noreferrer"><LocalizedText>Codice sorgente</LocalizedText></a><span aria-hidden="true"> · </span><a href={INSTANCE_MANIFEST.links.notice} target="_blank" rel="noopener noreferrer"><LocalizedText>Licenza e avvisi</LocalizedText></a></div>
           <div className="footer-bottom">
             <span>
               <LocalizedText>
@@ -1561,7 +1561,7 @@ function MethodView({ onSources, onCustody }: { onSources: () => void; onCustody
         <h3 id="project-participation-title"><LocalizedText>PolisRossa prende forma anche con te.</LocalizedText></h3>
         <p><LocalizedText>Cerchiamo persone disposte a leggere con attenzione, fare domande e suggerire alternative. Puoi rivedere una spiegazione, verificare una fonte, discutere un confronto statistico, ripensare una funzione o segnalare un dettaglio visivo che rende difficile orientarsi. Anche un titolo, un colore, un’immagine o la posizione di un pulsante meritano una proposta: nessuna parte del progetto è sottratta al confronto.</LocalizedText></p>
         <p><LocalizedText>Comincia da ciò che noti: indica la pagina, racconta che cosa non ti convince e quale risultato vorresti. Non serve scrivere codice, conoscere il lessico tecnico o arrivare con una soluzione completa. Una domanda ben posta può aprire il cambiamento; le proposte vengono discusse, verificate e migliorate insieme prima della pubblicazione.</LocalizedText></p>
-        <a className="text-link" href="/?view=partecipa&nuova=proposta"><LocalizedText>Scrivi una proposta con parole tue</LocalizedText><ArrowUpRight size={14}/></a>
+        <a className="text-link" href="/polisrossa?view=partecipa&nuova=proposta"><LocalizedText>Scrivi una proposta con parole tue</LocalizedText><ArrowUpRight size={14}/></a>
         <small><LocalizedText>La proposta si scrive nel forum. I membri PR2 possono discuterla e votarla.</LocalizedText></small>
       </section>
       <section className="project-participation" aria-labelledby="shared-custody-title">

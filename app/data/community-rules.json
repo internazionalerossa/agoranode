@@ -7,7 +7,7 @@
   {
     "id": 2,
     "title": "PR2: partecipare alla comunità",
-    "text": "Per chiedere PR2, accedi al tuo account PR1 con email confermata, dichiara il nome da usare e indica un URL HTTPS pubblico a Facebook, Instagram o al tuo sito personale. Il riferimento è obbligatorio, dichiarato da te e non verificato da PolisRossa: il server non lo apre automaticamente. Facebook OAuth è facoltativo e prova soltanto il controllo dell’account al momento della domanda, non l’identità anagrafica; Discord non qualifica la domanda. L’ammissione dipende dalla valutazione personale dei membri. Tre sì ammettono; tre no respingono. Senza un esito entro 72 ore la domanda scade. Ogni membro esprime un solo voto definitivo. Non pubblicare documenti o dati riservati."
+    "text": "Per chiedere PR2, accedi al tuo account PR1 con email confermata e collega davvero Facebook con OAuth. Il server ricava il riferimento dall’account autenticato e non accetta un URL inserito a mano. OAuth prova soltanto il controllo dell’account al momento della domanda, non l’identità anagrafica; l’ammissione dipende dalla valutazione personale dei membri. Tre sì ammettono; tre no respingono. Senza un esito entro 72 ore la domanda scade. Ogni membro esprime un solo voto definitivo. Non pubblicare documenti o dati riservati."
   },
   {
     "id": 3,

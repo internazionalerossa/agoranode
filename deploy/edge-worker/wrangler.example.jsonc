@@ -1,0 +1,14 @@
+{
+  "name": "polisrossa",
+  "main": "worker.mjs",
+  "compatibility_date": "2026-10-01",
+  "workers_dev": true,
+  "preview_urls": false,
+  "vars": {
+    "PUBLIC_HOST": "polisrossa.agoranode.workers.dev",
+    "UPSTREAM_ORIGIN": "https://polisrossa.tail37128d.ts.net/"
+  },
+  "secrets": {
+    "required": ["EDGE_SHARED_SECRET"]
+  }
+}

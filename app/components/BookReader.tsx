@@ -88,7 +88,7 @@ function Reader({language,ready}:{language:string;ready:boolean}) {
   void(async()=>{const shared=bookReaderPositionFromUrl(window.location.href),initial=load(shared?.chapter??0,shared?.page??0,0,shared??undefined);try{
    const response=await fetch(`/api/reading-progress?${params}`,{cache:"no-store",signal:AbortSignal.timeout(12000)});
    const result=await response.json();if(!alive)return;
-   if(response.status===401){setSignIn(`/account?return_to=${encodeURIComponent(bookReaderUrl(shared??{bookId,edition,chapter:0,page:0}))}`);const loaded=await initial,fallback=publicBookReaderFallback(loaded);if(alive&&fallback)await load(fallback.chapter,fallback.page);return;}
+   if(response.status===401){setSignIn(`/polisrossa/account?return_to=${encodeURIComponent(bookReaderUrl(shared??{bookId,edition,chapter:0,page:0}))}`);const loaded=await initial,fallback=publicBookReaderFallback(loaded);if(alive&&fallback)await load(fallback.chapter,fallback.page);return;}
    if(!response.ok){setProgressNotice("Il servizio dei segnalibri non è raggiungibile; la lettura resta disponibile ma la posizione non verrà salvata.");const loaded=await initial,fallback=publicBookReaderFallback(loaded);if(alive&&fallback)await load(fallback.chapter,fallback.page);return;}
    scope.current=result.scope;
    const saved=result.items?.[0];
@@ -135,7 +135,7 @@ function Reader({language,ready}:{language:string;ready:boolean}) {
  const shareMessage=shareResult==="copied"?"Link copiato.":shareResult==="shared"?"Posizione di lettura condivisa.":shareResult==="cancelled"?"Condivisione annullata.":shareResult==="unavailable"?"Copia automatica non disponibile: seleziona il link.":"";
  return <main className="book-reader">
   <header className="book-reader-header">
-   <a href="/?view=teoria" onClick={()=>queueSave(true)}><ArrowLeft size={18}/><LocalizedText>Biblioteca</LocalizedText></a>
+   <a href="/polisrossa?view=teoria" onClick={()=>queueSave(true)}><ArrowLeft size={18}/><LocalizedText>Biblioteca</LocalizedText></a>
    <div><span className="eyebrow"><LocalizedText>Lettura online</LocalizedText></span><h1>{book?.title??<LocalizedText>PolisRossa</LocalizedText>}</h1><p>{book?.author}</p></div>
    <BookOpen size={24}/>
   </header>
@@ -171,6 +171,6 @@ function Reader({language,ready}:{language:string;ready:boolean}) {
    </footer>
    <div className="reader-source"><span>{document.source} · {BOOK_LANGUAGES[edition]??edition}</span>{document.archive?<><span>{document.archive.attribution}</span><a href={document.archive.licenseUrl} target="_blank" rel="license noopener noreferrer">{document.archive.license}</a><a href={document.archive.rightsStatementUrl} target="_blank" rel="noopener noreferrer"><LocalizedText>Dichiarazione dei diritti</LocalizedText></a><a href={document.url} target="_blank" rel="noopener noreferrer"><LocalizedText>Apri il capitolo originale</LocalizedText></a></>:<a href={document.url} target="_blank" rel="noopener noreferrer"><LocalizedText>Testo, attribuzione e licenza nell’archivio originale</LocalizedText></a>}{auth?<button className="text-link" onClick={()=>queueSave(true)}><BookmarkCheck size={16}/><LocalizedText>Segna questa pagina</LocalizedText></button>:signIn?<a href={signIn} target="_top"><LocalizedText>Accedi per salvare la posizione</LocalizedText></a>:null}</div>
   </>:null}
- <p className="footer-privacy"><a href="/?view=privacy"><LocalizedText>Privacy, cookie e diritti</LocalizedText></a>{" · "}<a href="/?view=condizioni"><LocalizedText>Condizioni d’uso</LocalizedText></a></p>
+ <p className="footer-privacy"><a href="/"><LocalizedText>AgoràNode</LocalizedText></a>{" · "}<a href="/polisrossa?view=privacy"><LocalizedText>Privacy, cookie e diritti</LocalizedText></a>{" · "}<a href="/polisrossa?view=condizioni"><LocalizedText>Condizioni d’uso</LocalizedText></a></p>
  </main>;
 }

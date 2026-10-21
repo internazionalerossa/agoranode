@@ -30,7 +30,7 @@ test('device cleanup removes only public copies and preserves unsynced private r
  assert.equal(values.size,3);assert.equal(values.get('rassegna-rossa.cloud-outbox:owner'),'pending');assert.deepEqual(removed,['polisrossa-public-v1']);
 });
 test('legal destinations survive direct links and navigation from a selected discussion',()=>{
- assert.equal(viewFromUrl('https://site.test/?view=condizioni'),'condizioni');assert.equal(viewUrl('/?view=partecipa&proposal=selected','condizioni'),'/?view=condizioni');assert.equal(viewFromUrl('/?view=privacy'),'privacy');
+ assert.equal(viewFromUrl('https://site.test/?view=condizioni'),'condizioni');assert.equal(viewUrl('/?view=partecipa&proposal=selected','condizioni'),'/polisrossa?view=condizioni');assert.equal(viewFromUrl('/?view=privacy'),'privacy');
 });
 
 test('translation failures preserve the same-origin boundary instead of contacting providers from the browser',async()=>{

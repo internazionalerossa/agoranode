@@ -6,7 +6,7 @@ import {readFile,readdir} from 'node:fs/promises';
 import {getMigrations} from 'better-auth/db/migration';
 import {createAuth,accountEndpoint,type Auth} from '../server/auth';
 import {configuration} from '../server/config';
-import {socialIdentityEndpoint,verifiedSocialIdentity,allowedIdentityCallback,unlinkFacebookIdentity} from '../server/social-identity';
+import {socialIdentityEndpoint,verifiedSocialIdentity,verifiedApplicationSocialIdentity,allowedIdentityCallback,unlinkFacebookIdentity} from '../server/social-identity';
 import {PostgresDatabase,type Connections} from '../server/database';
 import {handleForum} from '../app/lib/forum';
 import {isFacebookAccountReference,validSocialIdentity} from '../app/lib/social-identity';
@@ -45,8 +45,8 @@ test('social linking uses a real OAuth callback, binds the authenticated user, e
    if(target.hostname==='graph.facebook.com'&&target.pathname==='/me')return Response.json({id:'123456789123456789',name:'Verified Reader',email:credentials.email,email_verified:true,picture:{data:{height:80,is_silhouette:false,url:'https://example.test/avatar.jpg',width:80}}});
    throw Error('Unexpected external OAuth request: '+target.origin+target.pathname);
   };
-  const bad=await auth.handler(new Request(config.origin+'/api/identity/callback/facebook?code=authorization-code&state=forged',{headers:{cookie:grantCookie}}));assert.notEqual(bad.headers.get('location'),config.origin+'/?view=partecipa&adesione=1');assert.equal(providerRequests,0);
-  const callback=await auth.handler(new Request(config.origin+'/api/identity/callback/facebook?code=authorization-code&state='+encodeURIComponent(url.searchParams.get('state')!),{headers:{cookie:grantCookie}}));assert.equal(callback.status,302);assert.equal(callback.headers.get('location'),config.origin+'/?view=partecipa&adesione=1');
+  const bad=await auth.handler(new Request(config.origin+'/api/identity/callback/facebook?code=authorization-code&state=forged',{headers:{cookie:grantCookie}}));assert.notEqual(bad.headers.get('location'),config.origin+'/polisrossa?view=partecipa&adesione=1');assert.equal(providerRequests,0);
+  const callback=await auth.handler(new Request(config.origin+'/api/identity/callback/facebook?code=authorization-code&state='+encodeURIComponent(url.searchParams.get('state')!),{headers:{cookie:grantCookie}}));assert.equal(callback.status,302);assert.equal(callback.headers.get('location'),config.origin+'/polisrossa?view=partecipa&adesione=1');
   const identity=await verifiedSocialIdentity(auth,req(cookie),config);assert.deepEqual(identity,{provider:'facebook',subject:'123456789123456789',name:'Verified Reader',url:'https://www.facebook.com/app_scoped_user_id/123456789123456789'});
   const publicStatus=await(await socialIdentityEndpoint(auth,req(cookie),config)).json();assert.deepEqual(publicStatus.identity,{provider:'facebook',name:'Verified Reader'});assert.doesNotMatch(JSON.stringify(publicStatus),/private-social|reader@example|123456789123456789/);
   const stored=await query('SELECT "accessToken","refreshToken" FROM account WHERE "providerId"=$1',['facebook']);assert.equal(stored.rows.length,1);assert.notEqual(stored.rows[0].accessToken,'private-social-access-token');
@@ -55,8 +55,9 @@ test('social linking uses a real OAuth callback, binds the authenticated user, e
   const session=await auth.api.getSession({headers:new Headers({cookie})});assert.ok(session?.user.emailVerified);
   const connection={query},forumDb=new PostgresDatabase({...connection,connect:async()=>connection} satisfies Connections),forumRequest=(action:Record<string,unknown>)=>new Request(config.origin+'/api/community/forum',{method:'POST',headers:{cookie,origin:config.origin,'content-type':'application/json'},body:JSON.stringify(action)});
   const unlink=()=>unlinkFacebookIdentity(auth,req(cookie));
-  const applicationId=crypto.randomUUID(),application={action:'apply',requestId:applicationId,alias:'verified-reader',intro:'Una presentazione pubblica sufficientemente lunga.',referenceUrl:'https://www.instagram.com/verified.reader/',language:'it',consent:true};
+  const applicationId=crypto.randomUUID(),application={action:'apply',requestId:applicationId,alias:'verified-reader',intro:'Una presentazione pubblica sufficientemente lunga.',language:'it',consent:true};
   assert.equal((await handleForum(forumRequest(application),forumDb,session!.user.id,undefined,Date.now,identity,unlink,true)).status,201);
+  const storedApplication=await query('SELECT reference_url,identity_provider,identity_subject FROM forum_members WHERE id=$1',[applicationId]);assert.deepEqual(storedApplication.rows[0],{reference_url:identity.url,identity_provider:'facebook',identity_subject:identity.subject});
   assert.equal((await query('SELECT id FROM account WHERE "providerId"=$1',['facebook'])).rows.length,0);
   assert.equal((await socialIdentityEndpoint(auth,new Request(config.origin+'/api/community/identity',{method:'DELETE',headers:{cookie,origin:config.origin}}),{...config,forumOpen:false})).status,200);
   assert.equal((await(await socialIdentityEndpoint(auth,req(cookie),config)).json()).identity,null);
@@ -67,6 +68,43 @@ test('social linking uses a real OAuth callback, binds the authenticated user, e
 test('social credentials must be complete pairs and absent providers are not offered',()=>{
  assert.throws(()=>configuration({...env,FACEBOOK_CLIENT_SECRET:undefined}),/both credentials/);
  assert.deepEqual(configuration({...env,DISCORD_CLIENT_ID:undefined,DISCORD_CLIENT_SECRET:undefined,FACEBOOK_CLIENT_ID:undefined,FACEBOOK_CLIENT_SECRET:undefined}).socialProviders,{});
+});
+test('invalid local PR2 application data never reaches the Facebook identity provider',async()=>{
+ let accountReads=0;
+ const auth={api:{listUserAccounts:async()=>{accountReads++;return [];}}} as unknown as Auth;
+ const config=configuration(env),request=new Request(config.origin+'/api/community/forum');
+ const base={action:'apply',requestId:crypto.randomUUID(),alias:'candidate',intro:'Una presentazione pubblica sufficientemente lunga.',language:'it',consent:true};
+ assert.equal(await verifiedApplicationSocialIdentity(auth,request,config,{...base,referenceUrl:'https://www.facebook.com/inserito-dal-browser'}),null);assert.equal(accountReads,0);
+ assert.equal(await verifiedApplicationSocialIdentity(auth,request,config,{...base,alias:''}),null);assert.equal(accountReads,0);
+ assert.equal(await verifiedApplicationSocialIdentity(auth,request,config,base),null);assert.equal(accountReads,1);
+});
+test('identity validation responses preserve session refresh cookies after authentication',async()=>{
+ const refreshed='ir.session=refreshed-session; Path=/; HttpOnly; Secure; SameSite=Lax';
+ const user={id:'reader',email:'reader@example.test',emailVerified:true};
+ const auth={api:{
+  getSession:async({asResponse}:{asResponse?:boolean})=>asResponse?Response.json({user},{headers:{'set-cookie':refreshed}}):{user,session:{createdAt:new Date(0)}},
+  listUserAccounts:async()=>[{id:'credential-account',providerId:'credential'}],
+ }} as unknown as Auth;
+ const config=configuration(env);
+ const request=(body:string,contentType='application/json')=>new Request(config.origin+'/api/community/identity',{method:'POST',headers:{origin:config.origin,'content-type':contentType},body});
+ const cases=[
+  await socialIdentityEndpoint(auth,request('{}','text/plain'),config),
+  await socialIdentityEndpoint(auth,request('x'.repeat(2001)),config),
+  await socialIdentityEndpoint(auth,request('{'),config),
+  await socialIdentityEndpoint(auth,request(JSON.stringify({provider:'facebook',referenceUrl:'https://www.facebook.com/inserito-dal-browser'})),config),
+  await socialIdentityEndpoint(auth,request(JSON.stringify({provider:'facebook'})),config),
+  await socialIdentityEndpoint(auth,request(JSON.stringify({provider:'facebook'})),{...config,forumOpen:false}),
+ ];
+ assert.deepEqual(cases.map(response=>response.status),[415,413,400,400,401,503]);
+ for(const response of cases){assert.ok(response.headers.getSetCookie().some(cookie=>cookie.startsWith('ir.session=refreshed-session')));assert.equal(response.headers.get('cache-control'),'private, no-store');assert.equal(response.headers.get('vary'),'cookie');}
+});
+test('PR2 copy does not present an app-scoped Facebook reference as a public profile or civil-identity proof',async()=>{
+ const source=await readFile(new URL('../app/components/CommunityView.tsx',import.meta.url),'utf8');
+ assert.match(source,/riferimento è specifico dell’app e potrebbe non essere una pagina pubblica consultabile/);
+ assert.match(source,/OAuth prova soltanto il controllo dell’account in quel momento/);
+ assert.match(source,/membri PR2 decidono soggettivamente/);
+ assert.doesNotMatch(source,/pagina Facebook autenticata|aperto il riferimento Facebook/);
+ assert.doesNotMatch(source,/mutate\(\{action:'apply'[^}]*referenceUrl/);
 });
 test('a verified account can remove its Facebook grant while the forum is closed',async()=>{
  const accounts=[{id:'credential-account',providerId:'credential'},{id:'facebook-account',providerId:'facebook'}],removed:string[]=[];

@@ -12,11 +12,11 @@ export function historyEventFromUrl(raw: string, validIds: ReadonlySet<string>):
 }
 
 export function historyEventUrl(id: string): string {
-  return `/?${new URLSearchParams({ view: "teoria", percorso: "timeline", evento: id })}`;
+  return `/polisrossa?${new URLSearchParams({ view: "teoria", percorso: "timeline", evento: id })}`;
 }
 
 export function historyTimelineUrl(id?: string): string {
-  const url = "/?view=teoria&percorso=timeline";
+  const url = "/polisrossa?view=teoria&percorso=timeline";
   return id ? `${url}#${encodeURIComponent(id)}` : url;
 }
 

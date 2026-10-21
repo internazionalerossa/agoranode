@@ -19,7 +19,7 @@ export function useCloudBookmarks(options: Options) {
   const [tick, setTick] = useState(0);
   const [reloadKey, setReloadKey] = useState(0);
   const [pending, setPending] = useState(0);
-  const [signInUrl, setSignInUrl] = useState("/account?return_to=%2F%3Fview%3Dsalvati");
+  const [signInUrl, setSignInUrl] = useState("/polisrossa/account?return_to=%2Fpolisrossa%3Fview%3Dsalvati");
   const persist = useCallback(() => {
     setPending(outbox.current.size);
     try { localStorage.setItem(OUTBOX + scope.current, JSON.stringify({ scope: scope.current, changes: [...outbox.current.values()] })); } catch { /* Server copies remain authoritative. */ }
@@ -55,7 +55,7 @@ export function useCloudBookmarks(options: Options) {
         if (!active || currentVersion !== requestVersion) return;
         if (response.status === 401) {
           authenticated.current = false; setAccount(false); setStatus("local");
-          if (typeof data.signInUrl === "string" && data.signInUrl.startsWith("/account?")) setSignInUrl(data.signInUrl);
+          if (typeof data.signInUrl === "string" && data.signInUrl.startsWith("/polisrossa/account?")) setSignInUrl(data.signInUrl);
           try { if (localStorage.getItem(ACCOUNT)) latest.current.onRestore({ articles: [], books: [], removed: [], replace: true }); } catch { /* Optional cache. */ }
           return;
         }

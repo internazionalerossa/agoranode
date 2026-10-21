@@ -14,7 +14,7 @@ const position={bookId:'manifesto',edition:'it',chapter:2,page:7};
 
 test('book reader positions round-trip through one-based public coordinates',()=>{
  const url=bookReaderUrl(position);
- assert.equal(url,'/read?book=manifesto&edition=it&chapter=3&page=8');
+ assert.equal(url,'/polisrossa/read?book=manifesto&edition=it&chapter=3&page=8');
  assert.deepEqual(bookReaderPositionFromUrl(url),position);
  assert.deepEqual(bookReaderSelectionFromUrl(url,'fr'),{bookId:'manifesto',edition:'it'});
  assert.deepEqual(bookReaderSelectionFromUrl('/read','it'),{bookId:'manifesto',edition:'it'});

@@ -14,20 +14,22 @@ I membri riconosciuti come PR2 dal server vedono direttamente forum e chat; intr
 
 Il runtime indipendente usa Node.js 24, PostgreSQL, Caddy e Better Auth. Il percorso scelto per questa istanza è il PC domestico già collaudato localmente, con ingresso HTTPS gratuito tramite Tailscale Funnel. Render e Brevo restano alternative storiche non attivate; non sono necessari né vanno acquistati per questa procedura.
 
+Questo rilascio resta **PolisRossa**, prima istanza tematica della futura piattaforma riusabile **AgoràNode**. Non offre ancora una configurazione generica per argomenti diversi e non trasforma più installazioni in una rete distribuita.
+
 Prima della pubblicazione completa devono essere configurati soltanto nei file privati dell'installazione:
 
 - il nome pubblico `.ts.net` effettivamente assegnato alla macchina e lo stesso valore in `APP_URL`;
 - una casella Gmail gratuita dedicata, con verifica in due passaggi e password per app, usata esclusivamente per conferma indirizzo e recupero password;
 - `PUBLIC_OPERATOR_NAME` e `PUBLIC_PRIVACY_CONTACT`, scelti dal gestore effettivo;
 - tre inviti iniziali distinti, consegnati privatamente alle persone che avviano PR2;
-- facoltativamente, la coppia Facebook OAuth per aggiungere una prova di controllo dell'account alla domanda PR2.
+- la coppia Facebook OAuth, obbligatoria prima di impostare `FORUM_OPEN=true` e non necessaria per tenere aperto il solo PR1.
 
-PR1 non usa accesso social: richiede sempre email confermata e password. Per PR2 la persona dichiara un URL HTTPS pubblico a Facebook, Instagram o al proprio sito, che viene valutato soggettivamente dai membri e non visitato dal server. Facebook OAuth è facoltativo; Discord non è usato. Non inserire token, password per app, chiavi, cookie o dati personali in chat, issue o sorgenti. Conservare registrazioni e forum chiusi finché non sono verificati consegna Gmail, recupero, isolamento tra account, persistenza dopo riavvio, ammissione PR2, voto, chat, backup e ripristino.
+PR1 non usa accesso social: richiede sempre email confermata e password. Anche scegliendo il percorso PR2 nella prima registrazione viene creato soltanto PR1; dopo conferma e accesso la persona deve collegare Facebook tramite OAuth e inviare esplicitamente la domanda. Il server ricava da OAuth il riferimento Facebook mostrato ai valutatori e rifiuta un URL arbitrario scritto nel modulo. Questo prova il controllo dell’account in quel momento, non l’identità civile; Discord, Instagram e un sito personale non lo sostituiscono. Non inserire token, password per app, chiavi, cookie o dati personali in chat, issue o sorgenti. Conservare registrazioni e forum chiusi finché non sono verificati consegna Gmail, recupero, isolamento tra account, persistenza dopo riavvio, ammissione PR2, voto, chat, backup e ripristino.
 
 ## Verifiche osservate e limiti
 
 I test locali coprono manifest, fallback offline, esclusione delle API private dalla cache, account con email verificata, ammissione, voto, biblioteca persistente e chat con database di prova. Il numero e l'esito dell'ultima suite sono registrati in [QUALITY.md](QUALITY.md), evitando di duplicare qui risultati destinati a diventare obsoleti.
 
-La presenza del codice non prova il servizio pubblico. Tailscale Funnel, consegna Gmail, eventuale callback Meta, telefono su rete mobile, riavvio del PC e ripristino dell'ultimo backup devono essere osservati sull'istanza reale. La replica automatica fra PC, il subentro dell'ultimo nodo, il quorum fra host e la cifratura end-to-end non sono implementati. Sono inoltre ancora necessari controlli interattivi su tastiera, orientamento, installazione Home e riconnessione sui dispositivi effettivi.
+La presenza del codice non prova il servizio pubblico. Funnel e una connessione SMTP sono stati osservati separatamente, ma consegna dei messaggi dei flussi account, callback Meta, telefono su rete mobile e riavvio del PC devono ancora essere verificati insieme sull'istanza reale; il ripristino dell'ultimo backup va ripetuto dopo i dati di collaudo. La replica automatica fra PC, il subentro dell'ultimo nodo, il quorum fra host e la cifratura end-to-end non sono implementati. Sono inoltre ancora necessari controlli interattivi su tastiera, orientamento, installazione Home e riconnessione sui dispositivi effettivi.
 
 Fonti tecniche: [installazione PWA](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Guides/Making_PWAs_installable), [prompt di installazione](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/How_to/Trigger_install_prompt), [web app su iOS](https://webkit.org/blog/13878/).

@@ -39,7 +39,7 @@ export function configuration(env:Record<string,string|undefined>=process.env){
  if(env.NODE_ENV==='production'&&!mirror){
   if((registrationOpen||forumOpen)&&!operator)throw Error('Configure PUBLIC_OPERATOR_NAME and PUBLIC_PRIVACY_CONTACT before opening registrations or participation');
   if((registrationOpen||forumOpen)&&mailTransport==='none')throw Error('Configure verified email delivery before opening registrations or participation');
-  if((registrationOpen||forumOpen)&&!accountAccessHash)throw Error('Configure the private account access code before opening registrations or participation');
+  if(forumOpen&&!socialProviders.facebook)throw Error('Configure Facebook OAuth before opening participation');
   if(forumOpen&&(!bootstrapHash||bootstrapHash.split(',').length!==3))throw Error('Configure three distinct founder invitation hashes before opening participation');
  }
  return {mirror,operator,socialProviders,registrationOpen,forumOpen,origin:origin.origin,secret,connectionString,bootstrapHash,accountAccessHash,port:Number(env.PORT??8000),mailTransport,smtp,brevoKey,mailFrom};

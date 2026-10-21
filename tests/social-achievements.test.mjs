@@ -52,6 +52,6 @@ test('dossier navigation accepts catalogue IDs only and creates stable shareable
  }
  for(const value of [null,undefined,'','missing','../italia','https://evil.example','<script>','ITALIA']){
   assert.equal(historyId(value),null);
-  if(typeof value==='string')assert.equal(historyLink(value),'/');
+  if(typeof value==='string')assert.equal(historyLink(value),'/polisrossa');
  }
 });

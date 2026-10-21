@@ -11,6 +11,8 @@
     "start": "node --env-file-if-exists=.env build-node/server.mjs",
     "db:migrate": "node --env-file-if-exists=.env --import tsx server/migrate.ts",
     "library:import": "node --env-file-if-exists=.env --import tsx server/library-import.ts",
+    "knowledge:import": "node --env-file-if-exists=.env --import tsx server/knowledge-import.ts",
+    "knowledge:replica": "node --env-file-if-exists=.env --import tsx server/knowledge-replica-agent.ts",
     "test": "node --import tsx --test --test-concurrency=1 tests/*.test.mjs tests/node-*.test.ts",
     "typecheck": "tsc --noEmit",
     "dev:server": "node --env-file=.env --import tsx --watch server/index.ts"

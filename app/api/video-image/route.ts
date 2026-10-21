@@ -3,6 +3,7 @@ import { fetchPublicPhotoResource, readLimited } from '@/app/lib/article-photo';
 import { createBoundedCache } from '@/app/lib/bounded-cache';
 import { validateVideos } from '@/app/lib/videos';
 import { GET as readVideos } from '../videos/route';
+import {instanceUserAgent} from '@/app/lib/instance';
 
 export const dynamic = 'force-dynamic';
 const cache = createBoundedCache<string, {until:number;bytes:Uint8Array;type:string}>(80, 8000000, value=>value.bytes.byteLength);
@@ -32,7 +33,7 @@ export async function GET(request:Request, fetcher:typeof fetch=fetch):Promise<R
    try{
     const url=new URL(target);
     // This fixed header set excludes the visitor's cookies, IP and user agent.
-    const response=await fetchPublicPhotoResource(url,AbortSignal.timeout(6000),{accept:'image/jpeg,image/png,image/webp','user-agent':'PolisRossa/1.0 (public thumbnails)'},fetcher,url.hostname.replace(/^www\./,''));
+    const response=await fetchPublicPhotoResource(url,AbortSignal.timeout(6000),{accept:'image/jpeg,image/png,image/webp','user-agent':instanceUserAgent('public thumbnails')},fetcher,url.hostname.replace(/^www\./,''));
     const type=response.headers.get('content-type')?.split(';')[0].trim()??'';
     if(!response.ok||!/^image\/(jpeg|png|webp|avif)$/.test(type)){await response.body?.cancel();continue;}
     const bytes=await readLimited(response,600000);

@@ -13,11 +13,11 @@ Aggiornamento: 21 ottobre 2026. Questo registro distingue codice verificato, com
 - Informativa cookie e memoria locale ampliata, copie pubbliche eliminabili senza rimuovere i salvati, traduzione della comunità facoltativa e interrotta al ritorno all’originale. Esportazione privata nel runtime indipendente; procedure del titolare ancora da completare.
 - Anteprima pubblica disponibile; autenticazione indipendente e scritture della comunità non attive su quell’indirizzo.
 - Revisione delle spiegazioni in README e guide, pagine principali, 64 tappe storiche, 11 introduzioni ai dossier, 32 descrizioni di libri e 18 ambiti statistici. Valori, date, fonti, edizioni e identificativi conservati; la revisione non riscrive i testi originali degli editori.
-- Il 21 ottobre 2026 la build di produzione e il controllo dei tipi sono terminati senza errori; la suite completa ha riportato 246 test superati, zero falliti e due test di avvio Linux saltati sul computer Windows.
-- Account, ammissioni, salvataggi e forum testati con PGlite e sessioni sintetiche; non sono prove di email reali, disponibilità del provider, backup remoto o concorrenza fra repliche.
+- Il 21 ottobre 2026 una suite completa precedente alle ultime aggiunte edge e knowledge ha riportato 260 test superati, zero falliti e due test di avvio Linux saltati sul computer Windows. Dopo le aggiunte, il controllo dei tipi è terminato senza errori; i gruppi mirati self-hosting (14/14) e diritti/deposito della conoscenza (10/10) sono passati. La suite completa e la build della revisione finale devono ancora essere rieseguite: i risultati precedenti non le sostituiscono.
+- Account, ammissioni, salvataggi e forum testati con PGlite e sessioni sintetiche; non sono prove dei flussi email reali, disponibilità del provider, backup remoto o concorrenza fra processi. Non esiste replica automatica fra nodi.
 - Il runtime domestico attuale usa Node.js 24, Docker Compose, PostgreSQL 17 e Caddy. Sul solo loopback `https://localhost:8443/` e `/healthz` hanno risposto 200 con la CA locale; il volume PostgreSQL esistente è stato conservato e tutte le 11 migrazioni risultano applicate con digest canonici.
 - Un backup PostgreSQL cifrato con age, creato dopo le migrazioni e l'import librario, è stato decifrato in streaming e ripristinato con successo in un volume usa-e-getta: 11 migrazioni, una revisione libraria e 16 capitoli verificati. Nessun dump in chiaro è stato scritto; le risorse di prova sono state rimosse.
-- L'accesso pubblico, Gmail e i percorsi account/PR2 sul dominio esterno non sono ancora collaudati. Registrazioni e forum restano chiusi.
+- Funnel pubblico e connessione SMTP Gmail sono stati osservati separatamente; il Worker `workers.dev` è soltanto predisposto nel codice e non è stato distribuito o attivato. Il collaudo da rete mobile e i percorsi completi di conferma, recupero, account e PR2 sul dominio esterno non sono ancora conclusi. Registrazioni e forum restano chiusi.
 - Prove browser precedenti hanno rilevato immagini assenti. Non è stato completato un controllo manuale di ogni percorso.
 - GitHub: repository `internazionalerossa/polisrossa` esistente. Le modifiche correnti sono ancora locali e non vanno presentate come pubblicate finché fetch, controllo della divergenza e push ordinario non terminano.
 
@@ -27,15 +27,15 @@ Aggiornamento: 21 ottobre 2026. Questo registro distingue codice verificato, com
 
 | Requisito | Stato e riscontro |
 | --- | --- |
-| Nome PolisRossa in marchio, caricamento e pagine | **verifica parziale**. Marchio, caricamento, testi, metadati e documenti rinominati; Polis invariato e colore tradotto localmente nella lingua di lettura. Verifica visiva integrale ancora necessaria. |
+| Nome PolisRossa in marchio, caricamento e pagine | **verifica parziale**. PolisRossa resta l’istanza visibile e conserva gli identificatori esistenti. Il confine AgoràNode v1 è implementato con manifesto tipizzato, facciata e `/api/instance`, ma non esiste ancora un generatore completo di nuovi nodi. Verifica visiva integrale ancora necessaria. |
 | Stella rossa a cinque punte e logo senza note musicali | **codice e anteprima**. Componenti di identità aggiornati; giudizio visivo finale aperto. |
 | Eliminare dati personali dai sorgenti pubblici | **verifica parziale**. Sorgenti indipendenti ripuliti; vecchio URL pubblico contiene ancora un identificativo personale. |
 | Repository pubblico sul nuovo account | **pubblicato, aggiornamento corrente in attesa**. Il ramo remoto esiste; il nuovo insieme di modifiche resta locale finché non supera il controllo di divergenza e il push senza forzatura. |
 | Link al sito nel README e istruzioni di contribuzione | **verifica parziale**. Documenti revisionati; il nome pubblico definitivo deve essere inserito soltanto dopo il collaudo esterno. |
 | Sorgenti completi scaricabili | **consegnato**. ZIP completo disponibile; aggiornare il pacchetto insieme ai sorgenti. |
 | Anteprima sul vecchio indirizzo | **pubblicato**. Anteprima pubblicata; deployment e sorgenti devono restare riferiti allo stesso commit verificato. |
-| Hosting gratuito indipendente in Europa, senza Koyeb | **locale funzionante, pubblicazione bloccata**. Applicazione, database persistente e HTTPS locale sono attivi sul PC; Tailscale Funnel, Gmail e verifica da rete mobile non sono ancora completati. Nessuna porta router, regola firewall o DMZ è stata modificata. |
-| Licenza, avvisi e identità del progetto | **implementato**. AGPL-3.0-or-later, ambito dei diritti di terzi, avvisi di garanzia, politica separata per nome e logo, dichiarazione sui diritti dei contributi e collegamenti ai sorgenti nell’interfaccia. Nessuna registrazione del marchio o conformità globale attestata. |
+| Hosting gratuito indipendente in Europa, senza Koyeb | **locale funzionante, pubblicazione finale bloccata**. Applicazione, database persistente, HTTPS locale e Funnel sono stati osservati; il Worker con indirizzo breve non è distribuito, il test mobile manca e account/forum restano chiusi. Nessuna porta router, regola firewall o DMZ è stata modificata. |
+| Licenza, avvisi e identità del progetto | **parziale**. Il codice usa AGPL-3.0-or-later e gli avvisi distinguono contenuti di terzi. Il contratto dati permette all’autore di scegliere la licenza del proprio contributo separatamente dal grant `org.agoranode.contribution-grant.v1`; il grant è ancora una bozza da revisionare legalmente, quindi l’editing pubblico non è aperto. Nessuna compatibilità con Wikipedia, registrazione del marchio o conformità globale è attestata. |
 
 ### Notizie e fonti
 
@@ -84,6 +84,8 @@ Aggiornamento: 21 ottobre 2026. Questo registro distingue codice verificato, com
 | Lettura interna e testo senza omissioni o errori di codifica | **codice e runtime locale verificati per l'edizione autorizzata**. `commons-viventi/en` è archiviata in PostgreSQL come revisione immutabile con 16 capitoli; l'API anonima restituisce la copia persistente con integrità e licenza. Le altre edizioni restano sui rispettivi archivi finché i diritti non consentono una copia. |
 | Segnalibro ultima pagina e raccolta libri per account | **solo runtime indipendente**. Persistenza testata localmente; non disponibile online sul vecchio servizio. |
 | Racconto cronologico espandibile con archivio finale | **pubblicato**. 64 tappe in sette epoche, con repressioni, colpi di Stato e riduzioni delle tutele documentate; consultazione per paese e tema. |
+| Deposito enciclopedico append-only | **codice e test mirati**. La migrazione 012, l’import idempotente di 64 eventi e 17 persone e il bundle deterministico sono coperti; entità, revisioni, fonti, relazioni e audit hanno hash e protezioni non distruttive. La migrazione/importazione sul volume operativo, il backup successivo e l’esposizione pubblica della cronologia non risultano ancora collaudati. |
+| Provenienza delle revisioni comunitarie | **contratto implementato, flusso pubblico chiuso**. Il record conserva autore, licenza del contributo, consenso al grant, richiedente, topic, decisione e predecessore; soltanto un esito approvato autorizza la revisione. Il grant richiede revisione legale e il forum non pubblica ancora automaticamente pagine enciclopediche. |
 | Copertura URSS, Europa, Italia/IRI, Cina e resto del mondo | **parziale**. Contenuti presenti; copertura e revisione storica restano selettive. |
 | Confronti USA e altri paesi con foto e grafici comprensibili | **parziale**. Confronti documentati presenti; revisione statistica ed editoriale completa aperta. |
 | Ampliare casa, energia, salari PPP/orari, STEM, docenti, lettura e risorse | **parziale**. 93 indicatori e 408963 osservazioni; copertura disomogenea, alcuni dati richiesti assenti. |
@@ -93,14 +95,14 @@ Aggiornamento: 21 ottobre 2026. Questo registro distingue codice verificato, com
 
 | Requisito | Stato e riscontro |
 | --- | --- |
-| Account indipendenti senza profilo social obbligatorio | **codice e anteprima**. SSO rimosso; accesso indipendente non ancora collegato. |
-| PR1 email/password senza approvazione comunitaria | **codice e runtime predisposti, flusso reale chiuso**. Registrazione con email e password confermata resta distinta da PR2; un codice iniziale privato limita l'abuso di Gmail e nel runtime è conservato soltanto il suo hash. Consegna Gmail, conferma e recupero reali non sono ancora collaudati. |
-| PR1 salvataggi privati persistenti dopo cancellazione cache | **solo runtime indipendente**. Database remoto previsto; isolamento e riapertura DB testati localmente. |
-| PR2 valutazione soggettiva della persona e nome riconoscibile nel voto | **solo runtime indipendente**. Nome, presentazione e URL HTTPS dichiarato obbligatorio sono mostrati soltanto a candidato e revisori; il server non apre né verifica il link. Facebook OAuth è una prova tecnica facoltativa del controllo dell'account e non certifica identità civile. |
+| Account indipendenti senza profilo social obbligatorio | **codice e runtime predisposti, flusso pubblico chiuso**. PR1 usa email e password; nessun social può creare o aprire l’account. |
+| PR1 email/password senza approvazione comunitaria | **codice e runtime predisposti, flusso reale chiuso**. Registrazione con email e password confermata resta distinta da PR2; il codice iniziale è una barriera facoltativa applicata soltanto alle nuove registrazioni, non al recupero, e nel runtime viene conservato soltanto il suo hash. Connessione SMTP osservata; conferma e recupero completi non sono ancora collaudati. |
+| PR1 salvataggi privati persistenti dopo cancellazione cache | **solo runtime indipendente**. Persistenza PostgreSQL, isolamento e riapertura del database testati localmente; percorso pubblico non collaudato. |
+| PR2 valutazione soggettiva della persona e nome riconoscibile nel voto | **solo runtime indipendente**. La prima scelta PR2 crea comunque soltanto PR1; dopo conferma e accesso servono Facebook OAuth, nome, presentazione e invio esplicito. Il riferimento Facebook deriva da OAuth e non da un URL arbitrario; prova il controllo dell’account in quel momento, non l’identità civile. `FORUM_OPEN=true` richiede la coppia OAuth completa. |
 | Tre sì da PR2 distinti entro 72 ore | **solo runtime indipendente**. Regole e test presenti; nessuna comunità reale attivata. |
 | Avvio dei tre membri iniziali con procedura sicura | **predisposto ma non collaudato**. Tre inviti distinti sono conservati solo nella configurazione privata e nel runtime restano gli hash; non sono stati distribuiti né usati da tre persone reali. |
 | Regole semplici con numerazione sequenziale | **pubblicato**. Numerazione sequenziale e distinzione fra regole pubbliche e configurazione tecnica. |
-| Conferma email, recupero, sessioni e sicurezza del servizio reale | **non completato**. Flussi simulati, limiti persistenti e pulizia degli account mai verificati sono testati; Gmail non è ancora configurato né provato con consegna reale. |
+| Conferma email, recupero, sessioni e sicurezza del servizio reale | **non completato**. Flussi simulati, limiti persistenti e pulizia degli account mai verificati sono testati; connessione SMTP e un messaggio di prova sono stati accettati da Gmail, ma conferma, recupero e revoca delle sessioni non sono ancora stati collaudati come percorso completo sul dominio pubblico. |
 
 ### Forum, issue e voto
 
@@ -125,7 +127,7 @@ Aggiornamento: 21 ottobre 2026. Questo registro distingue codice verificato, com
 | Licenze libri, immagini, feed, software e attribuzioni | **non completato**. Catalogo e riferimenti presenti; revisione completa dei diritti aperta. |
 | Adempimenti italiani/europei e modalità di pubblicazione non commerciale | **non completato**. Note operative predisposte; verifica legale attuale e decisioni del gestore ancora necessarie. |
 | Valutazione delle norme territorialmente applicabili | **non certificabile**. Nessuna dichiarazione universale attendibile; occorre definire giurisdizioni e obblighi applicabili. |
-| Indipendenza di sorgenti, dati e login dai fornitori precedenti | **parziale**. Runtime indipendente locale attivo; il percorso pubblico gratuito e l'email Gmail non sono ancora collaudati. |
+| Indipendenza di sorgenti, dati e login dai fornitori precedenti | **parziale**. Runtime indipendente locale attivo; Funnel pubblico e connessione SMTP Gmail osservati separatamente. Il percorso Worker dipende da Cloudflare e Tailscale ed è ancora da distribuire; flussi account completi, OAuth e collaudo mobile restano da eseguire. |
 | Completamento dei quattro obiettivi complessivi | **non completato**. Nessun macro-obiettivo è attestato come integralmente completato e verificato online. |
 
 ## Criterio di chiusura

@@ -1,0 +1,23 @@
+# Optional transport only. It is deliberately not included by the normal
+# self-hosting stack and grants no authority to approve public knowledge.
+services:
+  syncthing-public:
+    image: syncthing/syncthing:2.1.5
+    profiles: [public-replication]
+    restart: unless-stopped
+    environment:
+      PUID: "${LOCAL_UID:-1000}"
+      PGID: "${LOCAL_GID:-1000}"
+    ports:
+      # Administration stays on this computer. No device, discovery, WAN or
+      # router port is published by this overlay.
+      - "127.0.0.1:${SYNCTHING_GUI_PORT:-8384}:8384"
+    volumes:
+      # Device keys/configuration never enter the synchronized public folder.
+      - syncthing-public-config:/var/syncthing/config
+      - ../../.selfhost/public-replication/exchange:/var/syncthing/AgoràNode
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+
+volumes:
+  syncthing-public-config:

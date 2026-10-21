@@ -3,10 +3,13 @@ import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import vm from 'node:vm';
 import {brandManifestResponse} from '../app/lib/brand-manifest.ts';
+import {INSTANCE_MANIFEST} from '../app/lib/instance.ts';
 const root=new URL('../',import.meta.url);
 test('static and localized manifests expose real Android and iOS launcher assets with a stable application identity',async()=>{
  const manifest=JSON.parse(await readFile(new URL('public/manifest.webmanifest',root),'utf8'));
  const localized=await brandManifestResponse(new Request('https://example.test/api/manifest?language=en')).json();
+ const html=await readFile(new URL('web/index.html',root),'utf8');assert.match(html,/rel="manifest" href="\/api\/manifest\?language=it"/);
+ assert.equal(manifest.name,INSTANCE_MANIFEST.brand.canonicalName);assert.equal(manifest.description,INSTANCE_MANIFEST.instance.description);assert.equal(manifest.background_color,INSTANCE_MANIFEST.theme.background);assert.equal(manifest.theme_color,INSTANCE_MANIFEST.theme.background);
  for(const item of [manifest,localized]){assert.equal(item.id,'/');assert.equal(item.start_url,'/');assert.equal(item.display,'standalone');for(const size of [192,512])assert.ok(item.icons.some(icon=>icon.sizes===`${size}x${size}`&&icon.type==='image/png'));assert.ok(item.icons.some(icon=>icon.purpose==='maskable'));}
  for(const [path,size] of [['icons/app-192.png',192],['icons/app-512.png',512],['icons/app-maskable-512.png',512],['apple-touch-icon.png',180]]){const png=await readFile(new URL('public/'+path,root));assert.equal(png.subarray(1,4).toString(),'PNG');assert.equal(png.readUInt32BE(16),size);assert.equal(png.readUInt32BE(20),size);}
 });

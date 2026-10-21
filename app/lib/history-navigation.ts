@@ -5,5 +5,5 @@ export function historyId(value: string | null | undefined) {
 }
 export function historyLink(id: string) {
   const valid = historyId(id);
-  return valid ? `/?view=teoria&percorso=conquiste&storia=${encodeURIComponent(valid)}#dossier-${encodeURIComponent(valid)}` : '/';
+  return valid ? `/polisrossa?view=teoria&percorso=conquiste&storia=${encodeURIComponent(valid)}#dossier-${encodeURIComponent(valid)}` : '/polisrossa';
 }

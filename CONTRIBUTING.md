@@ -2,7 +2,7 @@
 
 [Italiano](#italiano) · [English](#english) · [Español](#español) · [Français](#français) · [Deutsch](#deutsch) · [Português](#português)
 
-**All languages are welcome. No coding experience is required to propose a change.** Suggestions, issues and votes belong in the site’s forum, using PR2 membership. GitHub is used for source changes and pull requests. Do not include private information in public contributions.
+**All languages are welcome. No coding experience is required to propose a change.** PolisRossa is the first AgoràNode instance and this repository keeps its current name until an explicit rename decision. Suggestions, issues and votes belong in the instance forum when it is operational, using PR2 membership. GitHub is used for source changes and pull requests. Public encyclopedia editing is not open yet. Do not include private information in public contributions.
 
 ## Italiano
 
@@ -12,11 +12,15 @@ Cerchiamo persone che leggano, valutino e mettano in discussione ciò che costru
 
 ### Proporre, senza programmare
 
-1. Nel sito apri **Partecipa → Forum**. Per pubblicare serve PR2: account con email confermata, riferimento HTTPS pubblico dichiarato e ammissione dei membri. Il riferimento può essere una pagina Facebook, Instagram o un sito personale; Facebook OAuth è facoltativo e non certifica l'identità civile.
+1. Nel sito apri **Partecipa → Forum**. Per pubblicare serve PR2: crea prima PR1 con email e password, conferma l’indirizzo, collega realmente Facebook tramite OAuth, invia la domanda e attendi l’ammissione dei membri. Il riferimento Facebook mostrato ai valutatori deriva da OAuth, non da un URL scritto nel modulo; prova il controllo dell’account in quel momento, non l'identità civile.
 2. Scegli **Apri una discussione** per un’issue oppure **Scrivi una proposta** per confrontare soluzioni con una votazione.
 3. Scrivi nella tua lingua: pagina, problema e cambiamento desiderato. Per correzioni e nuove fonti aggiungi riferimenti verificabili. Tutto il confronto resta nel thread del forum.
 
 Non devi preparare codice, installare nulla o trovare il file giusto. Puoi suggerire anche il testo esatto che vorresti leggere. Le risposte nello stesso thread permettono di chiarire e migliorare la proposta.
+
+Una proposta o un voto non modifica automaticamente una pagina. Il deposito della conoscenza conserva revisioni e provenienza, ma il collegamento pubblico fra forum e pubblicazione è ancora chiuso. Finché il grant dei contributi non è stato revisionato legalmente, i contenuti entrano attraverso la revisione tecnica ed editoriale del repository.
+
+Quando l’editing sarà aperto, chi scrive sceglierà la licenza pubblica del proprio contributo: AgoràNode non impone una licenza unica e non richiede compatibilità con Wikipedia. La scelta sarà separata dal grant minimo `org.agoranode.contribution-grant.v1`, necessario perché il nodo possa conservare e mostrare gratuitamente il contributo e pubblicare revisioni approvate democraticamente. Ogni revisione dovrà mostrare autore, richiedente, topic, decisione e predecessore. Il grant corrente è una bozza e non va accettato o applicato fuori dal futuro flusso revisionato.
 
 ### Modificare un testo dal browser
 
@@ -28,11 +32,15 @@ Per il codice leggi la [guida tecnica](#technical-contributions). Per capire cos
 
 ### Suggest a change without coding
 
-1. Open **Participate → Forum** on the site. Posting requires PR2: a verified-email account, a declared public HTTPS reference, and admission by members. The reference may be Facebook, Instagram, or a personal website; Facebook OAuth is optional and does not certify civil identity.
+1. Open **Participate → Forum** on the site. Posting requires PR2: first create PR1 with an email address and password, confirm the address, actually connect Facebook through OAuth, submit the application and wait for member approval. The Facebook reference shown to reviewers is derived from OAuth rather than an arbitrary form URL; it proves control of that account at that moment, not civil identity.
 2. Start a discussion for an issue, or choose **Write a proposal** for a vote.
 3. Describe the page, problem and expected improvement in your language. Include verifiable references. Discussion and voting stay in that forum thread.
 
 You do not need to install anything or locate the right source file. You can propose the exact wording you would like to see. Continue the conversation in the same forum thread.
+
+A proposal or vote does not automatically modify a page. The knowledge store preserves revisions and provenance, but the public forum-to-publication workflow remains closed. Until the contribution grant has received legal review, content enters through technical and editorial repository review.
+
+When editing opens, each writer will select the public license for their own contribution: AgoràNode imposes no single license and requires no Wikipedia compatibility. That choice will remain separate from the `org.agoranode.contribution-grant.v1` minimum grant needed for the node to preserve and display the contribution without an access fee and publish democratically approved revisions. Every revision must expose its author, requester, topic, decision and predecessor. The current grant is a draft and must not be treated as an active public submission agreement.
 
 ### Edit a text in your browser
 
@@ -82,6 +90,8 @@ Não precisas de programar nem instalar nada. Podes sugerir o texto exato. Para 
 | Historical chapters and references / Dossier e documenti | `app/data/history-dossiers.json` |
 | Dossier titles / Titoli dei dossier | `app/data/history-index.json` — keep IDs consistent with the full dossiers |
 | Social achievements atlas / Atlante delle conquiste | `app/data/social-achievements.ts` |
+| AgoràNode instance contract / Contratto dell’istanza | `app/platform/`, `app/instances/` |
+| Knowledge model and import / Modello e import della conoscenza | `app/lib/knowledge-model.ts`, `app/lib/contribution-rights.ts`, `server/knowledge*.ts` |
 | Page layout / Impaginazione | `app/components/`, `app/globals.css` |
 | Translation behavior / Traduzioni | `app/components/Localization.tsx`, `app/lib/translation.ts` |
 | Project documentation / Documentazione | `README.md`, `docs/` |
@@ -99,5 +109,7 @@ Read [AGENTS.md](AGENTS.md), [README.md](README.md) and the relevant section of 
 5. Open a pull request using the template. Explain the result and validation. If dependency inputs change, update the lockfile too.
 
 Keep credentials, `.env`, caches, personal collections, local paths and build outputs out of commits. Use synthetic fixtures for private data. Do not add a new dependency or hosting service without explaining the need. Existing database migrations are immutable.
+
+Code contributions remain under AGPL-3.0-or-later. The author-selected license and AgoràNode grant described above apply to future encyclopedia contributions, not as a way to relicense source code or third-party material. Never invent a license for existing editorial text, quotations, books, images or datasets.
 
 GitHub checks code; it does not deploy the Site automatically. Publication is handled separately after review. Contributors do not need production credentials.

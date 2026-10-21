@@ -13,12 +13,14 @@ const languagePattern=/^[a-z][a-z0-9-]{0,15}$/;
 const emailPattern=/^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/;
 const bootstrapPattern=/^[0-9a-f]{64}$/;
 const accountAccessCodePattern=/^pr1-[A-Za-z0-9_-]{43}$/;
+const dnsLabelPattern=/^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$/;
+const edgeSecretPattern=/^[A-Za-z0-9_-]{43,128}$/;
 const runtimeEnvironmentKeys=new Set([
  'COMPOSE_PROJECT_NAME','APP_URL','NODE_ENV','PORT','POSTGRES_PASSWORD','DATABASE_URL','AUTH_SECRET','MIRROR_MODE',
  'MAIL_TRANSPORT','MAIL_FROM','SMTP_HOST','SMTP_PORT','SMTP_USER','SMTP_PASSWORD','BREVO_API_KEY',
  'DISCORD_CLIENT_ID','DISCORD_CLIENT_SECRET','FACEBOOK_CLIENT_ID','FACEBOOK_CLIENT_SECRET','COMMUNITY_BOOTSTRAP_HASH','ACCOUNT_ACCESS_HASH',
  'REGISTRATIONS_OPEN','FORUM_OPEN','PUBLIC_OPERATOR_NAME','PUBLIC_PRIVACY_CONTACT','BIND_ADDRESS','LOCAL_UID','LOCAL_GID',
- 'HTTPS_PORT','HTTP_PORT',
+ 'HTTPS_PORT','HTTP_PORT','LOCAL_HTTPS_PORT','EDGE_SHARED_SECRET','EDGE_PUBLIC_ORIGIN','EDGE_UPSTREAM_ORIGIN','EDGE_ORIGIN_ACTIVE',
 ]);
 export function validSnapshotBasename(value){return basenamePattern.test(value)&&value!=='.'&&value!=='..';}
 function port(value,name){
@@ -44,7 +46,7 @@ export async function initialize(directory,urlText='https://localhost:8443',mode
  await mkdir(state,{recursive:true,mode:0o700});
  try{await access(resolve(state,'runtime.env'));throw Error('Configuration already exists; it will not be overwritten');}catch(e){if(e.code!=='ENOENT')throw e;}
  const password=randomBytes(32).toString('hex'),secret=randomBytes(48).toString('hex');
- const env=[`COMPOSE_PROJECT_NAME=${project}`,`APP_URL=${url.origin}`,'NODE_ENV=production','PORT=8000',`POSTGRES_PASSWORD=${password}`,`DATABASE_URL=postgresql://polisrossa:${password}@localhost/polisrossa?host=%2Fvar%2Frun%2Fpostgresql`,`AUTH_SECRET=${secret}`,`MIRROR_MODE=${mode==='mirror'}`,'MAIL_TRANSPORT=none','MAIL_FROM=','SMTP_HOST=','SMTP_PORT=465','SMTP_USER=','SMTP_PASSWORD=','BREVO_API_KEY=','DISCORD_CLIENT_ID=','DISCORD_CLIENT_SECRET=','FACEBOOK_CLIENT_ID=','FACEBOOK_CLIENT_SECRET=','COMMUNITY_BOOTSTRAP_HASH=','ACCOUNT_ACCESS_HASH=','REGISTRATIONS_OPEN=false','FORUM_OPEN=false','PUBLIC_OPERATOR_NAME=','PUBLIC_PRIVACY_CONTACT=','BIND_ADDRESS=127.0.0.1',`LOCAL_UID=${process.getuid?.()??1000}`,`LOCAL_GID=${process.getgid?.()??1000}`,`HTTPS_PORT=${httpsPort}`,`HTTP_PORT=${httpPort}`];
+ const env=[`COMPOSE_PROJECT_NAME=${project}`,`APP_URL=${url.origin}`,'NODE_ENV=production','PORT=8000',`POSTGRES_PASSWORD=${password}`,`DATABASE_URL=postgresql://polisrossa:${password}@localhost/polisrossa?host=%2Fvar%2Frun%2Fpostgresql`,`AUTH_SECRET=${secret}`,`MIRROR_MODE=${mode==='mirror'}`,'MAIL_TRANSPORT=none','MAIL_FROM=','SMTP_HOST=','SMTP_PORT=465','SMTP_USER=','SMTP_PASSWORD=','BREVO_API_KEY=','DISCORD_CLIENT_ID=','DISCORD_CLIENT_SECRET=','FACEBOOK_CLIENT_ID=','FACEBOOK_CLIENT_SECRET=','COMMUNITY_BOOTSTRAP_HASH=','ACCOUNT_ACCESS_HASH=','REGISTRATIONS_OPEN=false','FORUM_OPEN=false','PUBLIC_OPERATOR_NAME=','PUBLIC_PRIVACY_CONTACT=','BIND_ADDRESS=127.0.0.1',`LOCAL_UID=${process.getuid?.()??1000}`,`LOCAL_GID=${process.getgid?.()??1000}`,`HTTPS_PORT=${httpsPort}`,`HTTP_PORT=${httpPort}`,'LOCAL_HTTPS_PORT=','EDGE_SHARED_SECRET=','EDGE_PUBLIC_ORIGIN=','EDGE_UPSTREAM_ORIGIN=','EDGE_ORIGIN_ACTIVE=false'];
  await writeFile(resolve(state,'runtime.env'),env.join('\n')+'\n',{flag:'wx',mode:0o600});
  // HTTP redirects are disabled during local preparation; only HTTPS is served.
  const local=url.hostname==='localhost';
@@ -150,6 +152,20 @@ function senderAddress(value){return (value.match(/<([^<>]+)>$/)?.[1]??value).tr
 function publicHttpsOrigin(value){
  try{const url=new URL(value);return url.protocol==='https:'&&!url.username&&!url.password&&url.pathname==='/'&&!url.search&&!url.hash&&!url.port&&url.hostname.includes('.')&&!url.hostname.endsWith('.localhost')&&url.hostname!=='localhost'&&!url.hostname.endsWith('.local')&&!isIP(url.hostname)?url:null;}catch{return null;}
 }
+function workersDevHttpsOrigin(value){
+ const url=publicHttpsOrigin(value);if(!url)return null;
+ const labels=url.hostname.split('.');
+ return labels.length===4&&labels[2]==='workers'&&labels[3]==='dev'&&labels.slice(0,2).every(label=>dnsLabelPattern.test(label))?url:null;
+}
+function tailscaleFunnelOrigin(value){
+ const url=publicHttpsOrigin(value);if(!url)return null;
+ const labels=url.hostname.split('.');
+ return labels.length>=3&&labels.at(-2)==='ts'&&labels.at(-1)==='net'&&labels.slice(0,-2).every(label=>dnsLabelPattern.test(label))?url:null;
+}
+function validEdgeSecret(value){
+ if(!edgeSecretPattern.test(value))return false;
+ try{return Buffer.from(value,'base64url').length>=32;}catch{return false;}
+}
 export function tunnelCaddyConfiguration(origin){
  const url=publicHttpsOrigin(origin);if(!url)throw Error('Use a public HTTPS origin without path, port, credentials or an IP address');
  // Funnel terminates public TLS. Caddy deliberately uses its private CA only
@@ -180,8 +196,108 @@ export async function configureTunnelOrigin(directory,origin){
  if(!url)throw Error('Use a public HTTPS origin without path, port, credentials or an IP address');
  if(env.BIND_ADDRESS!=='127.0.0.1')throw Error('Tunnel publication requires BIND_ADDRESS=127.0.0.1');
  await replacePrivateFile(caddyPath,tunnelCaddyConfiguration(url.origin));
- await replacePrivateFile(runtimePath,setRuntimeValue(content,'APP_URL',url.origin));
+ let next=setRuntimeValue(content,'APP_URL',url.origin);next=setRuntimeValue(next,'EDGE_ORIGIN_ACTIVE','false');
+ if(tailscaleFunnelOrigin(url.origin))next=setRuntimeValue(next,'EDGE_UPSTREAM_ORIGIN',url.origin);
+ await replacePrivateFile(runtimePath,next);
  return {origin:url.origin,caddyPath,runtimePath};
+}
+export function edgeOriginCaddyConfiguration(edgeOrigin,upstreamOrigin){
+ const edge=workersDevHttpsOrigin(edgeOrigin),upstream=tailscaleFunnelOrigin(upstreamOrigin);
+ if(!edge)throw Error('Use a workers.dev HTTPS origin in the form https://worker.account.workers.dev, without a path or port');
+ if(!upstream)throw Error('The edge origin requires an existing public Tailscale Funnel HTTPS origin under ts.net');
+ const httpsHosts=[...new Set(['localhost',upstream.hostname,edge.hostname])].map(host=>`https://${host}:443`).join(', ');
+ return `{
+ auto_https disable_redirects
+}
+${httpsHosts} {
+ tls internal
+ @edge {
+  header X-Agoranode-Edge-Key {$EDGE_SHARED_SECRET}
+  header X-Agoranode-Client-IP *
+ }
+ handle @edge {
+  route {
+   vars edge_client_ip {http.request.header.X-Agoranode-Client-IP}
+   request_header -Forwarded
+   request_header -X-Forwarded-*
+   request_header -X-Real-IP
+   request_header -CF-Connecting-IP
+   request_header -True-Client-IP
+   request_header -X-Agoranode-*
+   reverse_proxy app:8000 {
+    header_up X-Forwarded-For {vars.edge_client_ip}
+    header_up X-Forwarded-Proto https
+    header_up X-Forwarded-Host ${edge.hostname}
+    header_up Host ${edge.hostname}
+   }
+  }
+ }
+ handle {
+  header Cache-Control "no-store"
+  respond "" 403
+ }
+}
+https://localhost:444 {
+ tls internal
+ route {
+  request_header -Forwarded
+  request_header -X-Forwarded-*
+  request_header -X-Real-IP
+  request_header -CF-Connecting-IP
+  request_header -True-Client-IP
+  request_header -X-Agoranode-*
+  reverse_proxy app:8000 {
+   header_up X-Forwarded-For {remote_host}
+   header_up X-Forwarded-Proto https
+   header_up X-Forwarded-Host localhost
+  }
+ }
+}
+http:// {
+ redir ${edge.origin}{uri} permanent
+}
+`;
+}
+export function parseEdgeOriginArgs(args){
+ const positional=[],options={activate:false};
+ for(let index=0;index<args.length;index++){
+  const value=args[index];
+  if(value==='--activate'){
+   if(options.activate)throw Error('Duplicate option: --activate');options.activate=true;
+  }else if(value==='--local-https-port'){
+   const next=args[++index];if(!next||next.startsWith('--'))throw Error('Missing value for --local-https-port');
+   if(options.localHttpsPort!==undefined)throw Error('Duplicate option: --local-https-port');options.localHttpsPort=port(next,'Local HTTPS port');
+  }else if(value.startsWith('--'))throw Error('Unknown edge-origin option: '+value);
+  else positional.push(value);
+ }
+ if(positional.length!==1)throw Error('Use edge-origin https://worker.account.workers.dev [--activate] [--local-https-port 9443]');
+ return {origin:positional[0],options};
+}
+export async function configureEdgeOrigin(directory,origin,options={}){
+ const state=resolve(directory,'.selfhost'),runtimePath=resolve(state,'runtime.env'),caddyPath=resolve(state,'Caddyfile'),stagedPath=resolve(state,'Caddyfile.edge-origin');
+ const content=await readFile(runtimePath,'utf8'),env=runtimeEnvironment(content),edge=workersDevHttpsOrigin(origin);
+ if(!edge)throw Error('Use a workers.dev HTTPS origin in the form https://worker.account.workers.dev, without a path or port');
+ if(env.MIRROR_MODE!=='false')throw Error('An edge origin can only be activated for a primary installation');
+ if(env.BIND_ADDRESS!=='127.0.0.1')throw Error('Edge publication requires BIND_ADDRESS=127.0.0.1');
+ if(env.EDGE_ORIGIN_ACTIVE==='true'&&!options.activate)throw Error('The edge origin is already active; use --activate to update it or tunnel-origin to roll back');
+ const upstream=tailscaleFunnelOrigin(env.EDGE_UPSTREAM_ORIGIN||env.APP_URL);
+ if(!upstream)throw Error('Prepare Tailscale Funnel with tunnel-origin before configuring the workers.dev edge');
+ const configuredSecret=env.EDGE_SHARED_SECRET??'';
+ if(configuredSecret&&!validEdgeSecret(configuredSecret))throw Error('EDGE_SHARED_SECRET is invalid; keep a base64url secret of at least 32 random bytes');
+ if(options.activate&&(!configuredSecret||env.EDGE_PUBLIC_ORIGIN!==edge.origin||env.EDGE_UPSTREAM_ORIGIN!==upstream.origin))throw Error('Prepare this edge origin without --activate first, configure the Worker with its private secret, then activate it');
+ const secret=configuredSecret||randomBytes(32).toString('base64url'),secretCreated=!configuredSecret;
+ const localHttpsPort=port(options.localHttpsPort??(env.LOCAL_HTTPS_PORT||9443),'Local HTTPS port');
+ if([Number(env.HTTPS_PORT),Number(env.HTTP_PORT)].includes(localHttpsPort))throw Error('Local HTTPS maintenance port must be different from HTTP_PORT and HTTPS_PORT');
+ const caddy=edgeOriginCaddyConfiguration(edge.origin,upstream.origin);
+ await replacePrivateFile(stagedPath,caddy);
+ let next=content;
+ for(const [key,value] of [['EDGE_SHARED_SECRET',secret],['EDGE_PUBLIC_ORIGIN',edge.origin],['EDGE_UPSTREAM_ORIGIN',upstream.origin]])next=setRuntimeValue(next,key,value);
+ if(options.activate){
+  next=setRuntimeValue(next,'LOCAL_HTTPS_PORT',String(localHttpsPort));next=setRuntimeValue(next,'EDGE_ORIGIN_ACTIVE','true');next=setRuntimeValue(next,'APP_URL',edge.origin);
+  await replacePrivateFile(caddyPath,caddy);
+ }else if(!env.EDGE_ORIGIN_ACTIVE)next=setRuntimeValue(next,'EDGE_ORIGIN_ACTIVE','false');
+ await replacePrivateFile(runtimePath,next);
+ return {origin:edge.origin,upstreamOrigin:upstream.origin,localHttpsPort,activated:Boolean(options.activate),secretCreated,stagedPath};
 }
 export async function publicationPreflight(directory){
  const state=resolve(directory,'.selfhost'),content=await readFile(resolve(state,'runtime.env'),'utf8'),env=runtimeEnvironment(content),checks=[];
@@ -190,6 +306,12 @@ export async function publicationPreflight(directory){
  add('mode','Installazione primaria',env.MIRROR_MODE==='false','MIRROR_MODE deve essere false per ospitare dati privati.');
  add('runtime','Runtime di produzione',env.NODE_ENV==='production'&&Boolean(env.DATABASE_URL)&&Boolean(env.POSTGRES_PASSWORD)&&Boolean(env.AUTH_SECRET&&env.AUTH_SECRET.length>=32),'Servono produzione, database persistente e segreti locali generati.');
  add('origin','Origine HTTPS pubblica stabile',Boolean(origin),'APP_URL deve essere un nome HTTPS pubblico senza percorso né porta interna.');
+ const workerOrigin=workersDevHttpsOrigin(env.APP_URL??'');
+ if(workerOrigin||env.EDGE_ORIGIN_ACTIVE==='true'){
+  let localPort=0;try{localPort=port(env.LOCAL_HTTPS_PORT,'Local HTTPS port');}catch{}
+  const edgeReady=Boolean(workerOrigin&&env.EDGE_ORIGIN_ACTIVE==='true'&&env.EDGE_PUBLIC_ORIGIN===workerOrigin.origin&&tailscaleFunnelOrigin(env.EDGE_UPSTREAM_ORIGIN)&&validEdgeSecret(env.EDGE_SHARED_SECRET??'')&&env.BIND_ADDRESS==='127.0.0.1'&&localPort!==Number(env.HTTP_PORT)&&localPort!==Number(env.HTTPS_PORT));
+  add('edge-origin','Ingresso Worker protetto e manutenzione locale',edgeReady,'La modalità edge richiede workers.dev coerente con APP_URL, segreto privato valido, origine Funnel ts.net e una porta di manutenzione distinta su loopback.');
+ }
  const operator=Boolean(env.PUBLIC_OPERATOR_NAME?.trim()&&env.PUBLIC_OPERATOR_NAME.trim().length<=200&&!/[\r\n]/.test(env.PUBLIC_OPERATOR_NAME));
  const privacy=Boolean(env.PUBLIC_PRIVACY_CONTACT&&emailPattern.test(env.PUBLIC_PRIVACY_CONTACT));
  add('operator','Gestore e contatto privacy pubblici',operator&&privacy,'Compilare PUBLIC_OPERATOR_NAME e un indirizzo PUBLIC_PRIVACY_CONTACT operativo.');
@@ -199,17 +321,18 @@ export async function publicationPreflight(directory){
  const smtp=transport==='smtp'&&Boolean(smtpHost)&&['465','587'].includes(env.SMTP_PORT??'465')&&Boolean(smtpUser)&&Boolean(env.SMTP_PASSWORD)&&mailFrom&&gmailIdentity;
  const brevo=transport==='brevo'&&Boolean(env.BREVO_API_KEY)&&mailFrom;
  add('mail','Conferma e recupero email configurati',smtp||brevo,transport==='smtp'?(smtpHost==='smtp.gmail.com'&&!gmailIdentity?'Per Gmail, SMTP_USER e MAIL_FROM devono usare la stessa casella verificata.':'SMTP richiede host, porta TLS 465 o STARTTLS 587, utente, password per app e mittente.'):(transport==='brevo'?'Brevo richiede API key e mittente verificato.':'Scegliere un trasporto email e collaudare un messaggio reale.'));
- const facebook={name:'FACEBOOK',id:Boolean(env.FACEBOOK_CLIENT_ID),secret:Boolean(env.FACEBOOK_CLIENT_SECRET)},discord=Boolean(env.DISCORD_CLIENT_ID||env.DISCORD_CLIENT_SECRET);
+ const facebook={name:'FACEBOOK',id:Boolean(env.FACEBOOK_CLIENT_ID),secret:Boolean(env.FACEBOOK_CLIENT_SECRET)},discord=Boolean(env.DISCORD_CLIENT_ID||env.DISCORD_CLIENT_SECRET),forumOpen=env.FORUM_OPEN==='true';
  const partial=facebook.id!==facebook.secret,complete=facebook.id&&facebook.secret?[facebook]:[];
- add('social','Provider facoltativo coerente',!partial&&!discord,discord?'Discord non è usato per PR1 o PR2: rimuovere le relative credenziali.':partial?'Facebook richiede client ID e client secret insieme.':facebook.id?'Facebook è configurato come prova tecnica supplementare per PR2.':'Facebook non è configurato: PR2 resta disponibile con nome e riferimento HTTPS dichiarati.');
+ const socialLabel=facebook.id?'Facebook OAuth configurato per PR2':'PR1 pronto; Facebook OAuth non ancora configurato';
+ add('social',socialLabel,!partial&&!discord&&(!forumOpen||facebook.id),discord?'Discord non è usato per PR1 o PR2: rimuovere le relative credenziali.':partial?'Facebook richiede client ID e client secret insieme.':facebook.id?'Facebook è configurato per autenticare le domande PR2.':'Facebook non è configurato: configurarlo prima di aprire FORUM_OPEN; PR1 continua a usare soltanto email e password.');
  const hashes=(env.COMMUNITY_BOOTSTRAP_HASH??'').split(',').filter(Boolean),validHashes=hashes.length===3&&hashes.every(hash=>bootstrapPattern.test(hash))&&new Set(hashes).size===3;
  add('founders','Tre inviti fondatori predisposti',validHashes,'Eseguire community-invites prima del collaudo PR2.');
  let invitations='missing';
  try{const codes=await optionalInvitationCodes(resolve(state,'private','community-founder-invites.txt'));if(codes)invitations=validHashes&&invitationHashes(codes).join(',')===hashes.join(',')?'matching':'mismatch';}catch{invitations='invalid';}
  add('founder-file','Inviti fondatori privati coerenti',invitations==='matching','Il file privato deve esistere, essere valido e corrispondere ai tre hash configurati.');
- const accountHash=env.ACCOUNT_ACCESS_HASH??'';let accountAccess='missing';
- try{const code=await optionalAccountAccessCode(resolve(state,'private','account-access-code.txt'));if(code)accountAccess=bootstrapPattern.test(accountHash)&&createHash('sha256').update(code).digest('hex')===accountHash?'matching':'mismatch';}catch{accountAccess='invalid';}
- add('account-access','Codice privato per accesso iniziale',accountAccess==='matching','Eseguire account-access prima di aprire registrazioni o forum; il file privato deve corrispondere al solo hash nel runtime.');
+ const accountHash=env.ACCOUNT_ACCESS_HASH??'';let accountAccess=accountHash?'missing':'disabled';
+ if(accountHash)try{const code=await optionalAccountAccessCode(resolve(state,'private','account-access-code.txt'));if(code)accountAccess=bootstrapPattern.test(accountHash)&&createHash('sha256').update(code).digest('hex')===accountHash?'matching':'mismatch';}catch{accountAccess='invalid';}
+ add('account-access','Codice privato account facoltativo',['disabled','matching'].includes(accountAccess),'Se ACCOUNT_ACCESS_HASH è configurato, il file privato deve esistere e corrispondere; lasciarlo vuoto apre le nuove registrazioni senza codice condiviso. Il recupero password non usa questa barriera.');
  const callbacks=origin?complete.map(provider=>`${origin.origin}/api/identity/callback/${provider.name.toLowerCase()}`):[];
  return {ready:checks.every(check=>check.ok),checks,callbacks,registrationsOpen:env.REGISTRATIONS_OPEN==='true',forumOpen:env.FORUM_OPEN==='true',invitations,accountAccess};
 }
@@ -219,8 +342,8 @@ export function formatPublicationPreflight(result){
  for(const callback of result.callbacks)lines.push(`[CALLBACK] ${callback}`);
  lines.push(`[STATO] Registrazioni ${result.registrationsOpen?'aperte':'chiuse'}; forum ${result.forumOpen?'aperto':'chiuso'}.`);
  if(result.invitations!=='matching')lines.push(`[ATTENZIONE] File privato inviti fondatori: ${result.invitations}. Non rigenerare codici già distribuiti.`);
- if(result.accountAccess!=='matching')lines.push(`[ATTENZIONE] Codice privato account: ${result.accountAccess}. Non aprire i flussi email senza prepararlo.`);
- lines.push(result.ready?'Configurazione statica pronta. Lascia i flag chiusi finché email e PR2 non superano il collaudo reale; se configuri OAuth, collauda anche quel percorso.':'Configurazione non pronta: risolvi tutti i blocchi lasciando chiusi i flag.');
+ if(!['disabled','matching'].includes(result.accountAccess))lines.push(`[ATTENZIONE] Codice privato account: ${result.accountAccess}. Correggerlo o disabilitarlo prima di aprire i flussi email.`);
+ lines.push(result.ready?'Configurazione statica pronta. Lascia i flag chiusi finché email e PR2 non superano il collaudo reale; Facebook OAuth deve essere collaudato prima di aprire FORUM_OPEN.':'Configurazione non pronta: risolvi tutti i blocchi lasciando chiusi i flag.');
  return lines.join('\n');
 }
 export function parseInitArgs(args){
@@ -238,7 +361,7 @@ export function parseInitArgs(args){
 }
 export function composeArgs(action,operands=[]){
  const base=['compose','--env-file','.selfhost/runtime.env','-f','deploy/selfhost/compose.yaml'];
- const commands={start:['up','-d','--build','--wait'],stop:['stop'],status:['ps'],logs:['logs','--tail','80'],backup:['run','--build','--rm','-T','backup'],certificate:['cp','proxy:/data/caddy/pki/authorities/local/root.crt','.selfhost/local-root.crt'],'mail-status':['run','--rm','-T','mail-limits','status'],'mail-reset':['run','--rm','-T','mail-limits','reset'],'snapshot-keygen':['run','--rm','-T','--no-deps','snapshot-sign','keygen'],'snapshot-status':['run','--rm','-T','snapshot-db','status']};
+ const commands={start:['up','-d','--build','--wait','--force-recreate'],stop:['stop'],status:['ps'],logs:['logs','--tail','80'],backup:['run','--build','--rm','-T','backup'],certificate:['cp','proxy:/data/caddy/pki/authorities/local/root.crt','.selfhost/local-root.crt'],'knowledge-import':['run','--rm','-T','knowledge-import'],'mail-status':['run','--rm','-T','mail-limits','status'],'mail-reset':['run','--rm','-T','mail-limits','reset'],'snapshot-keygen':['run','--rm','-T','--no-deps','snapshot-sign','keygen'],'snapshot-status':['run','--rm','-T','snapshot-db','status']};
  if(action==='snapshot-export'){
   snapshotExportOptions(operands);
   return [...base,'run','--rm','-T','--no-deps','snapshot-sign','export'];
@@ -252,7 +375,7 @@ export function composeArgs(action,operands=[]){
   return [...base,'run','--rm','-T','library-import',...operands];
  }
  if(operands.length)throw Error('Unexpected command arguments');
- if(!commands[action])throw Error('Use init, tunnel-origin, start, stop, status, logs, backup, certificate, mail-status, mail-reset, library-import or a snapshot-* command');
+ if(!commands[action])throw Error('Use init, tunnel-origin, edge-origin, start, stop, status, logs, backup, certificate, mail-status, mail-reset, library-import, knowledge-import or a snapshot-* command');
  return [...base,...commands[action]];
 }
 function snapshotExportOptions(operands){
@@ -289,6 +412,10 @@ if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
   else if(action==='tunnel-origin'){
    if(process.argv.length!==4)throw Error('Use tunnel-origin https://public-name.example');
    const result=await configureTunnelOrigin(root,process.argv[3]);console.log(`Private runtime origin and Caddy tunnel host updated to ${result.origin}. Restart the stack before enabling the tunnel.`);
+  }else if(action==='edge-origin'){
+   const parsed=parseEdgeOriginArgs(process.argv.slice(3)),result=await configureEdgeOrigin(root,parsed.origin,parsed.options);
+   if(result.activated)console.log(`Edge origin activated for ${result.origin}; local maintenance remains on loopback port ${result.localHttpsPort}. No secret was printed. Restart the stack only after the Worker is configured.`);
+   else console.log(`Edge origin prepared for ${result.origin}. APP_URL and the active Caddy configuration were not changed. The edge secret remains only in the private runtime file and was not printed. Configure and test the Worker, then repeat with --activate.`);
   }else if(action==='community-invites'){
    if(process.argv.length!==3)throw Error('community-invites does not accept arguments');
    const result=await createFounderInvitations(root);console.log(`${result.created?'Created':'Verified'} ${result.count} founder invitations in the private file ${result.path}. The codes were not printed.`);

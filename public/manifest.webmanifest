@@ -1,7 +1,7 @@
 {
   "name": "PolisRossa",
   "short_name": "PolisRossa",
-  "description": "Notizie, fonti e percorsi di lettura per uno sguardo internazionale.",
+  "description": "Notizie, fonti, biblioteca, storia, dati e partecipazione della comunità PolisRossa.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#f6f3ec",

@@ -163,7 +163,7 @@ export const WorldWatch = memo(function WorldWatch({ networkArticles, expanded=f
           I fatti più recenti dalle fonti internazionali, in una finestra di sei ore. Per seguire ciò che accade adesso.
         </T>
       </p>
-      <a className="watch-back-to-review" href="/?view=notizie#rassegna-articoli"><T>Torna alla rassegna</T> ↑</a>
+      <a className="watch-back-to-review" href="/polisrossa?view=notizie#rassegna-articoli"><T>Torna alla rassegna</T> ↑</a>
       <div className="watch-stats">
 
         <div>
@@ -290,7 +290,7 @@ export const WorldWatch = memo(function WorldWatch({ networkArticles, expanded=f
         ))}
       </ol>
       {expanded&&stories.length>visibleCount?<button className="button button-outline" onClick={()=>setVisibleCount(n=>n+60)}><T>Mostra altre notizie recenti</T></button>:null}
-      {!expanded&&stories.length>12?<a className="watch-open-all" href="/?view=osservatorio"><T>Apri tutte le notizie delle ultime sei ore</T> ↗</a>:null}
+      {!expanded&&stories.length>12?<a className="watch-open-all" href="/polisrossa?view=osservatorio"><T>Apri tutte le notizie delle ultime sei ore</T> ↗</a>:null}
       {!stories.length ? (
         <p className="watch-empty">
           <T>

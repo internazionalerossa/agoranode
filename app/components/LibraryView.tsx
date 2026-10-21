@@ -60,7 +60,7 @@ export function LibraryView({
   return (
     <div className="library-view">
       <header className="section-heading"><h1 id="page-title"><LocalizedText>Biblioteca</LocalizedText></h1><BookOpen size={24} strokeWidth={1.3}/></header>
-      <nav className="library-destinations" aria-label="Percorsi della biblioteca">{LIBRARY_SECTIONS.map(item=><a key={item.id} href={librarySectionUrl('/?view=teoria',item.id)} aria-current={section===item.id?'page':undefined} onClick={event=>{if(event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;event.preventDefault();chooseSection(item.id);}}><strong><LocalizedText>{item.label}</LocalizedText></strong><span><LocalizedText>{item.description}</LocalizedText></span><ArrowUpRight size={16}/></a>)}</nav>
+      <nav className="library-destinations" aria-label="Percorsi della biblioteca">{LIBRARY_SECTIONS.map(item=><a key={item.id} href={librarySectionUrl('/polisrossa?view=teoria',item.id)} aria-current={section===item.id?'page':undefined} onClick={event=>{if(event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;event.preventDefault();chooseSection(item.id);}}><strong><LocalizedText>{item.label}</LocalizedText></strong><span><LocalizedText>{item.description}</LocalizedText></span><ArrowUpRight size={16}/></a>)}</nav>
       <div id="library-section-panel" tabIndex={-1}>
       {section==='libri'?<>
       <div className="usage-guide" aria-label="Guida alla biblioteca">

@@ -4,7 +4,7 @@ export type BookmarkRow = { kind: "article" | "book"; item_key: string; payload:
 export type BookmarkStatement = { bind(...values: unknown[]): BookmarkStatement; all(): Promise<{ results: BookmarkRow[] }>; run(): Promise<unknown> };
 export type BookmarkDatabase = { prepare(sql: string): BookmarkStatement; batch(statements: BookmarkStatement[]): Promise<unknown> };
 
-export async function handleBookmarks(request: Request, db: BookmarkDatabase | undefined, userId: string | null, bookIds: Set<string>, signInUrl = "/account?return_to=%2F%3Fview%3Dsalvati"): Promise<Response> {
+export async function handleBookmarks(request: Request, db: BookmarkDatabase | undefined, userId: string | null, bookIds: Set<string>, signInUrl = "/polisrossa/account?return_to=%2Fpolisrossa%3Fview%3Dsalvati"): Promise<Response> {
   const reply = (data: unknown, status = 200) => Response.json(data, { status, headers: { "cache-control": "private, no-store", "vary": "cookie" } });
   if (!userId) return reply({ authenticated: false, signInUrl }, 401);
   if (!db) return reply({ authenticated: true, error: "Archivio temporaneamente non disponibile" }, 503);

@@ -5,6 +5,7 @@ import { validateVideos, type VideoItem } from "@/app/lib/videos";
 import { parseYouTubeListing } from "@/app/lib/youtube";
 import { fetchPublicPhotoResource, readLimited } from "@/app/lib/article-photo";
 import { createBoundedCache } from "@/app/lib/bounded-cache";
+import {instanceUserAgent} from '@/app/lib/instance';
 export const dynamic = "force-dynamic";
 const cache = createBoundedCache<string, { until: number; videos: VideoItem[] }>(128, 1000000, value => JSON.stringify(value).length * 2);
 export async function GET(request: Request) {
@@ -17,7 +18,7 @@ export async function GET(request: Request) {
   const signal = AbortSignal.timeout(9000);
   const load = async (url: string, limit: number) => {
     const target = new URL(url);
-    const response = await fetchPublicPhotoResource(target, signal, { accept: "application/atom+xml, application/json, text/html", "user-agent": "PolisRossa/1.0 (public video channels)" }, fetch, target.hostname.replace(/^www\./,""));
+    const response = await fetchPublicPhotoResource(target, signal, { accept: "application/atom+xml, application/json, text/html", "user-agent": instanceUserAgent('public video channels') }, fetch, target.hostname.replace(/^www\./,""));
     if (!response.ok) { await response.body?.cancel(); throw Error("Channel unavailable"); }
     return new TextDecoder().decode(await readLimited(response, limit));
   };

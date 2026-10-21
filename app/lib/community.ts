@@ -11,7 +11,7 @@ const ownerKey=async(user:string)=>[...new Uint8Array(await crypto.subtle.digest
 const changed=(result:{meta?:{changes?:number};changes?:number|bigint})=>Number(result.meta?.changes??result.changes??0)>0;
 const publicRow=(r:Row):CommunityProposal=>({id:String(r.id),title:String(r.title),body:String(r.body),references:String(r.references_text),category:r.category as CommunityProposal['category'],language:String(r.language),createdAt:Number(r.created_at),votes:{support:Number(r.support??0),oppose:Number(r.oppose??0),abstain:Number(r.abstain??0),total:Number(r.total??0)},decision:decisions[String(r.id)]??null});
 
-export async function handleCommunity(request:Request,db:CommunityDatabase|undefined,userId:string|null,signInUrl='/?view=partecipa',decisionOverrides:Record<string,CommunityDecision>=decisions):Promise<Response>{
+export async function handleCommunity(request:Request,db:CommunityDatabase|undefined,userId:string|null,signInUrl='/polisrossa?view=partecipa',decisionOverrides:Record<string,CommunityDecision>=decisions):Promise<Response>{
  const url=new URL(request.url), mine=url.pathname.endsWith('/mine');
  const reply=(body:unknown,status=200)=>Response.json(body,{status,headers:privateHeaders});
  // This endpoint deliberately stays out of shared caches, including the public board.

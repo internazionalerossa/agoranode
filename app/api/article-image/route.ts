@@ -6,6 +6,7 @@ import { fetchPublisherPage } from "@/app/lib/publisher-page";
 import { applySourceImages } from "@/app/lib/source-highlights";
 import { articleImages } from "@/app/lib/article-images";
 import { articleMetadataImages, fetchPublicPhotoResource, publicPhotoUrl, readLimited } from "@/app/lib/article-photo";
+import {instanceUserAgent} from '@/app/lib/instance';
 export const dynamic = "force-dynamic";
 const cache = new Map<string, { until: number; bytes: Uint8Array; type: string }>();
 let cacheBytes = 0;
@@ -55,7 +56,7 @@ export async function GET(request: Request, find?: (sourceId: string, id: string
       article = { ...stored, link: original };
       source = { ...source, homepage: new URL(original).origin + "/" };
     }
-    const headers = { "user-agent": "Mozilla/5.0 PolisRossa/1.0", referer: source.homepage, accept: "image/avif,image/webp,image/*" };
+    const headers = { "user-agent": `Mozilla/5.0 ${instanceUserAgent()}`, referer: source.homepage, accept: "image/avif,image/webp,image/*" };
     const download = async (urls: string[]) => {
       for (const raw of urls) {
         const url = publicPhotoUrl(raw); if (!url) continue;

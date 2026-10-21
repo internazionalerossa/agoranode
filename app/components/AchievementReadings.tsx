@@ -17,7 +17,7 @@ export default function AchievementReadings(){
     const destination=libraryReadingDestination(book,locale);
     return <li key={book.id}><a href={destination?.href??book.links[0]?.url} target={destination&&!destination.internal?'_blank':undefined} rel={destination&&!destination.internal?'noopener noreferrer':undefined}><T>{book.title}</T></a><small>{book.author} · {book.period}{destination&&<> · {destination.edition.language.toUpperCase()}</>}</small><p><T content>{reading.why}</T></p></li>;
    })}</ul>
-   <div className="reading-resource-links"><a href={`/?view=teoria&percorso=conquiste&indicatore=${encodeURIComponent(path.indicator)}#world-history-title`}><T>Confronta i dati</T><ArrowUpRight size={13}/></a>{path.resources.map(([label,url])=><a key={url} href={url} target="_blank" rel="noopener noreferrer"><T>{label}</T><ArrowUpRight size={13}/></a>)}</div>
+   <div className="reading-resource-links"><a href={`/polisrossa?view=teoria&percorso=conquiste&indicatore=${encodeURIComponent(path.indicator)}#world-history-title`}><T>Confronta i dati</T><ArrowUpRight size={13}/></a>{path.resources.map(([label,url])=><a key={url} href={url} target="_blank" rel="noopener noreferrer"><T>{label}</T><ArrowUpRight size={13}/></a>)}</div>
   </details>)}</div>
  </section>;
 }

@@ -42,6 +42,9 @@ test('the public event destination reuses the complete sourced timeline entry',(
   assert.match(html,/<details class="story-event-details" open=""/);
   assert.match(html,/>Condividi</);
   assert.match(html,/>Copia link</);
+  assert.match(html,/data-knowledge-kind="event" data-knowledge-entity="haymarket-1886"/);
+  assert.match(html,/Storico delle modifiche/);
+  assert.match(html,/Caricamento della cronologia/);
   assert.doesNotMatch(html,/story-opening/);
  }finally{
   if(previous===undefined)delete globalThis.window;else globalThis.window=previous;

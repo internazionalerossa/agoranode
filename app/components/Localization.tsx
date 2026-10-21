@@ -11,6 +11,7 @@ import {
 } from "react";
 
 import {brandName,localizeBrand,translateAroundBrand} from '@/app/lib/brand';
+import {INSTANCE_NAME} from '@/app/lib/instance';
 import { usePagePreparation } from "./InitialLoadBoundary";
 import { normalizeLanguage, chunkTranslationText } from "@/app/lib/translation";
 import { createAvailabilityCircuit } from "@/app/lib/availability-circuit";
@@ -207,7 +208,7 @@ const translationQueue = createTranslationQueue(async (task) => {
   }
 });
 function translate(text: string, from: string, to: string, priority = 0):Promise<string|null> {
-  if(text.includes("PolisRossa"))return translateAroundBrand(text,part=>translate(part,from,to,priority));
+  if(text.includes(INSTANCE_NAME))return translateAroundBrand(text,part=>translate(part,from,to,priority));
   from = normalizeLanguage(from);
   to = normalizeLanguage(to);
   if (from === to) return Promise.resolve(text);

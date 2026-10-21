@@ -8,7 +8,7 @@ test('only the exact rights-approved edition enters the internal reader',()=>{
  assert.ok(commons);
  const english=libraryReadingDestination(commons,'en');
  assert.equal(english.internal,true);
- assert.equal(english.href,'/read?book=commons-viventi&edition=en');
+ assert.equal(english.href,'/polisrossa/read?book=commons-viventi&edition=en');
 
  const spanish=libraryReadingDestination(commons,'es');
  assert.equal(spanish.internal,false);

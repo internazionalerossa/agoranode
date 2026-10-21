@@ -1,4 +1,5 @@
 import { chunkTranslationText, translateGoogleText, normalizeLanguage } from "@/app/lib/translation";
+import {instanceUserAgent} from '@/app/lib/instance';
 export const dynamic = "force-dynamic";
 
 type TranslationPayload = {
@@ -121,7 +122,7 @@ async function translateChunk(text: string, from: string, to: string) {
   const response = await fetch(endpoint, {
     headers: {
       accept: "application/json",
-      "user-agent": "InternazionaleRSS/1.0",
+      "user-agent": instanceUserAgent('public translations'),
     },
     signal: AbortSignal.timeout(12000),
   });

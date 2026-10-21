@@ -6,6 +6,7 @@ import {CHAT_MAX_IMAGE_BYTES,CHAT_MAX_WORDS,CHAT_NOTICE,chatWordCount,type ChatB
 import {LocalizedText as T,useLocale} from './Localization';
 import DiscussionText from './DiscussionText';
 const endpoint='/api/community/chat';
+const CHAT_REFRESH_SECONDS=15;
 export type ChatDraft={title:string;body:string;language?:string};
 const initialRoom=()=>typeof window!=='undefined'&&ROOMS.some(room=>room.id===new URL(location.href).searchParams.get('stanza'))?new URL(location.href).searchParams.get('stanza')!:'generale';
 export default function LiveChat({active,disabled,preview,onThread}:{active:boolean;disabled:boolean;preview:boolean;onThread:(draft:ChatDraft)=>void}){
@@ -24,7 +25,7 @@ export default function LiveChat({active,disabled,preview,onThread}:{active:bool
     const next=data as ChatBoard,key=next.instance+':'+next.expiresAt;offset.current=next.serverNow-Date.now();setNow(next.serverNow);setBoard(next);setConnected(true);setError('');
     if(generation.current!==key){generation.current=key;setMessages(next.messages);setBefore(next.previousBefore);}else{setMessages(old=>{const seen=new Map(old.filter(message=>message.expiresAt>next.serverNow).map(message=>[message.id,message]));for(const message of next.messages)seen.set(message.id,message);return [...seen.values()].sort((a,b)=>a.sequence-b.sequence);});setBefore(previous=>previous===undefined?next.previousBefore:previous);}
    }catch(error){if(!controller.signal.aborted){setConnected(false);setError(error instanceof Error?error.message:'Connessione alla chat interrotta.');}}finally{running=false;}
-  };void load();const timer=setInterval(()=>void load(),5000),visible=()=>{if(document.visibilityState==='visible')void load();};document.addEventListener('visibilitychange',visible);
+  };void load();const timer=setInterval(()=>void load(),CHAT_REFRESH_SECONDS*1000),visible=()=>{if(document.visibilityState==='visible')void load();};document.addEventListener('visibilitychange',visible);
   return()=>{controller.abort();clearInterval(timer);document.removeEventListener('visibilitychange',visible);attachmentVersion.current++;};
  },[room,active,preview]);
  useEffect(()=>{if(stickToBottom.current&&messageBox.current)messageBox.current.scrollTop=messageBox.current.scrollHeight;},[messages]);
@@ -43,7 +44,7 @@ export default function LiveChat({active,disabled,preview,onThread}:{active:bool
   <div className="chat-room-heading"><div><h4><T>{currentRoom.name}</T></h4><p><T>{currentRoom.description}</T></p></div>{board&&<small><T>Prossimo azzeramento</T><br/><time dateTime={new Date(board.expiresAt).toISOString()}>{date(board.expiresAt)}</time></small>}</div>
   <p className="chat-limits"><T>200 parole per messaggio · un invio al minuto per persona, fra tutte le stanze · immagini e GIF fino a 2 MB.</T></p>
   {!active||preview?<p className="chat-access-note"><T>{preview?'La chat sarà aperta dopo l’attivazione dell’accesso indipendente. Qui puoi consultare le stanze e le regole.':'Per leggere e scrivere nella chat serve l’ammissione PR2. Il forum pubblico rimane consultabile da tutti.'}</T></p>:<>
-   <div className="chat-connection" role="status"><T>{connected?'Aggiornamento automatico ogni 5 secondi.':'Connessione alla stanza…'}</T></div>
+   <div className="chat-connection" role="status"><T>{connected?`Aggiornamento automatico ogni ${CHAT_REFRESH_SECONDS} secondi.`:'Connessione alla stanza…'}</T></div>
    {before&&<button className="text-link" disabled={paging} onClick={()=>void older()}><T>Messaggi precedenti di questa sessione</T></button>}
    <div ref={messageBox} onScroll={event=>{const box=event.currentTarget;stickToBottom.current=box.scrollHeight-box.scrollTop-box.clientHeight<64;}} className="chat-message-list" aria-label="Conversazione temporanea">{messages.filter(message=>message.expiresAt>now).map(message=><article className={message.own?'chat-message chat-message-own':'chat-message'} key={message.id} id={'chat-'+message.id}><div className="chat-message-meta"><strong>{message.author}</strong><time dateTime={new Date(message.createdAt).toISOString()}>{time(message.createdAt)}</time></div><DiscussionText text={message.body} language={message.language} expiresAt={message.expiresAt}/>{message.image&&<a className="chat-image-link" href={message.image.url} target="_blank" rel="noopener noreferrer"><img src={message.image.url} alt="Immagine condivisa nella chat" loading="lazy" referrerPolicy="no-referrer"/></a>}{message.own&&<button className="text-link chat-thread-link" onClick={()=>onThread({title:'',body:message.body,language:message.language})}><T>Sviluppa il tuo messaggio nel forum</T> →</button>}</article>)}{board&&!messages.some(message=>message.expiresAt>now)&&<p className="chat-empty"><T>La stanza è vuota. Apri la conversazione con una domanda, un’immagine o una segnalazione.</T></p>}</div>
    {error&&<p role="alert" className="community-error"><T>{error}</T></p>}

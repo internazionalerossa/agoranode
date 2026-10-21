@@ -36,7 +36,7 @@ test('verified reader accounts, member admission, discussions and ballots persis
   const session=await authSession(identity.auth,request);
   return session.finish(await api(request,db,session.user?.id??null,hash,()=>{},forumOpen,session.user?{provider:'facebook',subject:BigInt('0x'+createHash('sha256').update(session.user.id).digest('hex').slice(0,15)).toString(),name:'Persona di prova',url:'https://www.facebook.com/app_scoped_user_id/'+BigInt('0x'+createHash('sha256').update(session.user.id).digest('hex').slice(0,15)).toString()}:null,async()=>{unlinkedIdentities++;}));
  };
- const application=(alias:string)=>({action:'apply',requestId:crypto.randomUUID(),alias,intro:'Una presentazione pubblica per la gestione delle fonti.',referenceUrl:'https://profiles.example.org/'+encodeURIComponent(alias),language:'it',consent:true});
+ const application=(alias:string)=>({action:'apply',requestId:crypto.randomUUID(),alias,intro:'Una presentazione pubblica per la gestione delle fonti.',language:'it',consent:true});
  try{
   for(const filename of (await readdir(new URL('../server/migrations',import.meta.url))).filter(n=>n.endsWith('.sql')).sort())await database.exec(await readFile(new URL('../server/migrations/'+filename,import.meta.url),'utf8'));
   await(await getMigrations(identity.auth.options)).runMigrations();
@@ -65,7 +65,7 @@ test('verified reader accounts, member admission, discussions and ballots persis
   for(const [i,cookie] of foundingSessions.entries()){assert.equal((await call(cookie,'/api/community/forum',application(foundingUsers[i]))).status,201);assert.equal((await call(cookie,'/api/community/forum',{action:'bootstrap',code:codes[i+1]})).status,200);}
   assert.equal((await call(alice,'/api/community/forum',topic)).status,201);
   const second=application('bobby');assert.equal((await call(bob,'/api/community/forum',second)).status,201);
-  const reviewerBoard=await(await call(alice,'/api/community/forum')).json();assert.equal(reviewerBoard.applications.find((item:{member:{id:string}})=>item.member.id===second.requestId).member.referenceUrl,second.referenceUrl);
+  const reviewerBoard=await(await call(alice,'/api/community/forum')).json();assert.match(reviewerBoard.applications.find((item:{member:{id:string}})=>item.member.id===second.requestId).member.referenceUrl,/^https:\/\/www\.facebook\.com\/app_scoped_user_id\//);
   assert.equal((await call(alice,'/api/community/forum',{action:'admit',id:second.requestId,value:1,identityChecked:false})).status,400);
   assert.equal((await call(alice,'/api/community/forum',{action:'admit',id:second.requestId,value:1,identityChecked:true})).status,200);
   for(const cookie of foundingSessions)assert.equal((await call(cookie,'/api/community/forum',{action:'admit',id:second.requestId,value:1,identityChecked:true})).status,200);

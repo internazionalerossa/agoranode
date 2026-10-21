@@ -17,6 +17,6 @@ export function libraryReadingDestination(book:TheoryCard,preferredLanguage:stri
  return {
   edition,
   internal,
-  href:internal?`/read?${new URLSearchParams({book:book.id,edition:edition.language})}`:edition.url,
+  href:internal?`/polisrossa/read?${new URLSearchParams({book:book.id,edition:edition.language})}`:edition.url,
  };
 }

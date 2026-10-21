@@ -1,4 +1,4 @@
-import {socialIdentityEndpoint,verifiedSocialIdentity,allowedIdentityCallback,unlinkFacebookIdentity} from './social-identity';
+import {socialIdentityEndpoint,verifiedApplicationSocialIdentity,allowedIdentityCallback,unlinkFacebookIdentity} from './social-identity';
 import {createServer} from 'node:http';
 import {readFile,stat} from 'node:fs/promises';
 import {resolve,extname,sep,dirname} from 'node:path';
@@ -13,6 +13,8 @@ import {liveChat} from './live-chat';
 import {purgeForumApplications,startForumApplicationRetention} from './forum-retention';
 import {purgeAuthenticationState,startAuthenticationRetention} from './auth-retention';
 import {api,privatePaths} from './api';
+import type {ForumSocialIdentity} from '../app/lib/forum';
+import {INSTANCE_NAME,INSTANCE_PLATFORM_NAME} from '../app/lib/instance';
 const config=configuration(),pool=createPool(config.connectionString),db=new PostgresDatabase(connections(pool));
 const {auth,settle}=createAuth(pool,config),root=resolve(dirname(fileURLToPath(import.meta.url)),'public');
 const jobs=new Set<Promise<unknown>>();
@@ -21,7 +23,7 @@ const types:Record<string,string>={'.html':'text/html; charset=utf-8','.js':'tex
 async function staticResponse(pathname:string){
  let decoded:string;try{decoded=decodeURIComponent(pathname);}catch{return new Response('Not found',{status:404});}
  if(decoded.includes('\0')||decoded.includes('\\'))return new Response('Not found',{status:404});
- const filename=['/','/read','/account'].includes(decoded)?resolve(root,'index.html'):resolve(root,'.'+decoded);
+ const filename=['/','/read','/account','/agoranode','/agoranode/','/polisrossa','/polisrossa/','/polisrossa/read','/polisrossa/account'].includes(decoded)?resolve(root,'index.html'):resolve(root,'.'+decoded);
  if(!filename.startsWith(root+sep))return new Response('Not found',{status:404});
  try{if(!(await stat(filename)).isFile())throw Error();return new Response(await readFile(filename),{headers:{'content-type':types[extname(filename)]??'application/octet-stream','cache-control':filename.endsWith('index.html')||decoded==='/sw.js'?'no-cache':decoded.startsWith('/assets/')?'public, max-age=31536000, immutable':'public, max-age=3600'}});}catch{return new Response('Not found',{status:404});}
 }
@@ -45,8 +47,8 @@ const server=createServer({maxHeaderSize:16384,requestTimeout:30000,headersTimeo
    const allowed=method==='GET'&&((config.mailTransport!=='none'&&(url.pathname==='/api/identity/verify-email'||url.pathname.startsWith('/api/identity/reset-password/')))||allowedIdentityCallback(url.pathname,method,config));
    response=allowed?await auth.handler(request):new Response('Not found',{status:404});
   }else if(url.pathname.startsWith('/api/')){
-   if(privatePaths.has(url.pathname)){const session=await authSession(auth,request);let socialIdentity=null,unlinkIdentity:(()=>Promise<void>)|undefined;
-    if(session.user&&url.pathname==='/api/community/forum'&&method==='POST'&&request.headers.get('origin')===config.origin&&request.headers.get('sec-fetch-site')!=='cross-site'){let action;try{action=(await request.clone().json()).action;}catch{}if(action==='apply'&&config.forumOpen)socialIdentity=await verifiedSocialIdentity(auth,request,config);if(action==='apply'||action==='cancelApplication')unlinkIdentity=()=>unlinkFacebookIdentity(auth,request);}
+   if(privatePaths.has(url.pathname)){const session=await authSession(auth,request);let socialIdentity:ForumSocialIdentity=null,unlinkIdentity:(()=>Promise<void>)|undefined;
+    if(session.user&&url.pathname==='/api/community/forum'&&method==='POST'&&request.headers.get('origin')===config.origin&&request.headers.get('sec-fetch-site')!=='cross-site'){let input:unknown;try{input=await request.clone().json();}catch{}const data=input&&!Array.isArray(input)&&typeof input==='object'?input as Record<string,unknown>:null,action=data?.action;if(action==='apply'&&config.forumOpen)socialIdentity=()=>verifiedApplicationSocialIdentity(auth,request,config,data);if(action==='apply'||action==='cancelApplication')unlinkIdentity=()=>unlinkFacebookIdentity(auth,request);}
     response=session.finish(await api(request,db,session.user?.id??null,config.bootstrapHash,background,config.forumOpen,socialIdentity,unlinkIdentity,Boolean(session.user)));}
    else response=await api(request,db,null,config.bootstrapHash,background,config.forumOpen);
   }else response=['GET','HEAD'].includes(method)?await staticResponse(url.pathname):new Response('Method not allowed',{status:405});
@@ -61,5 +63,5 @@ const server=createServer({maxHeaderSize:16384,requestTimeout:30000,headersTimeo
 const chatCleanup=setInterval(()=>liveChat.sweep(),1000);chatCleanup.unref();
 const forumRetention=startForumApplicationRetention(()=>background(purgeForumApplications(db).then(count=>console.info(`Forum application retention completed: ${count} removed`)).catch(error=>{console.error('Forum application retention failed');throw error;})));
 const authRetention=startAuthenticationRetention(()=>background(purgeAuthenticationState(db).then(result=>console.info(`Authentication retention completed: ${result.sessions+result.verifications+result.limits+result.unverifiedUsers+result.facebookGrants} removed`)).catch(error=>{console.error('Authentication retention failed');throw error;})));
-server.listen(config.port,'0.0.0.0',()=>console.info('PolisRossa server ready'));
+server.listen(config.port,'0.0.0.0',()=>console.info(`${INSTANCE_PLATFORM_NAME} instance ${INSTANCE_NAME} server ready`));
 for(const signal of ['SIGTERM','SIGINT'])process.on(signal,()=>{clearInterval(chatCleanup);clearInterval(forumRetention as ReturnType<typeof setInterval>);clearInterval(authRetention as ReturnType<typeof setInterval>);server.close(()=>{void Promise.allSettled([...jobs,settle()]).then(()=>pool.end()).then(()=>process.exit(0));});setTimeout(()=>process.exit(1),20000).unref();});

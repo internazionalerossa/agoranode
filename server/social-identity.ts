@@ -1,5 +1,6 @@
 import {authSession,type Auth} from './auth';
 import {SOCIAL_NAMES,validSocialIdentity,type SocialIdentity} from '../app/lib/social-identity';
+import {validForumApplicationInput} from '../app/lib/forum';
 import type {configuration} from './config';
 type Config=ReturnType<typeof configuration>;
 const headers={'cache-control':'private, no-store',vary:'cookie'};
@@ -7,7 +8,7 @@ const headers={'cache-control':'private, no-store',vary:'cookie'};
 export async function verifiedSocialIdentity(auth:Auth,request:Request,config:Config):Promise<SocialIdentity|null>{
  const accounts=await auth.api.listUserAccounts({headers:request.headers});
  for(const account of accounts){
-  // Only a Facebook grant can produce an optional admission claim.
+  // Only a Facebook grant can produce the admission claim required by PR2.
   if(account.providerId!=='facebook'||!Object.hasOwn(config.socialProviders,'facebook'))continue;
   const info=await auth.api.accountInfo({headers:request.headers,query:{accountId:account.id}});
   const provider='facebook' as const,subject=String((info.data as {id?:unknown})?.id??'');
@@ -17,6 +18,11 @@ export async function verifiedSocialIdentity(auth:Auth,request:Request,config:Co
   return identity;
  }
  return null;
+}
+/** Reject browser-invalid application data before any call to Facebook. */
+export async function verifiedApplicationSocialIdentity(auth:Auth,request:Request,config:Config,input:unknown){
+ if(!input||Array.isArray(input)||typeof input!=='object'||!validForumApplicationInput(input as Record<string,unknown>))return null;
+ return verifiedSocialIdentity(auth,request,config);
 }
 export function allowedIdentityCallback(path:string,method:string,config:Config){
  const match=/^\/api\/identity\/callback\/(facebook)$/.exec(path);
@@ -33,8 +39,8 @@ export async function socialIdentityEndpoint(auth:Auth,request:Request,config:Co
  if(request.method!=='GET'&&(request.headers.get('origin')!==config.origin||request.headers.get('sec-fetch-site')==='cross-site'))return reply({error:'Invalid origin'},403);
  const session=await authSession(auth,request);
  if(!session.user)return session.finish(reply({error:'Accedi al tuo account prima di collegare il social.'},401));
- // PR2 may offer Facebook as an optional proof of account control. The declared
- // public reference and applicant presentation remain the evidence for human review.
+ // PR2 requires Facebook as proof of account control. Human reviewers still
+ // decide whether the authenticated account and presentation identify the applicant.
  const accounts=await auth.api.listUserAccounts({headers:request.headers}),linked=accounts.some(account=>account.providerId==='facebook');
  const providers=config.forumOpen&&Object.hasOwn(config.socialProviders,'facebook')?[{id:'facebook',name:SOCIAL_NAMES.facebook}]:[];
  try{
@@ -47,14 +53,14 @@ export async function socialIdentityEndpoint(auth:Auth,request:Request,config:Co
    return session.finish(reply({ok:true,identity:null}));
   }
   if(!config.forumOpen)return session.finish(reply({error:'Il collegamento Facebook resta chiuso finché PR2 non è aperto.'},503));
-  if(!request.headers.get('content-type')?.startsWith('application/json'))return reply({error:'JSON required'},415);
-  const raw=await request.text();if(raw.length>2000)return reply({error:'Payload too large'},413);
-  let input:Record<string,unknown>;try{input=JSON.parse(raw);}catch{return reply({error:'Invalid input'},400);}
-  if(!input||Array.isArray(input)||Object.keys(input).some(key=>key!=='provider')||!providers.some(p=>p.id===input.provider))return reply({error:'Social non disponibile.'},400);
+  if(!request.headers.get('content-type')?.startsWith('application/json'))return session.finish(reply({error:'JSON required'},415));
+  const raw=await request.text();if(raw.length>2000)return session.finish(reply({error:'Payload too large'},413));
+  let input:Record<string,unknown>;try{input=JSON.parse(raw);}catch{return session.finish(reply({error:'Invalid input'},400));}
+  if(!input||Array.isArray(input)||Object.keys(input).some(key=>key!=='provider')||!providers.some(p=>p.id===input.provider))return session.finish(reply({error:'Social non disponibile.'},400));
   // Explicit linking requires a recently authenticated, verified local account. Redirects are fixed here.
   const current=await auth.api.getSession({headers:request.headers});
-  if(!current||Date.now()-new Date(current.session.createdAt).getTime()>15*60*1000)return reply({error:'Per collegare il social accedi di nuovo al tuo account.'},401);
-  const result=await auth.api.linkSocialAccount({headers:request.headers,body:{provider:'facebook',callbackURL:config.origin+'/?view=partecipa&adesione=1',errorCallbackURL:config.origin+'/?view=partecipa&adesione=1&social_error=1',disableRedirect:true},asResponse:true});
+  if(!current||Date.now()-new Date(current.session.createdAt).getTime()>15*60*1000)return session.finish(reply({error:'Per collegare il social accedi di nuovo al tuo account.'},401));
+  const result=await auth.api.linkSocialAccount({headers:request.headers,body:{provider:'facebook',callbackURL:config.origin+'/polisrossa?view=partecipa&adesione=1',errorCallbackURL:config.origin+'/polisrossa?view=partecipa&adesione=1&social_error=1',disableRedirect:true},asResponse:true});
   if(!result.ok)return session.finish(reply({error:'Collegamento non avviato. Accedi nuovamente e riprova.'},result.status));
   const data=await result.json();const redirect=new URL(data.url);
   if(redirect.protocol!=='https:'||!['www.facebook.com','facebook.com'].includes(redirect.hostname))throw Error('Invalid provider redirect');

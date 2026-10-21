@@ -27,6 +27,10 @@ services:
       context: ../..
     restart: unless-stopped
     env_file: ../../.selfhost/runtime.env
+    environment:
+      # The edge key is only for the Caddy boundary. Do not expose its value to
+      # application code even though the private runtime file is its source.
+      EDGE_SHARED_SECRET: ""
     volumes:
       - socket:/var/run/postgresql:ro
     depends_on:
@@ -41,9 +45,20 @@ services:
   proxy:
     image: caddy:2
     restart: unless-stopped
+    environment:
+      EDGE_SHARED_SECRET: "${EDGE_SHARED_SECRET:-}"
     ports:
       - "${BIND_ADDRESS:-127.0.0.1}:${HTTPS_PORT:-8443}:443"
       - "${BIND_ADDRESS:-127.0.0.1}:${HTTP_PORT:-8080}:80"
+      # A prepared edge origin assigns LOCAL_HTTPS_PORT (9443 by default).
+      # Older/tunnel-only installations receive one ephemeral loopback port,
+      # so this additive mapping cannot collide with a saved HTTPS port.
+      - name: local-maintenance
+        target: 444
+        host_ip: 127.0.0.1
+        published: "${LOCAL_HTTPS_PORT:-0}"
+        protocol: tcp
+        app_protocol: https
     volumes:
       - ../../.selfhost/Caddyfile:/etc/caddy/Caddyfile:ro
       - certificates:/data
@@ -75,6 +90,20 @@ services:
     image: "polisrossa-runtime:${COMPOSE_PROJECT_NAME:-polisrossa}"
     pull_policy: never
     entrypoint: [node, build-node/library-import.mjs]
+    environment:
+      DATABASE_URL: ${DATABASE_URL:?Run selfhost init first}
+    volumes:
+      - socket:/var/run/postgresql:ro
+    depends_on:
+      database:
+        condition: service_healthy
+  knowledge-import:
+    user: "${LOCAL_UID:-1000}:${LOCAL_GID:-1000}"
+    profiles: [tools]
+    image: "polisrossa-runtime:${COMPOSE_PROJECT_NAME:-polisrossa}"
+    pull_policy: never
+    network_mode: none
+    entrypoint: [node, build-node/knowledge-import.mjs]
     environment:
       DATABASE_URL: ${DATABASE_URL:?Run selfhost init first}
     volumes:

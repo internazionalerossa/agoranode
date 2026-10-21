@@ -2,6 +2,8 @@
 
 Questa configurazione avvia il server Node, PostgreSQL 17 e un proxy HTTPS Caddy. Non richiede Render, Supabase o Brevo. Servono Node.js 24 e Docker con Compose sul computer che ospiterà il sito. Non basta aprire una pagina web per installarla. Il PC deve restare acceso, con Docker avviato e senza sospensione.
 
+La configurazione ospita oggi **PolisRossa**, prima istanza tematica della piattaforma riusabile **AgoràNode**. Il manifesto v1, la facciata dell’istanza e il deposito comune della conoscenza sono implementati; non esistono ancora un generatore completo per nuovi argomenti o una rete di nodi interoperabili.
+
 ## Stato e confini
 
 Il pacchetto usa i nomi tecnici `primary` e `mirror` soltanto per scegliere la configurazione: `mirror` imposta i controlli di sola consultazione, mentre `primary` permette di configurare separatamente funzioni con scrittura, che restano inizialmente chiuse. La modalità effettiva va comunque verificata sul servizio in esecuzione; il checkpoint della release non comprende `runtime.env` e non prova che l'istanza stia usando `MIRROR_MODE=true`. Ospitare un'istanza non assegna diritti editoriali, di voto o di governo e non rende quel computer il proprietario del progetto.
@@ -22,7 +24,7 @@ L'indirizzo locale è `https://localhost:8443`. All'inizio è raggiungibile solo
 
 Caddy emette un certificato locale. Esporta la sua autorità pubblica con `node scripts/selfhost.mjs certificate`, poi rendila attendibile nel sistema/browser con la procedura prevista dal tuo sistema operativo. Verifica che provenga dalla tua installazione. Non disabilitare globalmente la verifica HTTPS. Le chiavi private della CA rimangono nel volume Docker `certificates`.
 
-`node scripts/selfhost.mjs stop` ferma i servizi senza eliminare i dati. `start` li ricrea quando cambia il codice mantenendo i volumi. Non eseguire `docker compose down -v` sull'installazione che vuoi conservare: elimina il database e i certificati.
+`node scripts/selfhost.mjs stop` ferma i servizi senza eliminare i dati. `start` ricrea i container mantenendo i volumi, anche quando cambia soltanto una configurazione montata come il Caddyfile aggiornato da `tunnel-origin`. Non eseguire `docker compose down -v` sull'installazione che vuoi conservare: elimina il database e i certificati.
 
 PostgreSQL non apre porte TCP: app e backup lo raggiungono attraverso un socket Unix condiviso sullo stesso host, con password. Le connessioni a database remoti continuano a richiedere TLS verificato. Gli amministratori del computer ospitante possono comunque leggere dati e segreti: il socket non promette protezione dal proprietario del sistema.
 
@@ -36,12 +38,24 @@ node scripts/selfhost.mjs library-import commons-viventi en
 
 Il comando è idempotente e salva testo, capitoli, licenza, attribuzione, origine e impronte in PostgreSQL. Deve terminare correttamente prima del backup destinato alla pubblicazione. Verifica poi senza account che `GET /api/library/read?bookId=commons-viventi&edition=en&chapter=0` restituisca `200` attraverso l'HTTPS locale e che un'edizione non importabile resti collegata all'archivio originale. Solo dopo ripeti backup cifrato e ripristino separato, controllando che la revisione del libro esista anche nel database ripristinato.
 
+## Importare la conoscenza pubblica di PolisRossa
+
+Dopo l’avvio e le migrazioni importa le pagine di conoscenza già revisionate nel repository:
+
+```sh
+node scripts/selfhost.mjs knowledge-import
+```
+
+Il comando usa un container senza rete, collegato a PostgreSQL soltanto tramite il socket locale. Importa in modo idempotente 64 eventi e 17 persone dalla storyline esistente; ogni entità, revisione, fonte e relazione ha un’impronta SHA-256 e le tabelle dei contenuti sono append-only. Ripetere il comando sulla stessa release non duplica i dati. Il seed dichiara PolisRossa come soggetto editoriale, approvazione `repository-review` e diritti di riuso non documentati: non attribuisce retroattivamente una licenza ai testi esistenti.
+
+Il deposito può costruire un bundle canonico delle revisioni correnti, ma il comando non invia quel bundle ad altri computer e non importa account, forum o serie statistiche. Dopo l’import esegui un nuovo backup cifrato e una prova di ripristino separata; verifica nel database ripristinato la presenza di 64 eventi e 17 persone prima di considerare protetta questa migrazione.
+
 ## Nodo locale di sola consultazione
 
 In una seconda cartella o checkout, un volontario può creare un'installazione indipendente senza modificare router, firewall o DNS:
 
 ```sh
-node scripts/selfhost.mjs init https://localhost:9443 mirror --project polisrossa-node2 --http-port 9080
+node scripts/selfhost.mjs init https://localhost:9543 mirror --project polisrossa-node2 --http-port 9080
 node scripts/selfhost.mjs start
 node scripts/selfhost.mjs status
 ```
@@ -81,9 +95,42 @@ node scripts/selfhost.mjs snapshot-status
 
 Verificare la chiave pubblica con un canale separato è indispensabile: ricevere bundle e chiave dalla stessa fonte non dimostra chi abbia firmato. Soltanto il comando di firma monta la chiave privata e i comandi snapshot non hanno rete; verifica e importazione non possono leggere quella chiave. Firma però soltanto codice già esaminato e considerato affidabile: lo strumento di firma fa parte della stessa release candidata, quindi il checkpoint non sostituisce la revisione del codice. Questo meccanismo non sincronizza nodi, non instrada visitatori e non prova che un gestore stia effettivamente eseguendo l'immagine verificata dopo il controllo.
 
-## Pubblicazione diretta su Internet, facoltativa
+## Ingresso Worker davanti a Tailscale Funnel
 
-Questa sezione serve soltanto a chi decide di esporre direttamente una propria installazione. Non è necessaria per usare un nodo locale o verificare un checkpoint.
+Il percorso gratuito preparato per un indirizzo più breve usa un Cloudflare Worker `workers.dev` come ingresso e l’URL Tailscale Funnel già esistente come origine. Non richiede porte WAN, DMZ o nuove regole del firewall. È un proxy, non una replica: PC, Docker, Tailscale, Funnel e Worker devono funzionare tutti; se il PC si ferma, il sito si ferma. Cloudflare e Tailscale diventano fornitori del percorso pubblico e devono comparire nell’informativa effettiva.
+
+Il repository contiene il Worker in `deploy/edge-worker/worker.mjs`, ma **non attesta che sia stato distribuito**. Prima conserva `REGISTRATIONS_OPEN=false` e `FORUM_OPEN=false`, verifica il backup e prepara l’origine senza attivarla:
+
+```powershell
+node scripts/selfhost.mjs edge-origin https://polisrossa.agoranode.workers.dev
+```
+
+Sostituisci l’URL soltanto se il nome realmente assegnato da Cloudflare è diverso. Questa prima fase crea un segreto casuale in `.selfhost/runtime.env` e scrive `.selfhost/Caddyfile.edge-origin`; non cambia `APP_URL`, non sostituisce il Caddyfile attivo e non riavvia i container. Non pubblicare né copiare in chat `EDGE_SHARED_SECRET`.
+
+Nel Worker configura `PUBLIC_HOST` con il solo hostname `polisrossa.agoranode.workers.dev`, `UPSTREAM_ORIGIN` con l’origine HTTPS effettiva di Funnel e `EDGE_SHARED_SECRET` come secret, usando esattamente il valore privato generato. Il codice accetta soltanto `GET`, `HEAD`, `POST` e `DELETE`, rifiuta upgrade e host diversi, rimuove header di inoltro non attendibili e trasmette a Caddy il segreto e l’IP convalidato fornito da Cloudflare. Verifica prima il Worker con consultazione soltanto; questa prova non autorizza l’apertura di account o forum.
+
+Dopo che Worker, home e `/healthz` hanno risposto correttamente, attiva il confine dell’origine:
+
+```powershell
+node scripts/selfhost.mjs edge-origin https://polisrossa.agoranode.workers.dev --activate
+node scripts/selfhost.mjs start
+node scripts/selfhost.mjs preflight
+```
+
+La seconda fase imposta `APP_URL` sull’origine Worker, installa il Caddyfile preparato e riserva `https://localhost:9443` per la manutenzione locale; puoi scegliere un’altra porta loopback libera con `--local-https-port`. Sul listener raggiunto da Funnel, Caddy accetta soltanto richieste con il segreto edge e l’header client previsti, rimuove gli header interni prima di inoltrarli e risponde `403` alle richieste dirette. Dopo l’attivazione controlla tutti questi casi: URL Worker valido, accesso diretto al nome `.ts.net` rifiutato anche con `Host: localhost`, manutenzione su `https://localhost:9443`, cookie e redirect riferiti al Worker e callback Facebook `${APP_URL}/api/identity/callback/facebook`.
+
+Per tornare in modo reversibile all’ingresso Funnel senza cambiare database o segreti:
+
+```powershell
+node scripts/selfhost.mjs tunnel-origin https://polisrossa.tail37128d.ts.net
+node scripts/selfhost.mjs start
+```
+
+Usa sempre l’hostname Funnel realmente restituito dalla tua installazione. Il rollback rende di nuovo Funnel l’origine dell’applicazione; disabilita separatamente il Worker se non deve più inoltrare richieste. Per chiudere ogni accesso Internet esegui anche `tailscale funnel reset` e verifica da una rete esterna. Nessuno di questi comandi elimina volumi, backup o chiavi.
+
+## Pubblicazione diretta su Internet, alternativa facoltativa
+
+Questa sezione serve soltanto a chi decide di esporre direttamente una propria installazione invece di usare Worker e Funnel. Non è necessaria per usare un nodo locale o verificare un checkpoint.
 
 Prima di aprire il sito scegli un nome stabile e verifica la raggiungibilità della connessione domestica. Un sottodominio DDNS gratuito può puntare all'IP pubblico, ma non supera il CGNAT dell'operatore. In quel caso serve una diversa connettività o un tunnel con un ingresso pubblico stabile. Non acquistare servizi per tentativi.
 
@@ -126,7 +173,7 @@ Se tutte le chiavi private vengono perse, le copie cifrate non sono recuperabili
 
 ## Email gratuita per gli account, non per invii massivi
 
-L'impostazione iniziale resta `MAIL_TRANSPORT=none`. Dopo aver configurato Gmail SMTP, PR1 usa email e password confermate. PR2 richiede nome e riferimento HTTPS dichiarati; Facebook può essere collegato facoltativamente soltanto da una sessione PR1 verificata e non sostituisce l'accesso PR1. Account personale e ammissione restano distinti.
+L'impostazione iniziale resta `MAIL_TRANSPORT=none`. Dopo aver configurato Gmail SMTP, PR1 usa soltanto email e password confermate. Chi sceglie il percorso PR2 crea comunque prima PR1; dopo la conferma deve accedere, collegare davvero Facebook tramite OAuth e inviare esplicitamente la domanda. Facebook non sostituisce l'accesso PR1 e non ammette automaticamente a PR2: prova il controllo dell'account social, mentre la valutazione resta ai membri.
 
 Per il server domestico il percorso scelto è una casella Gmail gratuita dedicata al progetto, senza acquistare un servizio di invio. Evita una casella personale: l'indirizzo `MAIL_FROM` sarà visibile ai destinatari. Attiva la verifica in due passaggi sull'account Google e, se l'opzione è disponibile per quell'account, crea una password per app dedicata a PolisRossa. Le password per app possono non essere disponibili per account con sola chiave di sicurezza, Advanced Protection o restrizioni di un'organizzazione. Non usare mai la password principale di Google.
 
@@ -143,13 +190,13 @@ MAIL_FROM=PolisRossa <casella-del-progetto@gmail.com>
 
 La porta 465 usa TLS fin dall'apertura della connessione. È supportata anche la porta 587, sulla quale il server impone STARTTLS. `SMTP_USER` e l'indirizzo racchiuso in `MAIL_FROM` devono coincidere per questo percorso semplice; il preflight blocca una discordanza. La password per app resta un segreto del gestore temporaneo: non inserirla nel repository, in chat, nei backup distribuiti o negli screenshot e revocala dall'account Google quando cambia il custode.
 
-Prima di provare registrazione o recupero genera il codice privato di accesso iniziale:
+Il codice privato di accesso iniziale è facoltativo. Può essere utile a un'altra installazione che voglia limitare temporaneamente le registrazioni durante un collaudo ristretto:
 
 ```sh
 node scripts/selfhost.mjs account-access
 ```
 
-Il comando salva il testo una sola volta in `.selfhost/private/account-access-code.txt` e inserisce in `runtime.env` soltanto `ACCOUNT_ACCESS_HASH`. Non stampa il codice, non sovrascrive un valore esistente e rifiuta la modalità `mirror`. Condividi il codice soltanto con le persone autorizzate al collaudo: lo stesso codice serve sia per creare l'account sia per chiedere il recupero. È una barriera riutilizzabile per proteggere la quota Gmail durante il lancio, non identifica una persona e non sostituisce conferma email, password o limiti anti-abuso. Se il file o il codice diventano pubblici, richiudi i flag prima di predisporre manualmente un nuovo codice e il relativo hash; il comando non offre una rotazione automatica.
+Il comando salva il testo una sola volta in `.selfhost/private/account-access-code.txt` e inserisce in `runtime.env` soltanto `ACCOUNT_ACCESS_HASH`. Non stampa il codice, non sovrascrive un valore esistente e rifiuta la modalità `mirror`. Quando `ACCOUNT_ACCESS_HASH` è vuoto, la registrazione non mostra né richiede questo campo e resta protetta dai limiti persistenti descritti sotto. Quando l'hash è configurato, il codice serve soltanto a creare un nuovo account; il recupero password resta disponibile senza questa barriera, con i propri limiti. È soltanto un freno riutilizzabile per contenere la quota Gmail: non identifica una persona e non sostituisce conferma email, password, OAuth Facebook, valutazione PR2 o limiti anti-abuso. Se un'installazione che lo usa lo espone, deve richiudere le registrazioni prima di predisporre manualmente un nuovo codice e il relativo hash; il comando non offre una rotazione automatica.
 
 Il mailer attuale invia soltanto conferma dell'indirizzo e recupero della password richiesti dall'utente. Non invia newsletter, annunci, digest o notifiche del forum e non esiste un comando che spedisca a tutti gli account. Per eventuali notifiche future serviranno consenso o scelta esplicita, disiscrizione, gestione dei rimbalzi, limiti e una revisione separata: non vanno riutilizzate implicitamente le email degli account.
 
@@ -182,9 +229,9 @@ Per rendere operativo l'intero flusso servono dati che il codice non può scegli
 
 1. `APP_URL` deve essere l'origine HTTPS pubblica e stabile definitiva, senza percorso e senza la porta interna `:8443`.
 2. `PUBLIC_OPERATOR_NAME` indica il soggetto che esercita temporaneamente la responsabilità operativa; `PUBLIC_PRIVACY_CONTACT` è una casella email funzionante e pubblicata nella pagina Privacy. Questi campi non attribuiscono proprietà politica o diritti di voto.
-3. Configura Gmail SMTP con una password per app e verifica in due passaggi, come sopra. Genera poi il codice privato con `node scripts/selfhost.mjs account-access`. Il primo collaudo deve comprendere una conferma e un recupero verso caselle autorizzate usando quel codice; non abilita né prova notifiche collettive.
-4. Facebook OAuth è facoltativo per PR2. Se vuoi offrirlo come prova tecnica supplementare, crea un'app in Meta for Developers, conserva `FACEBOOK_CLIENT_ID` e `FACEBOOK_CLIENT_SECRET` soltanto nel file privato e registra esattamente `https://DOMINIO/api/identity/callback/facebook`, sostituendo `DOMINIO` con l'host di `APP_URL`. Il solo scope è `public_profile`; non certifica l'identità civile. Discord non costituisce prova per l'ammissione. Il collegamento e il callback restano disabilitati finché `FORUM_OPEN=false`; lo scollegamento resta disponibile.
-5. PR2 richiede tre persone fondatrici distinte, ciascuna con il proprio account PR1 verificato, un nome dichiarato e un URL HTTPS pubblico a Facebook, Instagram o un sito personale. Genera i tre inviti una sola volta:
+3. Configura Gmail SMTP con una password per app e verifica in due passaggi, come sopra. Il primo collaudo deve comprendere una conferma e un recupero verso caselle autorizzate. Configura il codice facoltativo con `node scripts/selfhost.mjs account-access` soltanto se vuoi limitare temporaneamente le nuove registrazioni; non abilita né prova notifiche collettive.
+4. Facebook OAuth è obbligatorio per inviare una domanda PR2. Crea un'app in Meta for Developers, conserva `FACEBOOK_CLIENT_ID` e `FACEBOOK_CLIENT_SECRET` soltanto nel file privato e registra esattamente `https://DOMINIO/api/identity/callback/facebook`, sostituendo `DOMINIO` con l'host di `APP_URL`. Il solo scope richiesto è `public_profile`; prova il controllo dell'account al momento della domanda, non certifica l'identità civile. Il server deriva il riferimento Facebook dalla risposta autenticata e non accetta al suo posto un link scritto dal candidato. Discord, Instagram e un sito personale non sostituiscono questo passaggio. Collegamento e callback restano disabilitati finché `FORUM_OPEN=false`; lo scollegamento resta disponibile.
+5. PR2 richiede tre persone fondatrici distinte, ciascuna con il proprio account PR1 verificato e il proprio account Facebook autenticato. Genera i tre inviti una sola volta:
 
 ```sh
 node scripts/selfhost.mjs community-invites
@@ -198,7 +245,7 @@ Controlla quindi la configurazione statica:
 node scripts/selfhost.mjs preflight
 ```
 
-Il preflight mostra soltanto esiti, nomi dei requisiti e URL di callback; non mostra credenziali. Termina con codice `2` finché mancano origine pubblica, contatti, posta, il file privato del codice account con hash corrispondente o tre hash distinti corrispondenti al file privato degli inviti. Facebook è facoltativo; se una sola delle due credenziali è presente, la coppia incompleta resta un errore. Il controllo non contatta Gmail, Facebook, Instagram, Discord o il database: un esito positivo significa “configurazione completa”, non “servizi collaudati”. Se un file privato manca o non coincide con gli hash, il controllo resta bloccante e non modifica i file.
+Il preflight mostra soltanto esiti, nomi dei requisiti e URL di callback; non mostra credenziali. Termina con codice `2` finché mancano origine pubblica, contatti, posta o tre hash distinti corrispondenti al file privato degli inviti. Il codice account non è un requisito: se `ACCOUNT_ACCESS_HASH` è vuoto il controllo indica che la barriera è disattivata; se l'hash è presente, il file privato deve esistere e corrispondere. Se `FORUM_OPEN=true`, client ID e client secret Facebook diventano entrambi obbligatori; una coppia incompleta è sempre un errore. Il controllo non contatta Gmail, Meta o il database: un esito positivo significa “configurazione completa”, non “servizi collaudati”. Se un file privato richiesto manca o non coincide con gli hash, il controllo resta bloccante e non modifica i file.
 
 Il processo applicativo elimina le domande PR2 rimaste scadute per 30 giorni e quelle respinte da 30 giorni, insieme a voti ed elettorato di ammissione collegati. Elimina inoltre sessioni e token di verifica scaduti, contatori tecnici più vecchi di 24 ore e sessioni legacy prive di credenziale email/password, senza cancellare i relativi utenti o dati applicativi. Un account `credential` mai verificato da più di sette giorni viene eliminato soltanto se non ha sessioni, dati personali o un collegamento social; questo limita anche la crescita prodotta da registrazioni la cui email è stata negata per quota. Un grant/account Facebook locale non consumato viene rimosso dopo 24 ore. I controlli partono a ogni avvio e poi ogni 24 ore, quindi la cancellazione può completarsi entro il giorno successivo alla soglia; nei log compaiono soltanto conteggi. Gli eventi tecnici del forum conservano identificativi opachi. Verifica i messaggi `Forum application retention completed` e `Authentication retention completed` e includi nei tempi pubblicati anche la rotazione dei backup cifrati, perché una copia precedente non viene modificata dal processo in esecuzione.
 
@@ -206,11 +253,11 @@ Il processo applicativo elimina le domande PR2 rimaste scadute per 30 giorni e q
 
 Riavvia sempre dopo una modifica a `runtime.env`. Prima prova con accesso pubblico non ancora annunciato e con il forum chiuso:
 
-1. abilita temporaneamente `REGISTRATIONS_OPEN=true`, riavvia e crea un account autorizzato usando il codice privato;
-2. verifica ricezione e scadenza della conferma email, uscita e nuovo accesso, recupero password con lo stesso codice e revoca delle sessioni precedenti;
+1. abilita temporaneamente `REGISTRATIONS_OPEN=true`, riavvia e crea un account PR1 con email e password, senza codice se `ACCOUNT_ACCESS_HASH` è vuoto;
+2. verifica ricezione e scadenza della conferma email, uscita e nuovo accesso, recupero password senza codice iniziale e revoca delle sessioni precedenti; se hai configurato la barriera facoltativa, verifica il codice su una nuova registrazione senza confonderlo con una prova d'identità;
 3. verifica che con `FORUM_OPEN=false` collegamento e callback Facebook siano indisponibili ma un collegamento precedente possa essere rimosso; se hai configurato Facebook, apri poi il forum e da una sessione PR1 appena autenticata prova collegamento e callback definitivo, compresi rifiuto dell'autorizzazione e sessione scaduta. Verifica anche che Facebook non possa essere usato come accesso PR1 diretto;
 4. verifica salvataggi e posizione di lettura da due browser, poi un riavvio del container;
-5. abilita `FORUM_OPEN=true` e fai presentare la domanda alle tre persone fondatrici con nome, presentazione e riferimento HTTPS dichiarato obbligatorio, quindi usa un invito diverso per ciascuna; verifica che il server non apra automaticamente il link e che soltanto candidato e revisori lo vedano. Se provi anche Facebook OAuth, verifica che il grant sia rimosso dopo l’invio e che un fallimento successivo richieda eventualmente un nuovo collegamento;
+5. configura Facebook, abilita `FORUM_OPEN=true` e prova entrambi i percorsi della prima registrazione. La scelta PR2 deve creare soltanto PR1 e guidare, dopo conferma e accesso, alla pagina Partecipa. Verifica che il modulo resti bloccato prima dell'OAuth, che l'utente debba premere esplicitamente “Invia”, che la pratica diventi `pending` e non `active`, che il riferimento salvato derivi da Facebook e che il grant locale sia rimosso dopo l'invio. Per le tre persone fondatrici usa un invito diverso per ciascuna; un errore dopo lo scollegamento deve richiedere un nuovo collegamento senza inventare una domanda riuscita;
 6. con un account PR1 non ammesso verifica che scrittura, chat e voto siano rifiutati; con i tre PR2 verifica discussione pubblica e privata, proposta, voto, esportazione e persistenza dopo riavvio;
 7. ripeti backup cifrato e ripristino separato dopo aver creato questi dati di collaudo.
 

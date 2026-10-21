@@ -93,6 +93,9 @@ test('a person destination aggregates only existing roles, events, periods and s
   assert.match(html,/Clara Zetkin · Donne proletarie e socialismo/);
   assert.match(html,/>Condividi</);
   assert.match(html,/>Copia link</);
+  assert.match(html,/data-knowledge-kind="person" data-knowledge-entity="clara-zetkin"/);
+  assert.match(html,/Storico delle modifiche/);
+  assert.match(html,/Caricamento della cronologia/);
   assert.doesNotMatch(html,/story-opening/);
  }finally{
   if(previous===undefined)delete globalThis.window;else globalThis.window=previous;

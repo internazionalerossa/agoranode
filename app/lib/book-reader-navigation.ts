@@ -84,7 +84,7 @@ export function bookReaderUrl(position: BookReaderPosition): string {
       !Number.isSafeInteger(position.page) || position.page < 0 || position.page > MAX_PAGE) {
     throw new RangeError("Invalid book reader position");
   }
-  return `/read?${new URLSearchParams({
+  return `/polisrossa/read?${new URLSearchParams({
     book: position.bookId,
     edition: position.edition,
     chapter: String(position.chapter + 1),

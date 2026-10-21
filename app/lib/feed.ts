@@ -8,6 +8,7 @@ import {
   TOPIC_TAXONOMY,
   type SourceDefinition,
 } from "@/app/data/catalog";
+import {instanceUserAgent} from './instance';
 
 const publisherFor = createPublisherResolver(SOURCE_CATALOG);
 
@@ -64,8 +65,7 @@ const FEED_TTL_MS = 10 * 60 * 1000;
 const REQUEST_TIMEOUT_MS = 8000;
 const DISCOVERY_TTL_MS = 60 * 60 * 1000;
 const MAX_FEED_CHARS = 1_800_000;
-const USER_AGENT =
-  "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_0) AppleWebKit/537.36 (KHTML, like Gecko) PolisRossa/1.0";
+const USER_AGENT = instanceUserAgent(undefined, true);
 
 export function getSources(ids?: string[]) {
   if (!ids?.length) {

@@ -1,6 +1,6 @@
-import type {SocialIdentity} from '../app/lib/social-identity';
 import {handlePrivacyExport} from '../app/lib/privacy-export';
 import {brandManifestResponse} from '../app/lib/brand-manifest';
+import {instanceInfoResponse} from '../app/lib/instance-info';
 import {handleLiveChat} from './live-chat';
 import {visitorCountryResponse} from '../app/lib/visitor-country';
 import {GET as articles} from '../app/api/articles/route';
@@ -18,17 +18,24 @@ import {publicDataResponse} from '../app/lib/public-data-cache';
 import {handleBookmarks,type BookmarkDatabase} from '../app/lib/bookmarks';
 import {handleReadingProgress} from '../app/lib/reading-progress';
 import {handleCommunity} from '../app/lib/community';
-import {handleForum} from '../app/lib/forum';
+import {handleForum,type ForumSocialIdentity} from '../app/lib/forum';
 import type {PostgresDatabase} from './database';
 import {readBookDatabaseFirst} from './library-archive';
 import {libraryStorageRight} from './library-rights';
+import {publicKnowledgeEntityResponse,publicKnowledgeExportResponse,publicKnowledgeRevisionResponse} from './knowledge-api';
+import {handleFederationPr3} from './federation';
 const sourceIds=new Set(SOURCE_CATALOG.map(s=>s.id)),bookIds=new Set(THEORY_LIBRARY.map(b=>b.id));
 const publicEndpoints:Record<string,(r:Request)=>Promise<Response>>={'/api/articles':articles,'/api/videos':videos,'/api/highlights':highlights,'/api/pulse':pulse};
-export const privatePaths=new Set(['/api/privacy/export','/api/bookmarks','/api/reading-progress','/api/community','/api/community/mine','/api/community/forum','/api/community/chat','/api/community/chat-image']);
-export async function api(request:Request,db:PostgresDatabase,userId:string|null,bootstrapHash:string|undefined,background:(p:Promise<unknown>)=>void,participationOpen=true,socialIdentity?:SocialIdentity|null,unlinkSocialIdentity?:()=>Promise<void>,accountVerified=true):Promise<Response>{
+export const privatePaths=new Set(['/api/privacy/export','/api/bookmarks','/api/reading-progress','/api/community','/api/community/mine','/api/community/forum','/api/community/chat','/api/community/chat-image','/api/federation/pr3']);
+export async function api(request:Request,db:PostgresDatabase,userId:string|null,bootstrapHash:string|undefined,background:(p:Promise<unknown>)=>void,participationOpen=true,socialIdentity?:ForumSocialIdentity,unlinkSocialIdentity?:()=>Promise<void>,accountVerified=true):Promise<Response>{
  const url=new URL(request.url),path=url.pathname;
  if(path==='/api/manifest')return brandManifestResponse(request);
+ if(path==='/api/instance')return instanceInfoResponse(request);
  if(path==='/api/visitor-country')return visitorCountryResponse(request);
+ if(path==='/api/knowledge/entity')return publicKnowledgeEntityResponse(request,db.pool);
+ if(path==='/api/knowledge/revision')return publicKnowledgeRevisionResponse(request,db.pool);
+ if(path==='/api/knowledge/export')return publicKnowledgeExportResponse(request,db.pool);
+ if(path==='/api/federation/pr3')return handleFederationPr3(request,db,userId);
  const reply=(body:unknown,status=200)=>Response.json(body,{status,headers:{'cache-control':'private, no-store',vary:'cookie'}});
  if(request.method==='POST'&&privatePaths.has(path)&&request.headers.get('origin')!==url.origin)return reply({error:'Invalid origin'},403);
  if(path==='/api/privacy/export')return handlePrivacyExport(request,db,userId);

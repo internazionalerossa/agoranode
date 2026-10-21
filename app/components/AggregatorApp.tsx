@@ -99,6 +99,7 @@ const LibraryView = lazy(() => import("./LibraryView").then(module => ({ default
 const PrivacyView = lazy(()=>import("./PrivacyView"));
 const TermsView = lazy(()=>import("./TermsView"));
 const Acknowledgements = lazy(()=>import("./Acknowledgements"));
+const SharedCustodyView = lazy(()=>import("./SharedCustodyView"));
 const CommunityView = lazy(() => import("./CommunityView"));
 const SavedBooks = lazy(() => import("./LibraryView").then(module => ({ default: module.SavedBooks })));
 const publisherFor = createPublisherResolver(SOURCE_CATALOG);
@@ -1105,8 +1106,9 @@ export function AggregatorApp() {
             {view === "partecipa" ? <Suspense fallback={<p className="reader-message" role="status"><LocalizedText>Apertura della comunità…</LocalizedText></p>}><CommunityView/></Suspense> : null}
             {view === "condizioni" ? <Suspense fallback={<p role="status"><LocalizedText>Apertura delle condizioni…</LocalizedText></p>}><TermsView/></Suspense> : null}
             {view === "privacy" ? <Suspense fallback={<p role="status"><LocalizedText>Apertura delle informazioni…</LocalizedText></p>}><PrivacyView/></Suspense> : null}
+            {view === "custodia" ? <Suspense fallback={<p role="status"><LocalizedText>Apertura della guida ai nodi…</LocalizedText></p>}><SharedCustodyView/></Suspense> : null}
             {view === "metodo" ? (
-              <MethodView onSources={() => navigate("fonti")} />
+              <MethodView onSources={() => navigate("fonti")} onCustody={() => navigate("custodia")} />
             ) : null}
           </section>
           {view === "notizie" ? (
@@ -1135,7 +1137,7 @@ export function AggregatorApp() {
             </button>
           </div>
           <div className="footer-acknowledgements"><p><LocalizedText>Grazie alle redazioni, agli archivi, agli autori, ai traduttori e alle comunità del software libero che rendono possibile questa raccolta. Anche il tuo sguardo conta: testi, contenuti e interfaccia possono migliorare grazie alle tue proposte.</LocalizedText></p><a href="/?view=crediti" onClick={event=>{event.preventDefault();navigate("crediti");}}><LocalizedText>Fonti, crediti e ringraziamenti</LocalizedText><ArrowUpRight size={14}/></a></div>
-          <div className="footer-privacy"><a href="/?view=privacy" onClick={event=>{event.preventDefault();navigate("privacy");}}><LocalizedText>Privacy, cookie e diritti</LocalizedText></a><span aria-hidden="true"> · </span><a href="/?view=condizioni" onClick={event=>{event.preventDefault();navigate("condizioni");}}><LocalizedText>Condizioni e segnalazioni</LocalizedText></a><span aria-hidden="true"> · </span><a href="https://github.com/internazionalerossa/polisrossa" target="_blank" rel="noopener noreferrer"><LocalizedText>Codice sorgente</LocalizedText></a><span aria-hidden="true"> · </span><a href="https://github.com/internazionalerossa/polisrossa/blob/main/NOTICE" target="_blank" rel="noopener noreferrer"><LocalizedText>Licenza e avvisi</LocalizedText></a></div>
+          <div className="footer-privacy"><a href="/?view=custodia" onClick={event=>{event.preventDefault();navigate("custodia");}}><LocalizedText>Nodi e custodia condivisa</LocalizedText></a><span aria-hidden="true"> · </span><a href="/?view=privacy" onClick={event=>{event.preventDefault();navigate("privacy");}}><LocalizedText>Privacy, cookie e diritti</LocalizedText></a><span aria-hidden="true"> · </span><a href="/?view=condizioni" onClick={event=>{event.preventDefault();navigate("condizioni");}}><LocalizedText>Condizioni e segnalazioni</LocalizedText></a><span aria-hidden="true"> · </span><a href="https://github.com/internazionalerossa/polisrossa" target="_blank" rel="noopener noreferrer"><LocalizedText>Codice sorgente</LocalizedText></a><span aria-hidden="true"> · </span><a href="https://github.com/internazionalerossa/polisrossa/blob/main/NOTICE" target="_blank" rel="noopener noreferrer"><LocalizedText>Licenza e avvisi</LocalizedText></a></div>
           <div className="footer-bottom">
             <span>
               <LocalizedText>
@@ -1532,7 +1534,7 @@ function SourcesDirectory({
   );
 }
 
-function MethodView({ onSources }: { onSources: () => void }) {
+function MethodView({ onSources, onCustody }: { onSources: () => void; onCustody: () => void }) {
   return (
     <div className="method-view">
       <div className="method-intro">
@@ -1561,6 +1563,12 @@ function MethodView({ onSources }: { onSources: () => void }) {
         <p><LocalizedText>Comincia da ciò che noti: indica la pagina, racconta che cosa non ti convince e quale risultato vorresti. Non serve scrivere codice, conoscere il lessico tecnico o arrivare con una soluzione completa. Una domanda ben posta può aprire il cambiamento; le proposte vengono discusse, verificate e migliorate insieme prima della pubblicazione.</LocalizedText></p>
         <a className="text-link" href="/?view=partecipa&nuova=proposta"><LocalizedText>Scrivi una proposta con parole tue</LocalizedText><ArrowUpRight size={14}/></a>
         <small><LocalizedText>La proposta si scrive nel forum. I membri PR2 possono discuterla e votarla.</LocalizedText></small>
+      </section>
+      <section className="project-participation" aria-labelledby="shared-custody-title">
+        <p className="eyebrow"><LocalizedText>OSPITARE NON SIGNIFICA COMANDARE</LocalizedText></p>
+        <h3 id="shared-custody-title"><LocalizedText>Un nodo conserva l’accesso; la custodia si governa separatamente.</LocalizedText></h3>
+        <p><LocalizedText>Puoi già avviare un nodo locale indipendente di sola consultazione e verificare una release firmata. Replica, subentro automatico, quorum e cifratura end-to-end non sono ancora implementati: la pagina dedicata distingue ciò che funziona dalla roadmap per una governance revocabile.</LocalizedText></p>
+        <button className="text-link" type="button" onClick={onCustody}><LocalizedText>Come condividere la custodia di PolisRossa</LocalizedText><ArrowUpRight size={14}/></button>
       </section>
       <div className="method-grid">
         {[

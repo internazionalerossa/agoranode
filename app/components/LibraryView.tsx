@@ -3,6 +3,7 @@ import { lazy, Suspense, useEffect, useState } from "react";
 import { ArrowUpRight, BookOpen, Bookmark, BookmarkCheck, Search, X } from "lucide-react";
 import { THEORY_LIBRARY, BOOK_LANGUAGES } from "@/app/data/library";
 import { LIBRARY_SECTIONS, librarySectionFromUrl, librarySectionUrl, type LibrarySection } from "@/app/lib/library-navigation";
+import {libraryReadingDestination} from "@/app/lib/library-reading";
 import { READING_PATHS, GLOSSARY } from "@/app/data/editorial";
 import { LocalizedText, LocalizedInput, useReadingLocale } from "./Localization";
 const ALL = "all";
@@ -38,10 +39,9 @@ export function LibraryView({
     setSection(next);
     requestAnimationFrame(()=>document.getElementById('library-section-panel')?.focus({preventScroll:true}));
   };
-  const readingLink = (book: typeof THEORY_LIBRARY[number]) => {
+  const readingDestination = (book: typeof THEORY_LIBRARY[number]) => {
     const preferred = bookLanguage === "all" ? readingLanguage : bookLanguage;
-    const edition = book.editions?.find(item => item.language === preferred) ?? book.editions?.find(item => item.language === "en") ?? book.editions?.[0];
-    return edition ? `/read?${new URLSearchParams({ book: book.id, edition: edition.language })}` : book.links[0]?.url;
+    return libraryReadingDestination(book,preferred);
   };
   const [path, setPath] = useState("all");
   const active = READING_PATHS.find((p) => p.id === path);
@@ -64,7 +64,7 @@ export function LibraryView({
       <div id="library-section-panel" tabIndex={-1}>
       {section==='libri'?<>
       <div className="usage-guide" aria-label="Guida alla biblioteca">
-        <p><strong><LocalizedText>Come orientarsi</LocalizedText></strong> <LocalizedText>Questa biblioteca mette in relazione libri gratuiti, idee politiche e storia sociale. Se parti da zero, scegli un percorso: troverai un ordine di lettura suggerito, dai testi introduttivi alle opere più impegnative. Se cerchi già qualcosa di preciso, usa il catalogo per autore, argomento e lingua. Le edizioni disponibili possono essere aperte per la lettura online; con un account attivo puoi ritrovare il segnalibro e riprendere dal punto in cui ti eri fermato.</LocalizedText></p>
+        <p><strong><LocalizedText>Come orientarsi</LocalizedText></strong> <LocalizedText>Questa biblioteca mette in relazione libri gratuiti, idee politiche e storia sociale. Se parti da zero, scegli un percorso: troverai un ordine di lettura suggerito, dai testi introduttivi alle opere più impegnative. Se cerchi già qualcosa di preciso, usa il catalogo per autore, argomento e lingua. Le edizioni archiviate con un diritto compatibile si aprono nel lettore; le altre restano consultabili presso la fonte originale. Con un account attivo puoi ritrovare il segnalibro delle letture interne.</LocalizedText></p>
         <p><LocalizedText>La timeline ricostruisce le lotte, le organizzazioni e le trasformazioni delle condizioni di vita. Dati e grafici permette invece di costruire confronti, scegliendo indicatore, paesi, periodo e scala: comprende serie annuali, definizioni, fonti e download.</LocalizedText></p>
       </div>
       <p className="reading-paths-intro"><LocalizedText>Non occorre conoscere già il marxismo o la storia dei movimenti operai. I tre percorsi aiutano a costruire gradualmente gli strumenti di lettura: capire come si producono e si distribuiscono le risorse, conoscere le forme della solidarietà e confrontare diversi progetti di trasformazione sociale. Si comincia da opere relativamente brevi e si procede verso testi più complessi, con autori di paesi e tradizioni differenti. Non è un programma obbligatorio: puoi fermarti su una domanda, scegliere un’altra lingua o tornare in qualsiasi momento al catalogo completo.</LocalizedText></p>
@@ -130,14 +130,16 @@ export function LibraryView({
         <label><LocalizedText>Contesto degli autori</LocalizedText><select value={country} onChange={event=>setCountry(event.target.value)}><option value="all"><LocalizedText>Tutti i contesti</LocalizedText></option>{countries.map(value=><option key={value} value={value}><LocalizedText>{value}</LocalizedText></option>)}</select></label>
         <label><LocalizedText>Tema</LocalizedText><select value={theme} onChange={event=>setTheme(event.target.value)}><option value="all"><LocalizedText>Tutti i temi</LocalizedText></option>{themes.map(value=><option key={value} value={value}><LocalizedText>{value}</LocalizedText></option>)}</select></label>
         <p><strong>{books.length}</strong> <LocalizedText>opere consultabili negli archivi</LocalizedText> · {availableLanguages.length} <LocalizedText>lingue disponibili</LocalizedText></p>
-        <small><LocalizedText>Accedi per leggere nel sito e ritrovare la tua ultima pagina su ogni dispositivo.</LocalizedText></small>
+        <small><LocalizedText>Le edizioni archiviate con licenza compatibile si leggono nel sito; le altre si aprono nella fonte originale. L’account serve soltanto a ritrovare il segnalibro.</LocalizedText></small>
       </div>
       <div className="book-grid">
-        {books.slice(page*36,page*36+36).map((book, index) => (
+        {books.slice(page*36,page*36+36).map((book, index) => {const destination=readingDestination(book);return (
           <article className="book-card" key={book.id}>
-            <a href={readingLink(book)}
+            <a href={destination?.href??book.links[0]?.url}
+              target={destination&&!destination.internal?"_blank":undefined}
+              rel={destination&&!destination.internal?"noopener noreferrer":undefined}
               className={`book-cover book-tone-${index % 4}`}
-              aria-label={`Leggi ${book.title}`}
+              aria-label={`${destination?.internal?"Leggi":"Apri nell’archivio"} ${book.title}`}
             >
               <span>
                 <LocalizedText defer>
@@ -156,7 +158,7 @@ export function LibraryView({
               <p className="eyebrow">
                 <LocalizedText defer>{book.lane}</LocalizedText>
               </p>
-              <h3><a href={readingLink(book)}><LocalizedText content defer>{book.title}</LocalizedText></a></h3>
+              <h3><a href={destination?.href??book.links[0]?.url} target={destination&&!destination.internal?"_blank":undefined} rel={destination&&!destination.internal?"noopener noreferrer":undefined}><LocalizedText content defer>{book.title}</LocalizedText></a></h3>
               <p className="book-author">
                 {book.author}
                 <LocalizedText defer>{" · "}</LocalizedText>
@@ -168,7 +170,7 @@ export function LibraryView({
               <button className={`text-link book-save ${savedBooks.has(book.id) ? "is-saved" : ""}`} onClick={() => onToggleBook(book.id)} aria-pressed={savedBooks.has(book.id)}>
                 {savedBooks.has(book.id) ? <BookmarkCheck size={17} /> : <Bookmark size={17} />}<LocalizedText defer>{savedBooks.has(book.id) ? "Libro salvato" : "Salva libro"}</LocalizedText>
               </button>
-              <a className="book-read-link" href={readingLink(book)}><BookOpen size={17}/><LocalizedText defer>Leggi online</LocalizedText><ArrowUpRight size={17}/></a>
+              <a className="book-read-link" href={destination?.href??book.links[0]?.url} target={destination&&!destination.internal?"_blank":undefined} rel={destination&&!destination.internal?"noopener noreferrer":undefined}><BookOpen size={17}/><LocalizedText defer>{destination?.internal?"Leggi online":"Apri nell’archivio originale"}</LocalizedText><ArrowUpRight size={17}/></a>
               <p className="book-edition-count">{book.editions?.length} <LocalizedText defer>edizioni linguistiche</LocalizedText> · <LocalizedText defer>{book.level === "base" ? "Per iniziare" : book.level === "avanzato" ? "Approfondimento" : "Lettura intermedia"}</LocalizedText></p>
               <div className="book-links">
                 {book.links.map((link) => (
@@ -194,7 +196,7 @@ export function LibraryView({
               </small>
             </div>
           </article>
-        ))}
+        )})}
       </div>
       {!books.length ? (
         <div className="notice">
@@ -260,13 +262,12 @@ export function SavedBooks({ savedBooks, query, onToggleBook }: {
   return <section className="saved-books" aria-label="Libri salvati">
     <h3><LocalizedText>Libri salvati</LocalizedText></h3>
     {selectedBooks.map(book => {
-      const edition = book.editions?.find(item => item.language === language) ?? book.editions?.find(item => item.language === "en") ?? book.editions?.[0];
-      const href = edition ? `/read?${new URLSearchParams({ book: book.id, edition: edition.language })}` : book.links[0].url;
+      const destination=libraryReadingDestination(book,language),href=destination?.href??book.links[0].url;
       return <article key={book.id}>
         <div>
           <strong><LocalizedText content>{book.title}</LocalizedText></strong>
           <p>{book.author}</p>
-          <a href={href}><LocalizedText>Apri il testo</LocalizedText><ArrowUpRight size={14} /></a>
+          <a href={href} target={destination&&!destination.internal?"_blank":undefined} rel={destination&&!destination.internal?"noopener noreferrer":undefined}><LocalizedText>{destination?.internal?"Apri il testo":"Apri nell’archivio originale"}</LocalizedText><ArrowUpRight size={14} /></a>
         </div>
         <button className="save-button is-saved" onClick={() => onToggleBook(book.id)} aria-label={`Rimuovi libro dai salvati: ${book.title}`}><BookmarkCheck size={18} /></button>
       </article>;

@@ -25,16 +25,19 @@
         },
         "people": [
           {
+            "slug": "karl-marx",
             "name": "Karl Marx",
             "role": "Critica dell’economia politica e organizzazione internazionale del lavoro.",
             "url": "https://www.marxists.org/archive/marx/works/1848/communist-manifesto/index.htm"
           },
           {
+            "slug": "friedrich-engels",
             "name": "Friedrich Engels",
             "role": "Coautore del Manifesto: produzione, classi e trasformazione della società.",
             "url": "https://www.marxists.org/archive/marx/works/1848/communist-manifesto/index.htm"
           }
-        ]
+        ],
+        "id": "tappa-marx-ed-engels-il-lavoro-entra-al-centro-della-storia"
       },
       {
         "year": "1864",
@@ -53,7 +56,8 @@
               "url": "https://www.marxists.org/italiano/marx-engels/1864/indirizzo.htm"
             }
           ]
-        }
+        },
+        "id": "tappa-l-internazionale-salari-orario-e-cooperazione-diventano-una-causa-comune"
       },
       {
         "year": "1871",
@@ -74,7 +78,8 @@
               "url": "https://www.paris.fr/pages/les-150-ans-de-la-commune-la-fin-sanglante-et-les-consequences-5-5-17210"
             }
           ]
-        }
+        },
+        "id": "tappa-la-comune-il-potere-pubblico-si-avvicina-alla-vita-di-chi-lavora"
       },
       {
         "id": "haymarket-1886",
@@ -116,11 +121,13 @@
         },
         "people": [
           {
+            "slug": "clara-zetkin",
             "name": "Clara Zetkin",
             "role": "Organizzazione delle lavoratrici e autonomia economica come condizioni dell’emancipazione.",
             "url": "https://www.marxists.org/archive/zetkin/1896/10/women.htm"
           }
-        ]
+        ],
+        "id": "tappa-clara-zetkin-l-emancipazione-delle-donne-riguarda-anche-salario-e-lavoro"
       },
       {
         "year": "1906",
@@ -141,11 +148,13 @@
         },
         "people": [
           {
+            "slug": "rosa-luxemburg",
             "name": "Rosa Luxemburg",
             "role": "Una teoria dell’iniziativa popolare costruita a partire dalle lotte del suo tempo.",
             "url": "https://www.marxists.org/archive/luxemburg/1906/mass-strike/index.htm"
           }
-        ]
+        ],
+        "id": "tappa-rosa-luxemburg-lo-sciopero-come-scuola-di-partecipazione"
       },
       {
         "id": "iquique-1907",
@@ -175,7 +184,8 @@
         "text": "L’articolo 123 della Costituzione rivoluzionaria riconosce la giornata di otto ore e una struttura di diritti del lavoro. Una conquista sociale non richiede che un paese si definisca socialista: conta anche la forza con cui le rivendicazioni popolari cambiano le sue istituzioni.\n\nPortare queste richieste dentro una costituzione significa riconoscerle come questioni pubbliche, anziché lasciarle soltanto alla trattativa fra singolo lavoratore e impresa. L’applicazione concreta richiede poi strumenti, controlli e organizzazione.",
         "cards": [
           "mx-lavoro"
-        ]
+        ],
+        "id": "tappa-otto-ore-e-diritti-del-lavoro-dentro-la-costituzione"
       },
       {
         "year": "1917",
@@ -197,11 +207,13 @@
         },
         "people": [
           {
+            "slug": "vladimir-lenin",
             "name": "Vladimir Lenin",
             "role": "Dirigente bolscevico: collega il nuovo potere dei soviet alle domande di pace e terra.",
             "url": "https://www.marxists.org/archive/lenin/works/1917/oct/25-26/index.htm"
           }
-        ]
+        ],
+        "id": "tappa-pace-e-terra-le-rivendicazioni-popolari-cambiano-il-potere"
       }
     ]
   },
@@ -217,7 +229,8 @@
         "title": "Vienna Rossa costruisce una risposta pubblica al bisogno di casa",
         "text": "L’amministrazione socialdemocratica realizza oltre 64.000 appartamenti municipali. Il comune interviene direttamente sull’abitare: la casa entra in una rete di servizi, salute e opportunità per le famiglie lavoratrici.\n\nPer una famiglia lavoratrice, un intervento pubblico sull’abitazione può cambiare il rapporto fra salario e spese essenziali. Il progetto municipale permette di pensare insieme casa, servizi e qualità degli spazi comuni.",
         "dossier": "vienna",
-        "cards": []
+        "cards": [],
+        "id": "tappa-vienna-rossa-costruisce-una-risposta-pubblica-al-bisogno-di-casa"
       },
       {
         "year": "1919",
@@ -239,11 +252,13 @@
         },
         "people": [
           {
+            "slug": "antonio-gramsci",
             "name": "Antonio Gramsci",
             "role": "Consigli di fabbrica, cultura e formazione di una capacità politica collettiva.",
             "url": "https://www.marxists.org/italiano/gramsci/19/democraziaoperaia.htm"
           }
-        ]
+        ],
+        "id": "tappa-gramsci-e-i-consigli-chi-produce-puo-imparare-a-governare"
       },
       {
         "id": "palmer-1919",
@@ -286,11 +301,13 @@
         },
         "people": [
           {
+            "slug": "aleksandra-kollontai",
             "name": "Aleksandra Kollontai",
             "role": "Lavoro, autonomia delle donne e organizzazione collettiva della cura.",
             "url": "https://www.marxists.org/archive/kollonta/1920/communism-family.htm"
           }
-        ]
+        ],
+        "id": "tappa-kollontai-rendere-la-cura-una-responsabilita-sociale"
       },
       {
         "id": "squadrismo-1922",
@@ -336,11 +353,13 @@
         },
         "people": [
           {
+            "slug": "nadezda-krupskaja",
             "name": "Nadežda Krupskaja",
             "role": "Educazione e formazione come costruzione di capacità collettive.",
             "url": "https://www.marxists.org/archive/krupskaya/works/ethics.htm"
           }
-        ]
+        ],
+        "id": "tappa-in-tredici-anni-l-alfabetizzazione-passa-dal-56-6-all-87-4"
       },
       {
         "id": "fascismo-1926",
@@ -383,11 +402,13 @@
         },
         "people": [
           {
+            "slug": "jose-carlos-mariategui",
             "name": "José Carlos Mariátegui",
             "role": "Un marxismo latinoamericano attento a terra, comunità e condizione indigena.",
             "url": "https://www.marxists.org/espanol/mariateg/1928/7ensayos/index.htm"
           }
-        ]
+        ],
+        "id": "tappa-mariategui-un-socialismo-che-parte-dalla-terra-e-dai-popoli-indigeni"
       },
       {
         "id": "germania-1933",
@@ -448,7 +469,8 @@
         "cards": [
           "fr-ferie",
           "fr-quaranta"
-        ]
+        ],
+        "id": "tappa-quaranta-ore-e-ferie-pagate-il-tempo-di-vita-si-conquista"
       },
       {
         "year": "1936",
@@ -456,7 +478,8 @@
         "title": "Lavoro, riposo, istruzione: il progetto sociale sovietico",
         "text": "La Costituzione sovietica raccoglie diritti sociali che legano economia e responsabilità pubblica. Il testo costituzionale permette di studiare il progetto; scuola, servizi e risultati scientifici ne richiedono una lettura storica concreta.\n\nPer comprendere un diritto sociale bisogna chiedere quali servizi, risorse e possibilità di accesso gli danno consistenza. Il documento è il punto di partenza di questa domanda, non la sua risposta completa.",
         "dossier": "urss",
-        "cards": []
+        "cards": [],
+        "id": "tappa-lavoro-riposo-istruzione-il-progetto-sociale-sovietico"
       },
       {
         "id": "spagna-1939",
@@ -496,7 +519,8 @@
               "url": "https://encyclopedia.ushmm.org/content/en/timeline-event/holocaust/1942-1945/soviet-forces-liberate-auschwitz"
             }
           ]
-        }
+        },
+        "id": "tappa-l-armata-rossa-apre-i-cancelli-di-auschwitz"
       },
       {
         "year": "1945",
@@ -518,11 +542,13 @@
         },
         "people": [
           {
+            "slug": "ho-chi-minh",
             "name": "Hồ Chí Minh",
             "role": "Lotta anticoloniale e indipendenza come condizioni per costruire un futuro diverso.",
             "url": "https://www.marxists.org/reference/archive/ho-chi-minh/works/1945/declaration-independence.htm"
           }
-        ]
+        ],
+        "id": "tappa-ho-chi-minh-l-uguaglianza-dei-popoli-contro-il-dominio-coloniale"
       },
       {
         "year": "1946",
@@ -545,7 +571,8 @@
               "url": "https://www.edf.fr/groupe-edf/innover/rd-un-savoir-faire-mondial/toutes-les-actualites-de-la-rd/1946-creation-de-la-direction-des-etudes-et-recherches"
             }
           ]
-        }
+        },
+        "id": "tappa-un-sistema-elettrico-nazionale-e-una-ricerca-al-servizio-dell-industria"
       },
       {
         "id": "portella-1947",
@@ -602,7 +629,8 @@
         "cards": [
           "it-costituzione",
           "it-riposo"
-        ]
+        ],
+        "id": "tappa-dalla-ricostruzione-a-un-idea-piu-ampia-di-cittadinanza"
       },
       {
         "year": "1948–1992",
@@ -626,7 +654,8 @@
               "url": "https://search.acs.beniculturali.it/OpacACS/guida/IT-ACS-AS0001-0003965"
             }
           ]
-        }
+        },
+        "id": "tappa-l-iri-e-la-capacita-di-costruire-un-sistema-industriale"
       }
     ]
   },
@@ -656,11 +685,13 @@
         },
         "people": [
           {
+            "slug": "mao-zedong",
             "name": "Mao Zedong",
             "role": "La rivoluzione cinese e il progetto di ricostruzione nazionale.",
             "url": "https://www.marxists.org/reference/archive/mao/selected-works/volume-5/mswv5_01.htm"
           }
-        ]
+        ],
+        "id": "tappa-mao-zedong-e-la-nascita-di-una-nuova-sovranita-politica"
       },
       {
         "id": "apartheid-1950",
@@ -737,11 +768,13 @@
         ],
         "people": [
           {
+            "slug": "jurij-gagarin",
             "name": "Jurij Gagarin",
             "role": "Primo essere umano nello spazio, il 12 aprile 1961.",
             "url": "https://www.nasa.gov/history/60-years-ago-soviets-select-their-first-cosmonauts/"
           },
           {
+            "slug": "valentina-tereskova",
             "name": "Valentina Tereškova",
             "role": "Prima donna nello spazio, il 16 giugno 1963.",
             "url": "https://www.nasa.gov/history/sally-ride-and-valentina-tereshkova-changing-the-course-of-human-space-exploration/"
@@ -757,7 +790,8 @@
               "url": "https://www.nasa.gov/history/sally-ride-and-valentina-tereshkova-changing-the-course-of-human-space-exploration/"
             }
           ]
-        }
+        },
+        "id": "tappa-dalla-formazione-scientifica-ai-primi-viaggi-nello-spazio"
       },
       {
         "year": "1960–1979",
@@ -767,7 +801,8 @@
         "dossier": "rivoluzione-culturale",
         "cards": [
           "cn-medici"
-        ]
+        ],
+        "id": "tappa-la-prevenzione-e-le-cure-di-base-raggiungono-le-campagne"
       },
       {
         "year": "1961",
@@ -777,7 +812,8 @@
         "dossier": "cuba",
         "cards": [
           "cu-lettura"
-        ]
+        ],
+        "id": "tappa-un-paese-si-mobilita-per-imparare-a-leggere"
       },
       {
         "id": "lumumba-1961",
@@ -810,7 +846,8 @@
           "it-scuola",
           "it-statuto",
           "it-sanita"
-        ]
+        ],
+        "id": "tappa-scuola-comune-dignita-sul-lavoro-tempo-per-studiare-sanita-per-tutti"
       },
       {
         "id": "cuba-embargo-1962",
@@ -852,11 +889,13 @@
         },
         "people": [
           {
+            "slug": "ernesto-che-guevara",
             "name": "Ernesto Che Guevara",
             "role": "L’internazionalismo e il rapporto fra indipendenza politica ed economica.",
             "url": "https://www.marxists.org/archive/guevara/1964/12/11.htm"
           }
-        ]
+        ],
+        "id": "tappa-che-guevara-la-liberazione-politica-incontra-l-indipendenza-economica"
       },
       {
         "id": "brasile-1964",
@@ -928,11 +967,13 @@
         },
         "people": [
           {
+            "slug": "amilcar-cabral",
             "name": "Amílcar Cabral",
             "role": "Analisi della società, autonomia dello sviluppo e organizzazione anticoloniale.",
             "url": "https://www.marxists.org/subject/africa/cabral/1966/weapon-theory.htm"
           }
-        ]
+        ],
+        "id": "tappa-amilcar-cabral-la-liberazione-deve-cambiare-anche-la-vita-materiale"
       },
       {
         "year": "1969–1975",
@@ -955,7 +996,8 @@
               "url": "https://www.isro.gov.in/Timeline.html"
             }
           ]
-        }
+        },
+        "id": "tappa-dalla-ricerca-pubblica-al-primo-satellite-indiano"
       },
       {
         "year": "1969–1994",
@@ -975,7 +1017,8 @@
               "url": "https://embraer.com/historical-center-history-of-embraer/en/"
             }
           ]
-        }
+        },
+        "id": "tappa-embraer-la-costruzione-pubblica-di-competenze-aeronautiche"
       },
       {
         "year": "1971",
@@ -997,11 +1040,13 @@
         },
         "people": [
           {
+            "slug": "salvador-allende",
             "name": "Salvador Allende",
             "role": "Un programma di trasformazione socialista attraverso il governo di Unidad Popular.",
             "url": "https://www.memoriachilena.gob.cl/602/w3-article-3622.html"
           }
-        ]
+        ],
+        "id": "tappa-allende-e-il-rame-una-risorsa-strategica-torna-al-paese"
       },
       {
         "id": "cile-1973",
@@ -1083,7 +1128,8 @@
         "cards": [
           "cn-poverta"
         ],
-        "comparison": true
+        "comparison": true,
+        "id": "tappa-un-economia-reale-cinquanta-volte-piu-grande"
       },
       {
         "id": "cile-plan-laboral-1979",
@@ -1165,7 +1211,8 @@
               "url": "https://www.archives.sncf.com/once-upon-a-time-the-tgv-the-pioneers-tell-the-story/"
             }
           ]
-        }
+        },
+        "id": "tappa-il-tgv-porta-la-ricerca-ferroviaria-dentro-la-vita-quotidiana"
       },
       {
         "id": "patco-1981",
@@ -1212,11 +1259,13 @@
         },
         "people": [
           {
+            "slug": "thomas-sankara",
             "name": "Thomas Sankara",
             "role": "Un progetto africano di emancipazione economica, sociale e femminile.",
             "url": "https://www.marxists.org/archive/sankara/1984/october/04.htm"
           }
-        ]
+        ],
+        "id": "tappa-thomas-sankara-salute-dignita-e-autonomia-al-centro-dello-sviluppo"
       },
       {
         "id": "orgreave-1984",
@@ -1251,7 +1300,8 @@
         "dossier": "vietnam",
         "cards": [
           "vn-doimoi"
-        ]
+        ],
+        "id": "tappa-oi-moi-e-la-riduzione-della-poverta"
       },
       {
         "year": "1996–1998",
@@ -1261,7 +1311,8 @@
         "cards": [
           "za-diritti",
           "in-kerala"
-        ]
+        ],
+        "id": "tappa-diritti-sociali-e-organizzazione-dal-basso-oltre-un-unica-etichetta"
       }
     ]
   },
@@ -1280,7 +1331,8 @@
           "br-bolsa",
           "bo-scuola",
           "uy-salute"
-        ]
+        ],
+        "id": "tappa-sicurezza-economica-continuita-scolastica-e-salute-entrano-nelle-riforme"
       },
       {
         "id": "grecia-2010",
@@ -1361,7 +1413,8 @@
         "dossier": "cuba",
         "cards": [
           "cu-salute"
-        ]
+        ],
+        "id": "tappa-un-primato-mondiale-nella-prevenzione-materno-infantile"
       }
     ]
   }

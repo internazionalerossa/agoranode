@@ -1,10 +1,10 @@
-export const VIEWS=['notizie','fonti','teoria','salvati','metodo','partecipa','crediti','privacy','condizioni'] as const;
+export const VIEWS=['notizie','fonti','teoria','salvati','metodo','custodia','partecipa','crediti','privacy','condizioni'] as const;
 export type View=(typeof VIEWS)[number];
 export function viewFromUrl(raw:string):View{
  const url=new URL(raw,'https://site.invalid');const requested=url.searchParams.get('view');
  if(requested==='osservatorio'||url.hash==='#osservatorio-sei-ore')return 'notizie';
  if(VIEWS.includes(requested as View))return requested as View;
- if(url.searchParams.has('storia'))return 'teoria';
+ if(['storia','evento','persona','indicatore'].some(key=>url.searchParams.has(key)))return 'teoria';
  if(url.searchParams.has('stanza'))return 'partecipa';
  if(url.searchParams.has('proposal'))return 'partecipa';
  return 'notizie';
@@ -14,7 +14,7 @@ export function viewUrl(raw:string,next:View):string{
  if(next==='notizie')url.searchParams.delete('view');else url.searchParams.set('view',next);
  url.searchParams.delete('periodo');
  if(next!=='partecipa')for(const key of ['proposal','stanza'])url.searchParams.delete(key);
- if(next!=='teoria')for(const key of ['storia','percorso','indicatore'])url.searchParams.delete(key);
+ if(next!=='teoria')for(const key of ['storia','percorso','indicatore','evento','persona','paesi','dal','al','scala'])url.searchParams.delete(key);
  return url.pathname+url.search+url.hash;
 }
 

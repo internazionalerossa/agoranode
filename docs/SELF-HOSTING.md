@@ -26,6 +26,16 @@ Caddy emette un certificato locale. Esporta la sua autorità pubblica con `node 
 
 PostgreSQL non apre porte TCP: app e backup lo raggiungono attraverso un socket Unix condiviso sullo stesso host, con password. Le connessioni a database remoti continuano a richiedere TLS verificato. Gli amministratori del computer ospitante possono comunque leggere dati e segreti: il socket non promette protezione dal proprietario del sistema.
 
+## Importare la copia autorizzata della Biblioteca
+
+La lettura interna non scarica un libro durante la visita. Dopo il primo avvio importa esplicitamente la sola edizione registrata con diritto di redistribuzione:
+
+```sh
+node scripts/selfhost.mjs library-import commons-viventi en
+```
+
+Il comando è idempotente e salva testo, capitoli, licenza, attribuzione, origine e impronte in PostgreSQL. Deve terminare correttamente prima del backup destinato alla pubblicazione. Verifica poi senza account che `GET /api/library/read?bookId=commons-viventi&edition=en&chapter=0` restituisca `200` attraverso l'HTTPS locale e che un'edizione non importabile resti collegata all'archivio originale. Solo dopo ripeti backup cifrato e ripristino separato, controllando che la revisione del libro esista anche nel database ripristinato.
+
 ## Nodo locale di sola consultazione
 
 In una seconda cartella o checkout, un volontario può creare un'installazione indipendente senza modificare router, firewall o DNS:
@@ -77,13 +87,15 @@ Questa sezione serve soltanto a chi decide di esporre direttamente una propria i
 
 Prima di aprire il sito scegli un nome stabile e verifica la raggiungibilità della connessione domestica. Un sottodominio DDNS gratuito può puntare all'IP pubblico, ma non supera il CGNAT dell'operatore. In quel caso serve una diversa connettività o un tunnel con un ingresso pubblico stabile. Non acquistare servizi per tentativi.
 
-Per preparare una nuova installazione con dominio:
+Per preparare una nuova installazione destinata fin dall'inizio all'esposizione diretta con dominio:
 
 ```sh
 node scripts/selfhost.mjs init https://nome-del-server.example
 ```
 
-Il comando resta deliberatamente in ascolto sul solo computer. Dopo le verifiche di rete, configura `.selfhost/runtime.env` con `BIND_ADDRESS=0.0.0.0`, `HTTPS_PORT=443` e `HTTP_PORT=80`, e il router/firewall per raggiungere il proxy sulle porte 80 e 443. Non esporre database, cartelle private o porte amministrative. Per un'installazione già inizializzata modifica l'origine `APP_URL` e l'hostname nel Caddyfile senza rigenerare i segreti. Caddy richiede un dominio realmente raggiungibile per ottenere il certificato pubblico. Account e forum restano chiusi fino al collaudo e alla configurazione del gestore.
+Il comando resta deliberatamente in ascolto sul solo computer. Dopo le verifiche di rete, configura `.selfhost/runtime.env` con `BIND_ADDRESS=0.0.0.0`, `HTTPS_PORT=443` e `HTTP_PORT=80`, e il router/firewall per raggiungere il proxy sulle porte 80 e 443. Non esporre database, cartelle private o porte amministrative.
+
+Per convertire un'installazione locale già inizializzata, conserva `runtime.env`, volumi e segreti: modifica soltanto `APP_URL`, porte e indirizzo di ascolto, quindi sostituisci nel Caddyfile il sito `localhost:443` con il dominio pubblico. Rimuovi `tls internal`, perché nella pubblicazione diretta deve essere Caddy a richiedere e rinnovare il certificato pubblico; il redirect HTTP automatico resta quello di Caddy. Non usare `tunnel-origin`, che prepara invece il percorso separato tramite Tailscale Funnel. Caddy può ottenere il certificato soltanto dopo che DNS, inoltri WAN 80/443 e firewall rendono il dominio realmente raggiungibile. Account e forum restano chiusi fino al collaudo esterno e alla configurazione del gestore.
 
 ## Backup che i volontari possono conservare senza leggerli
 
@@ -112,10 +124,94 @@ Su un computer fidato, separato dall'istanza attiva, decifra il file con `age --
 
 Se tutte le chiavi private vengono perse, le copie cifrate non sono recuperabili. Nessun meccanismo automatico di sincronizzazione o ripristino remoto è abilitato da questi comandi.
 
-## Email gratuita, solo dopo la scelta del gestore
+## Email gratuita per gli account, non per invii massivi
 
-L'impostazione iniziale resta `MAIL_TRANSPORT=none`. L'accesso social richiede una coppia OAuth configurata e il callback sul dominio effettivo. L'account personale e l'ammissione PR2 restano distinti.
+L'impostazione iniziale resta `MAIL_TRANSPORT=none`. Dopo aver configurato Gmail SMTP, PR1 usa email e password confermate. PR2 richiede nome e riferimento HTTPS dichiarati; Facebook può essere collegato facoltativamente soltanto da una sessione PR1 verificata e non sostituisce l'accesso PR1. Account personale e ammissione restano distinti.
 
-L'adattatore SMTP esistente può usare Gmail: `MAIL_TRANSPORT=smtp`, `SMTP_HOST=smtp.gmail.com`, `SMTP_PORT=465`, `SMTP_USER` e `MAIL_FROM` uguali alla casella verificata, `SMTP_PASSWORD` una password per app generata dopo la verifica in due passaggi (se disponibile per quell'account). Inserisci i valori solo in `runtime.env`; non usare la password principale dell'account. Questa modalità abilita anche i flussi di accesso con email della versione compatibile.
+Per il server domestico il percorso scelto è una casella Gmail gratuita dedicata al progetto, senza acquistare un servizio di invio. Evita una casella personale: l'indirizzo `MAIL_FROM` sarà visibile ai destinatari. Attiva la verifica in due passaggi sull'account Google e, se l'opzione è disponibile per quell'account, crea una password per app dedicata a PolisRossa. Le password per app possono non essere disponibili per account con sola chiave di sicurezza, Advanced Protection o restrizioni di un'organizzazione. Non usare mai la password principale di Google.
 
-La quota di Gmail non è una garanzia di consegna né una capacità prenotata: Google può applicare limiti o blocchi. Il progetto non implementa ancora una coda distribuita, un contatore condiviso dei 500 invii o notifiche email del forum. Non configurare più server a inviare gli stessi messaggi. Nessuna email reale viene inviata dai comandi di installazione e backup; prova un invio soltanto a un indirizzo autorizzato prima di aprire le iscrizioni.
+Inserisci soltanto nel file ignorato `.selfhost/runtime.env`:
+
+```dotenv
+MAIL_TRANSPORT=smtp
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=465
+SMTP_USER=casella-del-progetto@gmail.com
+SMTP_PASSWORD=password-per-app
+MAIL_FROM=PolisRossa <casella-del-progetto@gmail.com>
+```
+
+La porta 465 usa TLS fin dall'apertura della connessione. È supportata anche la porta 587, sulla quale il server impone STARTTLS. `SMTP_USER` e l'indirizzo racchiuso in `MAIL_FROM` devono coincidere per questo percorso semplice; il preflight blocca una discordanza. La password per app resta un segreto del gestore temporaneo: non inserirla nel repository, in chat, nei backup distribuiti o negli screenshot e revocala dall'account Google quando cambia il custode.
+
+Prima di provare registrazione o recupero genera il codice privato di accesso iniziale:
+
+```sh
+node scripts/selfhost.mjs account-access
+```
+
+Il comando salva il testo una sola volta in `.selfhost/private/account-access-code.txt` e inserisce in `runtime.env` soltanto `ACCOUNT_ACCESS_HASH`. Non stampa il codice, non sovrascrive un valore esistente e rifiuta la modalità `mirror`. Condividi il codice soltanto con le persone autorizzate al collaudo: lo stesso codice serve sia per creare l'account sia per chiedere il recupero. È una barriera riutilizzabile per proteggere la quota Gmail durante il lancio, non identifica una persona e non sostituisce conferma email, password o limiti anti-abuso. Se il file o il codice diventano pubblici, richiudi i flag prima di predisporre manualmente un nuovo codice e il relativo hash; il comando non offre una rotazione automatica.
+
+Il mailer attuale invia soltanto conferma dell'indirizzo e recupero della password richiesti dall'utente. Non invia newsletter, annunci, digest o notifiche del forum e non esiste un comando che spedisca a tutti gli account. Per eventuali notifiche future serviranno consenso o scelta esplicita, disiscrizione, gestione dei rimbalzi, limiti e una revisione separata: non vanno riutilizzate implicitamente le email degli account.
+
+Prima dell'invio il server applica in PostgreSQL limiti a finestre fisse: 3 messaggi per destinatario e funzione ogni 15 minuti, 5 consegne per client ogni 15 minuti, 20 messaggi complessivi per finestra oraria e 100 per finestra giornaliera. Conserva soltanto l'impronta SHA-256 normalizzata dell'indirizzo e digest HMAC pseudonimi del client e delle chiavi del limitatore; non inserisce l'IP nei contatori. Un errore del database blocca l'invio; un fallimento SMTP consuma comunque il contatore e non viene ritentato automaticamente. La risposta del sito non attende il server Gmail, ma il job non è una coda durevole: durante il collaudo controlla anche la ricezione reale.
+
+Gmail personale applica inoltre propri limiti anti-abuso; Google documenta una soglia giornaliera, ma può limitare o bloccare gli invii anche in base ad altri segnali. Non è quindi una capacità garantita né una soluzione per invii massivi. Gmail riceve necessariamente indirizzo del destinatario, oggetto, testo e collegamento monouso di conferma o recupero; non riceve la password PolisRossa. Questo fornitore effettivo va indicato nell'informativa dell'istanza prima di aprire gli account. Non configurare più server a spedire gli stessi messaggi. Nessuna email reale viene inviata dai comandi di installazione, preflight e backup: prima di aprire le iscrizioni prova una conferma e un recupero soltanto verso indirizzi autorizzati.
+
+Il gestore può leggere soltanto lo stato aggregato, senza destinatari o segreti:
+
+```sh
+node scripts/selfhost.mjs mail-status
+```
+
+I contatori si azzerano da soli alla scadenza delle rispettive finestre. Dopo aver chiuso le registrazioni e verificato che un blocco non derivi da un abuso in corso, il gestore può azzerare esclusivamente questi contatori con `node scripts/selfhost.mjs mail-reset`. Il comando non elimina account, sessioni, forum, configurazione o credenziali; non usarlo per aggirare ripetutamente i limiti Gmail.
+
+Il codice conserva l'adattatore Brevo per compatibilità con installazioni esistenti, ma non è il percorso scelto per questo server e non deve essere attivato né acquistato. Il repository non può creare la password per app Gmail o verificarne il funzionamento senza una connessione e un invio reali.
+
+Riferimenti ufficiali: [Google — password per app](https://support.google.com/accounts/answer/185833), [Google — limiti di invio di Gmail](https://support.google.com/mail/answer/22839), [Google Workspace — porte SMTP Gmail](https://support.google.com/a/answer/176600).
+
+## Preparare account, social e forum senza aprirli
+
+Lavora in `.selfhost/runtime.env`, che è escluso da Git e dall'immagine Docker. Non incollare password per app, API key o client secret in chat, issue, commit o schermate pubbliche. Mantieni inizialmente:
+
+```dotenv
+REGISTRATIONS_OPEN=false
+FORUM_OPEN=false
+```
+
+Per rendere operativo l'intero flusso servono dati che il codice non può scegliere al posto del gestore:
+
+1. `APP_URL` deve essere l'origine HTTPS pubblica e stabile definitiva, senza percorso e senza la porta interna `:8443`.
+2. `PUBLIC_OPERATOR_NAME` indica il soggetto che esercita temporaneamente la responsabilità operativa; `PUBLIC_PRIVACY_CONTACT` è una casella email funzionante e pubblicata nella pagina Privacy. Questi campi non attribuiscono proprietà politica o diritti di voto.
+3. Configura Gmail SMTP con una password per app e verifica in due passaggi, come sopra. Genera poi il codice privato con `node scripts/selfhost.mjs account-access`. Il primo collaudo deve comprendere una conferma e un recupero verso caselle autorizzate usando quel codice; non abilita né prova notifiche collettive.
+4. Facebook OAuth è facoltativo per PR2. Se vuoi offrirlo come prova tecnica supplementare, crea un'app in Meta for Developers, conserva `FACEBOOK_CLIENT_ID` e `FACEBOOK_CLIENT_SECRET` soltanto nel file privato e registra esattamente `https://DOMINIO/api/identity/callback/facebook`, sostituendo `DOMINIO` con l'host di `APP_URL`. Il solo scope è `public_profile`; non certifica l'identità civile. Discord non costituisce prova per l'ammissione. Il collegamento e il callback restano disabilitati finché `FORUM_OPEN=false`; lo scollegamento resta disponibile.
+5. PR2 richiede tre persone fondatrici distinte, ciascuna con il proprio account PR1 verificato, un nome dichiarato e un URL HTTPS pubblico a Facebook, Instagram o un sito personale. Genera i tre inviti una sola volta:
+
+```sh
+node scripts/selfhost.mjs community-invites
+```
+
+Il comando salva i codici in `.selfhost/private/community-founder-invites.txt`, con permessi privati dove il sistema li supporta, e inserisce in `runtime.env` soltanto i tre hash SHA-256. Non stampa i codici, non sovrascrive un set esistente e rifiuta la modalità `mirror`. Consegna un codice diverso a ciascuna persona attraverso un canale privato. Se il file viene perso dopo aver configurato gli hash, i codici non sono recuperabili: il comando rifiuta di sostituirli silenziosamente. Dopo l'uso dei tre inviti, conserva il file fuori linea o eliminalo secondo la procedura concordata; gli hash non consentono di ricostruire i codici.
+
+Controlla quindi la configurazione statica:
+
+```sh
+node scripts/selfhost.mjs preflight
+```
+
+Il preflight mostra soltanto esiti, nomi dei requisiti e URL di callback; non mostra credenziali. Termina con codice `2` finché mancano origine pubblica, contatti, posta, il file privato del codice account con hash corrispondente o tre hash distinti corrispondenti al file privato degli inviti. Facebook è facoltativo; se una sola delle due credenziali è presente, la coppia incompleta resta un errore. Il controllo non contatta Gmail, Facebook, Instagram, Discord o il database: un esito positivo significa “configurazione completa”, non “servizi collaudati”. Se un file privato manca o non coincide con gli hash, il controllo resta bloccante e non modifica i file.
+
+Il processo applicativo elimina le domande PR2 rimaste scadute per 30 giorni e quelle respinte da 30 giorni, insieme a voti ed elettorato di ammissione collegati. Elimina inoltre sessioni e token di verifica scaduti, contatori tecnici più vecchi di 24 ore e sessioni legacy prive di credenziale email/password, senza cancellare i relativi utenti o dati applicativi. Un account `credential` mai verificato da più di sette giorni viene eliminato soltanto se non ha sessioni, dati personali o un collegamento social; questo limita anche la crescita prodotta da registrazioni la cui email è stata negata per quota. Un grant/account Facebook locale non consumato viene rimosso dopo 24 ore. I controlli partono a ogni avvio e poi ogni 24 ore, quindi la cancellazione può completarsi entro il giorno successivo alla soglia; nei log compaiono soltanto conteggi. Gli eventi tecnici del forum conservano identificativi opachi. Verifica i messaggi `Forum application retention completed` e `Authentication retention completed` e includi nei tempi pubblicati anche la rotazione dei backup cifrati, perché una copia precedente non viene modificata dal processo in esecuzione.
+
+## Collaudo e apertura graduale
+
+Riavvia sempre dopo una modifica a `runtime.env`. Prima prova con accesso pubblico non ancora annunciato e con il forum chiuso:
+
+1. abilita temporaneamente `REGISTRATIONS_OPEN=true`, riavvia e crea un account autorizzato usando il codice privato;
+2. verifica ricezione e scadenza della conferma email, uscita e nuovo accesso, recupero password con lo stesso codice e revoca delle sessioni precedenti;
+3. verifica che con `FORUM_OPEN=false` collegamento e callback Facebook siano indisponibili ma un collegamento precedente possa essere rimosso; se hai configurato Facebook, apri poi il forum e da una sessione PR1 appena autenticata prova collegamento e callback definitivo, compresi rifiuto dell'autorizzazione e sessione scaduta. Verifica anche che Facebook non possa essere usato come accesso PR1 diretto;
+4. verifica salvataggi e posizione di lettura da due browser, poi un riavvio del container;
+5. abilita `FORUM_OPEN=true` e fai presentare la domanda alle tre persone fondatrici con nome, presentazione e riferimento HTTPS dichiarato obbligatorio, quindi usa un invito diverso per ciascuna; verifica che il server non apra automaticamente il link e che soltanto candidato e revisori lo vedano. Se provi anche Facebook OAuth, verifica che il grant sia rimosso dopo l’invio e che un fallimento successivo richieda eventualmente un nuovo collegamento;
+6. con un account PR1 non ammesso verifica che scrittura, chat e voto siano rifiutati; con i tre PR2 verifica discussione pubblica e privata, proposta, voto, esportazione e persistenza dopo riavvio;
+7. ripeti backup cifrato e ripristino separato dopo aver creato questi dati di collaudo.
+
+Solo dopo questi risultati lascia entrambi i flag a `true` e verifica da una rete esterna `/healthz`, `/api/service-info`, registrazione, accesso, forum e invio email. Per richiudere immediatamente senza cancellare account o discussioni, rimetti entrambi i flag a `false` e riavvia; per interrompere anche la consultazione pubblica disattiva inoltre il tunnel o l'ingresso scelto. Non cancellare volumi e non rigenerare `AUTH_SECRET`, altrimenti le sessioni e i token OAuth cifrati esistenti non restano utilizzabili.

@@ -7,7 +7,21 @@ test('legacy observatory links resolve to the news collection with a six-hour pe
  assert.equal(viewUrl('https://site.example/?view=osservatorio','notizie'),'/');
 });
 
-test('navigation clears parameters owned by other areas while preserving unrelated links',()=>{const from='https://site.example/?view=teoria&storia=italia&percorso=conquiste&indicatore=SP.DYN.LE00.IN&stanza=generale&proposal=topic&ref=shared#world-history-title';assert.equal(viewUrl(from,'notizie'),'/?ref=shared');assert.equal(viewUrl(from,'partecipa'),'/?view=partecipa&stanza=generale&proposal=topic&ref=shared');assert.equal(viewUrl(from,'teoria'),'/?view=teoria&storia=italia&percorso=conquiste&indicatore=SP.DYN.LE00.IN&ref=shared');assert.equal(viewFromUrl('https://site.example/?stanza=generale'),'partecipa');});
+test('navigation clears parameters owned by other areas while preserving unrelated links',()=>{const from='https://site.example/?view=teoria&storia=italia&percorso=dati&indicatore=SP.DYN.LE00.IN&evento=alfabetizzazione&persona=clara-zetkin&paesi=CUB%2CITA&dal=1980&al=2020&scala=indice&stanza=generale&proposal=topic&ref=shared#world-history-title';assert.equal(viewUrl(from,'notizie'),'/?ref=shared');assert.equal(viewUrl(from,'partecipa'),'/?view=partecipa&stanza=generale&proposal=topic&ref=shared');assert.equal(viewUrl(from,'teoria'),'/?view=teoria&storia=italia&percorso=dati&indicatore=SP.DYN.LE00.IN&evento=alfabetizzazione&persona=clara-zetkin&paesi=CUB%2CITA&dal=1980&al=2020&scala=indice&ref=shared');assert.equal(viewFromUrl('https://site.example/?stanza=generale'),'partecipa');});
+
+test('encyclopedia and chart parameters select theory directly and survive only inside theory',()=>{
+ assert.equal(viewFromUrl('/?persona=clara-zetkin'),'teoria');
+ assert.equal(viewFromUrl('/?evento=haymarket-1886'),'teoria');
+ assert.equal(viewFromUrl('/?indicatore=life'),'teoria');
+ const graph='https://site.example/?view=teoria&percorso=dati&indicatore=life&paesi=CUB%2CUSA&dal=1960&al=2024&scala=indice';
+ assert.equal(viewUrl(graph,'teoria'),'/?view=teoria&percorso=dati&indicatore=life&paesi=CUB%2CUSA&dal=1960&al=2024&scala=indice');
+ assert.equal(viewUrl(graph,'fonti'),'/?view=fonti');
+});
+
+test('shared-custody page has a stable direct URL and clears private-area state',()=>{
+ assert.equal(viewFromUrl('https://site.example/?view=custodia'),'custodia');
+ assert.equal(viewUrl('https://site.example/?view=partecipa&stanza=generale&proposal=topic','custodia'),'/?view=custodia');
+});
 
 test('shared periods survive reload and invalid periods fall back to a day',()=>{
  for(const value of ['0.25','1','Infinity'])assert.equal(newsDaysFromUrl('https://site.example/?periodo='+value),value);

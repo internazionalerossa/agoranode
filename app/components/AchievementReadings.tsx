@@ -2,6 +2,7 @@
 import {ArrowUpRight} from 'lucide-react';
 import PATHS from '@/app/data/history-study-paths.json';
 import {THEORY_LIBRARY} from '@/app/data/library';
+import {libraryReadingDestination} from '@/app/lib/library-reading';
 import {LocalizedText as T,useReadingLocale} from './Localization';
 export default function AchievementReadings(){
  const locale=useReadingLocale();
@@ -13,8 +14,8 @@ export default function AchievementReadings(){
    <summary><T>{path.title}</T></summary><p><T content>{path.intro}</T></p>
    <ul>{path.books.map(reading=>{
     const book=THEORY_LIBRARY.find(item=>item.id===reading.id);if(!book)return null;
-    const edition=book.editions?.find(item=>item.language===locale)??book.editions?.find(item=>item.language==='en')??book.editions?.[0];
-    return <li key={book.id}><a href={edition?`/read?${new URLSearchParams({book:book.id,edition:edition.language})}`:book.links[0]?.url}><T>{book.title}</T></a><small>{book.author} · {book.period}{edition&&<> · {edition.language.toUpperCase()}</>}</small><p><T content>{reading.why}</T></p></li>;
+    const destination=libraryReadingDestination(book,locale);
+    return <li key={book.id}><a href={destination?.href??book.links[0]?.url} target={destination&&!destination.internal?'_blank':undefined} rel={destination&&!destination.internal?'noopener noreferrer':undefined}><T>{book.title}</T></a><small>{book.author} · {book.period}{destination&&<> · {destination.edition.language.toUpperCase()}</>}</small><p><T content>{reading.why}</T></p></li>;
    })}</ul>
    <div className="reading-resource-links"><a href={`/?view=teoria&percorso=conquiste&indicatore=${encodeURIComponent(path.indicator)}#world-history-title`}><T>Confronta i dati</T><ArrowUpRight size={13}/></a>{path.resources.map(([label,url])=><a key={url} href={url} target="_blank" rel="noopener noreferrer"><T>{label}</T><ArrowUpRight size={13}/></a>)}</div>
   </details>)}</div>

@@ -1,4 +1,4 @@
-import {socialIdentityEndpoint,verifiedSocialIdentity,allowedIdentityCallback} from './social-identity';
+import {socialIdentityEndpoint,verifiedSocialIdentity,allowedIdentityCallback,unlinkFacebookIdentity} from './social-identity';
 import {createServer} from 'node:http';
 import {readFile,stat} from 'node:fs/promises';
 import {resolve,extname,sep,dirname} from 'node:path';
@@ -10,6 +10,8 @@ import {createPool,connections} from './pool';
 import {PostgresDatabase} from './database';
 import {createAuth,authSession,accountEndpoint} from './auth';
 import {liveChat} from './live-chat';
+import {purgeForumApplications,startForumApplicationRetention} from './forum-retention';
+import {purgeAuthenticationState,startAuthenticationRetention} from './auth-retention';
 import {api,privatePaths} from './api';
 const config=configuration(),pool=createPool(config.connectionString),db=new PostgresDatabase(connections(pool));
 const {auth,settle}=createAuth(pool,config),root=resolve(dirname(fileURLToPath(import.meta.url)),'public');
@@ -43,9 +45,9 @@ const server=createServer({maxHeaderSize:16384,requestTimeout:30000,headersTimeo
    const allowed=method==='GET'&&((config.mailTransport!=='none'&&(url.pathname==='/api/identity/verify-email'||url.pathname.startsWith('/api/identity/reset-password/')))||allowedIdentityCallback(url.pathname,method,config));
    response=allowed?await auth.handler(request):new Response('Not found',{status:404});
   }else if(url.pathname.startsWith('/api/')){
-   if(privatePaths.has(url.pathname)){const session=await authSession(auth,request);let socialIdentity=null;
-    if(session.user&&config.forumOpen&&url.pathname==='/api/community/forum'&&method==='POST'&&request.headers.get('origin')===config.origin&&request.headers.get('sec-fetch-site')!=='cross-site'){let action;try{action=(await request.clone().json()).action;}catch{}if(action==='apply')socialIdentity=await verifiedSocialIdentity(auth,request,config);}
-    response=session.finish(await api(request,db,session.user?.id??null,config.bootstrapHash,background,config.forumOpen,socialIdentity));}
+   if(privatePaths.has(url.pathname)){const session=await authSession(auth,request);let socialIdentity=null,unlinkIdentity:(()=>Promise<void>)|undefined;
+    if(session.user&&url.pathname==='/api/community/forum'&&method==='POST'&&request.headers.get('origin')===config.origin&&request.headers.get('sec-fetch-site')!=='cross-site'){let action;try{action=(await request.clone().json()).action;}catch{}if(action==='apply'&&config.forumOpen)socialIdentity=await verifiedSocialIdentity(auth,request,config);if(action==='apply'||action==='cancelApplication')unlinkIdentity=()=>unlinkFacebookIdentity(auth,request);}
+    response=session.finish(await api(request,db,session.user?.id??null,config.bootstrapHash,background,config.forumOpen,socialIdentity,unlinkIdentity,Boolean(session.user)));}
    else response=await api(request,db,null,config.bootstrapHash,background,config.forumOpen);
   }else response=['GET','HEAD'].includes(method)?await staticResponse(url.pathname):new Response('Method not allowed',{status:405});
   outgoing.setHeader('x-content-type-options','nosniff');outgoing.setHeader('referrer-policy','no-referrer');outgoing.setHeader('x-frame-options','DENY');outgoing.setHeader('permissions-policy','camera=(), microphone=(), geolocation=()');outgoing.setHeader('strict-transport-security','max-age=31536000');
@@ -57,5 +59,7 @@ const server=createServer({maxHeaderSize:16384,requestTimeout:30000,headersTimeo
 });
 // Clear expired chat memory even when nobody is polling; no persistence on shutdown.
 const chatCleanup=setInterval(()=>liveChat.sweep(),1000);chatCleanup.unref();
+const forumRetention=startForumApplicationRetention(()=>background(purgeForumApplications(db).then(count=>console.info(`Forum application retention completed: ${count} removed`)).catch(error=>{console.error('Forum application retention failed');throw error;})));
+const authRetention=startAuthenticationRetention(()=>background(purgeAuthenticationState(db).then(result=>console.info(`Authentication retention completed: ${result.sessions+result.verifications+result.limits+result.unverifiedUsers+result.facebookGrants} removed`)).catch(error=>{console.error('Authentication retention failed');throw error;})));
 server.listen(config.port,'0.0.0.0',()=>console.info('PolisRossa server ready'));
-for(const signal of ['SIGTERM','SIGINT'])process.on(signal,()=>{server.close(()=>{void Promise.allSettled([...jobs,settle()]).then(()=>pool.end()).then(()=>process.exit(0));});setTimeout(()=>process.exit(1),20000).unref();});
+for(const signal of ['SIGTERM','SIGINT'])process.on(signal,()=>{clearInterval(chatCleanup);clearInterval(forumRetention as ReturnType<typeof setInterval>);clearInterval(authRetention as ReturnType<typeof setInterval>);server.close(()=>{void Promise.allSettled([...jobs,settle()]).then(()=>pool.end()).then(()=>process.exit(0));});setTimeout(()=>process.exit(1),20000).unref();});

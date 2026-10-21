@@ -2,12 +2,12 @@
   {
     "id": 1,
     "title": "PR1: il tuo archivio",
-    "text": "Accedi con il tuo social. Non serve l’approvazione dei membri e PolisRossa non invia email. Articoli salvati e segnalibri sono privati e sincronizzati online. Il primo livello serve alla continuità della lettura: ritrovare un articolo o riprendere un libro non richiede una presentazione pubblica. La sincronizzazione è disponibile quando il servizio indipendente è attivo."
+    "text": "Registrati con email e password e conferma l’indirizzo. Non serve l’approvazione dei membri né un profilo social. Le email servono soltanto a confermare l’account e recuperare l’accesso: non sono notifiche o newsletter. Articoli salvati e segnalibri sono privati e sincronizzati online. Il primo livello serve alla continuità della lettura: ritrovare un articolo o riprendere un libro non richiede una presentazione pubblica. La sincronizzazione è disponibile quando il servizio indipendente è attivo."
   },
   {
     "id": 2,
     "title": "PR2: partecipare alla comunità",
-    "text": "Per chiedere PR2, accedi al tuo account e collega un social tramite la sua schermata di autorizzazione. Nome e riferimento provengono dal provider, non da un link dichiarato a mano. Il collegamento prova il controllo del profilo, non l’identità anagrafica. Presenta una breve introduzione: tutti i membri PR2, anche quelli appena ammessi, possono valutare le domande aperte nella dashboard. Tre sì ammettono; tre no respingono. Senza un esito entro 72 ore la domanda scade. Ogni membro esprime un solo voto definitivo. Non pubblicare documenti o dati riservati."
+    "text": "Per chiedere PR2, accedi al tuo account PR1 con email confermata, dichiara il nome da usare e indica un URL HTTPS pubblico a Facebook, Instagram o al tuo sito personale. Il riferimento è obbligatorio, dichiarato da te e non verificato da PolisRossa: il server non lo apre automaticamente. Facebook OAuth è facoltativo e prova soltanto il controllo dell’account al momento della domanda, non l’identità anagrafica; Discord non qualifica la domanda. L’ammissione dipende dalla valutazione personale dei membri. Tre sì ammettono; tre no respingono. Senza un esito entro 72 ore la domanda scade. Ogni membro esprime un solo voto definitivo. Non pubblicare documenti o dati riservati."
   },
   {
     "id": 3,

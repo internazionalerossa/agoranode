@@ -1,4 +1,5 @@
 import {validSocialIdentity,type SocialIdentity} from './social-identity.ts';
+import {normalizeApplicantReferenceUrl} from './applicant-reference.ts';
 import {COMMUNITY_CATEGORIES,proposalId} from './community-model.ts';
 import {VOTING_METHODS,validChoices,tally,type Member,type ForumTopic,type Admission,type Ballot,type VotingMethod} from './forum-model.ts';
 import DECISIONS from '../data/community-decisions.json' with {type:'json'};
@@ -13,12 +14,12 @@ const text=(x:unknown,min:number,max:number):x is string=>typeof x==='string'&&x
 const count=(x:unknown)=>Number(x??0);
 const changed=(x:Partial<Result>)=>Number(x.meta?.changes??x.changes??0)>0;
 const digest=async(value:string)=>[...new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(value)))].map(n=>n.toString(16).padStart(2,'0')).join('');
-const member=(r:Row):Member=>({id:String(r.id),alias:String(r.alias),intro:String(r.intro),identityName:String(r.identity_name),identityKind:r.identity_kind as Member['identityKind'],identityUrl:String(r.identity_url),identityProvider:r.identity_provider?String(r.identity_provider):null,language:String(r.language),status:String(r.status),createdAt:count(r.created_at),deadline:count(r.deadline),admittedAt:r.admitted_at===null?null:count(r.admitted_at)});
+const member=(r:Row):Member=>({id:String(r.id),alias:String(r.alias),intro:String(r.intro),referenceUrl:typeof r.reference_url==='string'?r.reference_url:null,identityName:String(r.identity_name),identityKind:r.identity_kind as Member['identityKind'],identityUrl:String(r.identity_url),identityProvider:r.identity_provider?String(r.identity_provider):null,language:String(r.language),status:String(r.status),createdAt:count(r.created_at),deadline:count(r.deadline),admittedAt:r.admitted_at===null?null:count(r.admitted_at)});
 const safeEqual=(a:string,b:string)=>{if(a.length!==b.length)return false;let result=0;for(let i=0;i<a.length;i++)result|=a.charCodeAt(i)^b.charCodeAt(i);return result===0;};
 const topicSelect=`SELECT t.*,m.alias AS author,(SELECT COUNT(*) FROM forum_electorate e WHERE e.topic_id=t.id) AS eligible,(SELECT COUNT(*) FROM forum_ballots b WHERE b.topic_id=t.id) AS turnout FROM forum_topics t JOIN forum_members m ON m.id=t.author_id`;
 function publicTopic(r:Row,now:number,memberId?:string):ForumTopic{const discussion=JSON.parse(String(r.options_json)).length===0;return {private:count(r.private)===1,kind:discussion?'discussion':'proposal',id:String(r.id),author:String(r.author),title:String(r.title),body:String(r.body),references:String(r.references_text),category:String(r.category),language:String(r.language),options:JSON.parse(String(r.options_json)),method:r.method as VotingMethod,quorum:count(r.quorum),createdAt:count(r.created_at),startsAt:count(r.starts_at),endsAt:count(r.ends_at),eligible:count(r.eligible),turnout:count(r.turnout),phase:r.withdrawn?'withdrawn':discussion?'discussion':now<count(r.starts_at)?'discussion':now<count(r.ends_at)?'voting':'closed',own:r.author_id===memberId,decision:(DECISIONS as Record<string,import('./community-model.ts').CommunityDecision>)[String(r.id)]??null};}
 
-export async function handleForum(request:Request,db:ForumDatabase|undefined,userId:string|null,bootstrapHash?:string,clock=Date.now,socialIdentity?:SocialIdentity|null):Promise<Response>{
+export async function handleForum(request:Request,db:ForumDatabase|undefined,userId:string|null,bootstrapHash?:string,clock=Date.now,socialIdentity?:SocialIdentity|null,unlinkSocialIdentity?:()=>Promise<void>,accountVerified=true):Promise<Response>{
  const reply=(data:unknown,status=200)=>Response.json(data,{status,headers});
  const bootstrapHashes=(bootstrapHash??'').split(',').filter(value=>/^[0-9a-f]{64}$/.test(value)).slice(0,3);
  const url=new URL(request.url),signInUrl='/account?return_to=%2F%3Fview%3Dpartecipa';
@@ -59,8 +60,8 @@ export async function handleForum(request:Request,db:ForumDatabase|undefined,use
    const id=url.searchParams.get('id');if(!proposalId(id))return reply({error:'Invalid topic'},400);
    const raw=(await all(topicSelect+' WHERE t.id=?',id))[0];if(!raw||count(raw.withdrawn)===1||hidden.includes(id)||(!active&&count(raw.private)===1))return reply({error:'Discussione non disponibile.'},404);
    const topic=publicTopic(raw,now,own?.id),closed=topic.phase==='closed';
-   let ballots:(Ballot&{voter:{id:string;name:string;kind:string;reference:string}})[]=[],result=null;
-   if(closed){const rows=await all('SELECT b.receipt,b.choices_json,m.id,m.identity_name,m.identity_kind,m.identity_url FROM forum_ballots b JOIN forum_members m ON m.id=b.member_id WHERE b.topic_id=? ORDER BY b.receipt',id);ballots=rows.map(row=>({receipt:String(row.receipt),choices:JSON.parse(String(row.choices_json)),voter:{id:String(row.id),name:String(row.identity_name),kind:String(row.identity_kind),reference:String(row.identity_url)}}));result=tally(topic.method,topic.options.length,ballots.map(b=>b.choices),topic.eligible,topic.quorum);}
+   let ballots:(Ballot&{voter:{id:string;name:string;kind:string}})[]=[],result=null;
+   if(closed){const rows=await all('SELECT b.receipt,b.choices_json,m.id,m.alias AS voter_name,m.identity_kind FROM forum_ballots b JOIN forum_members m ON m.id=b.member_id WHERE b.topic_id=? ORDER BY b.receipt',id);ballots=rows.map(row=>({receipt:String(row.receipt),choices:JSON.parse(String(row.choices_json)),voter:{id:String(row.id),name:String(row.voter_name),kind:String(row.identity_kind)}}));result=tally(topic.method,topic.options.length,ballots.map(b=>b.choices),topic.eligible,topic.quorum);}
    if(kind==='export'){
     if(!closed)return reply({error:'Le schede nominative saranno pubblicate alla scadenza.'},409);
     const rules={id:topic.id,title:topic.title,options:topic.options,method:topic.method,quorum:topic.quorum,startsAt:topic.startsAt,endsAt:topic.endsAt,eligible:topic.eligible};
@@ -84,14 +85,21 @@ export async function handleForum(request:Request,db:ForumDatabase|undefined,use
   now=clock();
   if(!data||Array.isArray(data)||typeof data!=='object'||['ownerKey','userId','memberId','status','eligible','turnout'].some(key=>Object.hasOwn(data,key)))return reply({error:'Invalid input'},400);
   if(data.action==='apply'){
-   if(data.consent!==true||['identityName','identityKind','identityUrl','identityProvider','identitySubject'].some(key=>Object.hasOwn(data,key))||!text(data.alias,3,40)||!text(data.intro,20,1500)||!language(data.language)||!proposalId(data.requestId))return reply({error:'Controlla nome pubblico, presentazione, lingua e consenso.'},400);
+   if(!accountVerified)return reply({error:'Conferma l’indirizzo email del tuo account PR1 prima di chiedere PR2.'},403);
+   const referenceUrl=normalizeApplicantReferenceUrl(data.referenceUrl);
+   if(data.consent!==true||['identityName','identityKind','identityUrl','identityProvider','identitySubject'].some(key=>Object.hasOwn(data,key))||!text(data.alias,3,40)||!text(data.intro,20,1500)||!referenceUrl||!language(data.language)||!proposalId(data.requestId))return reply({error:'Controlla nome pubblico, presentazione, riferimento HTTPS, lingua e consenso.'},400);
    if(own)return reply({error:'Hai già una domanda di adesione.',member:own},409);
-   if(!validSocialIdentity(socialIdentity))return reply({error:'Collega un social e autorizza la verifica del profilo prima di inviare la domanda.'},403);
    const alias=data.alias.trim().normalize('NFKC'),aliasKey=alias.toLocaleLowerCase('und');
    const existing=await all('SELECT id FROM forum_members WHERE alias_key=?',aliasKey);if(existing.length)return reply({error:'Questo nome pubblico è già in uso.'},409);
-   const values=[data.requestId,owner,alias,aliasKey,data.intro.trim(),socialIdentity.name,'person',socialIdentity.url,data.language,now,now+72*3600000,socialIdentity.provider,socialIdentity.subject];
+   const identity=validSocialIdentity(socialIdentity)?socialIdentity:null;
+   if(identity&&(await all('SELECT id FROM forum_members WHERE identity_provider=? AND identity_subject=?',identity.provider,identity.subject)).length)return reply({error:'Questo account Facebook è già stato usato per una domanda PR2.'},409);
+   // The OAuth grant is evidence gathered for this application, not a token the
+   // forum needs to retain. Consume it before insertion; a lost insert race asks
+   // the applicant to link again instead of leaving an unnecessary grant stored.
+   if(identity){if(!unlinkSocialIdentity)return reply({error:'La prova Facebook non può essere rimossa in sicurezza. Scollegala o riprova.'},503);await unlinkSocialIdentity();}
+   const values=[data.requestId,owner,alias,aliasKey,data.intro.trim(),referenceUrl,identity?.name??alias,'person',identity?.url??'',data.language,now,now+72*3600000,identity?.provider??null,identity?.subject??null];
    const results=await db.batch([
-    sql("INSERT INTO forum_members (id,owner_key,alias,alias_key,intro,identity_name,identity_kind,identity_url,language,status,created_at,deadline,identity_provider,identity_subject) VALUES (?,?,?,?,?,?,?,?,?,'pending',?,?,?,?) ON CONFLICT DO NOTHING",...values),
+    sql("INSERT INTO forum_members (id,owner_key,alias,alias_key,intro,reference_url,identity_name,identity_kind,identity_url,language,status,created_at,deadline,identity_provider,identity_subject) VALUES (?,?,?,?,?,?,?,?,?,?,'pending',?,?,?,?) ON CONFLICT DO NOTHING",...values),
     sql("INSERT INTO forum_admission_electorate (candidate_id,member_id) SELECT ?,id FROM forum_members WHERE status='active' AND EXISTS(SELECT 1 FROM forum_members WHERE id=? AND owner_key=?) ON CONFLICT DO NOTHING",data.requestId,data.requestId,owner),
    ]);
    return changed(results[0])?reply({ok:true,id:data.requestId},201):reply({error:'Domanda non inviata o nome già in uso. Aggiorna e verifica prima di riprovare.'},409);
@@ -110,7 +118,21 @@ export async function handleForum(request:Request,db:ForumDatabase|undefined,use
   }
   if(data.action==='cancelApplication'){
    if(!own)return reply({error:'Domanda non disponibile.'},404);
-   const result=await sql("UPDATE forum_members SET status='withdrawn',intro='' WHERE id=? AND status IN ('pending','rejected')",own.id).run();return changed(result)?reply({ok:true}):reply({error:'Domanda non ritirabile.'},409);
+   if(!['pending','rejected'].includes(own.status))return reply({error:'Domanda non ritirabile.'},409);
+   if(own.identityProvider==='facebook'){
+    if(!unlinkSocialIdentity)return reply({error:'Ritiro temporaneamente non disponibile: il collegamento Facebook non può essere rimosso in sicurezza.'},503);
+    // Reauthentication may be required by the auth layer. Do not claim a
+    // successful withdrawal while its stored provider grant still exists.
+    await unlinkSocialIdentity();
+   }
+   // A withdrawn applicant must be able to start over, and the profile evidence
+   // must not remain in the membership table or its admission working sets.
+   const results=await db.batch([
+    sql('DELETE FROM forum_admission_votes WHERE candidate_id=? OR member_id=?',own.id,own.id),
+    sql('DELETE FROM forum_admission_electorate WHERE candidate_id=? OR member_id=?',own.id,own.id),
+    sql("DELETE FROM forum_members WHERE id=? AND status IN ('pending','rejected')",own.id),
+   ]);
+   return changed(results[2])?reply({ok:true}):reply({error:'Domanda non ritirabile.'},409);
   }
   if(!active)return reply({error:'Serve l’ammissione alla comunità per questa azione.'},403);
   if(data.action==='admit'){

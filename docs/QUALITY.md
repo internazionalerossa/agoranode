@@ -1,6 +1,6 @@
 # Stato delle verifiche e requisiti aperti
 
-Aggiornamento: 20 ottobre 2026. Questo registro distingue codice verificato, comportamento pubblicato e servizio operativo. Un test locale non attesta un flusso funzionante sul database remoto. Nessuno dei quattro obiettivi generali è dichiarato integralmente concluso.
+Aggiornamento: 21 ottobre 2026. Questo registro distingue codice verificato, comportamento locale osservato e servizio pubblico operativo. Un test locale non attesta un flusso funzionante dall'esterno. Nessuno dei quattro obiettivi generali è dichiarato integralmente concluso.
 
 ## Evidenze disponibili
 
@@ -13,10 +13,13 @@ Aggiornamento: 20 ottobre 2026. Questo registro distingue codice verificato, com
 - Informativa cookie e memoria locale ampliata, copie pubbliche eliminabili senza rimuovere i salvati, traduzione della comunità facoltativa e interrotta al ritorno all’originale. Esportazione privata nel runtime indipendente; procedure del titolare ancora da completare.
 - Anteprima pubblica disponibile; autenticazione indipendente e scritture della comunità non attive su quell’indirizzo.
 - Revisione delle spiegazioni in README e guide, pagine principali, 64 tappe storiche, 11 introduzioni ai dossier, 32 descrizioni di libri e 18 ambiti statistici. Valori, date, fonti, edizioni e identificativi conservati; la revisione non riscrive i testi originali degli editori.
-- Compilazione, controlli dei tipi e suite automatiche verificati. I risultati puntuali accompagnano ogni consegna; non attestano il funzionamento remoto delle funzioni chiuse.
+- Il 21 ottobre 2026 la build di produzione e il controllo dei tipi sono terminati senza errori; la suite completa ha riportato 246 test superati, zero falliti e due test di avvio Linux saltati sul computer Windows.
 - Account, ammissioni, salvataggi e forum testati con PGlite e sessioni sintetiche; non sono prove di email reali, disponibilità del provider, backup remoto o concorrenza fra repliche.
+- Il runtime domestico attuale usa Node.js 24, Docker Compose, PostgreSQL 17 e Caddy. Sul solo loopback `https://localhost:8443/` e `/healthz` hanno risposto 200 con la CA locale; il volume PostgreSQL esistente è stato conservato e tutte le 11 migrazioni risultano applicate con digest canonici.
+- Un backup PostgreSQL cifrato con age, creato dopo le migrazioni e l'import librario, è stato decifrato in streaming e ripristinato con successo in un volume usa-e-getta: 11 migrazioni, una revisione libraria e 16 capitoli verificati. Nessun dump in chiaro è stato scritto; le risorse di prova sono state rimosse.
+- L'accesso pubblico, Gmail e i percorsi account/PR2 sul dominio esterno non sono ancora collaudati. Registrazioni e forum restano chiusi.
 - Prove browser precedenti hanno rilevato immagini assenti. Non è stato completato un controllo manuale di ogni percorso.
-- GitHub: sorgenti pubblicati in `internazionalerossa/polisrossa`; 316 file della prima importazione verificati tramite una nuova clonazione e confronto degli hash, senza differenze. Database ed email di produzione non configurati.
+- GitHub: repository `internazionalerossa/polisrossa` esistente. Le modifiche correnti sono ancora locali e non vanno presentate come pubblicate finché fetch, controllo della divergenza e push ordinario non terminano.
 
 ## Requisiti per area
 
@@ -27,11 +30,11 @@ Aggiornamento: 20 ottobre 2026. Questo registro distingue codice verificato, com
 | Nome PolisRossa in marchio, caricamento e pagine | **verifica parziale**. Marchio, caricamento, testi, metadati e documenti rinominati; Polis invariato e colore tradotto localmente nella lingua di lettura. Verifica visiva integrale ancora necessaria. |
 | Stella rossa a cinque punte e logo senza note musicali | **codice e anteprima**. Componenti di identità aggiornati; giudizio visivo finale aperto. |
 | Eliminare dati personali dai sorgenti pubblici | **verifica parziale**. Sorgenti indipendenti ripuliti; vecchio URL pubblico contiene ancora un identificativo personale. |
-| Repository pubblico sul nuovo account | **pubblicato**. Importazione completa sul ramo `main`, commit `75794622383652392ae0c288f50848da9bc8b151`; copia remota verificata. |
-| Link al sito nel README e istruzioni di contribuzione | **verifica parziale**. Documenti predisposti; indirizzo definitivo e revisione finale da completare. |
+| Repository pubblico sul nuovo account | **pubblicato, aggiornamento corrente in attesa**. Il ramo remoto esiste; il nuovo insieme di modifiche resta locale finché non supera il controllo di divergenza e il push senza forzatura. |
+| Link al sito nel README e istruzioni di contribuzione | **verifica parziale**. Documenti revisionati; il nome pubblico definitivo deve essere inserito soltanto dopo il collaudo esterno. |
 | Sorgenti completi scaricabili | **consegnato**. ZIP completo disponibile; aggiornare il pacchetto insieme ai sorgenti. |
 | Anteprima sul vecchio indirizzo | **pubblicato**. Anteprima pubblicata; deployment e sorgenti devono restare riferiti allo stesso commit verificato. |
-| Hosting gratuito indipendente in Europa, senza Koyeb | **bloccato**. Configurazione predisposta; database, email e servizio non collegati. |
+| Hosting gratuito indipendente in Europa, senza Koyeb | **locale funzionante, pubblicazione bloccata**. Applicazione, database persistente e HTTPS locale sono attivi sul PC; Tailscale Funnel, Gmail e verifica da rete mobile non sono ancora completati. Nessuna porta router, regola firewall o DMZ è stata modificata. |
 | Licenza, avvisi e identità del progetto | **implementato**. AGPL-3.0-or-later, ambito dei diritti di terzi, avvisi di garanzia, politica separata per nome e logo, dichiarazione sui diritti dei contributi e collegamenti ai sorgenti nell’interfaccia. Nessuna registrazione del marchio o conformità globale attestata. |
 
 ### Notizie e fonti
@@ -78,7 +81,7 @@ Aggiornamento: 20 ottobre 2026. Questo registro distingue codice verificato, com
 | Requisito | Stato e riscontro |
 | --- | --- |
 | Molti libri globali, Mao, sovietici e altre tradizioni integrate | **parziale**. 176 opere, 724 edizioni, 37 lingue; catalogo selettivo. |
-| Lettura interna e testo senza omissioni o errori di codifica | **codice verificato**. Parsing, paginazione e navigazione testati; tutte le edizioni non collaudate. |
+| Lettura interna e testo senza omissioni o errori di codifica | **codice e runtime locale verificati per l'edizione autorizzata**. `commons-viventi/en` è archiviata in PostgreSQL come revisione immutabile con 16 capitoli; l'API anonima restituisce la copia persistente con integrità e licenza. Le altre edizioni restano sui rispettivi archivi finché i diritti non consentono una copia. |
 | Segnalibro ultima pagina e raccolta libri per account | **solo runtime indipendente**. Persistenza testata localmente; non disponibile online sul vecchio servizio. |
 | Racconto cronologico espandibile con archivio finale | **pubblicato**. 64 tappe in sette epoche, con repressioni, colpi di Stato e riduzioni delle tutele documentate; consultazione per paese e tema. |
 | Copertura URSS, Europa, Italia/IRI, Cina e resto del mondo | **parziale**. Contenuti presenti; copertura e revisione storica restano selettive. |
@@ -91,13 +94,13 @@ Aggiornamento: 20 ottobre 2026. Questo registro distingue codice verificato, com
 | Requisito | Stato e riscontro |
 | --- | --- |
 | Account indipendenti senza profilo social obbligatorio | **codice e anteprima**. SSO rimosso; accesso indipendente non ancora collegato. |
-| PR1 email/password senza approvazione comunitaria | **solo runtime indipendente**. Registrazione con email e password verificata senza profilo social; salvataggi PR1 testati prima dell’ammissione PR2. Non attiva online sul precedente indirizzo. |
+| PR1 email/password senza approvazione comunitaria | **codice e runtime predisposti, flusso reale chiuso**. Registrazione con email e password confermata resta distinta da PR2; un codice iniziale privato limita l'abuso di Gmail e nel runtime è conservato soltanto il suo hash. Consegna Gmail, conferma e recupero reali non sono ancora collaudati. |
 | PR1 salvataggi privati persistenti dopo cancellazione cache | **solo runtime indipendente**. Database remoto previsto; isolamento e riapertura DB testati localmente. |
-| PR2 verifica persona/ente e nome riconoscibile nel voto | **solo runtime indipendente**. Profilo con riferimento pubblico e ammissione; non certifica identità civile. |
+| PR2 valutazione soggettiva della persona e nome riconoscibile nel voto | **solo runtime indipendente**. Nome, presentazione e URL HTTPS dichiarato obbligatorio sono mostrati soltanto a candidato e revisori; il server non apre né verifica il link. Facebook OAuth è una prova tecnica facoltativa del controllo dell'account e non certifica identità civile. |
 | Tre sì da PR2 distinti entro 72 ore | **solo runtime indipendente**. Regole e test presenti; nessuna comunità reale attivata. |
-| Avvio dei tre membri iniziali con procedura sicura | **bloccato**. Inviti personali monouso previsti; non configurati né distribuiti. |
+| Avvio dei tre membri iniziali con procedura sicura | **predisposto ma non collaudato**. Tre inviti distinti sono conservati solo nella configurazione privata e nel runtime restano gli hash; non sono stati distribuiti né usati da tre persone reali. |
 | Regole semplici con numerazione sequenziale | **pubblicato**. Numerazione sequenziale e distinzione fra regole pubbliche e configurazione tecnica. |
-| Conferma email, recupero, sessioni e sicurezza del servizio reale | **non completato**. Flussi simulati verificati; consegna email e configurazione remota mancanti. |
+| Conferma email, recupero, sessioni e sicurezza del servizio reale | **non completato**. Flussi simulati, limiti persistenti e pulizia degli account mai verificati sono testati; Gmail non è ancora configurato né provato con consegna reale. |
 
 ### Forum, issue e voto
 
@@ -118,11 +121,11 @@ Aggiornamento: 20 ottobre 2026. Questo registro distingue codice verificato, com
 | --- | --- |
 | Traduzione forum/chat con originali e nessuna cache applicativa | **solo runtime indipendente**. Provider esterni dichiarati; nessuna garanzia sul trattamento dei provider. |
 | Revisione italiana e internazionale di ogni testo e documento | **non completato**. Revisioni parziali; il controllo dell’intero corpus resta aperto. |
-| Audit sicurezza, concorrenza, backup e ripristino remoti | **non completato**. Test locali presenti; ambiente remoto non configurato. |
+| Audit sicurezza, concorrenza, backup e ripristino remoti | **parziale**. Backup cifrato e ripristino isolato locale sono riusciti; audit esterno, conservazione fuori macchina e ripristino su un secondo custode non sono stati collaudati. |
 | Licenze libri, immagini, feed, software e attribuzioni | **non completato**. Catalogo e riferimenti presenti; revisione completa dei diritti aperta. |
 | Adempimenti italiani/europei e modalità di pubblicazione non commerciale | **non completato**. Note operative predisposte; verifica legale attuale e decisioni del gestore ancora necessarie. |
 | Valutazione delle norme territorialmente applicabili | **non certificabile**. Nessuna dichiarazione universale attendibile; occorre definire giurisdizioni e obblighi applicabili. |
-| Indipendenza di sorgenti, dati e login dai fornitori precedenti | **parziale**. Runtime indipendente pronto; sito pubblico rimane sul vecchio hosting. |
+| Indipendenza di sorgenti, dati e login dai fornitori precedenti | **parziale**. Runtime indipendente locale attivo; il percorso pubblico gratuito e l'email Gmail non sono ancora collaudati. |
 | Completamento dei quattro obiettivi complessivi | **non completato**. Nessun macro-obiettivo è attestato come integralmente completato e verificato online. |
 
 ## Criterio di chiusura
@@ -130,3 +133,5 @@ Aggiornamento: 20 ottobre 2026. Questo registro distingue codice verificato, com
 Ogni requisito richiede evidenza pertinente: codice e test per il comportamento, verifica del percorso pubblico per l’uso online, osservazioni sui dispositivi per l’impaginazione. Registrazioni, forum e voto richiedono inoltre email reali, persistenza dopo riavvio, isolamento fra utenti e prova di ripristino. Aggiornare la riga interessata invece di aggiungere resoconti duplicati.
 
 I blocchi esterni non devono nascondere i difetti correggibili nel codice; una configurazione preparata non equivale a un servizio attivo.
+
+La pagina di custodia condivisa e gli snapshot firmati descrivono strumenti e limiti disponibili oggi. Replica automatica fra PC, failover con un solo nodo rimasto, consenso distribuito tipo blockchain e cifratura end-to-end non sono implementati e non vanno dichiarati tali.

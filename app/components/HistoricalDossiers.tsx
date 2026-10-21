@@ -4,6 +4,7 @@ import {ArrowUpRight, BookOpen, Clock} from 'lucide-react';
 import DATA from '@/app/data/history-dossiers.json';
 import {HISTORY_INDEX,historyId,historyLink} from '@/app/lib/history-navigation';
 import {THEORY_LIBRARY} from '@/app/data/library';
+import {libraryReadingDestination} from '@/app/lib/library-reading';
 import {LocalizedText as T,useReadingLocale} from './Localization';
 
 type HistoricalSource = typeof DATA.sources[keyof typeof DATA.sources];
@@ -42,9 +43,8 @@ export default function HistoricalDossiers() {
           {dossier.timeline.length>0&&<section id={`${dossier.id}-cronologia`} className="history-timeline"><h4><T content>Le tappe</T></h4><ol>{dossier.timeline.map((event,index)=><li key={index}><strong><T defer>{event.date}</T></strong><div><p>{"eventId" in event&&typeof event.eventId==="string"?<a href={"#"+event.eventId}><T content defer>{event.text}</T></a>:<T content defer>{event.text}</T>}</p><SourceLinks ids={[event.source]}/></div></li>)}</ol></section>}
           {dossier.readings.length>0 && <section className="history-readings"><h4><T content>Dalla storia ai libri</T></h4>{dossier.readings.map(reading=>{
             const book=THEORY_LIBRARY.find(item=>item.id===reading.book);
-            const edition=book?.editions?.find(item=>item.language===locale)??book?.editions?.find(item=>item.language==='en')??book?.editions?.[0];
-            if(!book||!edition)return null;
-            return <a key={book.id} href={`/read?${new URLSearchParams({book:book.id,edition:edition.language})}`}><BookOpen size={23}/><span><small>{book.author}</small><strong><T defer>{book.title}</T></strong><p><T content defer>{reading.why}</T></p></span><ArrowUpRight size={18}/></a>;
+            if(!book)return null;const destination=libraryReadingDestination(book,locale);if(!destination)return null;
+            return <a key={book.id} href={destination.href} target={destination.internal?undefined:'_blank'} rel={destination.internal?undefined:'noopener noreferrer'}><BookOpen size={23}/><span><small>{book.author}</small><strong><T defer>{book.title}</T></strong><p><T content defer>{reading.why}</T></p></span><ArrowUpRight size={18}/></a>;
           })}</section>}
           <section id={`${dossier.id}-documenti`} className="history-bibliography"><h4><T content>Documenti e fonti del dossier</T></h4><ol>{bibliography.map(id=>{const source=sources[id];return <li key={id}><span className="eyebrow"><T defer>{source.kind}</T>{source.date&&<> · {source.date}</>}</span><a href={source.url} target="_blank" rel="noopener noreferrer"><T defer>{source.title}</T><ArrowUpRight size={14}/></a><p><T content defer>{source.publisher}</T> · <T defer>{source.locator}</T></p></li>;})}</ol></section>
           <nav className="history-related" aria-label="Altri approfondimenti"><p className="eyebrow"><T content>CONTINUA IL PERCORSO</T></p>{dossier.related.map(id=>{const next=HISTORY_INDEX.find(item=>item.id===id);return next?<button key={id} type="button" onClick={()=>choose(id)}><span><T defer>{next.title}</T></span><ArrowUpRight size={18}/></button>:null;})}</nav>

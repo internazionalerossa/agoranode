@@ -8,6 +8,8 @@ await viteBuild({configFile:false,root:resolve('web'),publicDir:resolve('public'
 await build({entryPoints:['server/index.ts'],outfile:'build-node/server.mjs',bundle:true,platform:'node',target:'node24',format:'esm',packages:'external',alias:{'@':resolve('.')},sourcemap:false});
 await build({entryPoints:['server/migrate.ts'],outfile:'build-node/migrate.mjs',bundle:true,platform:'node',target:'node24',format:'esm',packages:'external'});
 await build({entryPoints:['server/snapshot.ts'],outfile:'build-node/snapshot.mjs',bundle:true,platform:'node',target:'node24',format:'esm',packages:'external'});
+await build({entryPoints:['server/library-import.ts'],outfile:'build-node/library-import.mjs',bundle:true,platform:'node',target:'node24',format:'esm',packages:'external'});
+await build({entryPoints:['server/mail-limits-cli.ts'],outfile:'build-node/mail-limits-cli.mjs',bundle:true,platform:'node',target:'node24',format:'esm',packages:'external'});
 await mkdir('build-node/migrations',{recursive:true});
 await cp('server/migrations','build-node/migrations',{recursive:true});
 await cp('scripts/start-node.sh','build-node/start.sh');

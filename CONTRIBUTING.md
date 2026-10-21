@@ -12,7 +12,7 @@ Cerchiamo persone che leggano, valutino e mettano in discussione ciò che costru
 
 ### Proporre, senza programmare
 
-1. Nel sito apri **Partecipa → Forum**. Per pubblicare serve PR2, con social collegato e ammissione dei membri.
+1. Nel sito apri **Partecipa → Forum**. Per pubblicare serve PR2: account con email confermata, riferimento HTTPS pubblico dichiarato e ammissione dei membri. Il riferimento può essere una pagina Facebook, Instagram o un sito personale; Facebook OAuth è facoltativo e non certifica l'identità civile.
 2. Scegli **Apri una discussione** per un’issue oppure **Scrivi una proposta** per confrontare soluzioni con una votazione.
 3. Scrivi nella tua lingua: pagina, problema e cambiamento desiderato. Per correzioni e nuove fonti aggiungi riferimenti verificabili. Tutto il confronto resta nel thread del forum.
 
@@ -28,7 +28,7 @@ Per il codice leggi la [guida tecnica](#technical-contributions). Per capire cos
 
 ### Suggest a change without coding
 
-1. Open **Participate → Forum** on the site. Posting requires PR2: a linked social account and admission by members.
+1. Open **Participate → Forum** on the site. Posting requires PR2: a verified-email account, a declared public HTTPS reference, and admission by members. The reference may be Facebook, Instagram, or a personal website; Facebook OAuth is optional and does not certify civil identity.
 2. Start a discussion for an issue, or choose **Write a proposal** for a vote.
 3. Describe the page, problem and expected improvement in your language. Include verifiable references. Discussion and voting stay in that forum thread.
 
@@ -93,7 +93,7 @@ A proposal may simply name a page: knowing these files is optional. Source artic
 Read [AGENTS.md](AGENTS.md), [README.md](README.md) and the relevant section of [ARCHITECTURE.md](docs/ARCHITECTURE.md). Start from a concrete problem and keep each change focused. An issue is helpful for large changes but is not mandatory for small fixes.
 
 1. Fork the repository and create a short branch from `main`.
-2. Run `npm ci`, then `npm run dev` for local development. Node.js 22.13+ is required; CI uses Node.js 24.
+2. Run `npm ci`, then `npm run dev` for local development. Node.js 24 is required.
 3. Preserve source IDs, book IDs, personal collections and existing storage keys. The product is now PolisRossa; legacy `rassegna-rossa.*` keys remain for compatibility.
 4. For code or structured catalogue changes, run `npm test` and `npm run typecheck`. Add meaningful regression coverage for changed behavior. Check small screens and keyboard access when changing the UI; state any verification you could not perform. Documentation-only changes do not require building the application.
 5. Open a pull request using the template. Explain the result and validation. If dependency inputs change, update the lockfile too.

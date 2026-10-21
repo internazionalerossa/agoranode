@@ -10,24 +10,24 @@ La PWA non è una pubblicazione su App Store o Google Play. La presenza del mani
 
 I membri riconosciuti come PR2 dal server vedono direttamente forum e chat; introduzione e livelli di accesso sono riservati a visitatori e domande non ancora accolte. Le regole rimangono disponibili sotto le discussioni. I problemi di singoli feed sono consultabili nelle fonti, senza avvisi ripetuti nella rassegna.
 
-## Servizio di produzione da collegare
+## Servizio da pubblicare
 
-Il runtime indipendente usa Node e PostgreSQL con Better Auth per email e password. Il repository include migrazioni, account verificati, archivi personali persistenti, ammissioni, forum e voto. La chat usa memoria temporanea come previsto dalle regole e non promette conservazione dopo un riavvio.
+Il runtime indipendente usa Node.js 24, PostgreSQL, Caddy e Better Auth. Il percorso scelto per questa istanza è il PC domestico già collaudato localmente, con ingresso HTTPS gratuito tramite Tailscale Funnel. Render e Brevo restano alternative storiche non attivate; non sono necessari né vanno acquistati per questa procedura.
 
-Per l’attivazione mancano ancora valori reali, da inserire nei campi protetti dell’hosting:
+Prima della pubblicazione completa devono essere configurati soltanto nei file privati dell'installazione:
 
-- servizio applicativo da creare nello spazio Render scelto;
-- `DATABASE_URL`, con connessione verificata al progetto scelto;
-- `BREVO_API_KEY` e `MAIL_FROM`, con un mittente autorizzato;
-- `PUBLIC_OPERATOR_NAME` e `PUBLIC_PRIVACY_CONTACT`, forniti dal gestore;
-- tre inviti iniziali, comunicati privatamente alle persone che costituiranno la comunità.
+- il nome pubblico `.ts.net` effettivamente assegnato alla macchina e lo stesso valore in `APP_URL`;
+- una casella Gmail gratuita dedicata, con verifica in due passaggi e password per app, usata esclusivamente per conferma indirizzo e recupero password;
+- `PUBLIC_OPERATOR_NAME` e `PUBLIC_PRIVACY_CONTACT`, scelti dal gestore effettivo;
+- tre inviti iniziali distinti, consegnati privatamente alle persone che avviano PR2;
+- facoltativamente, la coppia Facebook OAuth per aggiungere una prova di controllo dell'account alla domanda PR2.
 
-Non inserire segreti in chat, issue o sorgenti. Conservare le registrazioni e la partecipazione chiuse finché non sono verificati consegna email, conferma, recupero, isolamento tra account, persistenza dopo riavvio, accesso PR2, voto, chat e procedure operative. Non modificare i requisiti di verifica per simulare un servizio attivo.
+PR1 non usa accesso social: richiede sempre email confermata e password. Per PR2 la persona dichiara un URL HTTPS pubblico a Facebook, Instagram o al proprio sito, che viene valutato soggettivamente dai membri e non visitato dal server. Facebook OAuth è facoltativo; Discord non è usato. Non inserire token, password per app, chiavi, cookie o dati personali in chat, issue o sorgenti. Conservare registrazioni e forum chiusi finché non sono verificati consegna Gmail, recupero, isolamento tra account, persistenza dopo riavvio, ammissione PR2, voto, chat, backup e ripristino.
 
 ## Verifiche osservate e limiti
 
-I test locali coprono il manifest, le dimensioni reali delle icone, il fallback offline, l’esclusione delle API private dalla cache e il riutilizzo delle risorse pubbliche. I test del runtime coprono accesso, persistenza dopo riapertura del database, biblioteca e chat con database di prova. La revisione del 20 ottobre ha superato 203 test del runtime Sites, 3 test del rendering dell’introduzione e 14 controlli mirati del runtime indipendente (compresi account, ammissione, voto e riapertura del database di prova). Il progetto Supabase individuato è attivo, ma lo schema pubblico è risultato privo di tabelle dell’app durante il controllo del 20 ottobre 2026.
+I test locali coprono manifest, fallback offline, esclusione delle API private dalla cache, account con email verificata, ammissione, voto, biblioteca persistente e chat con database di prova. Il numero e l'esito dell'ultima suite sono registrati in [QUALITY.md](QUALITY.md), evitando di duplicare qui risultati destinati a diventare obsoleti.
 
-L’accesso allo spazio Render internRossa è stato verificato; non risultano ancora servizi applicativi collegati. Le sessioni BrowserStack per Safari su iPhone 15 Pro e Chrome su Galaxy S24 sono state predisposte tramite collegamenti di apertura, ma non risultano eseguite: non costituiscono un collaudo concluso. L’audit in emulazione Android della versione Sites 56 ha riprodotto l’espansione della rassegna da 390 a 1.560 pixel, con lettore largo 1.536 pixel. La versione 57 contiene il contenimento del carosello e dimensioni riferite al viewport CSS, oltre alla gestione di Indietro nel lettore. Non è stato eseguito un nuovo audit browser dopo questa pubblicazione. Sono ancora necessari il test del servizio reale e la verifica interattiva di tastiera, orientamento, apertura Home e riconnessione sui due sistemi.
+La presenza del codice non prova il servizio pubblico. Tailscale Funnel, consegna Gmail, eventuale callback Meta, telefono su rete mobile, riavvio del PC e ripristino dell'ultimo backup devono essere osservati sull'istanza reale. La replica automatica fra PC, il subentro dell'ultimo nodo, il quorum fra host e la cifratura end-to-end non sono implementati. Sono inoltre ancora necessari controlli interattivi su tastiera, orientamento, installazione Home e riconnessione sui dispositivi effettivi.
 
 Fonti tecniche: [installazione PWA](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Guides/Making_PWAs_installable), [prompt di installazione](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/How_to/Trigger_install_prompt), [web app su iOS](https://webkit.org/blog/13878/).

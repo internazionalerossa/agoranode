@@ -26,6 +26,6 @@ services:
         sync: false
       - key: PUBLIC_PRIVACY_CONTACT
         sync: false
-      # Add at least one complete OAuth pair in the service Environment before opening PR2:
-      # DISCORD_CLIENT_ID + DISCORD_CLIENT_SECRET, or FACEBOOK_CLIENT_ID + FACEBOOK_CLIENT_SECRET.
+      # PR2 requires the complete Facebook OAuth pair in the service Environment:
+      # FACEBOOK_CLIENT_ID + FACEBOOK_CLIENT_SECRET. Discord is not PR2 identity evidence.
       # Provider credentials are optional during the closed public-reading deployment.

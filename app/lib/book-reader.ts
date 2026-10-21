@@ -1,7 +1,7 @@
 import { bookEdition } from "../data/library";
 import { publicPhotoUrl, fetchPublicPhotoResource, readLimited } from "./article-photo";
 import { readerChapters, parseReaderPage, paginateBook, sectionReaderBook, decodeBookHtml, type ReaderBlock, type ReaderChapter } from "./book-text";
-export type ReaderDocument = { chapters: ReaderChapter[]; chapter: number; pages: ReaderBlock[][]; revision: string; source: string; url: string; language: string };
+export type ReaderDocument = { chapters: ReaderChapter[]; chapter: number; pages: ReaderBlock[][]; revision: string; source: string; url: string; language: string; archive?: {persistent:true;revisionSha256:string;license:string;licenseUrl:string;rightsStatementUrl:string;attribution:string} };
 let cacheBytes = 0;
 const cache = new Map<string, { size: number; until: number; value: { html: string; chapters: ReaderChapter[]; sections?: ReaderBlock[][] } }>();
 async function load(url:string, language:string) {

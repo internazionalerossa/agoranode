@@ -21,6 +21,7 @@ test('verified reader accounts, member admission, discussions and ballots persis
  const messages:{email:string;url:string}[]=[];
  const makeAuth=()=>createAuth(pool,config,async(email,url)=>{messages.push({email,url});});
  let identity=makeAuth();
+ let unlinkedIdentities=0;
  const code='integration-bootstrap-012345678901234567890',codes=[code,code+'-second',code+'-third'],hash=codes.map(value=>createHash('sha256').update(value).digest('hex')).join(',');
  const account=(data:unknown)=>accountEndpoint(identity.auth,new Request(config.origin+'/api/auth',{method:'POST',headers:{origin:config.origin,'content-type':'application/json'},body:JSON.stringify(data)}),undefined,true);
  const login=async(alias:string)=>{
@@ -33,13 +34,17 @@ test('verified reader accounts, member admission, discussions and ballots persis
  const call=async(cookie:string,path:string,data?:unknown,forumOpen=true)=>{
   const request=new Request(config.origin+path,{method:data?'POST':'GET',headers:{cookie,origin:config.origin,'content-type':'application/json'},body:data?JSON.stringify(data):undefined});
   const session=await authSession(identity.auth,request);
-  return session.finish(await api(request,db,session.user?.id??null,hash,()=>{},forumOpen,session.user?{provider:'discord',subject:BigInt('0x'+createHash('sha256').update(session.user.id).digest('hex').slice(0,15)).toString(),name:'Persona di prova',url:'https://discord.com/users/'+BigInt('0x'+createHash('sha256').update(session.user.id).digest('hex').slice(0,15)).toString()}:null));
+  return session.finish(await api(request,db,session.user?.id??null,hash,()=>{},forumOpen,session.user?{provider:'facebook',subject:BigInt('0x'+createHash('sha256').update(session.user.id).digest('hex').slice(0,15)).toString(),name:'Persona di prova',url:'https://www.facebook.com/app_scoped_user_id/'+BigInt('0x'+createHash('sha256').update(session.user.id).digest('hex').slice(0,15)).toString()}:null,async()=>{unlinkedIdentities++;}));
  };
- const application=(alias:string)=>({action:'apply',requestId:crypto.randomUUID(),alias,intro:'Una presentazione pubblica per la gestione delle fonti.',language:'it',consent:true});
+ const application=(alias:string)=>({action:'apply',requestId:crypto.randomUUID(),alias,intro:'Una presentazione pubblica per la gestione delle fonti.',referenceUrl:'https://profiles.example.org/'+encodeURIComponent(alias),language:'it',consent:true});
  try{
   for(const filename of (await readdir(new URL('../server/migrations',import.meta.url))).filter(n=>n.endsWith('.sql')).sort())await database.exec(await readFile(new URL('../server/migrations/'+filename,import.meta.url),'utf8'));
   await(await getMigrations(identity.auth.options)).runMigrations();
-  const alice=await login('alice'),bob=await login('bobby');
+  const alice=await login('alice'),bob=await login('bobby'),withdrawer=await login('withdrawer');
+  const withdrawnApplication=application('withdrawer');assert.equal((await call(withdrawer,'/api/community/forum',withdrawnApplication)).status,201);
+  assert.equal(unlinkedIdentities,1);
+  assert.equal((await call(withdrawer,'/api/community/forum',{action:'cancelApplication'},false)).status,200);assert.equal(unlinkedIdentities,2);
+  assert.equal((await(await call(withdrawer,'/api/community/forum')).json()).member,null);
   const foundingUsers=['founder-two','founder-three'];
   const foundingSessions=await (async()=>{const sessions:string[]=[];for(const name of foundingUsers){await identity.auth.api.signUpEmail({body:{email:name+'@example.test',password:'an-integration-test-password-12345',name}});await identity.settle();const message=messages.find(m=>m.email===name+'@example.test')!;assert.ok(message);await identity.auth.handler(new Request(message.url));const response=await identity.auth.api.signInEmail({body:{email:name+'@example.test',password:'an-integration-test-password-12345'},asResponse:true});assert.equal(response.status,200);sessions.push(response.headers.getSetCookie().map(c=>c.split(';')[0]).join('; '));}return sessions;})();
   const topic={action:'create',requestId:crypto.randomUUID(),title:'Organizzare meglio il catalogo delle fonti',body:'Discutiamo due soluzioni per organizzare le fonti in modo chiaro e accessibile.',options:['Ordine alfabetico','Raggruppamento per paese'],language:'it',category:'sources',method:'single',quorum:50,durationHours:1,discussionHours:0};
@@ -60,6 +65,7 @@ test('verified reader accounts, member admission, discussions and ballots persis
   for(const [i,cookie] of foundingSessions.entries()){assert.equal((await call(cookie,'/api/community/forum',application(foundingUsers[i]))).status,201);assert.equal((await call(cookie,'/api/community/forum',{action:'bootstrap',code:codes[i+1]})).status,200);}
   assert.equal((await call(alice,'/api/community/forum',topic)).status,201);
   const second=application('bobby');assert.equal((await call(bob,'/api/community/forum',second)).status,201);
+  const reviewerBoard=await(await call(alice,'/api/community/forum')).json();assert.equal(reviewerBoard.applications.find((item:{member:{id:string}})=>item.member.id===second.requestId).member.referenceUrl,second.referenceUrl);
   assert.equal((await call(alice,'/api/community/forum',{action:'admit',id:second.requestId,value:1,identityChecked:false})).status,400);
   assert.equal((await call(alice,'/api/community/forum',{action:'admit',id:second.requestId,value:1,identityChecked:true})).status,200);
   for(const cookie of foundingSessions)assert.equal((await call(cookie,'/api/community/forum',{action:'admit',id:second.requestId,value:1,identityChecked:true})).status,200);
@@ -80,6 +86,7 @@ test('verified reader accounts, member admission, discussions and ballots persis
   const publicBoard=await(await call('','/api/community/forum')).json();
   assert.ok(publicBoard.topics.some((t:{id:string})=>t.id===discussion.requestId));
   assert.ok(!publicBoard.topics.some((t:{id:string})=>t.id===privateDiscussion.requestId));
+  assert.doesNotMatch(JSON.stringify(publicBoard),/profiles\.example\.org/);
   await assert.rejects(database.query('UPDATE forum_topics SET private=0 WHERE id=$1',[privateDiscussion.requestId]),/immutable/);
   const closed=await call(alice,'/api/community/forum',undefined,false);assert.equal((await closed.json()).participationOpen,false);
   assert.equal((await call(alice,'/api/community/forum',{action:'comment',id:topic.requestId,requestId:crypto.randomUUID(),body:'Un intervento durante la chiusura.',language:'it'},false)).status,503);

@@ -1,6 +1,6 @@
-# Accesso senza email
+# Email dell'account e identità sociale
 
-Il servizio usa `MAIL_TRANSPORT=none`: non richiede Brevo, SMTP o un mittente. Account e forum rimangono in PostgreSQL; non aggiungere Redis come archivio dei dati permanenti. Prima di aprire `REGISTRATIONS_OPEN`, configurare una coppia OAuth Discord o Facebook e il relativo callback `/api/identity/callback/discord` o `/api/identity/callback/facebook` sul dominio pubblico. La schermata Account mostra solo provider configurati. Il recupero avviene sul social; PR2 conserva la votazione separata. Le istruzioni SMTP/Brevo seguenti valgono soltanto per installazioni alternative che scelgano esplicitamente l’accesso email.
+Il valore iniziale `MAIL_TRANSPORT=none` tiene chiusi registrazione con password, conferma email e recupero. Sul server domestico, prima di aprire gli account, si configura Gmail SMTP come descritto in [SELF-HOSTING.md](SELF-HOSTING.md). Queste email servono esclusivamente a confermare l'indirizzo e recuperare l'account; non costituiscono un sistema di newsletter o notifiche collettive. PR2 richiede a una sessione PR1 verificata un nome dichiarato e un URL HTTPS pubblico a Facebook, Instagram o un sito personale. Il riferimento è obbligatorio, non verificato e mai richiesto dal server. Facebook OAuth è facoltativo e prova soltanto il controllo dell'account al momento della domanda; Discord non qualifica la domanda e OAuth non certifica l'identità civile.
 
 # Gestione e pubblicazione
 
@@ -20,25 +20,26 @@ Configurazione disponibile solo sul server, tramite i secret dell’hosting:
 | `APP_URL` | Origine HTTPS definitiva del sito, senza percorsi |
 | `DATABASE_URL` | Connessione PostgreSQL con TLS e certificato verificabile |
 | `AUTH_SECRET` | Segreto casuale di almeno 32 caratteri, da generare nel gestore dei secret |
-| `MAIL_TRANSPORT` | `smtp` oppure `brevo`; il secondo usa HTTPS |
+| `MAIL_TRANSPORT` | `smtp` per il percorso Gmail del server domestico; `brevo` resta soltanto per compatibilità con installazioni esistenti |
 | `BREVO_API_KEY` | Segreto per il solo trasporto Brevo |
 | `SMTP_HOST`, `SMTP_PORT` | Server email e porta TLS 465 oppure STARTTLS 587, solo con trasporto SMTP |
 | `SMTP_USER`, `SMTP_PASSWORD` | Credenziali SMTP dedicate |
 | `MAIL_FROM` | Mittente verificato e autorizzato dal servizio email |
+| `ACCOUNT_ACCESS_HASH` | SHA-256 del codice privato condiviso richiesto al lancio per registrazione e recupero; mai il codice in chiaro |
 | `REGISTRATIONS_OPEN`, `FORUM_OPEN` | Aperture esplicite, disabilitate per impostazione predefinita fino alle verifiche operative |
 | `COMMUNITY_BOOTSTRAP_HASH` | Tre SHA-256 distinti separati da virgole, per tre inviti personali monouso ai membri iniziali; mai i codici in chiaro |
 
 `npm run db:migrate`, oppure `node build-node/migrate.mjs` nell’immagine, applica le migrazioni applicative e lo schema della versione installata di Better Auth. Eseguire una sola release di migrazione, con backup verificato, prima di avviare la nuova versione. Non usare il ruolo amministratore come credenziale quotidiana del sito: separare ruolo di migrazione e ruolo applicativo, con permessi sulle sole tabelle necessarie. Le migrazioni applicate hanno un digest: una modifica successiva interrompe l’esecuzione.
 
-## Configurazione gratuita indipendente
+## Alternativa cloud precedente, non scelta per il server domestico
 
-Koyeb è escluso dal percorso di pubblicazione. Il blueprint `render.yaml` del runtime indipendente predispone **Render Free a Francoforte**, PostgreSQL **Neon Free a Francoforte** e invio delle email attraverso l’API HTTPS di **Brevo Free**. È una configurazione da collegare e verificare, non un servizio già attivato. Codice applicativo, Better Auth e PostgreSQL restano indipendenti dal login dei fornitori.
+Koyeb è escluso dal percorso di pubblicazione. Il repository conserva un blueprint Render come alternativa storica, con `MAIL_TRANSPORT=none` e account chiusi per impostazione predefinita. Non è il percorso scelto per l'istanza domestica e non attiva Render, Neon, Supabase o Brevo. Codice applicativo, Better Auth e PostgreSQL restano indipendenti dal login dei fornitori.
 
 Il blueprint richiede solo un Web Service Free, senza database Render a scadenza, dischi a pagamento o componenti aggiuntivi. Lo script `build-node/start.sh`, incluso nell’immagine, esegue le migrazioni all’avvio sotto lock PostgreSQL e poi sostituisce la shell con il server tramite `exec`. Un errore di migrazione impedisce l’avvio. Docker e Render usano lo stesso comando `sh build-node/start.sh`, senza comandi shell annidati. Il progetto usa il database Supabase Free confermato dal gestore, in `eu-west-1`, tramite session pooler IPv4; inserire `DATABASE_URL` esclusivamente nei secret del servizio. Account, segnalibri e forum risiedono nel database remoto, non nel filesystem temporaneo del server.
 
 Render Free si sospende dopo 15 minuti senza traffico e il primo accesso può richiedere circa un minuto. Ha quote di traffico e compilazione e può limitare applicazioni con molte richieste esterne: verificare la raccolta dei feed sul servizio reale. Non viene promessa disponibilità continua. Mantenere il piano Free, evitare componenti a pagamento e controllare le impostazioni di spesa; senza un metodo di pagamento le quote esaurite comportano sospensioni anziché extra addebitati. Le regioni scelte non costituiscono una garanzia generale sull’assenza di trasferimenti internazionali.
 
-Render Free blocca le porte SMTP 25, 465 e 587. Per questo il codice supporta `MAIL_TRANSPORT=brevo`, `BREVO_API_KEY` e `MAIL_FROM`, senza richiedere credenziali SMTP. Brevo Free dichiara 300 email al giorno e comprende le email transazionali. Verificare il mittente e le condizioni del servizio prima di aprire le iscrizioni. Non importare rubriche né abilitare campagne: il progetto usa solo conferme e recupero dell’account. Il trasporto SMTP rimane disponibile per altri hosting e per lo sviluppo locale con `MAIL_TRANSPORT=smtp`.
+Render Free blocca le porte SMTP 25, 465 e 587, quindi l'alternativa Render non può usare direttamente Gmail SMTP. L'adattatore Brevo rimane nel codice per compatibilità con installazioni esistenti, ma non è selezionato per il server domestico e non va attivato o acquistato come effetto di questa procedura. Il progetto usa solo conferme e recupero dell'account: non importa rubriche e non abilita campagne. Gmail SMTP è destinato all'installazione locale, che consente connessioni in uscita sulle porte 465 o 587.
 
 Il primo avvio del blueprint richiede anche `PUBLIC_OPERATOR_NAME`, `PUBLIC_PRIVACY_CONTACT` e `COMMUNITY_BOOTSTRAP_HASH`: i primi due identificano il titolare e il recapito pubblico; il terzo contiene esclusivamente i tre hash degli inviti iniziali. Questi valori si inseriscono nella configurazione del servizio, non nel repository. I campi `sync: false` vengono richiesti soltanto alla creazione iniziale del blueprint; per un servizio già creato vanno aggiunti nelle impostazioni dell’ambiente.
 
@@ -48,7 +49,7 @@ Riferimenti verificati il 20 ottobre 2026: [Render Free](https://render.com/docs
 
 ## Accesso e trasferimento
 
-Conferma email obbligatoria, password di almeno 12 caratteri, sessioni nel database e cookie sicuri HttpOnly. Il recupero usa un collegamento monouso e revoca le sessioni precedenti. Le operazioni private controllano l’origine e non accettano header di identità del visitatore. I limiti persistenti alle richieste di accesso sono condivisi dalle repliche; il loro funzionamento non dipende solo dall’IP dichiarato da un proxy.
+Conferma email obbligatoria, password di almeno 12 caratteri, sessioni nel database e cookie sicuri HttpOnly. Registrazione e recupero richiedono anche il codice iniziale privato quando `ACCOUNT_ACCESS_HASH` è configurato; in produzione l'apertura di account o forum viene rifiutata se manca. Il codice è una barriera di lancio condivisa, non verifica una persona. Il recupero usa un collegamento monouso e revoca le sessioni precedenti. Le operazioni private controllano l’origine e non accettano header di identità del visitatore. I limiti persistenti alle richieste di accesso sono condivisi dalle repliche; il loro funzionamento non dipende solo dall’IP dichiarato da un proxy. Gli account credential mai verificati e privi di sessioni, dati o social vengono eliminati dopo sette giorni; i grant Facebook locali non consumati dopo 24 ore, con pulizia all'avvio e giornaliera.
 
 L’account personale conserva letture e segnalibri. L’adesione con verifica comunitaria attribuisce separatamente la facoltà di intervenire e votare. Controllare il possesso della mail non costituisce verifica dell’identità civile. Non vengono raccolte scansioni di documenti.
 

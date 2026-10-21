@@ -12,6 +12,7 @@ async function setup(){
  await pg.exec(await readFile(new URL('../server/migrations/004-open-electorate.sql',import.meta.url),'utf8'));await pg.exec(await readFile(new URL('../server/migrations/005-topic-visibility.sql',import.meta.url),'utf8'));
  await pg.exec(await readFile(new URL('../server/migrations/006-three-founders.sql',import.meta.url),'utf8'));
  await pg.exec(await readFile(new URL('../server/migrations/007-social-identity.sql',import.meta.url),'utf8'));
+ await pg.exec(await readFile(new URL('../server/migrations/010-pr2-reference-url.sql',import.meta.url),'utf8'));
  // PGlite serializes one physical connection; production uses pg.Pool across replicas.
  const connection={query:async(sql:string,values:unknown[]=[])=>{const r=await pg.query(sql,values).catch(error=>{console.error('Test SQL failure',sql,error.message);throw error;});return {rows:r.rows as Record<string,unknown>[],rowCount:r.affectedRows};}};
  const pool={...connection,connect:async()=>connection} satisfies Connections;
@@ -30,10 +31,17 @@ test('PostgreSQL persists isolated collections and can resolve publisher referen
 });
 test('PostgreSQL enforces admission, immutable rules, fixed electorate, unique ballots and attributed export',async()=>{
  const {pg,db}=await setup();let now=Date.now();const code='test-code-012345678901234567890123456789',codes=[code,code+'-second',code+'-third'],hash=codes.map(value=>createHash('sha256').update(value).digest('hex')).join(',');
- const call=(user:string|null,data?:unknown,query='')=>handleForum(new Request('https://example.test/api/community/forum'+query,{method:data?'POST':'GET',headers:{origin:'https://example.test','content-type':'application/json'},body:data?JSON.stringify(data):undefined}),db,user,hash,()=>now,user?{provider:'discord',subject:BigInt('0x'+createHash('sha256').update(user).digest('hex').slice(0,15)).toString(),name:'Persona '+user,url:'https://discord.com/users/'+BigInt('0x'+createHash('sha256').update(user).digest('hex').slice(0,15)).toString()}:null);
- const apply=async(user:string)=>{const id=crypto.randomUUID();assert.equal((await call(user,{action:'apply',requestId:id,alias:user,intro:'Una presentazione pubblica sufficientemente lunga.',language:'it',consent:true})).status,201);return id;};
+ let unlinked=false;
+ const call=(user:string|null,data?:unknown,query='',withFacebook=true,accountVerified=true)=>handleForum(new Request('https://example.test/api/community/forum'+query,{method:data?'POST':'GET',headers:{origin:'https://example.test','content-type':'application/json'},body:data?JSON.stringify(data):undefined}),db,user,hash,()=>now,user&&withFacebook?{provider:'facebook',subject:BigInt('0x'+createHash('sha256').update(user).digest('hex').slice(0,15)).toString(),name:'Persona '+user,url:'https://www.facebook.com/app_scoped_user_id/'+BigInt('0x'+createHash('sha256').update(user).digest('hex').slice(0,15)).toString()}:null,async()=>{unlinked=true;},accountVerified);
+ const apply=async(user:string)=>{const id=crypto.randomUUID();assert.equal((await call(user,{action:'apply',requestId:id,alias:user,intro:'Una presentazione pubblica sufficientemente lunga.',referenceUrl:'https://profiles.example.org/'+encodeURIComponent(user),language:'it',consent:true})).status,201);return id;};
  try{
+  for(const referenceUrl of [undefined,'http://example.org/persona','https://localhost/persona','https://127.0.0.1/persona','https://user:pass@example.org/persona','https://example.org:8443/persona'])assert.equal((await call('invalid-reference',{action:'apply',requestId:crypto.randomUUID(),alias:'invalid-reference',intro:'Una presentazione pubblica sufficientemente lunga.',referenceUrl,language:'it',consent:true})).status,400);
+  assert.equal((await call('unverified-email',{action:'apply',requestId:crypto.randomUUID(),alias:'unverified-email',intro:'Una presentazione pubblica sufficientemente lunga.',referenceUrl:'https://profiles.example.org/unverified',language:'it',consent:true},'',false,false)).status,403);
+  const withoutFacebook=crypto.randomUUID();assert.equal((await call('without-facebook',{action:'apply',requestId:withoutFacebook,alias:'without-facebook',intro:'Una presentazione pubblica sufficientemente lunga.',referenceUrl:'https://www.instagram.com/without.facebook/',language:'it',consent:true},'',false)).status,201);
+  const storedWithoutFacebook=await pg.query<{reference_url:string;identity_provider:string|null}>('SELECT reference_url,identity_provider FROM forum_members WHERE id=$1',[withoutFacebook]);assert.equal(storedWithoutFacebook.rows[0].reference_url,'https://www.instagram.com/without.facebook/');assert.equal(storedWithoutFacebook.rows[0].identity_provider,null);assert.equal(unlinked,false);
+  assert.equal((await call('without-facebook',{action:'cancelApplication'},'',false)).status,200);assert.equal(unlinked,false);
   const founder=await apply('alice');assert.equal((await call('alice',{action:'bootstrap',code})).status,200);
+  assert.equal(unlinked,true);
   for(const [i,name] of ['founder-two','founder-three'].entries()){await apply(name);assert.equal((await call(name,{action:'bootstrap',code:codes[i+1]})).status,200);}
   const waiting=await apply('waiting');
   const bob=await apply('bobby');assert.equal((await call('alice',{action:'admit',id:bob,value:1,identityChecked:true})).status,200);
@@ -41,6 +49,12 @@ test('PostgreSQL enforces admission, immutable rules, fixed electorate, unique b
   const board=await(await call('bobby')).json();assert.equal(board.activeCount,4);assert.equal(board.applications.find((a:{member:{id:string}})=>a.member.id===waiting).canVote,true);
   for(const user of ['bobby','alice','founder-two'])assert.equal((await call(user,{action:'admit',id:waiting,value:-1})).status,200);
   assert.equal((await(await call('waiting')).json()).member.status,'rejected');
+  assert.equal((await call('waiting',{action:'cancelApplication'})).status,200);
+  assert.equal(unlinked,true);
+  const removed=await pg.query('SELECT alias,intro,reference_url,identity_name,identity_url,identity_provider,identity_subject FROM forum_members WHERE id=$1',[waiting]);assert.equal(removed.rows.length,0);
+  assert.equal((await pg.query<{count:number}>('SELECT count(*)::int AS count FROM forum_admission_votes WHERE candidate_id=$1 OR member_id=$1',[waiting])).rows[0].count,0);
+  assert.equal((await pg.query<{count:number}>('SELECT count(*)::int AS count FROM forum_admission_electorate WHERE candidate_id=$1 OR member_id=$1',[waiting])).rows[0].count,0);
+  const reapplied=await apply('waiting');assert.notEqual(reapplied,waiting);
   const withdrawn=crypto.randomUUID();
   assert.equal((await call('alice',{action:'create',kind:'discussion',requestId:withdrawn,title:'Una discussione da ritirare',body:'Questo testo non deve restare accessibile dopo il ritiro.',language:'it',category:'general'})).status,201);
   assert.equal((await call('alice',{action:'withdrawTopic',id:withdrawn})).status,200);
@@ -52,7 +66,7 @@ test('PostgreSQL enforces admission, immutable rules, fixed electorate, unique b
   assert.equal((await call('alice',{action:'vote',id,choices:[0],receipt,publicVote:true})).status,200);
   assert.equal((await pg.query<{count:number}>('SELECT count(*)::int AS count FROM forum_ballots')).rows[0].count,1);
   assert.equal((await call('alice',undefined,'?kind=export&id='+id)).status,409);now+=3600001;
-  const exported=await(await call(null,undefined,'?kind=export&id='+id)).json();assert.equal(exported.ballots[0].voter.name,'Persona alice');assert.equal(exported.rules.eligible,4);assert.deepEqual(exported.result.winners,[0]);assert.ok(exported.sha256);
+  const exported=await(await call(null,undefined,'?kind=export&id='+id)).json();assert.equal(exported.ballots[0].voter.name,'alice');assert.equal(Object.hasOwn(exported.ballots[0].voter,'reference'),false);assert.doesNotMatch(JSON.stringify(exported),/facebook\.com|app_scoped_user_id|profiles\.example\.org/);assert.equal(exported.rules.eligible,4);assert.deepEqual(exported.result.winners,[0]);assert.ok(exported.sha256);
   await assert.rejects(pg.query('DELETE FROM forum_events'),/Immutable/);assert.ok(founder);
  }finally{await pg.close();}
 });

@@ -10,12 +10,15 @@ test('old dossier and statistics links open the corresponding destination direct
  assert.equal(librarySectionFromUrl('/?view=teoria&percorso=conquiste'),'timeline');
  assert.equal(librarySectionFromUrl('/?view=teoria&percorso=conquiste&indicatore=SP.DYN.LE00.IN#world-history-title'),'dati');
  assert.equal(librarySectionFromUrl('/?view=teoria&percorso=conquiste&storia=diritti-sotto-attacco#dossier-diritti-sotto-attacco'),'timeline');
+ assert.equal(librarySectionFromUrl('/?view=teoria&percorso=timeline&evento=haymarket-1886'),'timeline');
+ assert.equal(librarySectionFromUrl('/?view=teoria&percorso=timeline&persona=clara-zetkin'),'timeline');
  assert.equal(librarySectionFromUrl('/?view=teoria&percorso=unknown'),'libri');
 });
 test('changing a library destination clears parameters owned by the previous destination',()=>{
- const raw='https://site.example/?view=teoria&percorso=conquiste&indicatore=SP.DYN.LE00.IN&storia=cuba&periodo=6h&ref=shared#dossier-cuba';
- const data=librarySectionUrl(raw,'dati');assert.equal(data,'/?view=teoria&percorso=dati&ref=shared');
+ const raw='https://site.example/?view=teoria&percorso=conquiste&indicatore=SP.DYN.LE00.IN&paesi=CUB%2CITA&dal=1980&al=2020&scala=indice&storia=cuba&periodo=6h&ref=shared#dossier-cuba';
+ const data=librarySectionUrl(raw,'dati');assert.equal(data,'/?view=teoria&percorso=dati&indicatore=SP.DYN.LE00.IN&paesi=CUB%2CITA&dal=1980&al=2020&scala=indice&ref=shared');
  assert.equal(librarySectionFromUrl(data),'dati');
  assert.equal(librarySectionFromUrl(librarySectionUrl(data,'timeline')),'timeline');
  assert.equal(librarySectionUrl(data,'libri'),'/?view=teoria&ref=shared');
+ assert.equal(librarySectionUrl('/?view=teoria&percorso=timeline&evento=haymarket-1886&persona=clara-zetkin','dati'),'/?view=teoria&percorso=dati');
 });

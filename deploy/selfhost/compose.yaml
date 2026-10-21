@@ -69,6 +69,33 @@ services:
     depends_on:
       database:
         condition: service_healthy
+  library-import:
+    user: "${LOCAL_UID:-1000}:${LOCAL_GID:-1000}"
+    profiles: [tools]
+    image: "polisrossa-runtime:${COMPOSE_PROJECT_NAME:-polisrossa}"
+    pull_policy: never
+    entrypoint: [node, build-node/library-import.mjs]
+    environment:
+      DATABASE_URL: ${DATABASE_URL:?Run selfhost init first}
+    volumes:
+      - socket:/var/run/postgresql:ro
+    depends_on:
+      database:
+        condition: service_healthy
+  mail-limits:
+    user: "${LOCAL_UID:-1000}:${LOCAL_GID:-1000}"
+    profiles: [tools]
+    image: "polisrossa-runtime:${COMPOSE_PROJECT_NAME:-polisrossa}"
+    pull_policy: never
+    network_mode: none
+    entrypoint: [node, build-node/mail-limits-cli.mjs]
+    environment:
+      DATABASE_URL: ${DATABASE_URL:?Run selfhost init first}
+    volumes:
+      - socket:/var/run/postgresql:ro
+    depends_on:
+      database:
+        condition: service_healthy
   snapshot:
     user: "${LOCAL_UID:-1000}:${LOCAL_GID:-1000}"
     profiles: [tools]

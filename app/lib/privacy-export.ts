@@ -14,7 +14,7 @@ export async function handlePrivacyExport(request:Request,db:ForumDatabase|undef
   const queries={
    bookmarks:['SELECT kind,item_key,payload,deleted,updated_at FROM bookmarks WHERE owner_id=?',userId],
    readingProgress:['SELECT book_id,edition,chapter,page,scroll,revision,updated_at FROM reading_progress WHERE owner_id=?',userId],
-   membership:['SELECT id,alias,intro,identity_name,identity_kind,identity_url,language,status,created_at,deadline,admitted_at FROM forum_members WHERE owner_key=?',owner],
+   membership:['SELECT id,alias,intro,reference_url,identity_name,identity_kind,identity_url,identity_provider,identity_subject,language,status,created_at,deadline,admitted_at FROM forum_members WHERE owner_key=?',owner],
    topics:['SELECT id,title,body,references_text,category,language,created_at,starts_at,ends_at,withdrawn FROM forum_topics WHERE author_id IN (SELECT id FROM forum_members WHERE owner_key=?)',owner],
    comments:['SELECT id,topic_id,body,language,created_at FROM forum_comments WHERE author_id IN (SELECT id FROM forum_members WHERE owner_key=?)',owner],
    ballots:['SELECT topic_id,choices_json,receipt,updated_at FROM forum_ballots WHERE member_id IN (SELECT id FROM forum_members WHERE owner_key=?)',owner],

@@ -9,3 +9,12 @@ test('HTTPS verification mail needs no SMTP credentials, accepts only actual pro
  await assert.rejects(createAccountMailer(config,async()=>Response.json({},{status:201}))('reader@example.test','https://example.test/verify'),/Invalid email/);
  assert.throws(()=>configuration({...env,BREVO_API_KEY:undefined}),/BREVO_API_KEY/);
 });
+test('Gmail SMTP uses implicit TLS on 465 or mandatory STARTTLS on 587 with the authenticated sender',()=>{
+ const gmail={APP_URL:'https://example.test',DATABASE_URL:'postgres://test:test@localhost/test',AUTH_SECRET:'test-only-secret-012345678901234567890',NODE_ENV:'production',MAIL_TRANSPORT:'smtp',SMTP_HOST:'smtp.gmail.com',SMTP_USER:'project.sender@gmail.com',SMTP_PASSWORD:'test-only-app-password',MAIL_FROM:'PolisRossa <project.sender@gmail.com>'};
+ const implicit=configuration(gmail).smtp!;
+ assert.equal(implicit.port,465);assert.equal(implicit.secure,true);assert.equal(implicit.requireTLS,false);assert.equal(implicit.tls?.minVersion,'TLSv1.2');
+ const starttls=configuration({...gmail,SMTP_PORT:'587'}).smtp!;
+ assert.equal(starttls.port,587);assert.equal(starttls.secure,false);assert.equal(starttls.requireTLS,true);assert.equal(starttls.tls?.minVersion,'TLSv1.2');
+ assert.throws(()=>configuration({...gmail,MAIL_FROM:'PolisRossa <another@gmail.com>'}),/same verified email address/);
+ assert.throws(()=>configuration({...gmail,SMTP_USER:'not-an-email'}),/same verified email address/);
+});

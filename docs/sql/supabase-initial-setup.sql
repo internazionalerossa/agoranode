@@ -266,7 +266,97 @@ CREATE UNIQUE INDEX forum_member_social_unique ON forum_members(identity_provide
 
 INSERT INTO app_migrations(name,sha256) VALUES('007-social-identity.sql','db5a9414497b4819c7c08f02accdf93f429da8e0dc17d74cc209494da18447e6');
 
--- Better Auth account, verification, session and rate-limit tables.
+-- 008-public-snapshot-provenance.sql
+CREATE TABLE public_snapshot_imports (
+ snapshot_id text PRIMARY KEY CHECK (snapshot_id ~ '^sha256:[0-9a-f]{64}$'),
+ format text NOT NULL,
+ format_version integer NOT NULL CHECK (format_version = 1),
+ network_id text NOT NULL CHECK (network_id ~ '^[a-z0-9][a-z0-9._:-]{2,127}$'),
+ checkpoint_height bigint NOT NULL CHECK (checkpoint_height >= 0),
+ previous_snapshot_id text REFERENCES public_snapshot_imports(snapshot_id),
+ release_root_sha256 text NOT NULL CHECK (release_root_sha256 ~ '^[0-9a-f]{64}$'),
+ signer_key_id text NOT NULL CHECK (signer_key_id ~ '^sha256:[0-9a-f]{64}$'),
+ manifest_json text NOT NULL,
+ imported_at timestamptz NOT NULL DEFAULT now(),
+ UNIQUE(network_id,checkpoint_height),
+ CHECK ((checkpoint_height=0 AND previous_snapshot_id IS NULL) OR (checkpoint_height>0 AND previous_snapshot_id IS NOT NULL))
+);
+CREATE TABLE public_snapshot_head (
+ singleton smallint PRIMARY KEY DEFAULT 1 CHECK (singleton=1),
+ snapshot_id text UNIQUE NOT NULL REFERENCES public_snapshot_imports(snapshot_id),
+ updated_at timestamptz NOT NULL DEFAULT now()
+);
+INSERT INTO app_migrations(name,sha256) VALUES('008-public-snapshot-provenance.sql','f08e77283418162416f0265bcfdcfc2e0c2cb5c66be763e35bcfa51b3188af86');
+
+-- 009-library-archive.sql
+CREATE TABLE library_editions (
+ book_id text NOT NULL CHECK (book_id ~ '^[a-z0-9][a-z0-9-]{0,127}$'),
+ language text NOT NULL CHECK (language ~ '^[a-z][a-z0-9-]{0,15}$'),
+ title text NOT NULL CHECK (char_length(title) BETWEEN 1 AND 500),
+ source_name text NOT NULL CHECK (char_length(source_name) BETWEEN 1 AND 300),
+ catalog_url text NOT NULL CHECK (catalog_url ~ '^https://'),
+ created_at timestamptz NOT NULL DEFAULT now(),
+ PRIMARY KEY (book_id,language)
+);
+CREATE TABLE library_revisions (
+ revision_sha256 text PRIMARY KEY CHECK (revision_sha256 ~ '^[0-9a-f]{64}$'),
+ book_id text NOT NULL,
+ language text NOT NULL,
+ source_url text NOT NULL CHECK (source_url ~ '^https://'),
+ parser_version integer NOT NULL CHECK (parser_version > 0),
+ license_spdx text NOT NULL CHECK (license_spdx ~ '^[A-Za-z0-9.+-]{1,80}$'),
+ license_url text NOT NULL CHECK (license_url ~ '^https://'),
+ rights_statement_url text NOT NULL CHECK (rights_statement_url ~ '^https://'),
+ rights_reviewed_at date NOT NULL,
+ attribution text NOT NULL CHECK (char_length(attribution) BETWEEN 1 AND 2000),
+ imported_at timestamptz NOT NULL DEFAULT now(),
+ FOREIGN KEY (book_id,language) REFERENCES library_editions(book_id,language),
+ UNIQUE (book_id,language,revision_sha256)
+);
+CREATE TABLE library_chapters (
+ revision_sha256 text NOT NULL REFERENCES library_revisions(revision_sha256) ON DELETE CASCADE,
+ chapter_index integer NOT NULL CHECK (chapter_index BETWEEN 0 AND 255),
+ title text NOT NULL CHECK (char_length(title) BETWEEN 1 AND 500),
+ source_url text NOT NULL CHECK (source_url ~ '^https://'),
+ content_sha256 text NOT NULL CHECK (content_sha256 ~ '^[0-9a-f]{64}$'),
+ pages_json text NOT NULL CHECK (octet_length(pages_json) BETWEEN 2 AND 8388608 AND jsonb_typeof(pages_json::jsonb)='array'),
+ PRIMARY KEY (revision_sha256,chapter_index)
+);
+CREATE TABLE library_current_revisions (
+ book_id text NOT NULL,
+ language text NOT NULL,
+ revision_sha256 text NOT NULL,
+ selected_at timestamptz NOT NULL DEFAULT now(),
+ PRIMARY KEY (book_id,language),
+ FOREIGN KEY (book_id,language) REFERENCES library_editions(book_id,language),
+ FOREIGN KEY (book_id,language,revision_sha256) REFERENCES library_revisions(book_id,language,revision_sha256)
+);
+CREATE INDEX library_revisions_edition_idx ON library_revisions(book_id,language,imported_at DESC);
+CREATE FUNCTION reject_library_archive_update() RETURNS trigger LANGUAGE plpgsql AS $$
+BEGIN
+ RAISE EXCEPTION 'library archive rows are immutable; insert a new revision instead';
+END;
+$$;
+CREATE TRIGGER library_editions_immutable BEFORE UPDATE ON library_editions FOR EACH ROW EXECUTE FUNCTION reject_library_archive_update();
+CREATE TRIGGER library_revisions_immutable BEFORE UPDATE ON library_revisions FOR EACH ROW EXECUTE FUNCTION reject_library_archive_update();
+CREATE TRIGGER library_chapters_immutable BEFORE UPDATE ON library_chapters FOR EACH ROW EXECUTE FUNCTION reject_library_archive_update();
+INSERT INTO app_migrations(name,sha256) VALUES('009-library-archive.sql','6fa6fd6ad833154e74cb451219846cc9f7aebf84d627f1763b55a5cbc61f5949');
+
+-- 010-pr2-reference-url.sql
+-- Nullable for applications created before this migration. New applications
+-- require a validated HTTPS reference in the API before insertion.
+ALTER TABLE forum_members ADD COLUMN reference_url text;
+ALTER TABLE forum_members ADD CONSTRAINT forum_member_reference_format CHECK (reference_url IS NULL OR (char_length(reference_url) <= 500 AND reference_url ~ '^https://'));
+
+-- Keep this digest synchronized with server/migrations/010-pr2-reference-url.sql.
+INSERT INTO app_migrations(name,sha256) VALUES('010-pr2-reference-url.sql','2f83d1641c27bd887ff1bbd180195df457a687ace299e59989b5ed6ef6ca6491');
+
+-- 011-private-auth-rate-limits.sql. A new database has no obsolete
+-- Better Auth rateLimit table; recording the migration keeps both paths equal.
+INSERT INTO app_migrations(name,sha256) VALUES('011-private-auth-rate-limits.sql','07d9d6cc1cff5968c9e14fad043398bb4cecd0110429c687d81b0550ceb7dd3b');
+
+-- Better Auth account, verification and session tables. Rate-limit keys use
+-- auth_request_limits above and are HMAC-pseudonymized by the application.
 create table "user" ("id" text not null primary key, "name" text not null, "email" text not null unique, "emailVerified" boolean not null, "image" text, "createdAt" timestamptz default CURRENT_TIMESTAMP not null, "updatedAt" timestamptz default CURRENT_TIMESTAMP not null);
 
 create table "session" ("id" text not null primary key, "expiresAt" timestamptz not null, "token" text not null unique, "createdAt" timestamptz default CURRENT_TIMESTAMP not null, "updatedAt" timestamptz not null, "ipAddress" text, "userAgent" text, "userId" text not null references "user" ("id") on delete cascade);
@@ -274,8 +364,6 @@ create table "session" ("id" text not null primary key, "expiresAt" timestamptz 
 create table "account" ("id" text not null primary key, "accountId" text not null, "providerId" text not null, "userId" text not null references "user" ("id") on delete cascade, "accessToken" text, "refreshToken" text, "idToken" text, "accessTokenExpiresAt" timestamptz, "refreshTokenExpiresAt" timestamptz, "scope" text, "password" text, "createdAt" timestamptz default CURRENT_TIMESTAMP not null, "updatedAt" timestamptz not null);
 
 create table "verification" ("id" text not null primary key, "identifier" text not null, "value" text not null, "expiresAt" timestamptz not null, "createdAt" timestamptz default CURRENT_TIMESTAMP not null, "updatedAt" timestamptz default CURRENT_TIMESTAMP not null);
-
-create table "rateLimit" ("id" text not null primary key, "key" text not null unique, "count" integer not null, "lastRequest" bigint not null);
 
 create index "session_userId_idx" on "session" ("userId");
 

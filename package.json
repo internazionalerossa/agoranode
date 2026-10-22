@@ -15,7 +15,9 @@
     "knowledge:replica": "node --env-file-if-exists=.env --import tsx server/knowledge-replica-agent.ts",
     "test": "node --import tsx --test --test-concurrency=1 tests/*.test.mjs tests/node-*.test.ts",
     "typecheck": "tsc --noEmit",
-    "dev:server": "node --env-file=.env --import tsx --watch server/index.ts"
+    "dev:server": "node --env-file=.env --import tsx --watch server/index.ts",
+    "peer:serve": "node --env-file-if-exists=.env --import tsx server/public-peer-cli.ts serve",
+    "peer:pull": "node --env-file-if-exists=.env --import tsx server/public-peer-cli.ts pull"
   },
   "dependencies": {
     "lucide-react": "^1.25.0",

@@ -24,7 +24,7 @@ test('public blob codec deterministically reconstructs empty, small, and multi-c
     const b=encodePublicBlob(bytes,NETWORK,SPACE);
     assert.deepEqual(a.manifest,b.manifest);
     assert.deepEqual([...a.blocks.keys()],[...b.blocks.keys()]);
-    assert.deepEqual(reconstructPublicBlob(a.manifest,a.blocks,NETWORK,SPACE),bytes);
+    assert.deepEqual(Buffer.from(reconstructPublicBlob(a.manifest,a.blocks,NETWORK,SPACE)),Buffer.from(bytes));
     assert.deepEqual(a.manifest.chunks.map(x=>x.size),chunkPublicBytes(bytes).map(x=>x.byteLength));
     assert.ok(a.manifest.chunks.every(x=>x.size<=MAX_CHUNK));
     assert.equal(a.manifest.size,size);
@@ -44,7 +44,7 @@ test('content-defined boundaries reuse most data after one-byte insertion', () =
   assert.ok(newBytes < edited.byteLength*0.40,
     'A tiny edit should reuse existing blocks rather than resend a cumulative snapshot');
   const available=new Map([...before.blocks,...after.blocks]);
-  assert.deepEqual(reconstructPublicBlob(after.manifest,available,NETWORK,SPACE),edited);
+  assert.deepEqual(Buffer.from(reconstructPublicBlob(after.manifest,available,NETWORK,SPACE)),Buffer.from(edited));
 });
 
 test('deny oversized, private, unknown, cross-space and modified content', () => {

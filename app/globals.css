@@ -5177,3 +5177,11 @@ body { min-width: 0; width: 100%; max-width: 100vw; overflow-x: hidden; }
 .story-event-proposal-selection input{width:18px;height:18px;flex-shrink:0;accent-color:var(--red,#ad302d)}
 .timeline-proposal-handoff{padding:13px;border-left:3px solid var(--red,#ad302d);background:var(--paper,#f6f3ec)}
 @media (max-width:600px){.timeline-proposal-tool{padding:17px 14px}.timeline-proposal-tool>a.button{width:100%;justify-content:center}}
+
+.timeline-proposal-picker{border:1px solid var(--line,#d8d5cb);border-radius:8px;padding:12px}
+.timeline-proposal-picker>summary{cursor:pointer;font-weight:650;padding:7px 0}
+.timeline-proposal-picker>div{padding-top:12px;display:grid;gap:12px}
+.timeline-proposal-picker ul{display:grid;list-style:none;gap:8px;padding:0;margin:0;max-height:330px;overflow:auto}
+.timeline-proposal-picker li{padding:4px 0;border-bottom:1px solid var(--line,#d8d5cb)}
+.timeline-proposal-picker li label{display:flex;align-items:flex-start;gap:9px;font-weight:400;cursor:pointer}
+.timeline-proposal-picker li input[type=checkbox]{flex:none;width:18px;height:18px;min-height:18px;margin:2px 0 0;accent-color:var(--red,#ad302d)}

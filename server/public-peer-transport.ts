@@ -184,3 +184,30 @@ export async function pullPublicPeer(origin: string,options: PeerOptions,
   }
   return results;
 }
+
+
+/**
+ * Sequential source failover for already known, independently hosted peers.
+ * This is NOT automatic peer discovery or a failover gateway for end users.
+ * Each origin is checked before trying any; no credentials are forwarded.
+ */
+export async function pullFromPublicPeers(
+  origins: readonly string[], options: PeerOptions,
+  deps: {fetcher?: typeof fetch; allowInsecureLoopback?: boolean} = {},
+) {
+  if (!Array.isArray(origins) || origins.length === 0 || origins.length > 8) {
+    throw Error('Choose between one and eight independent public peers');
+  }
+  const approved = origins.map(value => peerOrigin(value, deps.allowInsecureLoopback));
+  if (new Set(approved).size !== approved.length) throw Error('Duplicate public peer');
+  for (const origin of approved) {
+    try {
+      const packages = await pullPublicPeer(origin, options, deps);
+      return {packages, tried: approved.indexOf(origin) + 1};
+    } catch {
+      // A peer may be unavailable, inconsistent or malicious. Another fully
+      // validated origin can still supply the missing public packages.
+    }
+  }
+  throw Error('All configured public peers failed verification or were unreachable');
+}

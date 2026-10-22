@@ -2,7 +2,7 @@
 
 AgoràNode è il software e l’infrastruttura condivisa per costruire nodi tematici autonomi. Il paragone utile è ForumFree: un servizio mette a disposizione tecnologia e accesso per molte comunità, senza diventare una di esse né accentrare le loro discussioni e decisioni. Ogni nodo collega attualità, fonti, biblioteca, conoscenza, storia, dati e confronto pubblico sul proprio tema.
 
-**Agorà è un nodo** dedicato allo stato dell’arte della tecnologia AgoràNode e alle questioni comuni dell’infrastruttura. **PolisRossa è un altro nodo**, dedicato alla sinistra politica. Sono sullo stesso piano: condividono formato e impaginazione, non argomento, comunità o ambito decisionale. La home `/` è il portale per trovare i nodi: oggi raggiunge i due percorsi reali presenti nel repository e permette di esplorare idee per altri temi. `/agora` è in costruzione, mentre `/polisrossa` è il nodo tematico sviluppato. Non esiste ancora un registro federato per trovare nodi ospitati altrove.
+**Agorà è un nodo** dedicato allo stato dell’arte della tecnologia AgoràNode e alle questioni comuni dell’infrastruttura. **PolisRossa è un altro nodo**, dedicato alla sinistra politica. Sono sullo stesso piano istituzionale: **dovranno condividere** formato e impaginazione, ma non argomento, comunità o ambito decisionale. Oggi l'interfaccia completa di PolisRossa non è ancora riusata integralmente da Agorà. La home `/` è il portale per trovare i nodi: oggi raggiunge i due percorsi reali presenti nel repository e permette di esplorare idee per altri temi. `/agora` è in costruzione, mentre `/polisrossa` è il nodo tematico sviluppato. Non esiste ancora un registro federato per trovare nodi ospitati altrove.
 
 Ogni nodo dovrebbe rendere consultabile lo stato dell’arte del proprio tema: notizie e video con le fonti originali, biblioteca e conoscenza strutturata, cronologia, dati e confronto pubblico. I contenuti e le decisioni restano attribuiti alla comunità pertinente; Agorà tratta soltanto tecnologia, regole e risorse comuni dell’infrastruttura.
 
@@ -24,7 +24,7 @@ AgoràNode vuole diventare una rete **eseguibile e custodita dai computer dei co
 
 Questo obiettivo non richiede criptovaluta o mining: richiede blocchi verificabili, log di revisioni, consenso limitato alle decisioni che lo richiedono, gateway multipli, identità portabili e dati personali **mai diffusi nella replica pubblica**. Nessuna di queste proprietà va presunta operativa soltanto perché esiste uno schema. L'implementazione attuale ha un deposito pubblico e test di replica tra database locali; rete P2P e failover non sono ancora collaudati.
 
-La specifica aggiornata è in [Architettura custodita dai peer](docs/PEER-OWNED-ARCHITECTURE.md). L'ordine dei lavori e i test vincolanti sono nel [Piano di decentralizzazione](docs/DECENTRALIZATION-ROADMAP.md); [Stato delle verifiche](docs/QUALITY.md) distingue sempre codice, prove locali e rete reale.
+La revisione critica su fonti, governo, sicurezza, feedback e manipolazione del social è in [CRITICAL-DESIGN-REVIEW.md](docs/CRITICAL-DESIGN-REVIEW.md); il workflow wiki proposto è in [EDITORIAL-GOVERNANCE.md](docs/EDITORIAL-GOVERNANCE.md). La specifica aggiornata è in [Architettura custodita dai peer](docs/PEER-OWNED-ARCHITECTURE.md). L'ordine dei lavori e i test vincolanti sono nel [Piano di decentralizzazione](docs/DECENTRALIZATION-ROADMAP.md); [Stato delle verifiche](docs/QUALITY.md) distingue sempre codice, prove locali e rete reale.
 
 ## Il formato comune AgoràNode
 

@@ -87,3 +87,6 @@ L'obiettivo operativo è consentire a collaboratori indipendenti di ospitare cop
 
 Per il disegno integrato, i compromessi tra replica, privacy, moderazione, blockchain senza token, identità e governance, leggere [PEER-OWNED-ARCHITECTURE.md](PEER-OWNED-ARCHITECTURE.md). Per i passaggi e i collaudi prima dell'attivazione leggere [DECENTRALIZATION-ROADMAP.md](DECENTRALIZATION-ROADMAP.md). La documentazione non attesta il completamento delle fasi.
 
+## Autogoverno non significa voto su ogni fatto
+
+I nodi scelgono democraticamente regole, mandati e ricorsi, ma un'enciclopedia ha bisogno anche di verifiche sulle fonti, provenienza, conflitti editoriali, attribuzione e diritti. Un quorum non rende vero un dato. [EDITORIAL-GOVERNANCE.md](EDITORIAL-GOVERNANCE.md) definisce il workflow proposto, separato dai voti sulla politica editoriale; [CRITICAL-DESIGN-REVIEW.md](CRITICAL-DESIGN-REVIEW.md) documenta le principali contraddizioni e i test da aggiungere. Nessuna procedura di editing pubblico è attiva per effetto di questi documenti.

@@ -138,3 +138,21 @@ Ogni requisito richiede evidenza pertinente: codice e test per il comportamento,
 I blocchi esterni non devono nascondere i difetti correggibili nel codice; una configurazione preparata non equivale a un servizio attivo.
 
 La pagina di custodia condivisa e gli snapshot firmati descrivono strumenti e limiti disponibili oggi. Replica automatica fra PC, failover con un solo nodo rimasto, consenso distribuito tipo blockchain e cifratura end-to-end non sono implementati e non vanno dichiarati tali.
+
+## Contratti e visione della rete custodita dai peer — 22 ottobre 2026
+
+Questa sezione documenta **modifiche proposte in un ramo di lavoro**, non test già eseguiti o servizi pubblici operativi. Conservare le evidenze precedenti senza attribuire nuovi successi al runtime.
+
+| Requisito | Stato in questa revisione |
+| --- | --- |
+| Portale, tecnologia e comunità Agorà distinti | **contratto proposto**. Manifesto `agora` con capacità `planned`, registry locale, descriptor opt-in, tests. Nessun forum/data store Agorà completo. |
+| Catalogo dei nodi locali | **codice in ramo**. `GET /api/nodes` non effettua discovery P2P; il portale legge il registro allowlisted. |
+| Distinzione dati pubblici e privati | **policy tipizzata, non enforcement**. `data-placement.ts` non è ancora collegato a ogni esportatore o replica. |
+| Repliche fra PC indipendenti | **non collaudate**. Il kernel attuale funziona fra database locali; Syncthing opzionale non prova una rete libera da dipendenze. |
+| Servizio dopo perdita dell'host originario | **non implementato**. Nessun failover pubblico automatico o ingresso ridondante verificato. |
+| Consenso BFT tra computer | **non implementato**. I certificati statici `2f+1` non realizzano l'algoritmo di consenso. |
+| Forum e chat social distribuiti | **non implementati**. Restano separati dal patrimonio pubblico e dalla replica. |
+| Identità e continuità senza vendor obbligatorio | **non implementate**. OAuth/email e dominio hanno ancora dipendenze operative. |
+
+Le nuove condizioni di uscita e i test necessari sono in [DECENTRALIZATION-ROADMAP.md](DECENTRALIZATION-ROADMAP.md). Fino a esecuzione e riscontro registrato non aggiornare le righe a «verificato».
+

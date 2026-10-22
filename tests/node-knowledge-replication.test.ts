@@ -366,12 +366,18 @@ test("two independent databases converge through finalized directory packages an
       }, {allowInsecureLoopback: true});
       assert.equal(pulled.length, 1);
       assert.equal(pulled[0].created, true);
+      let packageDownloads = 0;
+      const measuringFetcher = (async (input: RequestInfo | URL, init?: RequestInit) => {
+        if (String(input).includes('/v1/packages/')) packageDownloads++;
+        return fetch(input,init);
+      }) as typeof fetch;
       const retry = await pullPublicPeer("http://127.0.0.1:" + address.port, {
         directory: inbox, validatorSet: validatorFixture.set,
         expectedNetworkId: NETWORK_ID, expectedSpaceId: SPACE_ID,
         allowLegacyBootstrap: true,
-      }, {allowInsecureLoopback: true});
+      }, {allowInsecureLoopback: true,fetcher:measuringFetcher});
       assert.equal(retry[0].created, false);
+      assert.equal(packageDownloads, 0, 'unchanged knowledge bytes must not be transferred a second time');
     } finally {
       await new Promise<void>((resolve, reject) => peer.close(error => error ? reject(error) : resolve()));
     }

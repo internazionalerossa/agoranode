@@ -15,13 +15,14 @@ export default function TimelineProposalTool({events,selectedIds,onSelectionChan
   const [period,setPeriod]=useState('');
   const [context,setContext]=useState('');
   const [source,setSource]=useState('');
+  const [find,setFind]=useState('');
   const [action,setAction]=useState<'revise'|'include'|'exclude'>('revise');
   const selected=events.filter(event=>selectedIds.includes(event.id)).slice(0,MAX_SELECTED);
   const validSource=source.trim()===''||(()=>{try{const u=new URL(source);return u.protocol==='https:'&&!u.username&&!u.password;}catch{return false;}})();
   const ready=mode==='new'
     ?title.trim().length>=5&&title.length<=140&&context.trim().length>=60&&context.length<=1800&&period.trim().length>0
     :selected.length>0&&selectedIds.length<=MAX_SELECTED&&context.trim().length>=60&&context.length<=1800;
-  const selectedNames=selected.map(event=>event.title).join(' · ');
+  const matches=events.filter(event=>!find.trim()||[event.title,event.year,event.country].some(value=>value.toLocaleLowerCase('it').includes(find.trim().toLocaleLowerCase('it')))).slice(0,14);
   const proposalTitle=mode==='new'
     ?'Proposta di nuova pagina: '+title.trim().slice(0,110)
     :'Proposta di revisione timeline: '+selected[0]?.title.slice(0,90);
@@ -59,6 +60,7 @@ export default function TimelineProposalTool({events,selectedIds,onSelectionChan
         <p>Usa le caselle accanto alle tappe del racconto oppure seleziona qui quelle che vuoi modificare.</p>
         {selected.length>0&&<ul>{selected.map(event=><li key={event.id}><span>{event.year} · {event.title}</span><button type="button" onClick={()=>onSelectionChange(selectedIds.filter(id=>id!==event.id))}>Rimuovi</button></li>)}</ul>}
       </div>
+      <details className="timeline-proposal-picker"><summary>Cerca e seleziona le tappe</summary><div><label>Cerca un evento, paese o periodo<input type="search" value={find} maxLength={160} onChange={e=>setFind(e.currentTarget.value)} placeholder="Es. Comune, 1871, lavoro…"/></label><p>{matches.length} risultati mostrati · massimo otto selezioni</p><ul>{matches.map(event=><li key={event.id}><label><input type="checkbox" checked={selectedIds.includes(event.id)} disabled={!selectedIds.includes(event.id)&&selectedIds.length>=MAX_SELECTED} onChange={()=>onSelectionChange(selectedIds.includes(event.id)?selectedIds.filter(id=>id!==event.id):[...selectedIds,event.id])}/><span>{event.year} · {event.title}</span></label></li>)}</ul></div></details>
       <label>Che cosa vuoi proporre?
         <select value={action} onChange={e=>setAction(e.currentTarget.value as typeof action)}>
           <option value="revise">Correggere o arricchire il racconto</option>

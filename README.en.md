@@ -18,6 +18,15 @@ A typed manifest and public endpoint define an initial contract for instances. T
 
 [Italiano](README.md) · [AgoràNode model (Italian)](docs/AGORANODE.md) · [Common governance (Italian)](docs/GOVERNANCE.md) · [Distributed network (Italian)](docs/DISTRIBUTED-NETWORK.md) · [Public replication (Italian)](docs/PUBLIC-REPLICATION.md) · [Contribute](CONTRIBUTING.md) · [Architecture](docs/ARCHITECTURE.md) · [Self-hosting](docs/SELF-HOSTING.md) · [Verification status](docs/QUALITY.md)
 
+
+## Peer-owned network goal (not yet operational)
+
+AgoràNode is shared software and infrastructure, **not** a central social community or a blockchain cryptocurrency. The portal at `/` lists thematic communities. **Agorà** at `/agora` is the thematic community about AgoràNode technology; **PolisRossa** at `/polisrossa` is a separate community. Neither community acquires authority over the other just because it shares code, a gateway or a physical computer.
+
+The goal is a network where collaborators run independent peer computers hosting verifiable public knowledge, gateways and, where authorized, technical validators. A physical **peer** can host several thematic **spaces**; a space can survive across many peers. Consensus is required for finalizing governed state, not for every chat message. Private identities, sessions, credentials and messages must not be placed in public replicas.
+
+The current repository contains local replication primitives, **not** deployed P2P networking, Byzantine consensus, automatic failover or federated private messaging. The proposed architecture is documented in [Peer-owned architecture](docs/PEER-OWNED-ARCHITECTURE.md), with testable delivery gates in the [Decentralization roadmap](docs/DECENTRALIZATION-ROADMAP.md) and actual evidence in [Quality](docs/QUALITY.md).
+
 ## The common AgoràNode format
 
 A complete node may change topic, sources, visual theme and community, but keeps the same recognizable environments:

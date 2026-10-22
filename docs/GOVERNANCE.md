@@ -45,9 +45,9 @@ La “proprietà comune” è quindi controllo costituzionale dell’infrastrutt
 
 **PR1** resta un account personale senza voto. **PR2** è una membership separata e circoscritta a un singolo nodo: dopo l’ammissione prevista da quell’istanza, partecipa alla sua assemblea con un voto. L’assemblea approva contenuti, regole locali, bilanci, incarichi, integrazioni e revoche. Nessun gruppo delegato può ampliare da solo il proprio mandato. La stessa persona può dover dimostrare l’unicità federale se partecipa a più nodi: più membership PR2 non producono più schede nell’elezione federale.
 
-### PR3: delegato eletto del nodo Agorà
+### PR3: mandato federale eletto dalla camera delle persone
 
-L’assemblea centrale Agora decide soltanto sulle materie comuni di AgoràNode: protocollo, regole federali, ammissione e coordinamento dei nodi e risorse condivise. Non decide le politiche nazionali o tematiche che appartengono alle assemblee dei rispettivi nodi. Un eventuale nodo PolisItalia, per esempio, delibererebbe sulle questioni italiane nella propria assemblea; non è una funzione o un’istanza oggi attiva. Questa delimitazione vale anche per ogni mandato PR3.
+La **federazione**, attraverso le camere e i mandati previsti da questa costituzione, decide soltanto sulle materie comuni di AgoràNode: protocollo, regole federali, ammissione e coordinamento dei nodi e risorse condivise. La comunità tematica Agorà può discutere e proporre, ma non sostituisce le camere federali. Non decide le politiche nazionali o tematiche che appartengono alle assemblee dei rispettivi nodi. Un eventuale nodo PolisItalia, per esempio, delibererebbe sulle questioni italiane nella propria assemblea; non è una funzione o un’istanza oggi attiva. Questa delimitazione vale anche per ogni mandato PR3.
 
 Ogni PR2 attivo di un nodo registrato è eleggibile e può essere nominato o autocandidarsi a **PR3**. Non diventa PR3 automaticamente: deve accettare pubblicamente la candidatura e superare un’elezione della camera federale delle persone, formata dai PR2 attivi deduplicati. Ogni candidatura è una decisione separata e legata allo stesso testo/digest che il candidato ha accettato.
 
@@ -82,7 +82,7 @@ Controlla conflitti d’interesse, rispetto del procedimento, bilanci, log, estr
 
 ### Nodo Agorà e coordinamento federale
 
-La home del servizio è un indice che presenta Agorà — AgoràNode e PolisRossa — AgoràNode come nodi sullo stesso piano. Il nodo Agorà discute e decide le questioni comuni dell’infrastruttura, incluse protocollo, interoperabilità, sicurezza, namespace, ammissione/coordinamento dei nodi e risorse condivise; non decide le politiche locali o tematiche. Ogni nodo mantiene contenuti, licenze, ammissioni e forum propri. Un account o ruolo PolisRossa non diventa automaticamente un account o ruolo nel nodo Agorà. Le decisioni federali hanno due camere:
+La home del servizio è un indice che presenta Agorà — AgoràNode e PolisRossa — AgoràNode come nodi sullo stesso piano. Il nodo tematico Agorà discute e propone sulle questioni dell'infrastruttura; le decisioni **vincolanti a livello federale** su protocollo, interoperabilità, sicurezza, namespace, ammissione/coordinamento dei nodi e risorse condivise spettano alle camere federali secondo le regole che seguono. Né il nodo Agorà né la federazione decidono le politiche locali o tematiche degli altri spazi. Ogni nodo mantiene contenuti, licenze, ammissioni e forum propri. Un account o ruolo PolisRossa non diventa automaticamente un account o ruolo nel nodo Agorà. Le decisioni federali hanno due camere:
 
 - **camera delle persone:** tutti i PR2 attivi dei nodi registrati, deduplicati a una persona un voto; elegge e revoca PR3;
 - **camera dei nodi:** un nodo ammesso, un voto, espresso soltanto in esecuzione di una decisione verificabile della propria assemblea.
@@ -181,3 +181,19 @@ Fino a quando tali asset appartengono materialmente a singoli account, la propri
 Il protocollo distribuito può governare scritture soltanto dopo test tra computer indipendenti, revisione crittografica esterna, esercitazione di revoca/rotazione, simulazione di fork, verifica privacy e approvazione della carta costitutiva. Prima di allora il modulo v1 resta sperimentale e non sostituisce le regole operative in `COMMUNITY.md`.
 
 La rete, le classi dei dati, i guasti ammessi e le prove di disponibilità sono specificati in [DISTRIBUTED-NETWORK.md](DISTRIBUTED-NETWORK.md).
+
+## Confine tra Agorà, federazione e custodia tecnica
+
+Agorà è un **nodo tematico** dedicato alla tecnologia AgoràNode, non il titolare automaticamente superiore a PolisRossa e agli altri spazi. Il portale dei nodi `/` non è un'assemblea. Le decisioni sul codice e sulle regole comuni seguono il protocollo di governance federale, con competenze e mandati espressi: non acquisiscono validità per il fatto di essere pubblicate sulla pagina `/agora`.
+
+Un **peer** è un computer che conserva o serve parte della rete; un **finalizzatore** è un incarico tecnico attribuito secondo regole specifiche. Nessuno dei due corrisponde a un PR2 o PR3 per il solo fatto di esistere. La disponibilità di molti computer gestiti dalla stessa persona non produce più schede.
+
+Per rendere reali i mandati occorre un percorso verificabile da proposta e approvazione politica a certificato di autorizzazione e a transizione finalizzata mediante consenso tecnico. Oggi i contratti crittografici sono locali, non una rete elettorale BFT operativa. Alla perdita del quorum restano valide le ultime decisioni finalizzate e le copie pubbliche rimangono leggibili; un host superstite non assume automaticamente il potere di emettere una nuova storia ufficiale.
+
+Le regole anti-Sybil, l'identità portabile, le chiavi di voto e l'eventuale segretezza delle schede richiedono review di sicurezza e privacy separata. Il regime di pubblicazione attuale delle schede nominative non va esteso inconsapevolmente a una rete replicata in modo irreversibile. Vedere [PEER-OWNED-ARCHITECTURE.md](PEER-OWNED-ARCHITECTURE.md) e [DECENTRALIZATION-ROADMAP.md](DECENTRALIZATION-ROADMAP.md).
+
+## Ricerca delle fonti, assenso e voto: meccanismi diversi
+
+Un'assemblea può stabilire regole editoriali e incarichi, ma non rendere «vera» un'affermazione con un voto. Le revisioni wiki richiedono fonti, provenienza, licenze e un processo di contestazione appropriato; vedi [EDITORIAL-GOVERNANCE.md](EDITORIAL-GOVERNANCE.md). Il consenso editoriale basato su ragioni, l'assenso sociocratico per operazioni reversibili, la maggioranza politica e il quorum tecnico BFT risolvono problemi distinti. Nessuno dei quattro deve sostituire automaticamente gli altri.
+
+Le criticità di cattura delle chiavi, asimmetria di risorse, voto non segreto, pressione di gruppo e dipendenze commerciali sono raccolte in [CRITICAL-DESIGN-REVIEW.md](CRITICAL-DESIGN-REVIEW.md). Queste aggiunte definiscono vincoli proposti e controlli da implementare, non cambiano automaticamente le regole operative del forum già avviato.

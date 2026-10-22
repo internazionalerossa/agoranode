@@ -73,3 +73,12 @@ La licenza pubblica è separata dal grant minimo AgoràNode `org.agoranode.contr
 Ogni cronologia pubblica dovrà indicare almeno autore, licenza del contributo, versione e digest del grant, predecessore, chi ha richiesto il cambiamento, topic del forum, metodo, esito e data della decisione. Una proposta respinta, ritirata, senza quorum o in pareggio resta nella storia del forum ma non autorizza la pubblicazione di una revisione. Email, token sociali e identificativi privati non fanno parte di questa provenienza.
 
 Il deposito e il contratto dati per questi record sono implementati, ma il grant è ancora una bozza da sottoporre a revisione legale e il flusso pubblico forum→pagina non è aperto. Fino ad allora i contenuti enciclopedici entrano tramite import amministrativo revisionato nel repository; la presenza di una votazione nel forum non cambia automaticamente una pagina.
+
+## Comunità e conversazioni in una rete di PC volontari (obiettivo)
+
+Agorà è il nodo tematico sulla tecnologia AgoràNode; PolisRossa è una comunità distinta. Quando la piattaforma sarà multi-nodo, la stessa interfaccia offrirà wiki, fonti, feed, forum e stanze anche ad Agorà, **ma con propri account applicativi, decisioni e moderatori**, senza un'assemblea unica che controlli tutti i temi. I diritti PR2 restano locali; i mandati PR3 riguardano soltanto competenze federali approvate.
+
+Una chat pubblica o riservata non può essere spostata automaticamente in una blockchain immutabile: messaggi, cancellazioni, scadenze, consensi e moderazione richiedono una politica differente da quella delle revisioni wiki approvate. La chat corrente vive nella RAM di un processo e può sparire al riavvio. Il futuro multi-peer dovrà definire in anticipo se e per quanto tempo le copie circolano fra server e dispositivi, quali messaggi sono cifrati end-to-end e che cosa **non** può essere cancellato da copie già esportate.
+
+La replica della conoscenza pubblica non contiene l'archivio privato degli utenti o le conversazioni riservate. L'obiettivo e i limiti sono descritti in [PEER-OWNED-ARCHITECTURE.md](PEER-OWNED-ARCHITECTURE.md).
+

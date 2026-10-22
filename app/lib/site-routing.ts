@@ -1,3 +1,17 @@
+/**
+ * SPA entrypoints served as index.html by the production Node server.
+ * Do not treat arbitrary paths as app routes: unknown paths must return 404.
+ */
+const APP_SHELL_PATHS = new Set([
+  '/', '/read', '/account', '/agoranode', '/agoranode/',
+  '/agora', '/agora/',
+  '/polisrossa', '/polisrossa/', '/polisrossa/read', '/polisrossa/account',
+]);
+
+export function isAppShellPath(pathname: string): boolean {
+  return APP_SHELL_PATHS.has(pathname);
+}
+
 export type SiteRoute =
   | {kind: 'platform'; canonicalPath: '/'}
   | {kind: 'agora'; canonicalPath: string}

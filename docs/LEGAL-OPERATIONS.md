@@ -67,3 +67,10 @@ La chat usa esclusivamente la memoria del processo. Dichiarare l’azzeramento d
 L’infrastruttura indipendente funziona localmente e il percorso Funnel è stato osservato, ma l’ingresso Worker, i flussi account completi, Facebook OAuth e il forum pubblico non sono ancora collaudati. Il deposito append-only della conoscenza non autorizza da solo l’editing. La conformità del servizio pubblico resta da completare con identità e dati del gestore, contratti effettivi, audit dei diritti, revisione del grant e flussi privacy. Non sostituire queste verifiche con un badge «conforme a tutte le leggi». Una verifica professionale mirata dell’inquadramento editoriale, del grant dei contributi e della pubblicazione di voti nominativi riduce l’incertezza senza richiedere di costituire automaticamente una società.
 
 La guida [PUBLICATION.md](PUBLICATION.md) raccoglie le sette aree operative e i passaggi concreti di pubblicazione gratuita. È una mappa del progetto, non un numero universale di obblighi né un’attestazione di conformità.
+
+
+## Custodia volontaria su più computer: obblighi da definire
+
+Una rete di collaboratori che replicano dati pubblici non elimina le responsabilità giuridiche, né trasforma per definizione tutti i partecipanti in semplici soggetti domestici. Prima di replicare contenuti di persone fisiche, definire ruoli e accordi dei custodi, basi giuridiche, durata, trasferimenti internazionali, canali per segnalazioni e rimedi, trattamento delle rimozioni, DPIA ove necessaria, oltre ai diritti sulle opere e alle licenze di distribuzione. La replica **permanente** di chat, domande PR2 o discussioni riservate è esclusa dal disegno pubblico proposto.
+
+Un hash irrevocabile può a sua volta rivelare metadati o collegare identità; cifrare o hashare un campo non lo rende automaticamente anonimo. Non integrare la piattaforma con reti aperte a terzi prima di una revisione legale e tecnica applicata ai dati concreti. La separazione proposta è dettagliata in [PEER-OWNED-ARCHITECTURE.md](PEER-OWNED-ARCHITECTURE.md), ma non rappresenta da sola conformità certificata.

@@ -4,6 +4,10 @@ Questa è la specifica tecnica obiettivo per conservare e servire il patrimonio 
 
 “A prova di bomba”, “indistruttibile” e “senza provider” in senso assoluto non sono requisiti dimostrabili. Incendi, sequestri, collusione, perdita di tutte le chiavi, vulnerabilità comuni, interruzione di Internet o estinzione della comunità possono rendere il servizio irraggiungibile. L’obiettivo serio è eliminare i singoli punti di guasto noti, misurare disponibilità e recupero, mantenere copie verificabili presso amministrazioni indipendenti e degradare in sola lettura senza corrompere la storia.
 
+
+> **Lettura coordinata (22 ottobre 2026).** Questa specifica descrive l'obiettivo dei protocolli di conoscenza. [PEER-OWNED-ARCHITECTURE.md](PEER-OWNED-ARCHITECTURE.md) aggiunge la distinzione tra peer fisico, nodi tematici, portale, chat/social e dati privati. [DECENTRALIZATION-ROADMAP.md](DECENTRALIZATION-ROADMAP.md) stabilisce l'ordine delle prove e indica quali funzionalità restano chiuse. La replica pubblica della conoscenza **non** autorizza la replica di account, chat o interi database del forum.
+
+
 ## Proprietà da garantire
 
 1. Un peer completo sopravvissuto può servire l’ultima conoscenza pubblica verificata anche se gli altri scompaiono.

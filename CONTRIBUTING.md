@@ -113,3 +113,12 @@ Keep credentials, `.env`, caches, personal collections, local paths and build ou
 Code contributions remain under AGPL-3.0-or-later. The author-selected license and AgoràNode grant described above apply to future encyclopedia contributions, not as a way to relicense source code or third-party material. Never invent a license for existing editorial text, quotations, books, images or datasets.
 
 GitHub checks code; it does not deploy the Site automatically. Publication is handled separately after review. Contributors do not need production credentials.
+
+## Contribuire alla rete dei peer / Contributing to peer-owned networking
+
+Un **nodo tematico** è una comunità, mentre un **peer** è un computer che conserva o serve dati della rete. Agorà è la comunità sulla tecnologia; PolisRossa è distinta. Il repository attuale contiene solo il motore di replica locale della conoscenza pubblica, non una rete P2P aperta; non presentare una prova locale come disponibilità federata.
+
+Prima di una proposta relativa a peer, protocolli o nuovi esportatori, leggere [PEER-OWNED-ARCHITECTURE.md](docs/PEER-OWNED-ARCHITECTURE.md), [DECENTRALIZATION-ROADMAP.md](docs/DECENTRALIZATION-ROADMAP.md) e [QUALITY.md](docs/QUALITY.md). Ogni modifica deve indicare quali dati attraversano la rete, chi ha diritto a riceverli, le conseguenze della disconnessione e la compatibilità con PolisRossa. Non aggiungere credenziali o dati privati in fixture e commit. Non installare servizi di rete sui computer altrui né creare nuove dipendenze obbligatorie dai provider senza un esplicito consenso.
+
+For external contributors: a thematic **space** is not the same as a physical **peer**. Start with a focused issue/PR, add negative tests for privacy and invalid inputs, and keep distributed writes disabled until multi-host testing and a security review are complete.
+

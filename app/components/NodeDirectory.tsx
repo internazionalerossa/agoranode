@@ -1,14 +1,15 @@
 import {useState} from "react";
 import {ArrowRight, BookOpen, Network, Search} from "lucide-react";
+import {publicLocalSpaces} from "../instances/registry";
 
-type ActiveNode = {
+type LocalNode = {
   id: string;
   name: string;
   topic: string;
   description: string;
   href: string;
   status: string;
-  kind: "active";
+  kind: "local";
 };
 
 type PossibleNode = {
@@ -25,28 +26,8 @@ type SearchIdea = {
   family: string;
 };
 
-const nodes = [
-  {
-    id: "agora",
-    name: "Agorà",
-    topic: "Tecnologia, protocollo e infrastruttura comune",
-    description:
-      "Stato dell’arte del progetto: architettura, regole, decisioni federali, custodia dei dati e sviluppo dei nodi.",
-    href: "/agora",
-    status: "Nodo in costruzione",
-    kind: "active",
-  },
-  {
-    id: "polisrossa",
-    name: "PolisRossa",
-    topic: "Stato dell’arte della sinistra politica",
-    description:
-      "Attualità, video, biblioteca, storia, dati e discussione sui movimenti e le idee della sinistra internazionale.",
-    href: "/polisrossa",
-    status: "Nodo tematico disponibile",
-    kind: "active",
-  },
-] as const;
+// This display-only catalogue derives from the same allowlisted manifests as /api/nodes.
+const nodes: LocalNode[] = publicLocalSpaces().map(space => ({...space, kind: 'local'}));
 
 const possibleNodeFamilies: ReadonlyArray<{name: string; topics: readonly string[]}> = [
   {name: "Scienze e matematica", topics: ["Matematica", "Fisica", "Astronomia", "Chimica", "Biologia", "Geologia", "Scienze del clima", "Statistica", "Informatica teorica"]},
@@ -84,13 +65,13 @@ export default function NodeDirectory() {
   const [query, setQuery] = useState("");
   const [page, setPage] = useState(0);
   const queryTerms = normalizeSearchText(query.trim()).split(/\s+/).filter(Boolean);
-  const activeMatches = nodes.filter((node) =>
+  const localMatches = nodes.filter((node) =>
     queryTerms.every((term) => normalizeSearchText(`${node.name} ${node.topic} ${node.description}`).includes(term)),
   );
   const possibleMatches = possibleNodes.filter((node) =>
     queryTerms.every((term) => normalizeSearchText(`${node.name} ${node.family}`).includes(term)),
   );
-  const matchingEntries: Array<ActiveNode | PossibleNode | SearchIdea> = [...activeMatches, ...possibleMatches];
+  const matchingEntries: Array<LocalNode | PossibleNode | SearchIdea> = [...localMatches, ...possibleMatches];
   if (query.trim() && matchingEntries.length === 0) {
     matchingEntries.push({
       id: `search-${normalizeSearchText(query.trim())}`,
@@ -127,10 +108,10 @@ export default function NodeDirectory() {
         <section className="node-directory-catalog" aria-labelledby="node-directory-catalog-title">
           <div className="node-directory-catalog-heading">
             <div>
-              <p className="eyebrow">ACCESSI DISPONIBILI</p>
+              <p className="eyebrow">ACCESSI LOCALI</p>
               <h2 id="node-directory-catalog-title">Trova un nodo</h2>
             </div>
-            <span aria-live="polite">{query.trim() ? `${matchingEntries.length} risultati` : `${nodes.length} nodi attivi`}</span>
+            <span aria-live="polite">{query.trim() ? `${matchingEntries.length} risultati` : `${nodes.length} nodi locali`}</span>
           </div>
           <label className="node-directory-search">
             <Search size={18} aria-hidden="true" />
@@ -148,7 +129,7 @@ export default function NodeDirectory() {
           </label>
           {query.trim() ? visibleEntries.length > 0 ? (
             <ol className="node-directory-list">
-              {visibleEntries.map((entry) => entry.kind === "active" ? (
+              {visibleEntries.map((entry) => entry.kind === "local" ? (
                 <li key={entry.id}>
                   <a className={`node-directory-card node-directory-card-${entry.id}`} href={entry.href}>
                     <span className="node-directory-card-main">

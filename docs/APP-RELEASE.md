@@ -33,3 +33,10 @@ I test locali coprono manifest, fallback offline, esclusione delle API private d
 La presenza del codice non prova il servizio pubblico. Funnel e una connessione SMTP sono stati osservati separatamente, ma consegna dei messaggi dei flussi account, callback Meta, telefono su rete mobile e riavvio del PC devono ancora essere verificati insieme sull'istanza reale; il ripristino dell'ultimo backup va ripetuto dopo i dati di collaudo. La replica automatica fra PC, il subentro dell'ultimo nodo, il quorum fra host e la cifratura end-to-end non sono implementati. Sono inoltre ancora necessari controlli interattivi su tastiera, orientamento, installazione Home e riconnessione sui dispositivi effettivi.
 
 Fonti tecniche: [installazione PWA](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Guides/Making_PWAs_installable), [prompt di installazione](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/How_to/Trigger_install_prompt), [web app su iOS](https://webkit.org/blog/13878/).
+
+
+## Client AgoràNode e partecipazione ai peer
+
+La PWA attuale è un **client web** e non una replica completa dei dati pubblici né un validatore: cache offline e service worker non offrono custodia durevole della rete. Nel modello futuro il browser potrà accedere a gateway indipendenti; chi desidera offrire disco e connessione dovrà avviare un demone persistente, con consenso esplicito sulle risorse e sulle categorie di dati condivise. Il nodo tematico Agorà (tecnologia) e PolisRossa devono usare componenti comuni con configurazioni separate; l'interfaccia completa di Agorà non è ancora implementata.
+
+Non collegare in modo implicito account personali o contenuti delle chat al dispositivo host: una persona può partecipare senza custodire alcun peer e un custode può ospitare contenuti pubblici senza acquisire diritti di voto. Vedi [DECENTRALIZATION-ROADMAP.md](DECENTRALIZATION-ROADMAP.md).

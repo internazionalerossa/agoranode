@@ -1,12 +1,12 @@
-import {AGORA_NODE_CAPABILITIES} from '../platform/agora-node-manifest';
+import {AGORA_NODE_CAPABILITIES, type AgoraNodeManifest} from '../platform/agora-node-manifest';
+import {localSpaceManifest, publicLocalSpaces} from '../instances/registry';
 import {INSTANCE_MANIFEST} from './instance';
 
 /**
  * Explicit projection: compatibility namespaces and any future private build
  * fields cannot leak through an object spread.
  */
-export function publicInstanceDescriptor() {
-  const manifest = INSTANCE_MANIFEST;
+export function publicInstanceDescriptor(manifest: AgoraNodeManifest = INSTANCE_MANIFEST) {
   return {
     schema: manifest.schema,
     schemaVersion: manifest.schemaVersion,
@@ -65,6 +65,23 @@ export function instanceInfoResponse(request: Request): Response {
   const headers = {'cache-control': 'public, max-age=3600', 'content-type': 'application/json; charset=utf-8'};
   if (request.method !== 'GET') return Response.json({error: 'Method not allowed'}, {status: 405, headers: {...headers, allow: 'GET'}});
   const url = new URL(request.url);
-  if ([...url.searchParams.keys()].length) return Response.json({error: 'Invalid request'}, {status: 400, headers});
-  return Response.json(publicInstanceDescriptor(), {headers});
+  // Legacy GET /api/instance remains PolisRossa; opt-in to the local
+  // Agorà preview with ?id=agora. Never resolve arbitrary remote manifests.
+  const keys = [...url.searchParams.keys()];
+  if (keys.some(key => key !== 'id') || url.searchParams.getAll('id').length > 1)
+    return Response.json({error: 'Invalid request'}, {status: 400, headers});
+  const requestedId = url.searchParams.get('id');
+  if (requestedId === '')
+    return Response.json({error: 'Invalid request'}, {status: 400, headers});
+  const manifest = requestedId === null ? INSTANCE_MANIFEST : localSpaceManifest(requestedId);
+  if (!manifest) return Response.json({error: 'Unknown local space'}, {status: 404, headers});
+  return Response.json(publicInstanceDescriptor(manifest), {headers});
+}
+
+/** Local catalogue only. Remote node discovery is NOT implemented. */
+export function localNodeDirectoryResponse(request: Request): Response {
+  const headers = {'cache-control': 'public, max-age=3600', 'content-type': 'application/json; charset=utf-8'};
+  if (request.method !== 'GET') return Response.json({error: 'Method not allowed'}, {status: 405, headers: {...headers, allow: 'GET'}});
+  if (new URL(request.url).search) return Response.json({error: 'Invalid request'}, {status: 400, headers});
+  return Response.json({nodes: publicLocalSpaces(), federatedDiscovery: false}, {headers});
 }

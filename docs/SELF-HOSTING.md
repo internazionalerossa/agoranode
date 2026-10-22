@@ -272,3 +272,12 @@ Riavvia sempre dopo una modifica a `runtime.env`. Prima prova con accesso pubbli
 7. ripeti backup cifrato e ripristino separato dopo aver creato questi dati di collaudo.
 
 Solo dopo questi risultati lascia entrambi i flag a `true` e verifica da una rete esterna `/healthz`, `/api/service-info`, registrazione, accesso, forum e invio email. Per richiudere immediatamente senza cancellare account o discussioni, rimetti entrambi i flag a `false` e riavvia; per interrompere anche la consultazione pubblica disattiva inoltre il tunnel o l'ingresso scelto. Non cancellare volumi e non rigenerare `AUTH_SECRET`, altrimenti le sessioni e i token OAuth cifrati esistenti non restano utilizzabili.
+
+## Il futuro peer dei collaboratori non è ancora l'attuale mirror
+
+La modalità `mirror` dell'installazione corrente permette di ospitare una copia locale per consultazione, con PostgreSQL e backup propri. Non rende quel PC un peer automaticamente raggiungibile, non replica forum/account e non permette al browser di continuare a usare l'identità privata se cade l'host originale.
+
+Il pacchetto futuro per collaboratori dovrà distinguere quattro scelte: replica pubblica, gateway pubblico, custode privato autorizzato e finalizzatore incaricato. Soltanto la prima può essere progettata senza accesso a dati personali. Installer, limiti risorse, aggiornamenti firmati, scoperta, trasporto, recupero e continuità HTTPS richiedono implementazione e test tra macchine indipendenti. **Non aprire porte, rendere pubbliche variabili .env, replicare volumi PostgreSQL in chiaro o attivare un relay per anticipare la roadmap.**
+
+Leggere [PEER-OWNED-ARCHITECTURE.md](PEER-OWNED-ARCHITECTURE.md) per le responsabilità dei peer e [DECENTRALIZATION-ROADMAP.md](DECENTRALIZATION-ROADMAP.md) per l'ordine dei collaudi.
+

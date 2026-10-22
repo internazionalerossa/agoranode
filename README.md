@@ -220,3 +220,8 @@ Account, sessioni, raccolte, avanzamento di lettura e richieste di ammissione so
 | [SOURCES.md](docs/SOURCES.md) | Fonti delle notizie e controlli dei collegamenti |
 | [LEGAL-OPERATIONS.md](docs/LEGAL-OPERATIONS.md) | Privacy, moderazione, contenuti e responsabilità del gestore |
 | [LICENSING.md](docs/LICENSING.md) | Licenze del codice, delle dipendenze e dei contenuti di terzi |
+
+
+### Storage leggero e repliche efficienti
+
+La prima ottimizzazione operativa evita di riscaricare pacchetti firmati pubblici già verificati; un prototipo separato testa la deduplicazione con blocchi content-defined e hash SHA-256. Il chunker **non è ancora collegato al trasporto in produzione**, quindi non implica ancora replica incrementale del patrimonio. Per limiti tecnici e benchmark sintetici riproducibili vedere [Lean Storage](docs/LEAN-STORAGE.md).

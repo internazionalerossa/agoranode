@@ -60,3 +60,6 @@ Separare prove di trasporto peer-to-peer, consenso BFT, certificati politici, ac
 
 Ogni nuova capacità deve preservare namespace, URL, volumi e ID PolisRossa, non inventare licenze per contenuti esistenti, e distinguere il contratto tipizzato dalla disponibilità pubblica comprovata.
 
+## Qualità della conoscenza e concentrazione del potere
+
+Una decisione democratica non certifica un fatto. Non creare API che trasformino un voto in verità editoriale o consentano a un custode tecnico di governare un nodo. Leggere `docs/EDITORIAL-GOVERNANCE.md` e `docs/CRITICAL-DESIGN-REVIEW.md` per i conflitti fra fonti, consenso, voto, privacy, ranking e anti-cattura. Non introdurre feed opachi di profilazione politica, replica irreversibile di relazioni personali o moderazione senza motivazione e rimedi.

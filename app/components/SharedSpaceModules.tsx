@@ -1,5 +1,6 @@
 import type {AgoraNodeManifest, AgoraNodeCapabilityId} from '../platform/agora-node-manifest';
 import {AGORA_NODE_CAPABILITIES} from '../platform/agora-node-manifest';
+import NodeContentSearch from './NodeContentSearch';
 
 /**
  * Same structured module navigator in every thematic community.
@@ -40,6 +41,7 @@ export default function SharedSpaceModules({manifest}: {manifest: AgoraNodeManif
           );
         })}
       </div>
+      <NodeContentSearch spaceId={manifest.instance.id}/>
     </section>
   );
 }

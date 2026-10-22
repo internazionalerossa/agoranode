@@ -56,3 +56,8 @@ I test HTTP usano un listener su loopback nel runner CI: **non equivalgono a una
 Serve almeno un programma di verifica esterno con: threat model, inventario delle superfici di attacco e trust roots, controllo riga-per-riga dei moduli crittografici e di autorizzazione, test di confidenzialità e cancellazione, fuzzing di parser e protocollo, revisione delle dipendenze e dei segreti, esercizi su almeno tre host indipendenti e rapporto firmato con evidenza riproducibile, limiti e severità delle vulnerabilità. La certificazione può essere dichiarata solo dall'organismo che l'ha effettivamente emessa.
 
 **Non dichiarare il software sicuro o decentralizzato solo perché la suite CI è verde.**
+
+
+## Rischi residui del prototipo lean storage
+
+I nuovi blocchi `gear32-v1` sono sperimentali: senza un certificato che vincoli il manifesto e i suoi hash al contenuto approvato, **non devono essere distribuiti come nuove revisioni pubbliche finali**. Deduplicare può rivelare la presenza di contenuti noti se applicato a oggetti segreti; quindi la policy del codec accetta solo `public-verified`, ma l'exporter deve comunque autorizzare realmente ogni dato. La verifica del contenuto per SHA-256 non prova verità o diritti. Il client ricontrolla i file locali prima di saltare il download, perciò il risparmio di banda non implica lo stesso risparmio di CPU. I peer di fallback sono URL configurati manualmente, non peer discovery autenticata.

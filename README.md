@@ -2,13 +2,13 @@
 
 **Infrastruttura open source per conoscenza condivisa, comunità autonome e reti custodite dalle persone.**
 
-[English](README.en.md) · [Architettura](docs/ARCHITECTURE.md) · [Contribuire](CONTRIBUTING.md) · [Roadmap](docs/DECENTRALIZATION-ROADMAP.md) · [Stato verificato](docs/QUALITY.md) · [Sicurezza](docs/SECURITY-REVIEW.md)
+[English](README.en.md) · [Prima lettura per sviluppatori](docs/ALPHA-BASELINE.md) · [Architettura](docs/ARCHITECTURE.md) · [Contribuire](CONTRIBUTING.md) · [Roadmap](docs/DECENTRALIZATION-ROADMAP.md) · [Stato verificato](docs/QUALITY.md) · [Sicurezza](docs/SECURITY-REVIEW.md)
 
 AgoràNode è una piattaforma **AGPL-3.0-or-later** per creare comunità tematiche autonome che condividono lo stesso software: **wiki con fonti e revisioni, feed RSS, biblioteca digitale, timeline narrativa, dati e grafici, forum, proposte e autogoverno comunitario**.
 
 L'obiettivo di lungo periodo è far funzionare il patrimonio pubblico della rete sui **computer di collaboratori indipendenti**, senza dipendere permanentemente da un server fondatore, un database commerciale o un unico cloud. Ogni computer dovrebbe custodire soltanto ciò che è autorizzato e sceglie di ospitare; le modifiche pubbliche devono essere verificabili e replicabili in modo incrementale, mentre le informazioni private restano protette.
 
-**Progetto in sviluppo, non un social federato pronto per la produzione.** PolisRossa è il primo nodo tematico sviluppato. Agorà è il nodo dedicato alla tecnologia stessa, ancora in costruzione. Consenso BFT in rete, identità portabili, chat federata, runtime completo multi-comunità e failover indipendente non sono ancora operativi. Il registro [QUALITY.md](docs/QUALITY.md) distingue codice implementato, test locali ed evidenze esterne.
+**Alpha di piattaforma: PolisRossa è il primo nodo reale, non una demo da buttare via.** Da qui estraiamo componenti, modelli e strumenti comuni senza perdere contenuti, URL e lavoro editoriale. **Non è ancora un social federato pronto per la produzione.** Agorà è il nodo dedicato alla tecnologia stessa, ancora in costruzione. Consenso BFT in rete, identità portabili, chat federata, runtime completo multi-comunità e failover indipendente non sono ancora operativi. Il registro [QUALITY.md](docs/QUALITY.md) distingue codice implementato, test locali ed evidenze esterne.
 
 ## Un motore, comunità diverse
 
@@ -50,7 +50,7 @@ Un voto può approvare una regola o una selezione editoriale; **non può rendere
 | Governance | Certificati di quorum verificati localmente, PR2/PR3 definiti | Consenso BFT operativo tra computer e audit indipendente |
 | Social e identità | Forum persistente, chat temporanea, autenticazione | Eventi social federati, stanze, cifratura privata e recovery portabile |
 
-Questa tabella descrive la **situazione effettiva**, non una promessa di funzioni già attive. Dettagli e limiti sono in [QUALITY.md](docs/QUALITY.md).
+Questa tabella distingue **codice esistente, funzioni alpha e lavoro incompleto**, non promesse di funzioni già attive. Le scelte di stack, i criteri di verifica e i merge già effettuati sono raccolti in [Alpha Baseline](docs/ALPHA-BASELINE.md). Dettagli e limiti sono in [QUALITY.md](docs/QUALITY.md).
 
 ## Architettura: piccolo nucleo, dati verificabili
 

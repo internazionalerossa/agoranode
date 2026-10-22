@@ -2,7 +2,7 @@
 
 **A community-owned knowledge network, built in the open.**
 
-[Italiano](README.md) · [Architecture](docs/ARCHITECTURE.md) · [Contributing](CONTRIBUTING.md) · [Roadmap](docs/DECENTRALIZATION-ROADMAP.md) · [Verified status](docs/QUALITY.md)
+[Italiano](README.md) · [Alpha engineering baseline](docs/ALPHA-BASELINE.md) · [Architecture](docs/ARCHITECTURE.md) · [Contributing](CONTRIBUTING.md) · [Roadmap](docs/DECENTRALIZATION-ROADMAP.md) · [Verified status](docs/QUALITY.md)
 
 AgoràNode is AGPL-licensed software for independent topical communities that combine a **wiki, RSS reader, digital library, searchable timeline, data visualizations, public discussions and community governance**. Each community uses the same core software and should retain authority over its own content and membership.
 

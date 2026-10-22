@@ -1,6 +1,6 @@
 # AgoràNode — Pagine enciclopediche, racconto e decisioni PR2
 
-**Contratto di prodotto e stato:** PolisRossa dispone oggi di pagine storiche narrative e di un catalogo di opere; questa specifica spiega come trasformare tali prototipi in moduli comuni per tutti i nodi. Un primo indice di ricerca e un editor di proposte della timeline sono presenti nel ramo di sviluppo; non esiste ancora il backend completo di pubblicazione federata.
+**Contratto di prodotto e stato:** PolisRossa dispone oggi di pagine storiche narrative e di un catalogo di opere; questa specifica spiega come trasformare tali prototipi in moduli comuni per tutti i nodi. Un primo indice di ricerca e un editor per preparare proposte sulla timeline sono già integrati in `main`; non esiste ancora il backend completo di pubblicazione federata.
 
 ## Tre oggetti differenti, sempre separati
 

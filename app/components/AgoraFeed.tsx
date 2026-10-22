@@ -60,7 +60,7 @@ export default function AgoraFeed(){
       {failed?<button type="button" onClick={()=>setRetry(x=>x+1)}>Riprova</button>:null}
     </div>
     <div className="agora-feed-activity">
-      <h3>Video e conferenze</h3>
+      <h3 id="agora-video-title">Video e conferenze</h3>
       {!loading&&!failed?<ArticleList items={videos}/>:null}
       <div className="agora-video-archives">
         <a href={AGORA_VIDEO_ARCHIVE.url} rel="noopener noreferrer" target="_blank">{AGORA_VIDEO_ARCHIVE.name}</a>

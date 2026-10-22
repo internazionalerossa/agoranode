@@ -63,3 +63,11 @@ Ogni nuova capacità deve preservare namespace, URL, volumi e ID PolisRossa, non
 ## Qualità della conoscenza e concentrazione del potere
 
 Una decisione democratica non certifica un fatto. Non creare API che trasformino un voto in verità editoriale o consentano a un custode tecnico di governare un nodo. Leggere `docs/EDITORIAL-GOVERNANCE.md` e `docs/CRITICAL-DESIGN-REVIEW.md` per i conflitti fra fonti, consenso, voto, privacy, ranking e anti-cattura. Non introdurre feed opachi di profilazione politica, replica irreversibile di relazioni personali o moderazione senza motivazione e rimedi.
+
+## Revisione sistematica dei requisiti
+
+Prima di cambiare moduli comuni, storie, dati, permessi o distribuzione, consultare **le specifiche tecniche pubbliche**: `docs/PEER-OWNED-ARCHITECTURE.md`, `docs/NODE-KNOWLEDGE-GRAPH.md`, `docs/CONTINUOUS-SYNC.md`, `docs/EDITORIAL-GOVERNANCE.md`, `docs/DECENTRALIZATION-ROADMAP.md` e `docs/QUALITY.md`. Verificare che il lavoro non contraddica invarianti già documentate: pagina ricercabile anche fuori timeline, inclusione narrativa decisa dai PR2 locali, provenienza e licenze dei file, replica pubblica separata dai dati personali, audit e rollback.
+
+Le trascrizioni letterali, gli appunti personali e i materiali riservati **non fanno parte del repository pubblico**. Non aggiungerli a commit, issue, PR, README, log o fixture; utilizzare soltanto requisiti tecnici rielaborati, necessari e privi di informazioni non pertinenti al codice. La storia delle decisioni tecniche resta in Git e nei documenti pubblici, non in un diario privato.
+
+A conclusione del cambiamento confrontare codice, API, test, interfaccia e documentazione con questi requisiti e annotare limiti ancora aperti; non trasformare gli obiettivi di prodotto in funzionalità dichiarate operative.

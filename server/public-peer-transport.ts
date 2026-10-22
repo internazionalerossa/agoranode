@@ -4,7 +4,8 @@
  * NOT automatic discovery, distributed consensus, or private data federation.
  */
 import {createServer, type Server} from 'node:http';
-import {readdir, open} from 'node:fs/promises';
+import {readdir, open, lstat} from 'node:fs/promises';
+import {createHash} from 'node:crypto';
 import {constants} from 'node:fs';
 import {join, resolve} from 'node:path';
 import {canonicalKnowledgeJson} from '../app/lib/knowledge-model';
@@ -62,19 +63,51 @@ async function names(options: PeerOptions): Promise<string[]> {
   }
   return approved;
 }
+/**
+ * Avoid rehashing all old snapshots on every one-second index request.
+ * Inode, size, mtime AND ctime invalidate the cached positive verification;
+ * receivers recheck signatures and hashes before importing regardless.
+ */
+export class PublicPeerIndexCache {
+  private verified=new Map<string,string>();
+  async names(options: PeerOptions):Promise<string[]> {
+    const entries=await readdir(resolve(options.directory),{withFileTypes:true});
+    const candidates=entries.filter(e=>e.isFile()&&safeName(e.name)).map(e=>e.name).sort();
+    if(candidates.length>MAX_LIST)throw Error('Peer index exceeds bounded window');
+    const approved:string[]=[],present=new Set(candidates);
+    for(const name of candidates){
+      try {
+        const meta=await lstat(join(resolve(options.directory),name));
+        if(!meta.isFile()||meta.isSymbolicLink())continue;
+        const stamp=[meta.dev,meta.ino,meta.size,meta.mtimeMs,meta.ctimeMs].join(':');
+        if(this.verified.get(name)!==stamp){
+          await readVerifiedPackage(options.directory,name,options);
+          this.verified.set(name,stamp);
+        }
+        approved.push(name);
+      }catch {this.verified.delete(name);}
+    }
+    for(const name of this.verified.keys())if(!present.has(name))this.verified.delete(name);
+    return approved;
+  }
+}
+
 function json(body: unknown, status = 200): Response {
   return Response.json(body, {status, headers: {'cache-control':'no-store','x-content-type-options':'nosniff'}});
 }
 
 /** Pure HTTP route; TLS termination belongs to the independently hosted gateway. */
-export async function publicPeerRequest(request: Request, options: PeerOptions): Promise<Response> {
+export async function publicPeerRequest(request: Request, options: PeerOptions, cache?: PublicPeerIndexCache): Promise<Response> {
   if (request.method !== 'GET') return json({error:'Method not allowed'},405);
   const url = new URL(request.url);
   if (url.search || url.hash) return json({error:'Invalid request'},400);
   if (url.pathname === '/v1/index') {
     const index: PublicPeerIndex = {format:FORMAT,networkId:options.expectedNetworkId,
-      spaceId:options.expectedSpaceId,packages:await names(options)};
-    return json(index);
+      spaceId:options.expectedSpaceId,packages:cache?await cache.names(options):await names(options)};
+    const etag='"'+createHash('sha256').update(JSON.stringify(index)).digest('hex')+'"';
+    const headers={'cache-control':'no-store','etag':etag,'x-content-type-options':'nosniff'};
+    if(request.headers.get('if-none-match')===etag) return new Response(null,{status:304,headers});
+    return Response.json(index,{headers});
   }
   const prefix='/v1/packages/';
   if (!url.pathname.startsWith(prefix)) return json({error:'Not found'},404);
@@ -90,10 +123,15 @@ export async function publicPeerRequest(request: Request, options: PeerOptions):
 
 /** Loopback by default: public exposure requires operator-managed TLS proxy. */
 export function createPublicPeerServer(options: PeerOptions, host='127.0.0.1'): Server {
+  const indexCache=new PublicPeerIndexCache();
   return createServer({requestTimeout:30_000},async(incoming,outgoing)=>{
     try {
-      const request=new Request('http://'+host+(incoming.url??'/'),{method:incoming.method??'GET'});
-      const response=await publicPeerRequest(request,options);
+      const request=new Request('http://'+host+(incoming.url??'/'),{
+        method:incoming.method??'GET',
+        headers:{...(typeof incoming.headers['if-none-match']==='string'?
+          {'if-none-match':incoming.headers['if-none-match']}: {})},
+      });
+      const response=await publicPeerRequest(request,options,indexCache);
       outgoing.writeHead(response.status,Object.fromEntries(response.headers));
       outgoing.end(Buffer.from(await response.arrayBuffer()));
     } catch {
@@ -146,26 +184,57 @@ function parseIndex(value: unknown, options: PeerOptions): string[] {
  * Pull from an explicitly configured peer URL. Verify signed namespaces BEFORE
  * atomically writing to an inbox consumed by the existing DB importer.
  */
+export type PublicPeerPollState = {
+  etag?: string;
+  lastFullIndexAt?: number;
+  verifiedLocalFiles?: Map<string,string>;
+  lastScrubAt?: number;
+};
 export async function pullPublicPeer(origin: string,options: PeerOptions,
-  deps:{fetcher?: typeof fetch; allowInsecureLoopback?: boolean}={}) {
+  deps:{fetcher?: typeof fetch; allowInsecureLoopback?: boolean; pollState?: PublicPeerPollState}={}) {
   const base=peerOrigin(origin,deps.allowInsecureLoopback),fetcher=deps.fetcher??fetch;
   const fetchBounded=async(route:string,size:number)=>{
     const response=await fetcher(base+route,{method:'GET',redirect:'manual',credentials:'omit',
       signal:AbortSignal.timeout(TIMEOUT_MS),headers:{accept:'application/json'}});
     return boundedBody(response,size);
   };
-  const index=parseIndex(JSON.parse(await fetchBounded('/v1/index',MAX_INDEX_BYTES)),options);
+  const state=deps.pollState;
+  const now=Date.now();
+  const useETag=Boolean(state?.etag && now-(state.lastFullIndexAt??0)<60_000);
+  const indexResponse=await fetcher(base+'/v1/index',{
+    method:'GET',redirect:'manual',credentials:'omit',signal:AbortSignal.timeout(TIMEOUT_MS),
+    headers:{accept:'application/json',...(useETag?{'if-none-match':state!.etag!}:{})},
+  });
+  if(indexResponse.status===304) {
+    if(!useETag)throw Error('Unsolicited unchanged response from peer');
+    return [];
+  }
+  const index=parseIndex(JSON.parse(await boundedBody(indexResponse,MAX_INDEX_BYTES)),options);
+  if(state) {
+    const etag=indexResponse.headers.get('etag');
+    state.etag=etag && /^"[0-9a-f]{64}"$/.test(etag)?etag:undefined;
+    state.lastFullIndexAt=now;
+    state.verifiedLocalFiles??=new Map();
+    state.lastScrubAt??=now;
+  }
   const results:Array<{name:string;created:boolean}>=[];
+  const scrub=Boolean(state && now-(state.lastScrubAt??0)>=3_600_000);
   for(const name of index) {
     // Verified local files are immutable: do not re-download entire cumulative
     // knowledge bundles on each poll. Fail closed on a corrupt local file;
     // operators must quarantine it explicitly rather than silently overwriting.
     try {
-      await readVerifiedPackage(options.directory,name,options);
+      const meta=state?await lstat(join(resolve(options.directory),name)):undefined;
+      const stamp=meta?[meta.dev,meta.ino,meta.size,meta.mtimeMs,meta.ctimeMs].join(':'):undefined;
+      if(!state||!stamp||scrub||state.verifiedLocalFiles?.get(name)!==stamp) {
+        await readVerifiedPackage(options.directory,name,options);
+        if(state&&stamp)state.verifiedLocalFiles?.set(name,stamp);
+      }
       results.push({name,created:false});
       continue;
     } catch(error) {
       if((error as NodeJS.ErrnoException).code!=='ENOENT') throw error;
+      state?.verifiedLocalFiles?.delete(name);
     }
     const payload:unknown=JSON.parse(await fetchBounded('/v1/packages/'+name,MAX_PACKAGE_BYTES));
     const validated=await validateKnowledgeReplicationPackage(payload,{
@@ -181,6 +250,15 @@ export async function pullPublicPeer(origin: string,options: PeerOptions,
       verifyGovernanceAuthorization:options.verifyGovernanceAuthorization,
     });
     results.push({name,created:result.created});
+    if(state) {
+      const meta=await lstat(join(resolve(options.directory),name));
+      state.verifiedLocalFiles?.set(name,[meta.dev,meta.ino,meta.size,meta.mtimeMs,meta.ctimeMs].join(':'));
+    }
+  }
+  if(state&&scrub)state.lastScrubAt=now;
+  if(state) {
+    const present=new Set(index);
+    for(const key of state.verifiedLocalFiles?.keys()??[])if(!present.has(key))state.verifiedLocalFiles?.delete(key);
   }
   return results;
 }
@@ -193,7 +271,7 @@ export async function pullPublicPeer(origin: string,options: PeerOptions,
  */
 export async function pullFromPublicPeers(
   origins: readonly string[], options: PeerOptions,
-  deps: {fetcher?: typeof fetch; allowInsecureLoopback?: boolean} = {},
+  deps: {fetcher?: typeof fetch; allowInsecureLoopback?: boolean; pollStates?: Map<string,PublicPeerPollState>} = {},
 ) {
   if (!Array.isArray(origins) || origins.length === 0 || origins.length > 8) {
     throw Error('Choose between one and eight independent public peers');
@@ -202,7 +280,9 @@ export async function pullFromPublicPeers(
   if (new Set(approved).size !== approved.length) throw Error('Duplicate public peer');
   for (const origin of approved) {
     try {
-      const packages = await pullPublicPeer(origin, options, deps);
+      const state=deps.pollStates?.get(origin)??{};
+      const packages = await pullPublicPeer(origin, options, {...deps,pollState:state});
+      deps.pollStates?.set(origin,state);
       return {packages, tried: approved.indexOf(origin) + 1};
     } catch {
       // A peer may be unavailable, inconsistent or malicious. Another fully
@@ -210,4 +290,59 @@ export async function pullFromPublicPeers(
     }
   }
   throw Error('All configured public peers failed verification or were unreachable');
+}
+
+
+export type PublicPeerWatchEvent =
+  | {status:'synced'; sourceTries:number; packagesSeen:number; newPackages:number}
+  | {status:'unavailable'; error:string};
+
+/**
+ * Best-effort one-second *poll*, NOT a one-second database backup, a quorum
+ * acknowledgment, or a bounded propagation-latency guarantee.
+ *
+ * Rotate among independent trusted endpoints and persist the HTTP ETags and
+ * verified-local-file stamps in process memory. Each subsequent poll is
+ * conditional, transferring zero index body bytes when unchanged. The
+ * last known verified public state remains available during outages.
+ */
+export async function watchPublicPeers(
+  origins: readonly string[],options:PeerOptions,
+  settings:{
+    intervalMs?:number;
+    signal?:AbortSignal;
+    onCycle?:(event:PublicPeerWatchEvent)=>void;
+  }={},
+  deps:{fetcher?:typeof fetch;allowInsecureLoopback?:boolean}={},
+):Promise<void> {
+  const interval=settings.intervalMs??1_000;
+  if(!Number.isInteger(interval)||interval<1_000||interval>60_000)
+    throw Error('Peer poll interval must be 1000–60000 milliseconds');
+  if(!Array.isArray(origins)||origins.length<1||origins.length>8)
+    throw Error('Choose between one and eight peers');
+  const checked=origins.map(origin=>peerOrigin(origin,deps.allowInsecureLoopback));
+  if(new Set(checked).size!==checked.length)throw Error('Duplicate public peer');
+  const states=new Map<string,PublicPeerPollState>();
+  let offset=0;
+  while(!settings.signal?.aborted) {
+    const rotated=[...checked.slice(offset),...checked.slice(0,offset)];
+    offset=(offset+1)%checked.length;
+    try {
+      const result=await pullFromPublicPeers(rotated,options,{...deps,pollStates:states});
+      settings.onCycle?.({
+        status:'synced',sourceTries:result.tried,
+        packagesSeen:result.packages.length,
+        newPackages:result.packages.filter(p=>p.created).length,
+      });
+    } catch(error) {
+      settings.onCycle?.({status:'unavailable',error:error instanceof Error?error.message:'Peer unavailable'});
+    }
+    if(settings.signal?.aborted)break;
+    await new Promise<void>(done=>{
+      const timer=setTimeout(()=>{settings.signal?.removeEventListener('abort',stop);done();},interval);
+      const stop=()=>{clearTimeout(timer);done();};
+      settings.signal?.addEventListener('abort',stop,{once:true});
+      if(settings.signal?.aborted)stop();
+    });
+  }
 }

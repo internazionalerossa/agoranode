@@ -5,6 +5,7 @@ import {resolve,extname,sep,dirname} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {Readable} from 'node:stream';
 import {serviceInfoResponse} from '../app/lib/service-info';
+import {isAppShellPath} from '../app/lib/site-routing';
 import {configuration} from './config';
 import {createPool,connections} from './pool';
 import {PostgresDatabase} from './database';
@@ -23,7 +24,7 @@ const types:Record<string,string>={'.html':'text/html; charset=utf-8','.js':'tex
 async function staticResponse(pathname:string){
  let decoded:string;try{decoded=decodeURIComponent(pathname);}catch{return new Response('Not found',{status:404});}
  if(decoded.includes('\0')||decoded.includes('\\'))return new Response('Not found',{status:404});
- const filename=['/','/read','/account','/agoranode','/agoranode/','/polisrossa','/polisrossa/','/polisrossa/read','/polisrossa/account'].includes(decoded)?resolve(root,'index.html'):resolve(root,'.'+decoded);
+ const filename=isAppShellPath(decoded)?resolve(root,'index.html'):resolve(root,'.'+decoded);
  if(!filename.startsWith(root+sep))return new Response('Not found',{status:404});
  try{if(!(await stat(filename)).isFile())throw Error();return new Response(await readFile(filename),{headers:{'content-type':types[extname(filename)]??'application/octet-stream','cache-control':filename.endsWith('index.html')||decoded==='/sw.js'?'no-cache':decoded.startsWith('/assets/')?'public, max-age=31536000, immutable':'public, max-age=3600'}});}catch{return new Response('Not found',{status:404});}
 }

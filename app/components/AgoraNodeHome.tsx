@@ -5,6 +5,7 @@ import {ArrowRight, GitBranch, Network, ShieldCheck} from "lucide-react";
 import FederationBoard from "./FederationBoard";
 import SharedCustodyView from "./SharedCustodyView";
 import SharedSpaceModules from "./SharedSpaceModules";
+import AgoraFeed from "./AgoraFeed";
 import {AGORA_MANIFEST} from "../instances/agora";
 
 export default function AgoraNodeHome() {
@@ -41,6 +42,7 @@ export default function AgoraNodeHome() {
       </aside>
 
       <main id="agoranode-content">
+        <AgoraFeed/>
         <SharedSpaceModules manifest={AGORA_MANIFEST}/>
         <FederationBoard />
         <SharedCustodyView />

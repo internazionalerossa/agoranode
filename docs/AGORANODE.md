@@ -76,3 +76,14 @@ Non sono una garanzia di indistruttibilità. Finché tutte le copie dipendono da
 ## Continuità tecnica di PolisRossa
 
 L’estrazione di AgoràNode non rinomina sali, chiavi del browser, formati di esportazione, rete dei checkpoint, volumi Docker, database o URL pubblici esistenti. Questa è continuità interna di PolisRossa, non compatibilità con Wikipedia. Un futuro nodo userà un proprio namespace; una migrazione di dati sarà un’operazione esplicita e reversibile, non un effetto collaterale del marchio.
+
+## Tecnologia comune, comunità Agorà e computer volontari
+
+AgoràNode non è la comunità Agorà: è la tecnologia, il formato e il protocollo. Il portale `/` rende individuabili gli spazi; `/agora` è il nodo tematico sulla tecnologia stessa, `/polisrossa` è un altro nodo tematico. Lo stesso programma deve servire entrambe le comunità con contenuti, regole, forum e dati separati. Il server fisico che ospita una comunità è un **peer**, non il nodo tematico in senso politico.
+
+Il manifesto di Agorà ora vive in `app/instances/agora.ts` e dichiara onestamente le sette superfici ancora in pianificazione; `app/instances/registry.ts` elenca i due percorsi **locali**. `GET /api/nodes` non è un indice di rete P2P e `GET /api/instance?id=agora` non significa che il nodo Agorà abbia un database e un forum pubblici. `GET /api/instance` senza parametri resta PolisRossa per compatibilità. Un futuro registro federato richiederà identità di rete, provenance, firme e difese contro registri ostili.
+
+L'obiettivo operativo è consentire a collaboratori indipendenti di ospitare copie complete o parziali del **patrimonio pubblico**, di servire frontend e API e di partecipare tecnicamente alla finalizzazione soltanto quando autorizzati. Con quorum mancante un peer conserva e serve l'ultima conoscenza verificata, non si autoproclama padrone delle scritture. Credenziali, sessioni, email, dati riservati e chiavi restano fuori dal protocollo di replica pubblica.
+
+Per il disegno integrato, i compromessi tra replica, privacy, moderazione, blockchain senza token, identità e governance, leggere [PEER-OWNED-ARCHITECTURE.md](PEER-OWNED-ARCHITECTURE.md). Per i passaggi e i collaudi prima dell'attivazione leggere [DECENTRALIZATION-ROADMAP.md](DECENTRALIZATION-ROADMAP.md). La documentazione non attesta il completamento delle fasi.
+

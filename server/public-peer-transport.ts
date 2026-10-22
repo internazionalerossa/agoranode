@@ -180,26 +180,57 @@ function parseIndex(value: unknown, options: PeerOptions): string[] {
  * Pull from an explicitly configured peer URL. Verify signed namespaces BEFORE
  * atomically writing to an inbox consumed by the existing DB importer.
  */
+export type PublicPeerPollState = {
+  etag?: string;
+  lastFullIndexAt?: number;
+  verifiedLocalFiles?: Map<string,string>;
+  lastScrubAt?: number;
+};
 export async function pullPublicPeer(origin: string,options: PeerOptions,
-  deps:{fetcher?: typeof fetch; allowInsecureLoopback?: boolean}={}) {
+  deps:{fetcher?: typeof fetch; allowInsecureLoopback?: boolean; pollState?: PublicPeerPollState}={}) {
   const base=peerOrigin(origin,deps.allowInsecureLoopback),fetcher=deps.fetcher??fetch;
   const fetchBounded=async(route:string,size:number)=>{
     const response=await fetcher(base+route,{method:'GET',redirect:'manual',credentials:'omit',
       signal:AbortSignal.timeout(TIMEOUT_MS),headers:{accept:'application/json'}});
     return boundedBody(response,size);
   };
-  const index=parseIndex(JSON.parse(await fetchBounded('/v1/index',MAX_INDEX_BYTES)),options);
+  const state=deps.pollState;
+  const now=Date.now();
+  const useETag=Boolean(state?.etag && now-(state.lastFullIndexAt??0)<60_000);
+  const indexResponse=await fetcher(base+'/v1/index',{
+    method:'GET',redirect:'manual',credentials:'omit',signal:AbortSignal.timeout(TIMEOUT_MS),
+    headers:{accept:'application/json',...(useETag?{'if-none-match':state!.etag!}:{})},
+  });
+  if(indexResponse.status===304) {
+    if(!useETag)throw Error('Unsolicited unchanged response from peer');
+    return [];
+  }
+  const index=parseIndex(JSON.parse(await boundedBody(indexResponse,MAX_INDEX_BYTES)),options);
+  if(state) {
+    const etag=indexResponse.headers.get('etag');
+    state.etag=etag && /^"[0-9a-f]{64}"$/.test(etag)?etag:undefined;
+    state.lastFullIndexAt=now;
+    state.verifiedLocalFiles??=new Map();
+    state.lastScrubAt??=now;
+  }
   const results:Array<{name:string;created:boolean}>=[];
+  const scrub=Boolean(state && now-(state.lastScrubAt??0)>=3_600_000);
   for(const name of index) {
     // Verified local files are immutable: do not re-download entire cumulative
     // knowledge bundles on each poll. Fail closed on a corrupt local file;
     // operators must quarantine it explicitly rather than silently overwriting.
     try {
-      await readVerifiedPackage(options.directory,name,options);
+      const meta=state?await lstat(join(resolve(options.directory),name)):undefined;
+      const stamp=meta?[meta.dev,meta.ino,meta.size,meta.mtimeMs,meta.ctimeMs].join(':'):undefined;
+      if(!state||!stamp||scrub||state.verifiedLocalFiles?.get(name)!==stamp) {
+        await readVerifiedPackage(options.directory,name,options);
+        if(state&&stamp)state.verifiedLocalFiles?.set(name,stamp);
+      }
       results.push({name,created:false});
       continue;
     } catch(error) {
       if((error as NodeJS.ErrnoException).code!=='ENOENT') throw error;
+      state?.verifiedLocalFiles?.delete(name);
     }
     const payload:unknown=JSON.parse(await fetchBounded('/v1/packages/'+name,MAX_PACKAGE_BYTES));
     const validated=await validateKnowledgeReplicationPackage(payload,{
@@ -215,6 +246,15 @@ export async function pullPublicPeer(origin: string,options: PeerOptions,
       verifyGovernanceAuthorization:options.verifyGovernanceAuthorization,
     });
     results.push({name,created:result.created});
+    if(state) {
+      const meta=await lstat(join(resolve(options.directory),name));
+      state.verifiedLocalFiles?.set(name,[meta.dev,meta.ino,meta.size,meta.mtimeMs,meta.ctimeMs].join(':'));
+    }
+  }
+  if(state&&scrub)state.lastScrubAt=now;
+  if(state) {
+    const present=new Set(index);
+    for(const key of state.verifiedLocalFiles?.keys()??[])if(!present.has(key))state.verifiedLocalFiles?.delete(key);
   }
   return results;
 }
@@ -227,7 +267,7 @@ export async function pullPublicPeer(origin: string,options: PeerOptions,
  */
 export async function pullFromPublicPeers(
   origins: readonly string[], options: PeerOptions,
-  deps: {fetcher?: typeof fetch; allowInsecureLoopback?: boolean} = {},
+  deps: {fetcher?: typeof fetch; allowInsecureLoopback?: boolean; pollStates?: Map<string,PublicPeerPollState>} = {},
 ) {
   if (!Array.isArray(origins) || origins.length === 0 || origins.length > 8) {
     throw Error('Choose between one and eight independent public peers');
@@ -236,7 +276,9 @@ export async function pullFromPublicPeers(
   if (new Set(approved).size !== approved.length) throw Error('Duplicate public peer');
   for (const origin of approved) {
     try {
-      const packages = await pullPublicPeer(origin, options, deps);
+      const state=deps.pollStates?.get(origin)??{};
+      const packages = await pullPublicPeer(origin, options, {...deps,pollState:state});
+      deps.pollStates?.set(origin,state);
       return {packages, tried: approved.indexOf(origin) + 1};
     } catch {
       // A peer may be unavailable, inconsistent or malicious. Another fully

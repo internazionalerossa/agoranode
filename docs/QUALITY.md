@@ -1,6 +1,6 @@
 # Stato delle verifiche e requisiti aperti
 
-Aggiornamento: 21 ottobre 2026. Questo registro distingue codice verificato, comportamento locale osservato e servizio pubblico operativo. Un test locale non attesta un flusso funzionante dall'esterno. Nessuno dei quattro obiettivi generali è dichiarato integralmente concluso.
+Aggiornamento della baseline: 23 ottobre 2026 (con evidenze storiche conservate dal 21 ottobre). Questo registro distingue codice verificato, comportamento locale osservato e servizio pubblico operativo. Un test locale non attesta un flusso funzionante dall'esterno. Nessuno dei quattro obiettivi generali è dichiarato integralmente concluso.
 
 ## Evidenze disponibili
 
@@ -146,7 +146,7 @@ Questa sezione documenta **modifiche di codice e specifiche proposte**, non nuov
 | Requisito | Stato in questa revisione |
 | --- | --- |
 | Portale, tecnologia e comunità Agorà distinti | **contratto proposto**. Manifesto `agora` con capacità `planned`, registry locale, descriptor opt-in, tests. Nessun forum/data store Agorà completo. |
-| Catalogo dei nodi locali | **codice in ramo**. `GET /api/nodes` non effettua discovery P2P; il portale legge il registro allowlisted. |
+| Catalogo dei nodi locali | **codice integrato in main**. `GET /api/nodes` non effettua discovery P2P; il portale legge il registro allowlisted. |
 | Distinzione dati pubblici e privati | **policy tipizzata, non enforcement**. `data-placement.ts` non è ancora collegato a ogni esportatore o replica. |
 | Repliche fra PC indipendenti | **non collaudate**. Il kernel attuale funziona fra database locali; Syncthing opzionale non prova una rete libera da dipendenze. |
 | Servizio dopo perdita dell'host originario | **non implementato**. Nessun failover pubblico automatico o ingresso ridondante verificato. |
@@ -162,13 +162,17 @@ Le nuove condizioni di uscita e i test necessari sono in [DECENTRALIZATION-ROADM
 
 [CRITICAL-DESIGN-REVIEW.md](CRITICAL-DESIGN-REVIEW.md) identifica contraddizioni fra decisione democratica e verifica delle fonti, schede nominative e privacy, conservazione immutabile e diritto alla rimozione, portale/nodo Agorà/federazione, oltre a dipendenze operative residue. [EDITORIAL-GOVERNANCE.md](EDITORIAL-GOVERNANCE.md) propone una procedura di fonte/revisione/contestazione per la wiki, **non implementata**. Nessun nuovo requisito di governance è da considerarsi collaudato solo perché documentato.
 
-## Prima implementazione dello scambio peer e UI condivisa — in verifica
+## Prima implementazione dello scambio peer e UI condivisa — consolidata in main
 
-Il ramo di sviluppo successivo introduce `SharedSpaceModules`, una navigazione comune che usa i manifesti di Agorà e PolisRossa, e il modulo `public-peer-transport.ts`, scambio opt-in **read-only** di pacchetti pubblici già firmati tramite peer HTTPS configurati manualmente. Il runtime applicativo PostgreSQL completo resta legato a PolisRossa, e `space-databases.ts` verifica la distinzione dei target DB **ma non è ancora cablato alle API private del secondo nodo**. Non sono implementati discovery P2P automatico, database multi-community completi, BFT, wiki editing pubblico, social/chat distribuiti, identità portabili e failover dei gateway.
+Il codice integrato con la PR #3 introduce `SharedSpaceModules`, una navigazione comune che usa i manifesti di Agorà e PolisRossa, e il modulo `public-peer-transport.ts`, scambio opt-in **read-only** di pacchetti pubblici già firmati tramite peer HTTPS configurati manualmente. Il runtime applicativo PostgreSQL completo resta legato a PolisRossa, e `space-databases.ts` verifica la distinzione dei target DB **ma non è ancora cablato alle API private del secondo nodo**. Non sono implementati discovery P2P automatico, database multi-community completi, BFT, wiki editing pubblico, social/chat distribuiti, identità portabili e failover dei gateway.
 
-Il collaudo previsto in CI usa connessioni HTTP loopback e database PGlite distinti **sullo stesso runner**. Nessuna verifica fra computer fisici indipendenti o certificazione di sicurezza viene attestata da questi test. Risultati da aggiornare solo dopo l'esito documentato della pipeline e il merge. Vedi [PEER-EXCHANGE.md](PEER-EXCHANGE.md) e [SECURITY-REVIEW.md](SECURITY-REVIEW.md).
+Il collaudo automatico in CI usa connessioni HTTP loopback e database PGlite distinti **sullo stesso runner**. Nessuna verifica fra computer fisici indipendenti o certificazione di sicurezza viene attestata da questi test. Risultati da aggiornare solo dopo l'esito documentato della pipeline e il merge. Vedi [PEER-EXCHANGE.md](PEER-EXCHANGE.md) e [SECURITY-REVIEW.md](SECURITY-REVIEW.md).
 
 
 ## Lean Storage sperimentale — aggiornamento 22 ottobre 2026
 
-Proposta in una PR successiva: `pullPublicPeer` evita di scaricare di nuovo pacchetti firmati già presenti e corretti; può tentare fino a 8 origini HTTPS preconfigurate. `public-blob-cas.ts` offre un codec sperimentale a blocchi content-defined per soli contenuti pubblici verificati, con hash dell'oggetto intero e test di recupero. **Non** è ancora un formato di consenso o un'API di replica incrementale disponibile su una rete. La CI deve superare build, typecheck, test e benchmark sintetico; nessun dato di costo/consumo energetico è stato misurato fra computer indipendenti. Vedere [LEAN-STORAGE.md](LEAN-STORAGE.md).
+La PR #4, integrata in main, permette a `pullPublicPeer` di evitare di scaricare di nuovo pacchetti firmati già presenti e corretti; può tentare fino a 8 origini HTTPS preconfigurate. `public-blob-cas.ts` offre un codec sperimentale a blocchi content-defined per soli contenuti pubblici verificati, con hash dell'oggetto intero e test di recupero. **Non** è ancora un formato di consenso o un'API di replica incrementale disponibile su una rete. La CI della PR #4 ha superato build, typecheck, test e benchmark sintetico; nessun dato di costo/consumo energetico è stato misurato fra computer indipendenti. Vedere [LEAN-STORAGE.md](LEAN-STORAGE.md).
+
+## Consolidamento della piattaforma alpha — 23 ottobre 2026
+
+Le PR #2–#5 sono integrate con **squash merge** in `main`, con [PolisRossa come alpha](ALPHA-BASELINE.md). Le differenze visibili fra cronologie dei vecchi branch e di `main` non autorizzano a ripetere i merge: confrontare i blob reali. La suite relativa alla PR #5 ha registrato **346 test superati, zero fallimenti**, con build e typecheck positivi; non dimostra funzionamento su host indipendenti, sicurezza certificata o disponibilità pubblica dei moduli non attivati. La nuova documentazione di consolidamento non promuove nessuna fase della [roadmap](DECENTRALIZATION-ROADMAP.md) ad «operativa» senza prove specifiche.

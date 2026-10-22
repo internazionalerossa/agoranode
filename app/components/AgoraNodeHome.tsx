@@ -30,6 +30,7 @@ export default function AgoraNodeHome() {
         <nav aria-label="Navigazione AgoràNode">
           <a href="/#node-directory-content">Nodi</a>
           <a href="#formato">Tecnologia</a>
+          <a href="#studio-agora">Laboratorio</a>
           <a href="#governo-federale">Decisioni</a>
           <a href="#possesso">Custodia</a>
           <a className="agoranode-instance-link" href="/polisrossa">PolisRossa <ArrowRight size={16}/></a>

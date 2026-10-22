@@ -6,6 +6,7 @@ import FederationBoard from "./FederationBoard";
 import SharedCustodyView from "./SharedCustodyView";
 import SharedSpaceModules from "./SharedSpaceModules";
 import AgoraFeed from "./AgoraFeed";
+import NodeStudio from "./NodeStudio";
 import {AGORA_MANIFEST} from "../instances/agora";
 
 export default function AgoraNodeHome() {
@@ -44,6 +45,7 @@ export default function AgoraNodeHome() {
       <main id="agoranode-content">
         <AgoraFeed/>
         <SharedSpaceModules manifest={AGORA_MANIFEST}/>
+        <NodeStudio spaceId="agora"/>
         <FederationBoard />
         <SharedCustodyView />
       </main>

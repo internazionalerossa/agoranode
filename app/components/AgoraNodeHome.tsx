@@ -4,6 +4,8 @@ import {useEffect} from "react";
 import {ArrowRight, GitBranch, Network, ShieldCheck} from "lucide-react";
 import FederationBoard from "./FederationBoard";
 import SharedCustodyView from "./SharedCustodyView";
+import SharedSpaceModules from "./SharedSpaceModules";
+import {AGORA_MANIFEST} from "../instances/agora";
 
 export default function AgoraNodeHome() {
   useEffect(() => {
@@ -39,6 +41,7 @@ export default function AgoraNodeHome() {
       </aside>
 
       <main id="agoranode-content">
+        <SharedSpaceModules manifest={AGORA_MANIFEST}/>
         <FederationBoard />
         <SharedCustodyView />
       </main>

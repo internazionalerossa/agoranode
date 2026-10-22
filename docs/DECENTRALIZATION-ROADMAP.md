@@ -125,3 +125,7 @@ Per ogni PR:
 ## Gate trasversale: affidabilità della conoscenza e prevenzione della cattura
 
 Prima del primo wiki pubblico, completare [EDITORIAL-GOVERNANCE.md](EDITORIAL-GOVERNANCE.md) con ruoli, permessi, selezione delle fonti, gestione di conflitti e licenze, senza far diventare maggioritario il giudizio su un fatto. Prima del primo governo federale vincolante, risolvere la segretezza/opacità delle schede e la differenza fra elettorato locale dinamico e federale congelato. Prima del primo social federato, progettare feed trasparente, protezione del grafo privato, blocchi, ricorsi e rimedi a propaganda coordinata. Test di attacco e criteri sono in [CRITICAL-DESIGN-REVIEW.md](CRITICAL-DESIGN-REVIEW.md).
+
+## Prototipi nel ramo di lavoro successivo
+
+Uno scambio read-only su HTTPS di pacchetti pubblici firmati è aggiunto in `server/public-peer-transport.ts` e descritto in [PEER-EXCHANGE.md](PEER-EXCHANGE.md). Non copre discovery libp2p, trasporto peer con identità mutua a livello rete, consensus BFT, repliche incrementali o failover. `app/components/SharedSpaceModules.tsx` usa il medesimo renderer dei sette moduli per Agorà e PolisRossa, ma non rende identiche tutte le funzionalità né attiva backend e database del nodo Agorà. `server/space-databases.ts` introduce un controllo fail-closed sui database configurati: la separazione reale degli account richiede ancora istanze applicative e permessi diversi. Nessun traguardo sopra può considerarsi superato soltanto perché questi prototipi compilano.

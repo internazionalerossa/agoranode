@@ -1,6 +1,6 @@
 import {handlePrivacyExport} from '../app/lib/privacy-export';
 import {brandManifestResponse} from '../app/lib/brand-manifest';
-import {instanceInfoResponse} from '../app/lib/instance-info';
+import {instanceInfoResponse, localNodeDirectoryResponse} from '../app/lib/instance-info';
 import {handleLiveChat} from './live-chat';
 import {visitorCountryResponse} from '../app/lib/visitor-country';
 import {GET as articles} from '../app/api/articles/route';
@@ -31,6 +31,7 @@ export async function api(request:Request,db:PostgresDatabase,userId:string|null
  const url=new URL(request.url),path=url.pathname;
  if(path==='/api/manifest')return brandManifestResponse(request);
  if(path==='/api/instance')return instanceInfoResponse(request);
+ if(path==='/api/nodes')return localNodeDirectoryResponse(request);
  if(path==='/api/visitor-country')return visitorCountryResponse(request);
  if(path==='/api/knowledge/entity')return publicKnowledgeEntityResponse(request,db.pool);
  if(path==='/api/knowledge/revision')return publicKnowledgeRevisionResponse(request,db.pool);

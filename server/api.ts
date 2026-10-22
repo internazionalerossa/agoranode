@@ -25,6 +25,7 @@ import {libraryStorageRight} from './library-rights';
 import {publicKnowledgeEntityResponse,publicKnowledgeExportResponse,publicKnowledgeRevisionResponse} from './knowledge-api';
 import {handleFederationPr3} from './federation';
 import {handleNodeFeedPreferences} from './node-feed-preferences';
+import {handleNodeStudioDrafts} from './node-studio-drafts';
 import {agoraFeedResponse} from './agora-feed';
 import {AGORA_SOURCE_IDS} from '../app/instances/agora-sources';
 const sourceIds=new Set(SOURCE_CATALOG.map(s=>s.id)),bookIds=new Set(THEORY_LIBRARY.map(b=>b.id));
@@ -38,6 +39,7 @@ export async function api(request:Request,db:PostgresDatabase,userId:string|null
  if(path==='/api/spaces/agora/feed')return agoraFeedResponse(request);
  if(path==='/api/spaces/agora/preferences')return handleNodeFeedPreferences(request,db,userId,'agora',AGORA_SOURCE_IDS);
  if(path==='/api/spaces/polisrossa/preferences')return handleNodeFeedPreferences(request,db,userId,'polisrossa',sourceIds);
+ if(path==='/api/node-studio/drafts')return handleNodeStudioDrafts(request,db,userId);
  if(path==='/api/visitor-country')return visitorCountryResponse(request);
  if(path==='/api/knowledge/entity')return publicKnowledgeEntityResponse(request,db.pool);
  if(path==='/api/knowledge/revision')return publicKnowledgeRevisionResponse(request,db.pool);

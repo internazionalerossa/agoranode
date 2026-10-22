@@ -49,3 +49,14 @@ Leggere `README.md`, `docs/ARCHITECTURE.md`, `CONTRIBUTING.md` e il codice perti
 Eseguire `npm test` e le verifiche pertinenti alla modifica. Per UI valutare tastiera, schermi piccoli, caricamento e fallimenti. Dichiarare eventuali blocchi o verifiche non eseguite. Prima di pubblicazioni o operazioni distruttive accertare che rientrino nella richiesta del maintainer; non riscrivere cronologia o dati per risolvere conflitti ordinari.
 
 Riportare cosa è cambiato e perché, verifiche e risultati, limiti residui e riferimenti a commit/PR/deploy. Non inventare un esito positivo e non confondere specifiche future con funzionalità implementate.
+
+## Evoluzione AgoraNode e limiti di decentralizzazione
+
+Il portale `/`, il nodo tematico Agorà `/agora` e il nodo PolisRossa `/polisrossa` sono tre superfici differenti: il primo è una directory, le altre sono comunità. **Peer** significa computer partecipante; non equivale a spazio tematico o elettore. Evitare di far dipendere nuovi moduli comuni da `POLISROSSA_MANIFEST` o da cataloghi PolisRossa direttamente; preservare il flusso legacy finché la migrazione dei dati è testata. Nuovi manifesti locali si registrano nella allowlist `app/instances/registry.ts`.
+
+Non dichiarare decentralizzato un backend per il solo fatto che genera snapshot firmati. Il kernel di replica pubblica è testato localmente ma non distribuisce ancora dati privati, forum, chat e account. Dati `public-ephemeral`, `private-local`, `private-authorized` e `secret-never-export` non entrano nella replica pubblica. Il contratto `app/platform/data-placement.ts` è soltanto una **policy preparatoria**: un futuro exporter deve farla rispettare lato server con test di non-divulgazione.
+
+Separare prove di trasporto peer-to-peer, consenso BFT, certificati politici, accesso web failover e continuità dell'autenticazione. Non avviare scritture distribuite, aprire porte, introdurre relay di terzi o esporre chiavi senza un modello di minaccia, test tra computer indipendenti e revisione di sicurezza. Le specifiche guida sono `docs/PEER-OWNED-ARCHITECTURE.md` e `docs/DECENTRALIZATION-ROADMAP.md`.
+
+Ogni nuova capacità deve preservare namespace, URL, volumi e ID PolisRossa, non inventare licenze per contenuti esistenti, e distinguere il contratto tipizzato dalla disponibilità pubblica comprovata.
+

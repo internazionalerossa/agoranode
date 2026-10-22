@@ -68,17 +68,18 @@ export function useNodeFeedPreferences(spaceId:string,sources:readonly Source[])
 export function FeedPreferenceControls({sources,prefs,spaceId}:{
   sources:readonly Source[];spaceId:string;prefs:ReturnType<typeof useNodeFeedPreferences>;
 }){
+  const [expanded,setExpanded]=useState(false);
   return <section className="node-feed-preferences" aria-label="Personalizza il feed">
     <div className="node-feed-choice" role="group" aria-label="Scegli la modalità del feed">
       <button type="button" aria-pressed={prefs.mode==='all'} onClick={()=>prefs.setMode('all')}>Tutti i feed</button>
       <button type="button" aria-pressed={prefs.mode==='favourites'} onClick={()=>prefs.setMode('favourites')}>Feed preferiti ({prefs.sourceIds.size})</button>
     </div>
-    <details><summary>Scegli le tue fonti</summary>
+    <details onToggle={event=>setExpanded(event.currentTarget.open)}><summary>Scegli le tue fonti</summary>
       <p>Puoi seguire più fonti. Nessuna selezione cambia le notizie visualizzate agli altri utenti.</p>
-      <div className="node-feed-source-list">{sources.map(source=><label key={source.id}>
+      <div className="node-feed-source-list">{expanded?sources.map(source=><label key={source.id}>
         <input type="checkbox" checked={prefs.sourceIds.has(source.id)} onChange={()=>prefs.choose(source.id)}/>
         {source.name}
-      </label>)}</div>
+      </label>):null}</div>
       <p>{prefs.account?'Le fonti scelte vengono salvate nel tuo account PR1.':'Le scelte del visitatore vengono salvate su questo dispositivo. Accedi per sincronizzarle nel tuo account PR1.'}</p>
     </details>
     {prefs.mode==='favourites'&&prefs.sourceIds.size===0?<p role="status">Seleziona almeno una fonte per vedere il tuo feed preferito.</p>:null}

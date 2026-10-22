@@ -11,6 +11,7 @@ await build({entryPoints:['server/snapshot.ts'],outfile:'build-node/snapshot.mjs
 await build({entryPoints:['server/library-import.ts'],outfile:'build-node/library-import.mjs',bundle:true,platform:'node',target:'node24',format:'esm',packages:'external'});
 await build({entryPoints:['server/knowledge-import.ts'],outfile:'build-node/knowledge-import.mjs',bundle:true,platform:'node',target:'node24',format:'esm',packages:'external'});
 await build({entryPoints:['server/knowledge-replica-agent.ts'],outfile:'build-node/knowledge-replica-agent.mjs',bundle:true,platform:'node',target:'node24',format:'esm',packages:'external'});
+await build({entryPoints:['server/public-peer-cli.ts'],outfile:'build-node/public-peer-cli.mjs',bundle:true,platform:'node',target:'node24',format:'esm',packages:'external'});
 await build({entryPoints:['server/mail-limits-cli.ts'],outfile:'build-node/mail-limits-cli.mjs',bundle:true,platform:'node',target:'node24',format:'esm',packages:'external'});
 await mkdir('build-node/migrations',{recursive:true});
 await cp('server/migrations','build-node/migrations',{recursive:true});

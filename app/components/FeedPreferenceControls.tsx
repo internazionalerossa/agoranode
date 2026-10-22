@@ -1,5 +1,5 @@
 "use client";
-import {useEffect,useState} from 'react';
+import {useEffect,useMemo,useState} from 'react';
 import {feedPreferenceStorageKey,normaliseSourceChoices,type FeedMode} from '../lib/node-feed-preferences';
 type Source={id:string;name:string};
 function fromStorage(spaceId:string,allowed:Set<string>):string[]{
@@ -9,7 +9,7 @@ function fromStorage(spaceId:string,allowed:Set<string>):string[]{
 }
 export function useNodeFeedPreferences(spaceId:string,sources:readonly Source[]){
   const key=sources.map(source=>source.id).join(',');
-  const allowed=new Set(key.split(',').filter(Boolean));
+  const allowed=useMemo(()=>new Set(key.split(',').filter(Boolean)),[key]);
   const [sourceIds,setSourceIds]=useState<string[]>([]);
   const [mode,setMode]=useState<FeedMode>('all');
   const [account,setAccount]=useState(false);
@@ -62,7 +62,8 @@ export function useNodeFeedPreferences(spaceId:string,sources:readonly Source[])
         .catch(()=>setStatus('Salvataggio nell’account non riuscito: la scelta resta sul dispositivo.'));
     }
   };
-  return {sourceIds:new Set(sourceIds),mode,setMode,choose,account,status,ready};
+  const preferred=useMemo(()=>new Set(sourceIds),[sourceIds]);
+  return {sourceIds:preferred,mode,setMode,choose,account,status,ready};
 }
 export function FeedPreferenceControls({sources,prefs,spaceId}:{
   sources:readonly Source[];spaceId:string;prefs:ReturnType<typeof useNodeFeedPreferences>;

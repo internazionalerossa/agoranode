@@ -100,7 +100,7 @@ export function encodePublicBlob(
 }
 
 function objectKeys(value: unknown, expected: string[]): value is Record<string, unknown> {
-  return Boolean(value) && typeof value === 'object' && !Array.isArray(value) &&
+  return value !== null && typeof value === 'object' && !Array.isArray(value) &&
     Object.keys(value).sort().join('|') === [...expected].sort().join('|');
 }
 

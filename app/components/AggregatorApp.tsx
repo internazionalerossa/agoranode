@@ -72,6 +72,7 @@ import { VideoCarousel } from "./VideoCarousel";
 import { useRegionalNews } from "./useRegionalNews";
 import { useCloudBookmarks, type RestoredCollection } from "./CloudBookmarks";
 import AgoraNodeIdentityLink from "./AgoraNodeIdentityLink";
+import SharedSpaceModules from "./SharedSpaceModules";
 import { createPublisherResolver } from "@/app/lib/publisher";
 import { useSourceHighlights } from "./SourceHighlights";
 import { applySourceImages } from "@/app/lib/source-highlights";
@@ -795,6 +796,7 @@ export function AggregatorApp() {
         </header>
 
         <main>
+          {view === "notizie" ? <SharedSpaceModules manifest={INSTANCE_MANIFEST}/> : null}
           {view === "notizie" ? <><VideoCarousel /><aside className="news-library-invitation" aria-label="Approfondimenti e comunità"><a href="/polisrossa?view=teoria" onClick={event=>{event.preventDefault();navigate("teoria");}}><strong><LocalizedText>Biblioteca</LocalizedText> →</strong><span><LocalizedText>Libri gratuiti, percorsi di lettura, storia delle conquiste e un archivio di dati da confrontare.</LocalizedText></span></a><a href="/polisrossa?view=partecipa" onClick={event=>{event.preventDefault();navigate("partecipa");}}><strong><LocalizedText>Partecipa · forum, chat e proposte</LocalizedText> →</strong><span><LocalizedText>Forum per discutere e approfondire, chat per incontrarsi e conversare, proposte per migliorare insieme testi, fonti, dati e ogni dettaglio del sito. Non serve saper programmare.</LocalizedText></span></a></aside></> : null}
           {heading ? (
             <section className="editorial-hero hero-compact" aria-labelledby="page-title">

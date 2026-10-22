@@ -2,14 +2,14 @@ import {useState} from "react";
 import {ArrowRight, BookOpen, Network, Search} from "lucide-react";
 import {publicLocalSpaces} from "../instances/registry";
 
-type ActiveNode = {
+type LocalNode = {
   id: string;
   name: string;
   topic: string;
   description: string;
   href: string;
   status: string;
-  kind: "active";
+  kind: "local";
 };
 
 type PossibleNode = {
@@ -27,7 +27,7 @@ type SearchIdea = {
 };
 
 // This display-only catalogue derives from the same allowlisted manifests as /api/nodes.
-const nodes: ActiveNode[] = publicLocalSpaces().map(space => ({...space, kind: 'active'}));
+const nodes: LocalNode[] = publicLocalSpaces().map(space => ({...space, kind: 'local'}));
 
 const possibleNodeFamilies: ReadonlyArray<{name: string; topics: readonly string[]}> = [
   {name: "Scienze e matematica", topics: ["Matematica", "Fisica", "Astronomia", "Chimica", "Biologia", "Geologia", "Scienze del clima", "Statistica", "Informatica teorica"]},
@@ -65,13 +65,13 @@ export default function NodeDirectory() {
   const [query, setQuery] = useState("");
   const [page, setPage] = useState(0);
   const queryTerms = normalizeSearchText(query.trim()).split(/\s+/).filter(Boolean);
-  const activeMatches = nodes.filter((node) =>
+  const localMatches = nodes.filter((node) =>
     queryTerms.every((term) => normalizeSearchText(`${node.name} ${node.topic} ${node.description}`).includes(term)),
   );
   const possibleMatches = possibleNodes.filter((node) =>
     queryTerms.every((term) => normalizeSearchText(`${node.name} ${node.family}`).includes(term)),
   );
-  const matchingEntries: Array<ActiveNode | PossibleNode | SearchIdea> = [...activeMatches, ...possibleMatches];
+  const matchingEntries: Array<LocalNode | PossibleNode | SearchIdea> = [...localMatches, ...possibleMatches];
   if (query.trim() && matchingEntries.length === 0) {
     matchingEntries.push({
       id: `search-${normalizeSearchText(query.trim())}`,
@@ -129,7 +129,7 @@ export default function NodeDirectory() {
           </label>
           {query.trim() ? visibleEntries.length > 0 ? (
             <ol className="node-directory-list">
-              {visibleEntries.map((entry) => entry.kind === "active" ? (
+              {visibleEntries.map((entry) => entry.kind === "local" ? (
                 <li key={entry.id}>
                   <a className={`node-directory-card node-directory-card-${entry.id}`} href={entry.href}>
                     <span className="node-directory-card-main">

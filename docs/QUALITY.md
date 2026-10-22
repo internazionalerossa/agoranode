@@ -141,7 +141,7 @@ La pagina di custodia condivisa e gli snapshot firmati descrivono strumenti e li
 
 ## Contratti e visione della rete custodita dai peer — 22 ottobre 2026
 
-Questa sezione documenta **modifiche proposte in un ramo di lavoro**, non test già eseguiti o servizi pubblici operativi. Conservare le evidenze precedenti senza attribuire nuovi successi al runtime.
+Questa sezione documenta **modifiche di codice e specifiche proposte**, non nuove funzionalità P2P attive. La verifica GitHub Actions e il loro esito vanno registrati separatamente dalla disponibilità del servizio. Conservare le evidenze precedenti senza attribuire nuovi successi al runtime.
 
 | Requisito | Stato in questa revisione |
 | --- | --- |
@@ -156,3 +156,8 @@ Questa sezione documenta **modifiche proposte in un ramo di lavoro**, non test g
 
 Le nuove condizioni di uscita e i test necessari sono in [DECENTRALIZATION-ROADMAP.md](DECENTRALIZATION-ROADMAP.md). Fino a esecuzione e riscontro registrato non aggiornare le righe a «verificato».
 
+
+
+## Riesame critico editoriale e costituzionale
+
+[CRITICAL-DESIGN-REVIEW.md](CRITICAL-DESIGN-REVIEW.md) identifica contraddizioni fra decisione democratica e verifica delle fonti, schede nominative e privacy, conservazione immutabile e diritto alla rimozione, portale/nodo Agorà/federazione, oltre a dipendenze operative residue. [EDITORIAL-GOVERNANCE.md](EDITORIAL-GOVERNANCE.md) propone una procedura di fonte/revisione/contestazione per la wiki, **non implementata**. Nessun nuovo requisito di governance è da considerarsi collaudato solo perché documentato.

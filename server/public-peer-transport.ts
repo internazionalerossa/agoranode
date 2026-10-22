@@ -287,3 +287,58 @@ export async function pullFromPublicPeers(
   }
   throw Error('All configured public peers failed verification or were unreachable');
 }
+
+
+export type PublicPeerWatchEvent =
+  | {status:'synced'; sourceTries:number; packagesSeen:number; newPackages:number}
+  | {status:'unavailable'; error:string};
+
+/**
+ * Best-effort one-second *poll*, NOT a one-second database backup, a quorum
+ * acknowledgment, or a bounded propagation-latency guarantee.
+ *
+ * Rotate among independent trusted endpoints and persist the HTTP ETags and
+ * verified-local-file stamps in process memory. Each subsequent poll is
+ * conditional, transferring zero index body bytes when unchanged. The
+ * last known verified public state remains available during outages.
+ */
+export async function watchPublicPeers(
+  origins: readonly string[],options:PeerOptions,
+  settings:{
+    intervalMs?:number;
+    signal?:AbortSignal;
+    onCycle?:(event:PublicPeerWatchEvent)=>void;
+  }={},
+  deps:{fetcher?:typeof fetch;allowInsecureLoopback?:boolean}={},
+):Promise<void> {
+  const interval=settings.intervalMs??1_000;
+  if(!Number.isInteger(interval)||interval<1_000||interval>60_000)
+    throw Error('Peer poll interval must be 1000–60000 milliseconds');
+  if(!Array.isArray(origins)||origins.length<1||origins.length>8)
+    throw Error('Choose between one and eight peers');
+  const checked=origins.map(origin=>peerOrigin(origin,deps.allowInsecureLoopback));
+  if(new Set(checked).size!==checked.length)throw Error('Duplicate public peer');
+  const states=new Map<string,PublicPeerPollState>();
+  let offset=0;
+  while(!settings.signal?.aborted) {
+    const rotated=[...checked.slice(offset),...checked.slice(0,offset)];
+    offset=(offset+1)%checked.length;
+    try {
+      const result=await pullFromPublicPeers(rotated,options,{...deps,pollStates:states});
+      settings.onCycle?.({
+        status:'synced',sourceTries:result.tried,
+        packagesSeen:result.packages.length,
+        newPackages:result.packages.filter(p=>p.created).length,
+      });
+    } catch(error) {
+      settings.onCycle?.({status:'unavailable',error:error instanceof Error?error.message:'Peer unavailable'});
+    }
+    if(settings.signal?.aborted)break;
+    await new Promise<void>(done=>{
+      const timer=setTimeout(()=>{settings.signal?.removeEventListener('abort',stop);done();},interval);
+      const stop=()=>{clearTimeout(timer);done();};
+      settings.signal?.addEventListener('abort',stop,{once:true});
+      if(settings.signal?.aborted)stop();
+    });
+  }
+}

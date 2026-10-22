@@ -34,5 +34,5 @@ test('timeline proposal interface includes multi-event curation, new page drafts
   assert.match(html,/Proponi una nuova pagina/);
   assert.match(html,/Escludere una tappa dalla timeline/);
   assert.match(html,/Continu(a|are) nel forum|Completa i campi per continuare/);
-  assert.match(html,/serve l.ammissione PR2/);
+  assert.match(html,/serve l(?:'|&#x27;)ammissione PR2/);
 });

@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {mkdtemp, rm, writeFile, symlink} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
-import {createPublicPeerServer, peerOrigin, publicPeerRequest, pullPublicPeer, pullFromPublicPeers} from '../server/public-peer-transport';
+import {createPublicPeerServer, peerOrigin, publicPeerRequest, pullPublicPeer, pullFromPublicPeers, watchPublicPeers, PublicPeerIndexCache} from '../server/public-peer-transport';
 
 const options = (directory: string) => ({
   directory, validatorSet: {}, expectedNetworkId: 'agoranode.public.v1',
@@ -95,5 +95,61 @@ test('known peer sources fail over without trusting a failed origin or private c
       pullFromPublicPeers(['https://first.example','https://first.example'],options(dir),{fetcher}),
       /Duplicate/,
     );
+  }finally{await rm(dir,{recursive:true,force:true});}
+});
+
+
+test('public index ETag avoids the unchanged response body',async()=>{
+  const dir=await mkdtemp(join(tmpdir(),'agoranode-etag-'));
+  try{
+    const cache=new PublicPeerIndexCache();
+    const first=await publicPeerRequest(new Request('http://localhost/v1/index'),options(dir),cache);
+    const etag=first.headers.get('etag');
+    assert.equal(first.status,200);
+    assert.match(etag??'',/^"[0-9a-f]{64}"$/);
+    assert.deepEqual((await first.json()).packages,[]);
+    const second=await publicPeerRequest(new Request('http://localhost/v1/index',
+      {headers:{'if-none-match':etag!}}),options(dir),cache);
+    assert.equal(second.status,304);
+    assert.equal(await second.text(),'');
+  }finally{await rm(dir,{recursive:true,force:true});}
+});
+
+test('conditional polling uses ETag and rejects unsolicited 304',async()=>{
+  const dir=await mkdtemp(join(tmpdir(),'agoranode-conditional-'));
+  const etag='"'+ 'a'.repeat(64)+'"';
+  const seen:string[]=[];
+  const fetcher=(async(_url:RequestInfo|URL,init?:RequestInit)=>{
+    const previous=new Headers(init?.headers).get('if-none-match');
+    seen.push(previous??'first');
+    if(previous===etag)return new Response(null,{status:304,headers:{etag}});
+    return Response.json({format:'org.agoranode.public-peer-index.v1',
+      networkId:'agoranode.public.v1',spaceId:'polisrossa',packages:[]},{headers:{etag}});
+  }) as typeof fetch;
+  try{
+    const state={};
+    await pullPublicPeer('https://peer.example',options(dir),{fetcher,pollState:state});
+    await pullPublicPeer('https://peer.example',options(dir),{fetcher,pollState:state});
+    assert.deepEqual(seen,['first',etag]);
+    await assert.rejects(pullPublicPeer('https://peer.example',options(dir),
+      {fetcher:(async()=>new Response(null,{status:304})) as typeof fetch,pollState:{}}),
+      /Unsolicited/);
+  }finally{await rm(dir,{recursive:true,force:true});}
+});
+
+test('one-second watch stops after abort without continuing requests',async()=>{
+  const dir=await mkdtemp(join(tmpdir(),'agoranode-watch-'));
+  const controller=new AbortController();
+  const events:string[]=[];
+  const fetcher=(async()=>Response.json({format:'org.agoranode.public-peer-index.v1',
+    networkId:'agoranode.public.v1',spaceId:'polisrossa',packages:[]})) as typeof fetch;
+  try{
+    await watchPublicPeers(['https://peer.example'],options(dir),{
+      intervalMs:1000,signal:controller.signal,
+      onCycle(event){events.push(event.status);if(events.length>=2)controller.abort();},
+    },{fetcher});
+    assert.deepEqual(events,['synced','synced']);
+    await assert.rejects(watchPublicPeers(['https://peer.example'],options(dir),{intervalMs:500},{fetcher}),
+      /poll interval/);
   }finally{await rm(dir,{recursive:true,force:true});}
 });

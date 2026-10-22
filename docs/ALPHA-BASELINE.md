@@ -90,3 +90,9 @@ Le conversazioni personali integrali e gli appunti riservati **non** vanno commi
 - [Sicurezza](SECURITY-REVIEW.md) e [qualità](QUALITY.md) — ciò che è provato, non solo pianificato.
 
 **Criterio di successo:** una persona capisce come contribuire senza conoscere Git o JSON, un operatore può ospitare una copia senza diventare proprietario del nodo, e uno sviluppatore può provare ogni affermazione con un test o un esperimento riproducibile.
+
+### Estrazione di strumenti comuni dal prototipo PolisRossa
+
+La rassegna Agorà con fonti fissate in `app/instances/agora-sources.ts`, il componente di preferenze personali del feed e il Node Studio a blocchi costituiscono un primo livello riusabile. La scelta delle fonti PR1 è privata e non determina l'ordine o la governance della rassegna altrui. Le bozze Node Studio sono protette da sessione e quota, ma non sono manifesti comunitari approvati. Ogni nuova fonte RSS proposta va revisionata, non interrogata automaticamente; ogni nuovo nodo deve ricevere namespace e backend isolati prima dell'attivazione.
+
+Il resto di PolisRossa, compresi gli account, il social e la biblioteca, continua a essere il riferimento alpha e non è ancora un runtime generico completo. Percorso dettagliato: [NODE-STUDIO.md](NODE-STUDIO.md).

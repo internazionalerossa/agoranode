@@ -8,7 +8,7 @@ AgoràNode is AGPL-licensed software for independent topical communities that co
 
 Our long-term goal: run the public network across **independently maintained computers**, with no single company database, founding machine or cloud provider required for continued access. Participants should not have to store everything or join a global consensus for every message. Instead, public content is verified and selectively replicated while personal information stays outside public distribution.
 
-**Current status:** PolisRossa is the first developed node, Agorà is a technology-focused preview. The complete multi-community runtime, portable identities, distributed social/chat, BFT network consensus, automated peer discovery, and independently tested gateway failover **do not exist as operational production features**. The repository includes local PostgreSQL account/forum flows, public revision history, signed knowledge package verification, an opt-in HTTPS peer exchange, a small shared thematic UI, and experimental content chunking. See [QUALITY.md](docs/QUALITY.md).
+**Current status:** PolisRossa is the first developed node, Agorà now has a curated, read-only technical news/video feed and a graphical draft editor, but its full wiki, forum and isolated backend are not yet operational. The complete multi-community runtime, portable identities, distributed social/chat, BFT network consensus, automated peer discovery, and independently tested gateway failover **do not exist as operational production features**. The repository includes local PostgreSQL account/forum flows, public revision history, signed knowledge package verification, an opt-in HTTPS peer exchange, a small shared thematic UI, and experimental content chunking. See [QUALITY.md](docs/QUALITY.md).
 
 ## Product model
 
@@ -53,6 +53,10 @@ A physical peer is not a vote, an editor, or the source of truth. A member's par
 ```
 
 The live peer exchange currently uses manually configured HTTPS origins. `peer:watch` polls the public index conditionally at a one-second default interval. **Polling every second is not a one-second RPO, backup, delivery guarantee, or BFT finality.**
+
+## Personalised feeds and visual Node Studio
+
+Visitors can select sources and switch between **All feeds** and **Favourite feeds**. Source choices stay on the device; authenticated PR1 accounts can save them privately per community. A bounded graphical **Node Studio** now lets visitors draft a thematic community using editable blocks, sources, a preview and local export. Authenticated users can also save drafts privately in PostgreSQL. Publishing a new node or an approved wiki revision remains gated by PR2/federation review and is not an open production operation. See [Node Studio](docs/NODE-STUDIO.md).
 
 ## Run locally
 

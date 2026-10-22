@@ -5,6 +5,8 @@ import {ArrowRight, GitBranch, Network, ShieldCheck} from "lucide-react";
 import FederationBoard from "./FederationBoard";
 import SharedCustodyView from "./SharedCustodyView";
 import SharedSpaceModules from "./SharedSpaceModules";
+import AgoraFeed from "./AgoraFeed";
+import NodeStudio from "./NodeStudio";
 import {AGORA_MANIFEST} from "../instances/agora";
 
 export default function AgoraNodeHome() {
@@ -28,20 +30,24 @@ export default function AgoraNodeHome() {
         <nav aria-label="Navigazione AgoràNode">
           <a href="/#node-directory-content">Nodi</a>
           <a href="#formato">Tecnologia</a>
+          <a href="#studio-agora">Laboratorio</a>
           <a href="#governo-federale">Decisioni</a>
           <a href="#possesso">Custodia</a>
           <a className="agoranode-instance-link" href="/polisrossa">PolisRossa <ArrowRight size={16}/></a>
         </nav>
       </header>
 
-      <aside className="agoranode-boundary" aria-label="Ambito del nodo Agorà">
-        <div><Network size={20}/><span><strong>AgoràNode è la tecnologia comune.</strong> Questo nodo raccoglie lo stato dell’arte del protocollo e dell’infrastruttura.</span></div>
-        <div><GitBranch size={20}/><span><strong>Le decisioni hanno un ambito preciso.</strong> Agorà tratta le questioni comuni; le scelte tematiche restano ai rispettivi nodi.</span></div>
-        <div><ShieldCheck size={20}/><span><strong>Ospitare non dà potere politico.</strong> Server, firma tecnica e diritto di voto rimangono separati.</span></div>
-      </aside>
+
 
       <main id="agoranode-content">
+        <AgoraFeed/>
+        <aside className="agoranode-boundary" aria-label="Ambito del nodo Agorà">
+          <div><Network size={20}/><span><strong>AgoràNode è la tecnologia comune.</strong> Questo nodo raccoglie lo stato dell’arte del protocollo e dell’infrastruttura.</span></div>
+          <div><GitBranch size={20}/><span><strong>Le decisioni hanno un ambito preciso.</strong> Agorà tratta le questioni comuni; le scelte tematiche restano ai rispettivi nodi.</span></div>
+          <div><ShieldCheck size={20}/><span><strong>Ospitare non dà potere politico.</strong> Server, firma tecnica e diritto di voto rimangono separati.</span></div>
+        </aside>
         <SharedSpaceModules manifest={AGORA_MANIFEST}/>
+        <NodeStudio spaceId="agora"/>
         <FederationBoard />
         <SharedCustodyView />
       </main>

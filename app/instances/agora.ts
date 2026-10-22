@@ -29,8 +29,8 @@ export const AGORA_MANIFEST = {
     accent: '#235f86',
   },
   capabilities: {
-    news: {label: 'Notizie e fonti tecnologiche', status: 'planned', route: '/agora'},
-    video: {label: 'Video e conferenze', status: 'planned', route: '/agora'},
+    news: {label: 'Notizie e fonti tecnologiche', status: 'implemented', route: '/agora#agora-news-title'},
+    video: {label: 'Video e conferenze', status: 'implemented', route: '/agora#agora-video-title'},
     library: {label: 'Biblioteca tecnica', status: 'planned', route: '/agora'},
     wiki: {label: 'Wiki e specifiche', status: 'planned', route: '/agora'},
     storyline: {label: 'Cronologia del progetto', status: 'planned', route: '/agora'},

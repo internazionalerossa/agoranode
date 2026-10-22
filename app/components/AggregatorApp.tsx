@@ -73,6 +73,8 @@ import { useRegionalNews } from "./useRegionalNews";
 import { useCloudBookmarks, type RestoredCollection } from "./CloudBookmarks";
 import AgoraNodeIdentityLink from "./AgoraNodeIdentityLink";
 import SharedSpaceModules from "./SharedSpaceModules";
+import {FeedPreferenceControls,useNodeFeedPreferences} from "./FeedPreferenceControls";
+import {selectPreferredArticles} from "../lib/node-feed-preferences";
 import { createPublisherResolver } from "@/app/lib/publisher";
 import { useSourceHighlights } from "./SourceHighlights";
 import { applySourceImages } from "@/app/lib/source-highlights";
@@ -109,7 +111,7 @@ const PAGE_SIZE = 24;
 const NAV: { id: View; label: string }[] = [
   { id: "notizie", label: "La rassegna" },
   { id: "teoria", label: "Biblioteca" },
-  { id: "partecipa", label: "Partecipa" },
+  { id: "partecipa", label: "Agorà" },
 ];
 const HEADINGS = {
   crediti:{overline:"UN LAVORO COLLETTIVO",title:<LocalizedText>Fonti, crediti e ringraziamenti.</LocalizedText>,description:"Questo progetto vive grazie al lavoro di redazioni, autori, traduttori, bibliotecari, archivisti, ricercatori e comunità del software libero. Qui puoi risalire alle risorse utilizzate."},
@@ -176,6 +178,7 @@ export function AggregatorApp() {
     return () => { window.removeEventListener("popstate", sync); window.removeEventListener("hashchange", sync); };
   }, []);
   const [articles, setArticles] = useState<Article[]>([]);
+  const feedPrefs=useNodeFeedPreferences("polisrossa",SOURCE_CATALOG);
   const [statuses, setStatuses] = useState<Record<string, SourceStatus>>({});
   const [savedIds, setSavedIds] = useState<Set<string>>(new Set());
   const [savedArticles, setSavedArticles] = useState<Article[]>([]);
@@ -603,7 +606,7 @@ export function AggregatorApp() {
       selectNews(
         view === "salvati"
           ? allArticles.filter((a) => savedIds.has(a.id))
-          : displayArticles.filter(isNewsArticle),
+          : selectPreferredArticles(displayArticles.filter(isNewsArticle),feedPrefs.mode,feedPrefs.sourceIds),
         {
           query: deferredQuery,
           region,
@@ -622,6 +625,8 @@ export function AggregatorApp() {
       view,
       allArticles,
       displayArticles,
+      feedPrefs.mode,
+      feedPrefs.sourceIds,
       savedIds,
       deferredQuery,
       region,
@@ -989,6 +994,7 @@ export function AggregatorApp() {
                       <LocalizedText>{" Azzera filtri"}</LocalizedText>
                     </button>
                 </div>
+                {view === "notizie" ? <FeedPreferenceControls spaceId="polisrossa" sources={SOURCE_CATALOG} prefs={feedPrefs}/> : null}
                 {view !== "fonti" ? <div className="news-selection-status" role="status" aria-live="polite" aria-atomic="true"><strong>{filtered.length} <LocalizedText>articoli trovati</LocalizedText></strong><span><LocalizedText>{NEWS_ORDERS.find(([value]) => value === sort)?.[1] ?? "Più recenti prima"}</LocalizedText>{view === "notizie" ? <> · <LocalizedText>{NEWS_PERIODS.find(([value]) => value === days)?.[1] ?? "Ultime 24 ore"}</LocalizedText></> : null}</span><small><LocalizedText>{sort === "balanced" ? "Una notizia per testata prima di ripetere una fonte, alternando i paesi nelle 24 ore. All’interno di ogni fonte, prima le più recenti." : sort === "source" ? "Testate in ordine alfabetico; per ogni testata, prima gli articoli più recenti." : "Ordine basato sulla data di pubblicazione indicata dalla fonte."}</LocalizedText></small>{days === "Infinity" && view === "notizie" ? <small><LocalizedText>Include solo gli articoli ricevuti dai feed e conservati sul dispositivo, anche senza data. Non è un archivio storico completo.</LocalizedText></small> : null}</div> : null}
                 {sourceId !== ALL ? (
                   <div className="active-source">

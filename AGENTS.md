@@ -71,3 +71,7 @@ Prima di cambiare moduli comuni, storie, dati, permessi o distribuzione, consult
 Le trascrizioni letterali, gli appunti personali e i materiali riservati **non fanno parte del repository pubblico**. Non aggiungerli a commit, issue, PR, README, log o fixture; utilizzare soltanto requisiti tecnici rielaborati, necessari e privi di informazioni non pertinenti al codice. La storia delle decisioni tecniche resta in Git e nei documenti pubblici, non in un diario privato.
 
 A conclusione del cambiamento confrontare codice, API, test, interfaccia e documentazione con questi requisiti e annotare limiti ancora aperti; non trasformare gli obiettivi di prodotto in funzionalità dichiarate operative.
+
+## Node Studio e preferenze dei feed
+
+Le API `/api/spaces/agora/preferences`, `/api/spaces/polisrossa/preferences` e `/api/node-studio/drafts` sono **private** e richiedono la stessa verifica sessione/mirror di bookmark e forum. Testare origine, isolamento del proprietario, limiti e migrazioni PostgreSQL. La rassegna tecnica Agorà legge solo sorgenti allowlisted dal backend; non aggiungere fetching automatico di URL suggerite dagli utenti. Le bozze non sono nodi pubblicati e non vanno replicate; PR2/PR3 non si ricavano dai pulsanti visuali. Leggere `docs/NODE-STUDIO.md` prima di aggiungere publish o provisioning.

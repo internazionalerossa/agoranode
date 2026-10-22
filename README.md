@@ -8,7 +8,7 @@ AgoràNode è una piattaforma **AGPL-3.0-or-later** per creare comunità tematic
 
 L'obiettivo di lungo periodo è far funzionare il patrimonio pubblico della rete sui **computer di collaboratori indipendenti**, senza dipendere permanentemente da un server fondatore, un database commerciale o un unico cloud. Ogni computer dovrebbe custodire soltanto ciò che è autorizzato e sceglie di ospitare; le modifiche pubbliche devono essere verificabili e replicabili in modo incrementale, mentre le informazioni private restano protette.
 
-**Alpha di piattaforma: PolisRossa è il primo nodo reale, non una demo da buttare via.** Da qui estraiamo componenti, modelli e strumenti comuni senza perdere contenuti, URL e lavoro editoriale. **Non è ancora un social federato pronto per la produzione.** Agorà è il nodo dedicato alla tecnologia stessa, ancora in costruzione. Consenso BFT in rete, identità portabili, chat federata, runtime completo multi-comunità e failover indipendente non sono ancora operativi. Il registro [QUALITY.md](docs/QUALITY.md) distingue codice implementato, test locali ed evidenze esterne.
+**Alpha di piattaforma: PolisRossa è il primo nodo reale, non una demo da buttare via.** Da qui estraiamo componenti, modelli e strumenti comuni senza perdere contenuti, URL e lavoro editoriale. **Non è ancora un social federato pronto per la produzione.** Agorà è il nodo dedicato alla tecnologia stessa, ora con una rassegna RSS/video consultabile ma ancora senza wiki e forum tematici completi. Consenso BFT in rete, identità portabili, chat federata, runtime completo multi-comunità e failover indipendente non sono ancora operativi. Il registro [QUALITY.md](docs/QUALITY.md) distingue codice implementato, test locali ed evidenze esterne.
 
 ## Un motore, comunità diverse
 
@@ -39,12 +39,12 @@ Un voto può approvare una regola o una selezione editoriale; **non può rendere
 
 | Sottosistema | Nel repository oggi | Da completare |
 | --- | --- | --- |
-| Frontend | React 19, TypeScript, Vite 8, Tailwind CSS; navigazione dei sette moduli condivisa | Generalizzare tutte le pagine PolisRossa e i contenuti per ogni nodo |
+| Frontend | React 19, TypeScript, Vite 8, Tailwind CSS; navigazione dei sette moduli, selettore fonti e primo editor a blocchi condivisi | Generalizzare tutte le pagine PolisRossa e i backend per ogni nodo |
 | Backend | Node.js, PostgreSQL, Better Auth; flussi locali account/forum | Runtime e database realmente isolati per ogni comunità |
 | Wiki | Revisioni pubbliche append-only, provenienza, fonti e pagina strutturata | Editor completo, bozze, review e pubblicazione governata |
 | Timeline | Racconto storico PolisRossa con pagine dedicate; wizard di proposte e contratto PR2 in sviluppo | Decisioni integrate con pubblicazione automatizzata verificata |
 | Biblioteca | Catalogo multilingue e lettura interna di edizioni autorizzate | Archiviazione selettiva dei file scaricabili e metadati per singola edizione |
-| Ricerca | Indice locale di metadati e filtro per il contenuto di PolisRossa | Full-text del grafo pubblico, pagine e relazioni complete |
+| Ricerca e feed | Indice locale PolisRossa, rassegna Agorà da fonti tecnologiche dichiarate, preferiti visitatore e PR1 per nodo | Motore full-text completo, feed per nuovi nodi e fonti attivate con voto PR2 |
 | Replica | Pacchetti knowledge firmati, import atomico, peer HTTPS configurabili | Trasporto incrementale a blocchi e discovery fra host indipendenti |
 | Storage | Codec a chunk deterministici SHA-256, benchmark sintetico | Integrare CAS al protocollo di pubblicazione e quote persistenti |
 | Governance | Certificati di quorum verificati localmente, PR2/PR3 definiti | Consenso BFT operativo tra computer e audit indipendente |
@@ -125,7 +125,7 @@ I comandi opzionali `npm run peer:serve`, `npm run peer:pull` e `npm run peer:wa
 
 Un nodo completo deve permettere di cercare un tema e arrivare alla sua pagina enciclopedica, seguirne le revisioni, aprire le fonti, vedere a quali tappe della timeline è collegato, leggere libri e dataset pertinenti e discutere una proposta di correzione. La timeline principale è una **selezione narrativa governata dai PR2 del nodo**, non l'intero elenco delle sue pagine.
 
-Nel prototipo PolisRossa ora puoi selezionare più tappe e preparare una proposta testuale, oppure iniziare una nuova pagina. Il testo passa al modulo PR2 del forum senza pubblicare nulla automaticamente. L'editor visuale completo e l'esecuzione verificata delle decisioni sono lavoro ancora aperto. Contratto e UX: [Node Knowledge Graph](docs/NODE-KNOWLEDGE-GRAPH.md), [Editorial Governance](docs/EDITORIAL-GOVERNANCE.md).
+Nel prototipo PolisRossa ora puoi selezionare più tappe e preparare una proposta testuale, oppure iniziare una nuova pagina. Su Agorà e nella sezione Agorà di PolisRossa è disponibile un **laboratorio visuale a blocchi** per comporre un nodo, aggiungere fonti, preparare pagine, vedere l'anteprima e salvare bozze private nell'account PR1. La creazione pubblica del nodo resta subordinata a una procedura PR2/federale non ancora attivata. [Guida Node Studio](docs/NODE-STUDIO.md). Il testo passa al modulo PR2 del forum senza pubblicare nulla automaticamente. L'editor visuale completo e l'esecuzione verificata delle decisioni sono lavoro ancora aperto. Contratto e UX: [Node Knowledge Graph](docs/NODE-KNOWLEDGE-GRAPH.md), [Editorial Governance](docs/EDITORIAL-GOVERNANCE.md).
 
 I file di biblioteca devono distinguere **opera, edizione, diritto di replica, file effettivamente disponibile e posizione dei peer**. Un libro indicizzato e linkato non è automaticamente scaricabile o legalmente conservabile sui computer dei collaboratori.
 

@@ -1,5 +1,6 @@
 "use client";
-import {useEffect,useRef,useState} from 'react';
+import {lazy,Suspense,useEffect,useRef,useState} from 'react';
+const NodeStudio=lazy(()=>import('./NodeStudio'));
 import {ArrowDown,ArrowUp,ArrowUpRight,ChevronLeft,Download,MessageSquare,Plus,RefreshCw,X} from 'lucide-react';
 import {COMMUNITY_CATEGORIES,proposalId} from '@/app/lib/community-model';
 import {timelineProposalFromUrl} from '@/app/lib/timeline-proposal';
@@ -60,7 +61,7 @@ export default function CommunityView(){
  const active=board?.member?.status==='active';
  const date=(value:number)=>new Intl.DateTimeFormat(locale,{dateStyle:'medium',timeStyle:'short'}).format(value);
  return <div className="community-view forum-view">
-  <header className="forum-header"><div><p className="eyebrow"><T>LA COMUNITÀ DI PolisRossa</T></p><h1 id="page-title" ref={heading} tabIndex={-1}><T>{active?(space==='forum'?'Forum':'Chat'):'Partecipa'}</T></h1>{active&&<p className="forum-member-summary"><strong>{board.member!.alias}</strong> · PR2 · <a href="/polisrossa/account?return_to=%2Fpolisrossa%3Fview%3Dpartecipa"><T>Il tuo account</T></a></p>}</div><div className="forum-members-count"><strong>{board?.activeCount??'—'}</strong><T>membri ammessi</T></div></header>
+  <header className="forum-header"><div><p className="eyebrow"><T>LA COMUNITÀ DI PolisRossa</T></p><h1 id="page-title" ref={heading} tabIndex={-1}><T>{active?(space==='forum'?'Agorà · Forum':'Agorà · Chat'):'Agorà'}</T></h1>{active&&<p className="forum-member-summary"><strong>{board.member!.alias}</strong> · PR2 · <a href="/polisrossa/account?return_to=%2Fpolisrossa%3Fview%3Dpartecipa"><T>Il tuo account</T></a></p>}</div><div className="forum-members-count"><strong>{board?.activeCount??'—'}</strong><T>membri ammessi</T></div></header>
   <CommunityIntroduction member={board?.member??null} ready={Boolean(board)}/>
   {board?.previewOnly&&<p className="community-notice" role="status"><T>Versione di verifica: puoi consultare regole e interfaccia. Le nuove adesioni e le votazioni saranno aperte dopo il passaggio al nuovo indirizzo.</T></p>}
   {board?.participationOpen===false&&!board.previewOnly&&<p className="community-notice" role="status"><T>Adesioni, nuovi interventi e votazioni sono temporaneamente chiusi. La lettura delle discussioni pubbliche resta aperta e il tuo archivio personale resta separato.</T></p>}
@@ -94,7 +95,10 @@ export default function CommunityView(){
    </>}
    </section>
   </>}
-  <details className="community-rules"><summary><T>Le regole della comunità</T></summary><ol>{RULES.map(rule=><li key={rule.id}><h3><T>Regola</T> {rule.id} · <T>{rule.title}</T></h3><p><T>{rule.text}</T></p></li>)}</ol>{active&&<button className="text-link" onClick={()=>{setComposeKind('proposal');setComposeVersion(v=>v+1);setCompose(true);}}><T>Proponi una modifica alle regole</T></button>}</details>
+  <details className="node-studio-entry"><summary>Laboratorio Agorà · crea un nodo o proponi una modifica</summary>
+    <Suspense fallback={<p role="status">Caricamento del laboratorio…</p>}><NodeStudio spaceId="polisrossa"/></Suspense>
+   </details>
+   <details className="community-rules"><summary><T>Le regole della comunità</T></summary><ol>{RULES.map(rule=><li key={rule.id}><h3><T>Regola</T> {rule.id} · <T>{rule.title}</T></h3><p><T>{rule.text}</T></p></li>)}</ol>{active&&<button className="text-link" onClick={()=>{setComposeKind('proposal');setComposeVersion(v=>v+1);setCompose(true);}}><T>Proponi una modifica alle regole</T></button>}</details>
  </div>;
 }
 /** Membership comes from the server; no onboarding flash while it is loading. */

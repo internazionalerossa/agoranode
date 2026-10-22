@@ -18,6 +18,14 @@ Il manifesto tipizzato e l’endpoint pubblico definiscono un primo contratto pe
 
 [English](README.en.md) · [Il modello AgoràNode](docs/AGORANODE.md) · [Governo comune](docs/GOVERNANCE.md) · [Rete distribuita](docs/DISTRIBUTED-NETWORK.md) · [Replica pubblica](docs/PUBLIC-REPLICATION.md) · [Contribuire](CONTRIBUTING.md) · [Architettura](docs/ARCHITECTURE.md) · [Self-hosting](docs/SELF-HOSTING.md) · [Stato delle verifiche](docs/QUALITY.md)
 
+## Visione tecnica: infrastruttura custodita dai partecipanti
+
+AgoràNode vuole diventare una rete **eseguibile e custodita dai computer dei collaboratori**, non un social che richiede per sempre un database centrale presso un'azienda. Un peer è un computer che replica, serve o convalida; un **nodo tematico** è una comunità con argomento, contenuti e autonomia propri. Lo stesso peer potrà ospitare più temi e lo stesso tema potrà sopravvivere su più peer.
+
+Questo obiettivo non richiede criptovaluta o mining: richiede blocchi verificabili, log di revisioni, consenso limitato alle decisioni che lo richiedono, gateway multipli, identità portabili e dati personali **mai diffusi nella replica pubblica**. Nessuna di queste proprietà va presunta operativa soltanto perché esiste uno schema. L'implementazione attuale ha un deposito pubblico e test di replica tra database locali; rete P2P e failover non sono ancora collaudati.
+
+La specifica aggiornata è in [Architettura custodita dai peer](docs/PEER-OWNED-ARCHITECTURE.md). L'ordine dei lavori e i test vincolanti sono nel [Piano di decentralizzazione](docs/DECENTRALIZATION-ROADMAP.md); [Stato delle verifiche](docs/QUALITY.md) distingue sempre codice, prove locali e rete reale.
+
 ## Il formato comune AgoràNode
 
 Un nodo completo cambia argomento, fonti, colori e comunità, ma conserva sei ambienti riconoscibili:

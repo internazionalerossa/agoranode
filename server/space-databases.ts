@@ -18,6 +18,9 @@ export function databaseTarget(connectionString: string): string {
   let dbName: string;
   try {dbName=decodeURIComponent(url.pathname.slice(1));} catch {throw Error('Invalid database name encoding');}
   if(!dbName || dbName.includes('/') || dbName.includes('\0') || dbName.includes('\\')) throw Error('Invalid database name');
+  // Reject libpq options that could secretly override host/database/search_path.
+  const allowedOptions=new Set(['sslmode','sslcert','sslkey','sslrootcert']);
+  for(const key of url.searchParams.keys()) if(!allowedOptions.has(key)) throw Error('Unsafe PostgreSQL connection option');
   const host=url.hostname.toLowerCase();
   // The connection target excludes credentials by design.
   return host+':'+(url.port||'5432')+'/'+dbName;

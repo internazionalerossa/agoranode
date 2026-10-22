@@ -181,3 +181,14 @@ Fino a quando tali asset appartengono materialmente a singoli account, la propri
 Il protocollo distribuito può governare scritture soltanto dopo test tra computer indipendenti, revisione crittografica esterna, esercitazione di revoca/rotazione, simulazione di fork, verifica privacy e approvazione della carta costitutiva. Prima di allora il modulo v1 resta sperimentale e non sostituisce le regole operative in `COMMUNITY.md`.
 
 La rete, le classi dei dati, i guasti ammessi e le prove di disponibilità sono specificati in [DISTRIBUTED-NETWORK.md](DISTRIBUTED-NETWORK.md).
+
+## Confine tra Agorà, federazione e custodia tecnica
+
+Agorà è un **nodo tematico** dedicato alla tecnologia AgoràNode, non il titolare automaticamente superiore a PolisRossa e agli altri spazi. Il portale dei nodi `/` non è un'assemblea. Le decisioni sul codice e sulle regole comuni seguono il protocollo di governance federale, con competenze e mandati espressi: non acquisiscono validità per il fatto di essere pubblicate sulla pagina `/agora`.
+
+Un **peer** è un computer che conserva o serve parte della rete; un **finalizzatore** è un incarico tecnico attribuito secondo regole specifiche. Nessuno dei due corrisponde a un PR2 o PR3 per il solo fatto di esistere. La disponibilità di molti computer gestiti dalla stessa persona non produce più schede.
+
+Per rendere reali i mandati occorre un percorso verificabile da proposta e approvazione politica a certificato di autorizzazione e a transizione finalizzata mediante consenso tecnico. Oggi i contratti crittografici sono locali, non una rete elettorale BFT operativa. Alla perdita del quorum restano valide le ultime decisioni finalizzate e le copie pubbliche rimangono leggibili; un host superstite non assume automaticamente il potere di emettere una nuova storia ufficiale.
+
+Le regole anti-Sybil, l'identità portabile, le chiavi di voto e l'eventuale segretezza delle schede richiedono review di sicurezza e privacy separata. Il regime di pubblicazione attuale delle schede nominative non va esteso inconsapevolmente a una rete replicata in modo irreversibile. Vedere [PEER-OWNED-ARCHITECTURE.md](PEER-OWNED-ARCHITECTURE.md) e [DECENTRALIZATION-ROADMAP.md](DECENTRALIZATION-ROADMAP.md).
+

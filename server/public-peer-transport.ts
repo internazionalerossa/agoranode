@@ -4,7 +4,8 @@
  * NOT automatic discovery, distributed consensus, or private data federation.
  */
 import {createServer, type Server} from 'node:http';
-import {readdir, open} from 'node:fs/promises';
+import {readdir, open, lstat} from 'node:fs/promises';
+import {createHash} from 'node:crypto';
 import {constants} from 'node:fs';
 import {join, resolve} from 'node:path';
 import {canonicalKnowledgeJson} from '../app/lib/knowledge-model';
@@ -62,19 +63,51 @@ async function names(options: PeerOptions): Promise<string[]> {
   }
   return approved;
 }
+/**
+ * Avoid rehashing all old snapshots on every one-second index request.
+ * Inode, size, mtime AND ctime invalidate the cached positive verification;
+ * receivers recheck signatures and hashes before importing regardless.
+ */
+export class PublicPeerIndexCache {
+  private verified=new Map<string,string>();
+  async names(options: PeerOptions):Promise<string[]> {
+    const entries=await readdir(resolve(options.directory),{withFileTypes:true});
+    const candidates=entries.filter(e=>e.isFile()&&safeName(e.name)).map(e=>e.name).sort();
+    if(candidates.length>MAX_LIST)throw Error('Peer index exceeds bounded window');
+    const approved:string[]=[],present=new Set(candidates);
+    for(const name of candidates){
+      try {
+        const meta=await lstat(join(resolve(options.directory),name));
+        if(!meta.isFile()||meta.isSymbolicLink())continue;
+        const stamp=[meta.dev,meta.ino,meta.size,meta.mtimeMs,meta.ctimeMs].join(':');
+        if(this.verified.get(name)!==stamp){
+          await readVerifiedPackage(options.directory,name,options);
+          this.verified.set(name,stamp);
+        }
+        approved.push(name);
+      }catch {this.verified.delete(name);}
+    }
+    for(const name of this.verified.keys())if(!present.has(name))this.verified.delete(name);
+    return approved;
+  }
+}
+
 function json(body: unknown, status = 200): Response {
   return Response.json(body, {status, headers: {'cache-control':'no-store','x-content-type-options':'nosniff'}});
 }
 
 /** Pure HTTP route; TLS termination belongs to the independently hosted gateway. */
-export async function publicPeerRequest(request: Request, options: PeerOptions): Promise<Response> {
+export async function publicPeerRequest(request: Request, options: PeerOptions, cache?: PublicPeerIndexCache): Promise<Response> {
   if (request.method !== 'GET') return json({error:'Method not allowed'},405);
   const url = new URL(request.url);
   if (url.search || url.hash) return json({error:'Invalid request'},400);
   if (url.pathname === '/v1/index') {
     const index: PublicPeerIndex = {format:FORMAT,networkId:options.expectedNetworkId,
-      spaceId:options.expectedSpaceId,packages:await names(options)};
-    return json(index);
+      spaceId:options.expectedSpaceId,packages:cache?await cache.names(options):await names(options)};
+    const etag='"'+createHash('sha256').update(JSON.stringify(index)).digest('hex')+'"';
+    const headers={'cache-control':'no-store','etag':etag,'x-content-type-options':'nosniff'};
+    if(request.headers.get('if-none-match')===etag) return new Response(null,{status:304,headers});
+    return Response.json(index,{headers});
   }
   const prefix='/v1/packages/';
   if (!url.pathname.startsWith(prefix)) return json({error:'Not found'},404);
@@ -90,10 +123,11 @@ export async function publicPeerRequest(request: Request, options: PeerOptions):
 
 /** Loopback by default: public exposure requires operator-managed TLS proxy. */
 export function createPublicPeerServer(options: PeerOptions, host='127.0.0.1'): Server {
+  const indexCache=new PublicPeerIndexCache();
   return createServer({requestTimeout:30_000},async(incoming,outgoing)=>{
     try {
       const request=new Request('http://'+host+(incoming.url??'/'),{method:incoming.method??'GET'});
-      const response=await publicPeerRequest(request,options);
+      const response=await publicPeerRequest(request,options,indexCache);
       outgoing.writeHead(response.status,Object.fromEntries(response.headers));
       outgoing.end(Buffer.from(await response.arrayBuffer()));
     } catch {

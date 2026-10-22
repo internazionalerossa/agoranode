@@ -28,7 +28,8 @@ test('fail closed for shared database, duplicate space ID, invalid names and uns
   ]) assert.throws(()=>validateSpaceDatabaseInputs(value));
   for(const url of [
     'sqlite:///local.db','postgres://db.local','postgres://db.local/',
-    'postgres://db.local/a%2Fb','not-a-url',
+    'postgres://db.local/a%2Fb','postgres://db.local/agora?host=%2Fvar%2Frun%2Fpostgresql',
+    'postgres://db.local/agora?options=-c%20search_path%3Dpublic','not-a-url',
   ]) assert.throws(()=>databaseTarget(url));
   assert.throws(()=>validateSpaceDatabaseInputs([]));
   assert.throws(()=>validateSpaceDatabaseInputs([{spaceId:'../agora',connectionString:common.connectionString}]));

@@ -153,3 +153,25 @@ test('one-second watch stops after abort without continuing requests',async()=>{
       /poll interval/);
   }finally{await rm(dir,{recursive:true,force:true});}
 });
+
+
+test('actual HTTP peer listener preserves If-None-Match and emits body-free 304',async()=>{
+  const dir=await mkdtemp(join(tmpdir(),'agoranode-etag-wire-'));
+  const server=createPublicPeerServer(options(dir));
+  try{
+    await new Promise<void>(resolve=>server.listen(0,'127.0.0.1',resolve));
+    const addr=server.address();
+    if(!addr||typeof addr==='string')throw Error('Invalid test listener');
+    const url='http://127.0.0.1:'+addr.port+'/v1/index';
+    const first=await fetch(url);
+    assert.equal(first.status,200);
+    const etag=first.headers.get('etag');
+    assert.match(etag??'',/^"[a-f0-9]{64}"$/);
+    const second=await fetch(url,{headers:{'if-none-match':etag!}});
+    assert.equal(second.status,304);
+    assert.equal(await second.text(),'');
+  }finally{
+    await new Promise<void>((resolve,reject)=>server.close(err=>err?reject(err):resolve()));
+    await rm(dir,{recursive:true,force:true});
+  }
+});

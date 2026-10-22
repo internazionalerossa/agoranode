@@ -4,7 +4,8 @@
  * NOT automatic discovery, distributed consensus, or private data federation.
  */
 import {createServer, type Server} from 'node:http';
-import {readdir, lstat, readFile} from 'node:fs/promises';
+import {readdir, open} from 'node:fs/promises';
+import {constants} from 'node:fs';
 import {join, resolve} from 'node:path';
 import {canonicalKnowledgeJson} from '../app/lib/knowledge-model';
 import {validateKnowledgeReplicationPackage, type KnowledgeReplicationPackage} from './knowledge-replication-finality';
@@ -27,10 +28,16 @@ function safeName(name: string): boolean {return FILENAME.test(name);}
 async function readVerifiedPackage(directory: string, name: string, options: PeerOptions) {
   if (!safeName(name)) throw Error('Invalid public package filename');
   const path = join(resolve(directory), name);
-  const meta = await lstat(path);
-  if (!meta.isFile() || meta.isSymbolicLink() || meta.size > MAX_PACKAGE_BYTES) throw Error('Not a bounded regular public package');
-  const raw = await readFile(path);
-  if (raw.byteLength !== meta.size) throw Error('Package changed during read');
+  // Open the actual file descriptor without following symlinks. This avoids
+  // a path-swap race between lstat(path) and readFile(path).
+  const handle=await open(path,constants.O_RDONLY | (constants.O_NOFOLLOW??0));
+  let raw: Buffer;
+  try {
+    const meta=await handle.stat();
+    if(!meta.isFile()||meta.size>MAX_PACKAGE_BYTES)throw Error('Not a bounded regular public package');
+    raw=await handle.readFile();
+    if(raw.byteLength!==meta.size)throw Error('Package changed during read');
+  } finally {await handle.close();}
   let parsed: unknown;
   try {parsed = JSON.parse(raw.toString('utf8'));} catch {throw Error('Package is not JSON');}
   const pkg = await validateKnowledgeReplicationPackage(parsed, {

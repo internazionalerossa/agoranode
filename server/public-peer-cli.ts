@@ -30,8 +30,8 @@ async function main() {
     process.stdout.write(JSON.stringify({status:'pulled',packages:pulled})+'\n');
     return;
   }
-  const port=Number(process.env.AG0RANODE_PEER_PORT??'9393');
-  if(!Number.isInteger(port)||port<1024||port>65535) throw Error('Invalid AG0RANODE_PEER_PORT');
+  const port=Number(process.env.AGORANODE_PEER_PORT??'9393');
+  if(!Number.isInteger(port)||port<1024||port>65535) throw Error('Invalid AGORANODE_PEER_PORT');
   const server=createPublicPeerServer(options);
   await new Promise<void>((done,reject)=>{
     server.once('error',reject);

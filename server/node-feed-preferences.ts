@@ -16,7 +16,7 @@ export async function handleNodeFeedPreferences(
      const row=await db.prepare('SELECT sources_json FROM node_feed_preferences WHERE owner_id=? AND space_id=?')
        .bind(userId,spaceId).first<{sources_json:unknown}>();
      const raw=typeof row?.sources_json==='string'?JSON.parse(row.sources_json):row?.sources_json;
-     return reply({authenticated:true,sourceIds:normaliseSourceChoices(raw,allowed)});
+     return reply({authenticated:true,saved:Boolean(row),sourceIds:normaliseSourceChoices(raw,allowed)});
    }catch{return reply({error:'Preferences temporarily unavailable'},503);}
  }
  if(request.method!=='PUT')return reply({error:'Method not allowed'},405);

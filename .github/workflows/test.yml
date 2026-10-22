@@ -1,4 +1,4 @@
-name: Verify PolisRossa
+name: Verify AgoraNode
 
 on:
   push:
@@ -27,7 +27,7 @@ jobs:
         run: npm ci --no-audit --no-fund
       - name: Build the independent application
         run: npm run build
-      - name: Verify domain logic and persistent accounts
-        run: npm test
       - name: Check TypeScript
         run: npm run typecheck
+      - name: Verify domain logic and persistent accounts
+        run: npm test

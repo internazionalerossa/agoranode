@@ -6,7 +6,7 @@
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
-import {createPublicPeerServer, pullPublicPeer, pullFromPublicPeers} from './public-peer-transport';
+import {createPublicPeerServer, pullPublicPeer, pullFromPublicPeers, watchPublicPeers} from './public-peer-transport';
 
 function required(name: string): string {
   const value=process.env[name];
@@ -15,7 +15,7 @@ function required(name: string): string {
 }
 async function main() {
   const command=process.argv[2];
-  if(command!=='serve'&&command!=='pull') throw Error('Usage: peer-exchange serve|pull');
+  if(command!=='serve'&&command!=='pull'&&command!=='watch') throw Error('Usage: peer-exchange serve|pull|watch');
   const options={
     validatorSet:JSON.parse(await readFile(required('KNOWLEDGE_REPLICA_VALIDATOR_SET'),'utf8')),
     expectedNetworkId:required('KNOWLEDGE_REPLICA_NETWORK_ID'),
@@ -25,6 +25,27 @@ async function main() {
       ? required('KNOWLEDGE_REPLICA_OUTBOX')
       : required('KNOWLEDGE_REPLICA_INBOX'),
   };
+  if(command==='watch') {
+    const configured=process.env.AGORANODE_PEER_ORIGINS;
+    const origins=configured!==undefined
+      ? configured.split(',').map(origin=>origin.trim())
+      : [required('AGORANODE_PEER_ORIGIN')];
+    const intervalMs=Number(process.env.AGORANODE_PEER_POLL_MS??'1000');
+    const controller=new AbortController();
+    process.once('SIGINT',()=>controller.abort());
+    process.once('SIGTERM',()=>controller.abort());
+    await watchPublicPeers(origins,options,{
+      intervalMs,signal:controller.signal,
+      onCycle:event=>{
+        // Never log credentials, payload bytes or full peer addresses.
+        if(event.status==='unavailable')
+          process.stderr.write(JSON.stringify({status:event.status,error:event.error})+'\\n');
+        else if(event.newPackages>0)
+          process.stdout.write(JSON.stringify(event)+'\\n');
+      },
+    });
+    return;
+  }
   if(command==='pull') {
     // Optional comma-separated HTTPS origins owned by different custodians.
     // The existing single-origin variable remains backward compatible.

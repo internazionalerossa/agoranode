@@ -111,7 +111,7 @@ const PAGE_SIZE = 24;
 const NAV: { id: View; label: string }[] = [
   { id: "notizie", label: "La rassegna" },
   { id: "teoria", label: "Biblioteca" },
-  { id: "partecipa", label: "Partecipa" },
+  { id: "partecipa", label: "Agorà" },
 ];
 const HEADINGS = {
   crediti:{overline:"UN LAVORO COLLETTIVO",title:<LocalizedText>Fonti, crediti e ringraziamenti.</LocalizedText>,description:"Questo progetto vive grazie al lavoro di redazioni, autori, traduttori, bibliotecari, archivisti, ricercatori e comunità del software libero. Qui puoi risalire alle risorse utilizzate."},

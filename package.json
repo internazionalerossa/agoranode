@@ -18,7 +18,8 @@
     "dev:server": "node --env-file=.env --import tsx --watch server/index.ts",
     "peer:serve": "node --env-file-if-exists=.env --import tsx server/public-peer-cli.ts serve",
     "peer:pull": "node --env-file-if-exists=.env --import tsx server/public-peer-cli.ts pull",
-    "benchmark:cas": "node --import tsx scripts/benchmark-public-cas.ts"
+    "benchmark:cas": "node --import tsx scripts/benchmark-public-cas.ts",
+    "peer:watch": "node --env-file-if-exists=.env --import tsx server/public-peer-cli.ts watch"
   },
   "dependencies": {
     "lucide-react": "^1.25.0",

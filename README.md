@@ -1,119 +1,105 @@
 # AgoràNode
 
-**Open-source infrastructure for knowledge, communities and community-owned computing.**
+**Infrastruttura open source per conoscenza condivisa, comunità autonome e reti custodite dalle persone.**
 
-[English](README.en.md) · [Architecture](docs/ARCHITECTURE.md) · [Distributed network](docs/DISTRIBUTED-NETWORK.md) · [Contributing](CONTRIBUTING.md) · [Current verification](docs/QUALITY.md) · [Security](docs/SECURITY-REVIEW.md)
+[English](README.en.md) · [Architettura](docs/ARCHITECTURE.md) · [Contribuire](CONTRIBUTING.md) · [Roadmap](docs/DECENTRALIZATION-ROADMAP.md) · [Stato verificato](docs/QUALITY.md) · [Sicurezza](docs/SECURITY-REVIEW.md)
 
-AgoràNode is an **AGPL-3.0-or-later** project for creating independent thematic communities on shared software. Each community is designed to combine a sourced knowledge base, public wiki pages, RSS feeds, a digital library, chronological events, structured data, discussions, proposals, and democratic governance.
+AgoràNode è una piattaforma **AGPL-3.0-or-later** per creare comunità tematiche autonome che condividono lo stesso software: **wiki con fonti e revisioni, feed RSS, biblioteca digitale, timeline narrativa, dati e grafici, forum, proposte e autogoverno comunitario**.
 
-Our long-term engineering goal is **a network that communities can run and preserve on their own computers**—without needing one company's database, cloud account, or founding server to remain online forever. Each peer should replicate only the content it is entitled and willing to store. Public content should be verifiable and incrementally synchronized; private data must not be copied into the public network.
+L'obiettivo di lungo periodo è far funzionare il patrimonio pubblico della rete sui **computer di collaboratori indipendenti**, senza dipendere permanentemente da un server fondatore, un database commerciale o un unico cloud. Ogni computer dovrebbe custodire soltanto ciò che è autorizzato e sceglie di ospitare; le modifiche pubbliche devono essere verificabili e replicabili in modo incrementale, mentre le informazioni private restano protette.
 
-**This is an active project, not a production-ready decentralized social network.** The existing PolisRossa application is the first developed thematic node. Agorà is the technology-focused node under construction. The distributed consensus, portable identities, federated forum/chat, complete multi-node runtime and independent gateway failover are not yet operational. We distinguish working code from design goals in [QUALITY.md](docs/QUALITY.md).
+**Progetto in sviluppo, non un social federato pronto per la produzione.** PolisRossa è il primo nodo tematico sviluppato. Agorà è il nodo dedicato alla tecnologia stessa, ancora in costruzione. Consenso BFT in rete, identità portabili, chat federata, runtime completo multi-comunità e failover indipendente non sono ancora operativi. Il registro [QUALITY.md](docs/QUALITY.md) distingue codice implementato, test locali ed evidenze esterne.
 
-## The idea
+## Un motore, comunità diverse
 
-Think **wiki + RSS reader + digital library + community forum**, with one consistent user experience per thematic community. The underlying software is AgoràNode; a thematic *node* is a community, **not** a physical server.
-
-| Surface | Responsibility |
+| Concetto | Responsabilità |
 | --- | --- |
-| `/` | The node directory and entry point |
-| `/agora` | Thematic community about AgoràNode technology, currently a preview |
-| `/polisrossa` | Developed community focused on the history, politics and culture of the international left |
-| Future communities | Same modules, different topics, sources, data, members and governance |
+| `/` | Portale e ricerca dei nodi |
+| `/agora` | Comunità tematica sul software AgoràNode (anteprima) |
+| `/polisrossa` | Prima comunità sviluppata: storia, attualità e culture della sinistra internazionale |
+| Nodo tematico | Contenuti, fonti, wiki, biblioteca, dati, regole e membership propri |
+| Peer fisico | Un computer che offre storage, banda o servizi a uno o più nodi |
 
-A physical **peer** may store several communities; one community may be served by many independent peers. Hosting hardware never grants editorial or political authority. A local community controls its own rules; federation-level decisions are scoped to shared infrastructure.
+**Un peer non è un elettore e un nodo tematico non è un server.** Più computer possono conservare lo stesso nodo; un computer può ospitarne diversi. Ospitare hardware non dà diritti politici, editoriali o di moderazione.
 
-## Why we're building it
+## Perché esiste
 
-Today a knowledge website, news aggregator and community forum often duplicate content and metadata, depend on opaque recommendation systems, or keep participation locked to one hosting provider. We are exploring a simpler architecture with:
+Enciclopedie, aggregatori di notizie, biblioteche digitali e forum oggi spesso vivono in applicazioni separate. AgoràNode vuole renderli **parti della stessa conoscenza navigabile**, senza un algoritmo opaco che decida per gli utenti cosa pensare e senza concentrare dati e potere in una sola infrastruttura.
 
-- **Interconnected knowledge:** an entity has a stable ID, sources, revision history and relationships to books, events, datasets and discussions. Timeline entries lead to pages; pages link back to the timeline and their supporting sources.
-- **Community sovereignty:** locally governed content and moderation, clear membership and appeals, delegations with deadlines, and no extra vote for the operator of a server.
-- **Portable public history:** revisions are append-only where appropriate, content-addressed, attributable and exportable. A hash proves integrity, *not* factual truth or publication rights.
-- **Lean replication:** store and transfer only missing public content blocks, maintain local indexes, and use consensus only for state that requires collective finality—not for every chat message.
-- **Provider replaceability:** publicly documented formats, independently operated peers, replaceable gateways and verifiable releases rather than a mandatory cloud vendor.
-- **Privacy by design:** accounts, passwords, private discussions and personal data are not part of the indiscriminate public replication set.
+- **Pagine enciclopediche per ogni tema:** ID stabili, fonti, revisioni, collegamenti a persone, luoghi, eventi, libri, serie statistiche e discussioni. Le pagine pubblicate sono ricercabili anche se non sono nella timeline.
+- **Timeline narrativa:** non un elenco di link, ma un racconto con periodo, contesto, testo introduttivo e accesso alle pagine di approfondimento, nello stile sviluppato su PolisRossa.
+- **Autogoverno PR2 locale:** i membri PR2 del nodo decidono quali pagine inserire nel racconto, quali modificare o escludere e con quale testo, attraverso proposte tracciate. L'esclusione dalla timeline non cancella una pagina wiki.
+- **Biblioteca vera, non una lista di URL:** opere, edizioni, lingue, formati, diritti e file locali verificabili *solo dove la ridistribuzione è permessa*, con collegamenti al resto del sapere.
+- **Portabilità e integrità:** registro delle revisioni, esportazioni pubbliche verificabili, backup privati separati, replica senza proprietario unico.
+- **Infrastruttura leggera:** indici locali ricostruibili, trasferimento dei soli oggetti mancanti, storage a blocchi deduplicati, consenso limitato alle decisioni che richiedono finalità comune.
 
-The governing principle is **simple primitives, explicit invariants, measurable results**. We prefer a modular monolith and small protocols to infrastructure layers whose cost is not justified by a real benchmark.
+Un voto può approvare una regola o una selezione editoriale; **non può rendere vero un fatto**. La verifica delle fonti, delle licenze e delle correzioni resta parte del sistema.
 
-## Status at a glance
+## Stato tecnico
 
-| Area | What's in the repository | Missing before real distributed production |
+| Sottosistema | Nel repository oggi | Da completare |
 | --- | --- | --- |
-| Frontend | React 19, TypeScript, Vite 8, Tailwind CSS; shared seven-module navigator | All PolisRossa views made fully configurable for every community |
-| Local storage | PostgreSQL 17, Better Auth, local persistent forum/account flows | Separate live runtime and permissions for each community |
-| Wiki knowledge | Content-addressed public revisions, sources, immutable audit and current pointers | Public editing/review workflow and complete thematic content graph |
-| Library | Multilingual metadata catalogue and an authorized in-site edition | Local file availability for each redistributable edition, rights review and durable CAS integration |
-| Timeline/data | Historically sourced PolisRossa catalogues and graphs | Generic per-node indexing, proposals, conflict/appeal workflows |
-| Search | Topic-scoped read-only discovery prototype for PolisRossa library and timeline | Full-text indexes, remote search and all public record kinds |
-| Replication | Verified public packages, direct HTTP peer transfer, conditional index polling | Incremental network block exchange, discovery and independent host acceptance tests |
-| Consensus | Ed25519 quorum-certificate validation in local tests | An actual network BFT protocol and independent security review |
-| Forum/chat/identity | Persistent forum; temporary single-process chat; Better Auth | Federated event delivery, safe E2E where needed and portable identity recovery |
-| Gateway | Local self-hosting and optional ingress proxies | Automatic independently hosted gateway continuity and tested failover |
+| Frontend | React 19, TypeScript, Vite 8, Tailwind CSS; navigazione dei sette moduli condivisa | Generalizzare tutte le pagine PolisRossa e i contenuti per ogni nodo |
+| Backend | Node.js, PostgreSQL, Better Auth; flussi locali account/forum | Runtime e database realmente isolati per ogni comunità |
+| Wiki | Revisioni pubbliche append-only, provenienza, fonti e pagina strutturata | Editor completo, bozze, review e pubblicazione governata |
+| Timeline | Racconto storico PolisRossa con pagine dedicate; wizard di proposte e contratto PR2 in sviluppo | Decisioni integrate con pubblicazione automatizzata verificata |
+| Biblioteca | Catalogo multilingue e lettura interna di edizioni autorizzate | Archiviazione selettiva dei file scaricabili e metadati per singola edizione |
+| Ricerca | Indice locale di metadati e filtro per il contenuto di PolisRossa | Full-text del grafo pubblico, pagine e relazioni complete |
+| Replica | Pacchetti knowledge firmati, import atomico, peer HTTPS configurabili | Trasporto incrementale a blocchi e discovery fra host indipendenti |
+| Storage | Codec a chunk deterministici SHA-256, benchmark sintetico | Integrare CAS al protocollo di pubblicazione e quote persistenti |
+| Governance | Certificati di quorum verificati localmente, PR2/PR3 definiti | Consenso BFT operativo tra computer e audit indipendente |
+| Social e identità | Forum persistente, chat temporanea, autenticazione | Eventi social federati, stanze, cifratura privata e recovery portabile |
 
-**Do not confuse a one-second peer poll with a one-second durable backup or globally consistent data.** The database's local transaction is the first durability boundary; the network can distribute only *approved finalized* public changes. Private backups are encrypted and restored under separate rules. See [Sync and storage](docs/CONTINUOUS-SYNC.md).
+Questa tabella descrive la **situazione effettiva**, non una promessa di funzioni già attive. Dettagli e limiti sono in [QUALITY.md](docs/QUALITY.md).
 
-## Architecture: a lightweight core
-
-```text
-Web / PWA client
-    │
-    ▼
-Community-aware React frontend + public/private API
-    │
-    ├─ knowledge pages / timeline / books / datasets
-    ├─ news ingestion and search (rebuildable indexes)
-    ├─ community discussions, moderation and proposals
-    └─ authenticated personal data (private, isolated)
-    │
-    ▼
-Local PostgreSQL (transactions and local indexes)
-    │
-    ├─ committed public change cursor ──> publication/review
-    │                                         │
-    │                              authorized checkpoint
-    │                                         │
-    └─ encrypted, restricted private backup   ▼
-                                   verified public object exchange
-                                         │          │
-                                     peer A       peer B
-                                       │            │
-                                    local index / browser gateway
-
-Peer replication does NOT copy a community's private database.
-```
-
-**Key distinction:** a physical peer, thematic community, forum member, technical finalizer and federation delegate are five different concepts. Neither a server nor the longest log determines political authority.
-
-The public replication **v1** presently transfers complete finalized knowledge bundles. Our experimental content-defined chunker (`server/public-blob-cas.ts`) supports verifiable deduplication in isolation but is **not yet integrated** with the wire protocol. Peer polling can avoid retransmitting unchanged packages. No benchmark implies that a €100 device can host billions of simultaneous sessions.
-
-## Project structure
+## Architettura: piccolo nucleo, dati verificabili
 
 ```text
-app/
-  components/       React product views and shared node navigator
-  data/             PolisRossa catalogues, timelines and sources
-  instances/        Agorà and PolisRossa manifests; per-space adapters
-  lib/              Domain models, permissions and discovery
-  platform/         Shared manifest, governance and replication contracts
-server/
-  api.ts            Application API boundary
-  auth.ts           Account/session boundary
-  knowledge*.ts     Public revision storage and verification
-  public-peer-*.ts  Optional read-only public peer exchange
-  public-blob-cas.ts Experimental public-only chunk codec
-  migrations/       PostgreSQL schema
-web/                Vite entry point
-scripts/            Build, local operation and synthetic benchmark
-tests/              Node test suite and PGlite fixtures
-docs/               Specifications, operational runbooks and evidence
+                        Browser / PWA
+                             │
+                 React + API del nodo tematico
+                             │
+           ┌─────────────────┴─────────────────┐
+     Patrimonio pubblico                 Dati riservati
+  wiki · timeline · libri                  account · sessioni
+  grafici · fonti · forum                 messaggi · backup
+           │                                     │
+      PostgreSQL locale                 custodia autorizzata
+   indici e audit transazionali          backup cifrati
+           │
+   revisione, fonti, diritti, decisione PR2
+           │
+   checkpoint pubblico finalizzato e firmato
+           │
+   scambio peer con verifica degli oggetti mancanti
+           │
+      PC volontario A — PC volontario B — altri peer
 ```
 
-The canonical repository is `internazionalerossa/agoranode`. Historical PolisRossa URLs, database/volume identifiers and personal storage keys are preserved for compatibility.
+**Replica ogni secondo non significa backup integrale ogni secondo.** Il salvataggio transazionale locale, la decisione di pubblicazione e la ricezione remota sono tre eventi distinti. Il nuovo `knowledge-delta.ts` legge solo le modifiche pubbliche committate dal registro audit locale; non pubblica né autorizza bozze. `peer:watch` verifica periodicamente l'indice dei pacchetti già finalizzati, di default ogni secondo, usando richieste condizionali HTTP per limitare traffico inutile. Non garantisce un RPO di un secondo, finalità globale né replica delle informazioni private.
 
-## Getting started
+La replica attuale trasporta ancora bundle v1 cumulativi. Il codec sperimentale [Lean Storage](docs/LEAN-STORAGE.md) permette di riutilizzare blocchi content-addressed, ma **non è ancora il protocollo di rete di produzione**. Per il disegno completo consultare [Continuous Sync](docs/CONTINUOUS-SYNC.md).
 
-**Requirements:** Node.js 24+, npm, Git. Docker and PostgreSQL are required for the full self-hosted server; browsing the frontend and running most local tests does not require exposing ports on your router.
+## Struttura del repository
+
+```text
+app/components/    Interfaccia React, moduli comuni, timeline e ricerca
+app/data/          Cataloghi e testi attuali di PolisRossa
+app/instances/     Manifesti, configurazioni e indici dei nodi
+app/lib/           Modelli di dominio, ricerca, conoscenza, proposte
+app/platform/      Contratti comuni e governance
+server/            API, PostgreSQL, storage conoscitivo, trasporto peer
+web/               Entrypoint Vite
+scripts/           Build, strumenti operativi, benchmark
+tests/             Test Node.js e fixture PGlite
+docs/              Specifiche, sicurezza, runbook e evidenze
+```
+
+Gli identificatori tecnici storici di PolisRossa (URL, volumi e database) rimangono compatibili; una modifica al frontend non deve distruggere i dati esistenti.
+
+## Avvio per sviluppatori
+
+Richiede **Node.js 24+**, npm e Git.
 
 ```bash
 git clone https://github.com/internazionalerossa/agoranode.git
@@ -122,7 +108,7 @@ npm ci
 npm run dev
 ```
 
-The Vite development server runs on the local machine. To build and verify the application:
+Per verificare il codice:
 
 ```bash
 npm run build
@@ -131,49 +117,42 @@ npm test
 npm run benchmark:cas
 ```
 
-`npm run benchmark:cas` runs a **synthetic** one-byte-edit exercise and reports deduplicated bytes; it is not an energy, production throughput or infrastructure-cost measurement. For a full local HTTPS installation, database migrations, backups and strict mirror mode, follow [SELF-HOSTING.md](docs/SELF-HOSTING.md); do not copy development credentials into production.
+Il benchmark CAS è sintetico: misura una modifica di un byte e i blocchi riutilizzati, **non** consumi energetici o prestazioni di produzione. Un server completo richiede PostgreSQL, configurazione e HTTPS secondo [SELF-HOSTING.md](docs/SELF-HOSTING.md).
 
-### Testing the public peer prototype
+I comandi opzionali `npm run peer:serve`, `npm run peer:pull` e `npm run peer:watch` gestiscono **soltanto pacchetti pubblici firmati**, tramite origini conosciute e TLS configurato dall'operatore. Non attivano il social federato, non copiano l'intero database e non sostituiscono backup privati. [Guida peer](docs/PEER-EXCHANGE.md).
 
-The optional `npm run peer:serve` and `npm run peer:pull` commands exchange **already finalized public knowledge packages only**. `npm run peer:watch` performs conditional polling (default one second) against up to eight configured HTTPS origins; it does not authorize new edits, finalize votes, replicate accounts or guarantee a one-second propagation SLA. The gateway binds loopback and must be explicitly secured and exposed through an operator-managed TLS proxy.
+## Conoscenza e partecipazione
 
-Read [PEER-EXCHANGE.md](docs/PEER-EXCHANGE.md) before enabling this functionality. Do not put passwords, private forum tables or unlicensed book contents into its outbox.
+Un nodo completo deve permettere di cercare un tema e arrivare alla sua pagina enciclopedica, seguirne le revisioni, aprire le fonti, vedere a quali tappe della timeline è collegato, leggere libri e dataset pertinenti e discutere una proposta di correzione. La timeline principale è una **selezione narrativa governata dai PR2 del nodo**, non l'intero elenco delle sue pagine.
 
-## Knowledge, library and governance
+Nel prototipo PolisRossa ora puoi selezionare più tappe e preparare una proposta testuale, oppure iniziare una nuova pagina. Il testo passa al modulo PR2 del forum senza pubblicare nulla automaticamente. L'editor visuale completo e l'esecuzione verificata delle decisioni sono lavoro ancora aperto. Contratto e UX: [Node Knowledge Graph](docs/NODE-KNOWLEDGE-GRAPH.md), [Editorial Governance](docs/EDITORIAL-GOVERNANCE.md).
 
-An AgoràNode thematic community should eventually offer an interconnected content graph: wiki articles and entities, chronological events, library editions, data series, and relevant discussions, all searchable with stable IDs. A proposal to change a shared timeline creates a reviewable *draft* linked to its base revision and forum topic. Only a valid locally authorized decision and technical validation can publish a new current revision. Facts require source evaluation; **voting does not make a claim true**.
+I file di biblioteca devono distinguere **opera, edizione, diritto di replica, file effettivamente disponibile e posizione dei peer**. Un libro indicizzato e linkato non è automaticamente scaricabile o legalmente conservabile sui computer dei collaboratori.
 
-Library records must separate **catalogue metadata**, **licence/rights of the exact edition**, **downloadable content** and **storage availability**. A publicly linked book is not automatically legal to copy onto every volunteer's disk. For eligible editions the long-term goal is verified content-addressed local copies and selective peer pinning; otherwise the site should retain metadata and attribution and link to the original archive.
+## Come contribuire
 
-The existing forum, wiki grant design and governance protocol have limits: [EDITORIAL-GOVERNANCE.md](docs/EDITORIAL-GOVERNANCE.md), [GOVERNANCE.md](docs/GOVERNANCE.md), and [CRITICAL-DESIGN-REVIEW.md](docs/CRITICAL-DESIGN-REVIEW.md). See [CONTINUOUS-SYNC.md](docs/CONTINUOUS-SYNC.md) for data boundaries.
+Cerchiamo sviluppatori e ricercatori interessati a **TypeScript/React, database, archivi, motori di ricerca, distributed systems, sicurezza, crittografia, UX accessibile, conoscenza strutturata e strumenti di democrazia partecipativa**.
 
-## Contributing
+Non occorre introdurre un grande framework per fare un contributo importante: una query più efficiente, una verifica negativa, una pagina più leggibile o un import idempotente possono contare molto più di un nuovo servizio.
 
-We are looking for contributors interested in **distributed systems, PostgreSQL, networking, TypeScript/React, accessibility, searchable knowledge, digital archives, applied cryptography, security, observability, UX and community-governance tools**.
+1. Leggi [AGENTS.md](AGENTS.md), [CONTRIBUTING.md](CONTRIBUTING.md) e [ARCHITECTURE.md](docs/ARCHITECTURE.md).
+2. Individua un problema concreto, descrivine il confine dati e proponi il minimo cambiamento verificabile.
+3. Lavora in un branch; includi test su errori, permessi, compatibilità e guasti quando pertinenti.
+4. Esegui build, test e typecheck; non committare segreti, dati personali o media senza diritti.
+5. Apri una pull request con trade-off, evidenze, modalità di rilascio e possibilità di ripristino.
 
-A useful contribution does not need to introduce a new framework. Fix a source attribution, add a regression test, remove duplicated state, measure a bottleneck, clarify a user flow or help document a failure mode.
+**Priorità di progetto:** runtime multi-nodo realmente condiviso, wiki/editing PR2, pagine enciclopediche e ricerca completa, biblioteca locale con diritti, replica dei blocchi con quote, consenso validato, identità portabili, social/chat distribuiti e prove fra computer indipendenti.
 
-1. Read [AGENTS.md](AGENTS.md), [CONTRIBUTING.md](CONTRIBUTING.md), and [ARCHITECTURE.md](docs/ARCHITECTURE.md).
-2. Start from a precise issue or design proposal, describing the behavior and data boundary.
-3. Create a branch; include negative tests for permissions, malicious input, restarts and cross-node state when relevant.
-4. Run `npm test`, `npm run typecheck` and `npm run build`. Do not commit secrets or personal data.
-5. Open a pull request with design tradeoffs, evidence, rollout and rollback details. Docs-only changes should still be precise about what is live versus planned.
+## Principi di ingegneria
 
-**Priority areas:** complete reusable multi-node UI/API, authorized wiki editing, rich timeline/book/entity search, local permission-safe content storage, incremental P2P blocks, independent host tests, portable identities, distributed chat with retention, and rigorous BFT selection/review. See [DECENTRALIZATION-ROADMAP.md](docs/DECENTRALIZATION-ROADMAP.md) and [CONTINUOUS-SYNC.md](docs/CONTINUOUS-SYNC.md).
+- **Misurare prima di scalare.** Non promettere “indistruttibile”, “senza costi” o capacità da miliardi di utenti con un singolo PC economico.
+- **Complessità solo se necessaria.** Prima un monolite modulare, formati versionati e indici ricostruibili. Poi eventuali libp2p, IPFS/CAR, NATS o BFT quando giustificati da test.
+- **Nessuna centralizzazione nascosta.** Il gestore delle chiavi, l'algoritmo di ricerca, l'amministratore del repository e il custode del server sono poteri diversi da sottoporre a controllo.
+- **Privacy prima dell'immutabilità indiscriminata.** Dati personali, chiavi, chat private e bozze riservate non entrano nel patrimonio pubblico replicato.
+- **Compatibilità e trasparenza.** Migrazioni additive, licenze per ogni opera, attribuzioni, storia delle decisioni e limiti documentati.
 
-## Engineering principles
+[Architettura peer-owned](docs/PEER-OWNED-ARCHITECTURE.md) · [Continuous Sync](docs/CONTINUOUS-SYNC.md) · [Lean Storage](docs/LEAN-STORAGE.md) · [Governance](docs/GOVERNANCE.md) · [Biblioteca](docs/LIBRARY.md) · [Roadmap](docs/DECENTRALIZATION-ROADMAP.md) · [Security review](docs/SECURITY-REVIEW.md)
 
-- Preserve user data and compatibility; additive migrations, explicit rollback where possible.
-- Fail closed on signatures, scope, rights, identity and quotas.
-- Distinguish local committed state, draft, approved publication and distributed finality.
-- Avoid vendor lock-in and premature microservices. Evaluate NATS, libp2p, IPFS, CRDTs or distributed SQL **against measured workloads**, never as branding.
-- Keep logs and content export private-safe, with attribution and legally appropriate removal.
-- Publish reproducible tests, documented assumptions and failure modes. No unverified “indestructible” or “zero-cost” guarantees.
+**Licenza:** [AGPL-3.0-or-later](LICENSE). La licenza del codice non estende i diritti su libri, immagini, dataset o testi di terzi: [NOTICE](NOTICE).
 
-## Documentation
-
-[Technical architecture](docs/ARCHITECTURE.md) · [Design vision](docs/PEER-OWNED-ARCHITECTURE.md) · [Continuous sync](docs/CONTINUOUS-SYNC.md) · [Lean Storage](docs/LEAN-STORAGE.md) · [Peer exchange](docs/PEER-EXCHANGE.md) · [Governance](docs/GOVERNANCE.md) · [Library](docs/LIBRARY.md) · [Security review](docs/SECURITY-REVIEW.md) · [Quality and verified status](docs/QUALITY.md) · [Roadmap](docs/DECENTRALIZATION-ROADMAP.md)
-
-**Licence:** [AGPL-3.0-or-later](LICENSE). Code licensing does **not** relicense third-party media, books, source articles, images or datasets. See [NOTICE](NOTICE) and [TRADEMARKS.md](TRADEMARKS.md).
-
-*AgoràNode is looking for collaborators who care about a difficult, concrete question: how do we make shared knowledge and its infrastructure more portable, less wasteful and less dependent on any single operator?*
+*AgoràNode è aperto a chi vuole costruire un'infrastruttura della conoscenza che continui a esistere anche quando il suo primo server si spegne — e che sappia dimostrare, con prove riproducibili, ogni promessa tecnica.*

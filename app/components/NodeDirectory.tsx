@@ -1,5 +1,6 @@
 import {useState} from "react";
 import {ArrowRight, BookOpen, Network, Search} from "lucide-react";
+import {publicLocalSpaces} from "../instances/registry";
 
 type ActiveNode = {
   id: string;
@@ -25,28 +26,8 @@ type SearchIdea = {
   family: string;
 };
 
-const nodes = [
-  {
-    id: "agora",
-    name: "Agorà",
-    topic: "Tecnologia, protocollo e infrastruttura comune",
-    description:
-      "Stato dell’arte del progetto: architettura, regole, decisioni federali, custodia dei dati e sviluppo dei nodi.",
-    href: "/agora",
-    status: "Nodo in costruzione",
-    kind: "active",
-  },
-  {
-    id: "polisrossa",
-    name: "PolisRossa",
-    topic: "Stato dell’arte della sinistra politica",
-    description:
-      "Attualità, video, biblioteca, storia, dati e discussione sui movimenti e le idee della sinistra internazionale.",
-    href: "/polisrossa",
-    status: "Nodo tematico disponibile",
-    kind: "active",
-  },
-] as const;
+// This display-only catalogue derives from the same allowlisted manifests as /api/nodes.
+const nodes: ActiveNode[] = publicLocalSpaces().map(space => ({...space, kind: 'active'}));
 
 const possibleNodeFamilies: ReadonlyArray<{name: string; topics: readonly string[]}> = [
   {name: "Scienze e matematica", topics: ["Matematica", "Fisica", "Astronomia", "Chimica", "Biologia", "Geologia", "Scienze del clima", "Statistica", "Informatica teorica"]},
@@ -127,10 +108,10 @@ export default function NodeDirectory() {
         <section className="node-directory-catalog" aria-labelledby="node-directory-catalog-title">
           <div className="node-directory-catalog-heading">
             <div>
-              <p className="eyebrow">ACCESSI DISPONIBILI</p>
+              <p className="eyebrow">ACCESSI LOCALI</p>
               <h2 id="node-directory-catalog-title">Trova un nodo</h2>
             </div>
-            <span aria-live="polite">{query.trim() ? `${matchingEntries.length} risultati` : `${nodes.length} nodi attivi`}</span>
+            <span aria-live="polite">{query.trim() ? `${matchingEntries.length} risultati` : `${nodes.length} nodi locali`}</span>
           </div>
           <label className="node-directory-search">
             <Search size={18} aria-hidden="true" />

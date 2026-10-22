@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {mkdtemp, rm, writeFile, symlink} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
-import {createPublicPeerServer, peerOrigin, publicPeerRequest, pullPublicPeer} from '../server/public-peer-transport';
+import {createPublicPeerServer, peerOrigin, publicPeerRequest, pullPublicPeer, pullFromPublicPeers} from '../server/public-peer-transport';
 
 const options = (directory: string) => ({
   directory, validatorSet: {}, expectedNetworkId: 'agoranode.public.v1',
@@ -67,4 +67,33 @@ test('peer pull rejects tampered indices and foreign namespaces even on loopback
       assert.deepEqual(fetched,[]);
     } finally {await new Promise<void>((resolve,reject)=>listener.close(e=>e?reject(e):resolve()));}
   } finally {await rm(dir,{recursive:true,force:true});}
+});
+
+
+test('known peer sources fail over without trusting a failed origin or private credentials',async()=>{
+  const dir=await mkdtemp(join(tmpdir(),'agoranode-peer-failover-'));
+  const calls:string[]=[];
+  const fetcher=(async (input:RequestInfo|URL)=>{
+    const address=String(input);
+    calls.push(address);
+    if(address.startsWith('https://first.example/'))return new Response('outage',{status:503});
+    return Response.json({format:'org.agoranode.public-peer-index.v1',
+      networkId:'agoranode.public.v1',spaceId:'polisrossa',packages:[]});
+  }) as typeof fetch;
+  try{
+    const result=await pullFromPublicPeers(['https://first.example','https://second.example'],
+      options(dir),{fetcher});
+    assert.deepEqual(result,{packages:[],tried:2});
+    assert.deepEqual(calls,['https://first.example/v1/index','https://second.example/v1/index']);
+    await assert.rejects(
+      pullFromPublicPeers(['https://first.example','http://unsafe.example'],options(dir),{fetcher}),
+      /bare HTTPS/,
+    );
+    assert.deepEqual(calls,['https://first.example/v1/index','https://second.example/v1/index'],
+      'reject insecure origins before any request');
+    await assert.rejects(
+      pullFromPublicPeers(['https://first.example','https://first.example'],options(dir),{fetcher}),
+      /Duplicate/,
+    );
+  }finally{await rm(dir,{recursive:true,force:true});}
 });

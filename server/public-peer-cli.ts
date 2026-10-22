@@ -6,7 +6,7 @@
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
-import {createPublicPeerServer, pullPublicPeer} from './public-peer-transport';
+import {createPublicPeerServer, pullPublicPeer, pullFromPublicPeers} from './public-peer-transport';
 
 function required(name: string): string {
   const value=process.env[name];
@@ -26,8 +26,17 @@ async function main() {
       : required('KNOWLEDGE_REPLICA_INBOX'),
   };
   if(command==='pull') {
-    const pulled=await pullPublicPeer(required('AGORANODE_PEER_ORIGIN'),options);
-    process.stdout.write(JSON.stringify({status:'pulled',packages:pulled})+'\n');
+    // Optional comma-separated HTTPS origins owned by different custodians.
+    // The existing single-origin variable remains backward compatible.
+    const multiple=process.env.AGORANODE_PEER_ORIGINS;
+    if (multiple !== undefined) {
+      const origins=multiple.split(',').map(item=>item.trim());
+      const pulled=await pullFromPublicPeers(origins,options);
+      process.stdout.write(JSON.stringify({status:'pulled',...pulled})+'\n');
+    } else {
+      const pulled=await pullPublicPeer(required('AGORANODE_PEER_ORIGIN'),options);
+      process.stdout.write(JSON.stringify({status:'pulled',packages:pulled})+'\n');
+    }
     return;
   }
   const port=Number(process.env.AGORANODE_PEER_PORT??'9393');

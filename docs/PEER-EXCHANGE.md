@@ -34,3 +34,8 @@ I pacchetti sono ancora bundle completi: l'incrementalismo tramite blocchi e Mer
 **Non attivare una rete pubblica con scritture distribuite** finché mancano consenso BFT, rotazione chiavi, audit esterno, minacce e capacità reali di risposta agli abusi. La directory locale `GET /api/nodes` non è discovery P2P.
 
 Vedere [PEER-OWNED-ARCHITECTURE.md](PEER-OWNED-ARCHITECTURE.md), [DECENTRALIZATION-ROADMAP.md](DECENTRALIZATION-ROADMAP.md) e [SECURITY-REVIEW.md](SECURITY-REVIEW.md).
+
+
+## Riduzione della banda e scelta della sorgente
+
+Il client verifica gli oggetti già presenti e non ne riscarica il corpo; una copia locale corrotta richiede quarantena esplicita. Per consentire il ripiego su peer noti indipendenti è disponibile `AGORANODE_PEER_ORIGINS` come elenco di massimo 8 origini HTTPS separate da virgole, in alternativa al singolo `AGORANODE_PEER_ORIGIN`. Tutti gli URL vengono validati prima di contattarli. Il ripiego riguarda il **trasporto dei pacchetti pubblici**, non le sessioni web degli utenti. Il prototipo [Lean Storage](LEAN-STORAGE.md) esplora blocchi riutilizzabili fra revisioni ma non è ancora collegato all'endpoint peer.

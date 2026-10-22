@@ -29,5 +29,7 @@ jobs:
         run: npm run build
       - name: Check TypeScript
         run: npm run typecheck
+      - name: Run synthetic lean-storage benchmark
+        run: npm run benchmark:cas
       - name: Verify domain logic and persistent accounts
         run: npm test

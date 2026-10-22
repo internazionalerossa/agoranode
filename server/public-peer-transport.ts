@@ -157,6 +157,16 @@ export async function pullPublicPeer(origin: string,options: PeerOptions,
   const index=parseIndex(JSON.parse(await fetchBounded('/v1/index',MAX_INDEX_BYTES)),options);
   const results:Array<{name:string;created:boolean}>=[];
   for(const name of index) {
+    // Verified local files are immutable: do not re-download entire cumulative
+    // knowledge bundles on each poll. Fail closed on a corrupt local file;
+    // operators must quarantine it explicitly rather than silently overwriting.
+    try {
+      await readVerifiedPackage(options.directory,name,options);
+      results.push({name,created:false});
+      continue;
+    } catch(error) {
+      if((error as NodeJS.ErrnoException).code!=='ENOENT') throw error;
+    }
     const payload:unknown=JSON.parse(await fetchBounded('/v1/packages/'+name,MAX_PACKAGE_BYTES));
     const validated=await validateKnowledgeReplicationPackage(payload,{
       validatorSet:options.validatorSet,allowLegacyBootstrap:options.allowLegacyBootstrap,
@@ -173,4 +183,31 @@ export async function pullPublicPeer(origin: string,options: PeerOptions,
     results.push({name,created:result.created});
   }
   return results;
+}
+
+
+/**
+ * Sequential source failover for already known, independently hosted peers.
+ * This is NOT automatic peer discovery or a failover gateway for end users.
+ * Each origin is checked before trying any; no credentials are forwarded.
+ */
+export async function pullFromPublicPeers(
+  origins: readonly string[], options: PeerOptions,
+  deps: {fetcher?: typeof fetch; allowInsecureLoopback?: boolean} = {},
+) {
+  if (!Array.isArray(origins) || origins.length === 0 || origins.length > 8) {
+    throw Error('Choose between one and eight independent public peers');
+  }
+  const approved = origins.map(value => peerOrigin(value, deps.allowInsecureLoopback));
+  if (new Set(approved).size !== approved.length) throw Error('Duplicate public peer');
+  for (const origin of approved) {
+    try {
+      const packages = await pullPublicPeer(origin, options, deps);
+      return {packages, tried: approved.indexOf(origin) + 1};
+    } catch {
+      // A peer may be unavailable, inconsistent or malicious. Another fully
+      // validated origin can still supply the missing public packages.
+    }
+  }
+  throw Error('All configured public peers failed verification or were unreachable');
 }

@@ -50,6 +50,7 @@ import {
   writeKnowledgeReplicationOutbox,
 } from "../server/knowledge-replica-agent";
 import { importKnowledgeReplicationPackage } from "../server/knowledge-replica-import";
+import {createPublicPeerServer, pullPublicPeer} from "../server/public-peer-transport";
 import { knowledgeGovernanceAuthorizationVerifier } from "../server/knowledge-replication-governance";
 import {
   KNOWLEDGE_REPLICATION_PACKAGE_FORMAT,
@@ -347,7 +348,33 @@ test("two independent databases converge through finalized directory packages an
     );
     await mkdir(inbox, { recursive: true });
     await writeFile(join(inbox, "unfinished.tmp"), "{");
-    await copyFile(firstOutbox.path, join(inbox, firstOutbox.path.split(/[\\/]/).at(-1)!));
+    // Exercise direct transport through an independent HTTP listener. The
+    // receiving database still validates and imports finalized bytes itself.
+    const peer = createPublicPeerServer({
+      directory: outbox, validatorSet: validatorFixture.set,
+      expectedNetworkId: NETWORK_ID, expectedSpaceId: SPACE_ID,
+      allowLegacyBootstrap: true,
+    });
+    await new Promise<void>(resolve => peer.listen(0, "127.0.0.1", resolve));
+    try {
+      const address = peer.address();
+      if (!address || typeof address === "string") throw Error("No test peer port");
+      const pulled = await pullPublicPeer("http://127.0.0.1:" + address.port, {
+        directory: inbox, validatorSet: validatorFixture.set,
+        expectedNetworkId: NETWORK_ID, expectedSpaceId: SPACE_ID,
+        allowLegacyBootstrap: true,
+      }, {allowInsecureLoopback: true});
+      assert.equal(pulled.length, 1);
+      assert.equal(pulled[0].created, true);
+      const retry = await pullPublicPeer("http://127.0.0.1:" + address.port, {
+        directory: inbox, validatorSet: validatorFixture.set,
+        expectedNetworkId: NETWORK_ID, expectedSpaceId: SPACE_ID,
+        allowLegacyBootstrap: true,
+      }, {allowInsecureLoopback: true});
+      assert.equal(retry[0].created, false);
+    } finally {
+      await new Promise<void>((resolve, reject) => peer.close(error => error ? reject(error) : resolve()));
+    }
     const firstScan = await processKnowledgeReplicationInbox({
       pool: replica.pool,
       inboxDirectory: inbox,

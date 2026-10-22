@@ -157,6 +157,16 @@ export async function pullPublicPeer(origin: string,options: PeerOptions,
   const index=parseIndex(JSON.parse(await fetchBounded('/v1/index',MAX_INDEX_BYTES)),options);
   const results:Array<{name:string;created:boolean}>=[];
   for(const name of index) {
+    // Verified local files are immutable: do not re-download entire cumulative
+    // knowledge bundles on each poll. Fail closed on a corrupt local file;
+    // operators must quarantine it explicitly rather than silently overwriting.
+    try {
+      await readVerifiedPackage(options.directory,name,options);
+      results.push({name,created:false});
+      continue;
+    } catch(error) {
+      if((error as NodeJS.ErrnoException).code!=='ENOENT') throw error;
+    }
     const payload:unknown=JSON.parse(await fetchBounded('/v1/packages/'+name,MAX_PACKAGE_BYTES));
     const validated=await validateKnowledgeReplicationPackage(payload,{
       validatorSet:options.validatorSet,allowLegacyBootstrap:options.allowLegacyBootstrap,

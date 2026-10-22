@@ -12,6 +12,8 @@ test('self-host setup generates isolated secrets, uses a private socket and neve
   assert.match(env,/REGISTRATIONS_OPEN=false/);assert.match(env,/FORUM_OPEN=false/);assert.match(env,/BIND_ADDRESS=127.0.0.1/);assert.match(env,/host=%2Fvar%2Frun%2Fpostgresql/);
   assert.match(env,/MAIL_TRANSPORT=none/);assert.match(env,/DISCORD_CLIENT_ID=\n/);assert.match(env,/COMMUNITY_BOOTSTRAP_HASH=\n/);assert.match(env,/ACCOUNT_ACCESS_HASH=\n/);
   assert.match(env,/AUTH_SECRET=[0-9a-f]{96}/);assert.match(env,/POSTGRES_PASSWORD=[0-9a-f]{64}/);
+  const databaseIdentity=/^POSTGRES_USER=(an_[0-9a-f]{24})\nPOSTGRES_DB=\1$/m.exec(env)?.[1];
+  assert.ok(databaseIdentity);assert.match(env,new RegExp(`^DATABASE_URL=postgresql://${databaseIdentity}:[0-9a-f]{64}@localhost/${databaseIdentity}\\?host=%2Fvar%2Frun%2Fpostgresql$`,'m'));
   assert.match(env,/COMPOSE_PROJECT_NAME=polisrossa-[0-9a-f]{12}/);assert.match(env,/HTTPS_PORT=8443/);assert.match(env,/HTTP_PORT=8080/);
   assert.match(env,/^EDGE_SHARED_SECRET=$/m);assert.match(env,/^EDGE_ORIGIN_ACTIVE=false$/m);assert.match(env,/^LOCAL_HTTPS_PORT=$/m);
   for(const path of [['private','snapshot'],['snapshots'],['replica']])assert.equal((await stat(join(dir,'.selfhost',...path))).isDirectory(),true);
@@ -150,6 +152,17 @@ test('init flags are order-independent and reject ambiguity',()=>{
  assert.deepEqual(parseInitArgs([]),{urlText:'https://localhost:8443',mode:'primary',options:{}});
  assert.throws(()=>parseInitArgs(['--project']),/Missing value/);assert.throws(()=>parseInitArgs(['--unknown','x']),/Unknown/);assert.throws(()=>parseInitArgs(['one','two','three']),/Use init/);
 });
+test('independent installations receive distinct database identities and Compose projects',async()=>{
+ const first=await mkdtemp(join(tmpdir(),'agoranode-host-a-')),second=await mkdtemp(join(tmpdir(),'agoranode-host-b-'));
+ try{
+  await initialize(first,'https://localhost:8443','mirror',{project:'host-a'});
+  await initialize(second,'https://localhost:9443','mirror',{project:'host-b',httpPort:'9080'});
+  const firstEnv=await readFile(join(first,'.selfhost/runtime.env'),'utf8'),secondEnv=await readFile(join(second,'.selfhost/runtime.env'),'utf8');
+  const identity=env=>/^POSTGRES_USER=(an_[0-9a-f]{24})$/m.exec(env)?.[1];
+  assert.ok(identity(firstEnv));assert.ok(identity(secondEnv));assert.notEqual(identity(firstEnv),identity(secondEnv));
+  assert.match(firstEnv,/DATABASE_URL=postgresql:\/\/an_[0-9a-f]{24}:[0-9a-f]{64}@localhost\/an_[0-9a-f]{24}\?host=%2Fvar%2Frun%2Fpostgresql/);
+ }finally{await rm(first,{recursive:true,force:true});await rm(second,{recursive:true,force:true});}
+});
 test('edge origin flags are order-independent and require an explicit origin',()=>{
  assert.deepEqual(parseEdgeOriginArgs(['--local-https-port','10443','https://polisrossa.agoranode.workers.dev','--activate']),{origin:'https://polisrossa.agoranode.workers.dev',options:{activate:true,localHttpsPort:10443}});
  assert.deepEqual(parseEdgeOriginArgs(['https://polisrossa.agoranode.workers.dev']),{origin:'https://polisrossa.agoranode.workers.dev',options:{activate:false}});
@@ -167,7 +180,7 @@ test('snapshot commands pass only validated basenames to the isolated tool conta
  assert.throws(()=>composeArgs('snapshot-export',['1']),/predecessor/);
  assert.throws(()=>composeArgs('snapshot-export',['0','sha256:'+'a'.repeat(64)]),/predecessor/);
  assert.doesNotThrow(()=>composeArgs('snapshot-export',['1','sha256:'+'a'.repeat(64)]));
-  const inherited={COMPOSE_PROJECT_NAME:'wrong',COMPOSE_PROFILES:'tools',DATABASE_URL:'postgresql://wrong.example/wrong',POSTGRES_PASSWORD:'wrong',BIND_ADDRESS:'0.0.0.0',HTTPS_PORT:'443',LOCAL_HTTPS_PORT:'443',EDGE_SHARED_SECRET:'wrong',EDGE_PUBLIC_ORIGIN:'https://wrong.example',EDGE_UPSTREAM_ORIGIN:'https://wrong.example',EDGE_ORIGIN_ACTIVE:'true',SNAPSHOT_PRIVATE_ACCESS:'rw',SNAPSHOT_DIR_ACCESS:'rw',SNAPSHOT_REPLICA_ACCESS:'rw',SNAPSHOT_HEIGHT:'99',KEEP:'yes'};
+  const inherited={COMPOSE_PROJECT_NAME:'wrong',COMPOSE_PROFILES:'tools',DATABASE_URL:'postgresql://wrong.example/wrong',POSTGRES_USER:'wrong',POSTGRES_DB:'wrong',POSTGRES_PASSWORD:'wrong',BIND_ADDRESS:'0.0.0.0',HTTPS_PORT:'443',LOCAL_HTTPS_PORT:'443',EDGE_SHARED_SECRET:'wrong',EDGE_PUBLIC_ORIGIN:'https://wrong.example',EDGE_UPSTREAM_ORIGIN:'https://wrong.example',EDGE_ORIGIN_ACTIVE:'true',SNAPSHOT_PRIVATE_ACCESS:'rw',SNAPSHOT_DIR_ACCESS:'rw',SNAPSHOT_REPLICA_ACCESS:'rw',SNAPSHOT_HEIGHT:'99',KEEP:'yes'};
   assert.deepEqual(composeEnvironment('snapshot-verify',inherited),{SNAPSHOT_PRIVATE_ACCESS:'ro',SNAPSHOT_DIR_ACCESS:'ro',SNAPSHOT_REPLICA_ACCESS:'ro',KEEP:'yes'});
  assert.equal(composeEnvironment('snapshot-keygen',{}).SNAPSHOT_PRIVATE_ACCESS,'rw');assert.equal(composeEnvironment('snapshot-keygen',{}).SNAPSHOT_REPLICA_ACCESS,'rw');
  assert.deepEqual(composeEnvironment('snapshot-export',{},['2','sha256:'+'b'.repeat(64)]),{SNAPSHOT_PRIVATE_ACCESS:'ro',SNAPSHOT_DIR_ACCESS:'rw',SNAPSHOT_REPLICA_ACCESS:'ro',SNAPSHOT_HEIGHT:'2',SNAPSHOT_PREVIOUS:'sha256:'+'b'.repeat(64)});
@@ -175,6 +188,8 @@ test('snapshot commands pass only validated basenames to the isolated tool conta
 test('only the signing tool receives the private key mount',async()=>{
  const compose=await readFile(new URL('../deploy/selfhost/compose.yaml',import.meta.url),'utf8');
  assert.match(compose,/postmaster\.pid[\s\S]*= 1 && pg_isready/);
+ assert.match(compose,/POSTGRES_USER: \$\{POSTGRES_USER:-polisrossa\}/);assert.match(compose,/POSTGRES_DB: \$\{POSTGRES_DB:-polisrossa\}/);
+ assert.match(compose,/PGUSER: \$\{POSTGRES_USER:-polisrossa\}/);assert.match(compose,/PGDATABASE: \$\{POSTGRES_DB:-polisrossa\}/);
  const app=compose.slice(compose.indexOf('  app:'),compose.indexOf('  proxy:'));
  const snapshot=compose.slice(compose.indexOf('  snapshot:'),compose.indexOf('  snapshot-db:'));
  const database=compose.slice(compose.indexOf('  snapshot-db:'),compose.indexOf('  snapshot-sign:'));

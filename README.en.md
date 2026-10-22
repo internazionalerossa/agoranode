@@ -1,6 +1,12 @@
 # AgoràNode
 
-**Public knowledge and communities governed in common.** AgoràNode is the main platform: it defines the shared format, federal coordination and tools used to build thematic nodes. Its home is `/`. **PolisRossa** is the first instance, with its own home at `/polisrossa`, subject, data, accounts, forum and authority. The canonical repository is `internazionalerossa/agoranode`; historical `polisrossa` technical identifiers used by the instance, databases, volumes and configuration remain unchanged so existing installations keep their data and compatibility.
+AgoràNode is the shared software and infrastructure for building independent thematic nodes. The useful analogy is ForumFree: a service provides technology and access for many communities without becoming one of them or centralizing their discussions and decisions. Each node connects current affairs, sources, a library, knowledge, history, data and public discussion around its subject.
+
+**Agorà is a node**, dedicated to the state of the art of AgoràNode technology and shared infrastructure matters. **PolisRossa is another node**, dedicated to the political left. They are peers: they share a format and layout, not a subject, community or decision-making scope. The home `/` is the portal for finding nodes; its current search and navigation cover the two paths in this repository. `/agora` is under construction, while `/polisrossa` is the developed thematic node. There is not yet a federated registry for finding nodes hosted elsewhere.
+
+Each node is intended to make the state of the art in its subject accessible: news and video with original sources, library and structured knowledge, timeline, data and public discussion. Content and decisions remain attributed to the relevant community; Agorà deals only with the technology, rules and shared resources of the infrastructure.
+
+The political ambition is direct democracy informed by sources, data and discussion, eventually replacing some decision-making functions of institutions. This is a goal, not a current condition: the service has no legal authority to replace public bodies, and the federation is not operational. The canonical repository is `internazionalerossa/agoranode`; historical `polisrossa` identifiers for the instance, database, volumes and configuration remain unchanged for compatibility.
 
 PolisRossa connects daily news with the books, history and data needed to understand it. It brings together socialist, communist, trade-union, anarchist and anticolonial sources from different countries while keeping their origin and original link visible. Readers are not asked to adopt a political position: the project offers material to verify, compare and discuss.
 
@@ -8,7 +14,7 @@ The editorial orientation is explicit. Automated classifications help organize c
 
 The project aims to become a resource maintained by several people without turning the first server into the owner of the site. The current work prepares that direction in a verifiable way: the code can be copied, a local node can operate in read-only mode, a release can be attested with a signature, and encrypted database backups can be entrusted to multiple custodians. A first kernel replicates public knowledge only between distinct databases through verified packages and atomic imports; it has been tested locally, not between independent computers. Network transport, peer discovery, public-address takeover, failover and end-to-end encryption **have not been tested or implemented as an operational service**.
 
-A typed manifest and public endpoint define the v1 platform/instance boundary. The main AgoràNode home already lives at `/`, while `/polisrossa` is the only thematic instance currently built. There is no complete topic-neutral generator, open federal forum or tested world-wide network yet. The database/API runtime for PR3 candidacy, voting, mandates and recall is implemented and covered by local tests, but it has no public UI and is not activated in production.
+A typed manifest and public endpoint define an initial contract for instances. The portal distinguishes the two real nodes in the repository from an initial map of 124 possible topics across many fields of knowledge: these are ideas from which communities may be built, not active nodes. Search covers existing nodes and candidate topics; an unlisted subject can also be previewed as a temporary, unsaved idea and is not submitted anywhere. The map is not exhaustive and is not a federated network. `/agora` presents technical status, the federal register and custody, but does not yet have the full editorial surfaces of `/polisrossa`. There is no complete node generator, open federal forum or tested worldwide network. The database/API runtime for PR3 candidacy, voting, mandates and recall is implemented and covered by local tests, but has no public interface and is not active in production. See [QUALITY.md](docs/QUALITY.md) for verified limits.
 
 [Italiano](README.md) · [AgoràNode model (Italian)](docs/AGORANODE.md) · [Common governance (Italian)](docs/GOVERNANCE.md) · [Distributed network (Italian)](docs/DISTRIBUTED-NETWORK.md) · [Public replication (Italian)](docs/PUBLIC-REPLICATION.md) · [Contribute](CONTRIBUTING.md) · [Architecture](docs/ARCHITECTURE.md) · [Self-hosting](docs/SELF-HOSTING.md) · [Verification status](docs/QUALITY.md)
 
@@ -23,7 +29,7 @@ A complete node may change topic, sources, visual theme and community, but keeps
 5. a democratic self-governance forum scoped to that instance;
 6. portable custody through revisions, provenance, verifiable exports and backups that exclude credentials and personal data.
 
-The `org.agoranode.instance.v1` contract requires these capabilities, but it does not make a new node complete by itself. Content, rights, sources, moderation, a declared operator and real testing are still required. The main AgoràNode home is distinct from PolisRossa; federal accounts, data, forum and authority must remain separately scoped and are not presented as open until their real path is tested. A PR2 admitted by PolisRossa decides within PolisRossa. Like any active PR2 from an admitted node, that person may stand for a federal PR3 mandate, but receives no automatic promotion or authority. Hosting a copy grants no additional vote.
+The `org.agoranode.instance.v1` contract describes expected capabilities, but does not make a new node complete by itself: content, rights, sources, moderation, declared responsibility and testing are required. Discovering communities hosted on other servers will require a registry and federated protocol that do not exist yet. Accounts, data and forums must remain scoped to each node and are not described as open until their actual paths are tested. A PR2 admitted by PolisRossa decides within PolisRossa. Like any active PR2 from an admitted node, that person may stand for a federal PR3 mandate, but receives no automatic promotion or authority. Hosting a copy grants no additional vote.
 
 | Level | Scope | How it is obtained | Authority |
 | --- | --- | --- | --- |
@@ -158,14 +164,16 @@ node scripts/selfhost.mjs status
 
 The default installation listens only on the local computer and keeps configuration, data and keys outside Git. Stopping it with `node scripts/selfhost.mjs stop` does not delete volumes. Do not use `docker compose down -v` on an installation that must be preserved.
 
-A second checkout can be initialized as a read-only node with a distinct project and ports:
+A second checkout can be initialized as an independent read-only installation of the same PolisRossa application, with a distinct Compose project and ports:
 
 ```sh
 node scripts/selfhost.mjs init https://localhost:9543 mirror --project polisrossa-node2 --http-port 9080
 node scripts/selfhost.mjs start
 ```
 
-A local node does not require router changes. [PUBLICATION.md](docs/PUBLICATION.md) describes the prepared no-cost path with a `workers.dev` Worker in front of Tailscale Funnel, without WAN port forwarding; that Worker has not yet been deployed or activated. [SELF-HOSTING.md](docs/SELF-HOSTING.md) documents the local runtime, knowledge import, backup, restore, checkpoints and the direct alternative that would require router and firewall changes. Do not publish `.selfhost`, `.env` files, tokens, keys, cookies or database copies.
+`mirror` makes the same PolisRossa application read-only: it does not create a new topic or node identity and does not synchronize content with other hosts. Each new installation gets its own PostgreSQL user and database as well as separate Compose volumes; existing configurations without these fields continue to use the historical `polisrossa` names. Do not publish `.selfhost`, `.env` files, tokens, keys, cookies or database copies.
+
+**Creating a custom thematic node and contributing hardware to a shared pool are not yet supported by the runtime.** The home-page map lists possible topics, not installations that can be generated; the portal does not register remote nodes and hosts do not automatically receive or replicate data. Today you can host an independent copy of the existing application by following [SELF-HOSTING.md](docs/SELF-HOSTING.md). [PUBLICATION.md](docs/PUBLICATION.md) describes the prepared no-cost path with a `workers.dev` Worker in front of Tailscale Funnel, without WAN port forwarding; that Worker has not yet been deployed or activated. Custom nodes first need runtime-loaded manifests, per-instance content and API isolation, and an interoperable registry. Shared hardware additionally needs a tested protocol for authorization, monitoring, replication and recovery. Hosting a server does not confer governance power or ownership.
 
 ## Participate
 

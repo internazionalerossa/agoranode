@@ -13,9 +13,11 @@ test('encyclopedia and chart parameters select theory directly and survive only 
  assert.equal(viewFromUrl('/?persona=clara-zetkin'),'teoria');
  assert.equal(viewFromUrl('/?evento=haymarket-1886'),'teoria');
  assert.equal(viewFromUrl('/?indicatore=life'),'teoria');
+ assert.equal(viewFromUrl('/?knowledgeKind=concept&knowledgeId=collective-memory'),'teoria');
  const graph='https://site.example/?view=teoria&percorso=dati&indicatore=life&paesi=CUB%2CUSA&dal=1960&al=2024&scala=indice';
  assert.equal(viewUrl(graph,'teoria'),'/polisrossa?view=teoria&percorso=dati&indicatore=life&paesi=CUB%2CUSA&dal=1960&al=2024&scala=indice');
  assert.equal(viewUrl(graph,'fonti'),'/polisrossa?view=fonti');
+ assert.equal(viewUrl('/?view=teoria&knowledgeKind=concept&knowledgeId=collective-memory','notizie'),'/polisrossa');
 });
 
 test('shared-custody page has a stable direct URL and clears private-area state',()=>{

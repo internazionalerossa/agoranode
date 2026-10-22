@@ -2,9 +2,11 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import {siteRouteFromUrl} from "../app/lib/site-routing";
 
-test("AgoràNode owns the root and PolisRossa owns its instance namespace", () => {
+test("the root lists nodes while Agorà and PolisRossa have distinct namespaces", () => {
   assert.deepEqual(siteRouteFromUrl("https://example.test/"), {kind: "platform", canonicalPath: "/"});
   assert.deepEqual(siteRouteFromUrl("https://example.test/agoranode"), {kind: "platform", canonicalPath: "/"});
+  assert.deepEqual(siteRouteFromUrl("https://example.test/agora"), {kind: "agora", canonicalPath: "/agora"});
+  assert.deepEqual(siteRouteFromUrl("https://example.test/agora?section=protocol#release"), {kind: "agora", canonicalPath: "/agora?section=protocol#release"});
   assert.deepEqual(siteRouteFromUrl("https://example.test/polisrossa"), {kind: "instance", canonicalPath: "/polisrossa"});
   assert.deepEqual(siteRouteFromUrl("https://example.test/polisrossa?view=partecipa"), {kind: "instance", canonicalPath: "/polisrossa?view=partecipa"});
 });

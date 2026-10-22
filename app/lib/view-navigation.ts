@@ -5,7 +5,7 @@ export function viewFromUrl(raw:string):View{
  if(url.pathname==='/agoranode'||url.pathname==='/agoranode/')return 'custodia';
  if(requested==='osservatorio'||url.hash==='#osservatorio-sei-ore')return 'notizie';
  if(VIEWS.includes(requested as View))return requested as View;
- if(['storia','evento','persona','indicatore'].some(key=>url.searchParams.has(key)))return 'teoria';
+ if(['storia','evento','persona','indicatore','knowledgeKind','knowledgeId'].some(key=>url.searchParams.has(key)))return 'teoria';
  if(url.searchParams.has('stanza'))return 'partecipa';
  if(url.searchParams.has('proposal'))return 'partecipa';
  return 'notizie';
@@ -18,7 +18,7 @@ export function viewUrl(raw:string,next:View):string{
  else url.searchParams.set('view',next);
  url.searchParams.delete('periodo');
  if(next!=='partecipa')for(const key of ['proposal','stanza'])url.searchParams.delete(key);
- if(next!=='teoria')for(const key of ['storia','percorso','indicatore','evento','persona','paesi','dal','al','scala'])url.searchParams.delete(key);
+ if(next!=='teoria')for(const key of ['storia','percorso','indicatore','evento','persona','paesi','dal','al','scala','knowledgeKind','knowledgeId'])url.searchParams.delete(key);
  return url.pathname+url.search+url.hash;
 }
 

@@ -8,9 +8,9 @@ import SharedCustodyView from "./SharedCustodyView";
 export default function AgoraNodeHome() {
   useEffect(() => {
     document.documentElement.lang = "it";
-    document.title = "AgoràNode · conoscenza pubblica governata in comune";
+    document.title = "Agorà — AgoràNode · tecnologia e infrastruttura comune";
     const description = document.querySelector<HTMLMetaElement>('meta[name="description"]');
-    if (description) description.content = "AgoràNode è una piattaforma federata per conoscenza pubblica, dati, biblioteche e comunità governate democraticamente.";
+    if (description) description.content = "AgoràNode è una tecnologia e infrastruttura condivisa per nodi tematici di conoscenza pubblica, dati, biblioteche e comunità.";
     document.querySelector<HTMLLinkElement>('link[rel="manifest"]')?.remove();
   }, []);
 
@@ -18,23 +18,23 @@ export default function AgoraNodeHome() {
     <div className="app-shell agoranode-shell">
       <a className="skip-link" href="#agoranode-content">Vai ai contenuti</a>
       <header className="agoranode-header">
-        <a className="agoranode-wordmark" href="/" aria-label="AgoràNode, pagina principale">
+        <a className="agoranode-wordmark" href="/" aria-label="Torna all’elenco dei nodi">
           <span aria-hidden="true">A</span>
-          <strong>AgoràNode</strong>
+          <strong>Agorà <small>— AgoràNode</small></strong>
         </a>
-        <p>Una casa comune per conoscenza pubblica, memoria e decisioni verificabili.</p>
+        <p>Stato dell’arte della tecnologia AgoràNode, delle sue regole e dell’infrastruttura comune.</p>
         <nav aria-label="Navigazione AgoràNode">
-          <a href="#formato">Formato</a>
-          <a href="#governo-federale">Registro federale</a>
-          <a href="#possesso">Governo comune</a>
-          <a href="#roadmap">Rete distribuita</a>
-          <a className="agoranode-instance-link" href="/polisrossa">Apri PolisRossa <ArrowRight size={16}/></a>
+          <a href="/#node-directory-content">Nodi</a>
+          <a href="#formato">Tecnologia</a>
+          <a href="#governo-federale">Decisioni</a>
+          <a href="#possesso">Custodia</a>
+          <a className="agoranode-instance-link" href="/polisrossa">PolisRossa <ArrowRight size={16}/></a>
         </nav>
       </header>
 
-      <aside className="agoranode-boundary" aria-label="Relazione tra piattaforma e istanze">
-        <div><Network size={20}/><span><strong>AgoràNode è la piattaforma principale.</strong> Definisce il formato comune e il coordinamento federale.</span></div>
-        <div><GitBranch size={20}/><span><strong>PolisRossa è un’istanza.</strong> Ha una home, una comunità, dati e decisioni propri.</span></div>
+      <aside className="agoranode-boundary" aria-label="Ambito del nodo Agorà">
+        <div><Network size={20}/><span><strong>AgoràNode è la tecnologia comune.</strong> Questo nodo raccoglie lo stato dell’arte del protocollo e dell’infrastruttura.</span></div>
+        <div><GitBranch size={20}/><span><strong>Le decisioni hanno un ambito preciso.</strong> Agorà tratta le questioni comuni; le scelte tematiche restano ai rispettivi nodi.</span></div>
         <div><ShieldCheck size={20}/><span><strong>Ospitare non dà potere politico.</strong> Server, firma tecnica e diritto di voto rimangono separati.</span></div>
       </aside>
 
@@ -50,4 +50,3 @@ export default function AgoraNodeHome() {
     </div>
   );
 }
-

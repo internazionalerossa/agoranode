@@ -24,16 +24,17 @@ test("the AgoràNode format and separate governance scopes are explicit", () => 
     "Forum democratico",
     "Custodia portabile",
   ]) assert.match(html, new RegExp(capability));
-  assert.match(html, /Questa è la home principale di AgoràNode/);
-  assert.match(html, /separato dal forum di PolisRossa/);
-  assert.match(html, /forum federale ed elezioni PR3 non vengono dichiarati aperti/);
+  assert.match(html, /La home è il portale che oggi permette di cercare i percorsi locali Agorà — AgoràNode e PolisRossa — AgoràNode/);
+  assert.match(html, /non offre ancora tutte le superfici editoriali di PolisRossa/);
+  assert.match(html, /il forum PolisRossa resta nel proprio ambito/);
+  assert.match(html, /Account, forum ed elezioni PR3 non vengono dichiarati aperti/);
 });
 
 test("the header identity statement points to the real AgoràNode page", () => {
   const link = renderToStaticMarkup(createElement(AgoraNodeIdentityLink));
   assert.match(link, /href="\/"/);
   assert.match(link, />PolisRossa è un nodo AgoràNode</);
-  assert.match(link, /aria-label="PolisRossa è un nodo AgoràNode: torna alla piattaforma principale"/);
+  assert.match(link, /aria-label="PolisRossa è un nodo AgoràNode: vai alla pagina AgoràNode"/);
 });
 
 test("PolisRossa preservation is strong but never overstated", () => {

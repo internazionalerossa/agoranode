@@ -1,5 +1,6 @@
 export type SiteRoute =
   | {kind: 'platform'; canonicalPath: '/'}
+  | {kind: 'agora'; canonicalPath: string}
   | {kind: 'instance'; canonicalPath: string}
   | {kind: 'reader'; canonicalPath: string}
   | {kind: 'account'; canonicalPath: string};
@@ -28,15 +29,15 @@ function withLocation(url: URL, pathname: string): string {
 /**
  * Resolve the public product boundary before React is mounted.
  *
- * `/` belongs to AgoràNode.  PolisRossa is the first instance and owns the
- * `/polisrossa` namespace.  Historic root links are retained as aliases so
- * bookmarks and already-shared history/data/forum links keep working.
+ * `/` is the node directory, `/agora` is the Agorà node, and `/polisrossa`
+ * is the PolisRossa node. Historic root links remain PolisRossa aliases.
  */
 export function siteRouteFromUrl(raw: string): SiteRoute {
   const url = new URL(raw, 'https://site.invalid');
   const path = url.pathname.replace(/\/+$/, '') || '/';
 
   if (path === '/agoranode') return {kind: 'platform', canonicalPath: '/'};
+  if (path === '/agora') return {kind: 'agora', canonicalPath: withLocation(url, '/agora')};
 
   if (path === '/polisrossa/read') {
     return {kind: 'reader', canonicalPath: withLocation(url, '/polisrossa/read')};
@@ -70,4 +71,3 @@ export function canonicalizeSiteRoute(route: SiteRoute, current: string): void {
   const visible = `${url.pathname}${url.search}${url.hash}`;
   if (visible !== route.canonicalPath) window.history.replaceState(window.history.state, '', route.canonicalPath);
 }
-

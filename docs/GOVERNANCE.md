@@ -1,6 +1,6 @@
 # Governo comune di AgoràNode
 
-Questa specifica definisce il modello costituzionale verso cui deve evolvere AgoràNode. Trasforma “il sito è di tutti” in poteri limitati, mandati verificabili e procedure revocabili. **AgoràNode è il prodotto e sito principale, oltre che l’istanza che coordina il protocollo; PolisRossa è un nodo tematico con una propria home, comunità, autorità e dati.** Il primo monolite deve quindi distinguere `/` per AgoràNode e `/polisrossa` per PolisRossa, preparando origini separate senza unire i due governi. Non descrive come già operative funzioni che oggi non lo sono: il forum attuale, i tre inviti iniziali PR2 e il singolo database PolisRossa non applicano ancora questo protocollo distribuito.
+Questa specifica definisce il modello costituzionale verso cui deve evolvere l’infrastruttura AgoràNode. Trasforma “il sistema è di tutti” in poteri limitati, mandati verificabili e procedure revocabili. **AgoràNode è il nome della tecnologia e del formato condiviso; Agorà è il nodo dedicato alla tecnologia AgoràNode, mentre PolisRossa è un nodo tematico sullo stesso piano, dedicato alla sinistra politica.** La home `/` è il portale per trovare i nodi, non un nodo superiore né un catalogo federato già completo: la ricerca attuale copre i due percorsi locali. Il percorso `/agora` presenta il registro federale e la custodia, ma non offre ancora tutte le superfici editoriali di PolisRossa; `/polisrossa` resta l’unico nodo tematico completo. Non descrive come già operative funzioni che oggi non lo sono: il forum attuale, i tre inviti iniziali PR2 e il singolo database PolisRossa non applicano ancora questo protocollo distribuito.
 
 Il riferimento politico è la proprietà comune con democrazia consiliare. Riprende dai congressi, dalla delega dal basso e dal “centralismo democratico” della tradizione comunista — compresa l’esperienza cinese — l’idea di discutere ampiamente, decidere con procedure note e poi coordinare l’esecuzione comune. Ne rende però verificabili i limiti: la base elegge, vincola e può revocare chi svolge un compito; dissenso, verbali e ricorsi restano pubblicabili; nessuna disciplina organizzativa può cancellare diritti, prove o minoranze. Non viene copiata la struttura statale cinese né un altro apparato esistente. AgoràNode non ammette partito unico, decisioni non rendicontate degli organi dirigenti, incarichi permanenti o un’autorità tecnica sottratta al controllo della comunità. “Gerarchia” significa catena pubblica delle responsabilità, non rango personale.
 
@@ -20,13 +20,15 @@ Il file `app/platform/agora-governance-protocol.ts` implementa un primo contratt
 
 Il contratto non è collegato al forum, non gestisce iscrizioni o chiavi, non replica dati e non realizza consenso fra computer. È un confine dati da collaudare, non una costituzione già applicata. Il checkpoint attuale `org.polisrossa.public-snapshot` resta `release-only`, con un solo firmatario e senza stato pubblico: non è il checkpoint distribuito descritto qui.
 
+Il sistema deve distinguere l’attribuzione pubblica dei contributi dalla segretezza del voto: interventi e proposte devono essere riconducibili a persone responsabili, mentre il pubblico non deve poter collegare una persona alla sua scelta. Il runtime di voto attuale conserva schede firmate che associano identificatore dell’elettore e scelta; consente verifiche, ma **non realizza il voto segreto** e non deve essere presentato o attivato come tale. Prima di un uso reale occorre un protocollo che verifichi eleggibilità, unicità e risultato senza pubblicare quella corrispondenza, sottoposto a revisione indipendente. Inoltre Facebook OAuth prova il controllo di un account, non l’identità civile: il percorso attuale non applica ancora la richiesta di contributi pubblici attribuiti a persone identificate.
+
 ## Invarianti costituzionali
 
 Queste regole prevalgono sui ruoli operativi e non possono essere aggirate configurando un server:
 
 1. **Una persona, un voto nel proprio elettorato.** Denaro, capacità del computer, spazio disco, tempo online, token e numero di copie ospitate non aumentano il voto.
 2. **Nessun potere dell’host.** Ospitare, fare relay, backup o manutenzione non attribuisce diritti politici, editoriali o di proprietà.
-3. **Assemblea sovrana.** Ogni nodo tematico ha una propria assemblea. L’istanza principale AgoràNode ha assemblea, forum e database distinti per il coordinamento federale; PolisRossa non governa gli altri nodi e la federazione non riscrive i contenuti di PolisRossa.
+3. **Assemblea sovrana.** Ogni nodo tematico ha una propria assemblea. Il nodo Agorà, dedicato alla tecnologia e alle questioni comuni dell’infrastruttura AgoràNode, coordina le materie federali; PolisRossa non governa gli altri nodi e la federazione non riscrive i suoi contenuti.
 4. **Mandato imperativo e revocabile.** Ogni delega indica oggetto, durata, limiti, rendiconto e procedura di revoca. Non esiste delega generale dell’“ultima parola”.
 5. **Rotazione e incompatibilità.** Gli incarichi scadono; controllo, esecuzione tecnica e giudizio sui ricorsi non possono concentrarsi stabilmente nelle stesse persone.
 6. **Storia non riscrivibile in via ordinaria.** Proposte, elettorati, schede finali, esiti, revisioni e revoche entrano in registri append-only. Una rettifica crea un nuovo record collegato; gli obblighi legali sui dati personali restano separati.
@@ -43,11 +45,13 @@ La “proprietà comune” è quindi controllo costituzionale dell’infrastrutt
 
 **PR1** resta un account personale senza voto. **PR2** è una membership separata e circoscritta a un singolo nodo: dopo l’ammissione prevista da quell’istanza, partecipa alla sua assemblea con un voto. L’assemblea approva contenuti, regole locali, bilanci, incarichi, integrazioni e revoche. Nessun gruppo delegato può ampliare da solo il proprio mandato. La stessa persona può dover dimostrare l’unicità federale se partecipa a più nodi: più membership PR2 non producono più schede nell’elezione federale.
 
-### PR3: delegato eletto dell’AgoràNode principale
+### PR3: delegato eletto del nodo Agorà
+
+L’assemblea centrale Agora decide soltanto sulle materie comuni di AgoràNode: protocollo, regole federali, ammissione e coordinamento dei nodi e risorse condivise. Non decide le politiche nazionali o tematiche che appartengono alle assemblee dei rispettivi nodi. Un eventuale nodo PolisItalia, per esempio, delibererebbe sulle questioni italiane nella propria assemblea; non è una funzione o un’istanza oggi attiva. Questa delimitazione vale anche per ogni mandato PR3.
 
 Ogni PR2 attivo di un nodo registrato è eleggibile e può essere nominato o autocandidarsi a **PR3**. Non diventa PR3 automaticamente: deve accettare pubblicamente la candidatura e superare un’elezione della camera federale delle persone, formata dai PR2 attivi deduplicati. Ogni candidatura è una decisione separata e legata allo stesso testo/digest che il candidato ha accettato.
 
-PR3 è un mandato per coordinare ed eseguire nell’istanza principale AgoràNode, non un grado personale superiore. Dura al massimo dodici mesi, indica scopo e limiti, dispone di un solo voto nel consiglio delegato, non aggiunge una seconda scheda alla persona nelle assemblee e pesa zero per hosting, denaro o hardware. Può scadere, essere revocato con soglia più bassa dell’elezione o terminare per dimissioni. Una rielezione richiede un nuovo `mandateId`, una nuova candidatura e una nuova votazione.
+PR3 è un mandato per coordinare ed eseguire nel nodo Agorà sulle sole materie federali, non un grado personale superiore. Dura al massimo dodici mesi, indica scopo e limiti, dispone di un solo voto nel consiglio delegato, non aggiunge una seconda scheda alla persona nelle assemblee e pesa zero per hosting, denaro o hardware. Può scadere, essere revocato con soglia più bassa dell’elezione o terminare per dimissioni. Una rielezione richiede un nuovo `mandateId`, una nuova candidatura e una nuova votazione.
 
 Il contratto registra transizioni append-only:
 
@@ -76,9 +80,9 @@ Mantengono release, chiavi operative, repliche, monitoraggio e ripristini. Esegu
 
 Controlla conflitti d’interesse, rispetto del procedimento, bilanci, log, estrazioni dei conteggi e limiti dei mandati. Può sospendere temporaneamente un atto contestato, chiedere una nuova votazione o pubblicare un rilievo; non può scegliere una politica al posto dell’assemblea. I componenti hanno mandato breve, scaglionato e revocabile, non possono essere contemporaneamente custodi principali e si astengono sui casi propri.
 
-### Istanza principale e federazione AgoràNode
+### Nodo Agorà e coordinamento federale
 
-La home AgoràNode non è una pagina secondaria di PolisRossa: presenta la piattaforma, l’indice dei nodi e il proprio spazio di coordinamento. La sua assemblea coordina soltanto protocollo comune, interoperabilità, sicurezza, namespace e risorse condivise. Ogni nodo mantiene contenuti, licenze, ammissioni e forum propri. Un account o ruolo PolisRossa non diventa automaticamente un account o ruolo AgoràNode. Le decisioni federali hanno due camere:
+La home del servizio è un indice che presenta Agorà — AgoràNode e PolisRossa — AgoràNode come nodi sullo stesso piano. Il nodo Agorà discute e decide le questioni comuni dell’infrastruttura, incluse protocollo, interoperabilità, sicurezza, namespace, ammissione/coordinamento dei nodi e risorse condivise; non decide le politiche locali o tematiche. Ogni nodo mantiene contenuti, licenze, ammissioni e forum propri. Un account o ruolo PolisRossa non diventa automaticamente un account o ruolo nel nodo Agorà. Le decisioni federali hanno due camere:
 
 - **camera delle persone:** tutti i PR2 attivi dei nodi registrati, deduplicati a una persona un voto; elegge e revoca PR3;
 - **camera dei nodi:** un nodo ammesso, un voto, espresso soltanto in esecuzione di una decisione verificabile della propria assemblea.
@@ -131,12 +135,12 @@ Questa disciplina riguarda l’esecuzione, non la coscienza o la parola: nessuno
 1. La proposta pubblica testo immutabile, digest, fonti, impatto sui dati, responsabili, costo, piano di verifica e rollback.
 2. Vengono dichiarati classe, base checkpoint, elettorato, finestra di discussione, voto e ricorso. Il server non può abbassare le soglie codificate per quella classe.
 3. Eventuali emendamenti materiali generano un nuovo digest e riaprono la discussione. Non si vota un titolo per applicare poi un testo diverso.
-4. Ogni scheda firma dominio, rete, decisione, camera, identità e scelta con la chiave congelata nell’elettorato.
-5. Alla chiusura qualsiasi peer può verificare firme, doppioni, quorum e conteggio e ottenere lo stesso certificato.
+4. **Limite del protocollo attuale:** ogni scheda v1 firma dominio, rete, decisione, camera, identità e scelta con la chiave congelata nell’elettorato, quindi l’identificatore dell’elettore è collegabile alla scelta. Questo formato non soddisfa il requisito di voto segreto e va sostituito prima di un uso reale.
+5. Un futuro protocollo dovrà consentire di verificare firme o prove di eleggibilità, doppioni, quorum e conteggio senza rendere pubblica la relazione fra identità e scelta; non è ancora implementato.
 6. Una modifica operativa viene eseguita soltanto se il certificato è approvato, il termine di ricorso è trascorso e la testa da modificare coincide ancora con `baseCheckpointId`.
 7. Il checkpoint successivo collega decisione, output verificato e predecessore. Un errore produce una nuova decisione o un rollback tecnico documentato, mai la riscrittura del certificato.
 
-Il certificato `org.agoranode.governance-quorum-certificate.v1` contiene tutte le schede finali firmate. Questa scelta è semplice e verificabile, ma non scala indefinitamente e rende pubblici gli identificatori politici pseudonimi: prima dell’uso su larga scala vanno progettati aggregazione, ricevute e privacy senza perdere la possibilità di ricontare.
+Il certificato `org.agoranode.governance-quorum-certificate.v1` contiene tutte le schede finali firmate. Questa scelta è semplice da verificare ma rende pubblica la relazione fra identificatori politici pseudonimi e scelte; non offre voto segreto e non è adatta a un’attivazione reale secondo il requisito del progetto. Aggregazione, ricevute e prove verificabili senza rivelare il voto richiedono un protocollo diverso, revisione indipendente e prove di sicurezza prima dell’uso.
 
 ## Mandati, rotazione e revoca
 

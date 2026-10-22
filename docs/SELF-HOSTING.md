@@ -2,7 +2,17 @@
 
 Questa configurazione avvia il server Node, PostgreSQL 17 e un proxy HTTPS Caddy. Non richiede Render, Supabase o Brevo. Servono Node.js 24 e Docker con Compose sul computer che ospiterà il sito. Non basta aprire una pagina web per installarla. Il PC deve restare acceso, con Docker avviato e senza sospensione.
 
-La configurazione ospita oggi **PolisRossa**, prima istanza tematica della piattaforma riusabile **AgoràNode**. Il manifesto v1, la facciata dell’istanza e il deposito comune della conoscenza sono implementati; non esistono ancora un generatore completo per nuovi argomenti o una rete di nodi interoperabili.
+La configurazione ospita oggi **PolisRossa — AgoràNode**, il solo nodo con rassegna, biblioteca, storia, dati e comunità già completi, dedicato allo stato dell’arte della sinistra politica. AgoràNode è il nome della tecnologia/infrastruttura comune. La home-indice dei nodi è disponibile; `/agora` presenta stato tecnico, registro federale e custodia, ma non ha ancora tutte le superfici editoriali di PolisRossa. Il manifesto v1, la facciata dell’istanza e il deposito comune della conoscenza sono implementati; non esistono ancora un generatore completo per nuovi argomenti o una rete di nodi interoperabili.
+
+Ogni installazione nuova creata con `init` riceve un identificatore PostgreSQL casuale, usato come nome del database e dell’utente, e volumi Compose separati. Questo isola le credenziali e i dati di installazioni distinte; non rende il tema o il manifesto dell’applicazione configurabili. Per retrocompatibilità, le installazioni inizializzate da versioni precedenti continuano a usare `polisrossa` quando i campi PostgreSQL dedicati non sono presenti.
+
+## Creare nodi e contribuire hardware: stato attuale
+
+`init` prepara una copia autonoma dell’applicazione PolisRossa. Anche in modalità `mirror`, il nome del progetto Compose cambia soltanto l’identità dell’installazione tecnica: il runtime, i percorsi, i cataloghi e l’API restano quelli di PolisRossa. La modalità `mirror` chiude le scritture; non importa né sincronizza automaticamente contenuti, account o forum da un altro server. Non usare questo comando per dichiarare creato un nuovo nodo tematico.
+
+Al momento non c’è un comando o un flusso web che generi un manifesto operativo per un tema scelto dall’utente, registri il nodo nella home, o gli assegni contenuti e database tramite API multi-istanza. Non è nemmeno possibile aggiungere il proprio computer a un pool federato di calcolo o storage: non ci sono peer discovery, orchestrazione, monitoraggio, replica automatica o failover operativi. Puoi ospitare una copia indipendente di PolisRossa seguendo questa guida e contribuire al codice con una pull request; l’hosting non dà accesso ai dati privati altrui né diritti politici.
+
+Il passaggio a nodi personalizzati richiede prima di caricare e validare un manifesto per istanza, separare identità, contenuti e API, e testare che database e dati personali restino isolati. Solo dopo ha senso registrare nodi ospitati da altri e definire un protocollo di custodia del contenuto pubblico. L’eventuale condivisione hardware viene dopo: deve specificare autorizzazioni, limiti delle risorse, aggiornamenti, osservabilità, revoca e ripristino prima di accettare host indipendenti. Il primo modello di replica da valutare deve riguardare soltanto contenuti pubblici verificabili; non credenziali, preferiti, account o altri dati privati.
 
 ## Stato e confini
 
@@ -52,7 +62,7 @@ Il deposito può costruire un bundle canonico delle revisioni correnti, ma il co
 
 ## Nodo locale di sola consultazione
 
-In una seconda cartella o checkout, un volontario può creare un'installazione indipendente senza modificare router, firewall o DNS:
+In una seconda cartella o checkout, un volontario può creare un'installazione indipendente della stessa applicazione PolisRossa senza modificare router, firewall o DNS:
 
 ```sh
 node scripts/selfhost.mjs init https://localhost:9543 mirror --project polisrossa-node2 --http-port 9080

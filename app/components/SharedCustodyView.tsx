@@ -11,14 +11,14 @@ export default function SharedCustodyView() {
         <h1 id="page-title"><T>Un formato comune, molti nodi governati dalle loro comunità.</T></h1>
         <p className="custody-lead">
           <T>
-            AgoràNode è l’infrastruttura comune; PolisRossa è la prima istanza, dedicata alla storia, all’attualità e alla cultura delle sinistre. Ogni nodo tratta un argomento diverso ma offre lo stesso insieme riconoscibile di strumenti: notizie, video, biblioteca, pagine enciclopediche, percorso storico, dati e forum democratico. Ospitare il servizio non significa possederlo.
+            AgoràNode è la tecnologia condivisa che permette di ospitare comunità indipendenti, come un servizio di forum. Agorà è un nodo dedicato alla tecnologia stessa; PolisRossa è un altro nodo, dedicato alla sinistra politica. La home è il portale per trovare le comunità, non un argomento politico sopra di loro. Ogni nodo usa lo stesso formato editoriale e conserva le proprie decisioni. Ospitare il servizio non significa possederlo.
           </T>
         </p>
         <aside className="custody-reality" aria-label="Stato attuale">
           <strong><T>Cosa funziona adesso</T></strong>
           <p><T>PolisRossa, il contratto comune AgoràNode, codice pubblico, installazioni indipendenti, database locale e un deposito pubblico in sola lettura con tutte le revisioni di 64 eventi e 17 persone, puntatori alle versioni correnti ed esportazione deterministica.</T></p>
           <strong><T>Cosa non funziona ancora</T></strong>
-          <p><T>Scrittura enciclopedica pubblica, creazione automatica di nuovi nodi, trasporto collaudato fra PC indipendenti, scoperta dei nodi e failover. Account, forum e dati personali sono esclusi dalla replica pubblica; la loro replica e la cifratura end-to-end non sono implementate.</T></p>
+          <p><T>Scrittura enciclopedica pubblica, creazione automatica di nuovi nodi, registro federato per scoprire nodi ospitati altrove, trasporto collaudato fra PC indipendenti e failover. Account, forum e dati personali sono esclusi dalla replica pubblica; la loro replica e la cifratura end-to-end non sono implementate.</T></p>
         </aside>
       </header>
 
@@ -44,7 +44,7 @@ export default function SharedCustodyView() {
           <article><span aria-hidden="true">05</span><h3><T>Forum democratico</T></h3><p><T>La comunità del singolo nodo discute contenuti e regole, ammette i membri abilitati e vota le proposte secondo procedure pubbliche e verificabili.</T></p></article>
           <article><span aria-hidden="true">06</span><h3><T>Custodia portabile</T></h3><p><T>Codice, conoscenza pubblica e provenienza devono poter essere verificati ed esportati senza includere password, sessioni, dati personali o segreti del gestore.</T></p></article>
         </div>
-        <p><T>Questa è la home principale di AgoràNode. Il suo spazio di coordinamento governerà soltanto formato comune, protocollo, sicurezza e risorse federali; resta separato dal forum di PolisRossa, che governa l’istanza tematica. La pagina principale è pubblicata, mentre account, forum federale ed elezioni PR3 non vengono dichiarati aperti finché il flusso completo non supera il collaudo.</T></p>
+        <p><T>La home è il portale che oggi permette di cercare i percorsi locali Agorà — AgoràNode e PolisRossa — AgoràNode; non esiste ancora un catalogo federato delle istanze ospitate altrove. Il nodo Agorà tratta tecnologia e questioni comuni dell’infrastruttura; il forum PolisRossa resta nel proprio ambito. Questa pagina presenta il registro federale e la custodia, ma non offre ancora tutte le superfici editoriali di PolisRossa. Account, forum ed elezioni PR3 non vengono dichiarati aperti finché il flusso completo non supera il collaudo.</T></p>
       </section>
 
       <section id="funzionamento" aria-labelledby="custody-how-title">
@@ -96,7 +96,7 @@ node scripts/selfhost.mjs certificate`}</code></pre>
         <div className="custody-grid">
           <article><span aria-hidden="true">01</span><h3><T>Assemblea del nodo</T></h3><p><T>La comunità della singola istanza delibera sui propri contenuti e sulle proprie regole con procedure, soglie, esiti e possibilità di ricorso pubblici.</T></p></article>
           <article><span aria-hidden="true">02</span><h3><T>Gruppi di lavoro e mandati</T></h3><p><T>Compiti circoscritti hanno durata dichiarata, responsabilità verificabili e una procedura di revoca; non diventano un diritto permanente all’ultima parola.</T></p></article>
-          <article><span aria-hidden="true">03</span><h3><T>Coordinamento federale AgoràNode</T></h3><p><T>Il formato comune ha questa home principale ma richiede un’assemblea e un forum separati da quelli dei nodi. Il registro PR3 sa verificare candidatura, voto, mandato, scadenza e richiamo; l’accesso reale degli utenti non è ancora aperto.</T></p></article>
+          <article><span aria-hidden="true">03</span><h3><T>Coordinamento federale AgoràNode</T></h3><p><T>Le questioni comuni dell’infrastruttura richiedono un’assemblea e un forum nel nodo Agorà, separati da quelli dei nodi tematici. Il registro PR3 sa verificare candidatura, voto, mandato, scadenza e richiamo; l’accesso reale degli utenti non è ancora aperto.</T></p></article>
           <article><span aria-hidden="true">04</span><h3><T>Custodi tecnici</T></h3><p><T>Chi mantiene un server, conserva un backup o verifica una release non riceve voti aggiuntivi. Operazioni e cambi di mandato dovranno lasciare un audit pubblico contestabile.</T></p></article>
         </div>
         <div className="custody-role-ladder" aria-label="Livelli di partecipazione">

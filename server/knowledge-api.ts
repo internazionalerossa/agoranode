@@ -26,8 +26,8 @@ const ERROR_HEADERS = {
   "cache-control": "no-store",
   "content-type": "application/json; charset=utf-8",
 } as const;
-const PUBLIC_KINDS = new Set(["event", "person"] as const);
-const PUBLIC_ID = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+const PUBLIC_KIND = /^[a-z][a-z0-9-]{0,63}$/;
+const PUBLIC_ID = /^[A-Za-z0-9][A-Za-z0-9._:-]{0,191}$/;
 
 function error(message: string, status: number, allow?: string) {
   return Response.json(
@@ -127,16 +127,15 @@ function entityQuery(url: URL) {
   const id = url.searchParams.get("id");
   const locale = url.searchParams.get("locale");
   if (
-    (kind !== "event" && kind !== "person") ||
-    !PUBLIC_KINDS.has(kind) ||
+    !kind ||
+    !PUBLIC_KIND.test(kind) ||
     !id ||
-    id.length > 191 ||
     !PUBLIC_ID.test(id) ||
     locale !== INSTANCE_MANIFEST.instance.language
   ) {
     return null;
   }
-  return { kind, id, locale: "it" as const };
+  return { kind, id, locale: INSTANCE_MANIFEST.instance.language };
 }
 
 function revisionQuery(url: URL) {

@@ -230,7 +230,7 @@ export default function KnowledgeRevisionHistory({
   kind,
   entityId,
 }: {
-  kind: "event" | "person";
+  kind: string;
   entityId: string;
 }) {
   const [retry, setRetry] = useState(0);

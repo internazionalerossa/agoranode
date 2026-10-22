@@ -14,7 +14,7 @@ I membri riconosciuti come PR2 dal server vedono direttamente forum e chat; intr
 
 Il runtime indipendente usa Node.js 24, PostgreSQL, Caddy e Better Auth. Il percorso scelto per questa istanza è il PC domestico già collaudato localmente, con ingresso HTTPS gratuito tramite Tailscale Funnel. Render e Brevo restano alternative storiche non attivate; non sono necessari né vanno acquistati per questa procedura.
 
-Questo rilascio resta **PolisRossa**, prima istanza tematica della futura piattaforma riusabile **AgoràNode**. Non offre ancora una configurazione generica per argomenti diversi e non trasforma più installazioni in una rete distribuita.
+Questo rilascio contiene **PolisRossa — AgoràNode**, il solo nodo con rassegna, biblioteca, storia, dati e comunità già completi, dedicato allo stato dell’arte della sinistra politica. AgoràNode è la tecnologia/infrastruttura comune; la home-indice dei nodi esiste e il percorso `/agora` presenta stato tecnico e custodia, ma il nodo Agorà non ha ancora tutte le superfici editoriali di PolisRossa. Non esiste ancora una configurazione generica completa per argomenti diversi e più installazioni non costituiscono una rete distribuita.
 
 Prima della pubblicazione completa devono essere configurati soltanto nei file privati dell'installazione:
 

@@ -205,8 +205,9 @@ test("knowledge endpoints reject unsupported methods and malformed or empty look
     await importPolisrossaKnowledge(pool);
     const invalid = [
       "/api/knowledge/entity?kind=event&id=haymarket-1886",
-      "/api/knowledge/entity?kind=article&id=haymarket-1886&locale=it",
-      "/api/knowledge/entity?kind=event&id=Haymarket-1886&locale=it",
+      "/api/knowledge/entity?kind=Article&id=haymarket-1886&locale=it",
+      "/api/knowledge/entity?kind=bad_kind&id=haymarket-1886&locale=it",
+      "/api/knowledge/entity?kind=event&id=bad%2Fid&locale=it",
       "/api/knowledge/entity?kind=event&id=haymarket-1886&locale=en",
       "/api/knowledge/entity?kind=event&id=haymarket-1886&locale=it&extra=1",
       "/api/knowledge/entity?kind=event&kind=person&id=haymarket-1886&locale=it",
@@ -233,6 +234,42 @@ test("knowledge endpoints reject unsupported methods and malformed or empty look
     assert.equal(entityWrite.headers.get("allow"), "GET");
     assert.equal((await request(db, "/api/knowledge/export", "DELETE")).status, 405);
     assert.equal((await request(db, "/api/knowledge/export?space=other")).status, 400);
+  } finally {
+    await pg.close();
+  }
+});
+
+test("the public knowledge API serves structured entity kinds beyond the historical seed", async () => {
+  const { pg, pool, db } = await fixture();
+  try {
+    const base = polisrossaKnowledgeSeed().find(
+      (entry) => entry.identity.kind === "event" && entry.identity.id === "haymarket-1886",
+    );
+    assert.ok(base);
+    await importKnowledgeRevisions(pool, [{
+      ...base,
+      identity: { ...base.identity, kind: "concept", id: "collective-memory" },
+      content: {
+        format: "org.agoranode.knowledge-entry.v1",
+        title: "Memoria collettiva",
+        summary: "Un concetto collegato a esperienze e istituzioni condivise.",
+      },
+    }]);
+    const response = await request(
+      db,
+      "/api/knowledge/entity?kind=concept&id=collective-memory&locale=it",
+    );
+    assert.equal(response.status, 200);
+    const body = await response.json();
+    assert.equal(body.current.identity.kind, "concept");
+    assert.equal(body.current.identity.id, "collective-memory");
+    assert.equal(body.current.content.title, "Memoria collettiva");
+
+    const missing = await request(
+      db,
+      "/api/knowledge/entity?kind=concept&id=not-yet-imported&locale=it",
+    );
+    assert.equal(missing.status, 404);
   } finally {
     await pg.close();
   }

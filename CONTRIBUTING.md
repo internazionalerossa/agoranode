@@ -2,7 +2,7 @@
 
 [Italiano](#italiano) · [English](#english) · [Español](#español) · [Français](#français) · [Deutsch](#deutsch) · [Português](#português)
 
-**All languages are welcome. No coding experience is required to propose a change.** AgoràNode is the shared platform and PolisRossa is its first thematic instance. The canonical repository is `internazionalerossa/agoranode`; existing `polisrossa` instance, database, volume and storage identifiers remain unchanged for compatibility. Suggestions, issues and votes belong in the relevant instance forum when it is operational, using PR2 membership. GitHub is used for source changes and pull requests. Public encyclopedia editing is not open yet. Do not include private information in public contributions.
+**All languages are welcome. No coding experience is required to propose a change.** AgoràNode is the shared technology for independent thematic communities. Agorà, focused on the infrastructure, and PolisRossa, focused on the political left, are separate nodes with distinct scopes; neither is the other's parent or instance. The portal shows existing nodes separately from possible topics for future communities. Those topic ideas do not represent active sites. The current search covers the local paths and topic map; no federated registry for other hosts exists yet. The canonical repository is `internazionalerossa/agoranode`; existing `polisrossa` instance, database, volume and storage identifiers remain unchanged for compatibility. Suggestions, issues and votes belong in the relevant node forum when it is operational, using PR2 membership. GitHub is used for source changes and pull requests. Public encyclopedia editing is not open yet. Do not include private information in public contributions.
 
 ## Italiano
 

@@ -167,4 +167,21 @@ test("the browser contract accepts the expected identity and rejects a substitut
     }),
     false,
   );
+  assert.equal(
+    isPublicKnowledgeHistory(
+      {
+        ...history,
+        current: {
+          ...history.current,
+          identity: { ...history.current.identity, kind: "concept" },
+        },
+      },
+      {
+        kind: "concept",
+        id: "evento-pubblico",
+        locale: "it",
+      },
+    ),
+    true,
+  );
 });

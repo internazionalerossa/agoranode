@@ -140,7 +140,7 @@ function revision(value: unknown): value is PublicKnowledgeRevision {
 /** Narrow validation at the browser boundary; server-side hashes remain authoritative. */
 export function isPublicKnowledgeHistory(
   value: unknown,
-  expected: { kind: "event" | "person"; id: string; locale: "it" },
+  expected: { kind: string; id: string; locale: string },
 ): value is PublicKnowledgeHistory {
   if (
     !record(value) ||

@@ -4,8 +4,8 @@ services:
     image: postgres:17-bookworm
     restart: unless-stopped
     environment:
-      POSTGRES_USER: polisrossa
-      POSTGRES_DB: polisrossa
+      POSTGRES_USER: ${POSTGRES_USER:-polisrossa}
+      POSTGRES_DB: ${POSTGRES_DB:-polisrossa}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Run selfhost init first}
       POSTGRES_INITDB_ARGS: --auth-local=scram-sha-256 --auth-host=scram-sha-256
     command: [postgres, -c, "listen_addresses=", -c, unix_socket_permissions=0777]
@@ -17,7 +17,7 @@ services:
       # initializing a new volume. Only PID 1 is the final server.
       test:
         - CMD-SHELL
-        - 'test "$$(head -n 1 "$$PGDATA/postmaster.pid" 2>/dev/null)" = 1 && pg_isready -h /var/run/postgresql -U polisrossa -d polisrossa'
+        - 'test "$$(head -n 1 "$$PGDATA/postmaster.pid" 2>/dev/null)" = 1 && pg_isready -h /var/run/postgresql -U "$$POSTGRES_USER" -d "$$POSTGRES_DB"'
       interval: 5s
       timeout: 3s
       retries: 20
@@ -74,8 +74,8 @@ services:
       dockerfile: Backup.Dockerfile
     environment:
       PGHOST: /var/run/postgresql
-      PGUSER: polisrossa
-      PGDATABASE: polisrossa
+      PGUSER: ${POSTGRES_USER:-polisrossa}
+      PGDATABASE: ${POSTGRES_DB:-polisrossa}
       PGPASSWORD: ${POSTGRES_PASSWORD:?Run selfhost init first}
     volumes:
       - socket:/var/run/postgresql:ro

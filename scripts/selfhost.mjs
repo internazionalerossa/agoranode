@@ -16,7 +16,7 @@ const accountAccessCodePattern=/^pr1-[A-Za-z0-9_-]{43}$/;
 const dnsLabelPattern=/^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$/;
 const edgeSecretPattern=/^[A-Za-z0-9_-]{43,128}$/;
 const runtimeEnvironmentKeys=new Set([
- 'COMPOSE_PROJECT_NAME','APP_URL','NODE_ENV','PORT','POSTGRES_PASSWORD','DATABASE_URL','AUTH_SECRET','MIRROR_MODE',
+ 'COMPOSE_PROJECT_NAME','APP_URL','NODE_ENV','PORT','POSTGRES_USER','POSTGRES_DB','POSTGRES_PASSWORD','DATABASE_URL','AUTH_SECRET','MIRROR_MODE',
  'MAIL_TRANSPORT','MAIL_FROM','SMTP_HOST','SMTP_PORT','SMTP_USER','SMTP_PASSWORD','BREVO_API_KEY',
  'DISCORD_CLIENT_ID','DISCORD_CLIENT_SECRET','FACEBOOK_CLIENT_ID','FACEBOOK_CLIENT_SECRET','COMMUNITY_BOOTSTRAP_HASH','ACCOUNT_ACCESS_HASH',
  'REGISTRATIONS_OPEN','FORUM_OPEN','PUBLIC_OPERATOR_NAME','PUBLIC_PRIVACY_CONTACT','BIND_ADDRESS','LOCAL_UID','LOCAL_GID',
@@ -42,11 +42,12 @@ export async function initialize(directory,urlText='https://localhost:8443',mode
  if(!projectPattern.test(project))throw Error('Project name must start with a lowercase letter or digit and contain at most 63 lowercase letters, digits, hyphens or underscores');
  const httpsPort=port(url.port||443,'HTTPS port'),httpPort=port(options.httpPort??8080,'HTTP port');
  if(httpPort===httpsPort)throw Error('HTTP and HTTPS ports must be different');
+ const databaseIdentity='an_'+randomBytes(12).toString('hex');
  const state=resolve(directory,'.selfhost');
  await mkdir(state,{recursive:true,mode:0o700});
  try{await access(resolve(state,'runtime.env'));throw Error('Configuration already exists; it will not be overwritten');}catch(e){if(e.code!=='ENOENT')throw e;}
  const password=randomBytes(32).toString('hex'),secret=randomBytes(48).toString('hex');
- const env=[`COMPOSE_PROJECT_NAME=${project}`,`APP_URL=${url.origin}`,'NODE_ENV=production','PORT=8000',`POSTGRES_PASSWORD=${password}`,`DATABASE_URL=postgresql://polisrossa:${password}@localhost/polisrossa?host=%2Fvar%2Frun%2Fpostgresql`,`AUTH_SECRET=${secret}`,`MIRROR_MODE=${mode==='mirror'}`,'MAIL_TRANSPORT=none','MAIL_FROM=','SMTP_HOST=','SMTP_PORT=465','SMTP_USER=','SMTP_PASSWORD=','BREVO_API_KEY=','DISCORD_CLIENT_ID=','DISCORD_CLIENT_SECRET=','FACEBOOK_CLIENT_ID=','FACEBOOK_CLIENT_SECRET=','COMMUNITY_BOOTSTRAP_HASH=','ACCOUNT_ACCESS_HASH=','REGISTRATIONS_OPEN=false','FORUM_OPEN=false','PUBLIC_OPERATOR_NAME=','PUBLIC_PRIVACY_CONTACT=','BIND_ADDRESS=127.0.0.1',`LOCAL_UID=${process.getuid?.()??1000}`,`LOCAL_GID=${process.getgid?.()??1000}`,`HTTPS_PORT=${httpsPort}`,`HTTP_PORT=${httpPort}`,'LOCAL_HTTPS_PORT=','EDGE_SHARED_SECRET=','EDGE_PUBLIC_ORIGIN=','EDGE_UPSTREAM_ORIGIN=','EDGE_ORIGIN_ACTIVE=false'];
+ const env=[`COMPOSE_PROJECT_NAME=${project}`,`APP_URL=${url.origin}`,'NODE_ENV=production','PORT=8000',`POSTGRES_USER=${databaseIdentity}`,`POSTGRES_DB=${databaseIdentity}`,`POSTGRES_PASSWORD=${password}`,`DATABASE_URL=postgresql://${databaseIdentity}:${password}@localhost/${databaseIdentity}?host=%2Fvar%2Frun%2Fpostgresql`,`AUTH_SECRET=${secret}`,`MIRROR_MODE=${mode==='mirror'}`,'MAIL_TRANSPORT=none','MAIL_FROM=','SMTP_HOST=','SMTP_PORT=465','SMTP_USER=','SMTP_PASSWORD=','BREVO_API_KEY=','DISCORD_CLIENT_ID=','DISCORD_CLIENT_SECRET=','FACEBOOK_CLIENT_ID=','FACEBOOK_CLIENT_SECRET=','COMMUNITY_BOOTSTRAP_HASH=','ACCOUNT_ACCESS_HASH=','REGISTRATIONS_OPEN=false','FORUM_OPEN=false','PUBLIC_OPERATOR_NAME=','PUBLIC_PRIVACY_CONTACT=','BIND_ADDRESS=127.0.0.1',`LOCAL_UID=${process.getuid?.()??1000}`,`LOCAL_GID=${process.getgid?.()??1000}`,`HTTPS_PORT=${httpsPort}`,`HTTP_PORT=${httpPort}`,'LOCAL_HTTPS_PORT=','EDGE_SHARED_SECRET=','EDGE_PUBLIC_ORIGIN=','EDGE_UPSTREAM_ORIGIN=','EDGE_ORIGIN_ACTIVE=false'];
  await writeFile(resolve(state,'runtime.env'),env.join('\n')+'\n',{flag:'wx',mode:0o600});
  // HTTP redirects are disabled during local preparation; only HTTPS is served.
  const local=url.hostname==='localhost';

@@ -12,7 +12,7 @@ Le variabili di ambiente sono impostazioni fornite al server senza scriverle nel
 
 Il target Node contiene interfaccia React, API, autenticazione Better Auth e database PostgreSQL. `npm run build` produce `build-node/`; `Dockerfile` esegue il processo senza privilegi di root. La compilazione non necessita di credenziali. `node build-node/server.mjs` avvia il servizio sulla porta `PORT` (8000 per impostazione predefinita). Preparare un’immagine non trasferisce dominio, utenti o dati da un altro servizio.
 
-Questo target distribuisce PolisRossa, prima istanza tematica della piattaforma riusabile **AgoràNode**. Il contratto `org.agoranode.instance.v1` e il deposito comune della conoscenza fanno parte del runtime, ma AgoràNode non è oggi un secondo servizio da configurare e il deployment non genera ancora istanze complete per argomenti diversi. Non abilita replica, failover o cifratura end-to-end.
+Questo target distribuisce il solo nodo con rassegna, biblioteca, storia, dati e comunità già completi: **PolisRossa — AgoràNode**, dedicato allo stato dell’arte della sinistra politica. AgoràNode è la tecnologia/infrastruttura comune; la home-indice dei nodi esiste e `/agora` presenta stato tecnico e custodia, ma il nodo Agorà non ha ancora tutte le superfici editoriali di PolisRossa. Il contratto `org.agoranode.instance.v1` e il deposito comune della conoscenza fanno parte del runtime, ma il deployment non genera ancora nodi completi per argomenti diversi. Non abilita replica, failover o cifratura end-to-end.
 
 Configurazione disponibile solo sul server, tramite i secret dell’hosting:
 

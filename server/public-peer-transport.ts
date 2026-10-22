@@ -126,7 +126,11 @@ export function createPublicPeerServer(options: PeerOptions, host='127.0.0.1'): 
   const indexCache=new PublicPeerIndexCache();
   return createServer({requestTimeout:30_000},async(incoming,outgoing)=>{
     try {
-      const request=new Request('http://'+host+(incoming.url??'/'),{method:incoming.method??'GET'});
+      const request=new Request('http://'+host+(incoming.url??'/'),{
+        method:incoming.method??'GET',
+        headers:{...(typeof incoming.headers['if-none-match']==='string'?
+          {'if-none-match':incoming.headers['if-none-match']}: {})},
+      });
       const response=await publicPeerRequest(request,options,indexCache);
       outgoing.writeHead(response.status,Object.fromEntries(response.headers));
       outgoing.end(Buffer.from(await response.arrayBuffer()));

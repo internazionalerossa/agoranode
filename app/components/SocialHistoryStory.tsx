@@ -1,5 +1,5 @@
 "use client";
-import {useState,useEffect} from 'react';
+import {useState,useEffect,lazy,Suspense} from 'react';
 import {ArrowDown,ArrowLeft,ArrowUpRight,Copy,Plus,Search,Share2} from 'lucide-react';
 import ProductionHighlights from './ProductionHighlights';
 import LivingConditions,{LivingConditionsPreview} from './LivingConditions';

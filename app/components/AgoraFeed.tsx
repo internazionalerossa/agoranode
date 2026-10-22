@@ -17,7 +17,7 @@ function ArticleList({items}:{items:ArticleRecord[]}){
       <p className="eyebrow">{item.kind==='video'?'Video':'Notizia'} · {item.sourceName} · {item.country}</p>
       <h3>{href?<a href={href} target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer">{item.title}</a>:item.title}</h3>
       {item.excerpt?<p>{item.excerpt.slice(0,420)}</p>:null}
-      <small>{item.publishedAt?new Intl.DateTimeFormat('it-IT',{dateStyle:'medium',timeStyle:'short'}).format(new Date(item.publishedAt)):'Data non specificata dalla fonte'}</small>
+      <small>{item.publishedAt&&Number.isFinite(Date.parse(item.publishedAt))?new Intl.DateTimeFormat('it-IT',{dateStyle:'medium',timeStyle:'short'}).format(new Date(item.publishedAt)):'Data non specificata dalla fonte'}</small>
     </article>;
   })}</div>;
 }

@@ -26,6 +26,7 @@ Non sono stati ispezionati riga per riga tutti i cataloghi, le ~migliaia di righ
 | S-08 | **Alta** | Open wiki editing e contenuti politici/sensibili in replica permanente possono rendere impossibili rettifiche e rimozioni | Protocolli di diritti, moderazione, retention e analisi dati prima di apertura |
 | S-09 | **Alta** | Quorum e voto nominativo non risolvono coercizione, identità duplicate e segretezza | Revisione formale del voto prima di uso federale vincolante |
 | S-10 | **Media** | Build e test su CI non provano la correttezza delle dipendenze né l'integrità del runtime ospitato da terzi | Lockfile, SBOM, dependency audit, provenance e firma release verificabile |
+| S-12 | **Alta** | La CLI del peer non possiede oggi un verificatore completo dei certificati politici per i checkpoint successivi al bootstrap e fallisce in modalità chiusa | Collegare un verificatore di governance controllato indipendentemente prima di propagare aggiornamenti post-bootstrap |
 | S-11 | **Alta** | Il controllo della separazione DB identifica target host/port/nome, non dimostra che DNS diversi non puntino allo stesso cluster | Ruoli e database realmente distinti, introspezione `current_database()`/`current_user` e credenziali scoped, test cross-tenant reali |
 
 ## Misure aggiunte in questa revisione

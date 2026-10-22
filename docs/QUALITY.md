@@ -161,3 +161,9 @@ Le nuove condizioni di uscita e i test necessari sono in [DECENTRALIZATION-ROADM
 ## Riesame critico editoriale e costituzionale
 
 [CRITICAL-DESIGN-REVIEW.md](CRITICAL-DESIGN-REVIEW.md) identifica contraddizioni fra decisione democratica e verifica delle fonti, schede nominative e privacy, conservazione immutabile e diritto alla rimozione, portale/nodo Agorà/federazione, oltre a dipendenze operative residue. [EDITORIAL-GOVERNANCE.md](EDITORIAL-GOVERNANCE.md) propone una procedura di fonte/revisione/contestazione per la wiki, **non implementata**. Nessun nuovo requisito di governance è da considerarsi collaudato solo perché documentato.
+
+## Prima implementazione dello scambio peer e UI condivisa — in verifica
+
+Il ramo di sviluppo successivo introduce `SharedSpaceModules`, una navigazione comune che usa i manifesti di Agorà e PolisRossa, e il modulo `public-peer-transport.ts`, scambio opt-in **read-only** di pacchetti pubblici già firmati tramite peer HTTPS configurati manualmente. Il runtime applicativo PostgreSQL completo resta legato a PolisRossa, e `space-databases.ts` verifica la distinzione dei target DB **ma non è ancora cablato alle API private del secondo nodo**. Non sono implementati discovery P2P automatico, database multi-community completi, BFT, wiki editing pubblico, social/chat distribuiti, identità portabili e failover dei gateway.
+
+Il collaudo previsto in CI usa connessioni HTTP loopback e database PGlite distinti **sullo stesso runner**. Nessuna verifica fra computer fisici indipendenti o certificazione di sicurezza viene attestata da questi test. Risultati da aggiornare solo dopo l'esito documentato della pipeline e il merge. Vedi [PEER-EXCHANGE.md](PEER-EXCHANGE.md) e [SECURITY-REVIEW.md](SECURITY-REVIEW.md).

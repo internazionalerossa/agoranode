@@ -2,6 +2,7 @@
 import {useEffect,useRef,useState} from 'react';
 import {ArrowDown,ArrowUp,ArrowUpRight,ChevronLeft,Download,MessageSquare,Plus,RefreshCw,X} from 'lucide-react';
 import {COMMUNITY_CATEGORIES,proposalId} from '@/app/lib/community-model';
+import {timelineProposalFromUrl} from '@/app/lib/timeline-proposal';
 import {VOTING_METHODS,validChoices,type ForumBoard,type ForumDetail,type VotingMethod,type Member} from '@/app/lib/forum-model';
 import LANGUAGES from '@/app/data/languages.json';
 import {LocalizedText as T,useLocale} from './Localization';
@@ -130,14 +131,15 @@ function Membership({member,bootstrap,busy,participationOpen,date,mutate}:{membe
 function LanguageField({value,onChange}:{value:string;onChange:(value:string)=>void}){return <label><T>Lingua del testo</T><select value={value} onChange={e=>onChange(e.target.value)}>{Object.entries(LANGUAGES).map(([id,label])=><option key={id} value={id}>{label}</option>)}</select></label>;}
 function TopicForm({busy,mutate,onCreated,draft,initialKind='discussion'}:{initialKind?:'discussion'|'proposal';busy:boolean;mutate:Mutation;onCreated:(id:string)=>void;draft?:ChatDraft}){
  const locale=useLocale(),requestId=useRef(crypto.randomUUID());
+ const intent=typeof window==='undefined'?null:timelineProposalFromUrl(window.location.href);
  const [privateTopic,setPrivateTopic]=useState(false);
- const [kind,setKind]=useState(initialKind),[title,setTitle]=useState(draft?.title??''),[body,setBody]=useState(draft?.body??''),[references,setReferences]=useState(''),[language,setLanguage]=useState(draft?.language??locale),[category,setCategory]=useState(initialKind==='proposal'?'governance':'general');
- const [options,setOptions]=useState(['']),[method,setMethod]=useState<VotingMethod>('single'),[discussion,setDiscussion]=useState(24),[duration,setDuration]=useState(72),[quorum,setQuorum]=useState(30),[confirmed,setConfirmed]=useState(false);
+ const [kind,setKind]=useState(initialKind),[title,setTitle]=useState(draft?.title??intent?.title??''),[body,setBody]=useState(draft?.body??intent?.body??''),[references,setReferences]=useState(intent?.references??''),[language,setLanguage]=useState(draft?.language??locale),[category,setCategory]=useState(initialKind==='proposal'?'governance':'general');
+ const [options,setOptions]=useState(intent?['Avviare la revisione proposta, soggetta alle verifiche delle fonti e della pubblicazione']:['']),[method,setMethod]=useState<VotingMethod>('single'),[discussion,setDiscussion]=useState(24),[duration,setDuration]=useState(72),[quorum,setQuorum]=useState(30),[confirmed,setConfirmed]=useState(false);
  const poll=kind==='proposal';
  const [where,setWhere]=useState(''),[expected,setExpected]=useState(''),[steps,setSteps]=useState('');
  const guidedBody=[body,...[["Dove si presenta",where],["Risultato atteso",expected],["Come riprodurlo",steps]].filter(([,value])=>value.trim()).map(([label,value])=>label+': '+value.trim())].filter(Boolean).join('\n\n');
  return <form className="community-form" onSubmit={e=>{e.preventDefault();void mutate({action:'create',kind,private:!poll&&category==='general'&&privateTopic,requestId:requestId.current,title,body:guidedBody,references,language,category,options:poll?options:[],method,discussionHours:discussion,durationHours:duration,quorum}).then(result=>{if(result?.id)onCreated(result.id);});}}>
-  <h3><T>Apri un argomento</T></h3><p className="forum-persistence-note"><T>Stai scrivendo nel forum permanente. Puoi sviluppare un ragionamento lungo e inserire riferimenti: gli altri membri potranno commentarlo. La chat non viene copiata automaticamente e gli allegati temporanei non vengono trasferiti.</T></p>
+  <h3><T>Apri un argomento</T></h3>{intent&&<p className="timeline-proposal-handoff" role="status">Bozza importata dalla timeline. Rileggi il testo e le fonti: nulla è stato inviato. Solo i membri PR2 possono pubblicare la proposta e partecipare al voto.</p>}<p className="forum-persistence-note"><T>Stai scrivendo nel forum permanente. Puoi sviluppare un ragionamento lungo e inserire riferimenti: gli altri membri potranno commentarlo. La chat non viene copiata automaticamente e gli allegati temporanei non vengono trasferiti.</T></p>
   <label><T>Tipo</T><select value={kind} onChange={e=>{setKind(e.target.value as 'discussion'|'proposal');setPrivateTopic(false);setCategory(e.target.value==='proposal'?'governance':'general');setConfirmed(false);requestId.current=crypto.randomUUID();}}><option value="discussion"><T>Discussione o issue senza voto</T></option><option value="proposal"><T>Proposta per il sito, con votazione</T></option></select></label>
   <p><T>{poll?'Descrivi una questione del progetto e le soluzioni su cui i membri voteranno.':'Puoi parlare di qualsiasi argomento, nel rispetto delle persone e delle regole della comunità. Non occorre creare una votazione.'}</T></p>
   {!poll&&category==='general'&&<label className="community-consent"><input type="checkbox" checked={privateTopic} onChange={e=>setPrivateTopic(e.target.checked)}/><span><T>Rendi privata ai soli membri PR2</T></span></label>}

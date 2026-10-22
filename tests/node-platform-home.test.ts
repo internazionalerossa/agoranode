@@ -14,8 +14,8 @@ test("the service root is a directory with Agorà and PolisRossa in the requeste
   assert.match(directory, /PolisRossa/);
   assert.match(directory, /href="\/agora"/);
   assert.match(directory, /href="\/polisrossa"/);
-  assert.match(directory, /Tecnologia, protocollo e infrastruttura comune/);
-  assert.match(directory, /Stato dell’arte della sinistra politica/);
+  assert.match(directory, /Tecnologia, software libero, architettura e infrastruttura AgoràNode/);
+  assert.match(directory, /Storia, attualità, cultura e dati delle sinistre e dei movimenti sociali internazionali/);
   assert.match(directory, /Nodo in costruzione/);
   assert.match(directory, /Nodo tematico disponibile/);
   assert.match(directory, /Trova un nodo/);

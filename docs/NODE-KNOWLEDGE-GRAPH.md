@@ -8,9 +8,9 @@
 2. **Selezione per la timeline**: i membri **PR2 del nodo competente** deliberano se una determinata pagina debba entrare nella timeline principale, essere spostata o uscirne. La decisione deve essere verificabile e può essere cambiata con una nuova proposta. Un PR2 di un altro nodo non decide per questo nodo.
 3. **Introduzione narrativa**: una tappa della timeline non è una parola-link. Contiene un periodo, un titolo e **uno o più paragrafi che raccontano perché il tema conta, cosa è successo e come si collega alle tappe vicine**, nello stile già presente in `SocialHistoryStory.tsx` di PolisRossa. Un link apre la pagina enciclopedica approfondita.
 
-L'esclusione dalla timeline cambia solo la selezione narrativa, non cancella la pagina, la sua storia o i collegamenti dall'enciclopedia. Il motore comune non deve imporre che ogni articolo wiki compaia nella timeline.
+L'esclusione dalla timeline cambia solo la selezione narrativa, non cancella la pagina, la sua storia o i collegamenti dall'enciclopedia. Il motore comune non deve imporre che ogni articolo Atlante compaia nella timeline.
 
-## UX per chi non conosce strumenti wiki
+## UX per chi non conosce strumenti Atlante
 
 **Percorso A — Modificare una o più tappe**
 - Nella timeline sono presenti selettori chiaramente associati a ogni tappa narrativa.
@@ -22,7 +22,7 @@ L'esclusione dalla timeline cambia solo la selezione narrativa, non cancella la 
 
 **Percorso B — Scrivere una nuova pagina**
 - «Proponi una nuova pagina» chiede titolo, contesto introduttivo, periodo (se pertinente) e fonti.
-- La futura vera esperienza wiki offrirà un editor a blocchi: titolo, sottosezioni, citazioni, fonti, dati, collegamenti, persone, libri; anteprima, salvataggio bozza, diff visivo, discussione e revisione.
+- La futura vera esperienza Atlante offrirà un editor a blocchi: titolo, sottosezioni, citazioni, fonti, dati, collegamenti, persone, libri; anteprima, salvataggio bozza, diff visivo, discussione e revisione.
 - L'accettazione crea una **pagina indicizzata**. La sua inclusione nella timeline resta una **decisione separata** dei PR2 locali, con testo narrativo specifico e collocazione.
 - L'interfaccia deve mostrare il risultato di ogni decisione, il motivo di un rifiuto e il percorso di ricorso. Nessuna automazione può convertire una proposta testuale in revisione definitiva senza certificato e controllo delle fonti.
 
@@ -32,7 +32,7 @@ Oggi è integrato soltanto un **wizard di testo** che apre il composer PR2 di Po
 
 | Oggetto | Identità | Relazioni |
 | --- | --- | --- |
-| Wiki | spaceId + kind + id + locale, revisione firmata | Citazioni, autori, temi, cronologia, correzioni |
+| Atlante | spaceId + kind + id + locale, revisione firmata | Citazioni, autori, temi, cronologia, correzioni |
 | Evento | Identità stabile, intervallo/precisione temporale, fonti | Persone, libri, luoghi, decisioni e dataset |
 | Opera | Work ID, non URL esterno | Autore, generi, edizioni e pagine collegate |
 | Edizione | ID specifico, lingua, diritti, formato | Work ID e file verificabili solo se redistribuibili |
@@ -48,7 +48,7 @@ L'attuale catalogo bibliografico PolisRossa non è ancora una biblioteca distrib
 - **Metadati:** titolo, autori, lingua, opera, edizione, formati, fonti e permessi di accesso.
 - **Disponibilità:** riferita all'edizione esatta; distinguere «lettura da archivio esterno», «disponibile localmente in questa istanza», «scaricabile da peer» e «non redistribuibile».
 - **File:** PDF/EPUB/HTML e media conservati come blocchi content-addressed, con controllo d'integrità, quota, pinning volontario, idempotenza e verifica dei diritti.
-- **Ricerca e relazioni:** collegare un libro alle pagine wiki, a una sequenza storica, a un autore e ai dataset pertinenti senza duplicare i file pesanti negli indici.
+- **Ricerca e relazioni:** collegare un libro alle voci dell’Atlante, a una sequenza storica, a un autore e ai dataset pertinenti senza duplicare i file pesanti negli indici.
 - **Edizioni con diritti differenti:** un link pubblico non equivale a licenza di replica. Evitare il download automatico di interi archivi privi di autorizzazione.
 - **Dati personali:** i commenti privati, la cronologia di lettura, le prenotazioni e le sessioni non entrano nella rete dei blocchi pubblici.
 
@@ -61,7 +61,7 @@ Una futura API dovrà verificare server-side tutti gli elementi: membership PR2 
 ## Cosa è realmente implementato in questo ramo
 
 - `node-content-search.ts` e `polisrossa-content.ts`: indice leggibile di metadati di biblioteca e titoli delle tappe già esistenti, filtrato per nodo.
-- `NodeContentSearch.tsx`: barra di ricerca e filtri comuni, con stati caricamento/vuoto/errore. La wiki e gli altri tipi restano aperti.
+- `NodeContentSearch.tsx`: barra di ricerca e filtri comuni, con stati caricamento/vuoto/errore. La Atlante e gli altri tipi restano aperti.
 - `timeline-curation.ts`: validatore e transizione deterministica di selezione narrativa, **non** backend live dei voti.
 - `TimelineProposalTool.tsx`: selezione di tappe e wizard testuale per una nuova pagina o per correggere il racconto; collegamento esplicito al forum PR2 PolisRossa.
 - `CommunityView.tsx`: importazione della bozza dal deep link; non altera controlli PR2 o transazioni del server.

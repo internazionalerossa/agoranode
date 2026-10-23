@@ -4,6 +4,16 @@
 
 **All languages are welcome. No coding experience is required to propose a change.**
 
+## I primi cinque minuti / Your first five minutes
+
+**Non serve capire la federazione per contribuire.** Parti da una pagina che non si legge bene, un link errato, un testo difficile o un bug riproducibile. Spiega il problema dal punto di vista di chi usa il sito; se modifichi il codice, aggiungi un test quando possibile. Le questioni politiche si discutono nel nodo competente, non si risolvono cambiando una variabile di configurazione.
+
+**You don't need to understand federation to help.** Start with one confusing screen, an accessibility issue, a bad source link, or a reproducible bug. Describe what a visitor sees and what they should be able to do. Make small changes with tests, and keep community governance separate from infrastructure ownership.
+
+Per iniziare: `npm ci`, poi `npm run dev` per vedere il frontend. Prima di proporre modifiche, esegui `npm run typecheck`, `npm run build` e `npm test`. Il backend completo richiede PostgreSQL e la [guida all'installazione](docs/SELF-HOSTING.md). Le credenziali, i contenuti personali e le conversazioni private non vanno mai inseriti nei commit.
+
+
+
 > **Nota sullo stato dell'alpha / Alpha status:** il forum PR2 e l'editor dell’Atlante non sono necessariamente aperti sul servizio pubblico. Le procedure di ammissione descritte sotto valgono **quando il nodo ospitante le ha attivate e collaudate**; in caso contrario, per segnalare problemi di codice e documentazione usare le [GitHub Issues](https://github.com/internazionalerossa/agoranode/issues). Le proposte non pubblicano automaticamente revisioni. / Forum and Atlante submission may not be enabled on the public deployment; use GitHub Issues for code/documentation feedback until activation is verified. AgoràNode is the shared technology for independent thematic communities. Agorà, focused on the infrastructure, and PolisRossa, focused on the political left, are separate nodes with distinct scopes; neither is the other's parent or instance. The portal shows existing nodes separately from possible topics for future communities. Those topic ideas do not represent active sites. The current search covers the local paths and topic map; no federated registry for other hosts exists yet. The canonical repository is `internazionalerossa/agoranode`; existing `polisrossa` instance, database, volume and storage identifiers remain unchanged for compatibility. Suggestions, issues and votes belong in the relevant node forum when it is operational, using PR2 membership. GitHub is used for source changes and pull requests. Public encyclopedia editing is not open yet. Do not include private information in public contributions.
 
 ## Italiano

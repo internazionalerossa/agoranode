@@ -162,3 +162,9 @@ Non occorre introdurre un grande framework per fare un contributo importante: un
 **Licenza:** [AGPL-3.0-or-later](LICENSE). La licenza del codice non estende i diritti su libri, immagini, dataset o testi di terzi: [NOTICE](NOTICE).
 
 *AgoràNode è aperto a chi vuole costruire un'infrastruttura della conoscenza che continui a esistere anche quando il suo primo server si spegne — e che sappia dimostrare, con prove riproducibili, ogni promessa tecnica.*
+
+
+
+### Conoscenza in database separati (lettura)
+
+Un manifesto installato può ora essere associato dal gestore a un **pool PostgreSQL pubblico dedicato**, dichiarato esclusivamente lato server con `AGORANODE_PUBLIC_SPACE_DATABASES_JSON`. Sono previsti fino a due collegamenti per pool: la ricerca e le pagine pubbliche del nodo vengono interrogate con namespace vincolato dal backend. Questo amplia il bootstrap dei nodi con una base di conoscenza consultabile, **non** abilita login/PR2/forum multi-tenant o pubblicazione wiki per i nuovi spazi. Configurazione e limiti in [THEMATIC-BOOTSTRAP.md](docs/THEMATIC-BOOTSTRAP.md).

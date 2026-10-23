@@ -19,6 +19,13 @@ export function feedPreferenceStorageKey(spaceId:string):string {
   if(!validSpaceId(spaceId))throw Error('Invalid node identity');
   return 'agoranode.feed-favourites.v1:'+spaceId;
 }
+export function feedModeStorageKey(spaceId:string):string {
+  if(!validSpaceId(spaceId))throw Error('Invalid node identity');
+  return 'agoranode.feed-mode.v1:'+spaceId;
+}
+export function normaliseFeedMode(value:unknown):FeedMode {
+  return value==='favourites'?'favourites':'all';
+}
 export function matchingPreferredSource<T extends {sourceId:string;feedSourceId?:string}>(
   article:T,favourites:ReadonlySet<string>,
 ):boolean{return favourites.has(article.sourceId)||Boolean(article.feedSourceId&&favourites.has(article.feedSourceId));}

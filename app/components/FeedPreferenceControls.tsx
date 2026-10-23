@@ -1,6 +1,6 @@
 "use client";
 import {useEffect,useMemo,useState} from 'react';
-import {feedPreferenceStorageKey,normaliseSourceChoices,type FeedMode} from '../lib/node-feed-preferences';
+import {feedPreferenceStorageKey,feedModeStorageKey,normaliseFeedMode,normaliseSourceChoices,type FeedMode} from '../lib/node-feed-preferences';
 type Source={id:string;name:string};
 function fromStorage(spaceId:string,allowed:Set<string>):string[]{
   if(typeof window==='undefined')return [];
@@ -19,7 +19,8 @@ export function useNodeFeedPreferences(spaceId:string,sources:readonly Source[])
     let live=true;
     const local=fromStorage(spaceId,allowed);
     setSourceIds(local);
-    setMode('all');
+    try{setMode(normaliseFeedMode(localStorage.getItem(feedModeStorageKey(spaceId))));}
+    catch{setMode('all');}
     setReady(false);
     const controller=new AbortController();
     void fetch('/api/spaces/'+spaceId+'/preferences',{signal:controller.signal,credentials:'same-origin',cache:'no-store'})
@@ -62,8 +63,13 @@ export function useNodeFeedPreferences(spaceId:string,sources:readonly Source[])
         .catch(()=>setStatus('Salvataggio nell’account non riuscito: la scelta resta sul dispositivo.'));
     }
   };
+  const changeMode=(next:FeedMode)=>{
+    setMode(next);
+    try{localStorage.setItem(feedModeStorageKey(spaceId),next);}
+    catch{setStatus('La modalità del feed non può essere salvata in questo browser.');}
+  };
   const preferred=useMemo(()=>new Set(sourceIds),[sourceIds]);
-  return {sourceIds:preferred,mode,setMode,choose,account,status,ready};
+  return {sourceIds:preferred,mode,setMode:changeMode,choose,account,status,ready};
 }
 export function FeedPreferenceControls({sources,prefs,spaceId}:{
   sources:readonly Source[];spaceId:string;prefs:ReturnType<typeof useNodeFeedPreferences>;

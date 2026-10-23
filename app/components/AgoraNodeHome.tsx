@@ -57,7 +57,7 @@ export default function AgoraNodeHome() {
           <AgoraFeed/>
           <aside className="agoranode-boundary" aria-label="Ambito del nodo Agorà">
             <div><Network size={20}/><span><strong>AgoràNode è la tecnologia comune.</strong> Agorà è il nodo alpha di riferimento; PolisRossa resta una comunità distinta.</span></div>
-            <div><GitBranch size={20}/><span><strong>Le decisioni hanno un ambito preciso.</strong> Le scelte editoriali e le decisioni delle altre comunità restano ai rispettivi nodi.</span></div>
+            <div><GitBranch size={20}/><span><strong>Le decisioni hanno un ambito preciso.</strong> Anche quando Agorà è il nodo alpha, le scelte tematiche restano ai rispettivi nodi.</span></div>
             <div><ShieldCheck size={20}/><span><strong>Ospitare non dà potere politico.</strong> L'ammissione PR2 non deriva dal possesso di un server: server, firme tecniche e diritto di voto rimangono separati.</span></div>
           </aside>
           <SharedSpaceModules manifest={AGORA_MANIFEST}/>

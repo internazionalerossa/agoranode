@@ -3,8 +3,9 @@ import {AGORA_NODE_MANIFEST_VERSION, AGORA_NODE_SCHEMA_ID, type AgoraNodeManifes
 /**
  * The Agorà technology community is a thematic space, not the AgoraNode
  * platform, the node directory or the federation's technical authority.
- * This is an explicit *planned* manifest: the current /agora page only
- * exposes documentation, custody information and a federation preview.
+ * The Agorà alpha home contains a real technology feed, and its Biblioteca
+ * contains the first local editorial Atlante and a curated timeline. Account
+ * and forum isolation remain planned and are never implied by route labels.
  */
 export const AGORA_MANIFEST = {
   schema: AGORA_NODE_SCHEMA_ID,
@@ -31,11 +32,11 @@ export const AGORA_MANIFEST = {
   capabilities: {
     news: {label: 'Notizie e fonti tecnologiche', status: 'implemented', route: '/agora#agora-news-title'},
     video: {label: 'Video e conferenze', status: 'implemented', route: '/agora#agora-video-title'},
-    library: {label: 'Biblioteca tecnica', status: 'planned', route: '/agora'},
-    wiki: {label: 'Wiki e specifiche', status: 'planned', route: '/agora'},
-    storyline: {label: 'Cronologia del progetto', status: 'planned', route: '/agora'},
-    data: {label: 'Dati e verifiche di rete', status: 'planned', route: '/agora'},
-    community: {label: 'Forum e stanze della comunità', status: 'planned', route: '/agora'},
+    library: {label: 'Biblioteca', status: 'implemented', route: '/agora?view=biblioteca'},
+    wiki: {label: 'Atlante · Indice e ricerca', status: 'implemented', route: '/agora?view=biblioteca&sezione=timeline&modalita=indice'},
+    storyline: {label: 'Timeline narrativa', status: 'implemented', route: '/agora?view=biblioteca&sezione=timeline'},
+    data: {label: 'Dati e grafici', status: 'implemented', route: '/agora?view=biblioteca&sezione=dati'},
+    community: {label: 'Agorà · proposte e laboratorio', status: 'planned', route: '/agora?view=partecipa'},
   },
   links: {
     repository: 'https://github.com/internazionalerossa/agoranode',
@@ -52,6 +53,6 @@ export const AGORA_MANIFEST = {
     publicKnowledge: 'append-only-revisions',
     portableExport: true,
     personalData: 'erasable-by-data-subject',
-    notice: 'Contratto e obiettivo di conservazione: Agorà non dispone ancora di un deposito tematico, account o forum autonomi. Il kernel di replica della sola conoscenza pubblica è verificato localmente; nessuna rete P2P di produzione è attiva.',
+    notice: 'Agorà ha una rassegna tecnologica, voci editoriali originali, una timeline narrativa e pagine di consultazione; account, forum e approvazione PR2 indipendenti non sono ancora attivati. Il kernel di replica pubblica è collaudato solo localmente.',
   },
 } as const satisfies AgoraNodeManifest;

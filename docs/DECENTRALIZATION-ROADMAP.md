@@ -45,7 +45,7 @@ Attività:
 1. Spostare cataloghi, etichette, fonti, libreria e layout specifici da `app/components/AggregatorApp.tsx` e `app/data/` in adapter tipizzati per spazio, preservando tutti gli ID polisrossa.
 2. Introdurre una factory runtime `createSpaceRuntime(spaceId, database, services)`: nessuna query forum, lettura privata, feed o account usa uno spazio implicito.
 3. Effettuare routing applicativo e API per spazio con una policy di autorizzazione verificata lato server. Il parametro URL non deve essere una fonte di fiducia per i permessi.
-4. Implementare un archivio/database **separato per spazio in produzione**, con migrazioni, seed e rotte per Agorà. Aggiungere una superficie condivisa di wiki, news, biblioteca, cronologia, dati, forum e chat; i moduli non attivi mostrano uno stato esplicito.
+4. Implementare un archivio/database **separato per spazio in produzione**, con migrazioni, seed e rotte per Agorà. Aggiungere una superficie condivisa di Atlante, news, biblioteca, cronologia, dati, forum e chat; i moduli non attivi mostrano uno stato esplicito.
 5. Collegare il nodo Agorà al tema tecnologia, documentazione, feed e forum propri, senza usare la bacheca federale come se fosse la sua assemblea.
 
 **Prove di uscita:** avvio di due spazi con dati e sessioni isolati; scritture inter-spazio negate; test di URL storici; creazione di terzo spazio sintetico *senza modificare componenti React*. Una sessione PR2 PolisRossa non attribuisce PR2 Agorà.
@@ -90,11 +90,11 @@ Attività:
 
 **Prove:** quattro finalizzatori su reti indipendenti (soglia 3); dopo la perdita del quorum nessuna nuova testa diventa finale, ma le letture continuano. La sottrazione o revoca di una chiave non permette promozioni automatiche. Nessuna macchina ottiene diritto di voto in virtù della potenza di calcolo.
 
-## Traguardo 6 — Wiki, feed, social e stanze
+## Traguardo 6 — Atlante, feed, social e stanze
 
-- **Wiki:** editing condiviso e offline delle bozze; dopo discussione e decisione locale, nuova revisione immutabile con provenance; possibilità di correggere errori senza modificare falsamente la storia.
+- **Atlante:** editing condiviso e offline delle bozze; dopo discussione e decisione locale, nuova revisione immutabile con provenance; possibilità di correggere errori senza modificare falsamente la storia.
 - **RSS:** acquisizione per fonte con scheduler/coda, controlli su timeout/duplicati, metadati e diritti; i peer replicano solo ciò che è legittimamente redistribuibile.
-- **Forum/social:** eventi firmati e moderabili, sincronizzazione per spazio, blocco di utenti abusivi, deduplicazione, tombstone e cancellazioni applicabili; retention differente da wiki.
+- **Forum/social:** eventi firmati e moderabili, sincronizzazione per spazio, blocco di utenti abusivi, deduplicazione, tombstone e cancellazioni applicabili; retention differente da Atlante.
 - **Chat:** protocolli di stanza dedicati (valutare Matrix), cifratura E2E per stanze riservate, accesso dei membri e reset coerente con le promesse del prodotto; **non** archiviarla automaticamente nel log perpetuo.
 - **Notifiche e ricerca:** indici locali ricostruibili, preferenze private, anti-spam e filtro per nodo; non richiedere consenso BFT per ogni messaggio.
 - **Mobile:** esperienza browser/PWA e notifiche con provider sostituibili; un browser non diventa automaticamente peer di storage persistente.
@@ -124,7 +124,7 @@ Per ogni PR:
 
 ## Gate trasversale: affidabilità della conoscenza e prevenzione della cattura
 
-Prima del primo wiki pubblico, completare [EDITORIAL-GOVERNANCE.md](EDITORIAL-GOVERNANCE.md) con ruoli, permessi, selezione delle fonti, gestione di conflitti e licenze, senza far diventare maggioritario il giudizio su un fatto. Prima del primo governo federale vincolante, risolvere la segretezza/opacità delle schede e la differenza fra elettorato locale dinamico e federale congelato. Prima del primo social federato, progettare feed trasparente, protezione del grafo privato, blocchi, ricorsi e rimedi a propaganda coordinata. Test di attacco e criteri sono in [CRITICAL-DESIGN-REVIEW.md](CRITICAL-DESIGN-REVIEW.md).
+Prima del primo Atlante pubblico, completare [EDITORIAL-GOVERNANCE.md](EDITORIAL-GOVERNANCE.md) con ruoli, permessi, selezione delle fonti, gestione di conflitti e licenze, senza far diventare maggioritario il giudizio su un fatto. Prima del primo governo federale vincolante, risolvere la segretezza/opacità delle schede e la differenza fra elettorato locale dinamico e federale congelato. Prima del primo social federato, progettare feed trasparente, protezione del grafo privato, blocchi, ricorsi e rimedi a propaganda coordinata. Test di attacco e criteri sono in [CRITICAL-DESIGN-REVIEW.md](CRITICAL-DESIGN-REVIEW.md).
 
 ## Prototipi già consolidati in main
 

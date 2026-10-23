@@ -34,3 +34,9 @@ Il modello sostenibile è **scala orizzontale comunitaria**: un piccolo PC può 
 7. Solo dopo, valutare alternative standard esterne (IPFS/CAR per oggetti, Automerge/Yjs per bozze CRDT) rispetto a semplicità, interoperabilità, sicurezza e manutenzione.
 
 Per ora, la sola ottimizzazione effettiva del trasporto v1 è evitare di scaricare di nuovo gli stessi pacchetti firmati. I blocchi v2 sono un **contratto sperimentale**.
+
+
+
+## Archivio CAS locale durevole (sperimentale)
+
+`server/public-cas-store.ts` memorizza con scritture atomiche i blocchi già verificati dal codec CAS, in directory separate ottenute da un hash del namespace rete/spazio. Richiede un verificatore esterno obbligatorio che autorizzi **l'esatto digest del manifesto e dell'oggetto** prima della prima scrittura. I blocchi immutabili sono verificati durante la rilettura e non vengono sovrascritti silenziosamente se corrotti. La lettura ricostruisce il contenuto e controlla nuovamente gli hash. È una primitiva locale: mancano ancora garbage collection/pinning con quote globali, download per hash nella rete, consenso BFT e politiche complete di cancellazione.

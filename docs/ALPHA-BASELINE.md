@@ -44,14 +44,14 @@ Ogni pagina enciclopedica del nodo deve poter essere trovata tramite ricerca e l
 
 La biblioteca deve distinguere *opera*, *edizione*, *licenza*, *file realmente disponibile*, *provenienza*, *checksum* e *peer custode*. La presenza di un URL esterno non implica il diritto a distribuire il file da un computer volontario. Le immagini, i media, i post e le serie statistiche avranno politiche diverse di archiviazione, ricerca e conservazione.
 
-Il wizard PR2 e l'indice locale biblioteca/timeline di PolisRossa sono un **primo livello di UX**, non una pipeline autorizzata di pubblicazione wiki universale. Prima del secondo nodo completo servono navigazione uniforme e API isolate, editor di pagina, diff leggibili, fonte per paragrafo ove appropriato, ricorsi e indicizzazione condivisa tra tutte le classi pubbliche.
+Il wizard PR2 e l'indice locale biblioteca/timeline di PolisRossa sono un **primo livello di UX**, non una pipeline autorizzata di pubblicazione Atlante universale. Prima del secondo nodo completo servono navigazione uniforme e API isolate, editor di pagina, diff leggibili, fonte per paragrafo ove appropriato, ricorsi e indicizzazione condivisa tra tutte le classi pubbliche.
 
 ## 5. Verifiche di accettazione prima di dichiarare «completo»
 
 | Ambito | Evidenza da richiedere |
 | --- | --- |
 | Due nodi autonomi | Stesso frontend renderizzato per Agorà e PolisRossa, database e sessioni realmente separati, test cross-space anche con utenti omonimi |
-| Wiki e timeline | Proposta → revisione fonti/diritti → voto PR2 valido → revisione pubblicata → ricerca aggiornata; esclusione timeline senza rimozione pagina |
+| Atlante e timeline | Proposta → revisione fonti/diritti → voto PR2 valido → revisione pubblicata → ricerca aggiornata; esclusione timeline senza rimozione pagina |
 | Biblioteca e media | Download solo delle edizioni redistribuibili, checksum, pinning volontario, quote e ripristino dopo perdita di una replica |
 | Peer P2P | Tre host indipendenti sotto amministrazioni/reti diverse, firme, guasti, dischi saturi, NAT, riconnessioni, differenze di versione |
 | Consenso | BFT reale revisionato con membership/reconfiguration, view changes, equivocation e partizioni; lettura in assenza di quorum |

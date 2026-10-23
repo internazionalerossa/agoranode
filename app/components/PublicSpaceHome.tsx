@@ -2,6 +2,7 @@
 import {useEffect,useMemo,useState,type CSSProperties} from 'react';
 import {validatePublicSpaceSeed,type PublicSpaceSeed} from '../platform/public-space-seed';
 import {PublicSpaceKnowledgePage,PublicSpaceRemoteSearch} from './PublicSpaceKnowledge';
+import PublicSpaceLibrary from './PublicSpaceLibrary';
 
 type ViewState={state:'loading'|'not-found'|'error'}|{state:'ready';seed:PublicSpaceSeed};
 const LABELS={
@@ -17,6 +18,7 @@ const LABELS={
 export default function PublicSpaceHome({spaceId}:{spaceId:string}){
  const [view,setView]=useState<ViewState>({state:'loading'});
  const [query,setQuery]=useState('');
+ const library=typeof window!=='undefined'&&new URL(window.location.href).searchParams.get('view')==='biblioteca';
  useEffect(()=>{
   const controller=new AbortController();
   setView({state:'loading'});
@@ -41,9 +43,9 @@ export default function PublicSpaceHome({spaceId}:{spaceId:string}){
    <a href="/" aria-label="Torna all'elenco dei nodi">AgoràNode · Nodi</a>
    {seed?<><h1>{seed.name}</h1><p>{seed.topic}</p></>:<h1>Nodo tematico</h1>}
    <nav aria-label="Navigazione del nodo">
-     <a href="#public-space-content">Conoscenza</a>
-     <a href="#public-space-sources">Fonti</a>
-     <a href="/agora">Agorà</a>
+     <a href={'/n/'+spaceId} aria-current={!library?'page':undefined}>Home</a>
+     <a href={'/n/'+spaceId+'?view=biblioteca'} aria-current={library?'page':undefined}>Biblioteca</a>
+     <a href="/agora?view=partecipa">Agorà · laboratorio comune</a>
    </nav>
   </header>
   <main id="public-space-content">
@@ -51,6 +53,7 @@ export default function PublicSpaceHome({spaceId}:{spaceId:string}){
     view.state==='not-found'?<section><h2>Nodo non pubblicato</h2><p>Questo spazio non è ancora installato su questo peer.</p></section>:
     view.state==='error'?<p role="alert">Impossibile verificare il manifesto di questo nodo.</p>:
     seed?<div className="public-space-main" style={{'--space-accent':seed.accent} as CSSProperties}>
+     {library?<PublicSpaceLibrary seed={seed}/>:<>
      <section className="public-space-intro">
       <p className="eyebrow">NODO TEMATICO · ANTEPRIMA PUBBLICA</p>
       <h2>{seed.name}</h2><p>{seed.description}</p>
@@ -80,6 +83,7 @@ export default function PublicSpaceHome({spaceId}:{spaceId:string}){
       </li>)}</ul>
       {seed.sources.length===0?<p>Le fonti sono ancora in preparazione.</p>:null}
      </section>
+     </>}
     </div>:<p role="alert">Il manifesto del nodo non è disponibile.</p>}
   </main>
  </div>;

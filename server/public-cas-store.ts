@@ -9,11 +9,11 @@
  */
 import {createHash} from 'node:crypto';
 import {constants} from 'node:fs';
-import {mkdir,open,link,unlink,writeFile,readFile} from 'node:fs/promises';
+import {mkdir,open,link,unlink} from 'node:fs/promises';
 import {join,resolve} from 'node:path';
 import {canonicalKnowledgeJson} from '../app/lib/knowledge-model';
 import {
- parsePublicBlobManifest,reconstructPublicBlob,type PublicBlobManifest,
+ parsePublicBlobManifest,reconstructPublicBlob,
 } from './public-blob-cas';
 
 const HASH=/^sha256:[a-f0-9]{64}$/;
@@ -66,15 +66,14 @@ export async function pinAuthorizedPublicBlob(
  const manifestDigest=digest(encoded);
  if(!await auth.verifyManifest({networkId,spaceId,manifestDigest,objectDigest:manifest.sha256}))
   throw Error('Public blob is not authorized by a finalized checkpoint');
+ const allowed=new Set(manifest.chunks.map(chunk=>chunk.sha256));
+ for(const hash of blocks.keys())if(!HASH.test(hash)||!allowed.has(hash))throw Error('CAS contains a block outside the authorized manifest');
  const root=spaceRoot(directory,networkId,spaceId),blockDir=join(root,'blocks'),manifestDir=join(root,'manifests');
  await mkdir(blockDir,{recursive:true,mode:0o700});
  await mkdir(manifestDir,{recursive:true,mode:0o700});
  let storedBlocks=0,reusedBlocks=0;
  for(const [hash,bytes] of blocks){
   if(!HASH.test(hash))throw Error('Invalid CAS object name');
-  // Manifest reconstruction above only verifies referenced blocks. Reject
-  // extras rather than becoming an arbitrary untrusted object-upload service.
-  if(!manifest.chunks.some(chunk=>chunk.sha256===hash))throw Error('CAS contains a block outside the authorized manifest');
   const path=join(blockDir,hash.slice(7));
   const created=await putImmutable(path,bytes);
   if(created)storedBlocks++;else reusedBlocks++;
@@ -87,7 +86,7 @@ export async function readPinnedPublicBlob(
 ):Promise<Uint8Array>{
  if(!HASH.test(manifestDigest))throw Error('Invalid CAS manifest hash');
  const root=spaceRoot(directory,networkId,spaceId);
- const bytes=await safeRead(join(root,'manifests',manifestDigest.slice(7)+'.json'),64*1024);
+ const bytes=await safeRead(join(root,'manifests',manifestDigest.slice(7)+'.json'),512*1024);
  if(digest(bytes)!==manifestDigest)throw Error('Corrupt CAS manifest hash');
  const manifest=parsePublicBlobManifest(JSON.parse(bytes.toString('utf8')),networkId,spaceId);
  const blocks=new Map<string,Uint8Array>();

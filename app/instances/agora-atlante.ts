@@ -20,9 +20,8 @@ export type AgoraAtlasEntry={
   timeline?:{period:string;order:number;narrative:string};
 };
 const DOC=(name:string)=>'https://github.com/internazionalerossa/agoranode/blob/main/docs/'+name;
-const PR=(num:number)=>'https://github.com/internazionalerossa/agoranode/pull/'+num;
 
-export const AGORA_ATLAS=[
+export const AGORA_ATLAS: readonly AgoraAtlasEntry[]=[
 {
  id:'agoranode',
  title:'AgoràNode: un motore, molte comunità',
@@ -220,7 +219,7 @@ export const AGORA_ATLAS=[
  references:[{title:'Revisione di sicurezza limitata',url:DOC('SECURITY-REVIEW.md')},{title:'Stato verificato',url:DOC('QUALITY.md')}],
  relatesTo:['replica','autogoverno'],
 },
-] as const satisfies readonly AgoraAtlasEntry[];
+];
 
 export const AGORA_ATLAS_CATEGORIES=['Tutti','Fondamenti','Conoscenza','Rete','Autogoverno','Laboratorio'] as const;
 export const AGORA_ATLAS_TIMELINE=AGORA_ATLAS.filter(entry=>entry.timeline)

@@ -123,3 +123,9 @@ Read the deeper [design](docs/PEER-OWNED-ARCHITECTURE.md), [continuous sync stra
 **License:** [AGPL-3.0-or-later](LICENSE); third-party books, news articles, media and datasets retain their own copyrights and permissions. See [NOTICE](NOTICE) and [TRADEMARKS.md](TRADEMARKS.md).
 
 *Join us in building knowledge systems that can outlive their first server—and in making every engineering claim reproducible.*
+
+
+
+### Isolated public knowledge stores
+
+Operator-installed public nodes may optionally be backed by a **separate PostgreSQL read pool**, configured only on the server via `AGORANODE_PUBLIC_SPACE_DATABASES_JSON`. Search and published wiki detail pages are then queried within the specific community's namespace; the browser cannot select another database. Each additional read pool is capped at two connections. Private accounts, PR2 governance and writable multi-node wiki publishing remain incomplete. See [Thematic Bootstrap](docs/THEMATIC-BOOTSTRAP.md).

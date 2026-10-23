@@ -80,6 +80,12 @@ Questa tabella distingue **codice esistente, funzioni alpha e lavoro incompleto*
 
 La replica attuale trasporta ancora bundle v1 cumulativi. Il codec sperimentale [Lean Storage](docs/LEAN-STORAGE.md) permette di riutilizzare blocchi content-addressed, ma **non è ancora il protocollo di rete di produzione**. Per il disegno completo consultare [Continuous Sync](docs/CONTINUOUS-SYNC.md).
 
+## Installare un nodo tematico autonomo di consultazione
+
+Il **Node Studio** permette di comporre in modo visuale una bozza tematica con blocchi, fonti, timeline e materiali. Un operatore può ora revisionarla e installare un manifesto pubblico separato con `npm run space:install -- --confirm-public-readonly <bozza.json> <directory-assoluta>`. Se il server configura `AGORANODE_PUBLIC_SPACES_DIRECTORY`, il nuovo nodo è consultabile su `/n/<id>` e compare nel portale, usando una **pagina React comune**. È una funzione realmente eseguibile, ma **solo read-only**: non crea account, un primo PR2, un forum o un nuovo database completo. Il salvataggio privato dei draft non pubblica nulla. [Procedura e limiti](docs/THEMATIC-BOOTSTRAP.md).
+
+La biblioteca di PolisRossa dispone inoltre di collegamenti permanenti alla **scheda delle singole opere**, con edizioni linguistiche e disponibilità verificata separatamente dai diritti di replica. Le pagine pubbliche della knowledge base hanno un primo editor visuale a blocchi per **preparare** correzioni e inviarle al forum PR2, senza sostituire revisione delle fonti, votazione e pubblicazione autorizzata.
+
 ## Struttura del repository
 
 ```text

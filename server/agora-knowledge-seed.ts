@@ -10,7 +10,7 @@ import {
   type KnowledgeJson,
   canonicalKnowledgeJson,
 } from '../app/lib/knowledge-model';
-import {databaseTarget} from './space-databases';
+import {validateAgoraSeedDatabase} from './agora-database';
 import {importKnowledgeRevisions} from './knowledge';
 import {createPool,connections} from './pool';
 import {migrateDatabase} from './migrations';
@@ -91,10 +91,6 @@ export async function importAgoraKnowledge(pool:Parameters<typeof importKnowledg
  * no accidental writes to PolisRossa. Run an isolated backup/restore test
  * before touching any live community database.
  */
-export function validateAgoraSeedDatabase(agoraUrl:string,polisrossaUrl:string){
- if(!agoraUrl||!polisrossaUrl||databaseTarget(agoraUrl)===databaseTarget(polisrossaUrl))
-  throw Error('Agorà requires an independent PostgreSQL database from PolisRossa');
-}
 if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
  const run=async()=>{
   const target=process.env.AGORANODE_AGORA_DATABASE_URL??'';

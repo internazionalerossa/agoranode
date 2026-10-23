@@ -38,3 +38,19 @@ L'installazione è atomica e **non sovrascrive** un manifesto già esistente: gl
 | Replica BFT, discovery P2P e failover | **Non realizzati da questo bootstrap** |
 
 Un host tecnico non acquisisce alcun voto per il solo fatto di aver pubblicato un manifesto. La creazione di un nodo completo richiede una migrazione esplicita a database e ruoli per nodo, verifica della governance PR2, moderazione e collaudo degli accessi. Vedere [ALPHA-BASELINE.md](ALPHA-BASELINE.md), [NODE-KNOWLEDGE-GRAPH.md](NODE-KNOWLEDGE-GRAPH.md), [DECENTRALIZATION-ROADMAP.md](DECENTRALIZATION-ROADMAP.md).
+
+
+
+## PostgreSQL indipendente: sola lettura della conoscenza pubblica
+
+È possibile configurare opzionalmente, **solo nel processo backend**, una connessione PostgreSQL distinta per ciascun nodo installato. Esempio con valori fittizi, da custodire in un file di configurazione segreto:
+
+```text
+AGORANODE_PUBLIC_SPACE_DATABASES_JSON=[{"spaceId":"storia-locale","connectionString":"postgresql://USER:PASSWORD@localhost:5432/storia_locale"}]
+```
+
+Il database deve essere già predisposto con lo schema delle revisioni pubbliche e con i contenuti autorizzati. Prima del collegamento eseguire le migrazioni necessarie in un ambiente isolato, verificando che non puntino al database PolisRossa. Il server apre **al massimo due connessioni** per ciascun pool pubblico aggiuntivo e rifiuta target di database duplicati tramite il registry. Le impostazioni segrete non vengono serializzate nelle risposte HTTP.
+
+Quando è configurato questo database, `GET /api/public-spaces/storia-locale/search?q=...` cerca le pagine pubbliche per titolo e descrizione e `GET /api/public-spaces/storia-locale/knowledge?kind=wiki&id=...` espone una pagina enciclopedica pubblicata, le sue fonti e fino a 100 hash delle revisioni. Il sito `/n/storia-locale` mostra i risultati e le pagine collegate con URL condivisibili. Tutte le query sono limitate dal `spaceId` selezionato **dal server**; il browser non può scegliere il database e non vengono esposte API di scrittura.
+
+Questo **non crea automaticamente una banca dati wiki completa**; serve un import approvato, ruoli PostgreSQL con privilegi minimi, backup separati e test reali cross-tenant. In assenza di DB o manifesti approvati gli endpoint restituiscono 404 o 503, non dati di altri spazi.

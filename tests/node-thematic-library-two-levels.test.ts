@@ -78,7 +78,7 @@ test('Agorà Atlante is independent from the timeline and all narrative entries 
  assert.ok(timeline.length>2);
  assert.ok(AGORA_ATLANTE.length>timeline.length);
  assert.ok(AGORA_ATLANTE.some(entry=>entry.timeline===null));
- assert.ok(timeline.every(entry=>entry.timeline?.introduction.length>=120));
+ assert.ok(timeline.every(entry=>(entry.timeline?.introduction.length??0)>=120));
  const url=atlasArticleUrl('agora','il-nodo-origine');
  assert.match(url,/view=biblioteca/);
  assert.match(url,/modalita=indice/);

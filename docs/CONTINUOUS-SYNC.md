@@ -58,7 +58,7 @@ Current knowledge v1 packages contain cumulative bundles. This is expensive if a
 - Compare missing hashes; fetch only the missing blocks from available custodians. Verify size, hash, source authorization, schema and namespace before committing the new head atomically.
 - Keep storage quotas and explicit pinning per community. A peer may offer 20 GiB for one space, not every archive of every space. Distribution capacity grows by participant choice.
 - Maintain an authenticated checkpoint history and GC policy; retain legally required correction history without indiscriminately preserving user-private data.
-- Use separate protocols for public forum events, transient rooms and user-private content. A wiki checkpoint does not become a master blockchain for all interactions.
+- Use separate protocols for public forum events, transient rooms and user-private content. A Atlante checkpoint does not become a master blockchain for all interactions.
 
 ## Strong consistency only where required
 
@@ -68,7 +68,7 @@ Current knowledge v1 packages contain cumulative bundles. This is expensive if a
 | Forum post/moderation | Locally authoritative signed events, eventually delivered under policy | Availability and local autonomy |
 | Temporary chat | Per-room ephemeral delivery, bounded retention; E2E for private rooms when implemented | Not an immutable ledger |
 | RSS and third-party references | Local cache/scheduled retrieval plus external attribution | No expensive consensus needed |
-| Wiki revision **current pointer** | Locally authorized decision and finalized checkpoint before global promotion | Prevent forked official history |
+| Atlante revision **current pointer** | Locally authorized decision and finalized checkpoint before global promotion | Prevent forked official history |
 | Federation mandates and constitutional votes | Separately certified political decision, technical BFT finality | Authority cannot depend on host count |
 | Large public licensed editions/media | Immutable content-addressed blocks with selective custody | Store once per peer, deduplicate reusable blocks |
 | Personal backup | Encrypted, restricted, versioned recovery with deletion process | Not suitable for open replicas |

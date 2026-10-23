@@ -16,7 +16,7 @@ test("the service root is a directory with Agorà and PolisRossa in the requeste
   assert.match(directory, /href="\/polisrossa"/);
   assert.match(directory, /Tecnologia, software libero, architettura e infrastruttura AgoràNode/);
   assert.match(directory, /Storia, attualità, cultura e dati delle sinistre e dei movimenti sociali internazionali/);
-  assert.match(directory, /Nodo in costruzione/);
+  assert.match(directory, /Nodo alpha tecnologico/);
   assert.match(directory, /Nodo tematico disponibile/);
   assert.match(directory, /Trova un nodo/);
   assert.match(directory, /Cerca tra i nodi disponibili/);
@@ -40,14 +40,14 @@ test("the AgoràNode overview distinguishes the shared infrastructure from thema
   assert.match(html, /Agorà <small>— AgoràNode<\/small>/);
   assert.match(html, /href="\/polisrossa"/);
   assert.match(html, /PolisRossa/);
-  assert.match(html, /Governo federale AgoràNode/);
-  assert.match(html, /Caricamento del registro federale/);
+  assert.match(html, /href="\/agora\?view=partecipa"/);
+  assert.match(html, /La rassegna/);
+  assert.match(html, /Biblioteca/);
 });
 
 test("the public hierarchy separates participation from hosting power", () => {
-  assert.match(html, /PR1/);
   assert.match(html, /PR2/);
-  assert.match(html, /PR3/);
+  assert.match(html, /href="\/agora\?view=partecipa"/);
   assert.match(html, /Ospitare non dà potere politico/);
   assert.match(html, /non deriva dal possesso di un server/);
 });

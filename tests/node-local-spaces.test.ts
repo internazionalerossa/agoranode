@@ -9,13 +9,15 @@ import {instanceInfoResponse} from '../app/lib/instance-info';
 import {api} from '../server/api';
 import type {PostgresDatabase} from '../server/database';
 
-test('Agorà is a separate, not-yet-operational thematic space', () => {
+test('Agorà has a public reference alpha, while participation remains unimplemented', () => {
   assert.equal(isAgoraNodeManifest(AGORA_MANIFEST), true);
   assert.equal(AGORA_MANIFEST.instance.id, 'agora');
   assert.equal(AGORA_MANIFEST.governance.scope, 'instance');
   assert.equal(AGORA_MANIFEST.capabilities.news.status, 'implemented');
   assert.equal(AGORA_MANIFEST.capabilities.video.status, 'implemented');
-  assert.equal(AGORA_MANIFEST.capabilities.wiki.status, 'planned');
+  assert.equal(AGORA_MANIFEST.capabilities.wiki.status, 'implemented');
+  assert.equal(AGORA_MANIFEST.capabilities.library.status, 'implemented');
+  assert.match(AGORA_MANIFEST.capabilities.wiki.route,/modalita=indice/);
   assert.equal(AGORA_MANIFEST.capabilities.community.status, 'planned');
   assert.equal(localSpaceManifest('agora'), AGORA_MANIFEST);
   assert.equal(localSpaceManifest('polisrossa'), POLISROSSA_MANIFEST);
@@ -44,7 +46,7 @@ test('manifest selection is explicit and does not change legacy PolisRossa respo
   const body = await response.json();
   assert.equal(body.instance.id, 'agora');
   assert.equal(body.capabilities.find((c: {id: string}) => c.id === 'news').status, 'implemented');
-  assert.equal(body.capabilities.find((c: {id: string}) => c.id === 'wiki').status, 'planned');
+  assert.equal(body.capabilities.find((c: {id: string}) => c.id === 'wiki').status, 'implemented');
   assert.equal(instanceInfoResponse(new Request('https://example.test/api/instance?id=nonexistent')).status, 404);
   assert.equal(instanceInfoResponse(new Request('https://example.test/api/instance?id=agora&id=polisrossa')).status, 400);
   assert.equal(instanceInfoResponse(new Request('https://example.test/api/instance?foo=1')).status, 400);

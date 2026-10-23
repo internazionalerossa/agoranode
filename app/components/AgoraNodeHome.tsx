@@ -7,9 +7,13 @@ import SharedCustodyView from "./SharedCustodyView";
 import SharedSpaceModules from "./SharedSpaceModules";
 import AgoraFeed from "./AgoraFeed";
 import NodeStudio from "./NodeStudio";
+import AgoraLibraryView from "./AgoraLibraryView";
 import {AGORA_MANIFEST} from "../instances/agora";
 
 export default function AgoraNodeHome() {
+  const view=typeof window==="undefined"?"notizie":new URL(window.location.href).searchParams.get("view")??"notizie";
+  const library=view==="biblioteca";
+  const participation=view==="partecipa";
   useEffect(() => {
     document.documentElement.lang = "it";
     document.title = "Agorà — AgoràNode · tecnologia e infrastruttura comune";
@@ -27,12 +31,11 @@ export default function AgoraNodeHome() {
           <strong>Agorà <small>— AgoràNode</small></strong>
         </a>
         <p>Stato dell’arte della tecnologia AgoràNode, delle sue regole e dell’infrastruttura comune.</p>
-        <nav aria-label="Navigazione AgoràNode">
-          <a href="/#node-directory-content">Nodi</a>
-          <a href="#formato">Tecnologia</a>
-          <a href="#studio-agora">Laboratorio</a>
-          <a href="#governo-federale">Decisioni</a>
-          <a href="#possesso">Custodia</a>
+        <nav aria-label="Navigazione del nodo Agorà">
+          <a href="/agora" aria-current={!library&&!participation?"page":undefined}>La rassegna</a>
+          <a href="/agora?view=biblioteca" aria-current={library?"page":undefined}>Biblioteca</a>
+          <a href="/agora?view=partecipa" aria-current={participation?"page":undefined}>Agorà</a>
+          <a href="/#node-directory-content">Altri nodi</a>
           <a className="agoranode-instance-link" href="/polisrossa">PolisRossa <ArrowRight size={16}/></a>
         </nav>
       </header>
@@ -40,16 +43,25 @@ export default function AgoraNodeHome() {
 
 
       <main id="agoranode-content">
-        <AgoraFeed/>
-        <aside className="agoranode-boundary" aria-label="Ambito del nodo Agorà">
-          <div><Network size={20}/><span><strong>AgoràNode è la tecnologia comune.</strong> Questo nodo raccoglie lo stato dell’arte del protocollo e dell’infrastruttura.</span></div>
-          <div><GitBranch size={20}/><span><strong>Le decisioni hanno un ambito preciso.</strong> Agorà tratta le questioni comuni; le scelte tematiche restano ai rispettivi nodi.</span></div>
-          <div><ShieldCheck size={20}/><span><strong>Ospitare non dà potere politico.</strong> Server, firma tecnica e diritto di voto rimangono separati.</span></div>
-        </aside>
-        <SharedSpaceModules manifest={AGORA_MANIFEST}/>
-        <NodeStudio spaceId="agora"/>
-        <FederationBoard />
-        <SharedCustodyView />
+        {library?<AgoraLibraryView/>:participation?<section className="agora-participation" aria-labelledby="agora-participation-title">
+          <header><p className="eyebrow">COMUNITÀ · PARTECIPAZIONE · PROPOSTE</p>
+            <h1 id="agora-participation-title">Agorà: costruire la piattaforma insieme</h1>
+            <p>Un laboratorio visuale per proposte e nuovi nodi, con ruoli e controlli espliciti.
+             La pubblicazione dei nuovi nodi non può sostituire una decisione PR2 competente
+             o creare automaticamente account e forum.</p>
+          </header>
+          <NodeStudio spaceId="agora"/>
+          <FederationBoard/>
+          <SharedCustodyView/>
+        </section>:<>
+          <AgoraFeed/>
+          <aside className="agoranode-boundary" aria-label="Ambito del nodo Agorà">
+            <div><Network size={20}/><span><strong>AgoràNode è la tecnologia comune.</strong> Agorà è il nodo alpha di riferimento; PolisRossa resta una comunità distinta.</span></div>
+            <div><GitBranch size={20}/><span><strong>Le decisioni hanno un ambito preciso.</strong> Anche quando Agorà è il nodo alpha, le scelte tematiche restano ai rispettivi nodi.</span></div>
+            <div><ShieldCheck size={20}/><span><strong>Ospitare non dà potere politico.</strong> L'ammissione PR2 non deriva dal possesso di un server: server, firme tecniche e diritto di voto rimangono separati.</span></div>
+          </aside>
+          <SharedSpaceModules manifest={AGORA_MANIFEST}/>
+        </>}
       </main>
 
       <footer className="agoranode-footer">

@@ -11,7 +11,7 @@ const DESCRIPTIONS: Readonly<Record<AgoraNodeCapabilityId,string>> = {
   news:'Feed RSS e notizie tracciabili fino alla fonte originale.',
   video:'Video e canali con provenienza e piattaforma dichiarate.',
   library:'Opere, documenti ed edizioni con i rispettivi diritti.',
-  wiki:'Pagine enciclopediche, fonti e cronologia delle revisioni.',
+  wiki:'Voci dell’Atlante, fonti e cronologia delle revisioni.',
   storyline:'Eventi, persone, concetti e percorsi cronologici.',
   data:'Indicatori, grafici, unità, periodi e metodologie.',
   community:'Forum, proposte, votazioni e stanze di conversazione.',
@@ -41,7 +41,7 @@ export default function SharedSpaceModules({manifest}: {manifest: AgoraNodeManif
           );
         })}
       </div>
-      <NodeContentSearch spaceId={manifest.instance.id}/>
+      {manifest.instance.id==='polisrossa'?<NodeContentSearch spaceId={manifest.instance.id}/>:null}
     </section>
   );
 }

@@ -54,3 +54,8 @@ Il database deve essere già predisposto con lo schema delle revisioni pubbliche
 Quando è configurato questo database, `GET /api/public-spaces/storia-locale/search?q=...` cerca le pagine pubbliche per titolo e descrizione e `GET /api/public-spaces/storia-locale/knowledge?kind=wiki&id=...` espone una pagina enciclopedica pubblicata, le sue fonti e fino a 100 hash delle revisioni. Il sito `/n/storia-locale` mostra i risultati e le pagine collegate con URL condivisibili. Tutte le query sono limitate dal `spaceId` selezionato **dal server**; il browser non può scegliere il database e non vengono esposte API di scrittura.
 
 Questo **non crea automaticamente una banca dati wiki completa**; serve un import approvato, ruoli PostgreSQL con privilegi minimi, backup separati e test reali cross-tenant. In assenza di DB o manifesti approvati gli endpoint restituiscono 404 o 503, non dati di altri spazi.
+
+
+## Biblioteca coerente con gli altri nodi
+
+Ogni nuovo spazio pubblico mostra un accesso a **Biblioteca**, con i tre pulsanti «Libri e percorsi», «Timeline e Atlante», «Dati e grafici». La seconda sezione rivela le due scelte interne «Timeline» e «Atlante · Indice e ricerca»: la prima visualizza soltanto le tappe selezionate del manifesto, la seconda indicizza tutti i blocchi pubblicati. Il resto della home non diventa una Biblioteca. È ancora un'edizione read-only del manifesto: l'attivazione autonoma del feed, del forum e del backend PR2 richiede un runtime più completo. [Specifica UX](LIBRARY-TWO-LEVEL-NAVIGATION.md).

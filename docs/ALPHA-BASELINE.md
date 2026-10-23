@@ -4,7 +4,7 @@
 
 ## 1. Cosa stiamo costruendo
 
-AgoraNode è un **motore comune** per comunità tematiche autonome. **PolisRossa è l'alpha**: la prima implementazione reale da cui estrarre componenti e contratti, senza azzerarne dati, URL, installazione o licenze. **Agorà** è la comunità tematica sulla tecnologia del progetto, distinta dal portale e dalla governance federale.
+AgoraNode è un **motore comune** per comunità tematiche autonome. **Agorà è il nodo alpha canonico di riferimento**, dedicato alla tecnologia della piattaforma, con rassegna RSS/video e prima Biblioteca tematica. **PolisRossa è il prototipo storico preesistente** da cui vengono estratti componenti e contratti, senza azzerarne dati, URL, installazione, membership o licenze. Le due comunità sono distinte dal portale e dalla governance federale: chiamare Agorà «origine» non le conferisce il potere di approvare le scelte editoriali di altri nodi.
 
 Il prodotto non è una blockchain onnivora. Un contenuto pubblico ha identità, fonti, diritto d'uso, revisione e collegamenti. Il suo eventuale inserimento nella timeline è una **scelta narrativa** separata e votata dai PR2 competenti. I dati personali e le conversazioni riservate non entrano nella replica pubblica. Un peer è un computer volontario, non un elettore o un amministratore politico.
 
@@ -95,4 +95,8 @@ Le conversazioni personali integrali e gli appunti riservati **non** vanno commi
 
 La rassegna Agorà con fonti fissate in `app/instances/agora-sources.ts`, il componente di preferenze personali del feed e il Node Studio a blocchi costituiscono un primo livello riusabile. La scelta delle fonti PR1 è privata e non determina l'ordine o la governance della rassegna altrui. Le bozze Node Studio sono protette da sessione e quota, ma non sono manifesti comunitari approvati. Ogni nuova fonte RSS proposta va revisionata, non interrogata automaticamente; ogni nuovo nodo deve ricevere namespace e backend isolati prima dell'attivazione.
 
-Il resto di PolisRossa, compresi gli account, il social e la biblioteca, continua a essere il riferimento alpha e non è ancora un runtime generico completo. Percorso dettagliato: [NODE-STUDIO.md](NODE-STUDIO.md).
+Le funzioni già operative di PolisRossa, compresi account, social e biblioteca, rimangono il **prototipo funzionale per l'estrazione dei componenti**, mentre Agorà è la nuova superficie alpha di riferimento del prodotto: nessuno dei due costituisce ancora un runtime completo e indipendente multi-nodo. Percorso dettagliato: [NODE-STUDIO.md](NODE-STUDIO.md).
+
+### Biblioteca a due livelli come convenzione comune
+
+La home del nodo conserva la rassegna e la partecipazione. Solo la **Biblioteca** presenta tre aree: *Libri e percorsi*, *Timeline e Atlante*, *Dati e grafici*. La seconda apre **Timeline** oppure **Atlante · Indice e ricerca**. La Timeline è una proiezione narrativa e selettiva delle voci; ogni voce pubblicata rimane ricercabile anche fuori dal racconto. [Specifica UX](LIBRARY-TWO-LEVEL-NAVIGATION.md).

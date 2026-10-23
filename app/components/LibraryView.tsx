@@ -2,7 +2,8 @@
 import { lazy, Suspense, useEffect, useState } from "react";
 import { ArrowUpRight, BookOpen, Bookmark, BookmarkCheck, Search, X } from "lucide-react";
 import { THEORY_LIBRARY, BOOK_LANGUAGES } from "@/app/data/library";
-import { LIBRARY_SECTIONS, librarySectionFromUrl, librarySectionUrl, type LibrarySection } from "@/app/lib/library-navigation";
+import { LIBRARY_SECTIONS, librarySectionFromUrl, librarySectionUrl,libraryTimelineModeFromUrl,libraryTimelineUrl,type LibraryTimelineMode, type LibrarySection } from "@/app/lib/library-navigation";
+import {LibraryTimelineTabs} from './LibraryNavigationTabs';
 import {libraryReadingDestination} from "@/app/lib/library-reading";
 import {bookDetailUrl,bookFromUrl} from "@/app/lib/book-page";
 import {LibraryBookDetail} from "./LibraryBookDetail";
@@ -11,6 +12,7 @@ import { LocalizedText, LocalizedInput, useReadingLocale } from "./Localization"
 const ALL = "all";
 const ArchiveDirectory = lazy(() => import('./ArchiveDirectory'));
 const SocialAchievements = lazy(() => import('./SocialAchievements'));
+const PolisrossaAtlasIndex=lazy(()=>import('./PolisrossaAtlasIndex'));
 const availableLanguages = [...new Set(THEORY_LIBRARY.flatMap(book => book.editions?.map(edition => edition.language) ?? []))].sort((a,b) => (BOOK_LANGUAGES[a] ?? a).localeCompare(BOOK_LANGUAGES[b] ?? b));
 export function LibraryView({
   query,
@@ -28,13 +30,14 @@ export function LibraryView({
   const [country,setCountry]=useState('all'),[theme,setTheme]=useState('all'),[bookPage,setBookPage]=useState(0);
   const countries=[...new Set(THEORY_LIBRARY.flatMap(book=>book.country?[book.country]:[]))].sort();
   const themes=[...new Set(THEORY_LIBRARY.filter(book=>book.editions?.length).map(book=>book.lane))].sort();
-  const [section, setSection] = useState<LibrarySection>("libri");
+  const [section, setSection] = useState<LibrarySection>(()=>typeof window==="undefined"?"libri":librarySectionFromUrl(window.location.href));
+  const [timelineMode,setTimelineMode]=useState<LibraryTimelineMode>(()=>typeof window==="undefined"?"racconto":libraryTimelineModeFromUrl(window.location.href));
   const [archivesOpen,setArchivesOpen]=useState(false);
   const [bookDetailId,setBookDetailId]=useState<string|null>(()=>typeof window!=="undefined"?bookFromUrl(window.location.href):null);
   useEffect(()=>{const sync=()=>setBookDetailId(bookFromUrl(window.location.href));window.addEventListener("popstate",sync);return()=>window.removeEventListener("popstate",sync);},[]);
   const selectedBook=bookDetailId?THEORY_LIBRARY.find(book=>book.id===bookDetailId):null;
   useEffect(() => {
-    const sync=()=>setSection(librarySectionFromUrl(window.location.href));
+    const sync=()=>{setSection(librarySectionFromUrl(window.location.href));setTimelineMode(libraryTimelineModeFromUrl(window.location.href));};
     sync();window.addEventListener('popstate',sync);window.addEventListener('hashchange',sync);
     return()=>{window.removeEventListener('popstate',sync);window.removeEventListener('hashchange',sync);};
   }, []);
@@ -42,6 +45,7 @@ export function LibraryView({
     const target=librarySectionUrl(window.location.href,next);
     if(target!==window.location.pathname+window.location.search+window.location.hash)window.history.pushState(window.history.state,"",target);
     setSection(next);
+    setTimelineMode('racconto');
     requestAnimationFrame(()=>document.getElementById('library-section-panel')?.focus({preventScroll:true}));
   };
   const readingDestination = (book: typeof THEORY_LIBRARY[number]) => {
@@ -68,6 +72,8 @@ export function LibraryView({
       <nav className="library-destinations" aria-label="Percorsi della biblioteca">{LIBRARY_SECTIONS.map(item=><a key={item.id} href={librarySectionUrl('/polisrossa?view=teoria',item.id)} aria-current={section===item.id?'page':undefined} onClick={event=>{if(event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;event.preventDefault();chooseSection(item.id);}}><strong><LocalizedText>{item.label}</LocalizedText></strong><span><LocalizedText>{item.description}</LocalizedText></span><ArrowUpRight size={16}/></a>)}</nav>
       {selectedBook?<LibraryBookDetail book={selectedBook}/>:bookDetailId?<p role="alert">Opera non presente nel catalogo.</p>:null}
       <div id="library-section-panel" tabIndex={-1}>
+      {section==='timeline'?<LibraryTimelineTabs mode={timelineMode}
+         href={mode=>libraryTimelineUrl('/polisrossa?view=teoria&percorso=timeline',mode)}/>:null}
       {section==='libri'?<>
       <div className="usage-guide" aria-label="Guida alla biblioteca">
         <p><strong><LocalizedText>Come orientarsi</LocalizedText></strong> <LocalizedText>Questa biblioteca mette in relazione libri gratuiti, idee politiche e storia sociale. Se parti da zero, scegli un percorso: troverai un ordine di lettura suggerito, dai testi introduttivi alle opere più impegnative. Se cerchi già qualcosa di preciso, usa il catalogo per autore, argomento e lingua. Le edizioni archiviate con un diritto compatibile si aprono nel lettore; le altre restano consultabili presso la fonte originale. Con un account attivo puoi ritrovare il segnalibro delle letture interne.</LocalizedText></p>
@@ -252,7 +258,9 @@ export function LibraryView({
           ))}
         </div>
       </section>
-      </>:<Suspense fallback={<p role="status"><LocalizedText>Apertura della sezione…</LocalizedText></p>}><SocialAchievements key={section} section={section}/></Suspense>}
+      </>:section==='timeline'&&timelineMode==='indice'?
+        <Suspense fallback={<p role="status">Apertura dell'indice dell'Atlante…</p>}><PolisrossaAtlasIndex/></Suspense>:
+        <Suspense fallback={<p role="status"><LocalizedText>Apertura della sezione…</LocalizedText></p>}><SocialAchievements key={section} section={section}/></Suspense>}
       </div>
     </div>
   );

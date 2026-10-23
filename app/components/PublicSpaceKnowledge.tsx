@@ -18,7 +18,7 @@ function safeLink(raw:string):string|null{
  catch{return null;}
 }
 function pageUrl(spaceId:string,kind:string,id:string){
- return '/n/'+spaceId+'?'+new URLSearchParams({knowledgeKind:kind,knowledgeId:id});
+ return '/n/'+spaceId+'?'+new URLSearchParams({view:'biblioteca',sezione:'timeline',modalita:'indice',knowledgeKind:kind,knowledgeId:id});
 }
 /** Read-only search against the PostgreSQL database *selected by the server*. */
 export function PublicSpaceRemoteSearch({spaceId,query}:{spaceId:string;query:string}){

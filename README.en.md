@@ -8,19 +8,23 @@ AgoràNode is AGPL-licensed software for independent topical communities that co
 
 Our long-term goal: run the public network across **independently maintained computers**, with no single company database, founding machine or cloud provider required for continued access. Participants should not have to store everything or join a global consensus for every message. Instead, public content is verified and selectively replicated while personal information stays outside public distribution.
 
-**Current status:** PolisRossa is the first developed node, Agorà now has a curated, read-only technical news/video feed and a graphical draft editor, but its full wiki, forum and isolated backend are not yet operational. The complete multi-community runtime, portable identities, distributed social/chat, BFT network consensus, automated peer discovery, and independently tested gateway failover **do not exist as operational production features**. The repository includes local PostgreSQL account/forum flows, public revision history, signed knowledge package verification, an opt-in HTTPS peer exchange, a small shared thematic UI, and experimental content chunking. See [QUALITY.md](docs/QUALITY.md).
+**Current status:** **Agorà by AgoràNode is the technology genesis and reference alpha**, built on the earlier PolisRossa prototype without deleting or taking ownership of that community. Agorà has its own curated news/video feed and a Library containing a first published editorial Atlante, a narrative timeline, technical reading paths and limited documented data. Its independent PR2 forum, authorized wiki publication pipeline and fully isolated backend are not yet operational. The complete multi-community runtime, portable identities, distributed social/chat, BFT network consensus, automated peer discovery, and independently tested gateway failover **do not exist as operational production features**. The repository includes local PostgreSQL account/forum flows, public revision history, signed knowledge package verification, an opt-in HTTPS peer exchange, a small shared thematic UI, and experimental content chunking. See [QUALITY.md](docs/QUALITY.md).
 
 ## Product model
 
 | URL / concept | Purpose |
 | --- | --- |
 | `/` | Community directory |
-| `/agora` | Technology and AgoràNode development (in progress) |
-| `/polisrossa` | First developed topical community |
+| `/agora` | AgoraNode's reference technology alpha: news, Library, narrative timeline, Atlante and visual drafts |
+| `/polisrossa` | Earlier application prototype and autonomous topical community |
 | Thematic node | A community with its own governance, sources, documents, datasets, membership and policies |
 | Physical peer | A device offering storage, an API gateway, routing or other services to one or more communities |
 
 A physical peer is not a vote, an editor, or the source of truth. A member's participation rights do not depend on hardware or money.
+
+## The same two-level Library navigation for every node
+
+From the site's main navigation, enter **Library**. Its first screen shows **Books & reading paths**, **Timeline & Atlante**, and **Data & charts**. Only after choosing **Timeline & Atlante** do two nested choices appear: **Timeline** for the selected, narrated chronology, or **Atlante — Index & Search** for published articles, whether included in the timeline or not. This is **only the Library's design**: it does not reorganize the news, video feed or participation areas. See [Library navigation](docs/LIBRARY-TWO-LEVEL-NAVIGATION.md).
 
 ## Engineering approach
 

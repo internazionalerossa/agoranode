@@ -15,10 +15,21 @@ import {purgeForumApplications,startForumApplicationRetention} from './forum-ret
 import {purgeAuthenticationState,startAuthenticationRetention} from './auth-retention';
 import {api,privatePaths} from './api';
 import {publicSpaceSeedResponse,publicSpaceDirectoryResponse} from './public-space-registry';
+import {openSpaceDatabaseRegistry} from './space-databases';
+import {publicSpaceKnowledgeResponse} from './public-space-knowledge';
 import type {ForumSocialIdentity} from '../app/lib/forum';
 import {INSTANCE_NAME,INSTANCE_PLATFORM_NAME} from '../app/lib/instance';
 const config=configuration(),pool=createPool(config.connectionString),db=new PostgresDatabase(connections(pool));
 const {auth,settle}=createAuth(pool,config),root=resolve(dirname(fileURLToPath(import.meta.url)),'public');
+// Optional, server-only local read pools. These credentials are NEVER sent to the browser.
+const extraSpaceInputs=process.env.AGORANODE_PUBLIC_SPACE_DATABASES_JSON
+ ? JSON.parse(process.env.AGORANODE_PUBLIC_SPACE_DATABASES_JSON) as Array<{spaceId:string;connectionString:string}>
+ : [];
+if(!Array.isArray(extraSpaceInputs)||extraSpaceInputs.length>16)throw Error('Invalid public space database configuration');
+const publicSpacePools=extraSpaceInputs.length
+ ? openSpaceDatabaseRegistry(extraSpaceInputs,connectionString=>createPool(connectionString))
+ : null;
+
 const jobs=new Set<Promise<unknown>>();
 const background=(promise:Promise<unknown>)=>{const job=promise.catch(()=>{}).finally(()=>jobs.delete(job));jobs.add(job);};
 const types:Record<string,string>={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json; charset=utf-8','.svg':'image/svg+xml','.webmanifest':'application/manifest+json','.woff2':'font/woff2','.png':'image/png','.jpg':'image/jpeg','.webp':'image/webp','.ico':'image/x-icon'};
@@ -39,7 +50,18 @@ const server=createServer({maxHeaderSize:16384,requestTimeout:30000,headersTimeo
   // Identity headers are never consulted. The canonical origin is configuration, never forwarded host input.
   const request=new Request(url,{method,headers,body:body as BodyInit|undefined});
   let response:Response;
-  if(url.pathname==='/api/public-spaces')response=await publicSpaceDirectoryResponse(request,process.env.AGORANODE_PUBLIC_SPACES_DIRECTORY);
+  const spaceKnowledge=/^\\/api\\/public-spaces\\/([a-z][a-z0-9-]{2,47})\\/(knowledge|search)$/.exec(url.pathname);
+  if(spaceKnowledge){
+   const id=spaceKnowledge[1];
+   const seed=await publicSpaceSeedResponse(
+    new Request(config.origin+'/api/public-spaces/'+id),
+    process.env.AGORANODE_PUBLIC_SPACES_DIRECTORY,
+   );
+   if(seed.status!==200||!publicSpacePools?.ids().includes(id)){
+    response=Response.json({error:'Knowledge node not installed'},{status:404,headers:{'cache-control':'no-store'}});
+   }else response=await publicSpaceKnowledgeResponse(request,connections(publicSpacePools.get(id)),id);
+  }
+  else if(url.pathname==='/api/public-spaces')response=await publicSpaceDirectoryResponse(request,process.env.AGORANODE_PUBLIC_SPACES_DIRECTORY);
   else if(url.pathname.startsWith('/api/public-spaces/'))response=await publicSpaceSeedResponse(request,process.env.AGORANODE_PUBLIC_SPACES_DIRECTORY);
   else if(url.pathname==='/api/service-info')response=serviceInfoResponse(request,config.operator,config.registrationOpen,config.forumOpen,config.mirror);
   else if(url.pathname==='/healthz'){
@@ -68,4 +90,4 @@ const chatCleanup=setInterval(()=>liveChat.sweep(),1000);chatCleanup.unref();
 const forumRetention=startForumApplicationRetention(()=>background(purgeForumApplications(db).then(count=>console.info(`Forum application retention completed: ${count} removed`)).catch(error=>{console.error('Forum application retention failed');throw error;})));
 const authRetention=startAuthenticationRetention(()=>background(purgeAuthenticationState(db).then(result=>console.info(`Authentication retention completed: ${result.sessions+result.verifications+result.limits+result.unverifiedUsers+result.facebookGrants} removed`)).catch(error=>{console.error('Authentication retention failed');throw error;})));
 server.listen(config.port,'0.0.0.0',()=>console.info(`${INSTANCE_PLATFORM_NAME} instance ${INSTANCE_NAME} server ready`));
-for(const signal of ['SIGTERM','SIGINT'])process.on(signal,()=>{clearInterval(chatCleanup);clearInterval(forumRetention as ReturnType<typeof setInterval>);clearInterval(authRetention as ReturnType<typeof setInterval>);server.close(()=>{void Promise.allSettled([...jobs,settle()]).then(()=>pool.end()).then(()=>process.exit(0));});setTimeout(()=>process.exit(1),20000).unref();});
+for(const signal of ['SIGTERM','SIGINT'])process.on(signal,()=>{clearInterval(chatCleanup);clearInterval(forumRetention as ReturnType<typeof setInterval>);clearInterval(authRetention as ReturnType<typeof setInterval>);server.close(()=>{void Promise.allSettled([...jobs,settle()]).then(()=>Promise.all([pool.end(),publicSpacePools?.close()])).then(()=>process.exit(0));});setTimeout(()=>process.exit(1),20000).unref();});

@@ -50,7 +50,7 @@ export async function publicSpaceDirectoryResponse(request:Request,directory?:st
   if(entries.length>100)throw Error('Too many space seed files');
   const spaces:Array<{spaceId:string;name:string;topic:string;description:string;href:string}>=[];
   for(const item of entries){
-   if(!item.isFile()||!/^([a-z][a-z0-9-]{2,47})\\.json$/.test(item.name))continue;
+   if(!item.isFile()||!/^([a-z][a-z0-9-]{2,47})\.json$/.test(item.name))continue;
    const spaceId=item.name.slice(0,-5);
    const response=await publicSpaceSeedResponse(new Request('https://site.invalid/api/public-spaces/'+spaceId),directory);
    if(!response.ok)continue;

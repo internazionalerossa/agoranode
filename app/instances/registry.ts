@@ -11,8 +11,8 @@ export const LOCAL_SPACES = [
     manifest: AGORA_MANIFEST,
     href: '/agora',
     availability: 'preview',
-    status: 'Nodo in costruzione',
-    description: 'Stato dell’arte del protocollo, decisioni federali in anteprima e custodia del software.',
+    status: 'Nodo alpha tecnologico · forum in sviluppo',
+    description: 'Nucleo tecnologico di AgoràNode: rassegna RSS e video, Biblioteca con Atlante narrativo, dati e laboratorio.',
   },
   {
     manifest: POLISROSSA_MANIFEST,

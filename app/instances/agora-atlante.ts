@@ -44,7 +44,7 @@ export const AGORA_ATLANTE:readonly AtlasEntry[]=[
     },
     sections:[
       {heading:'Perché il primo prototipo conta',paragraphs:[
-        'PolisRossa offre un modello visivo concreto: informazioni e notizie in primo piano, periodi raccontati come una storia, schede documentarie e filtri sulla biblioteca. Questa esperienza serve da banco di prova per la leggibilità delle voci dell’Atlante e per una navigazione utilizzabile anche senza conoscere software wiki.',
+        'PolisRossa offre un modello visivo concreto: informazioni e notizie in primo piano, periodi raccontati come una storia, schede documentarie e filtri sulla biblioteca. Questa esperienza serve da banco di prova per la leggibilità delle voci dell’Atlante e per una navigazione utilizzabile anche senza conoscere software specialistici.',
         'Il suo dominio applicativo resta distinto: il catalogo delle sinistre non viene copiato nel nodo tecnologico, e una decisione PR2 di PolisRossa non assume automaticamente valore per Agorà.',
       ]},
     ],sources:[
@@ -118,7 +118,7 @@ export const AGORA_ATLANTE:readonly AtlasEntry[]=[
     id:'racconto-e-atlante',kind:'milestone',
     title:'Le pagine diventano un racconto navigabile',
     summary:'La base della conoscenza e la timeline sono due cose diverse: tutte le voci pubblicate devono essere cercabili, mentre il Percorso principale contiene solo le tappe scelte dalla comunità e introdotte con un racconto.',
-    tags:['atlante','wiki','timeline','editor','storia'],
+    tags:['atlante','atlante','timeline','editor','storia'],
     timeline:{
       period:'22–23 ottobre 2026',place:'Pagine, ricerca e partecipazione',order:50,
       introduction:'Il lavoro sul modello editoriale ha distinto la pagina enciclopedica dalla selezione che compare nella timeline. Non basta mettere un titolo come collegamento: ogni tappa deve avere un testo introduttivo capace di collocarla in una storia più ampia. In PolisRossa questa forma narrativa era già leggibile; Agorà la assume come componente comune e la mette in relazione con ricerca, schede e proposte PR2.',

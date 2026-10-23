@@ -2,7 +2,7 @@
 
 **Una piattaforma aperta per costruire comunità che leggono, documentano e decidono insieme.**
 
-[English](README.en.md) · [Come contribuire](CONTRIBUTING.md) · [Installazione](docs/SELF-HOSTING.md) · [Architettura](docs/ARCHITECTURE.md) · [Stato dei test](docs/QUALITY.md)
+[English](README.en.md) · [Modello del progetto](docs/PLATFORM-MODEL.md) · [Come contribuire](CONTRIBUTING.md) · [Installazione](docs/SELF-HOSTING.md) · [Architettura](docs/ARCHITECTURE.md) · [Stato dei test](docs/QUALITY.md)
 
 AgoràNode riunisce in un unico sito una rassegna di notizie e video, una biblioteca, un **Atlante di conoscenze** e un forum. Ogni comunità può avere un argomento diverso — tecnologia, storia, scienza, quartieri, cultura — usando la stessa interfaccia. Le fonti devono essere riconoscibili, le modifiche tracciabili e le decisioni discusse dai partecipanti competenti.
 
@@ -12,9 +12,9 @@ Il progetto è software libero, con licenza **AGPL-3.0-or-later**. Non è ancora
 
 - **Agorà** (percorso `/agora`) è il nodo alpha di riferimento: segue lo sviluppo di AgoràNode, raccoglie fonti tecnologiche, ospita i primi contenuti dell'Atlante e il laboratorio per progettare nuovi nodi.
 - **PolisRossa** (percorso `/polisrossa`) è il prototipo storico che ha ispirato interfaccia, rassegna, biblioteca, timeline, grafici e sistemi di partecipazione. Conserva una comunità e dati propri.
-- **Portale** (percorso `/`) è il portale: il luogo dove trovare le comunità disponibili.
+- **Portale** (percorso `/`) è il registro dei nodi: indicizza identificatori, ambiti e stato reale dei servizi, separando siti pubblicati, anteprime e possibili temi futuri.
 
-Questi sono **percorsi del sito dopo la sua installazione**, non indirizzi di un servizio internet già attivo. GitHub contiene il codice; una pubblicazione online richiede anche un server e una configurazione verificata.
+È disponibile anche un'**[anteprima web statica su Render](https://agoranode-alpha-preview.onrender.com/)** per consultare l'interfaccia. È una dimostrazione pubblica senza database, account o diritti di voto attivi; disponibilità dei percorsi e versione effettivamente pubblicata devono essere verificate dopo ogni distribuzione. Non va confusa con un server applicativo completo.
 
 ## Come funziona un nodo
 

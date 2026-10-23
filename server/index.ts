@@ -66,14 +66,15 @@ const server=createServer({maxHeaderSize:16384,requestTimeout:30000,headersTimeo
   else if(url.pathname==='/api/service-info')response=serviceInfoResponse(request,config.operator,config.registrationOpen,config.forumOpen,config.mirror);
   else if(url.pathname==='/healthz'){
    try{await pool.query('SELECT 1');response=Response.json({ok:true},{headers:{'cache-control':'no-store'}});}catch{response=Response.json({ok:false},{status:503,headers:{'cache-control':'no-store'}});}
-  }else if(config.mirror&&(url.pathname==='/api/auth'||url.pathname.startsWith('/api/identity/')||url.pathname==='/api/community/identity'||privatePaths.has(url.pathname)))response=Response.json({configured:false,authenticated:false,registrationOpen:false,error:'Questa copia pubblica non ospita account o dati privati.'},{status:url.pathname==='/api/auth'&&method==='GET'?200:403,headers:{'cache-control':'private, no-store'}});
+  }else if(config.mirror&&url.pathname==='/api/agora/forum'&&method!=='GET')response=Response.json({error:'Sola consultazione'},{status:403,headers:{'cache-control':'no-store'}});
+  else if(config.mirror&&(url.pathname==='/api/auth'||url.pathname.startsWith('/api/identity/')||url.pathname==='/api/community/identity'||privatePaths.has(url.pathname)))response=Response.json({configured:false,authenticated:false,registrationOpen:false,error:'Questa copia pubblica non ospita account o dati privati.'},{status:url.pathname==='/api/auth'&&method==='GET'?200:403,headers:{'cache-control':'private, no-store'}});
   else if(url.pathname==='/api/auth')response=await accountEndpoint(auth,request,connections(pool),config.registrationOpen,config);
   else if(url.pathname==='/api/community/identity')response=await socialIdentityEndpoint(auth,request,config);
   else if(url.pathname.startsWith('/api/identity/')){
    const allowed=method==='GET'&&((config.mailTransport!=='none'&&(url.pathname==='/api/identity/verify-email'||url.pathname.startsWith('/api/identity/reset-password/')))||allowedIdentityCallback(url.pathname,method,config));
    response=allowed?await auth.handler(request):new Response('Not found',{status:404});
   }else if(url.pathname.startsWith('/api/')){
-   if(privatePaths.has(url.pathname)){const session=await authSession(auth,request);let socialIdentity:ForumSocialIdentity=null,unlinkIdentity:(()=>Promise<void>)|undefined;
+   if(privatePaths.has(url.pathname)||url.pathname==='/api/agora/forum'){const session=await authSession(auth,request);let socialIdentity:ForumSocialIdentity=null,unlinkIdentity:(()=>Promise<void>)|undefined;
     if(session.user&&url.pathname==='/api/community/forum'&&method==='POST'&&request.headers.get('origin')===config.origin&&request.headers.get('sec-fetch-site')!=='cross-site'){let input:unknown;try{input=await request.clone().json();}catch{}const data=input&&!Array.isArray(input)&&typeof input==='object'?input as Record<string,unknown>:null,action=data?.action;if(action==='apply'&&config.forumOpen)socialIdentity=()=>verifiedApplicationSocialIdentity(auth,request,config,data);if(action==='apply'||action==='cancelApplication')unlinkIdentity=()=>unlinkFacebookIdentity(auth,request);}
     response=session.finish(await api(request,db,session.user?.id??null,config.bootstrapHash,background,config.forumOpen,socialIdentity,unlinkIdentity,Boolean(session.user)));}
    else response=await api(request,db,null,config.bootstrapHash,background,config.forumOpen);

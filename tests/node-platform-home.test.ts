@@ -18,17 +18,20 @@ test("the service root is a directory with Agorà and PolisRossa in the requeste
   assert.match(directory, /Storia, attualità, cultura e dati delle sinistre e dei movimenti sociali internazionali/);
   assert.match(directory, /Nodo alpha tecnologico/);
   assert.match(directory, /Nodo tematico disponibile/);
-  assert.match(directory, /Trova un nodo/);
+  assert.match(directory, /Registro dei nodi pubblicati/);
   assert.match(directory, /Cerca tra i nodi disponibili/);
-  assert.match(directory, /Scegli una piazza oppure cerca un argomento/);
+  assert.match(directory, /Questo è il registro pubblico delle comunità/);
   assert.match(directory, /Ospitare una copia/);
+  assert.match(directory, /Apri Biblioteca e Atlante/);
+  assert.match(directory, /Forum e laboratorio nuovi nodi/);
+  assert.match(directory, /Nodo: agora/);
   assert.match(directory, /href="https:\/\/github\.com\/internazionalerossa\/agoranode\/blob\/main\/docs\/SELF-HOSTING\.md"/);
   assert.match(directory, /Ogni campo del sapere può avere la sua piazza/);
-  assert.match(directory, /Questi sono esempi di comunità possibili, non siti già attivi/);
+  assert.match(directory, /Questa tassonomia raccoglie possibili ambiti disciplinari/);
   assert.match(directory, /Scienze e matematica/);
   assert.match(directory, /Musica/);
   assert.match(directory, /\d+ esempi di temi; l’elenco non è un catalogo esaustivo/);
-  assert.match(directory, /Cerca anche un tema non ancora elencato per visualizzarlo come idea/);
+  assert.match(directory, /proposte non equivalgono a nodi attivi/);
 });
 
 test("the AgoràNode overview distinguishes the shared infrastructure from thematic nodes", () => {

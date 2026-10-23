@@ -14,7 +14,7 @@ function staticPreviewEntrypoints():Plugin {
  return {
   name:'agoranode-static-preview-entrypoints',
   apply:'build',
-  configResolved(config){output=config.build.outDir;},
+  configResolved(config){output=resolve(config.root,config.build.outDir);},
   async closeBundle(){
    if(process.env.VITE_PUBLIC_PREVIEW!=='true')return;
    if(!output)throw Error('Missing preview output directory');

@@ -186,3 +186,9 @@ La PR #7 introduce una prima rassegna **read-only** del nodo Agorà con sorgenti
 Un nuovo **runtime pubblico read-only** può mostrare da un manifesto installato manualmente una comunità su `/n/<id>` e registrarla nella directory, senza creare un fork React. Il bootstrap verifica nome/namespace e dimensioni dei file, rifiuta symlink e non concede PR2/account/forum; non è un multi-tenant completo. PolisRossa ha una pagina dedicata per ogni opera del catalogo con distinzione dei diritti di ciascuna edizione e un editor visuale di **proposte** sulle pagine knowledge: le revisioni non si pubblicano senza la decisione PR2 e le autorizzazioni richieste.
 
 Questa sezione registra modifiche in PR #9 da considerare collaudate solo dopo esito CI. Mancano ancora provisioning di un database/account per spazio, wiki collaborativa effettivamente pubblicabile via voto, social/chat distribuiti e test tra host indipendenti. [Procedura](THEMATIC-BOOTSTRAP.md).
+
+
+
+## PostgreSQL pubblico a namespace e CAS durevole — PR #9
+
+Il bootstrap tematico read-only può facoltativamente interrogare un database PostgreSQL separato con un massimo di due connessioni. Le API di **ricerca e pagina wiki** vincolano `spaceId`, schema e query; sono public-only e non espongono le tabelle account o forum. Lo schema PostgreSQL deve essere installato dall'operatore e la migrazione PR1/PR2 del nuovo nodo **non è automatizzata**. L'archivio `public-cas-store.ts` conserva blocchi pubblici in modo atomico solo dopo una chiamata obbligatoria a un verificatore esterno della finalità; non è ancora collegato al protocollo di rete v2. I relativi test controllano separazione dei namespace, input malevoli, approvazione, riuso e corruzione dei file; non costituiscono audit di sicurezza indipendente né prova su tre host reali.

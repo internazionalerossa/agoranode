@@ -1,5 +1,6 @@
 "use client";
 import {useEffect,useState} from 'react';
+import {AGORA_FORUM_PREVIEW_TOPICS} from '../instances/agora-forum-preview';
 
 type Topic={id:string;author:string;title:string;body:string;createdAt:number};
 type Board={spaceId:'agora';topics:Topic[];nextOffset:number|null;authenticated:boolean;publication:string};
@@ -29,9 +30,17 @@ export default function AgoraForum(){
  const [body,setBody]=useState('');
  const [saving,setSaving]=useState(false);
  const [revision,setRevision]=useState(0);
+ const isStaticPreview=import.meta.env.VITE_PUBLIC_PREVIEW==='true';
  useEffect(()=>{
   const controller=new AbortController();
   setReady(false);setError('');
+  if(isStaticPreview){
+   setTopics(AGORA_FORUM_PREVIEW_TOPICS.map(item=>({...item})));
+   setAuthenticated(false);
+   setNextOffset(null);
+   setReady(true);
+   return()=>controller.abort();
+  }
   void fetch('/api/agora/forum?offset='+offset,{cache:'no-store',credentials:'same-origin',signal:controller.signal})
    .then(async response=>{
     if(!response.ok)throw Error('Forum unavailable');
@@ -72,6 +81,7 @@ export default function AgoraForum(){
    <h2 id="agora-forum-title">Forum del nodo Agorà</h2>
    <p>Un luogo per discutere la tecnologia della piattaforma, proporre miglioramenti e confrontare fonti. Le discussioni sono pubbliche e persistono nel database del servizio, quando configurato. **Non** sono automaticamente referendum, votazioni o revisioni approvate.</p>
   </header>
+  {isStaticPreview?<p role="status" className="agora-forum-preview-notice"><strong>Anteprima pubblica:</strong> le discussioni seguenti sono esempi illustrativi, non messaggi inviati da persone. I pulsanti PR1, PR2 e PR3 mostrano soltanto le differenze dell'interfaccia; nessun account, voto o mandato è attivo.</p>:null}
   <div className="agora-forum-role">
    <h3>Esplora le funzioni per ruolo</h3>
    <p>Modalità dimostrativa della UI: la scelta qui sotto <strong>non crea un account e non cambia i permessi</strong>.</p>
@@ -85,7 +95,7 @@ export default function AgoraForum(){
    <h3>Discussioni</h3>
    {authenticated?<button type="button" onClick={()=>setCompose(x=>!x)} aria-expanded={compose}>
      {compose?'Chiudi il modulo':'Apri una discussione'}
-   </button>:<a href="/account?return_to=%2Fagora%3Fview%3Dpartecipa">Accedi per partecipare come PR1</a>}
+   </button>:isStaticPreview?<span>Il forum interattivo richiede il backend e una sessione verificata.</span>:<a href="/account?return_to=%2Fagora%3Fview%3Dpartecipa">Accedi per partecipare come PR1</a>}
   </div>
   {authenticated&&compose?<form onSubmit={event=>{event.preventDefault();void publish();}}>
    <label>Nome pubblico o pseudonimo<input required maxLength={60} minLength={2} value={alias} onChange={e=>setAlias(e.target.value)}/></label>
@@ -99,7 +109,7 @@ export default function AgoraForum(){
    topics.length===0?<p>Non ci sono ancora discussioni pubblicate. L’alpha si costruisce anche a partire dalla prima proposta.</p>:
    <ol className="agora-forum-list">{topics.map(item=><li key={item.id}>
     <article><h4>{item.title}</h4>
-     <p className="agora-forum-meta">Proposto da {item.author} · {Number.isFinite(item.createdAt)?new Date(item.createdAt).toLocaleDateString('it-IT'):'Data non disponibile'}</p>
+     <p className="agora-forum-meta">{isStaticPreview?'Esempio dimostrativo · ':''}Proposto da {item.author} · {item.createdAt>0&&Number.isFinite(item.createdAt)?new Date(item.createdAt).toLocaleDateString('it-IT'):'nessuna data di pubblicazione reale'}</p>
      <p style={{whiteSpace:'pre-wrap'}}>{item.body}</p>
     </article>
    </li>)}</ol>}

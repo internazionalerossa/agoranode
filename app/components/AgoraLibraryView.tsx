@@ -20,7 +20,7 @@ function LibraryIndex({selected}:{selected:AtlasEntry|null}){
   <header><p className="eyebrow">TUTTE LE VOCI · NON SOLTANTO LA TIMELINE</p>
    <h2>Indice e ricerca dell'Atlante</h2>
    <p>Ogni voce è consultabile anche quando non è stata selezionata per il Percorso narrativo.
-    Le fonti e i collegamenti consentono di seguire un tema senza conoscere strumenti wiki.</p>
+    Le fonti e i collegamenti consentono di seguire un tema senza conoscere strumenti tecnici.</p>
   </header>
   <label htmlFor="agora-atlas-query"><Search size={16} aria-hidden="true"/> Cerca un articolo per parola, argomento o titolo</label>
   <input id="agora-atlas-query" type="search" value={query} onChange={e=>setQuery(e.currentTarget.value)}

@@ -1,6 +1,6 @@
 # Installare un nodo tematico di consultazione
 
-**Stato: bootstrap pubblico read-only realmente eseguibile. Non è ancora un nodo con account, PR2, forum, wiki collaborativa, database isolato o consenso di rete.**
+**Stato: bootstrap pubblico read-only realmente eseguibile. Non è ancora un nodo con account, PR2, forum, Atlante collaborativa, database isolato o consenso di rete.**
 
 PolisRossa è la prima implementazione alpha. I nuovi nodi possono utilizzare il frontend React comune su `/n/<slug>` con un manifesto pubblico installato manualmente dall'operatore, senza creare un fork di AgoraNode.
 
@@ -32,7 +32,7 @@ L'installazione è atomica e **non sovrascrive** un manifesto già esistente: gl
 | Pagina pubblica generica, navigazione, tema, testi e fonti | **Operativa per manifesti installati** |
 | Ricerca locale nei blocchi del manifesto | **Operativa nell'anteprima** |
 | Elenco dinamico nel portale AgoràNode | **Operativo con configurazione locale** |
-| Ingestion RSS, wiki revisionata e biblioteca di file | **Da integrare nel runtime multi-nodo** |
+| Ingestion RSS, Atlante revisionata e biblioteca di file | **Da integrare nel runtime multi-nodo** |
 | Account PR1, primi PR2, forum, votazioni e autorizzazione di pubblicazione | **Non attivi per questi nuovi nodi** |
 | Database realmente isolati per tutti gli endpoint | **Non ancora collegati** |
 | Replica BFT, discovery P2P e failover | **Non realizzati da questo bootstrap** |
@@ -53,7 +53,7 @@ Il database deve essere già predisposto con lo schema delle revisioni pubbliche
 
 Quando è configurato questo database, `GET /api/public-spaces/storia-locale/search?q=...` cerca le pagine pubbliche per titolo e descrizione e `GET /api/public-spaces/storia-locale/knowledge?kind=wiki&id=...` espone una pagina enciclopedica pubblicata, le sue fonti e fino a 100 hash delle revisioni. Il sito `/n/storia-locale` mostra i risultati e le pagine collegate con URL condivisibili. Tutte le query sono limitate dal `spaceId` selezionato **dal server**; il browser non può scegliere il database e non vengono esposte API di scrittura.
 
-Questo **non crea automaticamente una banca dati wiki completa**; serve un import approvato, ruoli PostgreSQL con privilegi minimi, backup separati e test reali cross-tenant. In assenza di DB o manifesti approvati gli endpoint restituiscono 404 o 503, non dati di altri spazi.
+Questo **non crea automaticamente una banca dati Atlante completa**; serve un import approvato, ruoli PostgreSQL con privilegi minimi, backup separati e test reali cross-tenant. In assenza di DB o manifesti approvati gli endpoint restituiscono 404 o 503, non dati di altri spazi.
 
 
 ## Biblioteca coerente con gli altri nodi

@@ -1,24 +1,24 @@
-# Regole editoriali proposte: wiki verificabile senza voto sulla verità
+# Regole editoriali proposte: Atlante verificabile senza voto sulla verità
 
 **Bozza da discutere e approvare; non è un workflow ancora attivo nel prodotto.** La procedura attuale di PolisRossa resta descritta da [COMMUNITY.md](COMMUNITY.md) e [AGORANODE.md](AGORANODE.md).
 
 ## Un errore da evitare
 
-La piattaforma combina wiki, giornalismo RSS, biblioteca, dati, forum e voto. Queste funzioni non producono lo stesso tipo di affermazione: un risultato elettorale è una decisione; un'osservazione statistica è una misura con metodo; una notizia è una pubblicazione di terzi; una pagina wiki è una sintesi sottoposta a verifica. **Nessun quorum può rendere vero un fatto.** Un voto può approvare una regola editoriale, nominare un revisore o risolvere una disputa di procedimento, non sostituire evidenza, metodo, provenienza e revisioni documentate.
+La piattaforma combina Atlante, giornalismo RSS, biblioteca, dati, forum e voto. Queste funzioni non producono lo stesso tipo di affermazione: un risultato elettorale è una decisione; un'osservazione statistica è una misura con metodo; una notizia è una pubblicazione di terzi; una voce dell’Atlante è una sintesi sottoposta a verifica. **Nessun quorum può rendere vero un fatto.** Un voto può approvare una regola editoriale, nominare un revisore o risolvere una disputa di procedimento, non sostituire evidenza, metodo, provenienza e revisioni documentate.
 
 ### Oggetti e responsabilità
 
 | Oggetto | Fonte di autorità | Cambiamenti |
 | --- | --- | --- |
 | Notizia RSS/Atom | Autore/editore e URL originale | Aggiornare metadati, rettifiche e link; non manipolare il contenuto attribuito |
-| Wiki | Fonti verificabili, revisori responsabili e policy pubbliche del nodo | Versioni immutabili, contestazioni, correzioni collegate |
+| Atlante | Fonti verificabili, revisori responsabili e policy pubbliche del nodo | Versioni immutabili, contestazioni, correzioni collegate |
 | Dato statistico | Dataset, definizioni, unità, popolazione e data | Nuova importazione documentata, senza inventare valori mancanti |
 | Opera in biblioteca | Licenza della specifica edizione e diritti territoriali | Catalogo, link; testo interno solo con autorizzazione |
 | Post forum | Autore, moderazione, policy e permessi | Discussione persistente; rettifiche e rimozioni secondo legge |
 | Voto comunitario | Elettorato, procedimento, quorum e certificato | Decisione verificabile, ricorsi e revoca delle norme |
 | Chat | Consenso delle persone nella stanza e policy di retention | Scadenza; niente conversione automatica in memoria permanente |
 
-### Stati consigliati per le proposte wiki
+### Stati consigliati per le proposte Atlante
 
 1. **Draft:** autore prepara una modifica con revisione di partenza, fonti, licenza, ambito e motivazione. Bozza non pubblica finché non è autorizzata.
 2. **Source review:** controlli automatici e umani su attribuzioni, diritto di redistribuzione, fonti primarie/secondarie, data, unità, neutralità descrittiva e conflitti di interesse.
@@ -34,11 +34,11 @@ Non attribuire punteggi automatici di «verità» o «orientamento politico» ai
 
 Una pagina enciclopedica deve distinguere cronologia dei fatti, citazioni, interpretazioni, incertezza e valutazioni della comunità. Una deliberazione che sceglie di enfatizzare un tema va indicata come **decisione editoriale**, non come certificazione della sua verità. Vietare l'uso di profili privati per classificare politicamente lettori o orientare di nascosto il feed.
 
-### Licenze e wiki
+### Licenze e Atlante
 
-Il contratto di contributo oggi permette anche licenze `ND` o diritti riservati; possono essere utili per un **catalogo di lettura**, ma impediscono in generale le derivazioni normalmente necessarie per una wiki collaborativa. Prima dell'apertura creare una policy separata:
-- **Corpus wiki modificabile:** accetta soltanto licenze compatibili con revisioni collaborative e riuso previsto; spiegare condizioni di attribuzione e eventuale ShareAlike.
-- **Biblioteca/catalogo:** può citare e collegare opere con diritti più restrittivi senza assorbirle nella wiki modificabile.
+Il contratto di contributo oggi permette anche licenze `ND` o diritti riservati; possono essere utili per un **catalogo di lettura**, ma impediscono in generale le derivazioni normalmente necessarie per una Atlante collaborativa. Prima dell'apertura creare una policy separata:
+- **Corpus Atlante modificabile:** accetta soltanto licenze compatibili con revisioni collaborative e riuso previsto; spiegare condizioni di attribuzione e eventuale ShareAlike.
+- **Biblioteca/catalogo:** può citare e collegare opere con diritti più restrittivi senza assorbirle nella Atlante modificabile.
 - **Contenuti precedenti:** nessuna conversione retroattiva fittizia della licenza; mantenere `reuse-not-documented` quando appropriato.
 - **Interoperabilità:** non imporre una compatibilità con Wikipedia che il progetto non ha scelto; rendere invece verificabili restrizioni e opzioni future di esportazione.
 

@@ -31,7 +31,7 @@ export const POLISROSSA_MANIFEST = {
     news: {label: 'Notizie', status: 'implemented', route: '/polisrossa'},
     video: {label: 'Video', status: 'implemented', route: '/polisrossa'},
     library: {label: 'Biblioteca gratuita', status: 'implemented', route: '/polisrossa?view=teoria'},
-    wiki: {label: 'Wiki', status: 'planned', route: '/polisrossa?view=teoria&percorso=timeline'},
+    wiki: {label: 'Atlante · indice consultabile', status: 'implemented', route: '/polisrossa?view=teoria&percorso=timeline&modalita=indice'},
     storyline: {label: 'Storyline', status: 'implemented', route: '/polisrossa?view=teoria&percorso=timeline'},
     data: {label: 'Dati e grafici', status: 'implemented', route: '/polisrossa?view=teoria&percorso=dati'},
     community: {label: 'Forum e autogestione', status: 'implemented', route: '/polisrossa?view=partecipa'},

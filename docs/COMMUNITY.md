@@ -76,9 +76,9 @@ Il deposito e il contratto dati per questi record sono implementati, ma il grant
 
 ## Comunità e conversazioni in una rete di PC volontari (obiettivo)
 
-Agorà è il nodo tematico sulla tecnologia AgoràNode; PolisRossa è una comunità distinta. Quando la piattaforma sarà multi-nodo, la stessa interfaccia offrirà wiki, fonti, feed, forum e stanze anche ad Agorà, **ma con propri account applicativi, decisioni e moderatori**, senza un'assemblea unica che controlli tutti i temi. I diritti PR2 restano locali; i mandati PR3 riguardano soltanto competenze federali approvate.
+Agorà è il nodo tematico sulla tecnologia AgoràNode; PolisRossa è una comunità distinta. Quando la piattaforma sarà multi-nodo, la stessa interfaccia offrirà Atlante, fonti, feed, forum e stanze anche ad Agorà, **ma con propri account applicativi, decisioni e moderatori**, senza un'assemblea unica che controlli tutti i temi. I diritti PR2 restano locali; i mandati PR3 riguardano soltanto competenze federali approvate.
 
-Una chat pubblica o riservata non può essere spostata automaticamente in una blockchain immutabile: messaggi, cancellazioni, scadenze, consensi e moderazione richiedono una politica differente da quella delle revisioni wiki approvate. La chat corrente vive nella RAM di un processo e può sparire al riavvio. Il futuro multi-peer dovrà definire in anticipo se e per quanto tempo le copie circolano fra server e dispositivi, quali messaggi sono cifrati end-to-end e che cosa **non** può essere cancellato da copie già esportate.
+Una chat pubblica o riservata non può essere spostata automaticamente in una blockchain immutabile: messaggi, cancellazioni, scadenze, consensi e moderazione richiedono una politica differente da quella delle revisioni Atlante approvate. La chat corrente vive nella RAM di un processo e può sparire al riavvio. Il futuro multi-peer dovrà definire in anticipo se e per quanto tempo le copie circolano fra server e dispositivi, quali messaggi sono cifrati end-to-end e che cosa **non** può essere cancellato da copie già esportate.
 
 La replica della conoscenza pubblica non contiene l'archivio privato degli utenti o le conversazioni riservate. L'obiettivo e i limiti sono descritti in [PEER-OWNED-ARCHITECTURE.md](PEER-OWNED-ARCHITECTURE.md).
 

@@ -7,6 +7,7 @@ import SharedCustodyView from "./SharedCustodyView";
 import SharedSpaceModules from "./SharedSpaceModules";
 import AgoraFeed from "./AgoraFeed";
 import NodeStudio from "./NodeStudio";
+import AgoraForum from "./AgoraForum";
 import AgoraLibraryView from "./AgoraLibraryView";
 import {AGORA_MANIFEST} from "../instances/agora";
 
@@ -50,6 +51,7 @@ export default function AgoraNodeHome() {
              La pubblicazione dei nuovi nodi non può sostituire una decisione PR2 competente
              o creare automaticamente account e forum.</p>
           </header>
+          <AgoraForum/>
           <NodeStudio spaceId="agora"/>
           <FederationBoard/>
           <SharedCustodyView/>

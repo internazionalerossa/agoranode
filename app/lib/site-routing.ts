@@ -9,12 +9,13 @@ const APP_SHELL_PATHS = new Set([
 ]);
 
 export function isAppShellPath(pathname: string): boolean {
-  return APP_SHELL_PATHS.has(pathname);
+  return APP_SHELL_PATHS.has(pathname) || /^\/n\/[a-z][a-z0-9-]{2,47}\/?$/.test(pathname);
 }
 
 export type SiteRoute =
   | {kind: 'platform'; canonicalPath: '/'}
   | {kind: 'agora'; canonicalPath: string}
+  | {kind: 'thematic-node'; canonicalPath: string; spaceId: string}
   | {kind: 'instance'; canonicalPath: string}
   | {kind: 'reader'; canonicalPath: string}
   | {kind: 'account'; canonicalPath: string};
@@ -49,6 +50,9 @@ function withLocation(url: URL, pathname: string): string {
 export function siteRouteFromUrl(raw: string): SiteRoute {
   const url = new URL(raw, 'https://site.invalid');
   const path = url.pathname.replace(/\/+$/, '') || '/';
+
+  const publicSpace = /^\/n\/([a-z][a-z0-9-]{2,47})$/.exec(path);
+  if(publicSpace) return {kind:'thematic-node',spaceId:publicSpace[1],canonicalPath:'/n/'+publicSpace[1]};
 
   if (path === '/agoranode') return {kind: 'platform', canonicalPath: '/'};
   if (path === '/agora') return {kind: 'agora', canonicalPath: withLocation(url, '/agora')};

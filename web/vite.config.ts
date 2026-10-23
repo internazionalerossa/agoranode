@@ -1,40 +1,39 @@
 import {defineConfig,type Plugin} from 'vite';
 import react from '@vitejs/plugin-react';
 import {fileURLToPath} from 'node:url';
-import {copyFile,mkdir} from 'node:fs/promises';
-import {resolve,dirname} from 'node:path';
+import {join} from 'node:path';
+import {copyFile,mkdir,readFile} from 'node:fs/promises';
 
-const repositoryRoot=fileURLToPath(new URL('..',import.meta.url));
-const webRoot=fileURLToPath(new URL('.',import.meta.url));
 /**
- * Render's static preview does not honor the /_redirects SPA fallback.
- * Materialize actual entry files for each known public route. This changes
- * only the static preview build; the real Node server still owns API/auth.
+ * Static Render deployments do not rewrite arbitrary routes to index.html.
+ * Build actual index documents at the known paths, so a direct visit, refresh,
+ * or a copied link never relies on a dashboard-only redirect rule.
  *
- * Both /agora.html and /agora/index.html are written because static hosting
- * implementations vary between clean-URL rewriting and directory redirects.
+ * The preview is public and has no authentication or writable backend.
  */
-function staticPreviewEntries():Plugin{
- return {name:'agoranode-static-preview-routes',apply:'build',
-  async closeBundle(){
+function staticPreviewPages():Plugin {
+ return {
+  name:'agoranode-static-preview-pages',
+  apply:'build',
+  async writeBundle(options) {
    if(process.env.VITE_PUBLIC_PREVIEW!=='true')return;
-   const out=resolve(repositoryRoot,'dist-preview');
-   const paths=['agora','polisrossa','polisrossa/read','polisrossa/account','account','read'];
-   for(const path of paths){
-    const directory=resolve(out,path);
+   const outDir=options.dir;
+   if(!outDir)throw Error('Static preview output directory is required');
+   const index=join(outDir,'index.html');
+   await readFile(index,'utf8'); // fail build rather than publishing broken links
+   const known=['agora','polisrossa','polisrossa/read','polisrossa/account','account','read'];
+   for(const route of known){
+    const directory=join(outDir,...route.split('/'));
     await mkdir(directory,{recursive:true});
-    await copyFile(resolve(out,'index.html'),resolve(directory,'index.html'));
-    const cleanFile=resolve(out,path+'.html');
-    await mkdir(dirname(cleanFile),{recursive:true});
-    await copyFile(resolve(out,'index.html'),cleanFile);
+    await copyFile(index,join(directory,'index.html'));
    }
   },
  };
 }
 export default defineConfig({
- root:webRoot,
+ root:fileURLToPath(new URL('.',import.meta.url)),
  publicDir:fileURLToPath(new URL('../public',import.meta.url)),
- plugins:[react(),staticPreviewEntries()],
- resolve:{alias:{'@':repositoryRoot}},
+ plugins:[react(),staticPreviewPages()],
+ resolve:{alias:{'@':fileURLToPath(new URL('..',import.meta.url))}},
  server:{proxy:{'/api':'http://127.0.0.1:8000'}},
 });

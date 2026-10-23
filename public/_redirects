@@ -1,0 +1,3 @@
+# Static SPA fallback for Render previews only.
+# /api must be served by a real backend; static previews never impersonate API data.
+/* /index.html 200

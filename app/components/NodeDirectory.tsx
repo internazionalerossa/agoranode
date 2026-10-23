@@ -1,6 +1,7 @@
 import {useState,useEffect} from "react";
 import {ArrowRight, BookOpen, Network, Search} from "lucide-react";
 import {publicLocalSpaces} from "../instances/registry";
+import {staticPreviewHref} from "../lib/static-preview-navigation";
 
 type LocalNode = {
   id: string;
@@ -28,6 +29,7 @@ type SearchIdea = {
 
 // This display-only catalogue derives from the same allowlisted manifests as /api/nodes.
 const nodes: LocalNode[] = publicLocalSpaces().map(space => ({...space, kind: 'local'}));
+const publicNodeHref=(href:string)=>import.meta.env.VITE_PUBLIC_PREVIEW==='true'?(staticPreviewHref(href)??href):href;
 
 const possibleNodeFamilies: ReadonlyArray<{name: string; topics: readonly string[]}> = [
   {name: "Scienze e matematica", topics: ["Matematica", "Fisica", "Astronomia", "Chimica", "Biologia", "Geologia", "Scienze del clima", "Statistica", "Informatica teorica"]},
@@ -165,7 +167,7 @@ export default function NodeDirectory() {
             <ol className="node-directory-list">
               {visibleEntries.map((entry) => entry.kind === "local" ? (
                 <li key={entry.id}>
-                  <a className={`node-directory-card node-directory-card-${entry.id}`} href={entry.href}>
+                  <a className={`node-directory-card node-directory-card-${entry.id}`} href={publicNodeHref(entry.href)}>
                     <span className="node-directory-card-main">
                       <span className="node-directory-topic">{entry.topic}</span><code className="node-directory-identifier">ID: {entry.id} · {entry.id==='agora'?'NODO ALPHA':entry.id==='polisrossa'?'NODO TEMATICO':'ANTEPRIMA TEMATICA'}</code><code className="node-directory-namespace">Nodo: {entry.id}</code>
                       <strong className="node-directory-title">{entry.name} <span>— AgoràNode</span></strong>
@@ -194,7 +196,7 @@ export default function NodeDirectory() {
               <ol className="node-directory-list">
                 {allNodes.map((node) => (
                   <li key={node.id}>
-                    <a className={`node-directory-card node-directory-card-${node.id}`} href={node.href}>
+                    <a className={`node-directory-card node-directory-card-${node.id}`} href={publicNodeHref(node.href)}>
                       <span className="node-directory-card-main">
                         <span className="node-directory-topic">{node.topic}</span><code className="node-directory-identifier">ID: {node.id} · {node.id==='agora'?'NODO ALPHA':node.id==='polisrossa'?'NODO TEMATICO':'ANTEPRIMA TEMATICA'}</code><code className="node-directory-namespace">Nodo: {node.id}</code>
                         <strong className="node-directory-title">{node.name} <span>— AgoràNode</span></strong>

@@ -5312,10 +5312,10 @@ body { min-width: 0; width: 100%; max-width: 100vw; overflow-x: hidden; }
 .agora-library-heading h1 {font:500 clamp(30px,4.8vw,50px)/1.12 Georgia,serif;letter-spacing:-.03em;margin:12px 0}
 .agora-library-heading>p:last-child {max-width:72ch;font-size:15px;line-height:1.7}
 .agora-library .thematic-library-destinations {margin:12px 0 26px;grid-template-columns:repeat(3,minmax(0,1fr))}
-.themmatic-library-destinations > a {text-decoration:none}
+
 .thematic-library-destinations > a {background:rgba(255,255,255,.58);border:1px solid #d5dfe4}
 .thematic-library-destinations > a[aria-current=page] {border-color:var(--atlante-accent,#235f86);background:#eaf2f6;color:#184c6b}
-.thematic-library-direction {font-size:13px;font-weight:700}
+.thematic-library-destinations > a > .thematic-library-direction {grid-column:2;grid-row:1;justify-self:end;font-size:13px;font-weight:700}
 .library-timeline-options {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:12px 0 30px;max-width:790px}
 .library-timeline-options a {display:grid;gap:7px;padding:16px 18px;border:1px solid #cad4d9;border-radius:9px;text-decoration:none;background:rgba(255,255,255,.65);color:inherit}
 .library-timeline-options a strong {font-size:15px}

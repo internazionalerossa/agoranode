@@ -5410,3 +5410,13 @@ body { min-width: 0; width: 100%; max-width: 100vw; overflow-x: hidden; }
 .agora-forum-pagination{display:flex;gap:10px;margin:18px 0}
 .agora-forum-pagination button:disabled{opacity:.4;cursor:default}
 .agora-forum :is(a,button,input,textarea):focus-visible{outline:3px solid #235f86;outline-offset:3px}
+
+
+/* The platform registry leads with live node routes, not speculative subject lists. */
+.node-directory-quicklinks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:22px 0 8px}
+.node-directory-quicklinks a{display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid var(--line,#d5d9d4);border-radius:9px;padding:16px 18px;background:var(--surface,#fff);color:inherit;text-decoration:none;font-size:13px;font-weight:700;min-height:52px}
+.node-directory-quicklinks a:hover,.node-directory-quicklinks a:focus-visible{border-color:currentColor;outline-offset:3px}
+.node-directory-namespace{display:inline-block;margin:7px 0;color:var(--muted,#50636b);font-size:11px;letter-spacing:.02em;white-space:normal;overflow-wrap:anywhere}
+.node-directory-cta{display:block;margin-top:9px;font-size:12px;font-weight:700;color:var(--red,#a72f2f)}
+.node-directory-intro>p{line-height:1.75;max-width:80ch}
+@media(max-width:680px){.node-directory-quicklinks{grid-template-columns:1fr}.node-directory-quicklinks a{min-height:48px;padding:13px 15px}}

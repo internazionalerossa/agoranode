@@ -1,6 +1,7 @@
 "use client";
 import {useEffect,useMemo,useState,type CSSProperties} from 'react';
 import {validatePublicSpaceSeed,type PublicSpaceSeed} from '../platform/public-space-seed';
+import {PublicSpaceKnowledgePage,PublicSpaceRemoteSearch} from './PublicSpaceKnowledge';
 
 type ViewState={state:'loading'|'not-found'|'error'}|{state:'ready';seed:PublicSpaceSeed};
 const LABELS={
@@ -55,12 +56,14 @@ export default function PublicSpaceHome({spaceId}:{spaceId:string}){
       <h2>{seed.name}</h2><p>{seed.description}</p>
       <p className="public-space-boundary">{seed.publication.notice}</p>
      </section>
+     <PublicSpaceKnowledgePage spaceId={spaceId}/>
      <section aria-labelledby="public-space-knowledge-title">
       <h2 id="public-space-knowledge-title">La conoscenza del nodo</h2>
       <p>Testi, fonti e racconti proposti nel manifesto di questo nodo. Questa anteprima non sostituisce una wiki con revisioni e decisioni PR2.</p>
       <label htmlFor="node-public-search">Cerca fra le sezioni</label>
       <input id="node-public-search" type="search" value={query} maxLength={160}
         onChange={event=>setQuery(event.target.value)} placeholder="Argomento, autore, evento…"/>
+      <PublicSpaceRemoteSearch spaceId={spaceId} query={query}/>
       <div className="public-space-content-grid">{blocks.map(block=>
        <article key={block.id} className="public-space-block" id={'node-block-'+block.id}>
         <p className="eyebrow">{LABELS[block.kind]}</p><h3>{block.title}</h3>

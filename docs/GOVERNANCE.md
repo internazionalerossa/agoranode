@@ -194,6 +194,6 @@ Le regole anti-Sybil, l'identità portabile, le chiavi di voto e l'eventuale seg
 
 ## Ricerca delle fonti, assenso e voto: meccanismi diversi
 
-Un'assemblea può stabilire regole editoriali e incarichi, ma non rendere «vera» un'affermazione con un voto. Le revisioni wiki richiedono fonti, provenienza, licenze e un processo di contestazione appropriato; vedi [EDITORIAL-GOVERNANCE.md](EDITORIAL-GOVERNANCE.md). Il consenso editoriale basato su ragioni, l'assenso sociocratico per operazioni reversibili, la maggioranza politica e il quorum tecnico BFT risolvono problemi distinti. Nessuno dei quattro deve sostituire automaticamente gli altri.
+Un'assemblea può stabilire regole editoriali e incarichi, ma non rendere «vera» un'affermazione con un voto. Le revisioni Atlante richiedono fonti, provenienza, licenze e un processo di contestazione appropriato; vedi [EDITORIAL-GOVERNANCE.md](EDITORIAL-GOVERNANCE.md). Il consenso editoriale basato su ragioni, l'assenso sociocratico per operazioni reversibili, la maggioranza politica e il quorum tecnico BFT risolvono problemi distinti. Nessuno dei quattro deve sostituire automaticamente gli altri.
 
 Le criticità di cattura delle chiavi, asimmetria di risorse, voto non segreto, pressione di gruppo e dipendenze commerciali sono raccolte in [CRITICAL-DESIGN-REVIEW.md](CRITICAL-DESIGN-REVIEW.md). Queste aggiunte definiscono vincoli proposti e controlli da implementare, non cambiano automaticamente le regole operative del forum già avviato.

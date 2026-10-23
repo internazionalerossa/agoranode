@@ -27,7 +27,7 @@ const extraSpaceInputs=process.env.AGORANODE_PUBLIC_SPACE_DATABASES_JSON
  : [];
 if(!Array.isArray(extraSpaceInputs)||extraSpaceInputs.length>16)throw Error('Invalid public space database configuration');
 const publicSpacePools=extraSpaceInputs.length
- ? openSpaceDatabaseRegistry(extraSpaceInputs,connectionString=>createPool(connectionString))
+ ? openSpaceDatabaseRegistry(extraSpaceInputs,connectionString=>createPool(connectionString,2))
  : null;
 
 const jobs=new Set<Promise<unknown>>();

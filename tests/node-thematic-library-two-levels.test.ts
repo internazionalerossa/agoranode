@@ -13,6 +13,9 @@ import {
 import {LibraryPrimaryTabs,LibraryTimelineTabs} from '../app/components/LibraryNavigationTabs';
 import AgoraLibraryView from '../app/components/AgoraLibraryView';
 import PolisrossaAtlasIndex from '../app/components/PolisrossaAtlasIndex';
+import PublicSpaceLibrary from '../app/components/PublicSpaceLibrary';
+import {newNodeDraft} from '../app/lib/node-studio-model';
+import {createPublicSpaceSeed} from '../app/platform/public-space-seed';
 import {AGORA_ATLANTE} from '../app/instances/agora-atlante';
 import {atlasArticleUrl,atlasSearch,atlasTimeline,validateAtlas} from '../app/lib/thematic-atlas';
 
@@ -86,4 +89,21 @@ test('Agorà Atlante is independent from the timeline and all narrative entries 
  assert.ok(atlasSearch(AGORA_ATLANTE,'privacy').some(entry=>entry.id==='custodia-e-privacy'));
  assert.throws(()=>atlasArticleUrl('agora','../invalid'));
  assert.throws(()=>thematicLibraryHref('agora','libri','indice','il-nodo-origine'));
+});
+
+test('new operator-installed nodes reuse the same first-level Library choices',()=>{
+ const draft=newNodeDraft('create-node','storia-locale');
+ draft.name='Storia della città';
+ draft.topic='Storia locale e archivi della città';
+ draft.description='Una biblioteca locale con voci pubbliche e fonti dichiarate.';
+ draft.blocks=[{id:crypto.randomUUID(),kind:'timeline',title:'Un evento storico della città',
+  body:'Un racconto introduttivo da approfondire con fonti documentarie.',url:'https://example.org/source'}];
+ const seed=createPublicSpaceSeed(draft);
+ const html=renderToStaticMarkup(createElement(PublicSpaceLibrary,{seed}));
+ assert.match(html,/Libri e percorsi/);
+ assert.match(html,/Timeline e Atlante/);
+ assert.match(html,/Dati e grafici/);
+ assert.doesNotMatch(html,/Scegli come esplorare Timeline e Atlante/);
+ assert.equal(thematicLibraryLocationFromUrl('/n/storia-locale?view=biblioteca&sezione=timeline&modalita=indice','storia-locale').display,'indice');
+ assert.equal(thematicLibraryHref('storia-locale','timeline','indice',draft.blocks[0].id).startsWith('/n/storia-locale?view=biblioteca'),true);
 });

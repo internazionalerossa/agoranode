@@ -1,4 +1,3 @@
-import type {ReactNode} from 'react';
 import type {LibraryDestination,TimelineDisplay} from '../lib/thematic-library-navigation';
 import {THEMATIC_LIBRARY_DESTINATIONS} from '../lib/thematic-library-navigation';
 

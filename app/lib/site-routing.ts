@@ -52,7 +52,7 @@ export function siteRouteFromUrl(raw: string): SiteRoute {
   const path = url.pathname.replace(/\/+$/, '') || '/';
 
   const publicSpace = /^\/n\/([a-z][a-z0-9-]{2,47})$/.exec(path);
-  if(publicSpace) return {kind:'thematic-node',spaceId:publicSpace[1],canonicalPath:'/n/'+publicSpace[1]};
+  if(publicSpace) return {kind:'thematic-node',spaceId:publicSpace[1],canonicalPath:withLocation(url,'/n/'+publicSpace[1])};
 
   if (path === '/agoranode') return {kind: 'platform', canonicalPath: '/'};
   if (path === '/agora') return {kind: 'agora', canonicalPath: withLocation(url, '/agora')};

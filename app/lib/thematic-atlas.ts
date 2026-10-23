@@ -52,7 +52,7 @@ export function validateAtlas(entries:readonly AtlasEntry[]):void{
   for(const section of item.sections){
    if(!text(section.heading,3,120)||!Array.isArray(section.paragraphs)||
      section.paragraphs.length<1||section.paragraphs.length>10||
-     section.paragraphs.some(p=>!text(p,40,3500)))throw Error('Invalid Atlas section');
+     section.paragraphs.some((p:string)=>!text(p,40,3500)))throw Error('Invalid Atlas section');
   }
   for(const source of item.sources){
    if(!text(source.label,2,160)||!text(source.context,5,250)||!sourceUrl(source.url))

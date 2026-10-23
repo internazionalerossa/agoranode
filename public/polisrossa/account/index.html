@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex"><title>AgoràNode — apertura del nodo</title>
+<script>
+(function(){
+  var to=new URL('/',location.origin);
+  to.searchParams.set('previewPath',"/polisrossa/account");
+  var query=new URLSearchParams(location.search);
+  query.forEach(function(value,key){if(key!=='previewPath')to.searchParams.append(key,value);});
+  to.hash=location.hash;
+  location.replace(to.pathname+to.search+to.hash);
+})();
+</script>
+</head><body><main><p>Accesso alla pagina del nodo AgoràNode. <a href="/?previewPath=%2Fpolisrossa%2Faccount">Apri l'anteprima</a></p></main></body></html>

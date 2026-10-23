@@ -20,7 +20,8 @@
     "peer:pull": "node --env-file-if-exists=.env --import tsx server/public-peer-cli.ts pull",
     "benchmark:cas": "node --import tsx scripts/benchmark-public-cas.ts",
     "peer:watch": "node --env-file-if-exists=.env --import tsx server/public-peer-cli.ts watch",
-    "space:install": "node --import tsx server/install-public-space.ts"
+    "space:install": "node --import tsx server/install-public-space.ts",
+    "agora:seed": "node --env-file-if-exists=.env --import tsx server/agora-knowledge-seed.ts"
   },
   "dependencies": {
     "lucide-react": "^1.25.0",

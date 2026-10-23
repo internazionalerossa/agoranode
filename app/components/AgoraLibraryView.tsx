@@ -4,7 +4,7 @@ import {ArrowLeft,ArrowUpRight,BookOpen,Download,Search} from 'lucide-react';
 import {AGORA_ATLANTE,AGORA_ATLANTE_BY_ID} from '../instances/agora-atlante';
 import {atlasMarkdown,atlasSearch,atlasTimeline,type AtlasEntry} from '../lib/thematic-atlas';
 import {
- thematicLibraryHref,thematicLibraryLocationFromUrl,type TimelineDisplay,
+ thematicLibraryHref,thematicLibraryLocationFromUrl,
 } from '../lib/thematic-library-navigation';
 import {LibraryPrimaryTabs,LibraryTimelineTabs} from './LibraryNavigationTabs';
 

@@ -1,5 +1,6 @@
 "use client";
-import {useMemo,useState} from 'react';
+import {useEffect,useMemo,useState} from 'react';
+import {LOCAL_WIKI_DRAFT_FORMAT,localWikiDraftKey,validateLocalWikiDraft} from '../lib/local-wiki-draft';
 import {timelineProposalLink} from '../lib/timeline-proposal';
 import type {PublicKnowledgeHistory} from '../lib/public-knowledge';
 
@@ -20,6 +21,29 @@ export default function WikiProposalEditor({history}: {history:PublicKnowledgeHi
  const [source,setSource]=useState('');
  const [reason,setReason]=useState('');
  const [preview,setPreview]=useState(false);
+ const [savedStatus,setSavedStatus]=useState('');
+ const storageKey=localWikiDraftKey(entity.identity.spaceId,entity.identity.kind,entity.identity.id);
+ useEffect(()=>{
+  try{
+   const stored=localStorage.getItem(storageKey);
+   if(!stored)return;
+   const previous=validateLocalWikiDraft(JSON.parse(stored));
+   if(previous.revisionSha256!==entity.revisionSha256)return;
+   setBlocks(previous.blocks);setReason(previous.reason);setSource(previous.source);
+   setSavedStatus('Bozza presente su questo dispositivo, ripristinata sulla stessa revisione.');
+  }catch{/* Local drafts are optional and are never trusted as published material. */}
+ },[storageKey,entity.revisionSha256]);
+ const saveLocal=()=>{
+  try{
+   const validated=validateLocalWikiDraft({
+    format:LOCAL_WIKI_DRAFT_FORMAT,spaceId:entity.identity.spaceId,
+    kind:entity.identity.kind,id:entity.identity.id,revisionSha256:entity.revisionSha256,
+    reason,source,blocks,
+   });
+   localStorage.setItem(storageKey,JSON.stringify(validated));
+   setSavedStatus('Bozza salvata su questo dispositivo. Non è stata inviata al forum.');
+  }catch{setSavedStatus('Impossibile salvare la bozza: verifica i campi o lo spazio disponibile.');}
+ };
  const title=typeof entity.content.title==='string'?entity.content.title:
    typeof entity.content.name==='string'?entity.content.name:entity.identity.id;
  const text=blocks.map((block,index)=>(index+1)+'. '+block.text.trim()).join('\n\n');
@@ -90,6 +114,8 @@ export default function WikiProposalEditor({history}: {history:PublicKnowledgeHi
     <input type="url" value={source} maxLength={MAX_SOURCE_CHARS}
      onChange={event=>setSource(event.target.value)} placeholder="https://…"/>
    </label>
+   <button type="button" onClick={saveLocal}>Salva bozza su questo dispositivo</button>
+   {savedStatus?<p role="status">{savedStatus}</p>:null}
    <button type="button" onClick={()=>setPreview(value=>!value)} aria-expanded={preview}>Anteprima dei cambiamenti</button>
    {preview?<section aria-label="Anteprima dei testi proposti">
     <h3>Nuovi paragrafi</h3>

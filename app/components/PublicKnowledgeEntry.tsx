@@ -9,6 +9,7 @@ import {
 import { knowledgeEntityUrl } from "@/app/lib/knowledge-navigation";
 import type { KnowledgeJson } from "@/app/lib/knowledge-model";
 import KnowledgeRevisionHistory from "./KnowledgeRevisionHistory";
+import WikiProposalEditor from "./WikiProposalEditor";
 import { LocalizedText as T } from "./Localization";
 
 type State =
@@ -190,6 +191,7 @@ function KnowledgeEntry({
           <code>{entity.revisionSha256}</code>
         </footer>
       </article>
+      <WikiProposalEditor history={history}/>
       <KnowledgeRevisionHistory kind={kind} entityId={id} />
     </>
   );

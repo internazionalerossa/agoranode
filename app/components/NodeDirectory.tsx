@@ -146,6 +146,7 @@ export default function NodeDirectory() {
             </div>
             <span aria-live="polite">{query.trim() ? `${matchingEntries.length} risultati` : `${allNodes.length} nodi locali`}</span>
           </div>
+          <p className="node-directory-intro-help">Apri <strong>Agorà</strong> per visitare il nodo alpha e provare Biblioteca, Timeline, Atlante e laboratorio. PolisRossa conserva il proprio archivio tematico. Per iniziare una comunità da zero usa <a href="/agora?view=partecipa#studio-agora">Node Studio</a>: le bozze non vengono pubblicate automaticamente.</p>
           <label className="node-directory-search">
             <Search size={18} aria-hidden="true" />
             <span className="sr-only">Cerca tra i nodi disponibili</span>
@@ -166,7 +167,7 @@ export default function NodeDirectory() {
                 <li key={entry.id}>
                   <a className={`node-directory-card node-directory-card-${entry.id}`} href={entry.href}>
                     <span className="node-directory-card-main">
-                      <span className="node-directory-topic">{entry.topic}</span><code className="node-directory-namespace">Nodo: {entry.id}</code>
+                      <span className="node-directory-topic">{entry.topic}</span><code className="node-directory-identifier">ID: {entry.id} · {entry.id==='agora'?'NODO ALPHA':entry.id==='polisrossa'?'NODO TEMATICO':'ANTEPRIMA TEMATICA'}</code><code className="node-directory-namespace">Nodo: {entry.id}</code>
                       <strong className="node-directory-title">{entry.name} <span>— AgoràNode</span></strong>
                       <span className="node-directory-description">{entry.description}</span>
                       <span className="node-directory-status"><BookOpen size={14} aria-hidden="true" />{entry.status}</span><span className="node-directory-cta">Apri il nodo →</span>
@@ -195,7 +196,7 @@ export default function NodeDirectory() {
                   <li key={node.id}>
                     <a className={`node-directory-card node-directory-card-${node.id}`} href={node.href}>
                       <span className="node-directory-card-main">
-                        <span className="node-directory-topic">{node.topic}</span><code className="node-directory-namespace">Nodo: {node.id}</code>
+                        <span className="node-directory-topic">{node.topic}</span><code className="node-directory-identifier">ID: {node.id} · {node.id==='agora'?'NODO ALPHA':node.id==='polisrossa'?'NODO TEMATICO':'ANTEPRIMA TEMATICA'}</code><code className="node-directory-namespace">Nodo: {node.id}</code>
                         <strong className="node-directory-title">{node.name} <span>— AgoràNode</span></strong>
                         <span className="node-directory-description">{node.description}</span>
                         <span className="node-directory-status"><BookOpen size={14} aria-hidden="true" />{node.status}</span><span className="node-directory-cta">Apri il nodo →</span>

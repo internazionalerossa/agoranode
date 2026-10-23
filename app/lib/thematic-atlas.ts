@@ -6,6 +6,8 @@
  * narrative framing; non-selected articles remain searchable. This curated
  * genesis edition is a repository-reviewed seed, NOT a PR2 ballot certificate.
  */
+import {thematicLibraryHref} from './thematic-library-navigation';
+
 export type AtlasKind = 'milestone'|'concept'|'guide'|'technical-document';
 export type AtlasSource = {label:string;url:string;context:string};
 export type AtlasSection = {heading:string;paragraphs:readonly string[]};
@@ -74,14 +76,13 @@ export function validateAtlas(entries:readonly AtlasEntry[]):void{
 export function atlasArticleUrl(spaceId:string,id:string):string{
  if(!ID.test(spaceId)||spaceId.length>64||!ID.test(id)||id.length>80)
   throw Error('Invalid Atlas link identity');
- const base=spaceId==='agora'?'/agora':'/n/'+spaceId;
- return base+'?'+new URLSearchParams({voce:id});
+ return thematicLibraryHref(spaceId,'timeline','indice',id);
 }
 export function atlasSelectionFromUrl(raw:string,spaceId:string):string|null{
  const url=new URL(raw,'https://example.invalid');
  const expected=spaceId==='agora'?'/agora':'/n/'+spaceId;
  const selected=url.searchParams.get('voce');
- if(url.pathname.replace(/\/+$/,'')!==expected||!selected||
+ if(url.pathname.replace(/\/+$/,'')!==expected||url.searchParams.get('view')!=='biblioteca'||!selected||
    url.searchParams.getAll('voce').length!==1||!ID.test(selected)||selected.length>80)
    return null;
  return selected;

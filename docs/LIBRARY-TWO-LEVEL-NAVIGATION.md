@@ -51,3 +51,6 @@ NODO TEMATICO
 - La rassegna e i preferiti continuano a funzionare fuori da Biblioteca, separati per comunità.
 
 La prima versione usa `LibraryNavigationTabs.tsx` per la navigazione a due livelli; `AgoraLibraryView.tsx` per le tre sezioni del nodo tecnologico; `PolisrossaAtlasIndex.tsx` per le voci già presenti nel patrimonio storico. `thematic-atlas.ts` separa la voce enciclopedica dalla sua eventuale inclusione nel percorso narrativo. La pubblicazione multi-nodo completa dopo voto PR2 resta lavoro aperto e non è attestata da questo intervento.
+
+
+La stessa gerarchia è applicata anche ai **nuovi nodi read-only** installati da Node Studio: `PublicSpaceLibrary.tsx` mostra i tre accessi principali e, all'interno di «Timeline e Atlante», la selezione fra la Timeline del manifesto e l'Indice di tutte le sue voci. Se non ci sono libri, dati o tappe, mostra uno stato vuoto senza inventare contenuti o simulare decisioni PR2.

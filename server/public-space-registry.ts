@@ -1,4 +1,4 @@
-import {open} from 'node:fs/promises';
+import {open,readdir} from 'node:fs/promises';
 import {constants} from 'node:fs';
 import {isAbsolute,join} from 'node:path';
 import {validatePublicSpaceSeed} from '../app/platform/public-space-seed';
@@ -35,4 +35,28 @@ export async function publicSpaceSeedResponse(request:Request,directory?:string)
  }catch{
   return Response.json({error:'Public community not provisioned'},{status:404,headers});
  }
+}
+
+
+/** Directory contains only operator-installed public seeds, never user drafts. */
+export async function publicSpaceDirectoryResponse(request:Request,directory?:string):Promise<Response>{
+ const headers={'cache-control':'no-store','x-content-type-options':'nosniff'};
+ if(request.method!=='GET')return Response.json({error:'Method not allowed'},{status:405,headers:{...headers,allow:'GET'}});
+ if(new URL(request.url).search)return Response.json({error:'Invalid request'},{status:400,headers});
+ if(!directory)return Response.json({spaces:[]},{headers});
+ if(!isAbsolute(directory))return Response.json({error:'Invalid server configuration'},{status:503,headers});
+ try{
+  const entries=await readdir(directory,{withFileTypes:true});
+  if(entries.length>100)throw Error('Too many space seed files');
+  const spaces:Array<{spaceId:string;name:string;topic:string;description:string;href:string}>=[];
+  for(const item of entries){
+   if(!item.isFile()||!/^([a-z][a-z0-9-]{2,47})\\.json$/.test(item.name))continue;
+   const spaceId=item.name.slice(0,-5);
+   const response=await publicSpaceSeedResponse(new Request('https://site.invalid/api/public-spaces/'+spaceId),directory);
+   if(!response.ok)continue;
+   const manifest=await response.json() as {spaceId:string;name:string;topic:string;description:string};
+   spaces.push({spaceId,name:manifest.name,topic:manifest.topic,description:manifest.description,href:'/n/'+spaceId});
+  }
+  return Response.json({spaces:spaces.sort((a,b)=>a.name.localeCompare(b.name,'it'))},{headers});
+ }catch{return Response.json({error:'Public space directory unavailable'},{status:503,headers});}
 }

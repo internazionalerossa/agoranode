@@ -49,11 +49,11 @@ export default function PublicSpaceHome({spaceId}:{spaceId:string}){
    {view.state==='loading'?<p role="status">Caricamento del nodo…</p>:
     view.state==='not-found'?<section><h2>Nodo non pubblicato</h2><p>Questo spazio non è ancora installato su questo peer.</p></section>:
     view.state==='error'?<p role="alert">Impossibile verificare il manifesto di questo nodo.</p>:
-    <div className="public-space-main" style={{'--space-accent':view.seed.accent} as CSSProperties}>
+    seed?<div className="public-space-main" style={{'--space-accent':seed.accent} as CSSProperties}>
      <section className="public-space-intro">
       <p className="eyebrow">NODO TEMATICO · ANTEPRIMA PUBBLICA</p>
-      <h2>{view.seed.name}</h2><p>{view.seed.description}</p>
-      <p className="public-space-boundary">{view.seed.publication.notice}</p>
+      <h2>{seed.name}</h2><p>{seed.description}</p>
+      <p className="public-space-boundary">{seed.publication.notice}</p>
      </section>
      <section aria-labelledby="public-space-knowledge-title">
       <h2 id="public-space-knowledge-title">La conoscenza del nodo</h2>
@@ -70,14 +70,14 @@ export default function PublicSpaceHome({spaceId}:{spaceId:string}){
       {blocks.length===0?<p role="status">Nessun contenuto corrispondente in questa anteprima.</p>:null}
      </section>
      <section id="public-space-sources"><h2>Fonti del nodo</h2>
-      <ul>{view.seed.sources.map(source=><li key={source.id}>
+      <ul>{seed.sources.map(source=><li key={source.id}>
        <strong>{source.name}</strong>
        {source.homepage?<a href={source.homepage} target="_blank" rel="noopener noreferrer">Visita la fonte ↗</a>:null}
        {source.feedUrl?<a href={source.feedUrl} target="_blank" rel="noopener noreferrer">RSS/Atom ↗</a>:null}
       </li>)}</ul>
-      {view.seed.sources.length===0?<p>Le fonti sono ancora in preparazione.</p>:null}
+      {seed.sources.length===0?<p>Le fonti sono ancora in preparazione.</p>:null}
      </section>
-    </div>}
+    </div>:<p role="alert">Il manifesto del nodo non è disponibile.</p>}
   </main>
  </div>;
 }

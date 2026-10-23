@@ -56,7 +56,7 @@ export default function WikiProposalEditor({history}: {history:PublicKnowledgeHi
    catch{return null;}
   }
   const body=[
-   'PROPOSTA DI REVISIONE WIKI — DA SOTTOPORRE A VALUTAZIONE PR2',
+   'PROPOSTA DI REVISIONE DELL’ATLANTE — DA SOTTOPORRE A VALUTAZIONE PR2',
    'Pagina: '+title,
    'Nodo: '+entity.identity.spaceId,
    'Tipo: '+entity.identity.kind,
@@ -67,7 +67,7 @@ export default function WikiProposalEditor({history}: {history:PublicKnowledgeHi
    'La pagina corrente non viene modificata automaticamente. Fonti, licenze e decisioni PR2 devono essere verificate prima di un eventuale nuovo checkpoint.',
   ].join('\n\n');
   try{return timelineProposalLink({
-   title:'Revisione wiki: '+title.slice(0,112),
+   title:'Revisione Atlante: '+title.slice(0,112),
    body:body.slice(0,3950),references:source.trim(),
   });}catch{return null;}
  },[blocks,reason,source,title,entity.identity.spaceId,entity.identity.kind,entity.identity.id,entity.revisionSha256]);

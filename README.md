@@ -8,15 +8,15 @@ AgoràNode è una piattaforma **AGPL-3.0-or-later** per creare comunità tematic
 
 L'obiettivo di lungo periodo è far funzionare il patrimonio pubblico della rete sui **computer di collaboratori indipendenti**, senza dipendere permanentemente da un server fondatore, un database commerciale o un unico cloud. Ogni computer dovrebbe custodire soltanto ciò che è autorizzato e sceglie di ospitare; le modifiche pubbliche devono essere verificabili e replicabili in modo incrementale, mentre le informazioni private restano protette.
 
-**Alpha di piattaforma: PolisRossa è il primo nodo reale, non una demo da buttare via.** Da qui estraiamo componenti, modelli e strumenti comuni senza perdere contenuti, URL e lavoro editoriale. **Non è ancora un social federato pronto per la produzione.** Agorà è il nodo dedicato alla tecnologia stessa, ora con una rassegna RSS/video consultabile ma ancora senza wiki e forum tematici completi. Consenso BFT in rete, identità portabili, chat federata, runtime completo multi-comunità e failover indipendente non sono ancora operativi. Il registro [QUALITY.md](docs/QUALITY.md) distingue codice implementato, test locali ed evidenze esterne.
+**Agorà by AgoràNode è il nodo alpha di riferimento e il nucleo editoriale del prodotto.** Prende forma riutilizzando le soluzioni già sperimentate in PolisRossa, il prototipo storico che conserva contenuti, URL, account e identità autonoma. Agorà ha la propria rassegna RSS/video e una Biblioteca con primi documenti, Timeline narrativa, Atlante ricercabile e dati editoriali; **non è ancora un social federato pronto per la produzione** e il forum PR2 tematico indipendente non è operativo. Consenso BFT in rete, identità portabili, chat federata, runtime completo multi-comunità e failover indipendente non sono ancora operativi. Il registro [QUALITY.md](docs/QUALITY.md) distingue codice implementato, test locali ed evidenze esterne.
 
 ## Un motore, comunità diverse
 
 | Concetto | Responsabilità |
 | --- | --- |
 | `/` | Portale e ricerca dei nodi |
-| `/agora` | Comunità tematica sul software AgoràNode (anteprima) |
-| `/polisrossa` | Prima comunità sviluppata: storia, attualità e culture della sinistra internazionale |
+| `/agora` | Nodo alpha di origine Agorà by AgoràNode: rassegna tecnologica, Biblioteca, Atlante e laboratorio |
+| `/polisrossa` | Prototipo storico e comunità tematica autonoma: storia, notizie e cultura della sinistra internazionale |
 | Nodo tematico | Contenuti, fonti, wiki, biblioteca, dati, regole e membership propri |
 | Peer fisico | Un computer che offre storage, banda o servizi a uno o più nodi |
 
@@ -85,6 +85,12 @@ La replica attuale trasporta ancora bundle v1 cumulativi. Il codec sperimentale 
 Il **Node Studio** permette di comporre in modo visuale una bozza tematica con blocchi, fonti, timeline e materiali. Un operatore può ora revisionarla e installare un manifesto pubblico separato con `npm run space:install -- --confirm-public-readonly <bozza.json> <directory-assoluta>`. Se il server configura `AGORANODE_PUBLIC_SPACES_DIRECTORY`, il nuovo nodo è consultabile su `/n/<id>` e compare nel portale, usando una **pagina React comune**. È una funzione realmente eseguibile, ma **solo read-only**: non crea account, un primo PR2, un forum o un nuovo database completo. Il salvataggio privato dei draft non pubblica nulla. [Procedura e limiti](docs/THEMATIC-BOOTSTRAP.md).
 
 La biblioteca di PolisRossa dispone inoltre di collegamenti permanenti alla **scheda delle singole opere**, con edizioni linguistiche e disponibilità verificata separatamente dai diritti di replica. Le pagine pubbliche della knowledge base hanno un primo editor visuale a blocchi per **preparare** correzioni e inviarle al forum PR2, senza sostituire revisione delle fonti, votazione e pubblicazione autorizzata.
+
+## Biblioteca in due livelli, uguale per ogni nodo
+
+Dalla navigazione generale si apre **Biblioteca**; solo dentro Biblioteca appaiono tre scelte principali: **Libri e percorsi**, **Timeline e Atlante**, **Dati e grafici**. Cliccando **Timeline e Atlante** compaiono due opzioni secondarie: **Timeline** (racconto narrativo selezionato) oppure **Atlante · Indice e ricerca** (tutte le voci attualmente pubblicate e ricercabili). È una precisazione del modulo Biblioteca, **non un nuovo menu principale che sostituisce news, video o Agorà/partecipazione**. [Schema e contratti UX](docs/LIBRARY-TWO-LEVEL-NAVIGATION.md).
+
+Agorà possiede un primo corpus originale documentato nell'Atlante, con fonti, pagine correlate e tappe narrative; PolisRossa mantiene le pagine storiche esistenti e ha una modalità separata di ricerca delle voci del suo patrimonio pubblico. La pubblicazione automatica dopo voto PR2 è ancora da sviluppare.
 
 ## Struttura del repository
 

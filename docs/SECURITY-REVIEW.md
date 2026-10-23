@@ -8,7 +8,7 @@
 - Confine delle API e runtime unico: `server/index.ts`, `server/api.ts`, `server/config.ts`, `server/pool.ts`.
 - Import di pacchetti pubblici firmati e nuovo trasporto: `server/knowledge-replica-agent.ts`, `server/knowledge-replication-finality.ts`, `server/public-peer-transport.ts`, `server/public-peer-cli.ts`.
 - Separazione della configurazione di database: `server/space-databases.ts`.
-- Dipendenze e stato documentato di autenticazione, wiki, social e chat: `docs/ARCHITECTURE.md`, `docs/QUALITY.md`, `docs/CRITICAL-DESIGN-REVIEW.md` e relativi entrypoint.
+- Dipendenze e stato documentato di autenticazione, Atlante, social e chat: `docs/ARCHITECTURE.md`, `docs/QUALITY.md`, `docs/CRITICAL-DESIGN-REVIEW.md` e relativi entrypoint.
 
 Non sono stati ispezionati riga per riga tutti i cataloghi, le ~migliaia di righe CSS, tutte le query SQL, le dipendenze transitive, le immagini, tutti i middleware o le configurazioni delle macchine dei custodi. Non sono stati eseguiti fuzzing esterno, bug bounty, prove di downtime su reti geografiche, verifica crittografica di un algoritmo BFT o assessment legale/di privacy certificato.
 
@@ -23,7 +23,7 @@ Non sono stati ispezionati riga per riga tutti i cataloghi, le ~migliaia di righ
 | S-05 | **Alta** | Un gateway e un dominio possono restare singoli punti di guasto nonostante copie pubbliche | Gateway HTTPS indipendenti e recovery manuale autenticato |
 | S-06 | **Alta** | URL dei peer configurati manualmente: un operatore può sbagliare peer o proxy TLS; rete non scopre automaticamente custodi | Validazione degli ID, TLS rigoroso, pin trust root out-of-band e future multiple bootstrap |
 | S-07 | **Media** | Nuovo server di exchange ha payload, elenco, path e signature checks ma non anti-DoS di rete oltre timeout/dimensioni; verifica pacchetti ripetuta per l'indice | Rate-limit esterno, quote, osservabilità, test di carico e CPU |
-| S-08 | **Alta** | Open wiki editing e contenuti politici/sensibili in replica permanente possono rendere impossibili rettifiche e rimozioni | Protocolli di diritti, moderazione, retention e analisi dati prima di apertura |
+| S-08 | **Alta** | Open Atlante editing e contenuti politici/sensibili in replica permanente possono rendere impossibili rettifiche e rimozioni | Protocolli di diritti, moderazione, retention e analisi dati prima di apertura |
 | S-09 | **Alta** | Quorum e voto nominativo non risolvono coercizione, identità duplicate e segretezza | Revisione formale del voto prima di uso federale vincolante |
 | S-10 | **Media** | Build e test su CI non provano la correttezza delle dipendenze né l'integrità del runtime ospitato da terzi | Lockfile, SBOM, dependency audit, provenance e firma release verificabile |
 | S-12 | **Alta** | La CLI del peer non possiede oggi un verificatore completo dei certificati politici per i checkpoint successivi al bootstrap e fallisce in modalità chiusa | Collegare un verificatore di governance controllato indipendentemente prima di propagare aggiornamenti post-bootstrap |

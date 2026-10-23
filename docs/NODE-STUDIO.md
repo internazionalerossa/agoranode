@@ -1,10 +1,10 @@
 # Node Studio — frontend comune, fonti personali e bozze di comunità
 
-**Stato: implementazione alpha parziale.** PolisRossa resta il nodo completo di riferimento; il nodo tecnologico Agorà ora possiede una rassegna RSS/video di sola consultazione e strumenti comuni per creare bozze. La creazione pubblica automatica di un nuovo nodo, l'editing wiki con approvazione PR2 e i forum isolati per nodo **non** sono ancora operativi.
+**Stato: implementazione alpha parziale.** PolisRossa resta il nodo completo di riferimento; il nodo tecnologico Agorà ora possiede una rassegna RSS/video di sola consultazione e strumenti comuni per creare bozze. La creazione pubblica automatica di un nuovo nodo, l'modifica delle voci dell’Atlante con approvazione PR2 e i forum isolati per nodo **non** sono ancora operativi.
 
 ## Come deve apparire ogni nodo
 
-Ogni comunità condivide una struttura di prodotto riconoscibile, modellata sul lavoro editoriale e visuale di PolisRossa: rassegna con video, biblioteca di opere ed edizioni, pagine wiki, storyline narrativa, dati verificabili e area **Agorà** di partecipazione. Cambiano tema, colori, metadati, fonti, contenuti, utenti, delibere e diritti.
+Ogni comunità condivide una struttura di prodotto riconoscibile, modellata sul lavoro editoriale e visuale di PolisRossa: rassegna con video, biblioteca di opere ed edizioni, voci dell’Atlante, storyline narrativa, dati verificabili e area **Agorà** di partecipazione. Cambiano tema, colori, metadati, fonti, contenuti, utenti, delibere e diritti.
 
 Il manifesto versione 1 descrive lo stato dei moduli. Non autorizza ad attivare automaticamente servizi privati o un database di un'altra comunità. Chi apre un nuovo nodo deve avere un'origine e un ambito politico propri, indipendenti dalla macchina che lo ospita.
 
@@ -33,7 +33,7 @@ Una proposta su PolisRossa può aprire il compositore PR2 del forum già esisten
 2. Registrare una proposta con **digest dell'esatta bozza**, fonti, licenze, risorse e namespace richiesto. La bozza non deve cambiare fra scrutinio e approvazione senza invalidare l'atto.
 3. Eseguire discussione, conteggio verificabile, ricorso ed eventuale seconda camera secondo la materia. Un nuovo nodo non nasce dal numero di computer gestiti da una persona.
 4. Provisioning del nuovo `spaceId` con database e ruolo propri, manifesti firmati, gateway, quote e modulo forum, senza riusare sessioni PR2 PolisRossa.
-5. Indici wiki/timeline, link ad ogni pagina, alimentazione feed e gestione delle licenze. La timeline principale rimane una **selezione narrativa approvata** dei membri PR2: una pagina esclusa resta ricercabile.
+5. Indici Atlante/timeline, link ad ogni pagina, alimentazione feed e gestione delle licenze. La timeline principale rimane una **selezione narrativa approvata** dei membri PR2: una pagina esclusa resta ricercabile.
 6. Ripristino, export, dismissione e revoche collaudati su macchine indipendenti prima di aprire contributi pubblici.
 
 ## Sicurezza e convenzioni
@@ -52,6 +52,6 @@ Una proposta su PolisRossa può aprire il compositore PR2 del forum già esisten
 
 `FeedPreferenceControls.tsx` è comune ai nodi, `server/node-feed-preferences.ts` e migrazione `015-node-feed-preferences.sql` conservano scelte account; `server/agora-feed.ts` gestisce la rassegna di Agorà.
 
-I contratti dei wiki e dei voti narrativi sono in [NODE-KNOWLEDGE-GRAPH.md](NODE-KNOWLEDGE-GRAPH.md), [EDITORIAL-GOVERNANCE.md](EDITORIAL-GOVERNANCE.md) e [GOVERNANCE.md](GOVERNANCE.md). Stato del collaudo in [QUALITY.md](QUALITY.md).
+I contratti dei Atlante e dei voti narrativi sono in [NODE-KNOWLEDGE-GRAPH.md](NODE-KNOWLEDGE-GRAPH.md), [EDITORIAL-GOVERNANCE.md](EDITORIAL-GOVERNANCE.md) e [GOVERNANCE.md](GOVERNANCE.md). Stato del collaudo in [QUALITY.md](QUALITY.md).
 
-**Non chiamare «WordPress completo», «federazione funzionante» o «wiki pubblicamente modificabile» il solo editor di bozze.** È il primo passo verso un workflow PR2 realmente governato.
+**Non chiamare «WordPress completo», «federazione funzionante» o «Atlante pubblicamente modificabile» il solo editor di bozze.** È il primo passo verso un workflow PR2 realmente governato.

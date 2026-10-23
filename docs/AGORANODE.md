@@ -15,7 +15,7 @@ Ogni manifesto `org.agoranode.instance.v1` dichiara identità, argomento, lingua
 | Notizie | Raccogliere fonti scritte mantenendo editore, data, lingua e URL originale |
 | Video | Presentare canali e filmati senza avvio automatico e senza nascondere la piattaforma di origine |
 | Biblioteca | Catalogare opere e offrire lettura interna soltanto quando i diritti della specifica edizione lo consentono |
-| Wiki | Dare a entità e argomenti pagine stabili, fonti, relazioni e revisioni |
+| Atlante | Dare a entità e argomenti pagine stabili, fonti, relazioni e revisioni |
 | Storyline | Ordinare gli eventi del tema e collegarli a persone, luoghi, organizzazioni, opere e concetti |
 | Dati | Conservare definizioni, unità, popolazioni, periodi, valori e fonti insieme ai confronti e ai grafici |
 | Comunità | Discutere, proporre, votare e governare il singolo nodo con regole pubbliche |

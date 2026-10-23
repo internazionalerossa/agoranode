@@ -41,7 +41,7 @@ export default function SharedSpaceModules({manifest}: {manifest: AgoraNodeManif
           );
         })}
       </div>
-      <NodeContentSearch spaceId={manifest.instance.id}/>
+      {manifest.instance.id==='polisrossa'?<NodeContentSearch spaceId={manifest.instance.id}/>:null}
     </section>
   );
 }

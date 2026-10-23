@@ -23,9 +23,9 @@ Questa revisione sfida esplicitamente le assunzioni del progetto. Un manifesto, 
 
 ## 2. Lenti di progettazione, non figure da imitare
 
-### Wiki, Ward Cunningham, Wikipedia, Wales e Sanger
+### Atlante, Ward Cunningham, Wikipedia, Wales e Sanger
 
-Un wiki rende possibile la correzione pubblica e tracciabile. Il punto cruciale non è votare ogni frase: distinguere **verificabilità**, qualità delle fonti, conflitti di interesse, consenso editoriale, disaccordo documentato e regole generali. Wikipedia adotta pratiche di ricerca del consenso: una votazione non sostituisce l'argomentazione o le fonti. AgoràNode conserva la propria indipendenza da licenze e API Wikipedia, ma dovrebbe imparare dai meccanismi di revisione pubblica e dagli organi di ricorso.
+Un Atlante rende possibile la correzione pubblica e tracciabile. Il punto cruciale non è votare ogni frase: distinguere **verificabilità**, qualità delle fonti, conflitti di interesse, consenso editoriale, disaccordo documentato e regole generali. Wikipedia adotta pratiche di ricerca del consenso: una votazione non sostituisce l'argomentazione o le fonti. AgoràNode conserva la propria indipendenza da licenze e API Wikipedia, ma dovrebbe imparare dai meccanismi di revisione pubblica e dagli organi di ricorso.
 
 **Modifica:** passaggi separati `draft → source-review → discussion → publish/reject → appeal` con provenance, motivazioni e diritti. Un voto può definire la policy editoriale o decidere un conflitto procedurale, non «approvare» che un dato inventato diventi vero. I valutatori devono essere identificati e rendere conto dei conflitti d'interesse. Un piccolo errore verificabile non dovrebbe attendere una grande elezione; le modifiche contestate dovrebbero avere un percorso di risoluzione proporzionato.
 
@@ -45,7 +45,7 @@ Un sistema non si autoregola solo perché esistono voti e sensori. Servono **var
 
 Ostrom analizza come comunità gestiscano beni collettivi tramite confini, regole adatte al contesto, partecipazione, monitoraggio responsabile, sanzioni proporzionate, ricorsi e sistemi annidati. Non dimostra che qualsiasi bene comune possa fare a meno, in ogni situazione, di Stato, mercati o tutela giuridica.
 
-**Modifica:** ogni spazio dichiara chi può editare, leggere, governare, custodire o giudicare ricorsi; i custodi rendicontano alla comunità; sanzioni graduate e contestabili; forum, wiki e dati hanno procedure proporzionate. Le regole federali trattano interoperabilità e risorse comuni, non sostituiscono l'assemblea locale.
+**Modifica:** ogni spazio dichiara chi può editare, leggere, governare, custodire o giudicare ricorsi; i custodi rendicontano alla comunità; sanzioni graduate e contestabili; forum, Atlante e dati hanno procedure proporzionate. Le regole federali trattano interoperabilità e risorse comuni, non sostituiscono l'assemblea locale.
 
 ### Endenburg e sociocrazia, Castoriadis, Bookchin
 
@@ -77,11 +77,11 @@ Joseph Goebbels e i sistemi di filtraggio/monitoraggio statale, fra cui il Great
 
 **B — Voto nominativo vs riservatezza:** il forum attuale pubblica schede nominative; il contratto federale v1 permette di associare un identificativo pseudonimo alla scelta. Non aprire elezioni vincolanti fra comunità finché non siano risolti privacy, trasparenza e anti-coercizione.
 
-**C — Pubblicazione wiki vs decisione politica:** il deposito può accettare revisioni autorizzate, ma non esiste il workflow pubblico completo fra proposta, revisione, licenze, decisione, pubblicazione e ricorso. Inserire questo ponte prima della produzione; non votare sul fatto empirico.
+**C — Pubblicazione Atlante vs decisione politica:** il deposito può accettare revisioni autorizzate, ma non esiste il workflow pubblico completo fra proposta, revisione, licenze, decisione, pubblicazione e ricorso. Inserire questo ponte prima della produzione; non votare sul fatto empirico.
 
 **D — La comunità Agorà vs governo della rete:** la pagina `/agora` contiene la bacheca federale e la custodia, ma ancora non è un nodo editoriale completo né un'assemblea federale attivata. Evitare che un URL diventi fonte di autorità implicita.
 
-**E — Conoscenza pubblica e licenze:** il formato contempla contributi con licenze che possono vietare opere derivate. Queste opere possono apparire in una **biblioteca/catalogo con diritti distinti**, non diventare automaticamente testo di un corpus wiki collaborativo modificabile. Serve una policy chiara delle licenze ammesse per la wiki e un sistema di conflitti/attribuzioni.
+**E — Conoscenza pubblica e licenze:** il formato contempla contributi con licenze che possono vietare opere derivate. Queste opere possono apparire in una **biblioteca/catalogo con diritti distinti**, non diventare automaticamente testo di un corpus Atlante collaborativo modificabile. Serve una policy chiara delle licenze ammesse per l’Atlante e un sistema di conflitti/attribuzioni.
 
 **F — Conservazione vs diritto alla rimozione:** record append-only e checkpoint permanenti non devono includere per errore dati personali, votazioni riservate, social graph privati o copie di chat a 48 ore. Le richieste di rimozione vanno affrontate con policy e limiti realistici, non con un tombstone come unica misura.
 
@@ -101,7 +101,7 @@ Monitoraggi suggeriti (solo aggregati privacy-safe): distribuzione delle replich
 2. Chi può ammettere/espellere un nuovo spazio e con quali possibilità di ricorso?
 3. Quali classi di decisione sono segrete, nominate, pseudonime o pubbliche?
 4. Come limitare l'abuso di identità multiple senza imporre un'identità civile o un fornitore privato?
-5. Quale corpus wiki ammette testi modificabili e con quali licenze? Quali rimangono catalogo/lettura?
+5. Quale corpus Atlante ammette testi modificabili e con quali licenze? Quali rimangono catalogo/lettura?
 6. Le chat sono locali al nodo, globali alla rete o federate fra peer con stanze condivise? Chi ha la custodia delle chiavi E2E?
 7. Quale quorum resta valido se alcuni peer non hanno la versione più recente? Come si prova una migrazione fra versioni?
 8. Quali limiti di potere emergenziale si applicano quando la rete è sotto attacco, senza creare un proprietario permanente?

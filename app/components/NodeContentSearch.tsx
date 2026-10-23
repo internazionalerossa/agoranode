@@ -25,7 +25,7 @@ export default function NodeContentSearch({spaceId}:{spaceId:string}){
   }):[],[items,spaceId,query,kind]);
   return <section className="node-content-discovery" aria-label="Ricerca nella conoscenza del nodo">
     <h2>Esplora la conoscenza di questo nodo</h2>
-    <p>Ricerca comune fra biblioteca e timeline. Le pagine wiki, i dati e il forum saranno collegati quando i rispettivi indici saranno operativi.</p>
+    <p>Ricerca comune fra biblioteca e timeline. Le altre voci dell’Atlante, i dati e il forum saranno collegati man mano che saranno pubblicati i rispettivi indici.</p>
     <label htmlFor={'space-search-'+spaceId}>Cerca per titolo, autore, tema o periodo</label>
     <input id={'space-search-'+spaceId} type="search" value={query} maxLength={240}
       onChange={e=>setQuery(e.currentTarget.value)} placeholder="Cerca nella conoscenza pubblica"/>
@@ -34,7 +34,7 @@ export default function NodeContentSearch({spaceId}:{spaceId:string}){
       <option value="all">Tutti i risultati</option>
       <option value="book">Biblioteca</option>
       <option value="timeline">Timeline</option>
-      <option value="wiki">Wiki</option>
+      <option value="wiki">Voci dell’Atlante</option>
       <option value="dataset">Dati</option>
       <option value="forum">Forum</option>
     </select>

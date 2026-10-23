@@ -65,7 +65,7 @@ export default function TimelineProposalTool({events,selectedIds,onSelectionChan
         <select value={action} onChange={e=>setAction(e.currentTarget.value as typeof action)}>
           <option value="revise">Correggere o arricchire il racconto</option>
           <option value="include">Proporre l'inclusione di una pagina</option>
-          <option value="exclude">Escludere una tappa dalla timeline (non dalla wiki)</option>
+          <option value="exclude">Escludere una tappa dalla timeline (non dall’Atlante)</option>
         </select>
       </label>
     </>:<>
@@ -75,7 +75,7 @@ export default function TimelineProposalTool({events,selectedIds,onSelectionChan
       <label>Periodo o collocazione nella cronologia
         <input value={period} onChange={e=>setPeriod(e.currentTarget.value)} maxLength={120} placeholder="Es. 1968–1975, oppure contemporaneo"/>
       </label>
-      <p>La nuova pagina sarà proposta per la wiki; l’eventuale inserimento nella timeline rimarrà una decisione separata dei PR2.</p>
+      <p>La nuova pagina sarà proposta per l’Atlante; l’eventuale inserimento nella timeline rimarrà una decisione separata dei PR2.</p>
     </>}
     <label>{mode==='new'?'Scrivi un’introduzione comprensibile a chi scopre il tema':'Spiega il cambiamento o scrivi il nuovo passaggio narrativo'}
       <textarea value={context} onChange={e=>setContext(e.currentTarget.value)} rows={5} maxLength={1800}

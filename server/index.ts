@@ -14,7 +14,7 @@ import {liveChat} from './live-chat';
 import {purgeForumApplications,startForumApplicationRetention} from './forum-retention';
 import {purgeAuthenticationState,startAuthenticationRetention} from './auth-retention';
 import {api,privatePaths} from './api';
-import {publicSpaceSeedResponse} from './public-space-registry';
+import {publicSpaceSeedResponse,publicSpaceDirectoryResponse} from './public-space-registry';
 import type {ForumSocialIdentity} from '../app/lib/forum';
 import {INSTANCE_NAME,INSTANCE_PLATFORM_NAME} from '../app/lib/instance';
 const config=configuration(),pool=createPool(config.connectionString),db=new PostgresDatabase(connections(pool));
@@ -39,7 +39,8 @@ const server=createServer({maxHeaderSize:16384,requestTimeout:30000,headersTimeo
   // Identity headers are never consulted. The canonical origin is configuration, never forwarded host input.
   const request=new Request(url,{method,headers,body:body as BodyInit|undefined});
   let response:Response;
-  if(url.pathname.startsWith('/api/public-spaces/'))response=await publicSpaceSeedResponse(request,process.env.AGORANODE_PUBLIC_SPACES_DIRECTORY);
+  if(url.pathname==='/api/public-spaces')response=await publicSpaceDirectoryResponse(request,process.env.AGORANODE_PUBLIC_SPACES_DIRECTORY);
+  else if(url.pathname.startsWith('/api/public-spaces/'))response=await publicSpaceSeedResponse(request,process.env.AGORANODE_PUBLIC_SPACES_DIRECTORY);
   else if(url.pathname==='/api/service-info')response=serviceInfoResponse(request,config.operator,config.registrationOpen,config.forumOpen,config.mirror);
   else if(url.pathname==='/healthz'){
    try{await pool.query('SELECT 1');response=Response.json({ok:true},{headers:{'cache-control':'no-store'}});}catch{response=Response.json({ok:false},{status:503,headers:{'cache-control':'no-store'}});}

@@ -14,6 +14,7 @@ import {liveChat} from './live-chat';
 import {purgeForumApplications,startForumApplicationRetention} from './forum-retention';
 import {purgeAuthenticationState,startAuthenticationRetention} from './auth-retention';
 import {api,privatePaths} from './api';
+import {publicSpaceSeedResponse} from './public-space-registry';
 import type {ForumSocialIdentity} from '../app/lib/forum';
 import {INSTANCE_NAME,INSTANCE_PLATFORM_NAME} from '../app/lib/instance';
 const config=configuration(),pool=createPool(config.connectionString),db=new PostgresDatabase(connections(pool));
@@ -38,7 +39,8 @@ const server=createServer({maxHeaderSize:16384,requestTimeout:30000,headersTimeo
   // Identity headers are never consulted. The canonical origin is configuration, never forwarded host input.
   const request=new Request(url,{method,headers,body:body as BodyInit|undefined});
   let response:Response;
-  if(url.pathname==='/api/service-info')response=serviceInfoResponse(request,config.operator,config.registrationOpen,config.forumOpen,config.mirror);
+  if(url.pathname.startsWith('/api/public-spaces/'))response=await publicSpaceSeedResponse(request,process.env.AGORANODE_PUBLIC_SPACES_DIRECTORY);
+  else if(url.pathname==='/api/service-info')response=serviceInfoResponse(request,config.operator,config.registrationOpen,config.forumOpen,config.mirror);
   else if(url.pathname==='/healthz'){
    try{await pool.query('SELECT 1');response=Response.json({ok:true},{headers:{'cache-control':'no-store'}});}catch{response=Response.json({ok:false},{status:503,headers:{'cache-control':'no-store'}});}
   }else if(config.mirror&&(url.pathname==='/api/auth'||url.pathname.startsWith('/api/identity/')||url.pathname==='/api/community/identity'||privatePaths.has(url.pathname)))response=Response.json({configured:false,authenticated:false,registrationOpen:false,error:'Questa copia pubblica non ospita account o dati privati.'},{status:url.pathname==='/api/auth'&&method==='GET'?200:403,headers:{'cache-control':'private, no-store'}});

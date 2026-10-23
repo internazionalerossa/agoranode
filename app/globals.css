@@ -5304,3 +5304,108 @@ body { min-width: 0; width: 100%; max-width: 100vw; overflow-x: hidden; }
 .public-space-search-results ol {padding-left:25px;display:grid;gap:12px}
 .public-space-search-results li a {text-decoration:underline;text-underline-offset:3px}
 .public-space-search-results li p {line-height:1.5;margin:5px 0}
+
+
+/* Agorà alpha · editorial Atlas built on the narrative language of PolisRossa. */
+.agora-atlas-root {--atlas-ink:#1c2b33;--atlas-muted:#52636b;--atlas-rule:#d1dce0;--atlas-paper:#fff;--atlas-accent:#235f86;color:var(--atlas-ink);max-width:1180px;margin:0 auto;padding:clamp(16px,3vw,38px);font-family:inherit}
+.agora-atlas-root a {color:inherit;text-decoration:none}
+.agora-atlas-root a:focus-visible,.agora-atlas-root button:focus-visible,.agora-atlas-root input:focus-visible,.agora-atlas-root select:focus-visible {outline:3px solid var(--atlas-accent);outline-offset:4px}
+.agora-atlas-section-intro {max-width:810px;margin-bottom:30px}
+.agora-atlas-section-intro .eyebrow,.agora-atlas-document-header .eyebrow {font-size:11px;letter-spacing:.15em;font-weight:700;color:var(--atlas-accent)}
+.agora-atlas-section-intro h2 {font:500 clamp(30px,4vw,52px)/1.09 Georgia,serif;letter-spacing:-.028em;margin:10px 0 17px}
+.agora-atlas-section-intro>p:last-child {font-size:16px;line-height:1.75;max-width:70ch;color:var(--atlas-muted)}
+.agora-atlas-index {padding:32px 0 60px;border-bottom:1px solid var(--atlas-rule)}
+.agora-atlas-filters {display:flex;gap:16px;align-items:end;flex-wrap:wrap;margin:24px 0 14px}
+.agora-atlas-filters label {display:grid;gap:9px;font-size:13px;font-weight:650;flex:1;min-width:min(100%,250px);color:var(--atlas-ink)}
+.agora-atlas-filters label:first-child {flex:2}
+.agora-atlas-filters label>svg {display:inline}
+.agora-atlas-filters input,.agora-atlas-filters select {background:var(--atlas-paper);color:var(--atlas-ink);border:1px solid var(--atlas-rule);min-height:47px;width:100%;padding:11px 13px;border-radius:7px;font:inherit;font-size:15px}
+.agora-atlas-count {font-size:13px;color:var(--atlas-muted);margin:14px 0 21px}
+.agora-atlas-entry-grid {display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,270px),1fr));gap:13px}
+.agora-atlas-entry-card {background:var(--atlas-paper);border:1px solid var(--atlas-rule);border-radius:7px;padding:22px 24px;display:flex;flex-direction:column;min-height:225px;transition:box-shadow .16s ease,border-color .16s ease}
+.agora-atlas-entry-card:hover {border-color:var(--atlas-accent);box-shadow:0 8px 28px #1c2b3310}
+.agora-atlas-card-meta {display:flex;align-items:center;justify-content:space-between;gap:14px;font:600 11px/1.3 sans-serif;color:var(--atlas-muted);text-transform:uppercase;letter-spacing:.07em}
+.agora-atlas-card-number {font-size:13px;color:var(--atlas-accent)}
+.agora-atlas-entry-card h3 {font:600 clamp(20px,2vw,25px)/1.24 Georgia,serif;margin:18px 0 12px}
+.agora-atlas-entry-card h3 a {text-decoration:none}
+.agora-atlas-entry-card h3 a:hover {text-decoration:underline;text-underline-offset:4px}
+.agora-atlas-entry-card>p {color:var(--atlas-muted);line-height:1.65;font-size:14px;flex:1;margin:0}
+.agora-atlas-card-footer {display:flex;justify-content:space-between;align-items:center;margin-top:22px;border-top:1px solid var(--atlas-rule);padding-top:14px;font-size:12px;color:var(--atlas-muted)}
+.agora-atlas-card-footer>a {color:var(--atlas-accent)}
+.agora-atlas-empty {padding:24px;background:var(--atlas-paper);border:1px dashed var(--atlas-rule)}
+.agora-atlas-timeline {padding:64px 0;border-bottom:1px solid var(--atlas-rule)}
+.agora-atlas-timeline-list {list-style:none;margin:28px 0 0;padding:0}
+.agora-atlas-timeline-step {display:grid;grid-template-columns:80px minmax(0,1fr);align-items:stretch;gap:22px;max-width:1050px;position:relative}
+.agora-atlas-track {border-right:1px solid var(--atlas-rule);display:flex;justify-content:center;align-items:start;padding-top:27px;position:relative}
+.agora-atlas-track:before {content:'';position:absolute;right:-5px;top:38px;width:9px;height:9px;border:2px solid var(--atlas-accent);background:var(--atlas-paper);border-radius:50%}
+.agora-atlas-track span {font:650 13px sans-serif;color:var(--atlas-accent)}
+.agora-atlas-timeline-entry {padding:22px 0 44px;border-bottom:1px solid var(--atlas-rule)}
+.agora-atlas-timeline-step:last-child .agora-atlas-timeline-entry {border-bottom:0}
+.agora-atlas-timeline-entry h3 {font:600 clamp(23px,3vw,34px)/1.22 Georgia,serif;margin:9px 0 16px}
+.agora-atlas-timeline-entry h3 a:hover {text-decoration:underline;text-underline-offset:4px}
+.agora-atlas-timeline-entry>p:not(.eyebrow) {font-size:16px;line-height:1.8;max-width:76ch;color:var(--atlas-muted)}
+.agora-atlas-more {display:inline-flex;align-items:center;gap:10px;margin-top:18px;font-size:14px;font-weight:700;color:var(--atlas-accent)!important}
+.agora-atlas-more:hover {text-decoration:underline}
+.agora-atlas-library {padding:65px 0 35px}
+.agora-atlas-reading-grid {display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,265px),1fr));gap:13px}
+.agora-atlas-reading-card {border:1px solid var(--atlas-rule);background:var(--atlas-paper);padding:24px;min-height:285px;display:flex;flex-direction:column;gap:11px}
+.agora-atlas-reading-number {font:700 24px Georgia,serif;color:var(--atlas-accent)}
+.agora-atlas-reading-card h3 {font:600 23px/1.2 Georgia,serif;margin:0}
+.agora-atlas-reading-card>p:not(.eyebrow) {font-size:14px;line-height:1.65;color:var(--atlas-muted);flex:1}
+.agora-atlas-reading-card>a {display:inline-flex;align-items:center;gap:9px;color:var(--atlas-accent);font-weight:650;font-size:14px}
+.agora-atlas-reading-card>a:hover {text-decoration:underline}
+.agora-atlas-page {max-width:1180px;margin:0 auto}
+.agora-atlas-page-top {display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;padding:16px 0 26px;border-bottom:1px solid var(--atlas-rule)}
+.agora-atlas-back {display:inline-flex;align-items:center;gap:9px;font-size:14px;font-weight:700;color:var(--atlas-accent)!important}
+.agora-atlas-state {font:600 11px sans-serif;letter-spacing:.07em;text-transform:uppercase;color:var(--atlas-muted)}
+.agora-atlas-page-layout {display:grid;grid-template-columns:minmax(0,1fr) 240px;gap:clamp(26px,4vw,60px);align-items:start}
+.agora-atlas-document {min-width:0}
+.agora-atlas-document-header {padding:30px 0 28px;border-bottom:1px solid var(--atlas-rule)}
+.agora-atlas-document-header h1 {font:500 clamp(38px,5vw,65px)/1.07 Georgia,serif;letter-spacing:-.033em;margin:15px 0 19px;max-width:18ch}
+.agora-atlas-lead {font-size:clamp(17px,2vw,21px);line-height:1.65;color:var(--atlas-muted);max-width:64ch}
+.agora-atlas-time {display:flex;align-items:center;gap:9px;margin-top:26px;font-size:12px;color:var(--atlas-accent)}
+.agora-atlas-context {background:#eef5f7;padding:24px 28px;border-left:3px solid var(--atlas-accent);margin:30px 0}
+.agora-atlas-context p:last-child {font:normal clamp(16px,1.8vw,18px)/1.8 Georgia,serif;margin:12px 0 0}
+.agora-atlas-prose section {padding:12px 0 4px;scroll-margin-top:28px}
+.agora-atlas-prose h2,.agora-atlas-citations h2,.agora-atlas-related h2 {font:600 clamp(23px,3vw,32px)/1.3 Georgia,serif;margin:25px 0 16px}
+.agora-atlas-prose p {font-size:16px;line-height:1.9;margin:0 0 16px;max-width:75ch}
+.agora-atlas-citations,.agora-atlas-related {margin-top:35px;border-top:1px solid var(--atlas-rule);padding-top:14px}
+.agora-atlas-citations>p {font-size:14px;line-height:1.6;color:var(--atlas-muted)}
+.agora-atlas-citations ol {display:grid;gap:13px;padding:0 0 0 22px}
+.agora-atlas-citations a {display:inline-flex;gap:7px;align-items:center;font-size:14px;color:var(--atlas-accent)!important;text-decoration:underline}
+.agora-atlas-related-grid {display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:12px}
+.agora-atlas-related-grid>a {display:grid;gap:10px;border:1px solid var(--atlas-rule);padding:18px;background:var(--atlas-paper)}
+.agora-atlas-related-grid>a:hover {border-color:var(--atlas-accent)}
+.agora-atlas-related-grid strong {font:600 20px/1.2 Georgia,serif}
+.agora-atlas-related-grid svg {color:var(--atlas-accent)}
+.agora-atlas-publication {margin:45px 0 20px;border-top:1px solid var(--atlas-rule);padding-top:24px;font-size:13px;color:var(--atlas-muted)}
+.agora-atlas-publication p {line-height:1.65;margin-bottom:10px}
+.agora-atlas-publication p:first-child {display:flex;gap:10px;align-items:start}
+.agora-atlas-publication a {color:var(--atlas-accent);text-decoration:underline}
+.agora-atlas-aside {position:sticky;top:24px;padding:28px 0;margin-top:18px;border-bottom:1px solid var(--atlas-rule)}
+.agora-atlas-aside ol {padding-left:19px;display:grid;gap:12px;margin:18px 0}
+.agora-atlas-aside li {font-size:13px;line-height:1.55}
+.agora-atlas-aside a:hover {color:var(--atlas-accent);text-decoration:underline}
+.agora-atlas-aside-back {display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--atlas-accent)!important;margin-top:15px}
+.agora-atlas-missing {min-height:50vh;padding:50px 0}
+.agora-atlas-missing h2 {font:600 32px Georgia,serif}
+.agora-atlas-missing a {display:inline-block;margin-top:20px;color:var(--atlas-accent);text-decoration:underline}
+@media(max-width:800px) {
+ .agora-atlas-page-layout {grid-template-columns:1fr}
+ .agora-atlas-aside {position:static;grid-row:1;padding:14px 0;border-bottom:1px solid var(--atlas-rule)}
+ .agora-atlas-aside nav ol {display:flex;gap:10px 22px;flex-wrap:wrap;list-style:none;padding:0}
+ .agora-atlas-document-header h1 {max-width:none}
+}
+@media(max-width:600px) {
+ .agora-atlas-root {padding:14px}
+ .agora-atlas-index {padding-top:12px}
+ .agora-atlas-filters {display:grid}
+ .agora-atlas-filters label {min-width:100%}
+ .agora-atlas-entry-grid,.agora-atlas-reading-grid {grid-template-columns:1fr}
+ .agora-atlas-timeline {padding:42px 0}
+ .agora-atlas-timeline-step {grid-template-columns:32px minmax(0,1fr);gap:13px}
+ .agora-atlas-track {padding-top:32px}
+ .agora-atlas-track span {font-size:10px}
+ .agora-atlas-context {padding:18px}
+}
+@media(prefers-reduced-motion:reduce) {.agora-atlas-entry-card {transition:none}}

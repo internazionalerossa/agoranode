@@ -5304,3 +5304,83 @@ body { min-width: 0; width: 100%; max-width: 100vw; overflow-x: hidden; }
 .public-space-search-results ol {padding-left:25px;display:grid;gap:12px}
 .public-space-search-results li a {text-decoration:underline;text-underline-offset:3px}
 .public-space-search-results li p {line-height:1.5;margin:5px 0}
+
+
+/* The library is one top-level node area; these are its three primary choices. */
+.agora-library {--atlante-accent:#235f86;max-width:1120px;margin:0 auto;padding:clamp(16px,3vw,36px)}
+.agora-library-heading {border-bottom:1px solid #d6dfe3;padding:14px 0 22px;margin-bottom:18px}
+.agora-library-heading h1 {font:500 clamp(30px,4.8vw,50px)/1.12 Georgia,serif;letter-spacing:-.03em;margin:12px 0}
+.agora-library-heading>p:last-child {max-width:72ch;font-size:15px;line-height:1.7}
+.agora-library .thematic-library-destinations {margin:12px 0 26px;grid-template-columns:repeat(3,minmax(0,1fr))}
+.themmatic-library-destinations > a {text-decoration:none}
+.thematic-library-destinations > a {background:rgba(255,255,255,.58);border:1px solid #d5dfe4}
+.thematic-library-destinations > a[aria-current=page] {border-color:var(--atlante-accent,#235f86);background:#eaf2f6;color:#184c6b}
+.thematic-library-direction {font-size:13px;font-weight:700}
+.library-timeline-options {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:12px 0 30px;max-width:790px}
+.library-timeline-options a {display:grid;gap:7px;padding:16px 18px;border:1px solid #cad4d9;border-radius:9px;text-decoration:none;background:rgba(255,255,255,.65);color:inherit}
+.library-timeline-options a strong {font-size:15px}
+.library-timeline-options a span {font-size:12px;line-height:1.6;color:var(--muted,#627078)}
+.library-timeline-options a[aria-current=page] {background:#eaf2f6;border-color:#235f86;color:#184c6b;box-shadow:inset 0 -3px 0 #235f86}
+.library-timeline-options a:focus-visible,.thematic-library-destinations a:focus-visible {outline:3px solid #235f86;outline-offset:3px}
+.atlas-timeline,.atlas-index,.polisrossa-atlas-index,.atlas-library-books,.atlas-library-data,.atlas-article {max-width:1040px}
+.atlas-timeline>header,.atlas-index>header,.polisrossa-atlas-index>header,.atlas-library-books>header,.atlas-library-data>header {margin:0 0 28px;max-width:75ch}
+.atlas-timeline h2,.atlas-index h2,.polisrossa-atlas-index h2,.atlas-library-books h2,.atlas-library-data h2 {font:500 clamp(25px,3.3vw,36px)/1.16 Georgia,serif;margin:12px 0}
+.atlas-timeline>header>p:last-child,.atlas-index>header>p:last-child,.polisrossa-atlas-index>header>p:last-child {line-height:1.78}
+.atlas-timeline-events {border-left:1px solid #b9c7cc;margin-left:12px;padding-left:28px}
+.atlas-timeline-event {display:grid;grid-template-columns:146px minmax(0,1fr);gap:24px;position:relative;padding:0 0 32px}
+.atlas-timeline-event::before {position:absolute;content:'';left:-35px;top:8px;width:11px;height:11px;border-radius:50%;background:#f4f7f8;border:2px solid #235f86}
+.atlas-timeline-time strong {display:block;font:600 17px/1.35 Georgia,serif;color:#235f86}
+.atlas-timeline-time span {display:block;font-size:12px;line-height:1.5;margin-top:8px;color:var(--muted,#626e75)}
+.atlas-timeline-prose h3 {font:600 23px/1.25 Georgia,serif;margin:0 0 13px}
+.atlas-timeline-prose p {font-size:14px;line-height:1.86;max-width:76ch;margin:0 0 14px}
+.atlas-timeline-prose a {display:inline-flex;align-items:center;gap:7px;color:#235f86;font-size:13px;font-weight:700;text-decoration:none;border-bottom:1px solid currentColor}
+.atlas-index label,.polisrossa-atlas-index label {display:flex;align-items:center;gap:9px;font-weight:700;font-size:13px}
+.atlas-index input[type=search],.polisrossa-atlas-index input[type=search] {display:block;margin:12px 0;min-height:44px;padding:10px 13px;width:100%;max-width:650px;border:1px solid #acbbc1;border-radius:8px;background:#fff;font:inherit}
+.atlas-index-list {padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,310px),1fr));gap:10px;margin:16px 0 28px}
+.atlas-index-list li {border:1px solid #d5dfe3;border-radius:9px;background:#fff}
+.atlas-index-list a {display:grid;gap:8px;padding:16px;text-decoration:none;color:inherit;overflow-wrap:anywhere}
+.atlas-index-list a strong {font:600 18px/1.3 Georgia,serif}
+.atlas-index-list a span {font-size:12px;line-height:1.65;color:#51636b}
+.atlas-index-list a[aria-current=page] {border-left:4px solid #235f86}
+.polisrossa-atlas-index {padding:4px 0 24px}
+.atlas-index-filters select {display:block;min-height:42px;margin:10px 0;padding:8px 12px;border:1px solid #acbbc1;background:#fff;border-radius:7px}
+.atlas-index-count {font-size:13px;font-weight:600;color:var(--muted,#627078)}
+.atlas-article {background:#fff;border-left:5px solid #235f86;padding:clamp(18px,3vw,35px);border-radius:10px;box-shadow:0 1px 0 #cddadf}
+.atlas-article h2 {font:500 clamp(28px,3.8vw,45px)/1.15 Georgia,serif;letter-spacing:-.02em;margin:12px 0}
+.atlas-article-lead {font-size:17px!important;line-height:1.75!important;font-weight:500}
+.atlas-article p {font-size:14px;line-height:1.88;max-width:78ch}
+.atlas-article h3 {font:600 22px/1.3 Georgia,serif;margin:28px 0 10px}
+.atlas-article-sources,.atlas-article-related {padding-top:12px;border-top:1px solid #d5dfe3;margin-top:24px}
+.atlas-article :is(a,button) {color:#235f86}
+.atlas-article-sources a {display:inline-flex;align-items:center;gap:5px}
+.atlas-article-period,.atlas-article-status {font-size:12px!important;color:#50636b}
+.atlas-download {display:inline-flex;align-items:center;gap:7px;padding:10px 14px;border:1px solid #9eb4be;border-radius:8px;background:#eef4f6;cursor:pointer;min-height:44px}
+.atlas-library-cards {display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:14px}
+.atlas-library-cards article {padding:22px;border:1px solid #d5dfe3;background:#fff;border-radius:10px}
+.atlas-library-cards h3 {font:600 21px/1.3 Georgia,serif;margin:14px 0}
+.atlas-library-cards p {line-height:1.65;font-size:13px}
+.atlas-library-cards a {color:#235f86;font-weight:700;text-decoration:underline}
+.atlas-library-metrics {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:24px 0}
+.atlas-library-metrics>div {padding:20px;background:#fff;border:1px solid #d5dfe3}
+.atlas-library-metrics strong {display:block;font:500 32px/1.2 Georgia,serif;color:#235f86}
+.atlas-library-metrics span {font-size:12px}
+.atlas-library-bars {margin:15px 0;height:18px;background:#dfe8ec;border-radius:6px;overflow:hidden}
+.atlas-library-bars span {display:block;height:100%;background:#235f86}
+.agoranode-header nav a[aria-current=page] {border-bottom:2px solid #235f86;font-weight:700}
+.agora-participation {max-width:1080px;margin:auto;padding:clamp(15px,3vw,32px)}
+.agora-participation>header {max-width:72ch;padding-bottom:18px}
+.agora-participation>header h1 {font:500 clamp(28px,4vw,43px)/1.1 Georgia,serif;margin:15px 0}
+.agora-participation>header>p:last-child {line-height:1.76}
+@media(max-width:730px){
+ .atlas-timeline-event {grid-template-columns:1fr;gap:7px}
+ .atlas-timeline-time {display:flex;align-items:baseline;gap:10px}
+ .atlas-timeline-time span {margin:0}
+ .atlas-library-metrics {grid-template-columns:1fr}
+ .library-timeline-options {grid-template-columns:1fr}
+}
+@media(max-width:650px){
+ .agora-library .thematic-library-destinations {gap:7px}
+ .agora-library .thematic-library-destinations>a {padding:12px 9px}
+ .thematic-library-direction {display:none}
+ .atlas-timeline-event::before {left:-35px}
+}

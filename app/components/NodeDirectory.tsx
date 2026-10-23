@@ -86,7 +86,7 @@ export default function NodeDirectory() {
   const allNodes=[...nodes,...installed];
   const queryTerms = normalizeSearchText(query.trim()).split(/\s+/).filter(Boolean);
   const localMatches = allNodes.filter((node) =>
-    queryTerms.every((term) => normalizeSearchText(`${node.name} ${node.topic} ${node.description}`).includes(term)),
+    queryTerms.every((term) => normalizeSearchText(`${node.id} ${node.name} ${node.topic} ${node.description}`).includes(term)),
   );
   const possibleMatches = possibleNodes.filter((node) =>
     queryTerms.every((term) => normalizeSearchText(`${node.name} ${node.family}`).includes(term)),
@@ -119,17 +119,30 @@ export default function NodeDirectory() {
           <p className="eyebrow">PIAZZA PUBBLICA PER TEMI</p>
           <h1>Conoscenza e discussione, per tema.</h1>
           <p>
-            AgoràNode fornisce l’infrastruttura per comunità tematiche autonome.
-            In ogni nodo, attualità, fonti, biblioteca, storia, dati e confronto
-            pubblico sono collegati; regole e decisioni restano nella comunità.
-            Scegli una piazza oppure cerca un argomento.
+            Questo è il registro pubblico delle comunità ospitate dall'installazione.
+            Ogni nodo è identificato da un namespace stabile e da un argomento proprio:
+            il software e i componenti di base rimangono gli stessi, ma fonti, documenti,
+            utenti e decisioni editoriali devono conservare confini verificabili.
+            Il catalogo distingue un servizio applicativo da un'anteprima e da un tema soltanto proposto.
           </p>
+          <p>
+            Agorà è il nodo alpha dedicato alla piattaforma: puoi leggere il suo Atlante tecnico,
+            percorrerne la storia, esaminare la biblioteca e aprire il laboratorio per creare un nuovo nodo.
+            PolisRossa mantiene la propria identità e il suo patrimonio editoriale, come comunità tematica distinta.
+            I pulsanti sottostanti aprono direttamente le pagine disponibili.
+          </p>
+          <div className="node-directory-quicklinks" aria-label="Accessi diretti al sistema">
+            <a href="/agora">Esplora Agorà <ArrowRight size={16} aria-hidden="true"/></a>
+            <a href="/agora?view=biblioteca">Apri Biblioteca e Atlante <ArrowRight size={16} aria-hidden="true"/></a>
+            <a href="/agora?view=partecipa">Forum e laboratorio nuovi nodi <ArrowRight size={16} aria-hidden="true"/></a>
+            <a href="/polisrossa">Entra in PolisRossa <ArrowRight size={16} aria-hidden="true"/></a>
+          </div>
         </header>
         <section className="node-directory-catalog" aria-labelledby="node-directory-catalog-title">
           <div className="node-directory-catalog-heading">
             <div>
               <p className="eyebrow">ACCESSI LOCALI</p>
-              <h2 id="node-directory-catalog-title">Trova un nodo</h2>
+              <h2 id="node-directory-catalog-title">Registro dei nodi pubblicati</h2>
             </div>
             <span aria-live="polite">{query.trim() ? `${matchingEntries.length} risultati` : `${allNodes.length} nodi locali`}</span>
           </div>
@@ -144,7 +157,7 @@ export default function NodeDirectory() {
                 setQuery(event.currentTarget.value);
                 setPage(0);
               }}
-              placeholder="Cerca per argomento o nome del nodo"
+              placeholder="Cerca per nome, namespace o disciplina"
             />
           </label>
           {query.trim() ? visibleEntries.length > 0 ? (
@@ -153,10 +166,10 @@ export default function NodeDirectory() {
                 <li key={entry.id}>
                   <a className={`node-directory-card node-directory-card-${entry.id}`} href={entry.href}>
                     <span className="node-directory-card-main">
-                      <span className="node-directory-topic">{entry.topic}</span>
+                      <span className="node-directory-topic">{entry.topic}</span><code className="node-directory-namespace">Nodo: {entry.id}</code>
                       <strong className="node-directory-title">{entry.name} <span>— AgoràNode</span></strong>
                       <span className="node-directory-description">{entry.description}</span>
-                      <span className="node-directory-status"><BookOpen size={14} aria-hidden="true" />{entry.status}</span>
+                      <span className="node-directory-status"><BookOpen size={14} aria-hidden="true" />{entry.status}</span><span className="node-directory-cta">Apri il nodo →</span>
                     </span>
                     <ArrowRight className="node-directory-arrow" size={20} aria-hidden="true" />
                   </a>
@@ -182,10 +195,10 @@ export default function NodeDirectory() {
                   <li key={node.id}>
                     <a className={`node-directory-card node-directory-card-${node.id}`} href={node.href}>
                       <span className="node-directory-card-main">
-                        <span className="node-directory-topic">{node.topic}</span>
+                        <span className="node-directory-topic">{node.topic}</span><code className="node-directory-namespace">Nodo: {node.id}</code>
                         <strong className="node-directory-title">{node.name} <span>— AgoràNode</span></strong>
                         <span className="node-directory-description">{node.description}</span>
-                        <span className="node-directory-status"><BookOpen size={14} aria-hidden="true" />{node.status}</span>
+                        <span className="node-directory-status"><BookOpen size={14} aria-hidden="true" />{node.status}</span><span className="node-directory-cta">Apri il nodo →</span>
                       </span>
                       <ArrowRight className="node-directory-arrow" size={20} aria-hidden="true" />
                     </a>
@@ -195,7 +208,7 @@ export default function NodeDirectory() {
               <section className="node-directory-topic-map" aria-labelledby="node-directory-topic-map-title">
                   <p className="eyebrow">ORIZZONTE DEI NODI</p>
                 <h3 id="node-directory-topic-map-title">Ogni campo del sapere può avere la sua piazza</h3>
-                  <p>Questi sono esempi di comunità possibili, non siti già attivi. Ognuna potrà adottare il formato editoriale di PolisRossa: attualità, biblioteca, conoscenza, cronologia, dati e discussione del proprio ambito. Cerca anche un tema non ancora elencato per visualizzarlo come idea.</p>
+                  <p>Questa tassonomia raccoglie possibili ambiti disciplinari e non rappresenta una directory di siti già attivi. Ogni nuova comunità dovrà adottare il modello AgoràNode: rassegna delle fonti, Biblioteca, Atlante, timeline narrativa, dati e area di partecipazione. Prima di apparire nel registro operativo sono necessari un identificatore stabile, una configurazione approvata e servizi realmente installati.</p>
                 <div>
                   {possibleNodeFamilies.map((family) => (
                     <details key={family.name}>

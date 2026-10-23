@@ -60,7 +60,7 @@ I dati hanno politiche diverse, descritte dal contratto di preparazione `app/pla
 
 | Classe | Esempi | Distribuzione |
 | --- | --- | --- |
-| `public-verified` | Revisioni wiki approvate, dati con licenza verificata, certificati privi di PII | Repliche pubbliche in accordo ai diritti |
+| `public-verified` | Revisioni Atlante approvate, dati con licenza verificata, certificati privi di PII | Repliche pubbliche in accordo ai diritti |
 | `public-ephemeral` | Presenza online, chat pubblica a scadenza, cache temporanea | Non entra nel patrimonio append-only |
 | `private-local` | Sessioni, preferenze e dati account | Database privato del servizio autorizzato |
 | `private-authorized` | Contenuti riservati, messaggi E2E e backup utente | Solo destinatari/custodi autorizzati |
@@ -68,7 +68,7 @@ I dati hanno politiche diverse, descritte dal contratto di preparazione `app/pla
 
 **Attenzione:** un post pubblico può comunque contenere dati personali. Non va reso irreversibile per il solo fatto di essere visibile. Un evento di moderazione o un tombstone non elimina copie già scaricate; occorrono politiche di ammissione, retention, rimozione e obblighi chiari per i custodi. Non promettere oblio perfetto da una rete aperta.
 
-Per la wiki occorrono **revisioni indirizzate dal contenuto** e puntatori alla revisione corrente finalizzati. Per il social pubblico occorrono **eventi firmati, ordinati dove necessario**, idempotenti e sincronizzabili anche offline. Per la chat servono **stream per stanza**, cifratura dove richiesta, retention e moderazione; la chiusura della finestra di 48 ore attuale non è equivalente a cancellazione di copie remote. Per voti e modifiche costituzionali serve una **finalità rigorosa** e una prova politica separata dal quorum tecnico.
+Per l’Atlante occorrono **revisioni indirizzate dal contenuto** e puntatori alla revisione corrente finalizzati. Per il social pubblico occorrono **eventi firmati, ordinati dove necessario**, idempotenti e sincronizzabili anche offline. Per la chat servono **stream per stanza**, cifratura dove richiesta, retention e moderazione; la chiusura della finestra di 48 ore attuale non è equivalente a cancellazione di copie remote. Per voti e modifiche costituzionali serve una **finalità rigorosa** e una prova politica separata dal quorum tecnico.
 
 Non mettere tutti i post, messaggi e file in una blockchain universale: costo, latenza, cancellazione e privacy renderebbero la rete inadatta allo scopo. AgoràNode può utilizzare log Merkle, blocchi per contenuto e finalità BFT **senza mining, token o Proof-of-Stake**.
 

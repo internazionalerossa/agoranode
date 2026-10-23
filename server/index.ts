@@ -17,7 +17,7 @@ import {api,privatePaths} from './api';
 import {publicSpaceSeedResponse,publicSpaceDirectoryResponse} from './public-space-registry';
 import {openSpaceDatabaseRegistry,validateSpaceDatabaseInputs} from './space-databases';
 import {publicSpaceKnowledgeResponse} from './public-space-knowledge';
-import {validateAgoraSeedDatabase} from './agora-knowledge-seed';
+import {validateAgoraSeedDatabase} from './agora-database';
 import type {ForumSocialIdentity} from '../app/lib/forum';
 import {INSTANCE_NAME,INSTANCE_PLATFORM_NAME} from '../app/lib/instance';
 const config=configuration(),pool=createPool(config.connectionString),db=new PostgresDatabase(connections(pool));

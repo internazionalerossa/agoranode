@@ -15,8 +15,9 @@ import {purgeForumApplications,startForumApplicationRetention} from './forum-ret
 import {purgeAuthenticationState,startAuthenticationRetention} from './auth-retention';
 import {api,privatePaths} from './api';
 import {publicSpaceSeedResponse,publicSpaceDirectoryResponse} from './public-space-registry';
-import {openSpaceDatabaseRegistry} from './space-databases';
+import {openSpaceDatabaseRegistry,validateSpaceDatabaseInputs} from './space-databases';
 import {publicSpaceKnowledgeResponse} from './public-space-knowledge';
+import {validateAgoraSeedDatabase} from './agora-knowledge-seed';
 import type {ForumSocialIdentity} from '../app/lib/forum';
 import {INSTANCE_NAME,INSTANCE_PLATFORM_NAME} from '../app/lib/instance';
 const config=configuration(),pool=createPool(config.connectionString),db=new PostgresDatabase(connections(pool));
@@ -26,6 +27,15 @@ const extraSpaceInputs=process.env.AGORANODE_PUBLIC_SPACE_DATABASES_JSON
  ? JSON.parse(process.env.AGORANODE_PUBLIC_SPACE_DATABASES_JSON) as Array<{spaceId:string;connectionString:string}>
  : [];
 if(!Array.isArray(extraSpaceInputs)||extraSpaceInputs.length>16)throw Error('Invalid public space database configuration');
+const agoraDbUrl=process.env.AGORANODE_AGORA_DATABASE_URL;
+if(agoraDbUrl)validateAgoraSeedDatabase(agoraDbUrl,config.connectionString);
+if(agoraDbUrl&&extraSpaceInputs.length)
+ validateSpaceIsolation();
+function validateSpaceIsolation(){
+ // Validate that the origin database is not aliased through another space.
+ validateSpaceDatabaseInputs([...extraSpaceInputs,{spaceId:'agora',connectionString:agoraDbUrl!}]);
+}
+const agoraPublicPool=agoraDbUrl?createPool(agoraDbUrl,2):null;
 const publicSpacePools=extraSpaceInputs.length
  ? openSpaceDatabaseRegistry(extraSpaceInputs,connectionString=>createPool(connectionString,2))
  : null;
@@ -50,8 +60,14 @@ const server=createServer({maxHeaderSize:16384,requestTimeout:30000,headersTimeo
   // Identity headers are never consulted. The canonical origin is configuration, never forwarded host input.
   const request=new Request(url,{method,headers,body:body as BodyInit|undefined});
   let response:Response;
+  const agoraKnowledge=/^\/api\/spaces\/agora\/(knowledge|search)$/.exec(url.pathname);
   const spaceKnowledge=/^\/api\/public-spaces\/([a-z][a-z0-9-]{2,47})\/(knowledge|search)$/.exec(url.pathname);
-  if(spaceKnowledge){
+  if(agoraKnowledge){
+   response=agoraPublicPool
+    ? await publicSpaceKnowledgeResponse(request,connections(agoraPublicPool),'agora')
+    : Response.json({error:'Agorà knowledge database not configured'},{status:404,headers:{'cache-control':'no-store'}});
+  }
+  else if(spaceKnowledge){
    const id=spaceKnowledge[1];
    const seed=await publicSpaceSeedResponse(
     new Request(config.origin+'/api/public-spaces/'+id),
@@ -90,4 +106,4 @@ const chatCleanup=setInterval(()=>liveChat.sweep(),1000);chatCleanup.unref();
 const forumRetention=startForumApplicationRetention(()=>background(purgeForumApplications(db).then(count=>console.info(`Forum application retention completed: ${count} removed`)).catch(error=>{console.error('Forum application retention failed');throw error;})));
 const authRetention=startAuthenticationRetention(()=>background(purgeAuthenticationState(db).then(result=>console.info(`Authentication retention completed: ${result.sessions+result.verifications+result.limits+result.unverifiedUsers+result.facebookGrants} removed`)).catch(error=>{console.error('Authentication retention failed');throw error;})));
 server.listen(config.port,'0.0.0.0',()=>console.info(`${INSTANCE_PLATFORM_NAME} instance ${INSTANCE_NAME} server ready`));
-for(const signal of ['SIGTERM','SIGINT'])process.on(signal,()=>{clearInterval(chatCleanup);clearInterval(forumRetention as ReturnType<typeof setInterval>);clearInterval(authRetention as ReturnType<typeof setInterval>);server.close(()=>{void Promise.allSettled([...jobs,settle()]).then(()=>Promise.all([pool.end(),publicSpacePools?.close()])).then(()=>process.exit(0));});setTimeout(()=>process.exit(1),20000).unref();});
+for(const signal of ['SIGTERM','SIGINT'])process.on(signal,()=>{clearInterval(chatCleanup);clearInterval(forumRetention as ReturnType<typeof setInterval>);clearInterval(authRetention as ReturnType<typeof setInterval>);server.close(()=>{void Promise.allSettled([...jobs,settle()]).then(()=>Promise.all([pool.end(),publicSpacePools?.close(),agoraPublicPool?.end()])).then(()=>process.exit(0));});setTimeout(()=>process.exit(1),20000).unref();});

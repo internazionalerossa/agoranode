@@ -35,7 +35,7 @@ export default function NodeStudio({spaceId}:Props){
  const update=(patch:Partial<NodeBlueprintDraft>)=>setDraft(old=>({...old,...patch,updatedAt:Date.now()}));
  const reset=(operation:'create-node'|'edit-node')=>{
    const next=newNodeDraft(operation,operation==='edit-node'?spaceId:'nuovo-nodo');
-   setDraft(operation==='edit-node'?{...next,name:spaceId==='agora'?'Agorà':'PolisRossa'}:next);
+   setDraft(operation==='edit-node'?{...next,name:spaceId==='agora'?'Agorà':'PolisRossa'}:{...next,name:'',topic:'',description:'',sources:[],blocks:[]});
    setStatus('Nuova bozza avviata; non è stata pubblicata.');
  };
  const save=async()=>{
@@ -76,8 +76,9 @@ export default function NodeStudio({spaceId}:Props){
      <p>Un salvataggio è una <strong>bozza privata</strong>. Per rendere consultabile un nuovo nodo è disponibile il bootstrap pubblico read-only, installato manualmente da un operatore dopo la revisione di fonti e diritti. Non abilita account o voto PR2.</p>
      <p><a href="https://github.com/internazionalerossa/agoranode/blob/main/docs/THEMATIC-BOOTSTRAP.md" target="_blank" rel="noopener noreferrer">Come installare il nodo senza pubblicare bozze private ↗</a></p>
    </header>
+   <p className="node-studio-empty-invitation">Per iniziare da zero, scegli <strong>Nuovo nodo · pagina vuota</strong>: puoi aggiungere un titolo, le fonti e i blocchi uno alla volta. Non servono codice o Git.</p>
    <div className="node-studio-modes" role="group" aria-label="Tipo di lavoro">
-     <button type="button" aria-pressed={draft.operation==='create-node'} onClick={()=>reset('create-node')}>Nuovo nodo</button>
+     <button type="button" aria-pressed={draft.operation==='create-node'} onClick={()=>reset('create-node')}>Nuovo nodo · pagina vuota</button>
      <button type="button" aria-pressed={draft.operation==='edit-node'} onClick={()=>reset('edit-node')}>Modifica il nodo</button>
    </div>
    {account&&saved.length>0?<label>Bozze nel tuo account

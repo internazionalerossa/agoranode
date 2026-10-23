@@ -62,7 +62,7 @@ export default function PublicSpaceHome({spaceId}:{spaceId:string}){
      <PublicSpaceKnowledgePage spaceId={spaceId}/>
      <section aria-labelledby="public-space-knowledge-title">
       <h2 id="public-space-knowledge-title">La conoscenza del nodo</h2>
-      <p>Testi, fonti e racconti proposti nel manifesto di questo nodo. Questa anteprima non sostituisce una wiki con revisioni e decisioni PR2.</p>
+      <p>Testi, fonti e racconti proposti nel manifesto di questo nodo. Questa anteprima non sostituisce un Atlante con revisioni e decisioni PR2.</p>
       <label htmlFor="node-public-search">Cerca fra le sezioni</label>
       <input id="node-public-search" type="search" value={query} maxLength={160}
         onChange={event=>setQuery(event.target.value)} placeholder="Argomento, autore, evento…"/>

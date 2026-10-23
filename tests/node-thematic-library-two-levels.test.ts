@@ -70,7 +70,7 @@ test('PolisRossa keeps its three primary sections, with the same secondary selec
  assert.equal(libraryTimelineModeFromUrl(libraryTimelineUrl(atlasUrl,'racconto')),'racconto');
  assert.equal(librarySectionUrl(atlasUrl,'libri'),'/polisrossa?view=teoria');
  const html=renderToStaticMarkup(createElement(PolisrossaAtlasIndex));
- assert.match(html,/Indice e ricerca/);
+ assert.match(html,/INDICE E RICERCA/i);
  assert.match(html,/Cerca un tema/);
  assert.doesNotMatch(html,/Non ancora attivo/);
 });

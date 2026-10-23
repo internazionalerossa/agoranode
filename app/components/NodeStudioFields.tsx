@@ -18,7 +18,7 @@ export function StudioBlocks({draft,update}:{draft:NodeBlueprintDraft;update:(pa
     update({blocks:result});
   };
   return <fieldset className="node-studio-group">
-    <legend>03 · Pagine, wiki, timeline e contenuti</legend>
+    <legend>03 · Voci dell’Atlante, timeline e contenuti</legend>
     <p>Combina blocchi di testo, fonti, libri, video e tappe con brevi racconti introduttivi.</p>
     {draft.blocks.map((block,i)=><div className="node-studio-block" key={block.id}>
       <div className="node-studio-block-actions">

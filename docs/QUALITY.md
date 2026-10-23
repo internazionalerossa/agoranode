@@ -180,3 +180,9 @@ Le PR #2–#5 sono integrate con **squash merge** in `main`, con [PolisRossa com
 ## Rassegna e laboratorio comuni — implementazione in PR #7
 
 La PR #7 introduce una prima rassegna **read-only** del nodo Agorà con sorgenti tecnologiche RSS/Atom allowlisted e un collegamento a registrazioni e pagine per le dirette originali, senza dichiarare live trasmissioni non verificate. Il selettore **Tutti i feed / Feed preferiti** è condiviso con PolisRossa: il visitatore conserva fonti sul dispositivo; un account PR1 può salvarle privatamente per nodo, tramite nuova tabella `node_feed_preferences`. Una prima versione visuale **Node Studio** compone e salva bozze (localmente o in `node_studio_drafts` per utenti autenticati), ma non pubblica autonomamente nodi, media o revisioni wiki. La sola creazione pubblica attraverso PR2/PR3, l'attivazione dei nuovi forum e la discovery P2P restano NON IMPLEMENTATE. Vedi [NODE-STUDIO.md](NODE-STUDIO.md). I risultati della CI della PR vanno registrati solo dopo verifica effettiva.
+
+## Bootstrap pubblico e editor di proposte — revisione in PR #9
+
+Un nuovo **runtime pubblico read-only** può mostrare da un manifesto installato manualmente una comunità su `/n/<id>` e registrarla nella directory, senza creare un fork React. Il bootstrap verifica nome/namespace e dimensioni dei file, rifiuta symlink e non concede PR2/account/forum; non è un multi-tenant completo. PolisRossa ha una pagina dedicata per ogni opera del catalogo con distinzione dei diritti di ciascuna edizione e un editor visuale di **proposte** sulle pagine knowledge: le revisioni non si pubblicano senza la decisione PR2 e le autorizzazioni richieste.
+
+Questa sezione registra modifiche in PR #9 da considerare collaudate solo dopo esito CI. Mancano ancora provisioning di un database/account per spazio, wiki collaborativa effettivamente pubblicabile via voto, social/chat distribuiti e test tra host indipendenti. [Procedura](THEMATIC-BOOTSTRAP.md).

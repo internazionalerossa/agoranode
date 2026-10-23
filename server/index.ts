@@ -50,7 +50,7 @@ const server=createServer({maxHeaderSize:16384,requestTimeout:30000,headersTimeo
   // Identity headers are never consulted. The canonical origin is configuration, never forwarded host input.
   const request=new Request(url,{method,headers,body:body as BodyInit|undefined});
   let response:Response;
-  const spaceKnowledge=/^\\/api\\/public-spaces\\/([a-z][a-z0-9-]{2,47})\\/(knowledge|search)$/.exec(url.pathname);
+  const spaceKnowledge=/^\/api\/public-spaces\/([a-z][a-z0-9-]{2,47})\/(knowledge|search)$/.exec(url.pathname);
   if(spaceKnowledge){
    const id=spaceKnowledge[1];
    const seed=await publicSpaceSeedResponse(

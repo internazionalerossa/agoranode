@@ -82,6 +82,12 @@ For the complete HTTPS/Node/PostgreSQL deployment, backup and recovery procedure
 
 The opt-in `peer:serve`, `peer:pull` and `peer:watch` commands are documented in [PEER-EXCHANGE.md](docs/PEER-EXCHANGE.md). They transfer only previously signed public knowledge packages, not a user's database, private discussion or unlicensed book.
 
+## Installing a read-only thematic community
+
+Node Studio can export a validated draft with a topic, source references, editorial blocks and a narrative timeline. An operator can review the rights/privacy of those inputs and install a **public read-only** thematic seed using `npm run space:install -- --confirm-public-readonly <draft.json> <absolute-directory>`. With `AGORANODE_PUBLIC_SPACES_DIRECTORY` configured on the server, `/n/<space-id>` uses a shared React shell and the community appears in the local directory. This **does not** yet create a separate PostgreSQL account/PR2 realm, activate forum voting, or bypass editorial approval. See [Thematic Bootstrap](docs/THEMATIC-BOOTSTRAP.md).
+
+PolisRossa's library has dedicated catalogue detail links by work, with edition availability accurately distinguished from externally hosted files. Published knowledge entries include a visual correction proposal composer, whose output goes to the existing PR2 forum rather than directly modifying immutable published revisions.
+
 ## Repository
 
 ```text
@@ -117,3 +123,9 @@ Read the deeper [design](docs/PEER-OWNED-ARCHITECTURE.md), [continuous sync stra
 **License:** [AGPL-3.0-or-later](LICENSE); third-party books, news articles, media and datasets retain their own copyrights and permissions. See [NOTICE](NOTICE) and [TRADEMARKS.md](TRADEMARKS.md).
 
 *Join us in building knowledge systems that can outlive their first server—and in making every engineering claim reproducible.*
+
+
+
+### Isolated public knowledge stores
+
+Operator-installed public nodes may optionally be backed by a **separate PostgreSQL read pool**, configured only on the server via `AGORANODE_PUBLIC_SPACE_DATABASES_JSON`. Search and published wiki detail pages are then queried within the specific community's namespace; the browser cannot select another database. Each additional read pool is capped at two connections. Private accounts, PR2 governance and writable multi-node wiki publishing remain incomplete. See [Thematic Bootstrap](docs/THEMATIC-BOOTSTRAP.md).

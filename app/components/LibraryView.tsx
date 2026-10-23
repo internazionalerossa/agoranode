@@ -4,6 +4,8 @@ import { ArrowUpRight, BookOpen, Bookmark, BookmarkCheck, Search, X } from "luci
 import { THEORY_LIBRARY, BOOK_LANGUAGES } from "@/app/data/library";
 import { LIBRARY_SECTIONS, librarySectionFromUrl, librarySectionUrl, type LibrarySection } from "@/app/lib/library-navigation";
 import {libraryReadingDestination} from "@/app/lib/library-reading";
+import {bookDetailUrl,bookFromUrl} from "@/app/lib/book-page";
+import {LibraryBookDetail} from "./LibraryBookDetail";
 import { READING_PATHS, GLOSSARY } from "@/app/data/editorial";
 import { LocalizedText, LocalizedInput, useReadingLocale } from "./Localization";
 const ALL = "all";
@@ -28,6 +30,9 @@ export function LibraryView({
   const themes=[...new Set(THEORY_LIBRARY.filter(book=>book.editions?.length).map(book=>book.lane))].sort();
   const [section, setSection] = useState<LibrarySection>("libri");
   const [archivesOpen,setArchivesOpen]=useState(false);
+  const [bookDetailId,setBookDetailId]=useState<string|null>(()=>typeof window!=="undefined"?bookFromUrl(window.location.href):null);
+  useEffect(()=>{const sync=()=>setBookDetailId(bookFromUrl(window.location.href));window.addEventListener("popstate",sync);return()=>window.removeEventListener("popstate",sync);},[]);
+  const selectedBook=bookDetailId?THEORY_LIBRARY.find(book=>book.id===bookDetailId):null;
   useEffect(() => {
     const sync=()=>setSection(librarySectionFromUrl(window.location.href));
     sync();window.addEventListener('popstate',sync);window.addEventListener('hashchange',sync);
@@ -61,6 +66,7 @@ export function LibraryView({
     <div className="library-view">
       <header className="section-heading"><h1 id="page-title"><LocalizedText>Biblioteca</LocalizedText></h1><BookOpen size={24} strokeWidth={1.3}/></header>
       <nav className="library-destinations" aria-label="Percorsi della biblioteca">{LIBRARY_SECTIONS.map(item=><a key={item.id} href={librarySectionUrl('/polisrossa?view=teoria',item.id)} aria-current={section===item.id?'page':undefined} onClick={event=>{if(event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;event.preventDefault();chooseSection(item.id);}}><strong><LocalizedText>{item.label}</LocalizedText></strong><span><LocalizedText>{item.description}</LocalizedText></span><ArrowUpRight size={16}/></a>)}</nav>
+      {selectedBook?<LibraryBookDetail book={selectedBook}/>:bookDetailId?<p role="alert">Opera non presente nel catalogo.</p>:null}
       <div id="library-section-panel" tabIndex={-1}>
       {section==='libri'?<>
       <div className="usage-guide" aria-label="Guida alla biblioteca">
@@ -158,7 +164,7 @@ export function LibraryView({
               <p className="eyebrow">
                 <LocalizedText defer>{book.lane}</LocalizedText>
               </p>
-              <h3><a href={destination?.href??book.links[0]?.url} target={destination&&!destination.internal?"_blank":undefined} rel={destination&&!destination.internal?"noopener noreferrer":undefined}><LocalizedText content defer>{book.title}</LocalizedText></a></h3>
+              <h3><a href={bookDetailUrl(book.id)}><LocalizedText content defer>{book.title}</LocalizedText></a></h3>
               <p className="book-author">
                 {book.author}
                 <LocalizedText defer>{" · "}</LocalizedText>

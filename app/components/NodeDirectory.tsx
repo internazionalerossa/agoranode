@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useState,useEffect} from "react";
 import {ArrowRight, BookOpen, Network, Search} from "lucide-react";
 import {publicLocalSpaces} from "../instances/registry";
 
@@ -64,8 +64,28 @@ function normalizeSearchText(value: string) {
 export default function NodeDirectory() {
   const [query, setQuery] = useState("");
   const [page, setPage] = useState(0);
+  const [installed,setInstalled]=useState<LocalNode[]>([]);
+  useEffect(()=>{
+    const controller=new AbortController();
+    void fetch("/api/public-spaces",{signal:controller.signal,cache:"no-store"})
+      .then(response=>response.ok?response.json():{spaces:[]})
+      .then((value:unknown)=>{
+        if(controller.signal.aborted||!value||typeof value!=="object"||!("spaces" in value))return;
+        const spaces=(value as {spaces:unknown}).spaces;
+        if(!Array.isArray(spaces))return;
+        const result:LocalNode[]=spaces.filter(item=>item&&typeof item==="object"&&
+            typeof item.spaceId==="string"&&/^[a-z][a-z0-9-]{2,47}$/.test(item.spaceId)&&
+            typeof item.name==="string"&&typeof item.topic==="string"&&typeof item.description==="string"&&
+            item.href==="/n/"+item.spaceId).map(item=>({
+            id:item.spaceId,name:item.name,topic:item.topic,description:item.description,
+            href:item.href,status:"Anteprima tematica pubblicata",kind:"local" as const}));
+        setInstalled(result);
+      }).catch(()=>{});
+    return()=>controller.abort();
+  },[]);
+  const allNodes=[...nodes,...installed];
   const queryTerms = normalizeSearchText(query.trim()).split(/\s+/).filter(Boolean);
-  const localMatches = nodes.filter((node) =>
+  const localMatches = allNodes.filter((node) =>
     queryTerms.every((term) => normalizeSearchText(`${node.name} ${node.topic} ${node.description}`).includes(term)),
   );
   const possibleMatches = possibleNodes.filter((node) =>
@@ -111,7 +131,7 @@ export default function NodeDirectory() {
               <p className="eyebrow">ACCESSI LOCALI</p>
               <h2 id="node-directory-catalog-title">Trova un nodo</h2>
             </div>
-            <span aria-live="polite">{query.trim() ? `${matchingEntries.length} risultati` : `${nodes.length} nodi locali`}</span>
+            <span aria-live="polite">{query.trim() ? `${matchingEntries.length} risultati` : `${allNodes.length} nodi locali`}</span>
           </div>
           <label className="node-directory-search">
             <Search size={18} aria-hidden="true" />
@@ -158,7 +178,7 @@ export default function NodeDirectory() {
           ) : (
             <>
               <ol className="node-directory-list">
-                {nodes.map((node) => (
+                {allNodes.map((node) => (
                   <li key={node.id}>
                     <a className={`node-directory-card node-directory-card-${node.id}`} href={node.href}>
                       <span className="node-directory-card-main">

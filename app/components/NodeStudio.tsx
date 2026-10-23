@@ -73,7 +73,8 @@ export default function NodeStudio({spaceId}:Props){
    <header><p className="eyebrow">LABORATORIO · EDITOR VISUALE</p>
      <h2 id={'studio-title-'+spaceId}>Dai forma a un nodo, un blocco alla volta</h2>
      <p>Imposta argomento, fonti, pagine, timeline narrativa e biblioteca. Vedi l’anteprima e salva senza Git o codici.</p>
-     <p>Un salvataggio è una <strong>bozza privata</strong>. La pubblicazione richiede fonti e diritti verificati, una decisione PR2 competente e un servizio di attivazione ancora in sviluppo.</p>
+     <p>Un salvataggio è una <strong>bozza privata</strong>. Per rendere consultabile un nuovo nodo è disponibile il bootstrap pubblico read-only, installato manualmente da un operatore dopo la revisione di fonti e diritti. Non abilita account o voto PR2.</p>
+     <p><a href="https://github.com/internazionalerossa/agoranode/blob/main/docs/THEMATIC-BOOTSTRAP.md" target="_blank" rel="noopener noreferrer">Come installare il nodo senza pubblicare bozze private ↗</a></p>
    </header>
    <div className="node-studio-modes" role="group" aria-label="Tipo di lavoro">
      <button type="button" aria-pressed={draft.operation==='create-node'} onClick={()=>reset('create-node')}>Nuovo nodo</button>

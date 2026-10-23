@@ -1,6 +1,7 @@
 import HISTORY from '../data/history-index.json' with {type:'json'};
 import {THEORY_LIBRARY} from '../data/library';
 import {historyLink} from '../lib/history-navigation';
+import {bookDetailUrl} from '../lib/book-page';
 import type {NodeContentItem} from '../lib/node-content-search';
 
 /**
@@ -24,9 +25,8 @@ export const POLISROSSA_CONTENT: readonly NodeContentItem[] = [
     id:book.id,
     title:book.title,
     summary:book.summary,
-    // Existing library supports an indexed list; deep book detail pages
-    // and media download require a later dedicated implementation.
-    href:'/polisrossa?view=teoria&percorso=libri',
+    // Dedicated catalogue page; media availability remains rights-dependent.
+    href:bookDetailUrl(book.id),
     tags:[book.author,book.lane,...book.tags],
   })),
 ];

@@ -10,9 +10,9 @@ Il progetto è software libero, con licenza **AGPL-3.0-or-later**. Non è ancora
 
 ## Comincia da qui
 
-- **[Agorà](/agora)** è il nodo alpha di riferimento: segue lo sviluppo di AgoràNode, raccoglie fonti tecnologiche, ospita i primi contenuti dell'Atlante e il laboratorio per progettare nuovi nodi.
-- **[PolisRossa](/polisrossa)** è il prototipo storico che ha ispirato interfaccia, rassegna, biblioteca, timeline, grafici e sistemi di partecipazione. Conserva una comunità e dati propri.
-- **[/](/)** è il portale: il luogo dove trovare le comunità disponibili.
+- **Agorà** (percorso `/agora`) è il nodo alpha di riferimento: segue lo sviluppo di AgoràNode, raccoglie fonti tecnologiche, ospita i primi contenuti dell'Atlante e il laboratorio per progettare nuovi nodi.
+- **PolisRossa** (percorso `/polisrossa`) è il prototipo storico che ha ispirato interfaccia, rassegna, biblioteca, timeline, grafici e sistemi di partecipazione. Conserva una comunità e dati propri.
+- **Portale** (percorso `/`) è il portale: il luogo dove trovare le comunità disponibili.
 
 Questi sono **percorsi del sito dopo la sua installazione**, non indirizzi di un servizio internet già attivo. GitHub contiene il codice; una pubblicazione online richiede anche un server e una configurazione verificata.
 

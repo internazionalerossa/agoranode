@@ -82,6 +82,12 @@ For the complete HTTPS/Node/PostgreSQL deployment, backup and recovery procedure
 
 The opt-in `peer:serve`, `peer:pull` and `peer:watch` commands are documented in [PEER-EXCHANGE.md](docs/PEER-EXCHANGE.md). They transfer only previously signed public knowledge packages, not a user's database, private discussion or unlicensed book.
 
+## Installing a read-only thematic community
+
+Node Studio can export a validated draft with a topic, source references, editorial blocks and a narrative timeline. An operator can review the rights/privacy of those inputs and install a **public read-only** thematic seed using `npm run space:install -- --confirm-public-readonly <draft.json> <absolute-directory>`. With `AGORANODE_PUBLIC_SPACES_DIRECTORY` configured on the server, `/n/<space-id>` uses a shared React shell and the community appears in the local directory. This **does not** yet create a separate PostgreSQL account/PR2 realm, activate forum voting, or bypass editorial approval. See [Thematic Bootstrap](docs/THEMATIC-BOOTSTRAP.md).
+
+PolisRossa's library has dedicated catalogue detail links by work, with edition availability accurately distinguished from externally hosted files. Published knowledge entries include a visual correction proposal composer, whose output goes to the existing PR2 forum rather than directly modifying immutable published revisions.
+
 ## Repository
 
 ```text

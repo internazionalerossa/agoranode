@@ -3,6 +3,7 @@ import {useEffect,useMemo,useState,type CSSProperties} from 'react';
 import {validatePublicSpaceSeed,type PublicSpaceSeed} from '../platform/public-space-seed';
 import {PublicSpaceKnowledgePage,PublicSpaceRemoteSearch} from './PublicSpaceKnowledge';
 import PublicSpaceLibrary from './PublicSpaceLibrary';
+import {NODE_PRIMARY_TABS} from '../lib/node-primary-navigation';
 
 type ViewState={state:'loading'|'not-found'|'error'}|{state:'ready';seed:PublicSpaceSeed};
 const LABELS={
@@ -18,7 +19,9 @@ const LABELS={
 export default function PublicSpaceHome({spaceId}:{spaceId:string}){
  const [view,setView]=useState<ViewState>({state:'loading'});
  const [query,setQuery]=useState('');
- const library=typeof window!=='undefined'&&new URL(window.location.href).searchParams.get('view')==='biblioteca';
+ const currentView=typeof window!=='undefined'?new URL(window.location.href).searchParams.get('view'):null;
+ const library=currentView==='biblioteca';
+ const participation=currentView==='partecipa';
  useEffect(()=>{
   const controller=new AbortController();
   setView({state:'loading'});
@@ -43,9 +46,8 @@ export default function PublicSpaceHome({spaceId}:{spaceId:string}){
    <a href="/" aria-label="Torna all'elenco dei nodi">AgoràNode · Nodi</a>
    {seed?<><h1>{seed.name}</h1><p>{seed.topic}</p></>:<h1>Nodo tematico</h1>}
    <nav aria-label="Navigazione del nodo">
-     <a href={'/n/'+spaceId} aria-current={!library?'page':undefined}>Home</a>
-     <a href={'/n/'+spaceId+'?view=biblioteca'} aria-current={library?'page':undefined}>Biblioteca</a>
-     <a href="/agora?view=partecipa">Agorà · laboratorio comune</a>
+     {NODE_PRIMARY_TABS.map(tab=><a key={tab.id} href={'/n/'+spaceId+(tab.id==='notizie'?'':tab.id==='teoria'?'?view=biblioteca':'?view=partecipa')}
+       aria-current={(tab.id==='notizie'&&!library&&!participation)||(tab.id==='teoria'&&library)||(tab.id==='partecipa'&&participation)?'page':undefined}>{tab.label}</a>)}
    </nav>
   </header>
   <main id="public-space-content">
@@ -53,11 +55,39 @@ export default function PublicSpaceHome({spaceId}:{spaceId:string}){
     view.state==='not-found'?<section><h2>Nodo non pubblicato</h2><p>Questo spazio non è ancora installato su questo peer.</p></section>:
     view.state==='error'?<p role="alert">Impossibile verificare il manifesto di questo nodo.</p>:
     seed?<div className="public-space-main" style={{'--space-accent':seed.accent} as CSSProperties}>
-     {library?<PublicSpaceLibrary seed={seed}/>:<>
+     {library?<PublicSpaceLibrary seed={seed}/>:participation?<section className="agora-participation" aria-labelledby="public-space-community-title">
+       <p className="eyebrow">AGORÀ · {seed.name}</p>
+       <h2 id="public-space-community-title">Discussioni e proposte della comunità</h2>
+       <p>Questo nodo condivide il formato dei moduli di partecipazione di PolisRossa, non i suoi utenti, voti o messaggi.</p>
+       <p className="public-space-boundary">{seed.publication.notice}</p>
+       <div className="public-space-content-grid">
+        <article className="public-space-block"><h3>Discussioni</h3><p>Forum del nodo non attivato: nessun messaggio di PolisRossa viene riutilizzato.</p></article>
+        <article className="public-space-block"><h3>Proposte</h3><p>La pubblicazione di nuove proposte richiede account e autorizzazioni propri del nodo.</p></article>
+        <article className="public-space-block"><h3>Partecipazione</h3><p>I permessi PR1, PR2 e PR3 non sono attivati da un manifesto statico.</p></article>
+       </div>
+       <p>Puoi progettare modifiche e nuovi nodi nel <a href="/agora?view=partecipa#studio-agora">laboratorio comune Agorà</a>, senza trasferire privilegi.</p>
+      </section>:<>
      <section className="public-space-intro">
       <p className="eyebrow">NODO TEMATICO · ANTEPRIMA PUBBLICA</p>
       <h2>{seed.name}</h2><p>{seed.description}</p>
       <p className="public-space-boundary">{seed.publication.notice}</p>
+     </section>
+     <section aria-labelledby="public-space-feed-title" className="agora-current-news">
+      <h2 id="public-space-feed-title">La rassegna</h2>
+      <p>La struttura di PolisRossa con fonti selezionabili per nodo. Il manifesto pubblico contiene i riferimenti, non un feed live: nessuna notizia o visualizzazione è inventata.</p>
+      <label htmlFor="public-space-source-filter">Cerca una fonte</label>
+      <input id="public-space-source-filter" type="search" maxLength={160} value={query}
+       onChange={event=>setQuery(event.target.value)} placeholder="Nome della fonte o argomento"/>
+      <div className="agora-feed-cards">
+       {seed.sources.filter(source=>!query.trim()||[source.name,source.homepage].join(' ').toLocaleLowerCase('it').includes(query.trim().toLocaleLowerCase('it'))).map(source=><article className="agora-feed-card" key={source.id}>
+        <h3>{source.name}</h3>
+        {source.homepage?<p><a href={source.homepage} target="_blank" rel="noopener noreferrer">Sito originale ↗</a></p>:null}
+        {source.feedUrl?<p><a href={source.feedUrl} target="_blank" rel="noopener noreferrer">Feed RSS/Atom ↗</a></p>:null}
+       </article>)}
+      </div>
+      {seed.sources.length===0?<p>Non sono ancora state pubblicate fonti per questa rassegna.</p>:null}
+      <h3>Video</h3>
+      <p>I video verificati saranno disponibili quando l'operatore avrà configurato i relativi canali. I collegamenti del manifesto rimangono consultabili nella Biblioteca.</p>
      </section>
      <PublicSpaceKnowledgePage spaceId={spaceId}/>
      <section aria-labelledby="public-space-knowledge-title">

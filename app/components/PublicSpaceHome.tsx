@@ -3,6 +3,7 @@ import {useEffect,useMemo,useState,type CSSProperties} from 'react';
 import {validatePublicSpaceSeed,type PublicSpaceSeed} from '../platform/public-space-seed';
 import {PublicSpaceKnowledgePage,PublicSpaceRemoteSearch} from './PublicSpaceKnowledge';
 import PublicSpaceLibrary from './PublicSpaceLibrary';
+import NodeEditorialPanel from './NodeEditorialPanel';
 import {NODE_PRIMARY_TABS} from '../lib/node-primary-navigation';
 
 type ViewState={state:'loading'|'not-found'|'error'}|{state:'ready';seed:PublicSpaceSeed};
@@ -60,11 +61,8 @@ export default function PublicSpaceHome({spaceId}:{spaceId:string}){
        <h2 id="public-space-community-title">Discussioni e proposte della comunità</h2>
        <p>Questo nodo condivide il formato dei moduli di partecipazione di PolisRossa, non i suoi utenti, voti o messaggi.</p>
        <p className="public-space-boundary">{seed.publication.notice}</p>
-       <div className="public-space-content-grid">
-        <article className="public-space-block"><h3>Discussioni</h3><p>Forum del nodo non attivato: nessun messaggio di PolisRossa viene riutilizzato.</p></article>
-        <article className="public-space-block"><h3>Proposte</h3><p>La pubblicazione di nuove proposte richiede account e autorizzazioni propri del nodo.</p></article>
-        <article className="public-space-block"><h3>Partecipazione</h3><p>I permessi PR1, PR2 e PR3 non sono attivati da un manifesto statico.</p></article>
-       </div>
+       <NodeEditorialPanel seed={seed}/>
+       <p>Il forum conversazionale richiede un archivio e un sistema di permessi propri del nodo. Il voto editoriale PR2 è separato dal forum e non si attiva dall'anteprima.</p>
        <p>Puoi progettare modifiche e nuovi nodi nel <a href="/agora?view=partecipa#studio-agora">laboratorio comune Agorà</a>, senza trasferire privilegi.</p>
       </section>:<>
      <section className="public-space-intro">

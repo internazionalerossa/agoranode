@@ -2,7 +2,7 @@ import {defineConfig,type Plugin} from 'vite';
 import react from '@vitejs/plugin-react';
 import {fileURLToPath} from 'node:url';
 import {join} from 'node:path';
-import {copyFile,mkdir,readFile} from 'node:fs/promises';
+import {copyFile,mkdir,readFile,writeFile} from 'node:fs/promises';
 
 /**
  * Static Render deployments do not rewrite arbitrary routes to index.html.
@@ -21,6 +21,13 @@ function staticPreviewPages():Plugin {
    if(!outDir)throw Error('Static preview output directory is required');
    const index=join(outDir,'index.html');
    await readFile(index,'utf8'); // fail build rather than publishing broken links
+   const rawCommit=process.env.RENDER_GIT_COMMIT??process.env.GITHUB_SHA??'';
+   const commit=/^[0-9a-f]{40}$/i.test(rawCommit)?rawCommit.toLowerCase():null;
+   await writeFile(join(outDir,'version.json'),JSON.stringify({
+     format:'org.agoranode.static-preview-version.v1',
+     commit,
+     preview:true,
+   })+'\n','utf8');
    const known=['agora','polisrossa','polisrossa/read','polisrossa/account','account','read'];
    for(const route of known){
     const directory=join(outDir,...route.split('/'));

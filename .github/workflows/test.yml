@@ -33,3 +33,10 @@ jobs:
         run: npm run benchmark:cas
       - name: Verify domain logic and persistent accounts
         run: npm test
+
+      - name: Verify static preview build and direct-route documents
+        env:
+          VITE_PUBLIC_PREVIEW: 'true'
+        run: |
+          npx vite build --config web/vite.config.ts --outDir ../dist-preview
+          node scripts/verify-static-preview.mjs

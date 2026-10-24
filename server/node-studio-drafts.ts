@@ -61,14 +61,18 @@ export async function handleNodeStudioDrafts(
  catch{return reply({error:'Invalid draft data'},400);}
  const final={...draft,updatedAt:Date.now()};
  try{
-   const found=(await db.prepare('SELECT draft_id FROM node_studio_drafts WHERE owner_id=? ORDER BY updated_at DESC LIMIT 21')
-     .bind(userId).all()).results;
-   if(found.length>=20&&!found.some(row=>String(row.draft_id)===draft.draftId))
-     return reply({error:'Draft limit reached. Delete an older draft first.'},409);
-   await db.prepare('INSERT INTO node_studio_drafts(owner_id,draft_id,space_id,body_json) VALUES(?,?,?,?::jsonb) '+
+   // The count and conditional UPSERT run under db.batch()'s PostgreSQL
+   // advisory transaction lock. Concurrent requests cannot exceed the quota.
+   const result=await db.batch([db.prepare(
+     'INSERT INTO node_studio_drafts(owner_id,draft_id,space_id,body_json) '+
+     'SELECT ?,?,?,?::jsonb WHERE '+
+     '(SELECT COUNT(*) FROM node_studio_drafts WHERE owner_id=?) < 20 '+
+     'OR EXISTS (SELECT 1 FROM node_studio_drafts WHERE owner_id=? AND draft_id=?::uuid) '+
      'ON CONFLICT(owner_id,draft_id) DO UPDATE SET space_id=excluded.space_id,'+
-     'body_json=excluded.body_json,updated_at=now()')
-     .bind(userId,draft.draftId,draft.spaceId,JSON.stringify(final)).run();
+     'body_json=excluded.body_json,updated_at=now() RETURNING draft_id')
+     .bind(userId,draft.draftId,draft.spaceId,JSON.stringify(final),userId,userId,draft.draftId)]);
+   if(!result[0]?.results.length)
+     return reply({error:'Draft limit reached. Delete an older draft first.'},409);
    return reply({ok:true,draft:final});
  }catch{return reply({error:'Draft save failed'},503);}
 }

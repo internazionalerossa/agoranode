@@ -61,5 +61,13 @@ test('PostgreSQL draft storage isolates owners, enforces limits, and supports ex
    assert.equal((await call('alice','DELETE',undefined,'?draftId='+draft.draftId)).status,200);
    assert.equal((await(await call('alice','GET')).json()).drafts.length,0);
    assert.equal((await call('alice','PUT',{...draft,spaceId:'../etc'})).status,400);
+   // Updates of an existing draft are still allowed at the 20-draft quota.
+   const entries=Array.from({length:20},(_,i)=>({
+     ...draft,draftId:crypto.randomUUID(),spaceId:'science-'+i,
+   }));
+   for(const entry of entries)assert.equal((await call('alice','PUT',entry)).status,200);
+   assert.equal((await call('alice','PUT',{...draft,draftId:crypto.randomUUID(),spaceId:'overflow'})).status,409);
+   assert.equal((await call('alice','PUT',{...entries[0],description:'Revised description'})).status,200);
+   assert.equal((await(await call('alice','GET')).json()).drafts.length,20);
  }finally{await pg.close();}
 });

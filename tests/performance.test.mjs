@@ -137,7 +137,9 @@ test("the news startup dependency graph leaves the complete book catalogue in an
  const entry=Object.keys(manifest).find(key=>manifest[key].isEntry);assert.ok(entry);visit(entry);
  const startup=await Promise.all([...visited].filter(key=>manifest[key]?.file).map(key=>readFile(new URL('../build-node/public/'+manifest[key].file,import.meta.url),'utf8')));
  assert.ok(startup.every(code=>!code.includes('selected-works/volume-5/mswv5_58.htm')),'The full library must not download with news');
- assert.ok(manifest[entry].dynamicImports.some(key=>key.endsWith('/LibraryView.tsx')));
+ const app=Object.keys(manifest).find(key=>key.endsWith('/AggregatorApp.tsx'));
+ assert.ok(app && manifest[entry].dynamicImports.includes(app),'Legacy application loads on demand');
+ assert.ok(manifest[app].dynamicImports.some(key=>key.endsWith('/LibraryView.tsx')));
  assert.ok(startup.every(code=>!code.includes('Il secondo comma dell’articolo 3 affida')),'Historical articles must stay out of the news startup bundle');
  assert.ok(Object.entries(manifest).some(([key,value])=>key.endsWith('/SocialAchievements.tsx')&&value.dynamicImports?.some(key=>key.endsWith('/HistoricalDossiers.tsx'))));
 });
@@ -149,5 +151,8 @@ test("participation does not pull the book catalogue or historical statistics in
  const visited=new Set();function visit(key){if(visited.has(key))return;visited.add(key);for(const dep of manifest[key]?.imports??[])visit(dep);}const community=Object.keys(manifest).find(key=>key.endsWith('/CommunityView.tsx'));assert.ok(community);visit(community);
  const codes=await Promise.all([...visited].filter(key=>manifest[key]?.file).map(key=>readFile(new URL('../build-node/public/'+manifest[key].file,import.meta.url),'utf8')));
  assert.ok(codes.every(code=>!code.includes('selected-works/volume-5/mswv5_58.htm')&&!code.includes('constant2015USD')));
- assert.ok(Object.values(manifest).some(value=>value.isEntry&&value.dynamicImports?.includes(community)));
+ const entry=Object.keys(manifest).find(key=>manifest[key].isEntry);
+ const app=Object.keys(manifest).find(key=>key.endsWith('/AggregatorApp.tsx'));
+ assert.ok(entry && app && manifest[entry].dynamicImports?.includes(app));
+ assert.ok(manifest[app].dynamicImports?.includes(community));
 });

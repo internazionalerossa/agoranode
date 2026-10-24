@@ -1,10 +1,10 @@
 import {createRoot} from 'react-dom/client';
 import {lazy,Suspense} from 'react';
-import {AggregatorApp} from '../app/components/AggregatorApp';
 import '../app/globals.css';
 import MirrorNotice from '../app/components/MirrorNotice';
 import {canonicalizeSiteRoute,siteRouteFromUrl} from '../app/lib/site-routing';
 import {installStaticPreviewNavigation,staticPreviewVirtualUrl} from '../app/lib/static-preview-navigation';
+const AggregatorApp=lazy(()=>import('../app/components/AggregatorApp').then(m=>({default:m.AggregatorApp})));
 const PublicSpaceHome=lazy(()=>import('../app/components/PublicSpaceHome'));
 const AgoraNodeHome=lazy(()=>import('../app/components/AgoraNodeHome'));
 const NodeDirectory=lazy(()=>import('../app/components/NodeDirectory'));

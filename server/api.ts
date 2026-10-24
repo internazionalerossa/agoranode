@@ -41,7 +41,7 @@ export async function api(request:Request,db:PostgresDatabase,userId:string|null
  if(path==='/api/spaces/agora/preferences')return handleNodeFeedPreferences(request,db,userId,'agora',AGORA_SOURCE_IDS);
  if(path==='/api/spaces/polisrossa/preferences')return handleNodeFeedPreferences(request,db,userId,'polisrossa',sourceIds);
  if(path==='/api/node-studio/drafts')return handleNodeStudioDrafts(request,db,userId);
- if(path==='/api/agora/forum')return handleAgoraForum(request,db,userId);
+ if(path==='/api/agora/forum')return handleAgoraForum(request,db,userId,participationOpen);
  if(path==='/api/visitor-country')return visitorCountryResponse(request);
  if(path==='/api/knowledge/entity')return publicKnowledgeEntityResponse(request,db.pool);
  if(path==='/api/knowledge/revision')return publicKnowledgeRevisionResponse(request,db.pool);

@@ -5,7 +5,7 @@ import type {PostgresDatabase} from '../server/database';
 
 function database(){
  const calls:Array<{sql:string;args:unknown[]}>= [];
- const db={prepare(sql:string){
+ const db={batch:async()=>[{results:[{id:'00000000-0000-4000-8000-000000000002'}]}],prepare(sql:string){
   return {bind(...args:unknown[]){
    calls.push({sql,args});
    return {
@@ -46,5 +46,7 @@ test('creating a discussion requires an authenticated account and same origin',a
  assert.equal((await handleAgoraForum(post({...input,title:'a'.repeat(151)}),db,'account-1')).status,400);
  assert.equal((await handleAgoraForum(post(input),db,'account-1')).status,201);
  assert.ok(calls.some(call=>call.sql.startsWith('INSERT INTO agora_forum_topics')));
+ assert.ok(calls.some(call=>call.sql.includes('COUNT(*)')&&call.sql.includes('RETURNING id')));
+ assert.equal((await handleAgoraForum(post(input),db,'account-1',false)).status,503);
  assert.ok(!calls.some(call=>/UPDATE\s+forum_votes|INSERT\s+INTO\s+federation/i.test(call.sql)));
 });

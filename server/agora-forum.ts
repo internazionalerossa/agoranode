@@ -12,7 +12,7 @@ const clean=(value:unknown,min:number,max:number):value is string=>
  * It does not grant PR2/PR3 status and deliberately has NO vote endpoint.
  * The account owner_id never leaves the server.
  */
-export async function handleAgoraForum(request:Request,db:PostgresDatabase,userId:string|null):Promise<Response>{
+export async function handleAgoraForum(request:Request,db:PostgresDatabase,userId:string|null,participationOpen=true):Promise<Response>{
  const url=new URL(request.url);
  if(url.pathname!=='/api/agora/forum')return reply({error:'Unknown forum'},404);
  if(request.method==='GET'){
@@ -35,6 +35,7 @@ export async function handleAgoraForum(request:Request,db:PostgresDatabase,userI
   }catch{return reply({error:'Forum temporarily unavailable'},503);}
  }
  if(request.method!=='POST')return reply({error:'Method not allowed'},405);
+ if(!participationOpen)return reply({error:'Le nuove discussioni sono chiuse su questa installazione.'},503);
  if(!userId)return reply({error:'Accedi come PR1 per proporre una discussione.'},401);
  if(request.headers.get('origin')!==url.origin||request.headers.get('sec-fetch-site')==='cross-site')
   return reply({error:'Invalid origin'},403);
@@ -52,15 +53,16 @@ export async function handleAgoraForum(request:Request,db:PostgresDatabase,userI
     !clean(fields.alias,2,60)||!clean(fields.title,8,150)||!clean(fields.body,40,4000))
   return reply({error:'Completa alias, titolo e descrizione nei limiti indicati.'},400);
  try{
-  const recent=await db.prepare(
-   "SELECT COUNT(*)::int AS count FROM agora_forum_topics WHERE author_id=? AND created_at>now()-interval '1 day'")
-    .bind(userId).first<{count:number}>();
-  if(Number(recent?.count??0)>=6)return reply({error:'Limite di sei discussioni al giorno raggiunto.'},429);
-  const row=await db.prepare(
-   'INSERT INTO agora_forum_topics(space_id,author_id,author_alias,title,body)'+
-   ' VALUES(?,?,?,?,?) RETURNING id::text AS id')
-   .bind('agora',userId,fields.alias,fields.title,fields.body).first<{id:string}>();
-  if(!row?.id)return reply({error:'Salvataggio non riuscito'},503);
+  // The guarded INSERT and the count share the same transaction. db.batch()
+  // serializes quota writes with a PostgreSQL transaction advisory lock.
+  const results=await db.batch([db.prepare(
+   "INSERT INTO agora_forum_topics(space_id,author_id,author_alias,title,body)"+
+   " SELECT ?,?,?,?,? WHERE (SELECT COUNT(*) FROM agora_forum_topics"+
+   " WHERE author_id=? AND created_at>now()-interval '1 day') < 6"+
+   " RETURNING id::text AS id")
+   .bind('agora',userId,fields.alias,fields.title,fields.body,userId)]);
+  const row=results[0]?.results[0] as {id?:string}|undefined;
+  if(!row?.id)return reply({error:'Limite di sei discussioni al giorno raggiunto.'},429);
   return reply({ok:true,id:String(row.id),spaceId:'agora',status:'published-discussion-not-vote'},201);
  }catch{return reply({error:'Il forum non è ancora disponibile su questo server.'},503);}
 }

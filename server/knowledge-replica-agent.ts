@@ -8,6 +8,7 @@ import {
   rm,
 } from "node:fs/promises";
 import { basename, join, resolve } from "node:path";
+import { constants } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { canonicalKnowledgeJson } from "../app/lib/knowledge-model";
 import type { Connections } from "./database";
@@ -63,18 +64,26 @@ function safeFileName(value: string) {
 }
 
 async function readFinalPackage(path: string) {
-  const before = await lstat(path);
-  if (!before.isFile() || before.isSymbolicLink() || before.size > MAX_PACKAGE_BYTES) {
-    throw new Error("Replication package is not a regular bounded file");
-  }
-  const bytes = await readFile(path);
-  const after = await lstat(path);
-  if (
-    after.size !== before.size ||
-    after.mtimeMs !== before.mtimeMs ||
-    bytes.length !== before.size
-  ) {
-    throw new Error("Replication package changed while it was being read");
+  // Lock reads to the opened descriptor, never to a path that may be swapped
+  // between lstat and readFile by an untrusted inbox writer.
+  const handle = await open(path, constants.O_RDONLY | (constants.O_NOFOLLOW ?? 0));
+  let bytes: Buffer;
+  try {
+    const before = await handle.stat();
+    if (!before.isFile() || before.size > MAX_PACKAGE_BYTES) {
+      throw new Error("Replication package is not a regular bounded file");
+    }
+    bytes = await handle.readFile();
+    const after = await handle.stat();
+    if (
+      after.size !== before.size ||
+      after.mtimeMs !== before.mtimeMs ||
+      bytes.length !== before.size
+    ) {
+      throw new Error("Replication package changed while it was being read");
+    }
+  } finally {
+    await handle.close();
   }
   let parsed: unknown;
   try {

@@ -40,6 +40,8 @@ export function publicLocalSpaces() {
     href,
     availability,
     status,
+    modules: Object.values(manifest.capabilities).filter(capability => capability.status === 'implemented').map(capability => capability.label),
+    plannedModules: Object.values(manifest.capabilities).filter(capability => capability.status !== 'implemented').map(capability => capability.label),
   }));
 }
 

@@ -3,6 +3,7 @@ import {useEffect,useMemo,useState,type CSSProperties} from 'react';
 import {validatePublicSpaceSeed,type PublicSpaceSeed} from '../platform/public-space-seed';
 import {PublicSpaceKnowledgePage,PublicSpaceRemoteSearch} from './PublicSpaceKnowledge';
 import PublicSpaceLibrary from './PublicSpaceLibrary';
+import PublicSpaceRassegna from './PublicSpaceRassegna';
 import NodeEditorialPanel from './NodeEditorialPanel';
 import NodeForumPanel from './NodeForumPanel';
 import {NODE_PRIMARY_TABS} from '../lib/node-primary-navigation';
@@ -71,23 +72,7 @@ export default function PublicSpaceHome({spaceId}:{spaceId:string}){
       <h2>{seed.name}</h2><p>{seed.description}</p>
       <p className="public-space-boundary">{seed.publication.notice}</p>
      </section>
-     <section aria-labelledby="public-space-feed-title" className="agora-current-news">
-      <h2 id="public-space-feed-title">La rassegna</h2>
-      <p>La rassegna del nodo utilizza fonti selezionabili proprie. Il manifesto pubblico contiene i riferimenti, non un feed live: nessuna notizia o visualizzazione è inventata.</p>
-      <label htmlFor="public-space-source-filter">Cerca una fonte</label>
-      <input id="public-space-source-filter" type="search" maxLength={160} value={query}
-       onChange={event=>setQuery(event.target.value)} placeholder="Nome della fonte o argomento"/>
-      <div className="agora-feed-cards">
-       {seed.sources.filter(source=>!query.trim()||[source.name,source.homepage].join(' ').toLocaleLowerCase('it').includes(query.trim().toLocaleLowerCase('it'))).map(source=><article className="agora-feed-card" key={source.id}>
-        <h3>{source.name}</h3>
-        {source.homepage?<p><a href={source.homepage} target="_blank" rel="noopener noreferrer">Sito originale ↗</a></p>:null}
-        {source.feedUrl?<p><a href={source.feedUrl} target="_blank" rel="noopener noreferrer">Feed RSS/Atom ↗</a></p>:null}
-       </article>)}
-      </div>
-      {seed.sources.length===0?<p>Non sono ancora state pubblicate fonti per questa rassegna.</p>:null}
-      <h3>Video</h3>
-      <p>I video verificati saranno disponibili quando l'operatore avrà configurato i relativi canali. I collegamenti del manifesto rimangono consultabili nella Biblioteca.</p>
-     </section>
+     <PublicSpaceRassegna seed={seed}/>
      <PublicSpaceKnowledgePage spaceId={spaceId}/>
      <section aria-labelledby="public-space-knowledge-title">
       <h2 id="public-space-knowledge-title">La conoscenza del nodo</h2>

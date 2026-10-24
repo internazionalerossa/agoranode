@@ -8,9 +8,9 @@ const reply=(data:unknown,status=200)=>Response.json(data,{status,headers:HEADER
 const field=(data:unknown,min:number,max:number):data is string=>
  typeof data==='string'&&data.trim()===data&&data.length>=min&&data.length<=max&&!/[\u0000-\u001f]/.test(data);
 
-/** Independent per-node forum. All writes require a verified PR1 session. */
+/** Independent per-node forum. All writes require an active, verified PR2 of this node. */
 export async function handleNodeForum(
- request:Request,pool:Connections,spaceId:string,userId:string|null,
+ request:Request,pool:Connections,spaceId:string,userId:string|null,verifyPr2:(spaceId:string,userId:string)=>Promise<boolean>,
 ):Promise<Response>{
  const url=new URL(request.url);
  if(!SPACE.test(spaceId)||url.searchParams.getAll('spaceId').length!==1||
@@ -40,6 +40,8 @@ export async function handleNodeForum(
  }
  if(request.method!=='POST')return reply({error:'Method not allowed'},405);
  if(!userId)return reply({error:'Sign in to discuss'},401);
+ try{if(!await verifyPr2(spaceId,userId))return reply({error:'Active PR2 membership of this node is required'},403);}
+ catch{return reply({error:'PR2 verification unavailable'},503);}
  if(request.headers.get('origin')!==url.origin||request.headers.get('sec-fetch-site')==='cross-site')
   return reply({error:'Invalid origin'},403);
  if(!request.headers.get('content-type')?.startsWith('application/json'))

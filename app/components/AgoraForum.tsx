@@ -7,12 +7,12 @@ type Board={spaceId:'agora';topics:Topic[];nextOffset:number|null;authenticated:
 type ViewRole='visitatore'|'pr1'|'pr2'|'pr3';
 const ROLE_INFO:Record<ViewRole,{title:string;text:string}>={
  visitatore:{title:'Visitatore',text:'Legge le discussioni pubbliche e le voci dell’Atlante. Non può modificare le decisioni.'},
- pr1:{title:'PR1 · account',text:'Può proporre una discussione con un account verificato. Nessuna azione attribuisce automaticamente diritti PR2.'},
+ pr1:{title:'PR1 · account',text:'Può salvare preferenze delle fonti, articoli, post e segnalibri di lettura. Non può pubblicare nel forum né usare la chat.'},
  pr2:{title:'PR2 · anteprima delle funzioni',text:'Nella versione completa i PR2 discutono, verificano e votano proposte pertinenti al proprio nodo. Questa anteprima non dà accesso ai voti.'},
- pr3:{title:'PR3 · anteprima delle funzioni',text:'I mandati federali sono verificati separatamente e revocabili. Questo selettore non conferisce mandato né firme valide.'},
+ pr3:{title:'PR3 · anteprima delle funzioni',text:'PR3 è un PR2 attivo del nodo Agorà quando esercita competenze sulla tecnologia AgoraNode. Il selettore non conferisce diritti.'},
 };
 
-/** A real public discussion board with authenticated PR1 submissions.
+/** A real public discussion board with verified Agora PR2 submissions.
  * Role previews are documentation only; they never grant server permissions.
  */
 export default function AgoraForum(){
@@ -95,7 +95,7 @@ export default function AgoraForum(){
    <h3>Discussioni</h3>
    {authenticated?<button type="button" onClick={()=>setCompose(x=>!x)} aria-expanded={compose}>
      {compose?'Chiudi il modulo':'Apri una discussione'}
-   </button>:isStaticPreview?<span>Il forum interattivo richiede il backend e una sessione verificata.</span>:<a href="/account?return_to=%2Fagora%3Fview%3Dpartecipa">Accedi per partecipare come PR1</a>}
+   </button>:isStaticPreview?<span>Il forum interattivo richiede il backend e una sessione verificata.</span>:<a href="/account?return_to=%2Fagora%3Fview%3Dpartecipa">Accedi e verifica la tua appartenenza PR2 ad Agorà</a>}
   </div>
   {authenticated&&compose?<form onSubmit={event=>{event.preventDefault();void publish();}}>
    <label>Nome pubblico o pseudonimo<input required maxLength={60} minLength={2} value={alias} onChange={e=>setAlias(e.target.value)}/></label>

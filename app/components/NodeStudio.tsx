@@ -9,7 +9,7 @@ import type {PublicSpaceSeed} from '../platform/public-space-seed';
 type Props={spaceId:string;seed?:PublicSpaceSeed;onPropose?:(draft:NodeBlueprintDraft)=>Promise<string>};
 const key=(spaceId:string)=>'agoranode.node-studio.draft.v1:'+spaceId;
 export default function NodeStudio({spaceId,seed,onPropose}:Props){
- const [draft,setDraft]=useState<NodeBlueprintDraft>(()=>newNodeDraft('create-node'));
+ const [draft,setDraft]=useState<NodeBlueprintDraft>(()=>newNodeDraft(spaceId==='agora'?'create-node':'edit-node',spaceId==='agora'?'nuovo-nodo':spaceId));
  const [saved,setSaved]=useState<NodeBlueprintDraft[]>([]);
  const [account,setAccount]=useState(false);
  const [status,setStatus]=useState('');
@@ -101,10 +101,10 @@ export default function NodeStudio({spaceId,seed,onPropose}:Props){
      <p>Un salvataggio è una <strong>bozza privata</strong>. Per rendere consultabile un nuovo nodo è disponibile il bootstrap pubblico read-only, installato manualmente da un operatore dopo la revisione di fonti e diritti. Non abilita account o voto PR2.</p>
      <p><a href="https://github.com/internazionalerossa/agoranode/blob/main/docs/THEMATIC-BOOTSTRAP.md" target="_blank" rel="noopener noreferrer">Come installare il nodo senza pubblicare bozze private ↗</a></p>
    </header>
-   <p className="node-studio-empty-invitation">Il modello di riferimento per un nodo completo è la <a href="https://polisrossa.tail37128d.ts.net/" target="_blank" rel="noopener noreferrer">PolisRossa originale</a>: stessa organizzazione di rassegna, video, Biblioteca, Atlante, dati e Agorà, con identità e contenuti autonomi. Scegli il blueprint per partire da quel formato oppure una pagina vuota.</p>
+   {spaceId==='agora'?<p className="node-studio-empty-invitation">In Agorà puoi proporre nuovi nodi tematici partendo dalla struttura comune di rassegna, Biblioteca, Atlante e partecipazione. Il modello funzionale deriva dall’esperienza dei nodi esistenti, senza copiarne contenuti o identità.</p>:<p className="node-studio-empty-invitation">Qui puoi proporre modifiche visive alle sezioni, alle Voci dell’Atlante, alla Timeline, alle fonti e alla bibliografia di questo nodo. La creazione di altri nodi è riservata ad Agorà.</p>}
    <div className="node-studio-modes" role="group" aria-label="Tipo di lavoro">
-     <button type="button" onClick={fromReference}>Nuovo nodo · blueprint PolisRossa</button>
-     <button type="button" onClick={()=>reset('create-node')}>Nuovo nodo · pagina vuota</button>
+     {spaceId==='agora'?<><button type="button" onClick={fromReference}>Crea nuovo nodo · formato comune</button>
+     <button type="button" onClick={()=>reset('create-node')}>Nuovo nodo · pagina vuota</button></>:null}
      <button type="button" aria-pressed={draft.operation==='edit-node'} onClick={()=>reset('edit-node')}>Modifica il nodo</button>
    </div>
    {account&&saved.length>0?<label>Bozze nel tuo account
@@ -139,17 +139,17 @@ export default function NodeStudio({spaceId,seed,onPropose}:Props){
        <p className="eyebrow">ANTEPRIMA · NON PUBBLICATA</p>
        <div style={{borderTop:'5px solid '+draft.accent,paddingTop:12}}>
          <h3>{draft.name}</h3><p>{draft.topic}</p><p>{draft.description}</p>
-         <nav aria-label="Anteprima della navigazione PolisRossa">
+         <nav aria-label="Anteprima della navigazione del nodo">
            {NODE_PRIMARY_TABS.map(tab=><button type="button" key={tab.id} aria-pressed={previewTab===tab.id}
              onClick={()=>setPreviewTab(tab.id)}>{tab.label}</button>)}
          </nav>
          {previewTab==='notizie'?<section aria-label="Formato rassegna e video">
            <h4>Rassegna e video</h4><p>Controlli previsti: Tutti i feed · Feed preferiti · Ricerca · Filtri per fonte, lingua e tema · Video. Le fonti del nuovo nodo saranno configurate separatamente.</p>
-           <p>{draft.sources.length} fonti proposte · Nessuna notizia importata da PolisRossa.</p>
+           <p>{draft.sources.length} fonti proposte · Nessuna notizia importata da altri nodi.</p>
          </section>:previewTab==='teoria'?<section aria-label="Formato Biblioteca">
            <h4>Biblioteca</h4>
            <p>Libri e percorsi · Timeline e Atlante (Timeline / Indice e ricerca) · Dati e grafici.</p>
-           <p>Le opere, le voci e i dati saranno quelli autorizzati del nuovo nodo, non copie del catalogo PolisRossa.</p>
+           <p>Le opere, le voci e i dati saranno quelli autorizzati del nuovo nodo, non copie dei cataloghi di altri nodi.</p>
          </section>:<section aria-label="Formato partecipazione">
            <h4>Agorà · Forum e proposte</h4>
            <p>Anteprima dei pulsanti e delle sezioni: Discussioni · Proposte · Partecipazione. Account, chat e voto restano disabilitati fino all’installazione del backend e alla verifica delle autorizzazioni proprie del nodo.</p>

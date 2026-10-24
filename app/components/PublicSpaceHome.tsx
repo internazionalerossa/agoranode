@@ -60,11 +60,11 @@ export default function PublicSpaceHome({spaceId}:{spaceId:string}){
      {library?<PublicSpaceLibrary seed={seed}/>:participation?<section className="agora-participation" aria-labelledby="public-space-community-title">
        <p className="eyebrow">AGORÀ · {seed.name}</p>
        <h2 id="public-space-community-title">Discussioni e proposte della comunità</h2>
-       <p>Questo nodo condivide il formato dei moduli di partecipazione di PolisRossa, non i suoi utenti, voti o messaggi.</p>
+       <p>Questo nodo dispone di spazi propri per la partecipazione, con utenti, contenuti e decisioni confinati al suo ambito.</p>
        <p className="public-space-boundary">{seed.publication.notice}</p>
        <NodeEditorialPanel seed={seed}/>
        <NodeForumPanel seed={seed}/>
-       <p>Puoi progettare modifiche e nuovi nodi nel <a href="/agora?view=partecipa#studio-agora">laboratorio comune Agorà</a>, senza trasferire privilegi.</p>
+       <p>Puoi proporre modifiche a questo nodo nell’editor contestuale, senza acquisire privilegi di altre comunità. La creazione di nuovi nodi appartiene esclusivamente ad Agorà.</p>
       </section>:<>
      <section className="public-space-intro">
       <p className="eyebrow">NODO TEMATICO · ANTEPRIMA PUBBLICA</p>
@@ -73,7 +73,7 @@ export default function PublicSpaceHome({spaceId}:{spaceId:string}){
      </section>
      <section aria-labelledby="public-space-feed-title" className="agora-current-news">
       <h2 id="public-space-feed-title">La rassegna</h2>
-      <p>La struttura di PolisRossa con fonti selezionabili per nodo. Il manifesto pubblico contiene i riferimenti, non un feed live: nessuna notizia o visualizzazione è inventata.</p>
+      <p>La rassegna del nodo utilizza fonti selezionabili proprie. Il manifesto pubblico contiene i riferimenti, non un feed live: nessuna notizia o visualizzazione è inventata.</p>
       <label htmlFor="public-space-source-filter">Cerca una fonte</label>
       <input id="public-space-source-filter" type="search" maxLength={160} value={query}
        onChange={event=>setQuery(event.target.value)} placeholder="Nome della fonte o argomento"/>

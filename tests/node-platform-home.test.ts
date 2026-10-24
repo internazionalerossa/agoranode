@@ -42,8 +42,8 @@ test("the AgoràNode overview distinguishes the shared infrastructure from thema
   assert.doesNotMatch(html, /PolisRossa è un’istanza/);
   assert.match(html, /href="\/"/);
   assert.match(html, /Agorà <small>— AgoràNode<\/small>/);
-  assert.match(html, /href="\/polisrossa"/);
-  assert.match(html, /PolisRossa/);
+  assert.doesNotMatch(html, /class="agoranode-instance-link" href="\/polisrossa"/);
+  assert.match(html, /Elenco dei nodi/);
   assert.match(html, /href="\/agora\?view=partecipa"/);
   assert.match(html, /La rassegna/);
   assert.match(html, /Biblioteca/);

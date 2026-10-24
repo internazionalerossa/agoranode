@@ -38,7 +38,7 @@ export default function AgoraNodeHome() {
           {NODE_PRIMARY_TABS.map(tab=><a key={tab.id} href={thematicNodeTabHref('agora',tab.id)}
             aria-current={(tab.id==='notizie'&&!library&&!participation)||(tab.id==='teoria'&&library)||(tab.id==='partecipa'&&participation)?'page':undefined}>{tab.label}</a>)}
           <a href="/#node-directory-content">Altri nodi</a>
-          <a className="agoranode-instance-link" href="/polisrossa">PolisRossa <ArrowRight size={16}/></a>
+          <a className="agoranode-instance-link" href="/">Elenco dei nodi <ArrowRight size={16}/></a>
         </nav>
       </header>
 
@@ -60,7 +60,7 @@ export default function AgoraNodeHome() {
         </section>:<>
           <AgoraFeed/>
           <aside className="agoranode-boundary" aria-label="Ambito del nodo Agorà">
-            <div><Network size={20}/><span><strong>AgoràNode è la tecnologia comune.</strong> Agorà è il nodo alpha di riferimento; PolisRossa resta una comunità distinta.</span></div>
+            <div><Network size={20}/><span><strong>AgoràNode è la tecnologia comune.</strong> Agorà è il nodo iniziale da cui si propone la creazione di nuovi nodi. Ogni comunità tematica resta autonoma.</span></div>
             <div><GitBranch size={20}/><span><strong>Le decisioni hanno un ambito preciso.</strong> Anche quando Agorà è il nodo alpha, le scelte tematiche restano ai rispettivi nodi.</span></div>
             <div><ShieldCheck size={20}/><span><strong>Ospitare non dà potere politico.</strong> L'ammissione PR2 non deriva dal possesso di un server: server, firme tecniche e diritto di voto rimangono separati.</span></div>
           </aside>
@@ -70,7 +70,7 @@ export default function AgoraNodeHome() {
 
       <footer className="agoranode-footer">
         <p>AgoràNode · infrastruttura comune in costruzione pubblica e verificabile.</p>
-        <div><a href="/polisrossa">PolisRossa</a><span aria-hidden="true"> · </span><a href="https://github.com/internazionalerossa/agoranode" target="_blank" rel="noopener noreferrer">Codice sorgente</a><span aria-hidden="true"> · </span><a href="https://github.com/internazionalerossa/agoranode/blob/main/docs/AGORANODE.md" target="_blank" rel="noopener noreferrer">Architettura del progetto</a></div>
+        <div><a href="/">Tutti i nodi</a><span aria-hidden="true"> · </span><a href="https://github.com/internazionalerossa/agoranode" target="_blank" rel="noopener noreferrer">Codice sorgente</a><span aria-hidden="true"> · </span><a href="https://github.com/internazionalerossa/agoranode/blob/main/docs/AGORANODE.md" target="_blank" rel="noopener noreferrer">Architettura del progetto</a></div>
       </footer>
     </div>
   );

@@ -6,7 +6,7 @@ type Topic={id:string;space_id:string;author_alias:string;title:string;body:stri
 type Comment={id:string;author_alias:string;body:string;created_at:string};
 const endpoint=(spaceId:string,topicId?:string)=>'/api/node-forum?'+new URLSearchParams({spaceId,...(topicId?{topicId}:{})});
 
-/** Real, independent PR1 discussion board. Nothing is stored in PolisRossa. */
+/** Real, independent PR2 discussion board. Nothing is stored in PolisRossa. */
 export default function NodeForumPanel({seed}:{seed:PublicSpaceSeed}){
  const [topics,setTopics]=useState<Topic[]>([]);
  const [selected,setSelected]=useState<string|null>(null);
@@ -55,7 +55,7 @@ export default function NodeForumPanel({seed}:{seed:PublicSpaceSeed}){
  return <section className="agora-forum" aria-labelledby={'node-forum-title-'+seed.spaceId}>
   <header><p className="eyebrow">COMUNITÀ · DISCUSSIONI</p>
    <h2 id={'node-forum-title-'+seed.spaceId}>Forum di {seed.name}</h2>
-   <p>Discussioni reali, salvate esclusivamente nel database del nodo. È richiesta una sessione PR1 per pubblicare; il ruolo PR3 non attribuisce vantaggi nella conversazione.</p>
+   <p>Discussioni reali, salvate esclusivamente nel database del nodo. Per scrivere occorre essere PR2 di questo nodo; l'account PR1 consente soltanto preferenze e salvataggi personali.</p>
   </header>
   {error?<p role="alert">{error}</p>:null}
   {notice?<p role="status">{notice}</p>:null}

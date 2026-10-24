@@ -5,7 +5,7 @@ import type {PostgresDatabase} from '../server/database';
 
 function database(){
  const calls:Array<{sql:string;args:unknown[]}>= [];
- const db={batch:async()=>[{results:[{id:'00000000-0000-4000-8000-000000000002'}]}],prepare(sql:string){
+ const db={pool:{query:async(_sql:string,args:unknown[])=>({rows:args[0]==='account-1'?[{allowed:1}]:[]})},batch:async()=>[{results:[{id:'00000000-0000-4000-8000-000000000002'}]}],prepare(sql:string){
   return {bind(...args:unknown[]){
    calls.push({sql,args});
    return {
@@ -44,6 +44,7 @@ test('creating a discussion requires an authenticated account and same origin',a
  assert.equal((await handleAgoraForum(post({...input,role:'pr3'}),db,'account-1')).status,400);
  assert.equal((await handleAgoraForum(post({...input,body:'short'}),db,'account-1')).status,400);
  assert.equal((await handleAgoraForum(post({...input,title:'a'.repeat(151)}),db,'account-1')).status,400);
+ assert.equal((await handleAgoraForum(post(input),db,'pr1-only')).status,403);
  assert.equal((await handleAgoraForum(post(input),db,'account-1')).status,201);
  assert.ok(calls.some(call=>call.sql.startsWith('INSERT INTO agora_forum_topics')));
  assert.ok(calls.some(call=>call.sql.includes('COUNT(*)')&&call.sql.includes('RETURNING id')));

@@ -27,11 +27,12 @@ import {handleFederationPr3} from './federation';
 import {handleNodeFeedPreferences} from './node-feed-preferences';
 import {handleNodeStudioDrafts} from './node-studio-drafts';
 import {handleAgoraForum} from './agora-forum';
+import {handleScopedIssues} from './scoped-issues';
 import {agoraFeedResponse} from './agora-feed';
 import {AGORA_SOURCE_IDS} from '../app/instances/agora-sources';
 const sourceIds=new Set(SOURCE_CATALOG.map(s=>s.id)),bookIds=new Set(THEORY_LIBRARY.map(b=>b.id));
 const publicEndpoints:Record<string,(r:Request)=>Promise<Response>>={'/api/articles':articles,'/api/videos':videos,'/api/highlights':highlights,'/api/pulse':pulse};
-export const privatePaths=new Set(['/api/privacy/export','/api/bookmarks','/api/reading-progress','/api/community','/api/community/mine','/api/community/forum','/api/community/chat','/api/community/chat-image','/api/federation/pr3','/api/spaces/agora/preferences','/api/spaces/polisrossa/preferences','/api/node-studio/drafts']);
+export const privatePaths=new Set(['/api/privacy/export','/api/bookmarks','/api/reading-progress','/api/community','/api/community/mine','/api/community/forum','/api/community/chat','/api/community/chat-image','/api/federation/pr3','/api/spaces/agora/preferences','/api/spaces/polisrossa/preferences','/api/node-studio/drafts','/api/scoped-issues']);
 export async function api(request:Request,db:PostgresDatabase,userId:string|null,bootstrapHash:string|undefined,background:(p:Promise<unknown>)=>void,participationOpen=true,socialIdentity?:ForumSocialIdentity,unlinkSocialIdentity?:()=>Promise<void>,accountVerified=true):Promise<Response>{
  const url=new URL(request.url),path=url.pathname;
  if(path==='/api/manifest')return brandManifestResponse(request);
@@ -42,6 +43,7 @@ export async function api(request:Request,db:PostgresDatabase,userId:string|null
  if(path==='/api/spaces/polisrossa/preferences')return handleNodeFeedPreferences(request,db,userId,'polisrossa',sourceIds);
  if(path==='/api/node-studio/drafts')return handleNodeStudioDrafts(request,db,userId);
  if(path==='/api/agora/forum')return handleAgoraForum(request,db,userId,participationOpen);
+ if(path==='/api/scoped-issues')return handleScopedIssues(request,db,userId);
  if(path==='/api/visitor-country')return visitorCountryResponse(request);
  if(path==='/api/knowledge/entity')return publicKnowledgeEntityResponse(request,db.pool);
  if(path==='/api/knowledge/revision')return publicKnowledgeRevisionResponse(request,db.pool);

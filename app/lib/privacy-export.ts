@@ -18,6 +18,8 @@ export async function handlePrivacyExport(request:Request,db:ForumDatabase|undef
    topics:['SELECT id,title,body,references_text,category,language,created_at,starts_at,ends_at,withdrawn FROM forum_topics WHERE author_id IN (SELECT id FROM forum_members WHERE owner_key=?)',owner],
    comments:['SELECT id,topic_id,body,language,created_at FROM forum_comments WHERE author_id IN (SELECT id FROM forum_members WHERE owner_key=?)',owner],
    ballots:['SELECT topic_id,choices_json,receipt,updated_at FROM forum_ballots WHERE member_id IN (SELECT id FROM forum_members WHERE owner_key=?)',owner],
+   nodeStudioDrafts:['SELECT draft_id::text AS draft_id,space_id,body_json,updated_at FROM node_studio_drafts WHERE owner_id=?',userId],
+   agoraForumTopics:['SELECT id::text AS id,space_id,author_alias,title,body,created_at FROM agora_forum_topics WHERE author_id=?',userId],
   } as const;
   const entries=await Promise.all(Object.entries(queries).map(async([key,[sql,id]])=>{
    const rows=(await db.prepare(sql+' LIMIT 10001').bind(id).all()).results;

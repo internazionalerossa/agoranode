@@ -11,6 +11,7 @@ export async function migrateNodeEditorialDatabase(pool:Connections):Promise<voi
   {version:1,file:'019-node-editorial-pr2.sql'},
   {version:2,file:'020-node-forum.sql'},
   {version:3,file:'021-node-personal-bookmarks.sql'},
+  {version:4,file:'022-node-pr2-chat.sql'},
  ];
  const c=await pool.connect();
  try{

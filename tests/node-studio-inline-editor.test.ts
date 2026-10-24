@@ -10,6 +10,7 @@ test('Atlas visual editor changes a single paragraph without mutating or copying
  const two=appendAtlasEntry(added,secondId);
  assert.equal(base.blocks.length,0);
  assert.equal(two.blocks.length,2);
+ assert.equal(two.blocks[0].kind,'atlas');
  const updated=editStudioBlock(two,firstId,{title:'Galileo e il telescopio'});
  const written=editStudioBlock(updated,firstId,{body:'Una voce originale corredata da fonti e revisioni.'});
  assert.equal(written.blocks[0].title,'Galileo e il telescopio');

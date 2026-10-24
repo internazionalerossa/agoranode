@@ -7,7 +7,7 @@ import {
 import {LibraryPrimaryTabs,LibraryTimelineTabs} from './LibraryNavigationTabs';
 import {PublicSpaceKnowledgePage,PublicSpaceRemoteSearch} from './PublicSpaceKnowledge';
 
-const INDEXABLE=new Set(['heading','paragraph','timeline','source','book','video','data']);
+const INDEXABLE=new Set(['heading','paragraph','timeline','source','book','video','data','atlas','bibliography']);
 export default function PublicSpaceLibrary({seed}:{seed:PublicSpaceSeed}){
  const spaceId=seed.spaceId;
  const location=thematicLibraryLocationFromUrl(
@@ -18,7 +18,7 @@ export default function PublicSpaceLibrary({seed}:{seed:PublicSpaceSeed}){
  const filtered=useMemo(()=>entries.filter(block=>
   !query.trim()||[block.title,block.body,block.kind].join(' ')
    .toLocaleLowerCase('it').includes(query.trim().toLocaleLowerCase('it'))),[entries,query]);
- const books=seed.blocks.filter(block=>block.kind==='book'||block.kind==='source');
+ const books=seed.blocks.filter(block=>block.kind==='book'||block.kind==='source'||block.kind==='bibliography');
  const datasets=seed.blocks.filter(block=>block.kind==='data');
  const timeline=seed.blocks.filter(block=>block.kind==='timeline');
  const safeHref=(url:string):string|null=>{

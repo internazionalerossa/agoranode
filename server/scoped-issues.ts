@@ -88,6 +88,7 @@ export async function handleScopedIssues(
   if(!issue.rows[0])return reply({error:'Issue not found'},404);
   if(issue.rows[0].status!=='open')return reply({error:'Issue closed'},409);
   if(v.action==='comment'){
+   if(!await agoraPr2(db,userId,now))return reply({error:'Only verified Agorà PR2 members may comment on internal issues'},403);
    if(!text(v.body,5,4000)||v.title!==undefined||v.choice!==undefined)return reply({error:'Invalid comment'},400);
    const inserted=await db.batch([db.prepare(
     "INSERT INTO agora_internal_issue_comments(issue_id,author_id,body) SELECT ?,?,?"+

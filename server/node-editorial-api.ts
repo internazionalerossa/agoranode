@@ -25,6 +25,9 @@ export async function handleNodeEditorial(
  if(!ID.test(spaceId)||['agora','polisrossa'].includes(spaceId))
   return reply({error:'Unknown editable node'},404);
  const url=new URL(request.url);
+ if(url.pathname!=='/api/node-editorial')return reply({error:'Unknown editorial endpoint'},404);
+ if(url.searchParams.getAll('spaceId').length!==1||url.searchParams.get('spaceId')!==spaceId)
+  return reply({error:'Invalid query'},400);
  if(request.method==='GET'){
   if([...url.searchParams.keys()].some(key=>key!=='spaceId'||url.searchParams.getAll(key).length!==1))
    return reply({error:'Invalid query'},400);

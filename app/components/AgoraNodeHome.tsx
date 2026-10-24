@@ -8,6 +8,7 @@ import SharedSpaceModules from "./SharedSpaceModules";
 import AgoraFeed from "./AgoraFeed";
 import NodeStudio from "./NodeStudio";
 import AgoraForum from "./AgoraForum";
+import ScopedIssues from "./ScopedIssues";
 import AgoraLibraryView from "./AgoraLibraryView";
 import {AGORA_MANIFEST} from "../instances/agora";
 import {NODE_PRIMARY_TABS,thematicNodeTabHref} from "../lib/node-primary-navigation";
@@ -52,6 +53,7 @@ export default function AgoraNodeHome() {
              o creare automaticamente account e forum.</p>
           </header>
           <AgoraForum/>
+          <ScopedIssues/>
           <NodeStudio spaceId="agora"/>
           <FederationBoard/>
           <SharedCustodyView/>

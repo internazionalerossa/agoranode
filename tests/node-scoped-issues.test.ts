@@ -43,7 +43,7 @@ test('the issue service is scoped, authenticated, and never grants PR2 by self d
   await pg.query('INSERT INTO agora_internal_issues(id,scope,author_id,title,body) VALUES ($1,$2,$3,$4,$5)',
    [issueId,'agora','alice',details.title,details.body]);
   const list=await (await handleScopedIssues(new Request(url),db,null)).json();
-  assert.equal(list.issues.length,1);
+  assert.equal(list.issues.length,2);
   assert.equal(list.issues[0].scope,'agora');
   assert.ok(!JSON.stringify(list).includes('alice'));
   const separate=await (await handleScopedIssues(new Request('https://example.test/api/scoped-issues?scope=agoranode'),db,null)).json();

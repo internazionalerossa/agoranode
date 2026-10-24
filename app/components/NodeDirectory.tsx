@@ -10,6 +10,8 @@ type LocalNode = {
   description: string;
   href: string;
   status: string;
+  modules: string[];
+  plannedModules: string[];
   kind: "local";
 };
 
@@ -80,7 +82,7 @@ export default function NodeDirectory() {
             typeof item.name==="string"&&typeof item.topic==="string"&&typeof item.description==="string"&&
             item.href==="/n/"+item.spaceId).map(item=>({
             id:item.spaceId,name:item.name,topic:item.topic,description:item.description,
-            href:item.href,status:"Anteprima tematica pubblicata",kind:"local" as const}));
+            href:item.href,status:"Anteprima tematica pubblicata · funzionalità limitate",modules:[],plannedModules:[],kind:"local" as const}));
         setInstalled(result);
       }).catch(()=>{});
     return()=>controller.abort();
@@ -144,7 +146,7 @@ export default function NodeDirectory() {
           <div className="node-directory-catalog-heading">
             <div>
               <p className="eyebrow">ACCESSI LOCALI</p>
-              <h2 id="node-directory-catalog-title">Registro dei nodi pubblicati</h2>
+              <h2 id="node-directory-catalog-title">Nodi e anteprime configurati</h2>
             </div>
             <span aria-live="polite">{query.trim() ? `${matchingEntries.length} risultati` : `${allNodes.length} nodi locali`}</span>
           </div>
@@ -172,7 +174,7 @@ export default function NodeDirectory() {
                       <span className="node-directory-topic">{entry.topic}</span><code className="node-directory-identifier">ID: {entry.id} · {entry.id==='agora'?'NODO ALPHA':entry.id==='polisrossa'?'NODO TEMATICO':'ANTEPRIMA TEMATICA'}</code><code className="node-directory-namespace">Nodo: {entry.id}</code>
                       <strong className="node-directory-title">{entry.name} <span>— AgoràNode</span></strong>
                       <span className="node-directory-description">{entry.description}</span>
-                      <span className="node-directory-status"><BookOpen size={14} aria-hidden="true" />{entry.status}</span><span className="node-directory-cta">Apri il nodo →</span>
+                      <span className="node-directory-status"><BookOpen size={14} aria-hidden="true" />{entry.status}</span><span className="node-directory-description">Moduli previsti nel codice: {entry.modules.length ? entry.modules.join(" · ") : "consultazione del manifesto"}. {entry.plannedModules.length > 0 ? `Non ancora attivi: ${entry.plannedModules.join(" · ")}.` : ""} La presenza nel codice non prova che il servizio sia operativo su questo host.</span><span className="node-directory-cta">Apri il nodo →</span>
                     </span>
                     <ArrowRight className="node-directory-arrow" size={20} aria-hidden="true" />
                   </a>
@@ -201,7 +203,7 @@ export default function NodeDirectory() {
                         <span className="node-directory-topic">{node.topic}</span><code className="node-directory-identifier">ID: {node.id} · {node.id==='agora'?'NODO ALPHA':node.id==='polisrossa'?'NODO TEMATICO':'ANTEPRIMA TEMATICA'}</code><code className="node-directory-namespace">Nodo: {node.id}</code>
                         <strong className="node-directory-title">{node.name} <span>— AgoràNode</span></strong>
                         <span className="node-directory-description">{node.description}</span>
-                        <span className="node-directory-status"><BookOpen size={14} aria-hidden="true" />{node.status}</span><span className="node-directory-cta">Apri il nodo →</span>
+                        <span className="node-directory-status"><BookOpen size={14} aria-hidden="true" />{node.status}</span><span className="node-directory-description">Moduli previsti nel codice: {node.modules.length ? node.modules.join(" · ") : "consultazione del manifesto"}. {node.plannedModules.length > 0 ? `Non ancora attivi: ${node.plannedModules.join(" · ")}.` : ""} La presenza nel codice non prova che il servizio sia operativo su questo host.</span><span className="node-directory-cta">Apri il nodo →</span>
                       </span>
                       <ArrowRight className="node-directory-arrow" size={20} aria-hidden="true" />
                     </a>

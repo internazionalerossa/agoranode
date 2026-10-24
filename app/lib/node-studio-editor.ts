@@ -7,5 +7,5 @@ export function editStudioBlock(draft:NodeBlueprintDraft,id:string,patch:Pick<No
 export function appendAtlasEntry(draft:NodeBlueprintDraft,id:string):NodeBlueprintDraft{
  if(draft.blocks.length>=80)throw Error('Editorial draft block limit reached');
  if(draft.blocks.some(block=>block.id===id))throw Error('Duplicate editorial block');
- return {...draft,blocks:[...draft.blocks,{id,kind:'paragraph',title:'Nuova voce dell’Atlante',body:'',url:''}],updatedAt:Date.now()};
+ return {...draft,blocks:[...draft.blocks,{id,kind:'atlas',title:'Nuova voce dell’Atlante',body:'',url:''}],updatedAt:Date.now()};
 }

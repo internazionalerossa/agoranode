@@ -12,6 +12,7 @@ test('personal export reads the real schema, isolates accounts and never selects
   await engine.exec(await readFile(new URL('../server/migrations/001-schema.sql',import.meta.url),'utf8'));
   await engine.exec(await readFile(new URL('../server/migrations/007-social-identity.sql',import.meta.url),'utf8'));
   await engine.exec(await readFile(new URL('../server/migrations/010-pr2-reference-url.sql',import.meta.url),'utf8'));
+  await engine.exec(await readFile(new URL('../server/migrations/014-federation-pr3.sql',import.meta.url),'utf8'));
   await engine.exec(await readFile(new URL('../server/migrations/015-node-feed-preferences.sql',import.meta.url),'utf8'));
   await engine.exec(await readFile(new URL('../server/migrations/016-node-studio-drafts.sql',import.meta.url),'utf8'));
   await engine.exec(await readFile(new URL('../server/migrations/017-agora-forum-alpha.sql',import.meta.url),'utf8'));
@@ -24,6 +25,13 @@ test('personal export reads the real schema, isolates accounts and never selects
   await engine.query("INSERT INTO node_feed_preferences(owner_id,space_id,sources_json) VALUES ('alice','agora','[\"source-a\"]'::jsonb),('bob','agora','[\"source-b\"]'::jsonb)");
   await engine.query("INSERT INTO community_proposals(id,owner_key,title,body,references_text,category,language,created_at) VALUES ('proposal-a',$1,'Test title','Test text','', 'lavoro','it',1),('proposal-b',$2,'Other title','Other text','', 'lavoro','it',1)",[communityOwner,otherOwner]);
   await engine.query("INSERT INTO community_votes(proposal_id,voter_key,value,updated_at) VALUES ('proposal-a',$1,1,1),('proposal-b',$2,-1,1)",[communityOwner,otherOwner]);
+  const digest='sha256:'+ 'a'.repeat(64);
+  await engine.query('INSERT INTO federation_nodes(node_id,display_name,admitted_by_decision_digest,admitted_at) VALUES ($1,$2,$3,$4)', ['node-one','Node One',digest,1]);
+  await engine.query(
+    'INSERT INTO federation_pr2_electors(owner_key,actor_id,source_node_id,source_membership_id,voter_key_id,voter_public_key_spki_base64,public_alias,created_at) VALUES ($1,$2,$3,$4,$5,$6,$7,$8),($9,$10,$11,$12,$13,$14,$15,$16)',
+    ['alice','actor-alice','node-one','sha256:'+'1'.repeat(64),'sha256:'+'3'.repeat(64),'A'.repeat(64),'Alice',1,
+     'bob','actor-bob','node-one','sha256:'+'2'.repeat(64),'sha256:'+'4'.repeat(64),'B'.repeat(64),'Bob',1],
+  );
   const aliceDraft='00000000-0000-4000-8000-000000000011',bobDraft='00000000-0000-4000-8000-000000000012';
   await engine.query("INSERT INTO node_studio_drafts(owner_id,draft_id,space_id,body_json) VALUES ('alice',$1,'agora',$2::jsonb),('bob',$3,'agora',$4::jsonb)",[aliceDraft,JSON.stringify({notes:'private-alice-draft'}),bobDraft,JSON.stringify({notes:'private-bob-draft'})]);
   await engine.query("INSERT INTO agora_forum_topics(id,author_id,author_alias,title,body) VALUES ('00000000-0000-4000-8000-000000000013','alice','Alice','A proposal for Agora','A detailed public proposal for the Agora infrastructure.'),('00000000-0000-4000-8000-000000000014','bob','Bob','Another proposal','Private identity and distinct user data belong to another account.')");
@@ -45,7 +53,14 @@ test('personal export reads the real schema, isolates accounts and never selects
   assert.equal(data.data.communityProposals[0].id,'proposal-a');
   assert.equal(data.data.communityVotes.length,1);
   assert.equal(data.data.communityVotes[0].proposal_id,'proposal-a');
-  assert.doesNotMatch(body,/private-bob-draft|Another proposal|Private identity and distinct user data|source-b|proposal-b|Other title/);
+  assert.equal(data.data.federationPr2Electors.length,1);
+  assert.equal(data.data.federationPr2Electors[0].actor_id,'actor-alice');
+  assert.deepEqual(data.data.federationPr2Attestations,[]);
+  assert.deepEqual(data.data.federationPr3Candidacies,[]);
+  assert.deepEqual(data.data.federationPr3Electorate,[]);
+  assert.deepEqual(data.data.federationPr3Ballots,[]);
+  assert.deepEqual(data.data.federationPr3Mandates,[]);
+  assert.doesNotMatch(body,/private-bob-draft|Another proposal|Private identity and distinct user data|source-b|proposal-b|Other title|actor-bob/);
   assert.doesNotMatch(sqls.join(' '),/session|password|verification|SELECT \*/i);
   assert.equal((await handlePrivacyExport(new Request('https://example.test/api/privacy/export'),db,null)).status,401);
   assert.equal((await handlePrivacyExport(new Request('https://example.test/api/privacy/export?user=bob'),db,'alice')).status,400);

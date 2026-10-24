@@ -24,6 +24,12 @@ export async function handlePrivacyExport(request:Request,db:ForumDatabase|undef
    nodeFeedPreferences:['SELECT space_id,sources_json,updated_at FROM node_feed_preferences WHERE owner_id=?',userId],
    communityProposals:['SELECT id,title,body,references_text,category,language,created_at,withdrawn FROM community_proposals WHERE owner_key=?',communityOwner],
    communityVotes:['SELECT proposal_id,value,updated_at FROM community_votes WHERE voter_key=?',communityOwner],
+   federationPr2Electors:['SELECT actor_id,source_node_id,source_membership_id,voter_key_id,voter_public_key_spki_base64,public_alias,created_at FROM federation_pr2_electors WHERE owner_key=?',userId],
+   federationPr2Attestations:['SELECT attestation_sha256,source_node_id,source_membership_id,issuer_key_id,proof_json,attestation_json,valid_from,valid_until,accepted_at FROM federation_pr2_attestations WHERE owner_key=?',userId],
+   federationPr3Candidacies:['SELECT decision_id,kind,title,statement,created_at,opens_at,closes_at FROM federation_pr3_decisions WHERE candidate_owner_key=?',userId],
+   federationPr3Electorate:['SELECT decision_id,actor_id,voter_key_id,source_attestation_sha256 FROM federation_pr3_electorate WHERE owner_key=?',userId],
+   federationPr3Ballots:['SELECT decision_id,ballot_sha256,ballot_json,cast_at FROM federation_pr3_ballots WHERE owner_key=?',userId],
+   federationPr3Mandates:['SELECT mandate_id,sequence,state,transition_at,record_json FROM federation_pr3_mandate_records WHERE owner_key=?',userId],
   } as const;
   const entries=await Promise.all(Object.entries(queries).map(async([key,[sql,id]])=>{
    const rows=(await db.prepare(sql+' LIMIT 10001').bind(id).all()).results;

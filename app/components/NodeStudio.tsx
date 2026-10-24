@@ -3,6 +3,7 @@ import {useEffect,useState} from 'react';
 import {newNodeDraft,nodeStudioDraft,blueprintToProposal,type NodeBlueprintDraft} from '../lib/node-studio-model';
 import {timelineProposalLink} from '../lib/timeline-proposal';
 import {StudioBlocks,StudioSources} from './NodeStudioFields';
+import {NODE_PRIMARY_TABS} from '../lib/node-primary-navigation';
 
 type Props={spaceId:'agora'|'polisrossa'};
 const key=(spaceId:string)=>'agoranode.node-studio.draft.v1:'+spaceId;
@@ -12,6 +13,7 @@ export default function NodeStudio({spaceId}:Props){
  const [account,setAccount]=useState(false);
  const [status,setStatus]=useState('');
  const [preview,setPreview]=useState(false);
+ const [previewTab,setPreviewTab]=useState<'notizie'|'teoria'|'partecipa'>('notizie');
  const [busy,setBusy]=useState(false);
  useEffect(()=>{
    let active=true;
@@ -37,6 +39,15 @@ export default function NodeStudio({spaceId}:Props){
    const next=newNodeDraft(operation,operation==='edit-node'?spaceId:'nuovo-nodo');
    setDraft(operation==='edit-node'?{...next,name:spaceId==='agora'?'Agorà':'PolisRossa'}:{...next,name:'',topic:'',description:'',sources:[],blocks:[]});
    setStatus('Nuova bozza avviata; non è stata pubblicata.');
+ };
+ /** A blueprint of the complete PolisRossa interface, never a clone of its content. */
+ const fromReference=()=>{
+   const next=newNodeDraft('create-node','nuovo-nodo');
+   setDraft({...next,name:'Nuovo nodo',topic:'Argomento da approfondire',
+     description:'Una comunità tematica con rassegna, Biblioteca, dati e spazio di partecipazione.',
+     sources:[],blocks:[]});
+   setPreviewTab('notizie');setPreview(true);
+   setStatus('Formato PolisRossa caricato: navigazione, Biblioteca, moduli e comandi sono predisposti nell’anteprima. Fonti, testi e identità devono essere creati per il nuovo nodo. Nessun contenuto di PolisRossa è stato copiato.');
  };
  const save=async()=>{
    let checked:NodeBlueprintDraft;
@@ -76,9 +87,10 @@ export default function NodeStudio({spaceId}:Props){
      <p>Un salvataggio è una <strong>bozza privata</strong>. Per rendere consultabile un nuovo nodo è disponibile il bootstrap pubblico read-only, installato manualmente da un operatore dopo la revisione di fonti e diritti. Non abilita account o voto PR2.</p>
      <p><a href="https://github.com/internazionalerossa/agoranode/blob/main/docs/THEMATIC-BOOTSTRAP.md" target="_blank" rel="noopener noreferrer">Come installare il nodo senza pubblicare bozze private ↗</a></p>
    </header>
-   <p className="node-studio-empty-invitation">Per iniziare da zero, scegli <strong>Nuovo nodo · pagina vuota</strong>: puoi aggiungere un titolo, le fonti e i blocchi uno alla volta. Non servono codice o Git.</p>
+   <p className="node-studio-empty-invitation">Il modello di riferimento per un nodo completo è la <a href="https://polisrossa.tail37128d.ts.net/" target="_blank" rel="noopener noreferrer">PolisRossa originale</a>: stessa organizzazione di rassegna, video, Biblioteca, Atlante, dati e Agorà, con identità e contenuti autonomi. Scegli il blueprint per partire da quel formato oppure una pagina vuota.</p>
    <div className="node-studio-modes" role="group" aria-label="Tipo di lavoro">
-     <button type="button" aria-pressed={draft.operation==='create-node'} onClick={()=>reset('create-node')}>Nuovo nodo · pagina vuota</button>
+     <button type="button" onClick={fromReference}>Nuovo nodo · blueprint PolisRossa</button>
+     <button type="button" onClick={()=>reset('create-node')}>Nuovo nodo · pagina vuota</button>
      <button type="button" aria-pressed={draft.operation==='edit-node'} onClick={()=>reset('edit-node')}>Modifica il nodo</button>
    </div>
    {account&&saved.length>0?<label>Bozze nel tuo account
@@ -112,7 +124,21 @@ export default function NodeStudio({spaceId}:Props){
        <p className="eyebrow">ANTEPRIMA · NON PUBBLICATA</p>
        <div style={{borderTop:'5px solid '+draft.accent,paddingTop:12}}>
          <h3>{draft.name}</h3><p>{draft.topic}</p><p>{draft.description}</p>
-         <nav aria-label="Sezioni comuni">Notizie · Video · Biblioteca · Wiki · Timeline · Dati · Agorà</nav>
+         <nav aria-label="Anteprima della navigazione PolisRossa">
+           {NODE_PRIMARY_TABS.map(tab=><button type="button" key={tab.id} aria-pressed={previewTab===tab.id}
+             onClick={()=>setPreviewTab(tab.id)}>{tab.label}</button>)}
+         </nav>
+         {previewTab==='notizie'?<section aria-label="Formato rassegna e video">
+           <h4>Rassegna e video</h4><p>Controlli previsti: Tutti i feed · Feed preferiti · Ricerca · Filtri per fonte, lingua e tema · Video. Le fonti del nuovo nodo saranno configurate separatamente.</p>
+           <p>{draft.sources.length} fonti proposte · Nessuna notizia importata da PolisRossa.</p>
+         </section>:previewTab==='teoria'?<section aria-label="Formato Biblioteca">
+           <h4>Biblioteca</h4>
+           <p>Libri e percorsi · Timeline e Atlante (Timeline / Indice e ricerca) · Dati e grafici.</p>
+           <p>Le opere, le voci e i dati saranno quelli autorizzati del nuovo nodo, non copie del catalogo PolisRossa.</p>
+         </section>:<section aria-label="Formato partecipazione">
+           <h4>Agorà · Forum e proposte</h4>
+           <p>Anteprima dei pulsanti e delle sezioni: Discussioni · Proposte · Partecipazione. Account, chat e voto restano disabilitati fino all’installazione del backend e alla verifica delle autorizzazioni proprie del nodo.</p>
+         </section>}
          {draft.blocks.map(block=><article className="node-studio-preview-block" key={block.id}>
            <small>{block.kind}</small><h4>{block.title}</h4><p>{block.body}</p>
            {block.url?<small>Fonte: {block.url}</small>:null}

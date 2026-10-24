@@ -10,6 +10,7 @@ import NodeStudio from "./NodeStudio";
 import AgoraForum from "./AgoraForum";
 import AgoraLibraryView from "./AgoraLibraryView";
 import {AGORA_MANIFEST} from "../instances/agora";
+import {NODE_PRIMARY_TABS,thematicNodeTabHref} from "../lib/node-primary-navigation";
 
 export default function AgoraNodeHome() {
   const view=typeof window==="undefined"?"notizie":new URL(window.location.href).searchParams.get("view")??"notizie";
@@ -33,9 +34,8 @@ export default function AgoraNodeHome() {
         </a>
         <p>Stato dell’arte della tecnologia AgoràNode, delle sue regole e dell’infrastruttura comune.</p>
         <nav aria-label="Navigazione del nodo Agorà">
-          <a href="/agora" aria-current={!library&&!participation?"page":undefined}>La rassegna</a>
-          <a href="/agora?view=biblioteca" aria-current={library?"page":undefined}>Biblioteca</a>
-          <a href="/agora?view=partecipa" aria-current={participation?"page":undefined}>Agorà</a>
+          {NODE_PRIMARY_TABS.map(tab=><a key={tab.id} href={thematicNodeTabHref('agora',tab.id)}
+            aria-current={(tab.id==='notizie'&&!library&&!participation)||(tab.id==='teoria'&&library)||(tab.id==='partecipa'&&participation)?'page':undefined}>{tab.label}</a>)}
           <a href="/#node-directory-content">Altri nodi</a>
           <a className="agoranode-instance-link" href="/polisrossa">PolisRossa <ArrowRight size={16}/></a>
         </nav>

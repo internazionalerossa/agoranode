@@ -23,7 +23,7 @@ test('one founder publishes alone; the second admitted PR2 atomically activates 
   assert.deepEqual(await initializeEditorialNode(pool,'astronomia','alice',verify),{mode:'solo',spaceId:'astronomia'});
   await assert.rejects(initializeEditorialNode(pool,'astronomia','bob',verify),
    (e:unknown)=>e instanceof EditorialError&&e.status===409);
-  const solo=await proposeEditorialRevision(pool,'astronomia','alice',{title:'Astronomia',sections:['Biblioteca']});
+  const solo=await proposeEditorialRevision(pool,'astronomia','alice',{title:'Astronomia',sections:['Biblioteca']},verify);
   assert.equal(solo.status,'published');
   assert.equal(solo.electorateSize,1);
   const initial=await readEditorialHead(pool,'astronomia');
@@ -31,24 +31,24 @@ test('one founder publishes alone; the second admitted PR2 atomically activates 
   assert.equal(initial.digest,solo.digest);
   assert.deepEqual(await joinEditorialPr2(pool,'astronomia','bob',verify),{mode:'collective',members:2});
   assert.deepEqual(await joinEditorialPr2(pool,'astronomia','bob',verify),{mode:'collective',members:2});
-  const change=await proposeEditorialRevision(pool,'astronomia','alice',{title:'Astronomia',sections:['Biblioteca','Timeline']});
+  const change=await proposeEditorialRevision(pool,'astronomia','alice',{title:'Astronomia',sections:['Biblioteca','Timeline']},verify);
   assert.equal(change.status,'pending');
   assert.equal(change.electorateSize,2);
   assert.equal((await readEditorialHead(pool,'astronomia')).sequence,1);
-  assert.equal((await voteEditorialProposal(pool,'astronomia','alice',change.id,'yes')).status,'pending');
+  assert.equal((await voteEditorialProposal(pool,'astronomia','alice',change.id,'yes',verify)).status,'pending');
   assert.equal((await readEditorialHead(pool,'astronomia')).sequence,1);
-  const accepted=await voteEditorialProposal(pool,'astronomia','bob',change.id,'yes');
+  const accepted=await voteEditorialProposal(pool,'astronomia','bob',change.id,'yes',verify);
   assert.deepEqual(accepted,{status:'published',yes:2,no:0,required:2});
   assert.equal((await readEditorialHead(pool,'astronomia')).sequence,2);
-  await assert.rejects(voteEditorialProposal(pool,'astronomia','alice',change.id,'yes'),
+  await assert.rejects(voteEditorialProposal(pool,'astronomia','alice',change.id,'yes',verify),
    (e:unknown)=>e instanceof EditorialError&&e.status===409);
-  const staleA=await proposeEditorialRevision(pool,'astronomia','alice',{title:'Proposal A'});
-  const staleB=await proposeEditorialRevision(pool,'astronomia','bob',{title:'Proposal B'});
+  const staleA=await proposeEditorialRevision(pool,'astronomia','alice',{title:'Proposal A'},verify);
+  const staleB=await proposeEditorialRevision(pool,'astronomia','bob',{title:'Proposal B'},verify);
   assert.equal(staleA.status,'pending');assert.equal(staleB.status,'pending');
-  await voteEditorialProposal(pool,'astronomia','alice',staleA.id,'yes');
-  await voteEditorialProposal(pool,'astronomia','bob',staleA.id,'yes');
-  await voteEditorialProposal(pool,'astronomia','alice',staleB.id,'yes');
-  const stale=await voteEditorialProposal(pool,'astronomia','bob',staleB.id,'yes');
+  await voteEditorialProposal(pool,'astronomia','alice',staleA.id,'yes',verify);
+  await voteEditorialProposal(pool,'astronomia','bob',staleA.id,'yes',verify);
+  await voteEditorialProposal(pool,'astronomia','alice',staleB.id,'yes',verify);
+  const stale=await voteEditorialProposal(pool,'astronomia','bob',staleB.id,'yes',verify);
   assert.equal(stale.status,'stale');
   assert.equal((await readEditorialHead(pool,'astronomia')).sequence,3);
   await assert.rejects(pg.query('DELETE FROM node_editorial_revisions'),/immutable/);
@@ -67,15 +67,20 @@ test('a frozen electorate never grants retroactive ballots to PR2s admitted afte
   const verify=async(_:string,user:string)=>['alice','bob','carla'].includes(user);
   await initializeEditorialNode(pool,'geologia','alice',verify);
   await joinEditorialPr2(pool,'geologia','bob',verify);
-  const proposal=await proposeEditorialRevision(pool,'geologia','alice',{title:'New geological archive'});
+  const proposal=await proposeEditorialRevision(pool,'geologia','alice',{title:'New geological archive'},verify);
   assert.equal(proposal.electorateSize,2);
   const third=await joinEditorialPr2(pool,'geologia','carla',verify);
   assert.equal(third.members,3);
-  await assert.rejects(voteEditorialProposal(pool,'geologia','carla',proposal.id,'yes'),
+  await assert.rejects(voteEditorialProposal(pool,'geologia','carla',proposal.id,'yes',verify),
    (e:unknown)=>e instanceof EditorialError&&e.status===403);
-  const fresh=await proposeEditorialRevision(pool,'geologia','carla',{title:'A later proposal'});
+  const fresh=await proposeEditorialRevision(pool,'geologia','carla',{title:'A later proposal'},verify);
+  const revoked=async(_:string,user:string)=>user!=='carla';
+  await assert.rejects(proposeEditorialRevision(pool,'geologia','carla',{title:'Not permitted'},revoked),
+   (e:unknown)=>e instanceof EditorialError&&e.status===403);
+  await assert.rejects(voteEditorialProposal(pool,'geologia','carla',fresh.id,'yes',revoked),
+   (e:unknown)=>e instanceof EditorialError&&e.status===403);
   assert.equal(fresh.electorateSize,3);
-  const vote=await voteEditorialProposal(pool,'geologia','carla',fresh.id,'yes');
+  const vote=await voteEditorialProposal(pool,'geologia','carla',fresh.id,'yes',verify);
   assert.equal(vote.required,2);
  }finally{await pg.close();}
 });

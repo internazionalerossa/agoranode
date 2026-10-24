@@ -4,10 +4,11 @@ import {newNodeDraft,nodeStudioDraft,blueprintToProposal,type NodeBlueprintDraft
 import {timelineProposalLink} from '../lib/timeline-proposal';
 import {StudioBlocks,StudioSources} from './NodeStudioFields';
 import {NODE_PRIMARY_TABS} from '../lib/node-primary-navigation';
+import type {PublicSpaceSeed} from '../platform/public-space-seed';
 
-type Props={spaceId:'agora'|'polisrossa'};
+type Props={spaceId:string;seed?:PublicSpaceSeed;onPropose?:(draft:NodeBlueprintDraft)=>Promise<string>};
 const key=(spaceId:string)=>'agoranode.node-studio.draft.v1:'+spaceId;
-export default function NodeStudio({spaceId}:Props){
+export default function NodeStudio({spaceId,seed,onPropose}:Props){
  const [draft,setDraft]=useState<NodeBlueprintDraft>(()=>newNodeDraft('create-node'));
  const [saved,setSaved]=useState<NodeBlueprintDraft[]>([]);
  const [account,setAccount]=useState(false);
@@ -20,6 +21,7 @@ export default function NodeStudio({spaceId}:Props){
    try{
      const raw=localStorage.getItem(key(spaceId));
      if(raw)setDraft(nodeStudioDraft(JSON.parse(raw)));
+     else if(seed)setDraft({...newNodeDraft('edit-node',spaceId),name:seed.name,topic:seed.topic,description:seed.description,accent:seed.accent,sources:seed.sources,blocks:seed.blocks});
    }catch{}
    const controller=new AbortController();
    void fetch('/api/node-studio/drafts',{signal:controller.signal,cache:'no-store',credentials:'same-origin'})
@@ -33,11 +35,11 @@ export default function NodeStudio({spaceId}:Props){
        setSaved(result.drafts.map(item=>nodeStudioDraft(item)));
      }).catch(()=>{});
    return()=>{active=false;controller.abort();};
- },[spaceId]);
+ },[spaceId,seed]);
  const update=(patch:Partial<NodeBlueprintDraft>)=>setDraft(old=>({...old,...patch,updatedAt:Date.now()}));
  const reset=(operation:'create-node'|'edit-node')=>{
    const next=newNodeDraft(operation,operation==='edit-node'?spaceId:'nuovo-nodo');
-   setDraft(operation==='edit-node'?{...next,name:spaceId==='agora'?'Agorà':'PolisRossa'}:{...next,name:'',topic:'',description:'',sources:[],blocks:[]});
+   setDraft(operation==='edit-node'?{...next,name:seed?.name??(spaceId==='agora'?'Agorà':spaceId==='polisrossa'?'PolisRossa':'Nodo tematico'),topic:seed?.topic??next.topic,description:seed?.description??next.description,accent:seed?.accent??next.accent,sources:seed?.sources??[],blocks:seed?.blocks??[]}:{...next,name:'',topic:'',description:'',sources:[],blocks:[]});
    setStatus('Nuova bozza avviata; non è stata pubblicata.');
  };
  /** A blueprint of the complete PolisRossa interface, never a clone of its content. */
@@ -67,6 +69,18 @@ export default function NodeStudio({spaceId}:Props){
        setStatus('Bozza privata salvata nel tuo account.');
      }else setStatus('Bozza salvata sul dispositivo. Accedi come PR1 per salvarla nel tuo account.');
    }catch{setStatus('La bozza resta sul dispositivo. Il salvataggio nell’account non è riuscito.');}
+   finally{setBusy(false);}
+ };
+ const propose=async()=>{
+   if(!onPropose)return;
+   let prepared:NodeBlueprintDraft;
+   try{
+     prepared=nodeStudioDraft(draft);
+     if(prepared.operation!=='edit-node'||prepared.spaceId!==spaceId)throw Error('Seleziona Modifica il nodo per proporre una revisione di questa comunità.');
+   }catch(e){setStatus(e instanceof Error?e.message:'Bozza non valida');return;}
+   setBusy(true);
+   try{setStatus(await onPropose(prepared));}
+   catch(e){setStatus(e instanceof Error?e.message:'Proposta non registrata');}
    finally{setBusy(false);}
  };
  const download=()=>{
@@ -115,6 +129,7 @@ export default function NodeStudio({spaceId}:Props){
          <button type="button" disabled={busy} onClick={()=>void save()}>{busy?'Salvataggio…':'Salva bozza'}</button>
          <button type="button" aria-pressed={preview} onClick={()=>setPreview(value=>!value)}>{preview?'Nascondi anteprima':'Mostra anteprima'}</button>
          <button type="button" onClick={download}>Esporta bozza</button>
+         {onPropose?<button type="button" disabled={busy} onClick={()=>void propose()}>Invia revisione editoriale</button>:null}
        </div>
        {status?<p role="status">{status}</p>:null}
        {proposal?<a className="button button-outline" href={proposal}>Porta questa proposta al forum PR2 →</a>:

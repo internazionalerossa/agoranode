@@ -2,6 +2,7 @@ import {useState,useEffect} from "react";
 import {ArrowRight, BookOpen, Network, Search} from "lucide-react";
 import {publicLocalSpaces} from "../instances/registry";
 import {staticPreviewHref} from "../lib/static-preview-navigation";
+import {ORIGINAL_POLISROSSA_URL} from "../lib/polisrossa-original";
 
 type LocalNode = {
   id: string;
@@ -31,7 +32,8 @@ type SearchIdea = {
 
 // This display-only catalogue derives from the same allowlisted manifests as /api/nodes.
 const nodes: LocalNode[] = publicLocalSpaces().map(space => ({...space, kind: 'local'}));
-const publicNodeHref=(href:string)=>import.meta.env?.VITE_PUBLIC_PREVIEW==='true'?(staticPreviewHref(href)??href):href;
+const publicNodeHref=(href:string)=>import.meta.env?.VITE_PUBLIC_PREVIEW==='true'?
+ (href==='/polisrossa'?ORIGINAL_POLISROSSA_URL:(staticPreviewHref(href)??href)):href;
 
 const possibleNodeFamilies: ReadonlyArray<{name: string; topics: readonly string[]}> = [
   {name: "Scienze e matematica", topics: ["Matematica", "Fisica", "Astronomia", "Chimica", "Biologia", "Geologia", "Scienze del clima", "Statistica", "Informatica teorica"]},
@@ -141,7 +143,7 @@ export default function NodeDirectory() {
             <a href="/agora">Esplora Agorà <ArrowRight size={16} aria-hidden="true"/></a>
             <a href="/agora?view=biblioteca">Apri Biblioteca e Atlante <ArrowRight size={16} aria-hidden="true"/></a>
             <a href="/agora?view=partecipa">Forum e laboratorio nuovi nodi <ArrowRight size={16} aria-hidden="true"/></a>
-            <a href="/polisrossa">Entra in PolisRossa <ArrowRight size={16} aria-hidden="true"/></a>
+            <a href={publicNodeHref("/polisrossa")}>Entra in PolisRossa <ArrowRight size={16} aria-hidden="true"/></a>
           </nav>
         </header>
         <section className="node-directory-catalog" aria-labelledby="node-directory-catalog-title">

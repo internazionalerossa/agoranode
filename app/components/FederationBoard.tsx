@@ -248,7 +248,7 @@ export default function FederationBoard() {
         <ShieldCheck aria-hidden="true" />
       </header>
 
-      <div className="federation-role-path" aria-label="Percorso di partecipazione PR1, PR2 e PR3">
+      <div className="federation-role-path" role="group" aria-label="Percorso di partecipazione PR1, PR2 e PR3">
         <article><strong>PR1</strong><span>Account personale nel proprio nodo.</span></article>
         <span aria-hidden="true">→</span>
         <article><strong>PR2</strong><span>Membro ammesso e votante di un nodo.</span></article>

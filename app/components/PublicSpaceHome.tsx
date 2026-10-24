@@ -6,6 +6,7 @@ import PublicSpaceLibrary from './PublicSpaceLibrary';
 import PublicSpaceRassegna from './PublicSpaceRassegna';
 import NodeEditorialPanel from './NodeEditorialPanel';
 import NodeForumPanel from './NodeForumPanel';
+import NodeChatPanel from './NodeChatPanel';
 import {NODE_PRIMARY_TABS} from '../lib/node-primary-navigation';
 
 type ViewState={state:'loading'|'not-found'|'error'}|{state:'ready';seed:PublicSpaceSeed};
@@ -65,6 +66,7 @@ export default function PublicSpaceHome({spaceId}:{spaceId:string}){
        <p className="public-space-boundary">{seed.publication.notice}</p>
        <NodeEditorialPanel seed={seed}/>
        <NodeForumPanel seed={seed}/>
+       <NodeChatPanel seed={seed}/>
        <p>Puoi proporre modifiche a questo nodo nell’editor contestuale, senza acquisire privilegi di altre comunità. La creazione di nuovi nodi appartiene esclusivamente ad Agorà.</p>
       </section>:<>
      <section className="public-space-intro">

@@ -18,11 +18,13 @@ test('the thematic forum stores actual discussions and replies with account isol
   const url='https://example.test/api/node-forum?spaceId=astronomia';
   const post=(body:unknown,origin='https://example.test')=>new Request(url,{method:'POST',
    headers:{origin,'content-type':'application/json'},body:JSON.stringify(body)});
-  const call=(req:Request,id:string|null,space='astronomia')=>handleNodeForum(req,pool,space,id);
+  const verify=async(space:string,user:string)=>space==='astronomia'&&['alice','bob'].includes(user);
+  const call=(req:Request,id:string|null,space='astronomia')=>handleNodeForum(req,pool,space,id,verify);
   const text={action:'create',alias:'Ada',title:'Fonti astronomiche',body:'Propongo una discussione sulle fonti osservazionali pubbliche e verificabili.'};
   assert.equal((await call(post(text),null)).status,401);
   assert.equal((await call(post(text,'https://evil.test'),'alice')).status,403);
   assert.equal((await call(post({...text,role:'pr3'}),'alice')).status,400);
+  assert.equal((await call(post(text),'pr1')).status,403);
   const made=await call(post(text),'alice');
   assert.equal(made.status,201);
   const created=await made.json() as {id:string};

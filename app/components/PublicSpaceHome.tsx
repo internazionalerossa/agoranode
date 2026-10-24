@@ -11,7 +11,7 @@ import {NODE_PRIMARY_TABS} from '../lib/node-primary-navigation';
 type ViewState={state:'loading'|'not-found'|'error'}|{state:'ready';seed:PublicSpaceSeed};
 const LABELS={
  heading:'Capitolo',paragraph:'Approfondimento',timeline:'Timeline',source:'Fonte',
- book:'Biblioteca',video:'Video',data:'Dati',
+ book:'Biblioteca',video:'Video',data:'Dati',atlas:'Voce dell’Atlante',bibliography:'Bibliografia',
 } as const;
 
 /**

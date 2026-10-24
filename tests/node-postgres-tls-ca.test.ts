@@ -26,6 +26,6 @@ test('a genuine X.509 CA can be pinned while arbitrary PEM input is rejected',()
   assert.ok(config&&config!==false);
   assert.equal(config.rejectUnauthorized,true);
   assert.match(config.ca??'',/BEGIN CERTIFICATE/);
-  assert.equal(postgresTlsConfig('postgresql://u:p@db.example.org/postgres',{POSTGRES_CA_CERT_PEM:ca.replace(/\n/g,'\\n')})!==false,true);
+  assert.deepEqual(postgresTlsConfig('postgresql://u:p@db.example.org/postgres',{POSTGRES_CA_CERT_PEM:ca.replace(/\n/g,'\\n')}),config);
  }finally{rmSync(directory,{recursive:true,force:true});}
 });

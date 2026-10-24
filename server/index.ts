@@ -17,6 +17,7 @@ import {api,privatePaths} from './api';
 import {publicSpaceSeedResponse,publicSpaceDirectoryResponse} from './public-space-registry';
 import {databaseTarget,openSpaceDatabaseRegistry} from './space-databases';
 import {handleNodeEditorial,editorialPublicSpaceSeedResponse} from './node-editorial-api';
+import {handleNodeForum} from './node-forum';
 import {migrateNodeEditorialDatabase} from './node-editorial-migrations';
 import {publicSpaceKnowledgeResponse} from './public-space-knowledge';
 import type {ForumSocialIdentity} from '../app/lib/forum';
@@ -101,7 +102,7 @@ const server=createServer({maxHeaderSize:16384,requestTimeout:30000,headersTimeo
     response=await editorialPublicSpaceSeedResponse(connections(editorialSpacePools.get(id)),seed);
    }else response=installed;
   }
-  else if(url.pathname==='/api/node-editorial'){
+  else if(url.pathname==='/api/node-editorial'||url.pathname==='/api/node-forum'){
    const ids=url.searchParams.getAll('spaceId');
    const id=ids.length===1?ids[0]:'';
    if(!/^[a-z][a-z0-9-]{2,47}$/.test(id)||['agora','polisrossa'].includes(id))
@@ -114,7 +115,9 @@ const server=createServer({maxHeaderSize:16384,requestTimeout:30000,headersTimeo
     else if(config.mirror&&method!=='GET')response=Response.json({error:'Read-only mirror'},{status:403});
     else{
      const session=await authSession(auth,request);
-     response=session.finish(await handleNodeEditorial(request,connections(editorialSpacePools.get(id)),id,session.user?.id??null,verifyNodePr2));
+     response=session.finish(url.pathname==='/api/node-editorial'
+      ?await handleNodeEditorial(request,connections(editorialSpacePools.get(id)),id,session.user?.id??null,verifyNodePr2)
+      :await handleNodeForum(request,connections(editorialSpacePools.get(id)),id,session.user?.id??null));
     }
    }
   }

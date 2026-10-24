@@ -61,7 +61,8 @@ test('the issue service is scoped, authenticated, and never grants PR2 by self d
   assert.equal(detail.issue.id,issueId);
   assert.equal(detail.binding,false);
   assert.equal((await handleScopedIssues(post({action:'vote',issueId,choice:'yes'}),db,'alice')).status,403);
-  const message=await handleScopedIssues(post({action:'comment',issueId,body:'Please publish verifiable bibliography links.'}),db,'bob');
+  assert.equal((await handleScopedIssues(post({action:'comment',issueId,body:'Please publish verifiable bibliography links.'}),db,'bob')).status,403);
+  const message=await handleScopedIssues(post({action:'comment',issueId,body:'Please publish verifiable bibliography links.'}),db,'alice',now);
   assert.equal(message.status,201);
   const comments=await (await handleScopedIssues(new Request(url+'&issueId='+issueId),db,null)).json();
   assert.equal(comments.comments.length,1);

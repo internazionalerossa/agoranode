@@ -21,6 +21,7 @@ import {handleNodeEditorial,editorialPublicSpaceSeedResponse} from './node-edito
 import {handleNodeForum} from './node-forum';
 import {handleNodeBookmarks} from './node-bookmarks';
 import {handleNodeChat} from './node-chat';
+import {handleAgoraNodeFoundations} from './agora-node-foundations';
 import {migrateNodeEditorialDatabase} from './node-editorial-migrations';
 import {publicSpaceKnowledgeResponse} from './public-space-knowledge';
 import type {ForumSocialIdentity} from '../app/lib/forum';
@@ -106,6 +107,13 @@ const server=createServer({maxHeaderSize:16384,requestTimeout:30000,headersTimeo
    if(seed.status!==200||!publicSpacePools?.ids().includes(id)){
     response=Response.json({error:'Knowledge node not installed'},{status:404,headers:{'cache-control':'no-store'}});
    }else response=await publicSpaceKnowledgeResponse(request,connections(publicSpacePools.get(id)),id);
+  }
+  else if(url.pathname==='/api/agora/foundations'){
+   if(config.mirror&&method!=='GET')response=Response.json({error:'Read-only mirror'},{status:403});
+   else{
+    const session=await authSession(auth,request);
+    response=session.finish(await handleAgoraNodeFoundations(request,connections(pool),session.user?.id??null));
+   }
   }
   else if(url.pathname==='/api/public-spaces')response=await publicSpaceDirectoryResponse(request,process.env.AGORANODE_PUBLIC_SPACES_DIRECTORY);
   else if(url.pathname.startsWith('/api/public-spaces/')){

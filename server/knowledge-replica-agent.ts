@@ -68,8 +68,10 @@ async function readFinalPackage(path: string) {
   // between lstat and readFile by an untrusted inbox writer.
   const handle = await open(path, constants.O_RDONLY | (constants.O_NOFOLLOW ?? 0));
   let bytes: Buffer;
+  let stamp: string;
   try {
     const before = await handle.stat();
+    stamp = `${before.size}:${before.mtimeMs}`;
     if (!before.isFile() || before.size > MAX_PACKAGE_BYTES) {
       throw new Error("Replication package is not a regular bounded file");
     }
@@ -91,7 +93,7 @@ async function readFinalPackage(path: string) {
   } catch {
     throw new Error("Replication package is not JSON");
   }
-  return { parsed, text: bytes.toString("utf8"), stamp: `${before.size}:${before.mtimeMs}` };
+  return { parsed, text: bytes.toString("utf8"), stamp };
 }
 
 function packageFileName(material: KnowledgeReplicationPackage) {

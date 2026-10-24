@@ -79,7 +79,7 @@ export async function handleAgoraNodeFoundations(
   const canonical=canonicalKnowledgeJson(draft);
   const digest='sha256:'+createHash('sha256').update(canonical).digest('hex');
   try{
-   return response(await atomic(pool,async c=>{
+   const created=await atomic(pool,async c=>{
     const voters=await electorate(c,now);
     if(!voters.includes(userId))return {error:'Verified Agorà PR2 required',statusCode:403};
     if(voters.length>1000)return {error:'Electorate capacity reached',statusCode:409};
@@ -87,7 +87,9 @@ export async function handleAgoraNodeFoundations(
     const id=String(inserted.rows[0].id);
     for(const elector of voters)await query(c,'INSERT INTO agora_node_foundation_electors(proposal_id,user_id) VALUES($1::uuid,$2)',[id,elector]);
     return {id,spaceId:draft.spaceId,digest,status:'pending',electorateSize:voters.length,required:Math.floor(voters.length/2)+1};
-   }),201);
+   });
+   if('error' in created)return response({error:created.error},created.statusCode);
+   return response(created,201);
   }catch(e){
    if(e instanceof Error&&/duplicate key|unique constraint/i.test(e.message))return response({error:'A foundation proposal already exists for this node'},409);
    return response({error:'Could not register foundation proposal'},503);

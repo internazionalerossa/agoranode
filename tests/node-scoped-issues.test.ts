@@ -38,6 +38,15 @@ test('the issue service is scoped, authenticated, and never grants PR2 by self d
   const created=await handleScopedIssues(post(details),db,'alice',now);
   assert.equal(created.status,201);
   assert.equal((await handleScopedIssues(post(details),db,'alice',now+100001)).status,403);
+  const platformRequest=new Request('https://example.test/api/scoped-issues?scope=agoranode',{
+   method:'POST',headers:{origin:'https://example.test','content-type':'application/json'},
+   body:JSON.stringify(details),
+  });
+  assert.equal((await handleScopedIssues(platformRequest,db,'alice',now)).status,201);
+  assert.equal((await handleScopedIssues(new Request('https://example.test/api/scoped-issues?scope=agoranode',{
+   method:'POST',headers:{origin:'https://example.test','content-type':'application/json'},
+   body:JSON.stringify(details),
+  }),db,'alice',now+100001)).status,403);
 
   const issueId=crypto.randomUUID();
   await pg.query('INSERT INTO agora_internal_issues(id,scope,author_id,title,body) VALUES ($1,$2,$3,$4,$5)',
@@ -47,7 +56,7 @@ test('the issue service is scoped, authenticated, and never grants PR2 by self d
   assert.equal(list.issues[0].scope,'agora');
   assert.ok(!JSON.stringify(list).includes('alice'));
   const separate=await (await handleScopedIssues(new Request('https://example.test/api/scoped-issues?scope=agoranode'),db,null)).json();
-  assert.equal(separate.issues.length,0);
+  assert.equal(separate.issues.length,1);
   const detail=await (await handleScopedIssues(new Request(url+'&issueId='+issueId),db,null)).json();
   assert.equal(detail.issue.id,issueId);
   assert.equal(detail.binding,false);

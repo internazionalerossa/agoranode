@@ -31,7 +31,7 @@ type SearchIdea = {
 
 // This display-only catalogue derives from the same allowlisted manifests as /api/nodes.
 const nodes: LocalNode[] = publicLocalSpaces().map(space => ({...space, kind: 'local'}));
-const publicNodeHref=(href:string)=>import.meta.env.VITE_PUBLIC_PREVIEW==='true'?(staticPreviewHref(href)??href):href;
+const publicNodeHref=(href:string)=>import.meta.env?.VITE_PUBLIC_PREVIEW==='true'?(staticPreviewHref(href)??href):href;
 
 const possibleNodeFamilies: ReadonlyArray<{name: string; topics: readonly string[]}> = [
   {name: "Scienze e matematica", topics: ["Matematica", "Fisica", "Astronomia", "Chimica", "Biologia", "Geologia", "Scienze del clima", "Statistica", "Informatica teorica"]},

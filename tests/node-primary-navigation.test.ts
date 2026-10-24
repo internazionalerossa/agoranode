@@ -14,8 +14,8 @@ test('the navigation blueprint retains PolisRossa module ordering with node-spec
 });
 test('Node Studio clearly offers the PolisRossa blueprint without copying political content',()=>{
  const html=renderToStaticMarkup(createElement(NodeStudio,{spaceId:'agora'}));
- assert.match(html,/Nuovo nodo · blueprint PolisRossa/);
+ assert.match(html,/Crea nuovo nodo · formato comune/);
  assert.match(html,/Nuovo nodo · pagina vuota/);
- assert.match(html,/polisrossa\.tail37128d\.ts\.net/);
+ assert.doesNotMatch(html,/polisrossa\.tail37128d\.ts\.net/);
  assert.doesNotMatch(html,/Importa i contenuti di PolisRossa/);
 });

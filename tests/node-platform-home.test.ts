@@ -18,7 +18,7 @@ test("the service root is a directory with Agorà and PolisRossa in the requeste
   assert.match(directory, /Storia, attualità, cultura e dati delle sinistre e dei movimenti sociali internazionali/);
   assert.match(directory, /Nodo alpha tecnologico/);
   assert.match(directory, /Nodo tematico disponibile/);
-  assert.match(directory, /Registro dei nodi pubblicati/);
+  assert.match(directory, /Nodi e anteprime configurati/);
   assert.match(directory, /Cerca tra i nodi disponibili/);
   assert.match(directory, /Questo è il registro pubblico delle comunità/);
   assert.match(directory, /Ospitare una copia/);

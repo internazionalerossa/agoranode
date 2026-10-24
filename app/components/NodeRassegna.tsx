@@ -1,7 +1,7 @@
 "use client";
 
 import {useMemo,useState} from 'react';
-import {ArrowDown,ArrowUpRight,Search,X} from 'lucide-react';
+import {ArrowDown,ArrowUpRight,Bookmark,BookmarkCheck,Search,X} from 'lucide-react';
 import type {ArticleRecord} from '../lib/feed';
 
 /**
@@ -9,12 +9,12 @@ import type {ArticleRecord} from '../lib/feed';
  * preserve the established PolisRossa visual conventions. Content is supplied
  * exclusively by the node's own source registry/API, never by PolisRossa.
  */
-type Props={spaceId:string;articles:readonly ArticleRecord[];emptyText?:string;title?:string};
+type Props={spaceId:string;articles:readonly ArticleRecord[];emptyText?:string;title?:string; savedIds?:ReadonlySet<string>; onToggleSave?:(article:ArticleRecord)=>void};
 const safeHref=(raw:string):string|null=>{
  try{const url=new URL(raw);return ['https:','http:'].includes(url.protocol)&&!url.username&&!url.password?url.href:null;}
  catch{return null;}
 };
-export function NodeRassegna({spaceId,articles,emptyText='Nessun articolo disponibile dalle fonti di questo nodo.',title='Rassegna stampa'}:Props){
+export function NodeRassegna({spaceId,articles,emptyText='Nessun articolo disponibile dalle fonti di questo nodo.',title='Rassegna stampa',savedIds,onToggleSave}:Props){
  const [query,setQuery]=useState('');
  const [source,setSource]=useState('all');
  const [sort,setSort]=useState<'recent'|'source'>('recent');
@@ -54,6 +54,10 @@ export function NodeRassegna({spaceId,articles,emptyText='Nessun articolo dispon
    <div className="news-grid" aria-label="Articoli">{filtered.slice(0,visible).map(article=>{
     const href=safeHref(article.link),published=article.publishedAt&&Date.parse(article.publishedAt);
     return <article className="article-card" key={article.sourceId+'-'+article.id}>
+     <div className="article-image">
+      {article.image&&safeHref(article.image)?<img src={safeHref(article.image)!} alt="" loading="lazy" decoding="async" referrerPolicy="no-referrer" width={640} height={360}/>:
+       <span className="image-unavailable" aria-hidden="true"/>}
+     </div>
      <div className="article-copy">
       <div className="article-meta"><span>{article.sourceName}</span>
        {published&&Number.isFinite(published)?<time dateTime={article.publishedAt!}>{new Intl.DateTimeFormat('it-IT',{dateStyle:'medium',timeStyle:'short'}).format(published)}</time>:null}
@@ -62,7 +66,14 @@ export function NodeRassegna({spaceId,articles,emptyText='Nessun articolo dispon
       <p>{article.excerpt||'Questo feed non fornisce un estratto. Apri la fonte originale per leggere l’articolo.'}</p>
      </div>
      <div className="article-bottom"><span>Fonte: {article.country||'Paese non verificato'} · {article.language}</span>
-      {href?<a className="publisher-link" href={href} target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer">Leggi dalla fonte <ArrowUpRight size={14}/></a>:null}
+      <div>
+       {href?<a className="publisher-link" href={href} target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer">Leggi dalla fonte <ArrowUpRight size={14}/></a>:null}
+       {onToggleSave?<button type="button" className={`save-button ${savedIds?.has(article.id)?'is-saved':''}`}
+        aria-label={savedIds?.has(article.id)?'Rimuovi dai salvati: '+article.title:'Salva articolo: '+article.title}
+        aria-pressed={Boolean(savedIds?.has(article.id))} onClick={()=>onToggleSave(article)}>
+         {savedIds?.has(article.id)?<BookmarkCheck size={17}/>:<Bookmark size={17}/>}
+       </button>:null}
+      </div>
      </div>
     </article>;
    })}</div>

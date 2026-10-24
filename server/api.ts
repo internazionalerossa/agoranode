@@ -48,7 +48,19 @@ export async function api(request:Request,db:PostgresDatabase,userId:string|null
  if(path==='/api/knowledge/entity')return publicKnowledgeEntityResponse(request,db.pool);
  if(path==='/api/knowledge/revision')return publicKnowledgeRevisionResponse(request,db.pool);
  if(path==='/api/knowledge/export')return publicKnowledgeExportResponse(request,db.pool);
- if(path==='/api/federation/pr3')return handleFederationPr3(request,db,userId);
+ if(path==='/api/federation/pr3'){
+  // Legacy election/mandate actions are incompatible with the current
+  // constitution: PR3 IS an active PR2 of the founding Agorà node.
+  // Keep signed PR2 enrollment and public historical reads available.
+  if(request.method==='POST'){
+   let input:unknown;
+   try{input=await request.clone().json();}catch{return Response.json({error:'Invalid JSON'},{status:400});}
+   if(!input||typeof input!=='object'||Array.isArray(input)||
+      (input as Record<string,unknown>).action!=='enroll')
+    return Response.json({error:'Elected PR3 mandates are retired. PR3 derives from active Agorà PR2 membership.'},{status:410});
+  }
+  return handleFederationPr3(request,db,userId);
+ }
  const reply=(body:unknown,status=200)=>Response.json(body,{status,headers:{'cache-control':'private, no-store',vary:'cookie'}});
  if(request.method==='POST'&&privatePaths.has(path)&&request.headers.get('origin')!==url.origin)return reply({error:'Invalid origin'},403);
  if(path==='/api/privacy/export')return handlePrivacyExport(request,db,userId);

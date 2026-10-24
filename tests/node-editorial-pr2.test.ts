@@ -53,7 +53,7 @@ test('one founder publishes alone; the second admitted PR2 atomically activates 
   assert.equal((await readEditorialHead(pool,'astronomia')).sequence,3);
   await assert.rejects(pg.query('DELETE FROM node_editorial_revisions'),/immutable/);
   await assert.rejects(pg.query('UPDATE node_editorial_revisions SET digest=digest'),/immutable/);
-  const other=await pg.query("SELECT COUNT(*)::int AS count FROM node_editorial_pr2 WHERE space_id='astronomia'");
+  const other=await pg.query<{count:number}>("SELECT COUNT(*)::int AS count FROM node_editorial_pr2 WHERE space_id='astronomia'");
   assert.equal(other.rows[0].count,2);
  }finally{await pg.close();}
 });

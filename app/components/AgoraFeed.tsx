@@ -4,6 +4,7 @@ import type {ArticleRecord} from '../lib/feed';
 import {AGORA_SOURCES,AGORA_VIDEO_ARCHIVE,AGORA_LIVE_DESTINATION} from '../instances/agora-sources';
 import {FeedPreferenceControls,useNodeFeedPreferences} from './FeedPreferenceControls';
 import {selectPreferredArticles} from '../lib/node-feed-preferences';
+import {NodeRassegna} from './NodeRassegna';
 
 type FeedResponse={spaceId:string;articles:ArticleRecord[];sourceCount:number;statuses:{sourceId:string;ok:boolean}[]};
 const safeLink=(raw:string):string|null=>{
@@ -56,7 +57,7 @@ export default function AgoraFeed(){
     <FeedPreferenceControls spaceId="agora" sources={AGORA_SOURCES} prefs={prefs}/>
     <div className="agora-feed-activity">
       <h3>Le notizie</h3>
-      {loading?<p role="status">Aggiornamento delle fonti…</p>:failed?<p role="status">Le fonti non sono raggiungibili in questo momento. Puoi consultarle direttamente.</p>:<ArticleList items={news}/>}
+      {loading?<p role="status">Aggiornamento delle fonti…</p>:failed?<p role="status">Le fonti non sono raggiungibili in questo momento. Puoi consultarle direttamente.</p>:<NodeRassegna spaceId="agora" articles={news} title="Rassegna stampa · Agorà"/>}
       {failed?<button type="button" onClick={()=>setRetry(x=>x+1)}>Riprova</button>:null}
     </div>
     <div className="agora-feed-activity">

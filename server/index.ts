@@ -15,6 +15,7 @@ import {purgeForumApplications,startForumApplicationRetention} from './forum-ret
 import {purgeAuthenticationState,startAuthenticationRetention} from './auth-retention';
 import {api,privatePaths} from './api';
 import {publicSpaceSeedResponse,publicSpaceDirectoryResponse} from './public-space-registry';
+import {publicSpaceFeedResponse} from './public-space-feed';
 import {databaseTarget,openSpaceDatabaseRegistry} from './space-databases';
 import {handleNodeEditorial,editorialPublicSpaceSeedResponse} from './node-editorial-api';
 import {handleNodeForum} from './node-forum';
@@ -82,8 +83,19 @@ const server=createServer({maxHeaderSize:16384,requestTimeout:30000,headersTimeo
   // Identity headers are never consulted. The canonical origin is configuration, never forwarded host input.
   const request=new Request(url,{method,headers,body:body as BodyInit|undefined});
   let response:Response;
+  const spaceFeed=/^\/api\/public-spaces\/([a-z][a-z0-9-]{2,47})\/feed$/.exec(url.pathname);
   const spaceKnowledge=/^\/api\/public-spaces\/([a-z][a-z0-9-]{2,47})\/(knowledge|search)$/.exec(url.pathname);
-  if(spaceKnowledge){
+  if(spaceFeed){
+   const id=spaceFeed[1];
+   const manifest=await publicSpaceSeedResponse(
+    new Request(config.origin+'/api/public-spaces/'+id),
+    process.env.AGORANODE_PUBLIC_SPACES_DIRECTORY,
+   );
+   if(!manifest.ok)response=Response.json({error:'Thematic node not installed'},{status:404});
+   else response=await publicSpaceFeedResponse(request,
+     await manifest.json() as import('../app/platform/public-space-seed').PublicSpaceSeed);
+  }
+  else if(spaceKnowledge){
    const id=spaceKnowledge[1];
    const seed=await publicSpaceSeedResponse(
     new Request(config.origin+'/api/public-spaces/'+id),

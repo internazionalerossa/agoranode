@@ -33,7 +33,7 @@ test('new-node founding is voted only by Agora PR2/PR3 with an immutable bluepri
    ['agora','sha256:'+'b'.repeat(64),'A'.repeat(64),1,'sha256:'+'a'.repeat(64)]);
   const admit=async(user:string,suffix:string)=>{
    await pg.query('INSERT INTO federation_pr2_electors(owner_key,actor_id,source_node_id,source_membership_id,voter_key_id,voter_public_key_spki_base64,public_alias,created_at) VALUES($1,$2,$3,$4,$5,$6,$7,$8)',
-    [user,'actor-'+user,'agora','sha256:'+suffix.repeat(64),'sha256:'+suffix.toUpperCase().repeat(64),'A'.repeat(64),user,1]);
+    [user,'actor-'+user,'agora','sha256:'+suffix.repeat(64),'sha256:'+suffix.repeat(64),'A'.repeat(64),user,1]);
    await pg.query('INSERT INTO federation_pr2_attestations(attestation_sha256,owner_key,source_node_id,source_membership_id,issuer_key_id,proof_json,attestation_json,valid_from,valid_until,accepted_at) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)',
     ['sha256:'+suffix.repeat(64),user,'agora','sha256:'+suffix.repeat(64),'sha256:'+'b'.repeat(64),
      JSON.stringify({state:'active'}),'{}',now-1000,now+100000,now-1000]);

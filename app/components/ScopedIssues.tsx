@@ -55,7 +55,7 @@ export default function ScopedIssues(){
    <button type="button" aria-pressed={scope==='agora'} onClick={()=>{setScope('agora');setSelected(null);}}>Nodo Agorà</button>
    <button type="button" aria-pressed={scope==='agoranode'} onClick={()=>{setScope('agoranode');setSelected(null);}}>Piattaforma AgoraNode</button>
   </div>
-  <p>Creazione: PR2 verificato del nodo Agorà; per l'ambito AgoraNode è necessario un mandato PR3 federale attivo. Per commentare basta una sessione PR1.</p>
+  <p>Creazione e pareri consultivi: PR2 attivo e verificato del nodo Agorà, chiamato PR3 quando opera nell'ambito della piattaforma AgoraNode. Non esiste un mandato PR3 separato. Per commentare basta una sessione PR1.</p>
   <form onSubmit={e=>{e.preventDefault();void submit({action:'create',title,body});}}>
    <h3>Apri una issue</h3>
    <label>Titolo <input value={title} minLength={8} maxLength={160} required onChange={e=>setTitle(e.target.value)}/></label>

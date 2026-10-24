@@ -4,6 +4,7 @@ import {newNodeDraft,nodeStudioDraft,blueprintToProposal,type NodeBlueprintDraft
 import {timelineProposalLink} from '../lib/timeline-proposal';
 import {StudioBlocks,StudioSources} from './NodeStudioFields';
 import {NODE_PRIMARY_TABS} from '../lib/node-primary-navigation';
+import {editStudioBlock,appendAtlasEntry} from '../lib/node-studio-editor';
 import type {PublicSpaceSeed} from '../platform/public-space-seed';
 
 type Props={spaceId:string;seed?:PublicSpaceSeed;onPropose?:(draft:NodeBlueprintDraft)=>Promise<string>};
@@ -37,13 +38,11 @@ export default function NodeStudio({spaceId,seed,onPropose}:Props){
    return()=>{active=false;controller.abort();};
  },[spaceId,seed]);
  const update=(patch:Partial<NodeBlueprintDraft>)=>setDraft(old=>({...old,...patch,updatedAt:Date.now()}));
- const updateBlock=(id:string,patch:Partial<NodeBlueprintDraft['blocks'][number]>)=>
-  update({blocks:draft.blocks.map(block=>block.id===id?{...block,...patch}:block)});
+ const updateBlock=(id:string,patch:{title:string}|{body:string})=>
+  setDraft(previous=>editStudioBlock(previous,id,patch));
  const addAtlasEntry=()=>{
   if(draft.blocks.length>=80){setStatus('Il limite di 80 blocchi per bozza è stato raggiunto.');return;}
-  setDraft(previous=>({...previous,blocks:[...previous.blocks,{
-   id:crypto.randomUUID(),kind:'paragraph',title:'Nuova voce dell’Atlante',body:'',url:'',
-  }],updatedAt:Date.now()}));
+  setDraft(previous=>appendAtlasEntry(previous,crypto.randomUUID()));
   setPreviewTab('teoria');setPreview(true);
   setStatus('Voce dell’Atlante aggiunta alla bozza. Modifica titolo e testo direttamente nell’anteprima; non è pubblicata.');
  };

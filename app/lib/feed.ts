@@ -9,6 +9,7 @@ import {
   type SourceDefinition,
 } from "@/app/data/catalog";
 import {instanceUserAgent} from './instance';
+import {publicFeedUrl,publisherFeedUrl,fetchPublicFeedResponse} from './feed-fetch-policy';
 
 const publisherFor = createPublisherResolver(SOURCE_CATALOG);
 
@@ -207,14 +208,14 @@ async function getFeedCandidates(source: SourceDefinition) {
     return Array.from(
       new Set(
         declared
-          .map((url) => normalizeUrl(url, source.homepage))
+          .map((url) => publicFeedUrl(url, source.homepage)?.href??null)
           .filter((url): url is string => Boolean(url)),
       ),
     );
   const discovered = await discoverFeedUrls(source.homepage);
   const guessed = guessCommonFeedUrls(source.homepage);
   const unique = [...discovered, ...guessed]
-    .map((url) => normalizeUrl(url, source.homepage))
+    .map((url) => publisherFeedUrl(url, source.homepage))
     .filter((url): url is string => Boolean(url));
 
   return Array.from(new Set(unique));
@@ -233,7 +234,7 @@ async function discoverFeedUrls(homepage: string) {
       .filter((tag) => /alternate/i.test(tag) && /(rss|atom)\+xml/i.test(tag))
       .map((tag) => getAttribute(tag, "href"))
       .filter((url): url is string => Boolean(url))
-      .map((url) => normalizeUrl(url, homepage))
+      .map((url) => publisherFeedUrl(url, homepage))
       .filter((url): url is string => Boolean(url));
 
     const urls = Array.from(new Set(links));
@@ -291,13 +292,12 @@ async function fetchText(
   maxChars = MAX_FEED_CHARS,
   timeoutMs = REQUEST_TIMEOUT_MS,
 ) {
-  const response = await fetch(url, {
+  const response = await fetchPublicFeedResponse(url, {
     headers: {
       accept:
         "application/rss+xml, application/atom+xml, application/xml, text/xml, text/html;q=0.8, */*;q=0.5",
       "user-agent": USER_AGENT,
     },
-    redirect: "follow",
     signal: AbortSignal.timeout(Math.max(1, timeoutMs)),
   });
 

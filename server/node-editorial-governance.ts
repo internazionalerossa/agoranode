@@ -89,9 +89,9 @@ export async function joinEditorialPr2(
  });
 }
 export async function proposeEditorialRevision(
- pool:Connections,spaceId:string,userId:string,content:unknown,
+ pool:Connections,spaceId:string,userId:string,content:unknown,verify:VerifyNodePr2,
 ):Promise<{id:string;digest:string;status:Decision;electorateSize:number}>{
- validateIdentity(spaceId,userId);
+ validateIdentity(spaceId,userId);await requireVerified(verify,spaceId,userId);
  const canonical=canonicalKnowledgeJson(content);
  if(canonical.length>60000||!content||Array.isArray(content)||typeof content!=='object')
   throw new EditorialError(400,'Editorial content must be a bounded object');
@@ -111,10 +111,11 @@ export async function proposeEditorialRevision(
  });
 }
 export async function voteEditorialProposal(
- pool:Connections,spaceId:string,userId:string,id:string,choice:'yes'|'no',
+ pool:Connections,spaceId:string,userId:string,id:string,choice:'yes'|'no',verify:VerifyNodePr2,
 ):Promise<{status:Decision;yes:number;no:number;required:number}>{
  validateIdentity(spaceId,userId);
  if(!/^[0-9a-f-]{36}$/i.test(id)||!['yes','no'].includes(choice))throw new EditorialError(400,'Invalid vote');
+ await requireVerified(verify,spaceId,userId);
  return transact(pool,async c=>{
   await requireMember(c,spaceId,userId);
   const result=await c.query(

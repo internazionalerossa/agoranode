@@ -30,8 +30,17 @@ export async function handleAgoraForum(request:Request,db:PostgresDatabase,userI
     id:String(row.id),author:String(row.author_alias),
     title:String(row.title),body:String(row.body),createdAt:Number(row.created_ms),
    }));
+   let canParticipate=false;
+   if(userId)try{
+    const verification=await db.pool.query(
+     "SELECT 1 FROM federation_pr2_attestations a JOIN federation_pr2_electors e ON e.owner_key=a.owner_key"+
+     " WHERE e.owner_key=$1 AND e.source_node_id='agora' AND a.source_node_id='agora'"+
+     " AND a.valid_from<=$2 AND a.valid_until>$2 AND (a.proof_json::jsonb->>'state')='active' LIMIT 1",
+     [userId,Date.now()]);
+    canParticipate=verification.rows.length>0;
+   }catch{}
    return reply({spaceId:'agora',topics:rows,nextOffset:result.results.length>LIMIT?Number(raw)+LIMIT:null,
-    authenticated:Boolean(userId),publication:'discussion-only'});
+    authenticated:canParticipate,publication:'discussion-only'});
   }catch{return reply({error:'Forum temporarily unavailable'},503);}
  }
  if(request.method!=='POST')return reply({error:'Method not allowed'},405);

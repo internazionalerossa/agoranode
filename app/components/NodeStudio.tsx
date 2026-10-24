@@ -7,9 +7,9 @@ import {NODE_PRIMARY_TABS} from '../lib/node-primary-navigation';
 import {editStudioBlock,appendAtlasEntry} from '../lib/node-studio-editor';
 import type {PublicSpaceSeed} from '../platform/public-space-seed';
 
-type Props={spaceId:string;seed?:PublicSpaceSeed;onPropose?:(draft:NodeBlueprintDraft)=>Promise<string>};
+type Props={spaceId:string;seed?:PublicSpaceSeed;onPropose?:(draft:NodeBlueprintDraft)=>Promise<string>;onCreateNode?:(draft:NodeBlueprintDraft)=>Promise<string>};
 const key=(spaceId:string)=>'agoranode.node-studio.draft.v1:'+spaceId;
-export default function NodeStudio({spaceId,seed,onPropose}:Props){
+export default function NodeStudio({spaceId,seed,onPropose,onCreateNode}:Props){
  const [draft,setDraft]=useState<NodeBlueprintDraft>(()=>newNodeDraft(spaceId==='agora'?'create-node':'edit-node',spaceId==='agora'?'nuovo-nodo':spaceId));
  const [saved,setSaved]=useState<NodeBlueprintDraft[]>([]);
  const [account,setAccount]=useState(false);
@@ -92,6 +92,18 @@ export default function NodeStudio({spaceId,seed,onPropose}:Props){
    catch(e){setStatus(e instanceof Error?e.message:'Proposta non registrata');}
    finally{setBusy(false);}
  };
+ const submitFounding=async()=>{
+  if(!onCreateNode||spaceId!=='agora')return;
+  let prepared:NodeBlueprintDraft;
+  try{
+   prepared=nodeStudioDraft(draft);
+   if(prepared.operation!=='create-node')throw Error('Per fondare un nuovo nodo scegli la modalità Nuovo nodo.');
+  }catch(e){setStatus(e instanceof Error?e.message:'Bozza non valida');return;}
+  setBusy(true);
+  try{setStatus(await onCreateNode(prepared));}
+  catch(e){setStatus(e instanceof Error?e.message:'Proposta non registrata');}
+  finally{setBusy(false);}
+ };
  const download=()=>{
    let content:NodeBlueprintDraft;
    try{content=nodeStudioDraft(draft);}catch{setStatus('Completa e correggi i campi prima di esportare.');return;}
@@ -139,6 +151,7 @@ export default function NodeStudio({spaceId,seed,onPropose}:Props){
          <button type="button" aria-pressed={preview} onClick={()=>setPreview(value=>!value)}>{preview?'Nascondi anteprima':'Mostra anteprima'}</button>
          <button type="button" onClick={download}>Esporta bozza</button>
          {onPropose?<button type="button" disabled={busy} onClick={()=>void propose()}>Invia revisione editoriale</button>:null}
+         {spaceId==='agora'&&onCreateNode?<button type="button" disabled={busy} onClick={()=>void submitFounding()}>Proponi il nuovo nodo ai PR3 di Agorà</button>:null}
        </div>
        {status?<p role="status">{status}</p>:null}
        {proposal?<a className="button button-outline" href={proposal}>Porta questa proposta al forum PR2 →</a>:

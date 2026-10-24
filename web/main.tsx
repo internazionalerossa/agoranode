@@ -8,11 +8,12 @@ const AggregatorApp=lazy(()=>import('../app/components/AggregatorApp').then(m=>(
 const PublicSpaceHome=lazy(()=>import('../app/components/PublicSpaceHome'));
 const AgoraNodeHome=lazy(()=>import('../app/components/AgoraNodeHome'));
 const NodeDirectory=lazy(()=>import('../app/components/NodeDirectory'));
+const PolisRossaOriginalLink=lazy(()=>import('../app/components/PolisRossaOriginalLink'));
 const BookReader=lazy(()=>import('../app/components/BookReader').then(m=>({default:m.BookReader})));
 const Account=lazy(()=>import('../app/components/AccountView'));
 const staticPreview=import.meta.env.VITE_PUBLIC_PREVIEW==='true';
 if(staticPreview)installStaticPreviewNavigation();
 const route=siteRouteFromUrl(staticPreview?staticPreviewVirtualUrl(location.href):location.href);
 if(!staticPreview)canonicalizeSiteRoute(route,location.href);
-const content=route.kind==='platform'?<NodeDirectory/>:route.kind==='agora'?<AgoraNodeHome/>:route.kind==='thematic-node'?<PublicSpaceHome spaceId={route.spaceId}/>:route.kind==='reader'?<BookReader/>:route.kind==='account'?<Account/>:<AggregatorApp/>;
+const content=staticPreview&&['instance','reader','account'].includes(route.kind)?<PolisRossaOriginalLink/>:route.kind==='platform'?<NodeDirectory/>:route.kind==='agora'?<AgoraNodeHome/>:route.kind==='thematic-node'?<PublicSpaceHome spaceId={route.spaceId}/>:route.kind==='reader'?<BookReader/>:route.kind==='account'?<Account/>:<AggregatorApp/>;
 createRoot(document.getElementById('root')!).render(<>{route.kind!=='platform'?<MirrorNotice/>:null}<Suspense fallback={<main role="status">Caricamento…</main>}>{content}</Suspense></>);

@@ -22,6 +22,23 @@ test('the issue service is scoped, authenticated, and never grants PR2 by self d
   assert.equal((await handleScopedIssues(post(details),db,null)).status,401);
   assert.equal((await handleScopedIssues(post(details,'https://evil.test'),db,'alice')).status,403);
   assert.equal((await handleScopedIssues(post(details),db,'alice')).status,403);
+  // A verified node credential is created only by the separate authenticated
+  // federation-attestation process, never by a user-supplied role flag.
+  const digest='sha256:'+'a'.repeat(64);
+  await pg.query('INSERT INTO federation_nodes(node_id,display_name,admitted_by_decision_digest,admitted_at) VALUES($1,$2,$3,$4)',
+    ['agora','Agorà',digest,1]);
+  await pg.query('INSERT INTO federation_node_keys(node_id,key_id,public_key_spki_base64,valid_from,admitted_by_decision_digest) VALUES($1,$2,$3,$4,$5)',
+    ['agora','sha256:'+'b'.repeat(64),'A'.repeat(64),1,digest]);
+  await pg.query('INSERT INTO federation_pr2_electors(owner_key,actor_id,source_node_id,source_membership_id,voter_key_id,voter_public_key_spki_base64,public_alias,created_at) VALUES($1,$2,$3,$4,$5,$6,$7,$8)',
+    ['alice','actor-alice','agora','sha256:'+'c'.repeat(64),'sha256:'+'d'.repeat(64),'A'.repeat(64),'Alice',1]);
+  const now=1_800_000_000_000;
+  await pg.query('INSERT INTO federation_pr2_attestations(attestation_sha256,owner_key,source_node_id,source_membership_id,issuer_key_id,proof_json,attestation_json,valid_from,valid_until,accepted_at) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)',
+    ['sha256:'+'e'.repeat(64),'alice','agora','sha256:'+'c'.repeat(64),'sha256:'+'b'.repeat(64),
+     JSON.stringify({state:'active'}),'{}',now-1000,now+100000,now-1000]);
+  const created=await handleScopedIssues(post(details),db,'alice',now);
+  assert.equal(created.status,201);
+  assert.equal((await handleScopedIssues(post(details),db,'alice',now+100001)).status,403);
+
   const issueId=crypto.randomUUID();
   await pg.query('INSERT INTO agora_internal_issues(id,scope,author_id,title,body) VALUES ($1,$2,$3,$4,$5)',
    [issueId,'agora','alice',details.title,details.body]);

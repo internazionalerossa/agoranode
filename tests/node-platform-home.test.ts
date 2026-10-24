@@ -23,6 +23,7 @@ test("the service root is a directory with Agorà and PolisRossa in the requeste
   assert.match(directory, /Questo è il registro pubblico delle comunità/);
   assert.match(directory, /Ospitare una copia/);
   assert.match(directory, /Apri Biblioteca e Atlante/);
+  assert.match(directory, /<nav class="node-directory-quicklinks" aria-label="Accessi diretti al sistema">/);
   assert.match(directory, /Forum e laboratorio nuovi nodi/);
   assert.match(directory, /Nodo: agora/);
   assert.match(directory, /href="https:\/\/github\.com\/internazionalerossa\/agoranode\/blob\/main\/docs\/SELF-HOSTING\.md"/);

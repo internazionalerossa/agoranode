@@ -78,7 +78,7 @@ export default function SharedCustodyView() {
         <p className="eyebrow"><T>UN NODO LOCALE DI SOLA CONSULTAZIONE</T></p>
         <h2 id="custody-node-title"><T>Scarica, avvia, verifica.</T></h2>
         <p><T>Servono Git, Node.js 24 e Docker con Compose. I comandi creano una configurazione privata, avviano app, PostgreSQL e HTTPS, e non sovrascrivono un’installazione già presente.</T></p>
-        <pre className="custody-command" tabIndex={0} aria-label="Comandi per avviare un nodo di sola consultazione"><code>{`git clone https://github.com/internazionalerossa/agoranode.git
+        <pre className="custody-command" tabIndex={0} role="region" aria-label="Comandi per avviare un nodo di sola consultazione"><code>{`git clone https://github.com/internazionalerossa/agoranode.git
 cd agoranode
 git switch main
 node scripts/selfhost.mjs init https://localhost:9443 mirror --project polisrossa-nodo --http-port 9080
@@ -99,7 +99,7 @@ node scripts/selfhost.mjs certificate`}</code></pre>
           <article><span aria-hidden="true">03</span><h3><T>Coordinamento federale AgoràNode</T></h3><p><T>Le questioni comuni dell’infrastruttura richiedono un’assemblea e un forum nel nodo Agorà, separati da quelli dei nodi tematici. Il registro PR3 sa verificare candidatura, voto, mandato, scadenza e richiamo; l’accesso reale degli utenti non è ancora aperto.</T></p></article>
           <article><span aria-hidden="true">04</span><h3><T>Custodi tecnici</T></h3><p><T>Chi mantiene un server, conserva un backup o verifica una release non riceve voti aggiuntivi. Operazioni e cambi di mandato dovranno lasciare un audit pubblico contestabile.</T></p></article>
         </div>
-        <div className="custody-role-ladder" aria-label="Livelli di partecipazione">
+        <div className="custody-role-ladder" role="group" aria-label="Livelli di partecipazione">
           <article><strong>PR1</strong><span><T>Account personale: lettura, raccolte e candidatura a membro del proprio nodo.</T></span></article>
           <article><strong>PR2</strong><span><T>Membro ammesso e votante in un nodo preciso. Un PR2 attivo di qualsiasi nodo federato può presentare una candidatura PR3.</T></span></article>
           <article><strong>PR3</strong><span><T>Mandato federale AgoràNode ottenuto con candidatura pubblica ed elezione: ha scopo, durata, obbligo di relazione, incompatibilità e revoca. Non è automatico e non deriva dal possesso di un server.</T></span></article>

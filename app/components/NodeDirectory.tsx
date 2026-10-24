@@ -135,12 +135,12 @@ export default function NodeDirectory() {
             PolisRossa mantiene la propria identità e il suo patrimonio editoriale, come comunità tematica distinta.
             I pulsanti sottostanti aprono direttamente le pagine disponibili.
           </p>
-          <div className="node-directory-quicklinks" aria-label="Accessi diretti al sistema">
+          <nav className="node-directory-quicklinks" aria-label="Accessi diretti al sistema">
             <a href="/agora">Esplora Agorà <ArrowRight size={16} aria-hidden="true"/></a>
             <a href="/agora?view=biblioteca">Apri Biblioteca e Atlante <ArrowRight size={16} aria-hidden="true"/></a>
             <a href="/agora?view=partecipa">Forum e laboratorio nuovi nodi <ArrowRight size={16} aria-hidden="true"/></a>
             <a href="/polisrossa">Entra in PolisRossa <ArrowRight size={16} aria-hidden="true"/></a>
-          </div>
+          </nav>
         </header>
         <section className="node-directory-catalog" aria-labelledby="node-directory-catalog-title">
           <div className="node-directory-catalog-heading">

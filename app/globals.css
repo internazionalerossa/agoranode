@@ -5420,3 +5420,6 @@ body { min-width: 0; width: 100%; max-width: 100vw; overflow-x: hidden; }
 .node-directory-cta{display:block;margin-top:9px;font-size:12px;font-weight:700;color:var(--red,#a72f2f)}
 .node-directory-intro>p{line-height:1.75;max-width:80ch}
 @media(max-width:680px){.node-directory-quicklinks{grid-template-columns:1fr}.node-directory-quicklinks a{min-height:48px;padding:13px 15px}}
+
+/* Improve the alpha Biblioteca navigation text contrast on its selected pale-blue tab. */
+.agora-library .thematic-library-destinations > a[aria-current=page] > span { color:#4d5559; }

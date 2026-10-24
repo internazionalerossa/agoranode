@@ -12,25 +12,18 @@ const reply=(value:unknown,status=200)=>Response.json(value,{status,headers:HEAD
 const text=(v:unknown,min:number,max:number):v is string=>
  typeof v==='string'&&v.trim()===v&&v.length>=min&&v.length<=max&&!/[\u0000-\u001f]/.test(v);
 
-async function credential(db:PostgresDatabase,userId:string,scope:string,now:number){
- // PR2: authenticated account with a valid signed, admitted Agora credential.
- // Only currently active, time-bounded attestations can authorize the action.
- const pr2=await db.pool.query(
+/**
+ * PR3 is the platform-level function of an active PR2 of the Agorà founding node.
+ * No distinct appointment, hosting entitlement or platform ballot weight is created.
+ * Membership must have entered this store through signed attestation validation.
+ */
+async function agoraPr2(db:PostgresDatabase,userId:string,now:number):Promise<boolean>{
+ const result=await db.pool.query(
   "SELECT 1 FROM federation_pr2_attestations a JOIN federation_pr2_electors e ON e.owner_key=a.owner_key"+
-  " WHERE e.owner_key=$1 AND a.source_node_id='agora' AND a.valid_from<=$2 AND a.valid_until>$2"+
+  " WHERE e.owner_key=$1 AND e.source_node_id='agora' AND a.source_node_id='agora'"+
+  " AND a.valid_from<=$2 AND a.valid_until>$2"+
   " AND (a.proof_json::jsonb->>'state')='active' LIMIT 1",[userId,now]);
- if(scope==='agora')return pr2.rows.length>0;
- // PR3 has a distinct, active federal mandate. No host-operator shortcut.
- const pr3=await db.pool.query(
-  "SELECT 1 FROM federation_pr3_mandate_records m"+
-  " WHERE m.owner_key=$1 AND m.state='active'"+
-  " AND m.sequence=(SELECT MAX(latest.sequence) FROM federation_pr3_mandate_records latest WHERE latest.mandate_id=m.mandate_id)"+
-  " AND (m.record_json::jsonb->>'startsAt')::bigint<=$2"+
-  " AND (m.record_json::jsonb->>'expiresAt')::bigint>$2"+
-  " AND EXISTS(SELECT 1 FROM federation_pr2_attestations a"+
-  " WHERE a.owner_key=m.owner_key AND a.valid_from<=$2 AND a.valid_until>$2"+
-  " AND (a.proof_json::jsonb->>'state')='active') LIMIT 1",[userId,now]);
- return pr3.rows.length>0;
+ return result.rows.length>0;
 }
 
 export async function handleScopedIssues(
@@ -82,7 +75,7 @@ export async function handleScopedIssues(
   if(v.action==='create'){
    if(rawId!==null||!text(v.title,8,160)||!text(v.body,20,8000)||v.issueId!==undefined||v.choice!==undefined)
     return reply({error:'Invalid issue content'},400);
-   if(!await credential(db,userId,scope,now))return reply({error:'Verified scoped PR2 or active PR3 mandate required'},403);
+   if(!await agoraPr2(db,userId,now))return reply({error:'Active, verified Agorà PR2 membership required (PR3 is its platform function)'},403);
    const rows=await db.batch([db.prepare(
     "INSERT INTO agora_internal_issues(scope,author_id,title,body) SELECT ?,?,?,?"+
     " WHERE (SELECT COUNT(*) FROM agora_internal_issues WHERE author_id=? AND created_at>now()-interval '1 day')<10"+
@@ -105,7 +98,7 @@ export async function handleScopedIssues(
   }
   if(v.title!==undefined||v.body!==undefined||!['yes','no','abstain'].includes(String(v.choice)))
    return reply({error:'Invalid advisory vote'},400);
-  if(!await credential(db,userId,scope,now))return reply({error:'Verified scoped PR2 or active PR3 mandate required'},403);
+  if(!await agoraPr2(db,userId,now))return reply({error:'Active, verified Agorà PR2 membership required (PR3 is its platform function)'},403);
   await db.prepare("INSERT INTO agora_internal_issue_votes(issue_id,voter_id,choice) VALUES(?,?,?)"+
    " ON CONFLICT(issue_id,voter_id) DO UPDATE SET choice=excluded.choice,updated_at=now()")
    .bind(id,userId,v.choice).run();

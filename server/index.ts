@@ -20,6 +20,7 @@ import {databaseTarget,openSpaceDatabaseRegistry} from './space-databases';
 import {handleNodeEditorial,editorialPublicSpaceSeedResponse} from './node-editorial-api';
 import {handleNodeForum} from './node-forum';
 import {handleNodeBookmarks} from './node-bookmarks';
+import {handleNodeChat} from './node-chat';
 import {migrateNodeEditorialDatabase} from './node-editorial-migrations';
 import {publicSpaceKnowledgeResponse} from './public-space-knowledge';
 import type {ForumSocialIdentity} from '../app/lib/forum';
@@ -115,7 +116,7 @@ const server=createServer({maxHeaderSize:16384,requestTimeout:30000,headersTimeo
     response=await editorialPublicSpaceSeedResponse(connections(editorialSpacePools.get(id)),seed);
    }else response=installed;
   }
-  else if(url.pathname==='/api/node-editorial'||url.pathname==='/api/node-forum'||url.pathname==='/api/node-bookmarks'){
+  else if(url.pathname==='/api/node-editorial'||url.pathname==='/api/node-forum'||url.pathname==='/api/node-bookmarks'||url.pathname==='/api/node-chat'){
    const ids=url.searchParams.getAll('spaceId');
    const id=ids.length===1?ids[0]:'';
    if(!/^[a-z][a-z0-9-]{2,47}$/.test(id)||['agora','polisrossa'].includes(id))
@@ -133,6 +134,8 @@ const server=createServer({maxHeaderSize:16384,requestTimeout:30000,headersTimeo
       ?await handleNodeEditorial(request,editorPool,id,session.user?.id??null,verifyNodePr2)
       :url.pathname==='/api/node-forum'
        ?await handleNodeForum(request,editorPool,id,session.user?.id??null,verifyNodePr2)
+       :url.pathname==='/api/node-chat'
+        ?await handleNodeChat(request,editorPool,id,session.user?.id??null,verifyNodePr2)
        :await handleNodeBookmarks(request,editorPool,
         await installed.json() as import('../app/platform/public-space-seed').PublicSpaceSeed,session.user?.id??null));
     }

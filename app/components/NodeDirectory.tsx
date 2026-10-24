@@ -133,6 +133,8 @@ export default function NodeDirectory() {
             Agorà è il nodo alpha dedicato alla piattaforma: puoi leggere il suo Atlante tecnico,
             percorrerne la storia, esaminare la biblioteca e aprire il laboratorio per creare un nuovo nodo.
             PolisRossa mantiene la propria identità e il suo patrimonio editoriale, come comunità tematica distinta.
+            Il riferimento completo per formato, layout e pulsanti è il <a href="https://polisrossa.tail37128d.ts.net/" target="_blank" rel="noopener noreferrer">sito PolisRossa originale</a>;
+            la pagina /polisrossa su questa anteprima statica non equivale al servizio completo.
             I pulsanti sottostanti aprono direttamente le pagine disponibili.
           </p>
           <nav className="node-directory-quicklinks" aria-label="Accessi diretti al sistema">

@@ -35,6 +35,12 @@ test('the issue service is scoped, authenticated, and never grants PR2 by self d
   await pg.query('INSERT INTO federation_pr2_attestations(attestation_sha256,owner_key,source_node_id,source_membership_id,issuer_key_id,proof_json,attestation_json,valid_from,valid_until,accepted_at) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)',
     ['sha256:'+'e'.repeat(64),'alice','agora','sha256:'+'c'.repeat(64),'sha256:'+'b'.repeat(64),
      JSON.stringify({state:'active'}),'{}',now-1000,now+100000,now-1000]);
+  const boardAuthorized=await (await handleScopedIssues(new Request(url),db,'alice',now)).json();
+  assert.equal(boardAuthorized.canParticipate,true);
+  const boardPr1=await (await handleScopedIssues(new Request(url),db,'bob',now)).json();
+  assert.equal(boardPr1.canParticipate,false);
+  const boardRevoked=await (await handleScopedIssues(new Request(url),db,'alice',now+100001)).json();
+  assert.equal(boardRevoked.canParticipate,false);
   const created=await handleScopedIssues(post(details),db,'alice',now);
   assert.equal(created.status,201);
   assert.equal((await handleScopedIssues(post(details),db,'alice',now+100001)).status,403);

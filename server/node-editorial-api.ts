@@ -1,4 +1,7 @@
 import {nodeStudioDraft} from '../app/lib/node-studio-model';
+import {
+ PR2_APPROVED_NOTICE,validatePublicSpaceSeed,type PublicSpaceSeed,
+} from '../app/platform/public-space-seed';
 import type {Connections} from './database';
 import {
  EditorialError,initializeEditorialNode,joinEditorialPr2,
@@ -85,5 +88,29 @@ export async function handleNodeEditorial(
   if(e instanceof Error&&/Invalid node blueprint|Invalid node source|Invalid node content|Empty node block|exceeds storage/i.test(e.message))
    return reply({error:'Invalid node content'},400);
   return reply({error:'Editorial operation unavailable'},503);
+ }
+}
+
+/** Installed seeds become live read-only content after approved PR2 revisions. */
+export async function editorialPublicSpaceSeedResponse(
+ pool:Connections,seed:PublicSpaceSeed,
+):Promise<Response>{
+ try {
+  const head=await readEditorialHead(pool,seed.spaceId);
+  if(head.sequence===0)return Response.json(seed,{headers});
+  const data=head.content;
+  if(!data||typeof data!=='object'||Array.isArray(data))throw Error('Corrupt publication');
+  const record=data as Record<string,unknown>;
+  const result=validatePublicSpaceSeed({
+   ...seed,spaceId:seed.spaceId,
+   name:record.name,topic:record.topic,description:record.description,accent:record.accent,
+   sources:record.sources,blocks:record.blocks,
+   publication:{kind:'pr2-approved',notice:PR2_APPROVED_NOTICE},
+  });
+  return Response.json(result,{headers});
+ }catch(e){
+  if(e instanceof EditorialError&&e.status===404)
+   return Response.json(seed,{headers});
+  return reply({error:'The editorial publication is temporarily unavailable'},503);
  }
 }

@@ -8,7 +8,7 @@ const clean=(value:unknown,min:number,max:number):value is string=>
  !/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/.test(value);
 
 /**
- * Public Agorà discussion board. Contributions require an authenticated PR1.
+ * Public Agorà discussion board. Contributions require verified node PR2 membership.
  * It does not grant PR2/PR3 status and deliberately has NO vote endpoint.
  * The account owner_id never leaves the server.
  */
@@ -36,10 +36,14 @@ export async function handleAgoraForum(request:Request,db:PostgresDatabase,userI
  }
  if(request.method!=='POST')return reply({error:'Method not allowed'},405);
  if(!participationOpen)return reply({error:'Le nuove discussioni sono chiuse su questa installazione.'},503);
- if(!userId)return reply({error:'Accedi come PR1 per proporre una discussione.'},401);
+ if(!userId)return reply({error:'Accedi per partecipare.'},401);
  if(request.headers.get('origin')!==url.origin||request.headers.get('sec-fetch-site')==='cross-site')
   return reply({error:'Invalid origin'},403);
  if(url.search)return reply({error:'Unexpected parameters'},400);
+ try{
+  const result=await db.pool.query("SELECT 1 FROM federation_pr2_attestations a JOIN federation_pr2_electors e ON e.owner_key=a.owner_key WHERE e.owner_key=$1 AND e.source_node_id='agora' AND a.source_node_id='agora' AND a.valid_from<=$2 AND a.valid_until>$2 AND (a.proof_json::jsonb->>'state')='active' LIMIT 1",[userId,Date.now()]);
+  if(!result.rows.length)return reply({error:'Solo PR2 verificati del nodo Agorà possono partecipare.'},403);
+ }catch{return reply({error:'Impossibile verificare i permessi PR2.'},503);}
  if(!request.headers.get('content-type')?.startsWith('application/json'))
   return reply({error:'JSON required'},415);
  let raw:string;

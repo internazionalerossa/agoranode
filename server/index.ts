@@ -117,7 +117,7 @@ const server=createServer({maxHeaderSize:16384,requestTimeout:30000,headersTimeo
      const session=await authSession(auth,request);
      response=session.finish(url.pathname==='/api/node-editorial'
       ?await handleNodeEditorial(request,connections(editorialSpacePools.get(id)),id,session.user?.id??null,verifyNodePr2)
-      :await handleNodeForum(request,connections(editorialSpacePools.get(id)),id,session.user?.id??null));
+      :await handleNodeForum(request,connections(editorialSpacePools.get(id)),id,session.user?.id??null,verifyNodePr2));
     }
    }
   }

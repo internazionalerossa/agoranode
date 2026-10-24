@@ -37,6 +37,16 @@ export default function NodeStudio({spaceId,seed,onPropose}:Props){
    return()=>{active=false;controller.abort();};
  },[spaceId,seed]);
  const update=(patch:Partial<NodeBlueprintDraft>)=>setDraft(old=>({...old,...patch,updatedAt:Date.now()}));
+ const updateBlock=(id:string,patch:Partial<NodeBlueprintDraft['blocks'][number]>)=>
+  update({blocks:draft.blocks.map(block=>block.id===id?{...block,...patch}:block)});
+ const addAtlasEntry=()=>{
+  if(draft.blocks.length>=80){setStatus('Il limite di 80 blocchi per bozza è stato raggiunto.');return;}
+  setDraft(previous=>({...previous,blocks:[...previous.blocks,{
+   id:crypto.randomUUID(),kind:'paragraph',title:'Nuova voce dell’Atlante',body:'',url:'',
+  }],updatedAt:Date.now()}));
+  setPreviewTab('teoria');setPreview(true);
+  setStatus('Voce dell’Atlante aggiunta alla bozza. Modifica titolo e testo direttamente nell’anteprima; non è pubblicata.');
+ };
  const reset=(operation:'create-node'|'edit-node')=>{
    const next=newNodeDraft(operation,operation==='edit-node'?spaceId:'nuovo-nodo');
    setDraft(operation==='edit-node'?{...next,name:seed?.name??(spaceId==='agora'?'Agorà':spaceId==='polisrossa'?'PolisRossa':'Nodo tematico'),topic:seed?.topic??next.topic,description:seed?.description??next.description,accent:seed?.accent??next.accent,sources:seed?.sources??[],blocks:seed?.blocks??[]}:{...next,name:'',topic:'',description:'',sources:[],blocks:[]});
@@ -154,10 +164,22 @@ export default function NodeStudio({spaceId,seed,onPropose}:Props){
            <h4>Agorà · Forum e proposte</h4>
            <p>Anteprima dei pulsanti e delle sezioni: Discussioni · Proposte · Partecipazione. Account, chat e voto restano disabilitati fino all’installazione del backend e alla verifica delle autorizzazioni proprie del nodo.</p>
          </section>}
-         {draft.blocks.map(block=><article className="node-studio-preview-block" key={block.id}>
-           <small>{block.kind}</small><h4>{block.title}</h4><p>{block.body}</p>
+         {draft.blocks.map(block=><article className="node-studio-preview-block" key={block.id} id={'studio-block-'+block.id}>
+           <small>{block.kind}</small>
+           <label>Titolo della voce o sezione
+            <input value={block.title} maxLength={160} onChange={event=>updateBlock(block.id,{title:event.target.value})}/>
+           </label>
+           <label>{block.kind==='timeline'?'Racconto della tappa nella Timeline':'Testo del paragrafo o della voce'}
+            <textarea rows={5} value={block.body} maxLength={4000}
+             onChange={event=>updateBlock(block.id,{body:event.target.value})}/>
+           </label>
            {block.url?<small>Fonte: {block.url}</small>:null}
+           <button type="button" onClick={()=>update({blocks:draft.blocks.filter(item=>item.id!==block.id)})}
+            aria-label={'Rimuovi dalla bozza: '+block.title}>Rimuovi blocco</button>
          </article>)}
+         <div className="node-studio-actions">
+          <button type="button" disabled={draft.blocks.length>=80} onClick={addAtlasEntry}>+ Nuova voce dell’Atlante</button>
+         </div>
          <p>{draft.sources.length} fonti proposte · {draft.blocks.length} blocchi</p>
        </div>
      </aside>:null}

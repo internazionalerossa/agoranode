@@ -90,12 +90,12 @@ export default function NodeStudio({spaceId}:Props){
    <div className="node-studio-layout">
      <div className="node-studio-editor">
        <fieldset className="node-studio-group"><legend>01 · Identità della comunità</legend>
-         <label>Identificatore <input maxLength={48} disabled={draft.operation==='edit-node'} value={draft.spaceId}
+         <label>Identificatore <input autoComplete="off" maxLength={48} disabled={draft.operation==='edit-node'} value={draft.spaceId}
            onChange={e=>update({spaceId:e.target.value.toLowerCase().replace(/[^a-z0-9-]/g,'')})}/></label>
-         <label>Nome del nodo <input maxLength={90} value={draft.name} onChange={e=>update({name:e.target.value})}/></label>
-         <label>Argomento <input maxLength={180} value={draft.topic} onChange={e=>update({topic:e.target.value})}/></label>
+         <label>Nome del nodo <input autoComplete="off" maxLength={90} value={draft.name} onChange={e=>update({name:e.target.value})}/></label>
+         <label>Argomento <input autoComplete="off" maxLength={180} value={draft.topic} onChange={e=>update({topic:e.target.value})}/></label>
          <label>Presentazione <textarea rows={3} maxLength={1500} value={draft.description} onChange={e=>update({description:e.target.value})}/></label>
-         <label>Colore distintivo <input type="color" value={draft.accent} onChange={e=>update({accent:e.target.value})}/></label>
+         <label>Colore distintivo <input autoComplete="off" type="color" value={draft.accent} onChange={e=>update({accent:e.target.value})}/></label>
        </fieldset>
        <StudioSources draft={draft} update={update}/>
        <StudioBlocks draft={draft} update={update}/>

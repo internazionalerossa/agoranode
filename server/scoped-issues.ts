@@ -37,6 +37,10 @@ export async function handleScopedIssues(
  if(rawId!==null&&(!UUID.test(rawId)||url.searchParams.getAll('issueId').length!==1))
   return reply({error:'Invalid issue'},400);
  if(request.method==='GET'){
+  // Capability is derived from the server-side session and verified PR2 status,
+  // never from client role selectors. The board remains readable to visitors.
+  let canParticipate=false;
+  if(userId)try{canParticipate=await agoraPr2(db,userId,now);}catch{}
   try {
    if(rawId){
     const issue=await db.pool.query(
@@ -46,11 +50,11 @@ export async function handleScopedIssues(
      "SELECT id::text,body,created_at FROM agora_internal_issue_comments WHERE issue_id=$1::uuid ORDER BY created_at,id LIMIT 100",[rawId]);
     const tally=await db.pool.query(
      "SELECT choice,COUNT(*)::int AS count FROM agora_internal_issue_votes WHERE issue_id=$1::uuid GROUP BY choice",[rawId]);
-    return reply({issue:issue.rows[0],comments:comments.rows,advisoryVotes:tally.rows,binding:false});
+    return reply({issue:issue.rows[0],comments:comments.rows,advisoryVotes:tally.rows,binding:false,canParticipate});
    }
    const rows=await db.pool.query(
     "SELECT id::text,scope,title,body,status,created_at FROM agora_internal_issues WHERE scope=$1 ORDER BY created_at DESC,id DESC LIMIT 60",[scope]);
-   return reply({scope,issues:rows.rows,binding:false});
+   return reply({scope,issues:rows.rows,binding:false,canParticipate});
   }catch{return reply({error:'Issues unavailable'},503);}
  }
  if(request.method!=='POST')return reply({error:'Method not allowed'},405);

@@ -15,7 +15,10 @@ import {purgeForumApplications,startForumApplicationRetention} from './forum-ret
 import {purgeAuthenticationState,startAuthenticationRetention} from './auth-retention';
 import {api,privatePaths} from './api';
 import {publicSpaceSeedResponse,publicSpaceDirectoryResponse} from './public-space-registry';
-import {openSpaceDatabaseRegistry} from './space-databases';
+import {databaseTarget,openSpaceDatabaseRegistry} from './space-databases';
+import {handleNodeEditorial,editorialPublicSpaceSeedResponse} from './node-editorial-api';
+import {handleNodeForum} from './node-forum';
+import {migrateNodeEditorialDatabase} from './node-editorial-migrations';
 import {publicSpaceKnowledgeResponse} from './public-space-knowledge';
 import type {ForumSocialIdentity} from '../app/lib/forum';
 import {INSTANCE_NAME,INSTANCE_PLATFORM_NAME} from '../app/lib/instance';
@@ -29,6 +32,35 @@ if(!Array.isArray(extraSpaceInputs)||extraSpaceInputs.length>16)throw Error('Inv
 const publicSpacePools=extraSpaceInputs.length
  ? openSpaceDatabaseRegistry(extraSpaceInputs,connectionString=>createPool(connectionString,2))
  : null;
+const editorialSpaceInputs=process.env.AGORANODE_EDITORIAL_SPACE_DATABASES_JSON
+ ? JSON.parse(process.env.AGORANODE_EDITORIAL_SPACE_DATABASES_JSON) as Array<{spaceId:string;connectionString:string}>
+ : [];
+if(!Array.isArray(editorialSpaceInputs)||editorialSpaceInputs.length>16)
+ throw Error('Invalid editorial database configuration');
+const publicTargets=new Map(extraSpaceInputs.map(entry=>[entry.spaceId,databaseTarget(entry.connectionString)]));
+for(const entry of editorialSpaceInputs){
+ if(!entry||typeof entry.spaceId!=='string'||typeof entry.connectionString!=='string'||
+    publicTargets.get(entry.spaceId)!==databaseTarget(entry.connectionString)||
+    databaseTarget(entry.connectionString)===databaseTarget(config.connectionString))
+  throw Error('Every editorial writer must target its matching independent thematic database');
+}
+const editorialSpacePools=editorialSpaceInputs.length
+ ? openSpaceDatabaseRegistry(editorialSpaceInputs,connectionString=>createPool(connectionString,2))
+ : null;
+const verifyNodePr2=async(spaceId:string,userId:string)=>{
+ const at=Date.now();
+ const result=await pool.query(
+  `SELECT 1 FROM federation_pr2_attestations a
+   JOIN federation_pr2_electors e ON e.owner_key=a.owner_key
+   JOIN federation_node_keys k ON k.node_id=a.source_node_id AND k.key_id=a.issuer_key_id
+   WHERE e.owner_key=$1 AND e.source_node_id=$2 AND a.source_node_id=$2
+   AND (a.proof_json::jsonb->>'state')='active'
+   AND (a.proof_json::jsonb->>'nodeId')=$2
+   AND a.valid_from<=$3 AND a.valid_until>$3
+   AND k.valid_from<=$3 AND (k.valid_until IS NULL OR k.valid_until>$3)
+   LIMIT 1`,[userId,spaceId,at]);
+ return result.rows.length>0;
+};
 
 const jobs=new Set<Promise<unknown>>();
 const background=(promise:Promise<unknown>)=>{const job=promise.catch(()=>{}).finally(()=>jobs.delete(job));jobs.add(job);};
@@ -62,7 +94,33 @@ const server=createServer({maxHeaderSize:16384,requestTimeout:30000,headersTimeo
    }else response=await publicSpaceKnowledgeResponse(request,connections(publicSpacePools.get(id)),id);
   }
   else if(url.pathname==='/api/public-spaces')response=await publicSpaceDirectoryResponse(request,process.env.AGORANODE_PUBLIC_SPACES_DIRECTORY);
-  else if(url.pathname.startsWith('/api/public-spaces/'))response=await publicSpaceSeedResponse(request,process.env.AGORANODE_PUBLIC_SPACES_DIRECTORY);
+  else if(url.pathname.startsWith('/api/public-spaces/')){
+   const installed=await publicSpaceSeedResponse(request,process.env.AGORANODE_PUBLIC_SPACES_DIRECTORY);
+   const id=/^\/api\/public-spaces\/([a-z][a-z0-9-]{2,47})$/.exec(url.pathname)?.[1];
+   if(installed.ok&&id&&editorialSpacePools?.ids().includes(id)){
+    const seed=await installed.json() as import('../app/platform/public-space-seed').PublicSpaceSeed;
+    response=await editorialPublicSpaceSeedResponse(connections(editorialSpacePools.get(id)),seed);
+   }else response=installed;
+  }
+  else if(url.pathname==='/api/node-editorial'||url.pathname==='/api/node-forum'){
+   const ids=url.searchParams.getAll('spaceId');
+   const id=ids.length===1?ids[0]:'';
+   if(!/^[a-z][a-z0-9-]{2,47}$/.test(id)||['agora','polisrossa'].includes(id))
+    response=Response.json({error:'Invalid editorial node'},{status:400});
+   else if(!editorialSpacePools?.ids().includes(id))
+    response=Response.json({error:'Editorial database not configured'},{status:503});
+   else{
+    const installed=await publicSpaceSeedResponse(new Request(config.origin+'/api/public-spaces/'+id),process.env.AGORANODE_PUBLIC_SPACES_DIRECTORY);
+    if(!installed.ok)response=Response.json({error:'Node is not installed'},{status:404});
+    else if(config.mirror&&method!=='GET')response=Response.json({error:'Read-only mirror'},{status:403});
+    else{
+     const session=await authSession(auth,request);
+     response=session.finish(url.pathname==='/api/node-editorial'
+      ?await handleNodeEditorial(request,connections(editorialSpacePools.get(id)),id,session.user?.id??null,verifyNodePr2)
+      :await handleNodeForum(request,connections(editorialSpacePools.get(id)),id,session.user?.id??null));
+    }
+   }
+  }
   else if(url.pathname==='/api/service-info')response=serviceInfoResponse(request,config.operator,config.registrationOpen,config.forumOpen,config.mirror);
   else if(url.pathname==='/healthz'){
    try{await pool.query('SELECT 1');response=Response.json({ok:true},{headers:{'cache-control':'no-store'}});}catch{response=Response.json({ok:false},{status:503,headers:{'cache-control':'no-store'}});}
@@ -90,5 +148,11 @@ const server=createServer({maxHeaderSize:16384,requestTimeout:30000,headersTimeo
 const chatCleanup=setInterval(()=>liveChat.sweep(),1000);chatCleanup.unref();
 const forumRetention=startForumApplicationRetention(()=>background(purgeForumApplications(db).then(count=>console.info(`Forum application retention completed: ${count} removed`)).catch(error=>{console.error('Forum application retention failed');throw error;})));
 const authRetention=startAuthenticationRetention(()=>background(purgeAuthenticationState(db).then(result=>console.info(`Authentication retention completed: ${result.sessions+result.verifications+result.limits+result.unverifiedUsers+result.facebookGrants} removed`)).catch(error=>{console.error('Authentication retention failed');throw error;})));
-server.listen(config.port,'0.0.0.0',()=>console.info(`${INSTANCE_PLATFORM_NAME} instance ${INSTANCE_NAME} server ready`));
-for(const signal of ['SIGTERM','SIGINT'])process.on(signal,()=>{clearInterval(chatCleanup);clearInterval(forumRetention as ReturnType<typeof setInterval>);clearInterval(authRetention as ReturnType<typeof setInterval>);server.close(()=>{void Promise.allSettled([...jobs,settle()]).then(()=>Promise.all([pool.end(),publicSpacePools?.close()])).then(()=>process.exit(0));});setTimeout(()=>process.exit(1),20000).unref();});
+void Promise.all(editorialSpaceInputs.map(item=>migrateNodeEditorialDatabase(connections(editorialSpacePools!.get(item.spaceId)))))
+ .then(()=>server.listen(config.port,'0.0.0.0',()=>console.info(`${INSTANCE_PLATFORM_NAME} instance ${INSTANCE_NAME} server ready`)))
+ .catch(async(error:unknown)=>{
+  console.error('Editorial schema initialization failed; refusing to accept traffic',error instanceof Error?error.message:'Unknown error');
+  await Promise.allSettled([pool.end(),publicSpacePools?.close(),editorialSpacePools?.close()]);
+  process.exitCode=1;
+ });
+for(const signal of ['SIGTERM','SIGINT'])process.on(signal,()=>{clearInterval(chatCleanup);clearInterval(forumRetention as ReturnType<typeof setInterval>);clearInterval(authRetention as ReturnType<typeof setInterval>);server.close(()=>{void Promise.allSettled([...jobs,settle()]).then(()=>Promise.all([pool.end(),publicSpacePools?.close(),editorialSpacePools?.close()])).then(()=>process.exit(0));});setTimeout(()=>process.exit(1),20000).unref();});

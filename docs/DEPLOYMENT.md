@@ -1,5 +1,14 @@
 # Gestione e pubblicazione
 
+## Ripristino sicuro del backend Render — CA PostgreSQL (24 ottobre 2026)
+
+Il servizio Docker `polisrossa` ha compilato correttamente nel tentativo del 20 ottobre 2026, ma la migrazione si è arrestata con `self-signed certificate in certificate chain`. Per Supabase, il certificato CA del progetto va scaricato dalla sezione **Database → Settings → SSL Configuration → Download Certificate**. Il driver Node `pg` non deve usare `rejectUnauthorized:false`, `NODE_TLS_REJECT_UNAUTHORIZED=0` o disabilitare TLS.
+
+Il runtime ora accetta `POSTGRES_CA_CERT_PEM` come secret del servizio: incollare il **contenuto PEM** del certificato CA autentico proveniente dal dashboard del progetto collegato alla `DATABASE_URL`. Supporta sia newline effettivi sia sequenze `\\n`. Il processo valida che il valore sia un certificato X.509 CA e mantiene `rejectUnauthorized:true`, compresa la verifica del nome host. Senza tale secret, continua a usare la trust store di Node e rifiuta certificati sconosciuti.
+
+**Non mettere il certificato dentro `DATABASE_URL`**, non modificare la URL di connessione e non usare un certificato preso da altri progetti. Prima di riavviare un database con dati già esistenti, verificare origine del certificato, backup e possibilità di rollback, poi eseguire migratore, controllo `/healthz`, `/api/articles` e una prova in browser della Rassegna. Il servizio statico `agoranode-alpha-preview` non dispone delle API live; non usarlo per collaudare la Rassegna.
+
+
 ## Email dell'account e identità sociale
 
 Il valore iniziale `MAIL_TRANSPORT=none` tiene chiusi registrazione con password, conferma email e recupero. Sul server domestico, prima di aprire gli account, si configura Gmail SMTP come descritto in [SELF-HOSTING.md](SELF-HOSTING.md). Queste email servono esclusivamente a confermare l’indirizzo e recuperare l’account; non costituiscono un sistema di newsletter o notifiche collettive. La pagina di registrazione consente di creare PR1 oppure di indicare l’intenzione di proseguire verso PR2, ma in entrambi i casi crea soltanto l’account email/password. Dopo la conferma e l’accesso, PR2 richiede il collegamento reale di Facebook tramite OAuth, nome, presentazione e un invio esplicito. Il server ricava il riferimento Facebook dal collegamento autenticato e non accetta al suo posto un URL scritto nel modulo. OAuth prova soltanto il controllo dell’account Facebook in quel momento; non apre PR1, non certifica l’identità civile e Discord, Instagram o un sito personale non qualificano la domanda.

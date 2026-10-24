@@ -93,6 +93,7 @@ import { collectionOrder, collectAll, COLLECTION_CONCURRENCY } from "@/app/lib/c
 
 type FeedPayload = { articles: Article[]; statuses: SourceStatus[] };
 import {viewFromUrl,viewUrl,newsDaysFromUrl,type View} from "@/app/lib/view-navigation";
+import {NODE_PRIMARY_TABS} from "@/app/lib/node-primary-navigation";
 type DirectorySource = SourceDefinition & {
   count: number;
   status?: SourceStatus;
@@ -108,11 +109,7 @@ const CommunityView = lazy(() => import("./CommunityView"));
 const SavedBooks = lazy(() => import("./LibraryView").then(module => ({ default: module.SavedBooks })));
 const publisherFor = createPublisherResolver(SOURCE_CATALOG);
 const PAGE_SIZE = 24;
-const NAV: { id: View; label: string }[] = [
-  { id: "notizie", label: "La rassegna" },
-  { id: "teoria", label: "Biblioteca" },
-  { id: "partecipa", label: "Agorà" },
-];
+const NAV: ReadonlyArray<{id:View;label:string}> = NODE_PRIMARY_TABS;
 const HEADINGS = {
   crediti:{overline:"UN LAVORO COLLETTIVO",title:<LocalizedText>Fonti, crediti e ringraziamenti.</LocalizedText>,description:"Questo progetto vive grazie al lavoro di redazioni, autori, traduttori, bibliotecari, archivisti, ricercatori e comunità del software libero. Qui puoi risalire alle risorse utilizzate."},
   fonti: {

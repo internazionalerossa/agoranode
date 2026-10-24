@@ -1,6 +1,6 @@
 /** Safe portable blueprints. A draft is not a community, authorization, or published wiki revision. */
 export const NODE_BLUEPRINT_FORMAT='org.agoranode.node-blueprint-draft.v1' as const;
-export const NODE_BLOCK_KINDS=['heading','paragraph','timeline','source','book','video','data'] as const;
+export const NODE_BLOCK_KINDS=['heading','paragraph','timeline','source','book','video','data','atlas','bibliography'] as const;
 export type NodeBlockKind=typeof NODE_BLOCK_KINDS[number];
 export type NodeStudioBlock={id:string;kind:NodeBlockKind;title:string;body:string;url:string};
 export type NodeStudioSource={id:string;name:string;homepage:string;feedUrl:string};

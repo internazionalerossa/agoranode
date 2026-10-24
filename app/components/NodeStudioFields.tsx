@@ -4,6 +4,7 @@ import {NODE_BLOCK_KINDS} from '../lib/node-studio-model';
 const TITLES:Record<NodeBlockKind,string>={
   heading:'Titolo o capitolo',paragraph:'Paragrafo',timeline:'Tappa narrativa',
   source:'Fonte',book:'Opera o edizione',video:'Video',data:'Dati e grafici',
+ atlas:'Voce dell’Atlante',bibliography:'Riferimento bibliografico',
 };
 export function StudioBlocks({draft,update}:{draft:NodeBlueprintDraft;update:(patch:Partial<NodeBlueprintDraft>)=>void}){
   const add=(kind:NodeBlockKind)=>update({blocks:[...draft.blocks,{

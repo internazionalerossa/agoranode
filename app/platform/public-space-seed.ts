@@ -6,6 +6,8 @@ import {nodeStudioDraft,type NodeBlueprintDraft,type NodeStudioBlock,type NodeSt
  * be an explicit operator action after source/licence review.
  */
 export const PUBLIC_SPACE_SEED_FORMAT='org.agoranode.public-space-seed.v1' as const;
+export const PUBLIC_BOOTSTRAP_NOTICE='Public read-only bootstrap. Account, PR2 membership, forum, BFT and democratic publication are not enabled.' as const;
+export const PR2_APPROVED_NOTICE='This public content revision was approved by the configured node PR2 editorial procedure. This does not attest to federated consensus, independent hosting, or a live forum.' as const;
 export type PublicSpaceSeed={
   format:typeof PUBLIC_SPACE_SEED_FORMAT;
   spaceId:string;
@@ -15,7 +17,7 @@ export type PublicSpaceSeed={
   accent:string;
   sources:NodeStudioSource[];
   blocks:NodeStudioBlock[];
-  publication:{kind:'manual-bootstrap';notice:string};
+  publication:{kind:'manual-bootstrap'|'pr2-approved';notice:string};
 };
 
 const FIELDS=['format','spaceId','name','topic','description','accent','sources','blocks','publication'].sort().join(',');
@@ -30,7 +32,7 @@ export function createPublicSpaceSeed(input:unknown):PublicSpaceSeed{
   spaceId:draft.spaceId,name:draft.name,topic:draft.topic,description:draft.description,accent:draft.accent,
   sources:draft.sources,blocks:draft.blocks,
   publication:{kind:'manual-bootstrap',
-    notice:'Public read-only bootstrap. Account, PR2 membership, forum, BFT and democratic publication are not enabled.'},
+    notice:PUBLIC_BOOTSTRAP_NOTICE},
  };
 }
 export function validatePublicSpaceSeed(raw:unknown):PublicSpaceSeed{
@@ -43,7 +45,7 @@ export function validatePublicSpaceSeed(raw:unknown):PublicSpaceSeed{
    throw Error('Invalid public node seed');
  }
  const p=v.publication as Record<string,unknown>;
- if(p.kind!=='manual-bootstrap'||p.notice!=='Public read-only bootstrap. Account, PR2 membership, forum, BFT and democratic publication are not enabled.')
+ if(!((p.kind==='manual-bootstrap'&&p.notice===PUBLIC_BOOTSTRAP_NOTICE)||(p.kind==='pr2-approved'&&p.notice===PR2_APPROVED_NOTICE)))
   throw Error('Invalid public node publication status');
  // Derive a synthetic private draft for reusing *all* block/source validation,
  // excluding user identifiers from the public record.

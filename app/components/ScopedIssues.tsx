@@ -7,6 +7,7 @@ const endpoint=(scope:Scope,issueId?:string)=>'/api/scoped-issues?'+new URLSearc
 export default function ScopedIssues(){
  const [scope,setScope]=useState<Scope>('agora');
  const [issues,setIssues]=useState<Issue[]>([]);
+ const [canParticipate,setCanParticipate]=useState(false);
  const [selected,setSelected]=useState<string|null>(null);
  const [comments,setComments]=useState<Comment[]>([]);
  const [title,setTitle]=useState('');
@@ -17,10 +18,10 @@ export default function ScopedIssues(){
  const [busy,setBusy]=useState(false);
  useEffect(()=>{
   const controller=new AbortController();
-  setIssues([]);setComments([]);setError('');
+  setIssues([]);setComments([]);setError('');setCanParticipate(false);
   void fetch(endpoint(scope),{signal:controller.signal,cache:'no-store'})
-   .then(async r=>{if(!r.ok)throw Error('Elenco temporaneamente non disponibile');return r.json() as Promise<{issues:Issue[]}>;})
-   .then(v=>{if(!controller.signal.aborted)setIssues(Array.isArray(v.issues)?v.issues:[]);})
+   .then(async r=>{if(!r.ok)throw Error('Elenco temporaneamente non disponibile');return r.json() as Promise<{issues:Issue[];canParticipate:boolean}>;})
+   .then(v=>{if(!controller.signal.aborted){setIssues(Array.isArray(v.issues)?v.issues:[]);setCanParticipate(v.canParticipate===true);}})
    .catch(()=>{if(!controller.signal.aborted)setError('Registro delle issue non disponibile su questa installazione.');});
   return()=>controller.abort();
  },[scope,revision]);
@@ -55,13 +56,13 @@ export default function ScopedIssues(){
    <button type="button" aria-pressed={scope==='agora'} onClick={()=>{setScope('agora');setSelected(null);}}>Nodo Agorà</button>
    <button type="button" aria-pressed={scope==='agoranode'} onClick={()=>{setScope('agoranode');setSelected(null);}}>Piattaforma AgoraNode</button>
   </div>
-  <p>Creazione e pareri consultivi: PR2 attivo e verificato del nodo Agorà, chiamato PR3 quando opera nell'ambito della piattaforma AgoraNode. Non esiste un mandato PR3 separato. Per commentare basta una sessione PR1.</p>
-  <form onSubmit={e=>{e.preventDefault();void submit({action:'create',title,body});}}>
+  <p>Creazione e pareri consultivi: PR2 attivo e verificato del nodo Agorà, chiamato PR3 quando opera nell'ambito della piattaforma AgoraNode. Non esiste un mandato PR3 separato. Per commentare serve la stessa appartenenza PR2 verificata al nodo Agorà.</p>
+  {canParticipate?<form onSubmit={e=>{e.preventDefault();void submit({action:'create',title,body});}}>
    <h3>Apri una issue</h3>
    <label>Titolo <input value={title} minLength={8} maxLength={160} required onChange={e=>setTitle(e.target.value)}/></label>
    <label>Motivazione e proposta <textarea value={body} minLength={20} maxLength={8000} required rows={4} onChange={e=>setBody(e.target.value)}/></label>
    <button type="submit" disabled={busy}>Proponi issue</button>
-  </form>
+  </form>:<p role="status">Per aprire issue o contribuire alla discussione serve PR2 attivo del nodo Agorà. PR1 può soltanto consultare.</p>}
   {error?<p role="alert">{error}</p>:null}
   <ul className="agora-forum-list">{issues.map(i=><li key={i.id}>
    <article><h3>{i.title}</h3><p>{i.body}</p><small>{i.status==='open'?'Aperta':'Chiusa'} · {i.created_at}</small>
@@ -69,14 +70,14 @@ export default function ScopedIssues(){
    </article>
    {selected===i.id?<div>
     <h4>Commenti</h4><ol>{comments.map(c=><li key={c.id}><p>{c.body}</p></li>)}</ol>
-    <form onSubmit={e=>{e.preventDefault();void submit({action:'comment',issueId:i.id,body:comment});}}>
+    {canParticipate?<form onSubmit={e=>{e.preventDefault();void submit({action:'comment',issueId:i.id,body:comment});}}>
      <label>Intervento <textarea minLength={5} maxLength={4000} value={comment} required onChange={e=>setComment(e.target.value)}/></label>
      <button type="submit" disabled={busy}>Pubblica intervento</button>
-    </form>
-    <div role="group" aria-label="Parere consultivo">
+    </form>:null}
+    {canParticipate?<div role="group" aria-label="Parere consultivo">
      {(['yes','no','abstain'] as const).map(choice=><button type="button" key={choice} disabled={busy}
       onClick={()=>void submit({action:'vote',issueId:i.id,choice})}>{choice==='yes'?'Favorevole':choice==='no'?'Contrario':'Astenuto'}</button>)}
-    </div>
+    </div>:null}
    </div>:null}
   </li>)}</ul>
   {issues.length===0?<p>Nessuna issue disponibile in questo ambito.</p>:null}

@@ -2,8 +2,6 @@
 
 import {useEffect} from "react";
 import {ArrowRight, GitBranch, Network, ShieldCheck} from "lucide-react";
-import FederationBoard from "./FederationBoard";
-import SharedCustodyView from "./SharedCustodyView";
 import SharedSpaceModules from "./SharedSpaceModules";
 import AgoraFeed from "./AgoraFeed";
 import NodeStudio from "./NodeStudio";
@@ -55,8 +53,7 @@ export default function AgoraNodeHome() {
           <AgoraForum/>
           <ScopedIssues/>
           <NodeStudio spaceId="agora"/>
-          <FederationBoard/>
-          <SharedCustodyView/>
+          <p className="agora-governance-notice">Nell’ambito AgoraNode, PR3 significa essere PR2 attivo del nodo Agorà. Non esiste un mandato PR3 elettivo distinto; issue e decisioni restano sottoposte ai controlli del server.</p>
         </section>:<>
           <AgoraFeed/>
           <aside className="agoranode-boundary" aria-label="Ambito del nodo Agorà">

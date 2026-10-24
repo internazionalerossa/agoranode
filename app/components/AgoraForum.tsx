@@ -30,7 +30,7 @@ export default function AgoraForum(){
  const [body,setBody]=useState('');
  const [saving,setSaving]=useState(false);
  const [revision,setRevision]=useState(0);
- const isStaticPreview=import.meta.env.VITE_PUBLIC_PREVIEW==='true';
+ const isStaticPreview=import.meta.env?.VITE_PUBLIC_PREVIEW==='true';
  useEffect(()=>{
   const controller=new AbortController();
   setReady(false);setError('');

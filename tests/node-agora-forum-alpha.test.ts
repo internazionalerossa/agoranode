@@ -35,6 +35,11 @@ test('visitors can read public Agora discussions, never account identifiers',asy
  assert.equal(body.topics[0].author,'Lettrice');
  assert.ok(!JSON.stringify(body).includes('secret-private-id'));
  assert.equal(calls[0].args[0],'agora');
+ const pr1=await (await handleAgoraForum(new Request('https://example.test/api/agora/forum'),db,'pr1-only')).json();
+ assert.equal(pr1.authenticated,false);
+ const pr2=await (await handleAgoraForum(new Request('https://example.test/api/agora/forum'),db,'account-1')).json();
+ assert.equal(pr2.authenticated,true);
+
  assert.equal((await handleAgoraForum(new Request('https://example.test/api/agora/forum?offset=-1'),db,null)).status,400);
 });
 test('creating a discussion requires an authenticated account and same origin',async()=>{
